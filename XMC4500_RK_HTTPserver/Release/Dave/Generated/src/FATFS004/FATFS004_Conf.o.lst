@@ -25,8 +25,8 @@
   27              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
 DEFINED SYMBOLS
                             *ABS*:00000000 FATFS004_Conf.c
-C:\Users\Mihai\AppData\Local\Temp\ccG90v8Q.s:21     .rodata:00000000 FATFS004_DeviceFunc
-C:\Users\Mihai\AppData\Local\Temp\ccG90v8Q.s:18     .rodata:00000000 $d
+C:\Users\Mihai\AppData\Local\Temp\ccSVUGgf.s:21     .rodata:00000000 FATFS004_DeviceFunc
+C:\Users\Mihai\AppData\Local\Temp\ccSVUGgf.s:18     .rodata:00000000 $d
 
 UNDEFINED SYMBOLS
 SDMMC001_Initialize

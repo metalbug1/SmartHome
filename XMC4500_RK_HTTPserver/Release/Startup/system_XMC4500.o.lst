@@ -302,14 +302,14 @@
  308              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
 DEFINED SYMBOLS
                             *ABS*:00000000 system_XMC4500.c
-C:\Users\Mihai\AppData\Local\Temp\ccsLaIXE.s:17     .text.SystemCoreClockUpdate:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccsLaIXE.s:22     .text.SystemCoreClockUpdate:00000000 SystemCoreClockUpdate
-C:\Users\Mihai\AppData\Local\Temp\ccsLaIXE.s:67     .text.SystemCoreClockUpdate:0000005c $d
-C:\Users\Mihai\AppData\Local\Temp\ccsLaIXE.s:74     .text.SystemInit:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccsLaIXE.s:79     .text.SystemInit:00000000 SystemInit
-C:\Users\Mihai\AppData\Local\Temp\ccsLaIXE.s:286    .text.SystemInit:000001d0 $d
-C:\Users\Mihai\AppData\Local\Temp\ccsLaIXE.s:306    .data:00000000 SystemCoreClock
-C:\Users\Mihai\AppData\Local\Temp\ccsLaIXE.s:302    .data:00000000 $d
+C:\Users\Mihai\AppData\Local\Temp\ccA1M8sr.s:17     .text.SystemCoreClockUpdate:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccA1M8sr.s:22     .text.SystemCoreClockUpdate:00000000 SystemCoreClockUpdate
+C:\Users\Mihai\AppData\Local\Temp\ccA1M8sr.s:67     .text.SystemCoreClockUpdate:0000005c $d
+C:\Users\Mihai\AppData\Local\Temp\ccA1M8sr.s:74     .text.SystemInit:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccA1M8sr.s:79     .text.SystemInit:00000000 SystemInit
+C:\Users\Mihai\AppData\Local\Temp\ccA1M8sr.s:286    .text.SystemInit:000001d0 $d
+C:\Users\Mihai\AppData\Local\Temp\ccA1M8sr.s:306    .data:00000000 SystemCoreClock
+C:\Users\Mihai\AppData\Local\Temp\ccA1M8sr.s:302    .data:00000000 $d
 
 UNDEFINED SYMBOLS
 AllowPLLInitByStartup

@@ -3425,24 +3425,24 @@
  3445              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
 DEFINED SYMBOLS
                             *ABS*:00000000 fs.c
-C:\Users\Mihai\AppData\Local\Temp\ccuCpNp2.s:17     .text.fs_open:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccuCpNp2.s:22     .text.fs_open:00000000 fs_open
-C:\Users\Mihai\AppData\Local\Temp\ccuCpNp2.s:79     .text.fs_open:00000064 $d
+C:\Users\Mihai\AppData\Local\Temp\ccoj7ViO.s:17     .text.fs_open:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccoj7ViO.s:22     .text.fs_open:00000000 fs_open
+C:\Users\Mihai\AppData\Local\Temp\ccoj7ViO.s:79     .text.fs_open:00000064 $d
                             *COM*:00000118 fs_memory
-C:\Users\Mihai\AppData\Local\Temp\ccuCpNp2.s:83     .text.fs_close:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccuCpNp2.s:88     .text.fs_close:00000000 fs_close
-C:\Users\Mihai\AppData\Local\Temp\ccuCpNp2.s:113    .text.fs_close:00000028 $d
-C:\Users\Mihai\AppData\Local\Temp\ccuCpNp2.s:116    .text.fs_read:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccuCpNp2.s:121    .text.fs_read:00000000 fs_read
-C:\Users\Mihai\AppData\Local\Temp\ccuCpNp2.s:141    .text.fs_bytes_left:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccuCpNp2.s:146    .text.fs_bytes_left:00000000 fs_bytes_left
-C:\Users\Mihai\AppData\Local\Temp\ccuCpNp2.s:163    .rodata:00000000 file__index_html
-C:\Users\Mihai\AppData\Local\Temp\ccuCpNp2.s:172    .rodata:00000014 file__404_html
-C:\Users\Mihai\AppData\Local\Temp\ccuCpNp2.s:181    .rodata:00000028 file__img_sics_gif
-C:\Users\Mihai\AppData\Local\Temp\ccuCpNp2.s:160    .rodata:00000000 $d
-C:\Users\Mihai\AppData\Local\Temp\ccuCpNp2.s:190    .rodata:0000003c data__index_html
-C:\Users\Mihai\AppData\Local\Temp\ccuCpNp2.s:1895   .rodata:000006e2 data__404_html
-C:\Users\Mihai\AppData\Local\Temp\ccuCpNp2.s:2594   .rodata:0000099a data__img_sics_gif
+C:\Users\Mihai\AppData\Local\Temp\ccoj7ViO.s:83     .text.fs_close:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccoj7ViO.s:88     .text.fs_close:00000000 fs_close
+C:\Users\Mihai\AppData\Local\Temp\ccoj7ViO.s:113    .text.fs_close:00000028 $d
+C:\Users\Mihai\AppData\Local\Temp\ccoj7ViO.s:116    .text.fs_read:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccoj7ViO.s:121    .text.fs_read:00000000 fs_read
+C:\Users\Mihai\AppData\Local\Temp\ccoj7ViO.s:141    .text.fs_bytes_left:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccoj7ViO.s:146    .text.fs_bytes_left:00000000 fs_bytes_left
+C:\Users\Mihai\AppData\Local\Temp\ccoj7ViO.s:163    .rodata:00000000 file__index_html
+C:\Users\Mihai\AppData\Local\Temp\ccoj7ViO.s:172    .rodata:00000014 file__404_html
+C:\Users\Mihai\AppData\Local\Temp\ccoj7ViO.s:181    .rodata:00000028 file__img_sics_gif
+C:\Users\Mihai\AppData\Local\Temp\ccoj7ViO.s:160    .rodata:00000000 $d
+C:\Users\Mihai\AppData\Local\Temp\ccoj7ViO.s:190    .rodata:0000003c data__index_html
+C:\Users\Mihai\AppData\Local\Temp\ccoj7ViO.s:1895   .rodata:000006e2 data__404_html
+C:\Users\Mihai\AppData\Local\Temp\ccoj7ViO.s:2594   .rodata:0000099a data__img_sics_gif
 
 UNDEFINED SYMBOLS
 fopen

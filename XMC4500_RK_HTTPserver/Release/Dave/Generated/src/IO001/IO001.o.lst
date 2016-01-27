@@ -140,13 +140,13 @@
  146              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
 DEFINED SYMBOLS
                             *ABS*:00000000 IO001.c
-C:\Users\Mihai\AppData\Local\Temp\ccr2T5g1.s:17     .text.IO001_Init:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccr2T5g1.s:22     .text.IO001_Init:00000000 IO001_Init
-C:\Users\Mihai\AppData\Local\Temp\ccr2T5g1.s:37     .text.IO001_Init:00000014 $d
-C:\Users\Mihai\AppData\Local\Temp\ccr2T5g1.s:40     .text.IO001_EnableDigitalInput:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccr2T5g1.s:45     .text.IO001_EnableDigitalInput:00000000 IO001_EnableDigitalInput
-C:\Users\Mihai\AppData\Local\Temp\ccr2T5g1.s:128    .text.IO001_DisableDigitalInput:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccr2T5g1.s:133    .text.IO001_DisableDigitalInput:00000000 IO001_DisableDigitalInput
+C:\Users\Mihai\AppData\Local\Temp\ccS734ya.s:17     .text.IO001_Init:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccS734ya.s:22     .text.IO001_Init:00000000 IO001_Init
+C:\Users\Mihai\AppData\Local\Temp\ccS734ya.s:37     .text.IO001_Init:00000014 $d
+C:\Users\Mihai\AppData\Local\Temp\ccS734ya.s:40     .text.IO001_EnableDigitalInput:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccS734ya.s:45     .text.IO001_EnableDigitalInput:00000000 IO001_EnableDigitalInput
+C:\Users\Mihai\AppData\Local\Temp\ccS734ya.s:128    .text.IO001_DisableDigitalInput:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccS734ya.s:133    .text.IO001_DisableDigitalInput:00000000 IO001_DisableDigitalInput
 
 UNDEFINED SYMBOLS
 IO001_Handle0

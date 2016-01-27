@@ -655,38 +655,38 @@
  672 066d 000000   		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
 DEFINED SYMBOLS
                             *ABS*:00000000 dns.c
-C:\Users\Mihai\AppData\Local\Temp\cc2GeePy.s:17     .text.unlikely.dns_parse_name:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc2GeePy.s:21     .text.unlikely.dns_parse_name:00000000 dns_parse_name
-C:\Users\Mihai\AppData\Local\Temp\cc2GeePy.s:39     .text.dns_send:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc2GeePy.s:43     .text.dns_send:00000000 dns_send
-C:\Users\Mihai\AppData\Local\Temp\cc2GeePy.s:133    .text.dns_send:000000bc $d
-C:\Users\Mihai\AppData\Local\Temp\cc2GeePy.s:136    .text.dns_check_entry:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc2GeePy.s:140    .text.dns_check_entry:00000000 dns_check_entry
-C:\Users\Mihai\AppData\Local\Temp\cc2GeePy.s:215    .text.dns_check_entry:00000090 $d
-C:\Users\Mihai\AppData\Local\Temp\cc2GeePy.s:218    .text.dns_recv:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc2GeePy.s:222    .text.dns_recv:00000000 dns_recv
-C:\Users\Mihai\AppData\Local\Temp\cc2GeePy.s:381    .text.dns_recv:00000180 $d
-C:\Users\Mihai\AppData\Local\Temp\cc2GeePy.s:387    .text.dns_setserver:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc2GeePy.s:392    .text.dns_setserver:00000000 dns_setserver
-C:\Users\Mihai\AppData\Local\Temp\cc2GeePy.s:410    .text.dns_setserver:00000018 $d
-C:\Users\Mihai\AppData\Local\Temp\cc2GeePy.s:413    .text.dns_init:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc2GeePy.s:418    .text.dns_init:00000000 dns_init
-C:\Users\Mihai\AppData\Local\Temp\cc2GeePy.s:446    .text.dns_init:00000034 $d
-C:\Users\Mihai\AppData\Local\Temp\cc2GeePy.s:452    .text.dns_getserver:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc2GeePy.s:457    .text.dns_getserver:00000000 dns_getserver
-C:\Users\Mihai\AppData\Local\Temp\cc2GeePy.s:483    .text.dns_getserver:00000038 $d
-C:\Users\Mihai\AppData\Local\Temp\cc2GeePy.s:487    .text.dns_tmr:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc2GeePy.s:492    .text.dns_tmr:00000000 dns_tmr
-C:\Users\Mihai\AppData\Local\Temp\cc2GeePy.s:513    .text.dns_tmr:00000028 $d
-C:\Users\Mihai\AppData\Local\Temp\cc2GeePy.s:516    .text.dns_gethostbyname:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc2GeePy.s:521    .text.dns_gethostbyname:00000000 dns_gethostbyname
-C:\Users\Mihai\AppData\Local\Temp\cc2GeePy.s:643    .text.dns_gethostbyname:00000108 $d
-C:\Users\Mihai\AppData\Local\Temp\cc2GeePy.s:650    .bss:00000000 $d
-C:\Users\Mihai\AppData\Local\Temp\cc2GeePy.s:654    .bss:00000000 dns_servers
-C:\Users\Mihai\AppData\Local\Temp\cc2GeePy.s:658    .bss:00000008 dns_pcb
-C:\Users\Mihai\AppData\Local\Temp\cc2GeePy.s:662    .bss:0000000c dns_table
-C:\Users\Mihai\AppData\Local\Temp\cc2GeePy.s:666    .bss:0000046c dns_payload
-C:\Users\Mihai\AppData\Local\Temp\cc2GeePy.s:670    .bss:0000066c dns_seqno
+C:\Users\Mihai\AppData\Local\Temp\ccitISYW.s:17     .text.unlikely.dns_parse_name:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccitISYW.s:21     .text.unlikely.dns_parse_name:00000000 dns_parse_name
+C:\Users\Mihai\AppData\Local\Temp\ccitISYW.s:39     .text.dns_send:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccitISYW.s:43     .text.dns_send:00000000 dns_send
+C:\Users\Mihai\AppData\Local\Temp\ccitISYW.s:133    .text.dns_send:000000bc $d
+C:\Users\Mihai\AppData\Local\Temp\ccitISYW.s:136    .text.dns_check_entry:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccitISYW.s:140    .text.dns_check_entry:00000000 dns_check_entry
+C:\Users\Mihai\AppData\Local\Temp\ccitISYW.s:215    .text.dns_check_entry:00000090 $d
+C:\Users\Mihai\AppData\Local\Temp\ccitISYW.s:218    .text.dns_recv:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccitISYW.s:222    .text.dns_recv:00000000 dns_recv
+C:\Users\Mihai\AppData\Local\Temp\ccitISYW.s:381    .text.dns_recv:00000180 $d
+C:\Users\Mihai\AppData\Local\Temp\ccitISYW.s:387    .text.dns_setserver:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccitISYW.s:392    .text.dns_setserver:00000000 dns_setserver
+C:\Users\Mihai\AppData\Local\Temp\ccitISYW.s:410    .text.dns_setserver:00000018 $d
+C:\Users\Mihai\AppData\Local\Temp\ccitISYW.s:413    .text.dns_init:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccitISYW.s:418    .text.dns_init:00000000 dns_init
+C:\Users\Mihai\AppData\Local\Temp\ccitISYW.s:446    .text.dns_init:00000034 $d
+C:\Users\Mihai\AppData\Local\Temp\ccitISYW.s:452    .text.dns_getserver:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccitISYW.s:457    .text.dns_getserver:00000000 dns_getserver
+C:\Users\Mihai\AppData\Local\Temp\ccitISYW.s:483    .text.dns_getserver:00000038 $d
+C:\Users\Mihai\AppData\Local\Temp\ccitISYW.s:487    .text.dns_tmr:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccitISYW.s:492    .text.dns_tmr:00000000 dns_tmr
+C:\Users\Mihai\AppData\Local\Temp\ccitISYW.s:513    .text.dns_tmr:00000028 $d
+C:\Users\Mihai\AppData\Local\Temp\ccitISYW.s:516    .text.dns_gethostbyname:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccitISYW.s:521    .text.dns_gethostbyname:00000000 dns_gethostbyname
+C:\Users\Mihai\AppData\Local\Temp\ccitISYW.s:643    .text.dns_gethostbyname:00000108 $d
+C:\Users\Mihai\AppData\Local\Temp\ccitISYW.s:650    .bss:00000000 $d
+C:\Users\Mihai\AppData\Local\Temp\ccitISYW.s:654    .bss:00000000 dns_servers
+C:\Users\Mihai\AppData\Local\Temp\ccitISYW.s:658    .bss:00000008 dns_pcb
+C:\Users\Mihai\AppData\Local\Temp\ccitISYW.s:662    .bss:0000000c dns_table
+C:\Users\Mihai\AppData\Local\Temp\ccitISYW.s:666    .bss:0000046c dns_payload
+C:\Users\Mihai\AppData\Local\Temp\ccitISYW.s:670    .bss:0000066c dns_seqno
 
 UNDEFINED SYMBOLS
 pbuf_alloc

@@ -206,27 +206,27 @@
  222              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
 DEFINED SYMBOLS
                             *ABS*:00000000 FATFS004.c
-C:\Users\Mihai\AppData\Local\Temp\cc85BqtC.s:17     .text.disk_initialize:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc85BqtC.s:22     .text.disk_initialize:00000000 disk_initialize
-C:\Users\Mihai\AppData\Local\Temp\cc85BqtC.s:39     .text.disk_initialize:00000014 $d
-C:\Users\Mihai\AppData\Local\Temp\cc85BqtC.s:43     .text.disk_status:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc85BqtC.s:48     .text.disk_status:00000000 disk_status
-C:\Users\Mihai\AppData\Local\Temp\cc85BqtC.s:65     .text.disk_status:00000014 $d
-C:\Users\Mihai\AppData\Local\Temp\cc85BqtC.s:69     .text.disk_read:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc85BqtC.s:74     .text.disk_read:00000000 disk_read
-C:\Users\Mihai\AppData\Local\Temp\cc85BqtC.s:98     .text.disk_read:00000024 $d
-C:\Users\Mihai\AppData\Local\Temp\cc85BqtC.s:102    .text.disk_write:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc85BqtC.s:107    .text.disk_write:00000000 disk_write
-C:\Users\Mihai\AppData\Local\Temp\cc85BqtC.s:131    .text.disk_write:00000024 $d
-C:\Users\Mihai\AppData\Local\Temp\cc85BqtC.s:135    .text.disk_ioctl:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc85BqtC.s:140    .text.disk_ioctl:00000000 disk_ioctl
-C:\Users\Mihai\AppData\Local\Temp\cc85BqtC.s:162    .text.disk_ioctl:00000020 $d
-C:\Users\Mihai\AppData\Local\Temp\cc85BqtC.s:166    .text.get_fattime:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc85BqtC.s:171    .text.get_fattime:00000000 get_fattime
-C:\Users\Mihai\AppData\Local\Temp\cc85BqtC.s:199    .text.get_fattime:00000048 $d
+C:\Users\Mihai\AppData\Local\Temp\cc8tDJsX.s:17     .text.disk_initialize:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc8tDJsX.s:22     .text.disk_initialize:00000000 disk_initialize
+C:\Users\Mihai\AppData\Local\Temp\cc8tDJsX.s:39     .text.disk_initialize:00000014 $d
+C:\Users\Mihai\AppData\Local\Temp\cc8tDJsX.s:43     .text.disk_status:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc8tDJsX.s:48     .text.disk_status:00000000 disk_status
+C:\Users\Mihai\AppData\Local\Temp\cc8tDJsX.s:65     .text.disk_status:00000014 $d
+C:\Users\Mihai\AppData\Local\Temp\cc8tDJsX.s:69     .text.disk_read:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc8tDJsX.s:74     .text.disk_read:00000000 disk_read
+C:\Users\Mihai\AppData\Local\Temp\cc8tDJsX.s:98     .text.disk_read:00000024 $d
+C:\Users\Mihai\AppData\Local\Temp\cc8tDJsX.s:102    .text.disk_write:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc8tDJsX.s:107    .text.disk_write:00000000 disk_write
+C:\Users\Mihai\AppData\Local\Temp\cc8tDJsX.s:131    .text.disk_write:00000024 $d
+C:\Users\Mihai\AppData\Local\Temp\cc8tDJsX.s:135    .text.disk_ioctl:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc8tDJsX.s:140    .text.disk_ioctl:00000000 disk_ioctl
+C:\Users\Mihai\AppData\Local\Temp\cc8tDJsX.s:162    .text.disk_ioctl:00000020 $d
+C:\Users\Mihai\AppData\Local\Temp\cc8tDJsX.s:166    .text.get_fattime:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc8tDJsX.s:171    .text.get_fattime:00000000 get_fattime
+C:\Users\Mihai\AppData\Local\Temp\cc8tDJsX.s:199    .text.get_fattime:00000048 $d
                             *COM*:00000004 FATFS004_UnusedStatus
-C:\Users\Mihai\AppData\Local\Temp\cc85BqtC.s:208    .data:00000000 FATFS004_StatusCodes
-C:\Users\Mihai\AppData\Local\Temp\cc85BqtC.s:216    .data:00000005 FATFS004_ErrorCodes
+C:\Users\Mihai\AppData\Local\Temp\cc8tDJsX.s:208    .data:00000000 FATFS004_StatusCodes
+C:\Users\Mihai\AppData\Local\Temp\cc8tDJsX.s:216    .data:00000005 FATFS004_ErrorCodes
 
 UNDEFINED SYMBOLS
 FATFS004_DeviceFunc

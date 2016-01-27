@@ -310,15 +310,15 @@
  316              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
 DEFINED SYMBOLS
                             *ABS*:00000000 NVIC_SCU001.c
-C:\Users\Mihai\AppData\Local\Temp\ccWuV1c6.s:17     .text.NVIC_SCU001_Init:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccWuV1c6.s:22     .text.NVIC_SCU001_Init:00000000 NVIC_SCU001_Init
-C:\Users\Mihai\AppData\Local\Temp\ccWuV1c6.s:51     .text.NVIC_SCU001_Init:00000038 $d
-C:\Users\Mihai\AppData\Local\Temp\ccWuV1c6.s:55     .text.NVIC_SCU001_RegisterCallback:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccWuV1c6.s:60     .text.NVIC_SCU001_RegisterCallback:00000000 NVIC_SCU001_RegisterCallback
-C:\Users\Mihai\AppData\Local\Temp\ccWuV1c6.s:72     .text.NVIC_SCU001_RegisterCallback:00000010 $d
+C:\Users\Mihai\AppData\Local\Temp\ccaMnRHj.s:17     .text.NVIC_SCU001_Init:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccaMnRHj.s:22     .text.NVIC_SCU001_Init:00000000 NVIC_SCU001_Init
+C:\Users\Mihai\AppData\Local\Temp\ccaMnRHj.s:51     .text.NVIC_SCU001_Init:00000038 $d
+C:\Users\Mihai\AppData\Local\Temp\ccaMnRHj.s:55     .text.NVIC_SCU001_RegisterCallback:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccaMnRHj.s:60     .text.NVIC_SCU001_RegisterCallback:00000000 NVIC_SCU001_RegisterCallback
+C:\Users\Mihai\AppData\Local\Temp\ccaMnRHj.s:72     .text.NVIC_SCU001_RegisterCallback:00000010 $d
                             *COM*:00000088 NVIC_SCU001_Handle0
-C:\Users\Mihai\AppData\Local\Temp\ccWuV1c6.s:75     .text.SCU_0_IRQHandler:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccWuV1c6.s:80     .text.SCU_0_IRQHandler:00000000 SCU_0_IRQHandler
-C:\Users\Mihai\AppData\Local\Temp\ccWuV1c6.s:312    .text.SCU_0_IRQHandler:000001a4 $d
+C:\Users\Mihai\AppData\Local\Temp\ccaMnRHj.s:75     .text.SCU_0_IRQHandler:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccaMnRHj.s:80     .text.SCU_0_IRQHandler:00000000 SCU_0_IRQHandler
+C:\Users\Mihai\AppData\Local\Temp\ccaMnRHj.s:312    .text.SCU_0_IRQHandler:000001a4 $d
 
 NO UNDEFINED SYMBOLS

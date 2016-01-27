@@ -335,37 +335,37 @@
  359              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
 DEFINED SYMBOLS
                             *ABS*:00000000 netif.c
-C:\Users\Mihai\AppData\Local\Temp\ccD3hIut.s:17     .text.netif_remove:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccD3hIut.s:22     .text.netif_remove:00000000 netif_remove
-C:\Users\Mihai\AppData\Local\Temp\ccD3hIut.s:66     .text.netif_remove:00000044 $d
+C:\Users\Mihai\AppData\Local\Temp\ccJUdyLR.s:17     .text.netif_remove:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccJUdyLR.s:22     .text.netif_remove:00000000 netif_remove
+C:\Users\Mihai\AppData\Local\Temp\ccJUdyLR.s:66     .text.netif_remove:00000044 $d
                             *COM*:00000004 netif_list
                             *COM*:00000004 netif_default
-C:\Users\Mihai\AppData\Local\Temp\ccD3hIut.s:70     .text.netif_find:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccD3hIut.s:75     .text.netif_find:00000000 netif_find
-C:\Users\Mihai\AppData\Local\Temp\ccD3hIut.s:108    .text.netif_find:00000034 $d
-C:\Users\Mihai\AppData\Local\Temp\ccD3hIut.s:111    .text.netif_set_ipaddr:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccD3hIut.s:116    .text.netif_set_ipaddr:00000000 netif_set_ipaddr
-C:\Users\Mihai\AppData\Local\Temp\ccD3hIut.s:166    .text.netif_set_ipaddr:00000048 $d
-C:\Users\Mihai\AppData\Local\Temp\ccD3hIut.s:170    .text.netif_set_addr:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccD3hIut.s:175    .text.netif_set_addr:00000000 netif_set_addr
-C:\Users\Mihai\AppData\Local\Temp\ccD3hIut.s:194    .text.netif_add:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccD3hIut.s:199    .text.netif_add:00000000 netif_add
-C:\Users\Mihai\AppData\Local\Temp\ccD3hIut.s:245    .text.netif_add:00000060 $d
-C:\Users\Mihai\AppData\Local\Temp\ccD3hIut.s:249    .text.netif_set_gw:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccD3hIut.s:254    .text.netif_set_gw:00000000 netif_set_gw
-C:\Users\Mihai\AppData\Local\Temp\ccD3hIut.s:265    .text.netif_set_netmask:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccD3hIut.s:270    .text.netif_set_netmask:00000000 netif_set_netmask
-C:\Users\Mihai\AppData\Local\Temp\ccD3hIut.s:281    .text.netif_set_default:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccD3hIut.s:286    .text.netif_set_default:00000000 netif_set_default
-C:\Users\Mihai\AppData\Local\Temp\ccD3hIut.s:296    .text.netif_set_default:00000008 $d
-C:\Users\Mihai\AppData\Local\Temp\ccD3hIut.s:299    .text.netif_set_up:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccD3hIut.s:304    .text.netif_set_up:00000000 netif_set_up
-C:\Users\Mihai\AppData\Local\Temp\ccD3hIut.s:321    .text.netif_set_down:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccD3hIut.s:326    .text.netif_set_down:00000000 netif_set_down
-C:\Users\Mihai\AppData\Local\Temp\ccD3hIut.s:338    .text.netif_is_up:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccD3hIut.s:343    .text.netif_is_up:00000000 netif_is_up
-C:\Users\Mihai\AppData\Local\Temp\ccD3hIut.s:357    .bss:00000000 netifnum.4794
-C:\Users\Mihai\AppData\Local\Temp\ccD3hIut.s:358    .bss:00000000 $d
+C:\Users\Mihai\AppData\Local\Temp\ccJUdyLR.s:70     .text.netif_find:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccJUdyLR.s:75     .text.netif_find:00000000 netif_find
+C:\Users\Mihai\AppData\Local\Temp\ccJUdyLR.s:108    .text.netif_find:00000034 $d
+C:\Users\Mihai\AppData\Local\Temp\ccJUdyLR.s:111    .text.netif_set_ipaddr:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccJUdyLR.s:116    .text.netif_set_ipaddr:00000000 netif_set_ipaddr
+C:\Users\Mihai\AppData\Local\Temp\ccJUdyLR.s:166    .text.netif_set_ipaddr:00000048 $d
+C:\Users\Mihai\AppData\Local\Temp\ccJUdyLR.s:170    .text.netif_set_addr:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccJUdyLR.s:175    .text.netif_set_addr:00000000 netif_set_addr
+C:\Users\Mihai\AppData\Local\Temp\ccJUdyLR.s:194    .text.netif_add:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccJUdyLR.s:199    .text.netif_add:00000000 netif_add
+C:\Users\Mihai\AppData\Local\Temp\ccJUdyLR.s:245    .text.netif_add:00000060 $d
+C:\Users\Mihai\AppData\Local\Temp\ccJUdyLR.s:249    .text.netif_set_gw:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccJUdyLR.s:254    .text.netif_set_gw:00000000 netif_set_gw
+C:\Users\Mihai\AppData\Local\Temp\ccJUdyLR.s:265    .text.netif_set_netmask:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccJUdyLR.s:270    .text.netif_set_netmask:00000000 netif_set_netmask
+C:\Users\Mihai\AppData\Local\Temp\ccJUdyLR.s:281    .text.netif_set_default:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccJUdyLR.s:286    .text.netif_set_default:00000000 netif_set_default
+C:\Users\Mihai\AppData\Local\Temp\ccJUdyLR.s:296    .text.netif_set_default:00000008 $d
+C:\Users\Mihai\AppData\Local\Temp\ccJUdyLR.s:299    .text.netif_set_up:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccJUdyLR.s:304    .text.netif_set_up:00000000 netif_set_up
+C:\Users\Mihai\AppData\Local\Temp\ccJUdyLR.s:321    .text.netif_set_down:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccJUdyLR.s:326    .text.netif_set_down:00000000 netif_set_down
+C:\Users\Mihai\AppData\Local\Temp\ccJUdyLR.s:338    .text.netif_is_up:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccJUdyLR.s:343    .text.netif_is_up:00000000 netif_is_up
+C:\Users\Mihai\AppData\Local\Temp\ccJUdyLR.s:357    .bss:00000000 netifnum.4794
+C:\Users\Mihai\AppData\Local\Temp\ccJUdyLR.s:358    .bss:00000000 $d
 
 UNDEFINED SYMBOLS
 igmp_stop

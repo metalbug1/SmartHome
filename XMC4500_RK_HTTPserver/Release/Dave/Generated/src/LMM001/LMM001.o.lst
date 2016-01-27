@@ -440,20 +440,20 @@
  454              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
 DEFINED SYMBOLS
                             *ABS*:00000000 LMM001.c
-C:\Users\Mihai\AppData\Local\Temp\cchpWGOm.s:17     .text.LMM001_lmake_new_block:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cchpWGOm.s:21     .text.LMM001_lmake_new_block:00000000 LMM001_lmake_new_block
-C:\Users\Mihai\AppData\Local\Temp\cchpWGOm.s:47     .text.LMM001_ldisconnect_from_free_list:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cchpWGOm.s:51     .text.LMM001_ldisconnect_from_free_list:00000000 LMM001_ldisconnect_from_free_list
-C:\Users\Mihai\AppData\Local\Temp\cchpWGOm.s:76     .text.LMM001_l_assimilate_up:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cchpWGOm.s:80     .text.LMM001_l_assimilate_up:00000000 LMM001_l_assimilate_up
-C:\Users\Mihai\AppData\Local\Temp\cchpWGOm.s:109    .text.LMM001_l_assimilate_down:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cchpWGOm.s:113    .text.LMM001_l_assimilate_down:00000000 LMM001_l_assimilate_down
-C:\Users\Mihai\AppData\Local\Temp\cchpWGOm.s:136    .text.LMM001_free:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cchpWGOm.s:141    .text.LMM001_free:00000000 LMM001_free
-C:\Users\Mihai\AppData\Local\Temp\cchpWGOm.s:199    .text.LMM001_malloc:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cchpWGOm.s:204    .text.LMM001_malloc:00000000 LMM001_malloc
-C:\Users\Mihai\AppData\Local\Temp\cchpWGOm.s:333    .text.LMM001_realloc:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cchpWGOm.s:338    .text.LMM001_realloc:00000000 LMM001_realloc
+C:\Users\Mihai\AppData\Local\Temp\ccRP33cA.s:17     .text.LMM001_lmake_new_block:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccRP33cA.s:21     .text.LMM001_lmake_new_block:00000000 LMM001_lmake_new_block
+C:\Users\Mihai\AppData\Local\Temp\ccRP33cA.s:47     .text.LMM001_ldisconnect_from_free_list:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccRP33cA.s:51     .text.LMM001_ldisconnect_from_free_list:00000000 LMM001_ldisconnect_from_free_list
+C:\Users\Mihai\AppData\Local\Temp\ccRP33cA.s:76     .text.LMM001_l_assimilate_up:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccRP33cA.s:80     .text.LMM001_l_assimilate_up:00000000 LMM001_l_assimilate_up
+C:\Users\Mihai\AppData\Local\Temp\ccRP33cA.s:109    .text.LMM001_l_assimilate_down:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccRP33cA.s:113    .text.LMM001_l_assimilate_down:00000000 LMM001_l_assimilate_down
+C:\Users\Mihai\AppData\Local\Temp\ccRP33cA.s:136    .text.LMM001_free:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccRP33cA.s:141    .text.LMM001_free:00000000 LMM001_free
+C:\Users\Mihai\AppData\Local\Temp\ccRP33cA.s:199    .text.LMM001_malloc:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccRP33cA.s:204    .text.LMM001_malloc:00000000 LMM001_malloc
+C:\Users\Mihai\AppData\Local\Temp\ccRP33cA.s:333    .text.LMM001_realloc:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccRP33cA.s:338    .text.LMM001_realloc:00000000 LMM001_realloc
 
 UNDEFINED SYMBOLS
 memmove

@@ -279,27 +279,27 @@
  297              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
 DEFINED SYMBOLS
                             *ABS*:00000000 raw.c
-C:\Users\Mihai\AppData\Local\Temp\ccPRZTqW.s:17     .text.raw_input:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccPRZTqW.s:22     .text.raw_input:00000000 raw_input
-C:\Users\Mihai\AppData\Local\Temp\ccPRZTqW.s:79     .text.raw_input:00000068 $d
-C:\Users\Mihai\AppData\Local\Temp\ccPRZTqW.s:82     .text.raw_bind:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccPRZTqW.s:87     .text.raw_bind:00000000 raw_bind
-C:\Users\Mihai\AppData\Local\Temp\ccPRZTqW.s:99     .text.raw_connect:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccPRZTqW.s:104    .text.raw_connect:00000000 raw_connect
-C:\Users\Mihai\AppData\Local\Temp\ccPRZTqW.s:116    .text.raw_recv:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccPRZTqW.s:121    .text.raw_recv:00000000 raw_recv
-C:\Users\Mihai\AppData\Local\Temp\ccPRZTqW.s:130    .text.raw_sendto:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccPRZTqW.s:135    .text.raw_sendto:00000000 raw_sendto
-C:\Users\Mihai\AppData\Local\Temp\ccPRZTqW.s:207    .text.raw_send:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccPRZTqW.s:212    .text.raw_send:00000000 raw_send
-C:\Users\Mihai\AppData\Local\Temp\ccPRZTqW.s:220    .text.raw_remove:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccPRZTqW.s:225    .text.raw_remove:00000000 raw_remove
-C:\Users\Mihai\AppData\Local\Temp\ccPRZTqW.s:253    .text.raw_remove:00000024 $d
-C:\Users\Mihai\AppData\Local\Temp\ccPRZTqW.s:256    .text.raw_new:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccPRZTqW.s:261    .text.raw_new:00000000 raw_new
-C:\Users\Mihai\AppData\Local\Temp\ccPRZTqW.s:287    .text.raw_new:0000002c $d
-C:\Users\Mihai\AppData\Local\Temp\ccPRZTqW.s:291    .bss:00000000 $d
-C:\Users\Mihai\AppData\Local\Temp\ccPRZTqW.s:295    .bss:00000000 raw_pcbs
+C:\Users\Mihai\AppData\Local\Temp\ccTrw5Vj.s:17     .text.raw_input:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccTrw5Vj.s:22     .text.raw_input:00000000 raw_input
+C:\Users\Mihai\AppData\Local\Temp\ccTrw5Vj.s:79     .text.raw_input:00000068 $d
+C:\Users\Mihai\AppData\Local\Temp\ccTrw5Vj.s:82     .text.raw_bind:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccTrw5Vj.s:87     .text.raw_bind:00000000 raw_bind
+C:\Users\Mihai\AppData\Local\Temp\ccTrw5Vj.s:99     .text.raw_connect:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccTrw5Vj.s:104    .text.raw_connect:00000000 raw_connect
+C:\Users\Mihai\AppData\Local\Temp\ccTrw5Vj.s:116    .text.raw_recv:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccTrw5Vj.s:121    .text.raw_recv:00000000 raw_recv
+C:\Users\Mihai\AppData\Local\Temp\ccTrw5Vj.s:130    .text.raw_sendto:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccTrw5Vj.s:135    .text.raw_sendto:00000000 raw_sendto
+C:\Users\Mihai\AppData\Local\Temp\ccTrw5Vj.s:207    .text.raw_send:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccTrw5Vj.s:212    .text.raw_send:00000000 raw_send
+C:\Users\Mihai\AppData\Local\Temp\ccTrw5Vj.s:220    .text.raw_remove:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccTrw5Vj.s:225    .text.raw_remove:00000000 raw_remove
+C:\Users\Mihai\AppData\Local\Temp\ccTrw5Vj.s:253    .text.raw_remove:00000024 $d
+C:\Users\Mihai\AppData\Local\Temp\ccTrw5Vj.s:256    .text.raw_new:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccTrw5Vj.s:261    .text.raw_new:00000000 raw_new
+C:\Users\Mihai\AppData\Local\Temp\ccTrw5Vj.s:287    .text.raw_new:0000002c $d
+C:\Users\Mihai\AppData\Local\Temp\ccTrw5Vj.s:291    .bss:00000000 $d
+C:\Users\Mihai\AppData\Local\Temp\ccTrw5Vj.s:295    .bss:00000000 raw_pcbs
 
 UNDEFINED SYMBOLS
 ntohs

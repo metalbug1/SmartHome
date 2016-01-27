@@ -255,20 +255,20 @@
  265              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
 DEFINED SYMBOLS
                             *ABS*:00000000 EthernetPHY.c
-C:\Users\Mihai\AppData\Local\Temp\ccy7LicW.s:17     .text.PHY_lWriteReg.constprop.0:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccy7LicW.s:21     .text.PHY_lWriteReg.constprop.0:00000000 PHY_lWriteReg.constprop.0
-C:\Users\Mihai\AppData\Local\Temp\ccy7LicW.s:51     .text.PHY_lWriteReg.constprop.0:00000034 $d
+C:\Users\Mihai\AppData\Local\Temp\ccgAuMVa.s:17     .text.PHY_lWriteReg.constprop.0:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccgAuMVa.s:21     .text.PHY_lWriteReg.constprop.0:00000000 PHY_lWriteReg.constprop.0
+C:\Users\Mihai\AppData\Local\Temp\ccgAuMVa.s:51     .text.PHY_lWriteReg.constprop.0:00000034 $d
                             *COM*:00000004 PHYtimerCallback
-C:\Users\Mihai\AppData\Local\Temp\ccy7LicW.s:55     .text.PHY_lReadReg.constprop.1:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccy7LicW.s:59     .text.PHY_lReadReg.constprop.1:00000000 PHY_lReadReg.constprop.1
-C:\Users\Mihai\AppData\Local\Temp\ccy7LicW.s:92     .text.PHY_lReadReg.constprop.1:00000038 $d
-C:\Users\Mihai\AppData\Local\Temp\ccy7LicW.s:96     .text.PHY_IsLinkUP:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccy7LicW.s:101    .text.PHY_IsLinkUP:00000000 PHY_IsLinkUP
-C:\Users\Mihai\AppData\Local\Temp\ccy7LicW.s:127    .text.PHY_InitializeDevice:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccy7LicW.s:132    .text.PHY_InitializeDevice:00000000 PHY_InitializeDevice
-C:\Users\Mihai\AppData\Local\Temp\ccy7LicW.s:244    .text.PHY_InitializeDevice:000000f8 $d
-C:\Users\Mihai\AppData\Local\Temp\ccy7LicW.s:247    .text.PHY_RegisterTimerCallback:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccy7LicW.s:252    .text.PHY_RegisterTimerCallback:00000000 PHY_RegisterTimerCallback
-C:\Users\Mihai\AppData\Local\Temp\ccy7LicW.s:262    .text.PHY_RegisterTimerCallback:00000008 $d
+C:\Users\Mihai\AppData\Local\Temp\ccgAuMVa.s:55     .text.PHY_lReadReg.constprop.1:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccgAuMVa.s:59     .text.PHY_lReadReg.constprop.1:00000000 PHY_lReadReg.constprop.1
+C:\Users\Mihai\AppData\Local\Temp\ccgAuMVa.s:92     .text.PHY_lReadReg.constprop.1:00000038 $d
+C:\Users\Mihai\AppData\Local\Temp\ccgAuMVa.s:96     .text.PHY_IsLinkUP:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccgAuMVa.s:101    .text.PHY_IsLinkUP:00000000 PHY_IsLinkUP
+C:\Users\Mihai\AppData\Local\Temp\ccgAuMVa.s:127    .text.PHY_InitializeDevice:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccgAuMVa.s:132    .text.PHY_InitializeDevice:00000000 PHY_InitializeDevice
+C:\Users\Mihai\AppData\Local\Temp\ccgAuMVa.s:244    .text.PHY_InitializeDevice:000000f8 $d
+C:\Users\Mihai\AppData\Local\Temp\ccgAuMVa.s:247    .text.PHY_RegisterTimerCallback:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccgAuMVa.s:252    .text.PHY_RegisterTimerCallback:00000000 PHY_RegisterTimerCallback
+C:\Users\Mihai\AppData\Local\Temp\ccgAuMVa.s:262    .text.PHY_RegisterTimerCallback:00000008 $d
 
 NO UNDEFINED SYMBOLS
