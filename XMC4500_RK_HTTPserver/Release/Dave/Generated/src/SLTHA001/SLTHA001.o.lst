@@ -1,0 +1,1008 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"SLTHA001.c"
+  16              		.section	.text.SLTHA001_lFatInfoToStatus,"ax",%progbits
+  17              		.align	1
+  18              		.thumb
+  19              		.thumb_func
+  21              	SLTHA001_lFatInfoToStatus:
+  22              		@ args = 0, pretend = 0, frame = 40
+  23              		@ frame_needed = 0, uses_anonymous_args = 0
+  24 0000 30B5     		push	{r4, r5, lr}
+  25 0002 0D46     		mov	r5, r1
+  26 0004 8BB0     		sub	sp, sp, #44
+  27 0006 0021     		movs	r1, #0
+  28 0008 3C22     		movs	r2, #60
+  29 000a 0446     		mov	r4, r0
+  30 000c FFF7FEFF 		bl	memset
+  31 0010 2B7A     		ldrb	r3, [r5, #8]	@ zero_extendqisi2
+  32 0012 03F01000 		and	r0, r3, #16
+  33 0016 C1B2     		uxtb	r1, r0
+  34 0018 0029     		cmp	r1, #0
+  35 001a 0CBF     		ite	eq
+  36 001c 4FF40043 		moveq	r3, #32768
+  37 0020 4FF48043 		movne	r3, #16384
+  38 0024 6360     		str	r3, [r4, #4]
+  39 0026 2A7A     		ldrb	r2, [r5, #8]	@ zero_extendqisi2
+  40 0028 40F2FF11 		movw	r1, #511
+  41 002c 12F0010F 		tst	r2, #1
+  42 0030 40F26D10 		movw	r0, #365
+  43 0034 08BF     		it	eq
+  44 0036 0846     		moveq	r0, r1
+  45 0038 0343     		orrs	r3, r3, r0
+  46 003a E888     		ldrh	r0, [r5, #6]
+  47 003c 2A68     		ldr	r2, [r5, #0]
+  48 003e 6360     		str	r3, [r4, #4]
+  49 0040 00F01F01 		and	r1, r0, #31
+  50 0044 4B00     		lsls	r3, r1, #1
+  51 0046 A988     		ldrh	r1, [r5, #4]
+  52 0048 2261     		str	r2, [r4, #16]
+  53 004a C0F34512 		ubfx	r2, r0, #5, #6
+  54 004e 0292     		str	r2, [sp, #8]
+  55 0050 C00A     		lsrs	r0, r0, #11
+  56 0052 C1F34312 		ubfx	r2, r1, #5, #4
+  57 0056 0193     		str	r3, [sp, #4]
+  58 0058 0390     		str	r0, [sp, #12]
+  59 005a 01F01F03 		and	r3, r1, #31
+  60 005e 501E     		subs	r0, r2, #1
+  61 0060 490A     		lsrs	r1, r1, #9
+  62 0062 0493     		str	r3, [sp, #16]
+  63 0064 0590     		str	r0, [sp, #20]
+  64 0066 5031     		adds	r1, r1, #80
+  65 0068 0023     		movs	r3, #0
+  66 006a 01A8     		add	r0, sp, #4
+  67 006c 0691     		str	r1, [sp, #24]
+  68 006e 0993     		str	r3, [sp, #36]
+  69 0070 FFF7FEFF 		bl	mktime
+  70 0074 4FF40072 		mov	r2, #512
+  71 0078 6062     		str	r0, [r4, #36]
+  72 007a E061     		str	r0, [r4, #28]
+  73 007c 6061     		str	r0, [r4, #20]
+  74 007e E262     		str	r2, [r4, #44]
+  75 0080 0BB0     		add	sp, sp, #44
+  76 0082 30BD     		pop	{r4, r5, pc}
+  78              		.section	.text.SLTHA001_lFindAvailableSlot,"ax",%progbits
+  79              		.align	1
+  80              		.global	SLTHA001_lFindAvailableSlot
+  81              		.thumb
+  82              		.thumb_func
+  84              	SLTHA001_lFindAvailableSlot:
+  85              		@ args = 0, pretend = 0, frame = 0
+  86              		@ frame_needed = 0, uses_anonymous_args = 0
+  87 0000 431C     		adds	r3, r0, #1
+  88 0002 30B5     		push	{r4, r5, lr}
+  89 0004 03D0     		beq	.L7
+  90 0006 0D4B     		ldr	r3, .L18
+  91 0008 1968     		ldr	r1, [r3, #0]
+  92 000a 8842     		cmp	r0, r1
+  93 000c 13D0     		beq	.L8
+  94              	.L7:
+  95 000e 0C4C     		ldr	r4, .L18+4
+  96 0010 0022     		movs	r2, #0
+  97 0012 2260     		str	r2, [r4, #0]
+  98 0014 1346     		mov	r3, r2
+  99              	.L9:
+ 100 0016 132B     		cmp	r3, #19
+ 101 0018 1C46     		mov	r4, r3
+ 102 001a 0949     		ldr	r1, .L18+4
+ 103 001c 09DC     		bgt	.L17
+ 104              	.L10:
+ 105 001e 0D1D     		adds	r5, r1, #4
+ 106 0020 0133     		adds	r3, r3, #1
+ 107 0022 5559     		ldr	r5, [r2, r5]
+ 108 0024 1432     		adds	r2, r2, #20
+ 109 0026 8542     		cmp	r5, r0
+ 110 0028 F5D1     		bne	.L9
+ 111 002a 0C60     		str	r4, [r1, #0]
+ 112              	.L11:
+ 113 002c 0349     		ldr	r1, .L18
+ 114 002e 0860     		str	r0, [r1, #0]
+ 115 0030 01E0     		b	.L8
+ 116              	.L17:
+ 117 0032 0B60     		str	r3, [r1, #0]
+ 118 0034 FAE7     		b	.L11
+ 119              	.L8:
+ 120 0036 0248     		ldr	r0, .L18+4
+ 121 0038 0068     		ldr	r0, [r0, #0]
+ 122 003a 30BD     		pop	{r4, r5, pc}
+ 123              	.L19:
+ 124              		.align	2
+ 125              	.L18:
+ 126 003c 00000000 		.word	.LANCHOR0
+ 127 0040 00000000 		.word	.LANCHOR1
+ 129              		.section	.text.SLTHA001_lLocalInitialize,"ax",%progbits
+ 130              		.align	1
+ 131              		.global	SLTHA001_lLocalInitialize
+ 132              		.thumb
+ 133              		.thumb_func
+ 135              	SLTHA001_lLocalInitialize:
+ 136              		@ args = 0, pretend = 0, frame = 0
+ 137              		@ frame_needed = 0, uses_anonymous_args = 0
+ 138              		@ link register save eliminated.
+ 139 0000 0022     		movs	r2, #0
+ 140              	.L21:
+ 141 0002 084B     		ldr	r3, .L23
+ 142 0004 191D     		adds	r1, r3, #4
+ 143 0006 4FF0FF30 		mov	r0, #-1
+ 144 000a 5050     		str	r0, [r2, r1]
+ 145 000c 1432     		adds	r2, r2, #20
+ 146 000e B2F5C87F 		cmp	r2, #400
+ 147 0012 F6D1     		bne	.L21
+ 148 0014 0022     		movs	r2, #0
+ 149 0016 0121     		movs	r1, #1
+ 150 0018 0220     		movs	r0, #2
+ 151 001a 5A60     		str	r2, [r3, #4]
+ 152 001c 9961     		str	r1, [r3, #24]
+ 153 001e D862     		str	r0, [r3, #44]
+ 154 0020 7047     		bx	lr
+ 155              	.L24:
+ 156 0022 00BF     		.align	2
+ 157              	.L23:
+ 158 0024 00000000 		.word	.LANCHOR1
+ 160              		.section	.text._open,"ax",%progbits
+ 161              		.align	1
+ 162              		.global	_open
+ 163              		.thumb
+ 164              		.thumb_func
+ 166              	_open:
+ 167              		@ args = 4, pretend = 12, frame = 0
+ 168              		@ frame_needed = 0, uses_anonymous_args = 1
+ 169 0000 0EB4     		push	{r1, r2, r3}
+ 170 0002 2DE9F841 		push	{r3, r4, r5, r6, r7, r8, lr}
+ 171 0006 8046     		mov	r8, r0
+ 172 0008 4FF0FF30 		mov	r0, #-1
+ 173 000c 079C     		ldr	r4, [sp, #28]
+ 174 000e FFF7FEFF 		bl	SLTHA001_lFindAvailableSlot
+ 175 0012 1428     		cmp	r0, #20
+ 176 0014 0646     		mov	r6, r0
+ 177 0016 04D1     		bne	.L26
+ 178 0018 FFF7FEFF 		bl	__errno
+ 179 001c 1727     		movs	r7, #23
+ 180 001e 0760     		str	r7, [r0, #0]
+ 181 0020 84E0     		b	.L27
+ 182              	.L26:
+ 183 0022 4046     		mov	r0, r8
+ 184 0024 FFF7FEFF 		bl	strlen
+ 185 0028 B0F5806F 		cmp	r0, #1024
+ 186 002c 7ED8     		bhi	.L27
+ 187 002e 2707     		lsls	r7, r4, #28
+ 188 0030 48BF     		it	mi
+ 189 0032 24F48064 		bicmi	r4, r4, #1024
+ 190 0036 04F4C063 		and	r3, r4, #1536
+ 191 003a B3F5C06F 		cmp	r3, #1536
+ 192 003e 01D1     		bne	.L30
+ 193 0040 A107     		lsls	r1, r4, #30
+ 194 0042 0AD1     		bne	.L47
+ 195              	.L30:
+ 196 0044 04F42061 		and	r1, r4, #2560
+ 197 0048 B1F5206F 		cmp	r1, #2560
+ 198 004c 07D0     		beq	.L48
+ 199 004e 14F40072 		ands	r2, r4, #512
+ 200 0052 06D1     		bne	.L49
+ 201 0054 022C     		cmp	r4, #2
+ 202 0056 05D9     		bls	.L31
+ 203 0058 1EE0     		b	.L36
+ 204              	.L47:
+ 205 005a 0822     		movs	r2, #8
+ 206 005c 02E0     		b	.L31
+ 207              	.L48:
+ 208 005e 0022     		movs	r2, #0
+ 209 0060 00E0     		b	.L31
+ 210              	.L49:
+ 211 0062 1022     		movs	r2, #16
+ 212              	.L31:
+ 213 0064 14F00307 		ands	r7, r4, #3
+ 214 0068 02D1     		bne	.L33
+ 215 006a 42F00105 		orr	r5, r2, #1
+ 216 006e 08E0     		b	.L69
+ 217              	.L33:
+ 218 0070 012F     		cmp	r7, #1
+ 219 0072 02D1     		bne	.L35
+ 220 0074 42F00205 		orr	r5, r2, #2
+ 221 0078 03E0     		b	.L69
+ 222              	.L35:
+ 223 007a 022F     		cmp	r7, #2
+ 224 007c 0CD1     		bne	.L36
+ 225 007e 42F00305 		orr	r5, r2, #3
+ 226              	.L69:
+ 227 0082 0130     		adds	r0, r0, #1
+ 228 0084 FFF7FEFF 		bl	malloc
+ 229 0088 2D4A     		ldr	r2, .L71
+ 230 008a 1421     		movs	r1, #20
+ 231 008c EFB2     		uxtb	r7, r5
+ 232 008e 01FB0625 		mla	r5, r1, r6, r2
+ 233 0092 6861     		str	r0, [r5, #20]
+ 234 0094 20B9     		cbnz	r0, .L68
+ 235 0096 49E0     		b	.L27
+ 236              	.L36:
+ 237 0098 FFF7FEFF 		bl	__errno
+ 238 009c 1622     		movs	r2, #22
+ 239 009e 23E0     		b	.L70
+ 240              	.L68:
+ 241 00a0 4146     		mov	r1, r8
+ 242 00a2 FFF7FEFF 		bl	strcpy
+ 243 00a6 FFF7FEFF 		bl	__errno
+ 244 00aa 0523     		movs	r3, #5
+ 245 00ac 0360     		str	r3, [r0, #0]
+ 246 00ae 2869     		ldr	r0, [r5, #16]
+ 247 00b0 88B1     		cbz	r0, .L37
+ 248              	.L41:
+ 249 00b2 2349     		ldr	r1, .L71
+ 250 00b4 1425     		movs	r5, #20
+ 251 00b6 05FB0615 		mla	r5, r5, r6, r1
+ 252 00ba 3A46     		mov	r2, r7
+ 253 00bc 4146     		mov	r1, r8
+ 254 00be 2869     		ldr	r0, [r5, #16]
+ 255 00c0 FFF7FEFF 		bl	f_open
+ 256 00c4 8046     		mov	r8, r0
+ 257 00c6 88B1     		cbz	r0, .L67
+ 258 00c8 1E4F     		ldr	r7, .L71+4
+ 259 00ca FFF7FEFF 		bl	__errno
+ 260 00ce 07EB8801 		add	r1, r7, r8, lsl #2
+ 261 00d2 4A68     		ldr	r2, [r1, #4]
+ 262 00d4 08E0     		b	.L70
+ 263              	.L37:
+ 264 00d6 0120     		movs	r0, #1
+ 265 00d8 4FF40971 		mov	r1, #548
+ 266 00dc FFF7FEFF 		bl	calloc
+ 267 00e0 2861     		str	r0, [r5, #16]
+ 268 00e2 0028     		cmp	r0, #0
+ 269 00e4 E5D1     		bne	.L41
+ 270 00e6 23E0     		b	.L42
+ 271              	.L70:
+ 272 00e8 0260     		str	r2, [r0, #0]
+ 273 00ea 21E0     		b	.L42
+ 274              	.L67:
+ 275 00ec F71C     		adds	r7, r6, #3
+ 276 00ee 2207     		lsls	r2, r4, #28
+ 277 00f0 6F60     		str	r7, [r5, #4]
+ 278 00f2 EC60     		str	r4, [r5, #12]
+ 279 00f4 A860     		str	r0, [r5, #8]
+ 280 00f6 07D5     		bpl	.L43
+ 281 00f8 2869     		ldr	r0, [r5, #16]
+ 282 00fa C168     		ldr	r1, [r0, #12]
+ 283 00fc FFF7FEFF 		bl	f_lseek
+ 284 0100 B0B9     		cbnz	r0, .L42
+ 285 0102 2A69     		ldr	r2, [r5, #16]
+ 286 0104 9368     		ldr	r3, [r2, #8]
+ 287 0106 AB60     		str	r3, [r5, #8]
+ 288              	.L43:
+ 289 0108 002F     		cmp	r7, #0
+ 290 010a 14DA     		bge	.L56
+ 291              	.L46:
+ 292 010c 0C4B     		ldr	r3, .L71
+ 293 010e 1420     		movs	r0, #20
+ 294 0110 00FB0636 		mla	r6, r0, r6, r3
+ 295 0114 3169     		ldr	r1, [r6, #16]
+ 296 0116 71B1     		cbz	r1, .L56
+ 297 0118 7069     		ldr	r0, [r6, #20]
+ 298 011a FFF7FEFF 		bl	free
+ 299 011e 3069     		ldr	r0, [r6, #16]
+ 300 0120 FFF7FEFF 		bl	free
+ 301 0124 0022     		movs	r2, #0
+ 302 0126 7261     		str	r2, [r6, #20]
+ 303 0128 3261     		str	r2, [r6, #16]
+ 304 012a 04E0     		b	.L56
+ 305              	.L27:
+ 306 012c 0027     		movs	r7, #0
+ 307 012e 02E0     		b	.L56
+ 308              	.L42:
+ 309 0130 4FF0FF37 		mov	r7, #-1
+ 310 0134 EAE7     		b	.L46
+ 311              	.L56:
+ 312 0136 3846     		mov	r0, r7
+ 313 0138 BDE8F841 		pop	{r3, r4, r5, r6, r7, r8, lr}
+ 314 013c 03B0     		add	sp, sp, #12
+ 315 013e 7047     		bx	lr
+ 316              	.L72:
+ 317              		.align	2
+ 318              	.L71:
+ 319 0140 00000000 		.word	.LANCHOR1
+ 320 0144 00000000 		.word	.LANCHOR0
+ 322              		.section	.text._close,"ax",%progbits
+ 323              		.align	1
+ 324              		.global	_close
+ 325              		.thumb
+ 326              		.thumb_func
+ 328              	_close:
+ 329              		@ args = 0, pretend = 0, frame = 0
+ 330              		@ frame_needed = 0, uses_anonymous_args = 0
+ 331 0000 70B5     		push	{r4, r5, r6, lr}
+ 332 0002 FFF7FEFF 		bl	SLTHA001_lFindAvailableSlot
+ 333 0006 1428     		cmp	r0, #20
+ 334 0008 06D1     		bne	.L74
+ 335 000a FFF7FEFF 		bl	__errno
+ 336 000e 0922     		movs	r2, #9
+ 337              	.L79:
+ 338 0010 0260     		str	r2, [r0, #0]
+ 339              	.L78:
+ 340 0012 4FF0FF30 		mov	r0, #-1
+ 341 0016 70BD     		pop	{r4, r5, r6, pc}
+ 342              	.L74:
+ 343 0018 0E4B     		ldr	r3, .L80
+ 344 001a 1424     		movs	r4, #20
+ 345 001c 04FB0034 		mla	r4, r4, r0, r3
+ 346 0020 4FF0FF36 		mov	r6, #-1
+ 347 0024 2069     		ldr	r0, [r4, #16]
+ 348 0026 6660     		str	r6, [r4, #4]
+ 349 0028 0028     		cmp	r0, #0
+ 350 002a F2D0     		beq	.L78
+ 351 002c FFF7FEFF 		bl	f_close
+ 352 0030 0546     		mov	r5, r0
+ 353 0032 30B1     		cbz	r0, .L76
+ 354 0034 FFF7FEFF 		bl	__errno
+ 355 0038 0749     		ldr	r1, .L80+4
+ 356 003a 01EB8505 		add	r5, r1, r5, lsl #2
+ 357 003e 6A68     		ldr	r2, [r5, #4]
+ 358 0040 E6E7     		b	.L79
+ 359              	.L76:
+ 360 0042 6069     		ldr	r0, [r4, #20]
+ 361 0044 FFF7FEFF 		bl	free
+ 362 0048 2069     		ldr	r0, [r4, #16]
+ 363 004a FFF7FEFF 		bl	free
+ 364 004e 2561     		str	r5, [r4, #16]
+ 365 0050 2846     		mov	r0, r5
+ 366 0052 70BD     		pop	{r4, r5, r6, pc}
+ 367              	.L81:
+ 368              		.align	2
+ 369              	.L80:
+ 370 0054 00000000 		.word	.LANCHOR1
+ 371 0058 00000000 		.word	.LANCHOR0
+ 373              		.section	.text._read_r,"ax",%progbits
+ 374              		.align	1
+ 375              		.global	_read_r
+ 376              		.thumb
+ 377              		.thumb_func
+ 379              	_read_r:
+ 380              		@ args = 0, pretend = 0, frame = 8
+ 381              		@ frame_needed = 0, uses_anonymous_args = 0
+ 382 0000 F7B5     		push	{r0, r1, r2, r4, r5, r6, r7, lr}
+ 383 0002 1D46     		mov	r5, r3
+ 384 0004 0846     		mov	r0, r1
+ 385 0006 0023     		movs	r3, #0
+ 386 0008 0E46     		mov	r6, r1
+ 387 000a 1746     		mov	r7, r2
+ 388 000c 0193     		str	r3, [sp, #4]
+ 389 000e FFF7FEFF 		bl	SLTHA001_lFindAvailableSlot
+ 390 0012 1428     		cmp	r0, #20
+ 391 0014 06D0     		beq	.L83
+ 392 0016 1549     		ldr	r1, .L98
+ 393 0018 1424     		movs	r4, #20
+ 394 001a 04FB0014 		mla	r4, r4, r0, r1
+ 395 001e E068     		ldr	r0, [r4, #12]
+ 396 0020 C307     		lsls	r3, r0, #31
+ 397 0022 03D5     		bpl	.L84
+ 398              	.L83:
+ 399 0024 FFF7FEFF 		bl	__errno
+ 400 0028 0923     		movs	r3, #9
+ 401 002a 10E0     		b	.L97
+ 402              	.L84:
+ 403 002c 022E     		cmp	r6, #2
+ 404 002e 13D9     		bls	.L90
+ 405 0030 2069     		ldr	r0, [r4, #16]
+ 406 0032 88B1     		cbz	r0, .L90
+ 407 0034 3946     		mov	r1, r7
+ 408 0036 2A46     		mov	r2, r5
+ 409 0038 01AB     		add	r3, sp, #4
+ 410 003a FFF7FEFF 		bl	f_read
+ 411 003e 0646     		mov	r6, r0
+ 412 0040 38B1     		cbz	r0, .L88
+ 413 0042 FFF7FEFF 		bl	__errno
+ 414 0046 0A4A     		ldr	r2, .L98+4
+ 415 0048 02EB8606 		add	r6, r2, r6, lsl #2
+ 416 004c 7368     		ldr	r3, [r6, #4]
+ 417              	.L97:
+ 418 004e 0360     		str	r3, [r0, #0]
+ 419 0050 02E0     		b	.L90
+ 420              	.L88:
+ 421 0052 019A     		ldr	r2, [sp, #4]
+ 422 0054 AB1A     		subs	r3, r5, r2
+ 423 0056 03D5     		bpl	.L89
+ 424              	.L90:
+ 425 0058 4FF0FF31 		mov	r1, #-1
+ 426 005c 0191     		str	r1, [sp, #4]
+ 427 005e 03E0     		b	.L85
+ 428              	.L89:
+ 429 0060 A168     		ldr	r1, [r4, #8]
+ 430 0062 6D18     		adds	r5, r5, r1
+ 431 0064 E81A     		subs	r0, r5, r3
+ 432 0066 A060     		str	r0, [r4, #8]
+ 433              	.L85:
+ 434 0068 0198     		ldr	r0, [sp, #4]
+ 435 006a FEBD     		pop	{r1, r2, r3, r4, r5, r6, r7, pc}
+ 436              	.L99:
+ 437              		.align	2
+ 438              	.L98:
+ 439 006c 00000000 		.word	.LANCHOR1
+ 440 0070 00000000 		.word	.LANCHOR0
+ 442              		.section	.text._write_r,"ax",%progbits
+ 443              		.align	1
+ 444              		.global	_write_r
+ 445              		.thumb
+ 446              		.thumb_func
+ 448              	_write_r:
+ 449              		@ args = 0, pretend = 0, frame = 8
+ 450              		@ frame_needed = 0, uses_anonymous_args = 0
+ 451 0000 F7B5     		push	{r0, r1, r2, r4, r5, r6, r7, lr}
+ 452 0002 1C46     		mov	r4, r3
+ 453 0004 0846     		mov	r0, r1
+ 454 0006 0023     		movs	r3, #0
+ 455 0008 0E46     		mov	r6, r1
+ 456 000a 1746     		mov	r7, r2
+ 457 000c 0193     		str	r3, [sp, #4]
+ 458 000e FFF7FEFF 		bl	SLTHA001_lFindAvailableSlot
+ 459 0012 1428     		cmp	r0, #20
+ 460 0014 03D1     		bne	.L101
+ 461 0016 FFF7FEFF 		bl	__errno
+ 462 001a 0922     		movs	r2, #9
+ 463 001c 14E0     		b	.L114
+ 464              	.L101:
+ 465 001e 022E     		cmp	r6, #2
+ 466 0020 1AD9     		bls	.L105
+ 467 0022 1249     		ldr	r1, .L115
+ 468 0024 1425     		movs	r5, #20
+ 469 0026 05FB0015 		mla	r5, r5, r0, r1
+ 470 002a 2869     		ldr	r0, [r5, #16]
+ 471 002c A0B1     		cbz	r0, .L105
+ 472 002e 3946     		mov	r1, r7
+ 473 0030 2246     		mov	r2, r4
+ 474 0032 01AB     		add	r3, sp, #4
+ 475 0034 FFF7FEFF 		bl	f_write
+ 476 0038 0646     		mov	r6, r0
+ 477 003a 38B1     		cbz	r0, .L104
+ 478 003c FFF7FEFF 		bl	__errno
+ 479 0040 0B4B     		ldr	r3, .L115+4
+ 480 0042 03EB8606 		add	r6, r3, r6, lsl #2
+ 481 0046 7268     		ldr	r2, [r6, #4]
+ 482              	.L114:
+ 483 0048 0260     		str	r2, [r0, #0]
+ 484 004a 05E0     		b	.L105
+ 485              	.L104:
+ 486 004c 0198     		ldr	r0, [sp, #4]
+ 487 004e 231A     		subs	r3, r4, r0
+ 488 0050 5A1C     		adds	r2, r3, #1
+ 489 0052 01D0     		beq	.L105
+ 490 0054 A342     		cmp	r3, r4
+ 491 0056 03D1     		bne	.L106
+ 492              	.L105:
+ 493 0058 4FF0FF30 		mov	r0, #-1
+ 494 005c 0190     		str	r0, [sp, #4]
+ 495 005e 03E0     		b	.L107
+ 496              	.L106:
+ 497 0060 AA68     		ldr	r2, [r5, #8]
+ 498 0062 A418     		adds	r4, r4, r2
+ 499 0064 E11A     		subs	r1, r4, r3
+ 500 0066 A960     		str	r1, [r5, #8]
+ 501              	.L107:
+ 502 0068 0198     		ldr	r0, [sp, #4]
+ 503 006a FEBD     		pop	{r1, r2, r3, r4, r5, r6, r7, pc}
+ 504              	.L116:
+ 505              		.align	2
+ 506              	.L115:
+ 507 006c 00000000 		.word	.LANCHOR1
+ 508 0070 00000000 		.word	.LANCHOR0
+ 510              		.section	.text._lseek,"ax",%progbits
+ 511              		.align	1
+ 512              		.global	_lseek
+ 513              		.thumb
+ 514              		.thumb_func
+ 516              	_lseek:
+ 517              		@ args = 0, pretend = 0, frame = 0
+ 518              		@ frame_needed = 0, uses_anonymous_args = 0
+ 519 0000 70B5     		push	{r4, r5, r6, lr}
+ 520 0002 0C46     		mov	r4, r1
+ 521 0004 1646     		mov	r6, r2
+ 522 0006 FFF7FEFF 		bl	SLTHA001_lFindAvailableSlot
+ 523 000a 1428     		cmp	r0, #20
+ 524 000c 0546     		mov	r5, r0
+ 525 000e 05D0     		beq	.L118
+ 526 0010 154B     		ldr	r3, .L132
+ 527 0012 1422     		movs	r2, #20
+ 528 0014 02FB0030 		mla	r0, r2, r0, r3
+ 529 0018 0069     		ldr	r0, [r0, #16]
+ 530 001a 18B9     		cbnz	r0, .L119
+ 531              	.L118:
+ 532 001c FFF7FEFF 		bl	__errno
+ 533 0020 0922     		movs	r2, #9
+ 534 0022 14E0     		b	.L131
+ 535              	.L119:
+ 536 0024 0EB9     		cbnz	r6, .L121
+ 537 0026 2146     		mov	r1, r4
+ 538 0028 07E0     		b	.L129
+ 539              	.L121:
+ 540 002a 012E     		cmp	r6, #1
+ 541 002c 01D1     		bne	.L123
+ 542 002e 8168     		ldr	r1, [r0, #8]
+ 543 0030 02E0     		b	.L130
+ 544              	.L123:
+ 545 0032 022E     		cmp	r6, #2
+ 546 0034 15D1     		bne	.L125
+ 547 0036 C168     		ldr	r1, [r0, #12]
+ 548              	.L130:
+ 549 0038 6118     		adds	r1, r4, r1
+ 550              	.L129:
+ 551 003a FFF7FEFF 		bl	f_lseek
+ 552 003e 0446     		mov	r4, r0
+ 553 0040 38B1     		cbz	r0, .L124
+ 554 0042 FFF7FEFF 		bl	__errno
+ 555 0046 0949     		ldr	r1, .L132+4
+ 556 0048 01EB8404 		add	r4, r1, r4, lsl #2
+ 557 004c 6268     		ldr	r2, [r4, #4]
+ 558              	.L131:
+ 559 004e 0260     		str	r2, [r0, #0]
+ 560 0050 07E0     		b	.L125
+ 561              	.L124:
+ 562 0052 054B     		ldr	r3, .L132
+ 563 0054 1422     		movs	r2, #20
+ 564 0056 02FB0535 		mla	r5, r2, r5, r3
+ 565 005a 2869     		ldr	r0, [r5, #16]
+ 566 005c 8068     		ldr	r0, [r0, #8]
+ 567 005e A860     		str	r0, [r5, #8]
+ 568 0060 70BD     		pop	{r4, r5, r6, pc}
+ 569              	.L125:
+ 570 0062 4FF0FF30 		mov	r0, #-1
+ 571 0066 70BD     		pop	{r4, r5, r6, pc}
+ 572              	.L133:
+ 573              		.align	2
+ 574              	.L132:
+ 575 0068 00000000 		.word	.LANCHOR1
+ 576 006c 00000000 		.word	.LANCHOR0
+ 578              		.section	.text._unlink,"ax",%progbits
+ 579              		.align	1
+ 580              		.global	_unlink
+ 581              		.thumb
+ 582              		.thumb_func
+ 584              	_unlink:
+ 585              		@ args = 0, pretend = 0, frame = 0
+ 586              		@ frame_needed = 0, uses_anonymous_args = 0
+ 587 0000 10B5     		push	{r4, lr}
+ 588 0002 FFF7FEFF 		bl	f_unlink
+ 589 0006 0446     		mov	r4, r0
+ 590 0008 48B1     		cbz	r0, .L136
+ 591 000a FFF7FEFF 		bl	__errno
+ 592 000e 044B     		ldr	r3, .L137
+ 593 0010 03EB8404 		add	r4, r3, r4, lsl #2
+ 594 0014 6168     		ldr	r1, [r4, #4]
+ 595 0016 0160     		str	r1, [r0, #0]
+ 596 0018 4FF0FF30 		mov	r0, #-1
+ 597 001c 10BD     		pop	{r4, pc}
+ 598              	.L136:
+ 599 001e 10BD     		pop	{r4, pc}
+ 600              	.L138:
+ 601              		.align	2
+ 602              	.L137:
+ 603 0020 00000000 		.word	.LANCHOR0
+ 605              		.section	.text._fstat,"ax",%progbits
+ 606              		.align	1
+ 607              		.global	_fstat
+ 608              		.thumb
+ 609              		.thumb_func
+ 611              	_fstat:
+ 612              		@ args = 0, pretend = 0, frame = 24
+ 613              		@ frame_needed = 0, uses_anonymous_args = 0
+ 614 0000 30B5     		push	{r4, r5, lr}
+ 615 0002 87B0     		sub	sp, sp, #28
+ 616 0004 0446     		mov	r4, r0
+ 617 0006 1822     		movs	r2, #24
+ 618 0008 0D46     		mov	r5, r1
+ 619 000a 6846     		mov	r0, sp
+ 620 000c 0021     		movs	r1, #0
+ 621 000e FFF7FEFF 		bl	memset
+ 622 0012 022C     		cmp	r4, #2
+ 623 0014 04D8     		bhi	.L140
+ 624 0016 4FF40053 		mov	r3, #8192
+ 625 001a 6B60     		str	r3, [r5, #4]
+ 626 001c 0020     		movs	r0, #0
+ 627 001e 1BE0     		b	.L141
+ 628              	.L140:
+ 629 0020 2046     		mov	r0, r4
+ 630 0022 FFF7FEFF 		bl	SLTHA001_lFindAvailableSlot
+ 631 0026 0D4B     		ldr	r3, .L143
+ 632 0028 1422     		movs	r2, #20
+ 633 002a 02FB0030 		mla	r0, r2, r0, r3
+ 634 002e 6946     		mov	r1, sp
+ 635 0030 4069     		ldr	r0, [r0, #20]
+ 636 0032 FFF7FEFF 		bl	f_stat
+ 637 0036 0446     		mov	r4, r0
+ 638 0038 48B1     		cbz	r0, .L142
+ 639 003a FFF7FEFF 		bl	__errno
+ 640 003e 0849     		ldr	r1, .L143+4
+ 641 0040 01EB8404 		add	r4, r1, r4, lsl #2
+ 642 0044 6268     		ldr	r2, [r4, #4]
+ 643 0046 0260     		str	r2, [r0, #0]
+ 644 0048 4FF0FF30 		mov	r0, #-1
+ 645 004c 04E0     		b	.L141
+ 646              	.L142:
+ 647 004e 2846     		mov	r0, r5
+ 648 0050 6946     		mov	r1, sp
+ 649 0052 FFF7FEFF 		bl	SLTHA001_lFatInfoToStatus
+ 650 0056 2046     		mov	r0, r4
+ 651              	.L141:
+ 652 0058 07B0     		add	sp, sp, #28
+ 653 005a 30BD     		pop	{r4, r5, pc}
+ 654              	.L144:
+ 655              		.align	2
+ 656              	.L143:
+ 657 005c 00000000 		.word	.LANCHOR1
+ 658 0060 00000000 		.word	.LANCHOR0
+ 660              		.section	.text._stat,"ax",%progbits
+ 661              		.align	1
+ 662              		.global	_stat
+ 663              		.thumb
+ 664              		.thumb_func
+ 666              	_stat:
+ 667              		@ args = 0, pretend = 0, frame = 24
+ 668              		@ frame_needed = 0, uses_anonymous_args = 0
+ 669 0000 30B5     		push	{r4, r5, lr}
+ 670 0002 87B0     		sub	sp, sp, #28
+ 671 0004 0446     		mov	r4, r0
+ 672 0006 1822     		movs	r2, #24
+ 673 0008 0D46     		mov	r5, r1
+ 674 000a 6846     		mov	r0, sp
+ 675 000c 0021     		movs	r1, #0
+ 676 000e FFF7FEFF 		bl	memset
+ 677 0012 2046     		mov	r0, r4
+ 678 0014 6946     		mov	r1, sp
+ 679 0016 FFF7FEFF 		bl	f_stat
+ 680 001a 0446     		mov	r4, r0
+ 681 001c 48B1     		cbz	r0, .L146
+ 682 001e FFF7FEFF 		bl	__errno
+ 683 0022 074B     		ldr	r3, .L148
+ 684 0024 03EB8404 		add	r4, r3, r4, lsl #2
+ 685 0028 6168     		ldr	r1, [r4, #4]
+ 686 002a 0160     		str	r1, [r0, #0]
+ 687 002c 4FF0FF30 		mov	r0, #-1
+ 688 0030 04E0     		b	.L147
+ 689              	.L146:
+ 690 0032 2846     		mov	r0, r5
+ 691 0034 6946     		mov	r1, sp
+ 692 0036 FFF7FEFF 		bl	SLTHA001_lFatInfoToStatus
+ 693 003a 2046     		mov	r0, r4
+ 694              	.L147:
+ 695 003c 07B0     		add	sp, sp, #28
+ 696 003e 30BD     		pop	{r4, r5, pc}
+ 697              	.L149:
+ 698              		.align	2
+ 699              	.L148:
+ 700 0040 00000000 		.word	.LANCHOR0
+ 702              		.section	.text.rename,"ax",%progbits
+ 703              		.align	1
+ 704              		.global	rename
+ 705              		.thumb
+ 706              		.thumb_func
+ 708              	rename:
+ 709              		@ args = 0, pretend = 0, frame = 0
+ 710              		@ frame_needed = 0, uses_anonymous_args = 0
+ 711 0000 10B5     		push	{r4, lr}
+ 712 0002 FFF7FEFF 		bl	f_rename
+ 713 0006 0446     		mov	r4, r0
+ 714 0008 48B1     		cbz	r0, .L152
+ 715 000a FFF7FEFF 		bl	__errno
+ 716 000e 044B     		ldr	r3, .L153
+ 717 0010 03EB8404 		add	r4, r3, r4, lsl #2
+ 718 0014 6168     		ldr	r1, [r4, #4]
+ 719 0016 0160     		str	r1, [r0, #0]
+ 720 0018 4FF0FF30 		mov	r0, #-1
+ 721 001c 10BD     		pop	{r4, pc}
+ 722              	.L152:
+ 723 001e 10BD     		pop	{r4, pc}
+ 724              	.L154:
+ 725              		.align	2
+ 726              	.L153:
+ 727 0020 00000000 		.word	.LANCHOR0
+ 729              		.section	.text._chmod,"ax",%progbits
+ 730              		.align	1
+ 731              		.global	_chmod
+ 732              		.thumb
+ 733              		.thumb_func
+ 735              	_chmod:
+ 736              		@ args = 0, pretend = 0, frame = 0
+ 737              		@ frame_needed = 0, uses_anonymous_args = 0
+ 738 0000 10B5     		push	{r4, lr}
+ 739 0002 C9B2     		uxtb	r1, r1
+ 740 0004 0122     		movs	r2, #1
+ 741 0006 FFF7FEFF 		bl	f_chmod
+ 742 000a 0446     		mov	r4, r0
+ 743 000c 48B1     		cbz	r0, .L157
+ 744 000e FFF7FEFF 		bl	__errno
+ 745 0012 044B     		ldr	r3, .L158
+ 746 0014 03EB8404 		add	r4, r3, r4, lsl #2
+ 747 0018 6168     		ldr	r1, [r4, #4]
+ 748 001a 0160     		str	r1, [r0, #0]
+ 749 001c 4FF0FF30 		mov	r0, #-1
+ 750 0020 10BD     		pop	{r4, pc}
+ 751              	.L157:
+ 752 0022 10BD     		pop	{r4, pc}
+ 753              	.L159:
+ 754              		.align	2
+ 755              	.L158:
+ 756 0024 00000000 		.word	.LANCHOR0
+ 758              		.section	.text._mkdir,"ax",%progbits
+ 759              		.align	1
+ 760              		.global	_mkdir
+ 761              		.thumb
+ 762              		.thumb_func
+ 764              	_mkdir:
+ 765              		@ args = 0, pretend = 0, frame = 0
+ 766              		@ frame_needed = 0, uses_anonymous_args = 0
+ 767 0000 10B5     		push	{r4, lr}
+ 768 0002 FFF7FEFF 		bl	f_mkdir
+ 769 0006 0446     		mov	r4, r0
+ 770 0008 48B1     		cbz	r0, .L162
+ 771 000a FFF7FEFF 		bl	__errno
+ 772 000e 044B     		ldr	r3, .L163
+ 773 0010 03EB8404 		add	r4, r3, r4, lsl #2
+ 774 0014 6168     		ldr	r1, [r4, #4]
+ 775 0016 0160     		str	r1, [r0, #0]
+ 776 0018 4FF0FF30 		mov	r0, #-1
+ 777 001c 10BD     		pop	{r4, pc}
+ 778              	.L162:
+ 779 001e 10BD     		pop	{r4, pc}
+ 780              	.L164:
+ 781              		.align	2
+ 782              	.L163:
+ 783 0020 00000000 		.word	.LANCHOR0
+ 785              		.section	.text._sync,"ax",%progbits
+ 786              		.align	1
+ 787              		.global	_sync
+ 788              		.thumb
+ 789              		.thumb_func
+ 791              	_sync:
+ 792              		@ args = 0, pretend = 0, frame = 0
+ 793              		@ frame_needed = 0, uses_anonymous_args = 0
+ 794 0000 10B5     		push	{r4, lr}
+ 795 0002 0024     		movs	r4, #0
+ 796              	.L167:
+ 797 0004 054B     		ldr	r3, .L172
+ 798 0006 1819     		adds	r0, r3, r4
+ 799 0008 C068     		ldr	r0, [r0, #12]
+ 800 000a 08B1     		cbz	r0, .L166
+ 801 000c FFF7FEFF 		bl	f_sync
+ 802              	.L166:
+ 803 0010 1434     		adds	r4, r4, #20
+ 804 0012 B4F5C87F 		cmp	r4, #400
+ 805 0016 F5D1     		bne	.L167
+ 806 0018 10BD     		pop	{r4, pc}
+ 807              	.L173:
+ 808 001a 00BF     		.align	2
+ 809              	.L172:
+ 810 001c 04000000 		.word	.LANCHOR1+4
+ 812              		.section	.text.mkfs,"ax",%progbits
+ 813              		.align	1
+ 814              		.global	mkfs
+ 815              		.thumb
+ 816              		.thumb_func
+ 818              	mkfs:
+ 819              		@ args = 0, pretend = 0, frame = 0
+ 820              		@ frame_needed = 0, uses_anonymous_args = 0
+ 821 0000 10B5     		push	{r4, lr}
+ 822 0002 FFF7FEFF 		bl	f_mkfs
+ 823 0006 0446     		mov	r4, r0
+ 824 0008 48B1     		cbz	r0, .L176
+ 825 000a FFF7FEFF 		bl	__errno
+ 826 000e 044B     		ldr	r3, .L177
+ 827 0010 03EB8404 		add	r4, r3, r4, lsl #2
+ 828 0014 6168     		ldr	r1, [r4, #4]
+ 829 0016 0160     		str	r1, [r0, #0]
+ 830 0018 4FF0FF30 		mov	r0, #-1
+ 831 001c 10BD     		pop	{r4, pc}
+ 832              	.L176:
+ 833 001e 10BD     		pop	{r4, pc}
+ 834              	.L178:
+ 835              		.align	2
+ 836              	.L177:
+ 837 0020 00000000 		.word	.LANCHOR0
+ 839              		.section	.text.mount,"ax",%progbits
+ 840              		.align	1
+ 841              		.global	mount
+ 842              		.thumb
+ 843              		.thumb_func
+ 845              	mount:
+ 846              		@ args = 0, pretend = 0, frame = 0
+ 847              		@ frame_needed = 0, uses_anonymous_args = 0
+ 848 0000 10B5     		push	{r4, lr}
+ 849 0002 FFF7FEFF 		bl	f_mount
+ 850 0006 0446     		mov	r4, r0
+ 851 0008 48B1     		cbz	r0, .L181
+ 852 000a FFF7FEFF 		bl	__errno
+ 853 000e 044B     		ldr	r3, .L182
+ 854 0010 03EB8404 		add	r4, r3, r4, lsl #2
+ 855 0014 6168     		ldr	r1, [r4, #4]
+ 856 0016 0160     		str	r1, [r0, #0]
+ 857 0018 4FF0FF30 		mov	r0, #-1
+ 858 001c 10BD     		pop	{r4, pc}
+ 859              	.L181:
+ 860 001e 10BD     		pop	{r4, pc}
+ 861              	.L183:
+ 862              		.align	2
+ 863              	.L182:
+ 864 0020 00000000 		.word	.LANCHOR0
+ 866              		.section	.text._isatty,"ax",%progbits
+ 867              		.align	1
+ 868              		.global	_isatty
+ 869              		.thumb
+ 870              		.thumb_func
+ 872              	_isatty:
+ 873              		@ args = 0, pretend = 0, frame = 0
+ 874              		@ frame_needed = 0, uses_anonymous_args = 0
+ 875              		@ link register save eliminated.
+ 876 0000 0228     		cmp	r0, #2
+ 877 0002 CCBF     		ite	gt
+ 878 0004 0020     		movgt	r0, #0
+ 879 0006 0120     		movle	r0, #1
+ 880 0008 7047     		bx	lr
+ 882              		.section	.text.SLTHA001_Init,"ax",%progbits
+ 883              		.align	1
+ 884              		.global	SLTHA001_Init
+ 885              		.thumb
+ 886              		.thumb_func
+ 888              	SLTHA001_Init:
+ 889              		@ args = 0, pretend = 0, frame = 0
+ 890              		@ frame_needed = 0, uses_anonymous_args = 0
+ 891              		@ link register save eliminated.
+ 892 0000 FFF7FEBF 		b	SLTHA001_lLocalInitialize
+ 894              		.section	.text._link,"ax",%progbits
+ 895              		.align	1
+ 896              		.global	_link
+ 897              		.thumb
+ 898              		.thumb_func
+ 900              	_link:
+ 901              		@ args = 0, pretend = 0, frame = 0
+ 902              		@ frame_needed = 0, uses_anonymous_args = 0
+ 903 0000 08B5     		push	{r3, lr}
+ 904 0002 FFF7FEFF 		bl	__errno
+ 905 0006 1F23     		movs	r3, #31
+ 906 0008 0360     		str	r3, [r0, #0]
+ 907 000a 4FF0FF30 		mov	r0, #-1
+ 908 000e 08BD     		pop	{r3, pc}
+ 910              		.section	.text.fdisk,"ax",%progbits
+ 911              		.align	1
+ 912              		.global	fdisk
+ 913              		.thumb
+ 914              		.thumb_func
+ 916              	fdisk:
+ 917              		@ args = 0, pretend = 0, frame = 0
+ 918              		@ frame_needed = 0, uses_anonymous_args = 0
+ 919              		@ link register save eliminated.
+ 920 0000 4FF0FF30 		mov	r0, #-1
+ 921 0004 7047     		bx	lr
+ 923              		.global	FileHandle
+ 924              		.global	ErrorCodes
+ 925              		.data
+ 926              		.align	2
+ 927              		.set	.LANCHOR0,. + 0
+ 930              	LastAllocFileHandle.12248:
+ 931 0000 FFFFFFFF 		.word	-1
+ 934              	ErrorCodes:
+ 935 0004 00000000 		.word	0
+ 936 0008 FFFFFFFF 		.word	-1
+ 937 000c FFFFFFFF 		.word	-1
+ 938 0010 05000000 		.word	5
+ 939 0014 02000000 		.word	2
+ 940 0018 02000000 		.word	2
+ 941 001c 16000000 		.word	22
+ 942 0020 0D000000 		.word	13
+ 943 0024 11000000 		.word	17
+ 944 0028 09000000 		.word	9
+ 945 002c 0D000000 		.word	13
+ 946 0030 13000000 		.word	19
+ 947 0034 05000000 		.word	5
+ 948 0038 05000000 		.word	5
+ 949 003c FFFFFFFF 		.word	-1
+ 950 0040 FFFFFFFF 		.word	-1
+ 951 0044 FFFFFFFF 		.word	-1
+ 952 0048 FFFFFFFF 		.word	-1
+ 953 004c FFFFFFFF 		.word	-1
+ 954              		.bss
+ 955              		.align	2
+ 956              		.set	.LANCHOR1,. + 0
+ 959              	Slot.12247:
+ 960 0000 00000000 		.space	4
+ 963              	FileHandle:
+ 964 0004 00000000 		.space	400
+ 964      00000000 
+ 964      00000000 
+ 964      00000000 
+ 964      00000000 
+ 965              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 SLTHA001.c
+C:\Users\Mihai\AppData\Local\Temp\cch1oSCc.s:17     .text.SLTHA001_lFatInfoToStatus:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cch1oSCc.s:21     .text.SLTHA001_lFatInfoToStatus:00000000 SLTHA001_lFatInfoToStatus
+C:\Users\Mihai\AppData\Local\Temp\cch1oSCc.s:79     .text.SLTHA001_lFindAvailableSlot:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cch1oSCc.s:84     .text.SLTHA001_lFindAvailableSlot:00000000 SLTHA001_lFindAvailableSlot
+C:\Users\Mihai\AppData\Local\Temp\cch1oSCc.s:126    .text.SLTHA001_lFindAvailableSlot:0000003c $d
+C:\Users\Mihai\AppData\Local\Temp\cch1oSCc.s:130    .text.SLTHA001_lLocalInitialize:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cch1oSCc.s:135    .text.SLTHA001_lLocalInitialize:00000000 SLTHA001_lLocalInitialize
+C:\Users\Mihai\AppData\Local\Temp\cch1oSCc.s:158    .text.SLTHA001_lLocalInitialize:00000024 $d
+C:\Users\Mihai\AppData\Local\Temp\cch1oSCc.s:161    .text._open:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cch1oSCc.s:166    .text._open:00000000 _open
+C:\Users\Mihai\AppData\Local\Temp\cch1oSCc.s:319    .text._open:00000140 $d
+C:\Users\Mihai\AppData\Local\Temp\cch1oSCc.s:323    .text._close:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cch1oSCc.s:328    .text._close:00000000 _close
+C:\Users\Mihai\AppData\Local\Temp\cch1oSCc.s:370    .text._close:00000054 $d
+C:\Users\Mihai\AppData\Local\Temp\cch1oSCc.s:374    .text._read_r:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cch1oSCc.s:379    .text._read_r:00000000 _read_r
+C:\Users\Mihai\AppData\Local\Temp\cch1oSCc.s:439    .text._read_r:0000006c $d
+C:\Users\Mihai\AppData\Local\Temp\cch1oSCc.s:443    .text._write_r:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cch1oSCc.s:448    .text._write_r:00000000 _write_r
+C:\Users\Mihai\AppData\Local\Temp\cch1oSCc.s:507    .text._write_r:0000006c $d
+C:\Users\Mihai\AppData\Local\Temp\cch1oSCc.s:511    .text._lseek:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cch1oSCc.s:516    .text._lseek:00000000 _lseek
+C:\Users\Mihai\AppData\Local\Temp\cch1oSCc.s:575    .text._lseek:00000068 $d
+C:\Users\Mihai\AppData\Local\Temp\cch1oSCc.s:579    .text._unlink:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cch1oSCc.s:584    .text._unlink:00000000 _unlink
+C:\Users\Mihai\AppData\Local\Temp\cch1oSCc.s:603    .text._unlink:00000020 $d
+C:\Users\Mihai\AppData\Local\Temp\cch1oSCc.s:606    .text._fstat:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cch1oSCc.s:611    .text._fstat:00000000 _fstat
+C:\Users\Mihai\AppData\Local\Temp\cch1oSCc.s:657    .text._fstat:0000005c $d
+C:\Users\Mihai\AppData\Local\Temp\cch1oSCc.s:661    .text._stat:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cch1oSCc.s:666    .text._stat:00000000 _stat
+C:\Users\Mihai\AppData\Local\Temp\cch1oSCc.s:700    .text._stat:00000040 $d
+C:\Users\Mihai\AppData\Local\Temp\cch1oSCc.s:703    .text.rename:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cch1oSCc.s:708    .text.rename:00000000 rename
+C:\Users\Mihai\AppData\Local\Temp\cch1oSCc.s:727    .text.rename:00000020 $d
+C:\Users\Mihai\AppData\Local\Temp\cch1oSCc.s:730    .text._chmod:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cch1oSCc.s:735    .text._chmod:00000000 _chmod
+C:\Users\Mihai\AppData\Local\Temp\cch1oSCc.s:756    .text._chmod:00000024 $d
+C:\Users\Mihai\AppData\Local\Temp\cch1oSCc.s:759    .text._mkdir:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cch1oSCc.s:764    .text._mkdir:00000000 _mkdir
+C:\Users\Mihai\AppData\Local\Temp\cch1oSCc.s:783    .text._mkdir:00000020 $d
+C:\Users\Mihai\AppData\Local\Temp\cch1oSCc.s:786    .text._sync:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cch1oSCc.s:791    .text._sync:00000000 _sync
+C:\Users\Mihai\AppData\Local\Temp\cch1oSCc.s:810    .text._sync:0000001c $d
+C:\Users\Mihai\AppData\Local\Temp\cch1oSCc.s:813    .text.mkfs:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cch1oSCc.s:818    .text.mkfs:00000000 mkfs
+C:\Users\Mihai\AppData\Local\Temp\cch1oSCc.s:837    .text.mkfs:00000020 $d
+C:\Users\Mihai\AppData\Local\Temp\cch1oSCc.s:840    .text.mount:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cch1oSCc.s:845    .text.mount:00000000 mount
+C:\Users\Mihai\AppData\Local\Temp\cch1oSCc.s:864    .text.mount:00000020 $d
+C:\Users\Mihai\AppData\Local\Temp\cch1oSCc.s:867    .text._isatty:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cch1oSCc.s:872    .text._isatty:00000000 _isatty
+C:\Users\Mihai\AppData\Local\Temp\cch1oSCc.s:883    .text.SLTHA001_Init:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cch1oSCc.s:888    .text.SLTHA001_Init:00000000 SLTHA001_Init
+C:\Users\Mihai\AppData\Local\Temp\cch1oSCc.s:895    .text._link:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cch1oSCc.s:900    .text._link:00000000 _link
+C:\Users\Mihai\AppData\Local\Temp\cch1oSCc.s:911    .text.fdisk:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cch1oSCc.s:916    .text.fdisk:00000000 fdisk
+C:\Users\Mihai\AppData\Local\Temp\cch1oSCc.s:963    .bss:00000004 FileHandle
+C:\Users\Mihai\AppData\Local\Temp\cch1oSCc.s:934    .data:00000004 ErrorCodes
+C:\Users\Mihai\AppData\Local\Temp\cch1oSCc.s:926    .data:00000000 $d
+C:\Users\Mihai\AppData\Local\Temp\cch1oSCc.s:930    .data:00000000 LastAllocFileHandle.12248
+C:\Users\Mihai\AppData\Local\Temp\cch1oSCc.s:955    .bss:00000000 $d
+C:\Users\Mihai\AppData\Local\Temp\cch1oSCc.s:959    .bss:00000000 Slot.12247
+
+UNDEFINED SYMBOLS
+memset
+mktime
+__errno
+strlen
+malloc
+strcpy
+f_open
+calloc
+f_lseek
+free
+f_close
+f_read
+f_write
+f_unlink
+f_stat
+f_rename
+f_chmod
+f_mkdir
+f_sync
+f_mkfs
+f_mount

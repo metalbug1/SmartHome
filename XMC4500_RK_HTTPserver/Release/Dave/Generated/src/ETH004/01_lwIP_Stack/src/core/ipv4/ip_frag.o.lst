@@ -1,0 +1,705 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"ip_frag.c"
+  16              		.section	.text.ip_reass_free_complete_datagram,"ax",%progbits
+  17              		.align	1
+  18              		.thumb
+  19              		.thumb_func
+  21              	ip_reass_free_complete_datagram:
+  22              		@ args = 0, pretend = 0, frame = 0
+  23              		@ frame_needed = 0, uses_anonymous_args = 0
+  24 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+  25 0004 4668     		ldr	r6, [r0, #4]
+  26 0006 7268     		ldr	r2, [r6, #4]
+  27 0008 9388     		ldrh	r3, [r2, #4]	@ unaligned
+  28 000a 0446     		mov	r4, r0
+  29 000c 0F46     		mov	r7, r1
+  30 000e BBB9     		cbnz	r3, .L8
+  31 0010 1068     		ldr	r0, [r2, #0]	@ unaligned
+  32 0012 04F10805 		add	r5, r4, #8
+  33 0016 6060     		str	r0, [r4, #4]
+  34 0018 04F11C01 		add	r1, r4, #28
+  35              	.L3:
+  36 001c 55F8043B 		ldr	r3, [r5], #4	@ unaligned
+  37 0020 8D42     		cmp	r5, r1
+  38 0022 42F8043B 		str	r3, [r2], #4	@ unaligned
+  39 0026 F9D1     		bne	.L3
+  40 0028 3046     		mov	r0, r6
+  41 002a 0121     		movs	r1, #1
+  42 002c FFF7FEFF 		bl	icmp_time_exceeded
+  43 0030 3046     		mov	r0, r6
+  44 0032 FFF7FEFF 		bl	pbuf_clen
+  45 0036 0546     		mov	r5, r0
+  46 0038 3046     		mov	r0, r6
+  47 003a FFF7FEFF 		bl	pbuf_free
+  48 003e 00E0     		b	.L2
+  49              	.L8:
+  50 0040 0025     		movs	r5, #0
+  51              	.L2:
+  52 0042 6668     		ldr	r6, [r4, #4]
+  53              	.L4:
+  54 0044 5EB1     		cbz	r6, .L11
+  55              	.L5:
+  56 0046 7268     		ldr	r2, [r6, #4]
+  57 0048 3046     		mov	r0, r6
+  58 004a D2F80080 		ldr	r8, [r2, #0]	@ unaligned
+  59 004e FFF7FEFF 		bl	pbuf_clen
+  60 0052 2D18     		adds	r5, r5, r0
+  61 0054 3046     		mov	r0, r6
+  62 0056 FFF7FEFF 		bl	pbuf_free
+  63 005a 4646     		mov	r6, r8
+  64 005c F2E7     		b	.L4
+  65              	.L11:
+  66 005e 084E     		ldr	r6, .L12
+  67 0060 2068     		ldr	r0, [r4, #0]
+  68 0062 3268     		ldr	r2, [r6, #0]
+  69 0064 A242     		cmp	r2, r4
+  70 0066 0CBF     		ite	eq
+  71 0068 3060     		streq	r0, [r6, #0]
+  72 006a 3860     		strne	r0, [r7, #0]
+  73 006c 2046     		mov	r0, r4
+  74 006e FFF7FEFF 		bl	mem_free
+  75 0072 B188     		ldrh	r1, [r6, #4]
+  76 0074 4B1B     		subs	r3, r1, r5
+  77 0076 B380     		strh	r3, [r6, #4]	@ movhi
+  78 0078 2846     		mov	r0, r5
+  79 007a BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+  80              	.L13:
+  81 007e 00BF     		.align	2
+  82              	.L12:
+  83 0080 00000000 		.word	.LANCHOR0
+  85              		.section	.text.ip_reass_remove_oldest_datagram,"ax",%progbits
+  86              		.align	1
+  87              		.thumb
+  88              		.thumb_func
+  90              	ip_reass_remove_oldest_datagram:
+  91              		@ args = 0, pretend = 0, frame = 0
+  92              		@ frame_needed = 0, uses_anonymous_args = 0
+  93 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+  94 0002 0646     		mov	r6, r0
+  95 0004 0F46     		mov	r7, r1
+  96 0006 0025     		movs	r5, #0
+  97              	.L22:
+  98 0008 174B     		ldr	r3, .L33
+  99 000a 0024     		movs	r4, #0
+ 100 000c 1B68     		ldr	r3, [r3, #0]
+ 101 000e 2146     		mov	r1, r4
+ 102 0010 2246     		mov	r2, r4
+ 103              	.L15:
+ 104 0012 F3B1     		cbz	r3, .L32
+ 105              	.L19:
+ 106 0014 D6F80CC0 		ldr	ip, [r6, #12]	@ unaligned
+ 107 0018 5869     		ldr	r0, [r3, #20]
+ 108 001a 6045     		cmp	r0, ip
+ 109 001c 09D1     		bne	.L16
+ 110 001e D6F810C0 		ldr	ip, [r6, #16]	@ unaligned
+ 111 0022 9869     		ldr	r0, [r3, #24]
+ 112 0024 6045     		cmp	r0, ip
+ 113 0026 04D1     		bne	.L16
+ 114 0028 B3F80CC0 		ldrh	ip, [r3, #12]
+ 115 002c B088     		ldrh	r0, [r6, #4]	@ unaligned
+ 116 002e 8445     		cmp	ip, r0
+ 117 0030 09D0     		beq	.L17
+ 118              	.L16:
+ 119 0032 0134     		adds	r4, r4, #1
+ 120 0034 32B1     		cbz	r2, .L24
+ 121 0036 93F81FC0 		ldrb	ip, [r3, #31]	@ zero_extendqisi2
+ 122 003a D07F     		ldrb	r0, [r2, #31]	@ zero_extendqisi2
+ 123 003c 8445     		cmp	ip, r0
+ 124 003e 98BF     		it	ls
+ 125 0040 1A46     		movls	r2, r3
+ 126 0042 00E0     		b	.L17
+ 127              	.L24:
+ 128 0044 1A46     		mov	r2, r3
+ 129              	.L17:
+ 130 0046 1868     		ldr	r0, [r3, #0]
+ 131 0048 0028     		cmp	r0, #0
+ 132 004a 18BF     		it	ne
+ 133 004c 1946     		movne	r1, r3
+ 134 004e 0346     		mov	r3, r0
+ 135 0050 DFE7     		b	.L15
+ 136              	.L32:
+ 137 0052 1AB1     		cbz	r2, .L20
+ 138 0054 1046     		mov	r0, r2
+ 139 0056 FFF7FEFF 		bl	ip_reass_free_complete_datagram
+ 140 005a 2D18     		adds	r5, r5, r0
+ 141              	.L20:
+ 142 005c BD42     		cmp	r5, r7
+ 143 005e 01DA     		bge	.L31
+ 144 0060 012C     		cmp	r4, #1
+ 145 0062 D1DC     		bgt	.L22
+ 146              	.L31:
+ 147 0064 2846     		mov	r0, r5
+ 148 0066 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 149              	.L34:
+ 150              		.align	2
+ 151              	.L33:
+ 152 0068 00000000 		.word	.LANCHOR0
+ 154              		.section	.text.ip_reass_tmr,"ax",%progbits
+ 155              		.align	1
+ 156              		.global	ip_reass_tmr
+ 157              		.thumb
+ 158              		.thumb_func
+ 160              	ip_reass_tmr:
+ 161              		@ args = 0, pretend = 0, frame = 0
+ 162              		@ frame_needed = 0, uses_anonymous_args = 0
+ 163 0000 38B5     		push	{r3, r4, r5, lr}
+ 164 0002 084B     		ldr	r3, .L43
+ 165 0004 1868     		ldr	r0, [r3, #0]
+ 166 0006 0024     		movs	r4, #0
+ 167              	.L40:
+ 168 0008 58B1     		cbz	r0, .L42
+ 169              	.L39:
+ 170 000a C17F     		ldrb	r1, [r0, #31]	@ zero_extendqisi2
+ 171 000c 0568     		ldr	r5, [r0, #0]
+ 172 000e 19B1     		cbz	r1, .L37
+ 173 0010 4A1E     		subs	r2, r1, #1
+ 174 0012 C277     		strb	r2, [r0, #31]
+ 175 0014 0446     		mov	r4, r0
+ 176 0016 02E0     		b	.L41
+ 177              	.L37:
+ 178 0018 2146     		mov	r1, r4
+ 179 001a FFF7FEFF 		bl	ip_reass_free_complete_datagram
+ 180              	.L41:
+ 181 001e 2846     		mov	r0, r5
+ 182 0020 F2E7     		b	.L40
+ 183              	.L42:
+ 184 0022 38BD     		pop	{r3, r4, r5, pc}
+ 185              	.L44:
+ 186              		.align	2
+ 187              	.L43:
+ 188 0024 00000000 		.word	.LANCHOR0
+ 190              		.section	.text.ip_reass,"ax",%progbits
+ 191              		.align	1
+ 192              		.global	ip_reass
+ 193              		.thumb
+ 194              		.thumb_func
+ 196              	ip_reass:
+ 197              		@ args = 0, pretend = 0, frame = 8
+ 198              		@ frame_needed = 0, uses_anonymous_args = 0
+ 199 0000 2DE9F74F 		push	{r0, r1, r2, r4, r5, r6, r7, r8, r9, sl, fp, lr}
+ 200 0004 4468     		ldr	r4, [r0, #4]
+ 201 0006 0546     		mov	r5, r0
+ 202 0008 2088     		ldrh	r0, [r4, #0]	@ unaligned
+ 203 000a FFF7FEFF 		bl	ntohs
+ 204 000e C0F30320 		ubfx	r0, r0, #8, #4
+ 205 0012 0528     		cmp	r0, #5
+ 206 0014 46D1     		bne	.L78
+ 207 0016 E088     		ldrh	r0, [r4, #6]	@ unaligned
+ 208 0018 9C4F     		ldr	r7, .L118
+ 209 001a FFF7FEFF 		bl	ntohs
+ 210 001e 8146     		mov	r9, r0
+ 211 0020 6088     		ldrh	r0, [r4, #2]	@ unaligned
+ 212 0022 FFF7FEFF 		bl	ntohs
+ 213 0026 8246     		mov	sl, r0
+ 214 0028 2088     		ldrh	r0, [r4, #0]	@ unaligned
+ 215 002a FFF7FEFF 		bl	ntohs
+ 216 002e 8346     		mov	fp, r0
+ 217 0030 2846     		mov	r0, r5
+ 218 0032 FFF7FEFF 		bl	pbuf_clen
+ 219 0036 BB88     		ldrh	r3, [r7, #4]
+ 220 0038 1918     		adds	r1, r3, r0
+ 221 003a 0A29     		cmp	r1, #10
+ 222 003c 0646     		mov	r6, r0
+ 223 003e 04DC     		bgt	.L47
+ 224              	.L49:
+ 225 0040 924F     		ldr	r7, .L118
+ 226 0042 0023     		movs	r3, #0
+ 227 0044 3F68     		ldr	r7, [r7, #0]
+ 228 0046 0193     		str	r3, [sp, #4]
+ 229 0048 0FE0     		b	.L48
+ 230              	.L47:
+ 231 004a 2046     		mov	r0, r4
+ 232 004c 3146     		mov	r1, r6
+ 233 004e FFF7FEFF 		bl	ip_reass_remove_oldest_datagram
+ 234 0052 38B3     		cbz	r0, .L78
+ 235 0054 BA88     		ldrh	r2, [r7, #4]
+ 236 0056 9019     		adds	r0, r2, r6
+ 237 0058 0A28     		cmp	r0, #10
+ 238 005a F1DD     		ble	.L49
+ 239 005c 22E0     		b	.L78
+ 240              	.L52:
+ 241 005e E368     		ldr	r3, [r4, #12]	@ unaligned
+ 242 0060 7A69     		ldr	r2, [r7, #20]
+ 243 0062 9A42     		cmp	r2, r3
+ 244 0064 04D0     		beq	.L112
+ 245              	.L50:
+ 246 0066 0197     		str	r7, [sp, #4]
+ 247 0068 3F68     		ldr	r7, [r7, #0]
+ 248              	.L48:
+ 249 006a 002F     		cmp	r7, #0
+ 250 006c F7D1     		bne	.L52
+ 251 006e 08E0     		b	.L113
+ 252              	.L112:
+ 253 0070 2169     		ldr	r1, [r4, #16]	@ unaligned
+ 254 0072 B869     		ldr	r0, [r7, #24]
+ 255 0074 8842     		cmp	r0, r1
+ 256 0076 F6D1     		bne	.L50
+ 257 0078 BB89     		ldrh	r3, [r7, #12]
+ 258 007a A288     		ldrh	r2, [r4, #4]	@ unaligned
+ 259 007c 9342     		cmp	r3, r2
+ 260 007e F2D1     		bne	.L50
+ 261 0080 14E0     		b	.L51
+ 262              	.L113:
+ 263 0082 8349     		ldr	r1, .L118+4
+ 264 0084 B1F80A80 		ldrh	r8, [r1, #10]
+ 265 0088 4046     		mov	r0, r8
+ 266 008a FFF7FEFF 		bl	mem_malloc
+ 267 008e 0746     		mov	r7, r0
+ 268 0090 0028     		cmp	r0, #0
+ 269 0092 40F0D880 		bne	.L81
+ 270 0096 2046     		mov	r0, r4
+ 271 0098 3146     		mov	r1, r6
+ 272 009a FFF7FEFF 		bl	ip_reass_remove_oldest_datagram
+ 273 009e B042     		cmp	r0, r6
+ 274 00a0 80F2CA80 		bge	.L114
+ 275              	.L78:
+ 276 00a4 2846     		mov	r0, r5
+ 277 00a6 FFF7FEFF 		bl	pbuf_free
+ 278 00aa EBE0     		b	.L68
+ 279              	.L51:
+ 280 00ac E088     		ldrh	r0, [r4, #6]	@ unaligned
+ 281 00ae FFF7FEFF 		bl	ntohs
+ 282 00b2 C004     		lsls	r0, r0, #19
+ 283 00b4 0FD1     		bne	.L56
+ 284 00b6 F889     		ldrh	r0, [r7, #14]
+ 285 00b8 FFF7FEFF 		bl	ntohs
+ 286 00bc C004     		lsls	r0, r0, #19
+ 287 00be 0AD0     		beq	.L56
+ 288 00c0 2346     		mov	r3, r4
+ 289 00c2 07F10801 		add	r1, r7, #8
+ 290 00c6 04F11400 		add	r0, r4, #20
+ 291              	.L57:
+ 292 00ca 53F804CB 		ldr	ip, [r3], #4	@ unaligned
+ 293 00ce 8342     		cmp	r3, r0
+ 294 00d0 41F804CB 		str	ip, [r1], #4	@ unaligned
+ 295 00d4 F9D1     		bne	.L57
+ 296              	.L56:
+ 297 00d6 6D4A     		ldr	r2, .L118
+ 298 00d8 9388     		ldrh	r3, [r2, #4]
+ 299 00da F618     		adds	r6, r6, r3
+ 300 00dc 9680     		strh	r6, [r2, #4]	@ movhi
+ 301 00de E088     		ldrh	r0, [r4, #6]	@ unaligned
+ 302 00e0 FFF7FEFF 		bl	ntohs
+ 303 00e4 00F40054 		and	r4, r0, #8192
+ 304 00e8 A1B2     		uxth	r1, r4
+ 305 00ea 69B9     		cbnz	r1, .L58
+ 306 00ec B87F     		ldrb	r0, [r7, #30]	@ zero_extendqisi2
+ 307 00ee 4FEAC949 		lsl	r9, r9, #19
+ 308 00f2 0AEB194A 		add	sl, sl, r9, lsr #16
+ 309 00f6 CBF3032B 		ubfx	fp, fp, #8, #4
+ 310 00fa 40F00102 		orr	r2, r0, #1
+ 311 00fe AAEB8B0A 		sub	sl, sl, fp, lsl #2
+ 312 0102 BA77     		strb	r2, [r7, #30]
+ 313 0104 A7F81CA0 		strh	sl, [r7, #28]	@ movhi
+ 314              	.L58:
+ 315 0108 6C68     		ldr	r4, [r5, #4]
+ 316 010a 6088     		ldrh	r0, [r4, #2]	@ unaligned
+ 317 010c FFF7FEFF 		bl	ntohs
+ 318 0110 8146     		mov	r9, r0
+ 319 0112 2088     		ldrh	r0, [r4, #0]	@ unaligned
+ 320 0114 FFF7FEFF 		bl	ntohs
+ 321 0118 0646     		mov	r6, r0
+ 322 011a E088     		ldrh	r0, [r4, #6]	@ unaligned
+ 323 011c FFF7FEFF 		bl	ntohs
+ 324 0120 C304     		lsls	r3, r0, #19
+ 325 0122 1C0C     		lsrs	r4, r3, #16
+ 326 0124 04EB0900 		add	r0, r4, r9
+ 327 0128 C6F30326 		ubfx	r6, r6, #8, #4
+ 328 012c 6A68     		ldr	r2, [r5, #4]
+ 329 012e A0EB860C 		sub	ip, r0, r6, lsl #2
+ 330 0132 0021     		movs	r1, #0
+ 331 0134 1FFA8CF9 		uxth	r9, ip
+ 332 0138 1170     		strb	r1, [r2, #0]
+ 333 013a 5170     		strb	r1, [r2, #1]
+ 334 013c 9170     		strb	r1, [r2, #2]
+ 335 013e D170     		strb	r1, [r2, #3]
+ 336 0140 9480     		strh	r4, [r2, #4]	@ unaligned
+ 337 0142 A2F80690 		strh	r9, [r2, #6]	@ unaligned
+ 338 0146 7868     		ldr	r0, [r7, #4]
+ 339 0148 0126     		movs	r6, #1
+ 340              	.L59:
+ 341 014a 0028     		cmp	r0, #0
+ 342 014c 00F09280 		beq	.L115
+ 343              	.L65:
+ 344 0150 4368     		ldr	r3, [r0, #4]
+ 345 0152 B3F80480 		ldrh	r8, [r3, #4]	@ unaligned
+ 346 0156 4445     		cmp	r4, r8
+ 347 0158 08D2     		bcs	.L60
+ 348 015a 1060     		str	r0, [r2, #0]	@ unaligned
+ 349 015c 91B1     		cbz	r1, .L111
+ 350 015e CB88     		ldrh	r3, [r1, #6]	@ unaligned
+ 351 0160 A342     		cmp	r3, r4
+ 352 0162 24D8     		bhi	.L62
+ 353 0164 C145     		cmp	r9, r8
+ 354 0166 22D8     		bhi	.L62
+ 355 0168 0D60     		str	r5, [r1, #0]	@ unaligned
+ 356 016a 0CE0     		b	.L67
+ 357              	.L60:
+ 358 016c 1FD0     		beq	.L62
+ 359 016e D888     		ldrh	r0, [r3, #6]	@ unaligned
+ 360 0170 A042     		cmp	r0, r4
+ 361 0172 1CD8     		bhi	.L62
+ 362 0174 19B1     		cbz	r1, .L64
+ 363 0176 C988     		ldrh	r1, [r1, #6]	@ unaligned
+ 364 0178 4145     		cmp	r1, r8
+ 365 017a 18BF     		it	ne
+ 366 017c 0026     		movne	r6, #0
+ 367              	.L64:
+ 368 017e 1868     		ldr	r0, [r3, #0]	@ unaligned
+ 369 0180 1946     		mov	r1, r3
+ 370 0182 E2E7     		b	.L59
+ 371              	.L111:
+ 372 0184 7D60     		str	r5, [r7, #4]
+ 373              	.L67:
+ 374 0186 BC7F     		ldrb	r4, [r7, #30]	@ zero_extendqisi2
+ 375 0188 E307     		lsls	r3, r4, #31
+ 376 018a 7BD5     		bpl	.L68
+ 377 018c 002E     		cmp	r6, #0
+ 378 018e 79D0     		beq	.L68
+ 379 0190 7868     		ldr	r0, [r7, #4]
+ 380 0192 4468     		ldr	r4, [r0, #4]
+ 381 0194 A188     		ldrh	r1, [r4, #4]	@ unaligned
+ 382 0196 0029     		cmp	r1, #0
+ 383 0198 74D1     		bne	.L68
+ 384 019a 1168     		ldr	r1, [r2, #0]	@ unaligned
+ 385              	.L69:
+ 386 019c 79B1     		cbz	r1, .L116
+ 387              	.L70:
+ 388 019e 4868     		ldr	r0, [r1, #4]
+ 389 01a0 D388     		ldrh	r3, [r2, #6]	@ unaligned
+ 390 01a2 8288     		ldrh	r2, [r0, #4]	@ unaligned
+ 391 01a4 9342     		cmp	r3, r2
+ 392 01a6 6DD1     		bne	.L68
+ 393 01a8 0168     		ldr	r1, [r0, #0]	@ unaligned
+ 394 01aa 0246     		mov	r2, r0
+ 395 01ac F6E7     		b	.L69
+ 396              	.L62:
+ 397 01ae 374C     		ldr	r4, .L118
+ 398 01b0 2846     		mov	r0, r5
+ 399 01b2 A688     		ldrh	r6, [r4, #4]
+ 400 01b4 FFF7FEFF 		bl	pbuf_clen
+ 401 01b8 301A     		subs	r0, r6, r0
+ 402 01ba A080     		strh	r0, [r4, #4]	@ movhi
+ 403 01bc 72E7     		b	.L78
+ 404              	.L116:
+ 405 01be BD8B     		ldrh	r5, [r7, #28]
+ 406 01c0 1435     		adds	r5, r5, #20
+ 407 01c2 BD83     		strh	r5, [r7, #28]	@ movhi
+ 408 01c4 2568     		ldr	r5, [r4, #0]	@ unaligned
+ 409 01c6 07F10802 		add	r2, r7, #8
+ 410 01ca 2346     		mov	r3, r4
+ 411 01cc 07F11C00 		add	r0, r7, #28
+ 412              	.L72:
+ 413 01d0 52F8046B 		ldr	r6, [r2], #4	@ unaligned
+ 414 01d4 8242     		cmp	r2, r0
+ 415 01d6 43F8046B 		str	r6, [r3], #4	@ unaligned
+ 416 01da F9D1     		bne	.L72
+ 417 01dc B88B     		ldrh	r0, [r7, #28]
+ 418 01de FFF7FEFF 		bl	htons
+ 419 01e2 0021     		movs	r1, #0
+ 420 01e4 6080     		strh	r0, [r4, #2]	@ unaligned
+ 421 01e6 A171     		strb	r1, [r4, #6]
+ 422 01e8 E171     		strb	r1, [r4, #7]
+ 423 01ea A172     		strb	r1, [r4, #10]
+ 424 01ec E172     		strb	r1, [r4, #11]
+ 425 01ee 2046     		mov	r0, r4
+ 426 01f0 1421     		movs	r1, #20
+ 427 01f2 FFF7FEFF 		bl	inet_chksum
+ 428 01f6 6081     		strh	r0, [r4, #10]	@ unaligned
+ 429 01f8 7C68     		ldr	r4, [r7, #4]
+ 430              	.L73:
+ 431 01fa 5DB1     		cbz	r5, .L117
+ 432              	.L74:
+ 433 01fc 6E68     		ldr	r6, [r5, #4]
+ 434 01fe 2846     		mov	r0, r5
+ 435 0200 6FF01301 		mvn	r1, #19
+ 436 0204 FFF7FEFF 		bl	pbuf_header
+ 437 0208 2946     		mov	r1, r5
+ 438 020a 2046     		mov	r0, r4
+ 439 020c FFF7FEFF 		bl	pbuf_cat
+ 440 0210 3568     		ldr	r5, [r6, #0]	@ unaligned
+ 441 0212 F2E7     		b	.L73
+ 442              	.L117:
+ 443 0214 1D4D     		ldr	r5, .L118
+ 444 0216 3868     		ldr	r0, [r7, #0]
+ 445 0218 2A68     		ldr	r2, [r5, #0]
+ 446 021a BA42     		cmp	r2, r7
+ 447 021c 16BF     		itet	ne
+ 448 021e 019B     		ldrne	r3, [sp, #4]
+ 449 0220 2860     		streq	r0, [r5, #0]
+ 450 0222 1860     		strne	r0, [r3, #0]
+ 451 0224 3846     		mov	r0, r7
+ 452 0226 FFF7FEFF 		bl	mem_free
+ 453 022a 2046     		mov	r0, r4
+ 454 022c AE88     		ldrh	r6, [r5, #4]
+ 455 022e FFF7FEFF 		bl	pbuf_clen
+ 456 0232 311A     		subs	r1, r6, r0
+ 457 0234 A980     		strh	r1, [r5, #4]	@ movhi
+ 458 0236 26E0     		b	.L110
+ 459              	.L114:
+ 460 0238 4046     		mov	r0, r8
+ 461 023a FFF7FEFF 		bl	mem_malloc
+ 462 023e 0746     		mov	r7, r0
+ 463 0240 0028     		cmp	r0, #0
+ 464 0242 3FF42FAF 		beq	.L78
+ 465              	.L81:
+ 466 0246 0021     		movs	r1, #0
+ 467 0248 2022     		movs	r2, #32
+ 468 024a 3846     		mov	r0, r7
+ 469 024c FFF7FEFF 		bl	memset
+ 470 0250 0E48     		ldr	r0, .L118
+ 471 0252 0368     		ldr	r3, [r0, #0]
+ 472 0254 0760     		str	r7, [r0, #0]
+ 473 0256 0322     		movs	r2, #3
+ 474 0258 FA77     		strb	r2, [r7, #31]
+ 475 025a 3B60     		str	r3, [r7, #0]
+ 476 025c 2246     		mov	r2, r4
+ 477 025e 07F10801 		add	r1, r7, #8
+ 478 0262 04F11400 		add	r0, r4, #20
+ 479              	.L55:
+ 480 0266 52F804EB 		ldr	lr, [r2], #4	@ unaligned
+ 481 026a 8242     		cmp	r2, r0
+ 482 026c 41F804EB 		str	lr, [r1], #4	@ unaligned
+ 483 0270 F9D1     		bne	.L55
+ 484 0272 30E7     		b	.L56
+ 485              	.L115:
+ 486 0274 0029     		cmp	r1, #0
+ 487 0276 85D0     		beq	.L111
+ 488              	.L82:
+ 489 0278 0D60     		str	r5, [r1, #0]	@ unaligned
+ 490 027a C988     		ldrh	r1, [r1, #6]	@ unaligned
+ 491 027c A142     		cmp	r1, r4
+ 492 027e 18BF     		it	ne
+ 493 0280 0026     		movne	r6, #0
+ 494 0282 80E7     		b	.L67
+ 495              	.L68:
+ 496 0284 0024     		movs	r4, #0
+ 497              	.L110:
+ 498 0286 2046     		mov	r0, r4
+ 499 0288 BDE8FE8F 		pop	{r1, r2, r3, r4, r5, r6, r7, r8, r9, sl, fp, pc}
+ 500              	.L119:
+ 501              		.align	2
+ 502              	.L118:
+ 503 028c 00000000 		.word	.LANCHOR0
+ 504 0290 00000000 		.word	memp_sizes
+ 506              		.section	.text.ip_frag,"ax",%progbits
+ 507              		.align	1
+ 508              		.global	ip_frag
+ 509              		.thumb
+ 510              		.thumb_func
+ 512              	ip_frag:
+ 513              		@ args = 0, pretend = 0, frame = 32
+ 514              		@ frame_needed = 0, uses_anonymous_args = 0
+ 515 0000 2DE9F04F 		push	{r4, r5, r6, r7, r8, r9, sl, fp, lr}
+ 516 0004 89B0     		sub	sp, sp, #36
+ 517 0006 8146     		mov	r9, r0
+ 518 0008 0220     		movs	r0, #2
+ 519 000a 0792     		str	r2, [sp, #28]
+ 520 000c 0F8C     		ldrh	r7, [r1, #32]
+ 521 000e 8A46     		mov	sl, r1
+ 522 0010 0246     		mov	r2, r0
+ 523 0012 0021     		movs	r1, #0
+ 524 0014 FFF7FEFF 		bl	pbuf_alloc
+ 525 0018 0546     		mov	r5, r0
+ 526 001a 0028     		cmp	r0, #0
+ 527 001c 00F09680 		beq	.L128
+ 528 0020 4D4C     		ldr	r4, .L135
+ 529 0022 4781     		strh	r7, [r0, #10]	@ movhi
+ 530 0024 24F00304 		bic	r4, r4, #3
+ 531 0028 4460     		str	r4, [r0, #4]
+ 532 002a D9F80430 		ldr	r3, [r9, #4]
+ 533 002e 0781     		strh	r7, [r0, #8]	@ movhi
+ 534 0030 2246     		mov	r2, r4
+ 535 0032 03F1100E 		add	lr, r3, #16
+ 536              	.L122:
+ 537 0036 1868     		ldr	r0, [r3, #0]	@ unaligned
+ 538 0038 5968     		ldr	r1, [r3, #4]	@ unaligned
+ 539 003a 1646     		mov	r6, r2
+ 540 003c 03C6     		stmia	r6!, {r0, r1}
+ 541 003e 0833     		adds	r3, r3, #8
+ 542 0040 7345     		cmp	r3, lr
+ 543 0042 3246     		mov	r2, r6
+ 544 0044 F7D1     		bne	.L122
+ 545 0046 1868     		ldr	r0, [r3, #0]	@ unaligned
+ 546 0048 3060     		str	r0, [r6, #0]	@ unaligned
+ 547 004a E088     		ldrh	r0, [r4, #6]
+ 548 004c FFF7FEFF 		bl	ntohs
+ 549 0050 C104     		lsls	r1, r0, #19
+ 550 0052 CB0C     		lsrs	r3, r1, #19
+ 551 0054 00F40056 		and	r6, r0, #8192
+ 552 0058 B9F80800 		ldrh	r0, [r9, #8]
+ 553 005c 0293     		str	r3, [sp, #8]
+ 554 005e B2B2     		uxth	r2, r6
+ 555 0060 A7F11401 		sub	r1, r7, #20
+ 556 0064 0823     		movs	r3, #8
+ 557 0066 1438     		subs	r0, r0, #20
+ 558 0068 0592     		str	r2, [sp, #20]
+ 559 006a 91FBF3F2 		sdiv	r2, r1, r3
+ 560 006e 86B2     		uxth	r6, r0
+ 561 0070 90B2     		uxth	r0, r2
+ 562 0072 C100     		lsls	r1, r0, #3
+ 563 0074 8BB2     		uxth	r3, r1
+ 564 0076 1422     		movs	r2, #20
+ 565 0078 0490     		str	r0, [sp, #16]
+ 566 007a 0693     		str	r3, [sp, #24]
+ 567 007c 0392     		str	r2, [sp, #12]
+ 568              	.L123:
+ 569 007e 002E     		cmp	r6, #0
+ 570 0080 5FD0     		beq	.L134
+ 571              	.L127:
+ 572 0082 A7F1130C 		sub	ip, r7, #19
+ 573 0086 0298     		ldr	r0, [sp, #8]
+ 574 0088 0599     		ldr	r1, [sp, #20]
+ 575 008a B445     		cmp	ip, r6
+ 576 008c 4FEAC04B 		lsl	fp, r0, #19
+ 577 0090 D4BF     		ite	le
+ 578 0092 4FF0000C 		movle	ip, #0
+ 579 0096 4FF0010C 		movgt	ip, #1
+ 580 009a 41EADB4B 		orr	fp, r1, fp, lsr #19
+ 581 009e BCF1000F 		cmp	ip, #0
+ 582 00a2 04D1     		bne	.L129
+ 583 00a4 4BF4005B 		orr	fp, fp, #8192
+ 584 00a8 DDF81880 		ldr	r8, [sp, #24]
+ 585 00ac 00E0     		b	.L124
+ 586              	.L129:
+ 587 00ae B046     		mov	r8, r6
+ 588              	.L124:
+ 589 00b0 04F11401 		add	r1, r4, #20
+ 590 00b4 4246     		mov	r2, r8
+ 591 00b6 039B     		ldr	r3, [sp, #12]
+ 592 00b8 CDF804C0 		str	ip, [sp, #4]
+ 593 00bc 4846     		mov	r0, r9
+ 594 00be FFF7FEFF 		bl	pbuf_copy_partial
+ 595 00c2 039B     		ldr	r3, [sp, #12]
+ 596 00c4 C218     		adds	r2, r0, r3
+ 597 00c6 90B2     		uxth	r0, r2
+ 598 00c8 0390     		str	r0, [sp, #12]
+ 599 00ca 5846     		mov	r0, fp
+ 600 00cc FFF7FEFF 		bl	htons
+ 601 00d0 08F11401 		add	r1, r8, #20
+ 602 00d4 E080     		strh	r0, [r4, #6]	@ movhi
+ 603 00d6 88B2     		uxth	r0, r1
+ 604 00d8 FFF7FEFF 		bl	htons
+ 605 00dc 0023     		movs	r3, #0
+ 606 00de 6080     		strh	r0, [r4, #2]	@ movhi
+ 607 00e0 6381     		strh	r3, [r4, #10]	@ movhi
+ 608 00e2 2046     		mov	r0, r4
+ 609 00e4 1421     		movs	r1, #20
+ 610 00e6 FFF7FEFF 		bl	inet_chksum
+ 611 00ea DDF804C0 		ldr	ip, [sp, #4]
+ 612 00ee 6081     		strh	r0, [r4, #10]	@ movhi
+ 613 00f0 BCF1000F 		cmp	ip, #0
+ 614 00f4 05D0     		beq	.L125
+ 615 00f6 06F11402 		add	r2, r6, #20
+ 616 00fa 2846     		mov	r0, r5
+ 617 00fc 91B2     		uxth	r1, r2
+ 618 00fe FFF7FEFF 		bl	pbuf_realloc
+ 619              	.L125:
+ 620 0102 0021     		movs	r1, #0
+ 621 0104 0220     		movs	r0, #2
+ 622 0106 0A46     		mov	r2, r1
+ 623 0108 FFF7FEFF 		bl	pbuf_alloc
+ 624 010c 8346     		mov	fp, r0
+ 625 010e A0B1     		cbz	r0, .L126
+ 626 0110 2946     		mov	r1, r5
+ 627 0112 FFF7FEFF 		bl	pbuf_chain
+ 628 0116 DAF81430 		ldr	r3, [sl, #20]
+ 629 011a 079A     		ldr	r2, [sp, #28]
+ 630 011c 5946     		mov	r1, fp
+ 631 011e 5046     		mov	r0, sl
+ 632 0120 9847     		blx	r3
+ 633 0122 5846     		mov	r0, fp
+ 634 0124 FFF7FEFF 		bl	pbuf_free
+ 635 0128 0298     		ldr	r0, [sp, #8]
+ 636 012a 0499     		ldr	r1, [sp, #16]
+ 637 012c 4218     		adds	r2, r0, r1
+ 638 012e C8EB0606 		rsb	r6, r8, r6
+ 639 0132 93B2     		uxth	r3, r2
+ 640 0134 B6B2     		uxth	r6, r6
+ 641 0136 0293     		str	r3, [sp, #8]
+ 642 0138 A1E7     		b	.L123
+ 643              	.L126:
+ 644 013a 2846     		mov	r0, r5
+ 645 013c FFF7FEFF 		bl	pbuf_free
+ 646 0140 04E0     		b	.L128
+ 647              	.L134:
+ 648 0142 2846     		mov	r0, r5
+ 649 0144 FFF7FEFF 		bl	pbuf_free
+ 650 0148 3046     		mov	r0, r6
+ 651 014a 00E0     		b	.L121
+ 652              	.L128:
+ 653 014c FF20     		movs	r0, #255
+ 654              	.L121:
+ 655 014e 40B2     		sxtb	r0, r0
+ 656 0150 09B0     		add	sp, sp, #36
+ 657 0152 BDE8F08F 		pop	{r4, r5, r6, r7, r8, r9, sl, fp, pc}
+ 658              	.L136:
+ 659 0156 00BF     		.align	2
+ 660              	.L135:
+ 661 0158 09000000 		.word	.LANCHOR0+9
+ 663              		.bss
+ 664              		.align	2
+ 665              		.set	.LANCHOR0,. + 0
+ 668              	reassdatagrams:
+ 669 0000 00000000 		.space	4
+ 672              	ip_reass_pbufcount:
+ 673 0004 0000     		.space	2
+ 676              	buf:
+ 677 0006 00000000 		.space	1504
+ 677      00000000 
+ 677      00000000 
+ 677      00000000 
+ 677      00000000 
+ 678 05e6 0000     		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 ip_frag.c
+C:\Users\Mihai\AppData\Local\Temp\ccddGfAL.s:17     .text.ip_reass_free_complete_datagram:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccddGfAL.s:21     .text.ip_reass_free_complete_datagram:00000000 ip_reass_free_complete_datagram
+C:\Users\Mihai\AppData\Local\Temp\ccddGfAL.s:83     .text.ip_reass_free_complete_datagram:00000080 $d
+C:\Users\Mihai\AppData\Local\Temp\ccddGfAL.s:86     .text.ip_reass_remove_oldest_datagram:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccddGfAL.s:90     .text.ip_reass_remove_oldest_datagram:00000000 ip_reass_remove_oldest_datagram
+C:\Users\Mihai\AppData\Local\Temp\ccddGfAL.s:152    .text.ip_reass_remove_oldest_datagram:00000068 $d
+C:\Users\Mihai\AppData\Local\Temp\ccddGfAL.s:155    .text.ip_reass_tmr:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccddGfAL.s:160    .text.ip_reass_tmr:00000000 ip_reass_tmr
+C:\Users\Mihai\AppData\Local\Temp\ccddGfAL.s:188    .text.ip_reass_tmr:00000024 $d
+C:\Users\Mihai\AppData\Local\Temp\ccddGfAL.s:191    .text.ip_reass:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccddGfAL.s:196    .text.ip_reass:00000000 ip_reass
+C:\Users\Mihai\AppData\Local\Temp\ccddGfAL.s:503    .text.ip_reass:0000028c $d
+C:\Users\Mihai\AppData\Local\Temp\ccddGfAL.s:507    .text.ip_frag:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccddGfAL.s:512    .text.ip_frag:00000000 ip_frag
+C:\Users\Mihai\AppData\Local\Temp\ccddGfAL.s:661    .text.ip_frag:00000158 $d
+C:\Users\Mihai\AppData\Local\Temp\ccddGfAL.s:664    .bss:00000000 $d
+C:\Users\Mihai\AppData\Local\Temp\ccddGfAL.s:668    .bss:00000000 reassdatagrams
+C:\Users\Mihai\AppData\Local\Temp\ccddGfAL.s:672    .bss:00000004 ip_reass_pbufcount
+C:\Users\Mihai\AppData\Local\Temp\ccddGfAL.s:676    .bss:00000006 buf
+
+UNDEFINED SYMBOLS
+icmp_time_exceeded
+pbuf_clen
+pbuf_free
+mem_free
+ntohs
+mem_malloc
+htons
+inet_chksum
+pbuf_header
+pbuf_cat
+memset
+memp_sizes
+pbuf_alloc
+pbuf_copy_partial
+pbuf_realloc
+pbuf_chain

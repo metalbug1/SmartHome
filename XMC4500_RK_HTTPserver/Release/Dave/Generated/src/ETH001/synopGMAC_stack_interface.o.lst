@@ -1,0 +1,1182 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"synopGMAC_stack_interface.c"
+  16              		.section	.text.Eth_GetTxBuffer,"ax",%progbits
+  17              		.align	1
+  18              		.global	Eth_GetTxBuffer
+  19              		.thumb
+  20              		.thumb_func
+  22              	Eth_GetTxBuffer:
+  23              		@ args = 0, pretend = 0, frame = 0
+  24              		@ frame_needed = 0, uses_anonymous_args = 0
+  25              		@ link register save eliminated.
+  26 0000 034B     		ldr	r3, .L2
+  27 0002 1968     		ldr	r1, [r3, #0]
+  28 0004 4A6C     		ldr	r2, [r1, #68]
+  29 0006 9368     		ldr	r3, [r2, #8]
+  30 0008 0360     		str	r3, [r0, #0]
+  31 000a 0020     		movs	r0, #0
+  32 000c 7047     		bx	lr
+  33              	.L3:
+  34 000e 00BF     		.align	2
+  35              	.L2:
+  36 0010 00000000 		.word	synopGMACdev
+  38              		.section	.text.Eth_InitNetworkInterface,"ax",%progbits
+  39              		.align	1
+  40              		.global	Eth_InitNetworkInterface
+  41              		.thumb
+  42              		.thumb_func
+  44              	Eth_InitNetworkInterface:
+  45              		@ args = 0, pretend = 0, frame = 0
+  46              		@ frame_needed = 0, uses_anonymous_args = 0
+  47 0000 1448     		ldr	r0, .L5
+  48 0002 154B     		ldr	r3, .L5+4
+  49 0004 0268     		ldr	r2, [r0, #0]
+  50 0006 10B5     		push	{r4, lr}
+  51 0008 144C     		ldr	r4, .L5+8
+  52 000a 42F08061 		orr	r1, r2, #67108864
+  53 000e 2360     		str	r3, [r4, #0]
+  54 0010 0160     		str	r1, [r0, #0]
+  55 0012 1348     		ldr	r0, .L5+12
+  56 0014 FFF7FEFF 		bl	RESET001_DeassertReset
+  57 0018 124B     		ldr	r3, .L5+16
+  58 001a 1349     		ldr	r1, .L5+20
+  59 001c 5868     		ldr	r0, [r3, #4]
+  60 001e 40F00402 		orr	r2, r0, #4
+  61 0022 5A60     		str	r2, [r3, #4]
+  62 0024 4B6C     		ldr	r3, [r1, #68]
+  63 0026 23F00700 		bic	r0, r3, #7
+  64 002a 4864     		str	r0, [r1, #68]
+  65 002c 4A6C     		ldr	r2, [r1, #68]
+  66 002e 22F07003 		bic	r3, r2, #112
+  67 0032 4B64     		str	r3, [r1, #68]
+  68 0034 086C     		ldr	r0, [r1, #64]
+  69 0036 20F4E002 		bic	r2, r0, #7340032
+  70 003a 0A64     		str	r2, [r1, #64]
+  71 003c 0023     		movs	r3, #0
+  72 003e 0B49     		ldr	r1, .L5+24
+  73 0040 0B4A     		ldr	r2, .L5+28
+  74 0042 2068     		ldr	r0, [r4, #0]
+  75 0044 FFF7FEFF 		bl	synopGMAC_attach
+  76 0048 2068     		ldr	r0, [r4, #0]
+  77 004a FFF7FEFF 		bl	synopGMAC_reset
+  78 004e 0020     		movs	r0, #0
+  79 0050 10BD     		pop	{r4, pc}
+  80              	.L6:
+  81 0052 00BF     		.align	2
+  82              	.L5:
+  83 0054 40400050 		.word	1342193728
+  84 0058 00000000 		.word	GMACdevice
+  85 005c 00000000 		.word	synopGMACdev
+  86 0060 04000020 		.word	536870916
+  87 0064 00460050 		.word	1342195200
+  88 0068 00820248 		.word	1208123904
+  89 006c 00C00050 		.word	1342226432
+  90 0070 00D00050 		.word	1342230528
+  92              		.section	.text.Eth_ExitNetworkInterface,"ax",%progbits
+  93              		.align	1
+  94              		.global	Eth_ExitNetworkInterface
+  95              		.thumb
+  96              		.thumb_func
+  98              	Eth_ExitNetworkInterface:
+  99              		@ args = 0, pretend = 0, frame = 0
+ 100              		@ frame_needed = 0, uses_anonymous_args = 0
+ 101              		@ link register save eliminated.
+ 102 0000 7047     		bx	lr
+ 104              		.section	.text.Eth_OpenNetworkInterface,"ax",%progbits
+ 105              		.align	1
+ 106              		.global	Eth_OpenNetworkInterface
+ 107              		.thumb
+ 108              		.thumb_func
+ 110              	Eth_OpenNetworkInterface:
+ 111              		@ args = 0, pretend = 0, frame = 0
+ 112              		@ frame_needed = 0, uses_anonymous_args = 0
+ 113 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 114 0002 594C     		ldr	r4, .L20
+ 115 0004 5949     		ldr	r1, .L20+4
+ 116 0006 5A4A     		ldr	r2, .L20+8
+ 117 0008 2068     		ldr	r0, [r4, #0]
+ 118 000a 85B0     		sub	sp, sp, #20
+ 119 000c 0023     		movs	r3, #0
+ 120 000e FFF7FEFF 		bl	synopGMAC_attach
+ 121 0012 2068     		ldr	r0, [r4, #0]
+ 122 0014 FFF7FEFF 		bl	synopGMAC_read_version
+ 123 0018 2068     		ldr	r0, [r4, #0]
+ 124 001a 4422     		movs	r2, #68
+ 125 001c 00F1BC03 		add	r3, r0, #188
+ 126 0020 4021     		movs	r1, #64
+ 127 0022 FFF7FEFF 		bl	synopGMAC_get_mac_addr
+ 128 0026 0C21     		movs	r1, #12
+ 129 0028 2068     		ldr	r0, [r4, #0]
+ 130 002a FFF7FEFF 		bl	synopGMAC_set_mdc_clk_div
+ 131 002e 2468     		ldr	r4, [r4, #0]
+ 132 0030 2046     		mov	r0, r4
+ 133 0032 FFF7FEFF 		bl	synopGMAC_get_mdc_clk_div
+ 134 0036 C4F8A400 		str	r0, [r4, #164]
+ 135 003a FFF7FEFF 		bl	PHY_InitializeDevice
+ 136 003e 0746     		mov	r7, r0
+ 137 0040 0028     		cmp	r0, #0
+ 138 0042 40F08D80 		bne	.L9
+ 139 0046 4B4B     		ldr	r3, .L20+12
+ 140 0048 D868     		ldr	r0, [r3, #12]
+ 141 004a C0F30221 		ubfx	r1, r0, #8, #3
+ 142 004e C1F10702 		rsb	r2, r1, #7
+ 143 0052 062A     		cmp	r2, #6
+ 144 0054 28BF     		it	cs
+ 145 0056 0622     		movcs	r2, #6
+ 146 0058 09B1     		cbz	r1, .L14
+ 147 005a 4E1E     		subs	r6, r1, #1
+ 148 005c 00E0     		b	.L10
+ 149              	.L14:
+ 150 005e 3E46     		mov	r6, r7
+ 151              	.L10:
+ 152 0060 0125     		movs	r5, #1
+ 153 0062 05FA02F4 		lsl	r4, r5, r2
+ 154 0066 631E     		subs	r3, r4, #1
+ 155 0068 03F03F00 		and	r0, r3, #63
+ 156 006c 00FA06F1 		lsl	r1, r0, r6
+ 157 0070 8A00     		lsls	r2, r1, #2
+ 158 0072 414C     		ldr	r4, .L20+16
+ 159 0074 D6B2     		uxtb	r6, r2
+ 160 0076 84F86C63 		strb	r6, [r4, #876]
+ 161 007a 3B4E     		ldr	r6, .L20
+ 162 007c 4FF48053 		mov	r3, #4096
+ 163 0080 E360     		str	r3, [r4, #12]
+ 164 0082 2A46     		mov	r2, r5
+ 165 0084 0621     		movs	r1, #6
+ 166 0086 3068     		ldr	r0, [r6, #0]
+ 167 0088 FFF7FEFF 		bl	synopGMAC_setup_tx_desc_queue
+ 168 008c 3068     		ldr	r0, [r6, #0]
+ 169 008e FFF7FEFF 		bl	synopGMAC_init_tx_desc_base
+ 170 0092 2A46     		mov	r2, r5
+ 171 0094 0621     		movs	r1, #6
+ 172 0096 3068     		ldr	r0, [r6, #0]
+ 173 0098 FFF7FEFF 		bl	synopGMAC_setup_rx_desc_queue
+ 174 009c 3068     		ldr	r0, [r6, #0]
+ 175 009e FFF7FEFF 		bl	synopGMAC_init_rx_desc_base
+ 176 00a2 3068     		ldr	r0, [r6, #0]
+ 177 00a4 42F28801 		movw	r1, #8328
+ 178 00a8 FFF7FEFF 		bl	synopGMAC_dma_bus_mode_init
+ 179 00ac 3349     		ldr	r1, .L20+20
+ 180 00ae 3068     		ldr	r0, [r6, #0]
+ 181 00b0 FFF7FEFF 		bl	synopGMAC_dma_control_init
+ 182 00b4 3068     		ldr	r0, [r6, #0]
+ 183 00b6 0225     		movs	r5, #2
+ 184 00b8 C0F8AC50 		str	r5, [r0, #172]
+ 185 00bc FFF7FEFF 		bl	synopGMAC_rmii_100mbps_enable
+ 186 00c0 3068     		ldr	r0, [r6, #0]
+ 187 00c2 FFF7FEFF 		bl	synopGMAC_mac_init
+ 188 00c6 3068     		ldr	r0, [r6, #0]
+ 189 00c8 FFF7FEFF 		bl	synopGMAC_multicast_enable
+ 190 00cc 3068     		ldr	r0, [r6, #0]
+ 191 00ce FFF7FEFF 		bl	synopGMAC_multicast_hash_filter_enable
+ 192 00d2 3068     		ldr	r0, [r6, #0]
+ 193 00d4 FFF7FEFF 		bl	synopGMAC_broadcast_enable
+ 194 00d8 3068     		ldr	r0, [r6, #0]
+ 195 00da FFF7FEFF 		bl	synopGMAC_enable_rx_chksum_offload
+ 196 00de 3068     		ldr	r0, [r6, #0]
+ 197 00e0 FFF7FEFF 		bl	synopGMAC_rx_tcpip_chksum_drop_enable
+ 198 00e4 1426     		movs	r6, #20
+ 199 00e6 0025     		movs	r5, #0
+ 200              	.L12:
+ 201 00e8 2548     		ldr	r0, .L20+24
+ 202 00ea 1F4C     		ldr	r4, .L20
+ 203 00ec 0022     		movs	r2, #0
+ 204 00ee 3118     		adds	r1, r6, r0
+ 205 00f0 0092     		str	r2, [sp, #0]
+ 206 00f2 0192     		str	r2, [sp, #4]
+ 207 00f4 0292     		str	r2, [sp, #8]
+ 208 00f6 0B46     		mov	r3, r1
+ 209 00f8 4FF4BE62 		mov	r2, #1520
+ 210 00fc 2068     		ldr	r0, [r4, #0]
+ 211 00fe FFF7FEFF 		bl	synopGMAC_set_rx_qptr
+ 212 0102 204B     		ldr	r3, .L20+28
+ 213 0104 2068     		ldr	r0, [r4, #0]
+ 214 0106 2946     		mov	r1, r5
+ 215 0108 9A19     		adds	r2, r3, r6
+ 216 010a FFF7FEFF 		bl	synopGMAC_set_tx_address
+ 217 010e 0135     		adds	r5, r5, #1
+ 218 0110 0028     		cmp	r0, #0
+ 219 0112 03DB     		blt	.L11
+ 220 0114 062D     		cmp	r5, #6
+ 221 0116 06F2DC56 		addw	r6, r6, #1500
+ 222 011a E5D1     		bne	.L12
+ 223              	.L11:
+ 224 011c 1A49     		ldr	r1, .L20+32
+ 225 011e 0A68     		ldr	r2, [r1, #0]
+ 226 0120 12B1     		cbz	r2, .L13
+ 227 0122 0520     		movs	r0, #5
+ 228 0124 2168     		ldr	r1, [r4, #0]
+ 229 0126 9047     		blx	r2
+ 230              	.L13:
+ 231 0128 2068     		ldr	r0, [r4, #0]
+ 232 012a FFF7FEFF 		bl	synopGMAC_clear_interrupt
+ 233 012e 2068     		ldr	r0, [r4, #0]
+ 234 0130 4FF0FF31 		mov	r1, #-1
+ 235 0134 FFF7FEFF 		bl	synopGMAC_disable_mmc_tx_interrupt
+ 236 0138 2068     		ldr	r0, [r4, #0]
+ 237 013a 4FF0FF31 		mov	r1, #-1
+ 238 013e FFF7FEFF 		bl	synopGMAC_disable_mmc_rx_interrupt
+ 239 0142 2068     		ldr	r0, [r4, #0]
+ 240 0144 4FF0FF31 		mov	r1, #-1
+ 241 0148 FFF7FEFF 		bl	synopGMAC_disable_mmc_ipc_rx_interrupt
+ 242 014c 2068     		ldr	r0, [r4, #0]
+ 243 014e 0F49     		ldr	r1, .L20+36
+ 244 0150 FFF7FEFF 		bl	synopGMAC_enable_interrupt
+ 245 0154 2068     		ldr	r0, [r4, #0]
+ 246 0156 FFF7FEFF 		bl	synopGMAC_enable_dma_rx
+ 247 015a 2068     		ldr	r0, [r4, #0]
+ 248 015c FFF7FEFF 		bl	synopGMAC_enable_dma_tx
+ 249              	.L9:
+ 250 0160 3846     		mov	r0, r7
+ 251 0162 05B0     		add	sp, sp, #20
+ 252 0164 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 253              	.L21:
+ 254 0166 00BF     		.align	2
+ 255              	.L20:
+ 256 0168 00000000 		.word	synopGMACdev
+ 257 016c 00C00050 		.word	1342226432
+ 258 0170 00D00050 		.word	1342230528
+ 259 0174 00ED00E0 		.word	-536810240
+ 260 0178 00E100E0 		.word	-536813312
+ 261 017c 1C002000 		.word	2097180
+ 262 0180 00000000 		.word	Eth_RxBuffer
+ 263 0184 00000000 		.word	Eth_TxBuffer
+ 264 0188 00000000 		.word	.LANCHOR0
+ 265 018c E3A10100 		.word	106979
+ 267              		.section	.text.Eth_CloseNetworkInterface,"ax",%progbits
+ 268              		.align	1
+ 269              		.global	Eth_CloseNetworkInterface
+ 270              		.thumb
+ 271              		.thumb_func
+ 273              	Eth_CloseNetworkInterface:
+ 274              		@ args = 0, pretend = 0, frame = 0
+ 275              		@ frame_needed = 0, uses_anonymous_args = 0
+ 276 0000 10B5     		push	{r4, lr}
+ 277 0002 0F4C     		ldr	r4, .L27
+ 278 0004 2068     		ldr	r0, [r4, #0]
+ 279 0006 FFF7FEFF 		bl	synopGMAC_disable_interrupt_all
+ 280 000a 2068     		ldr	r0, [r4, #0]
+ 281 000c FFF7FEFF 		bl	synopGMAC_disable_dma_rx
+ 282 0010 2068     		ldr	r0, [r4, #0]
+ 283 0012 FFF7FEFF 		bl	synopGMAC_take_desc_ownership_rx
+ 284 0016 2068     		ldr	r0, [r4, #0]
+ 285 0018 FFF7FEFF 		bl	synopGMAC_disable_dma_tx
+ 286 001c 2068     		ldr	r0, [r4, #0]
+ 287 001e FFF7FEFF 		bl	synopGMAC_take_desc_ownership_tx
+ 288 0022 2068     		ldr	r0, [r4, #0]
+ 289 0024 0121     		movs	r1, #1
+ 290 0026 FFF7FEFF 		bl	synopGMAC_giveup_rx_desc_queue
+ 291 002a 2068     		ldr	r0, [r4, #0]
+ 292 002c 0121     		movs	r1, #1
+ 293 002e FFF7FEFF 		bl	synopGMAC_giveup_tx_desc_queue
+ 294 0032 044B     		ldr	r3, .L27+4
+ 295 0034 5868     		ldr	r0, [r3, #4]
+ 296 0036 00B1     		cbz	r0, .L23
+ 297 0038 8047     		blx	r0
+ 298              	.L23:
+ 299 003a 0020     		movs	r0, #0
+ 300 003c 10BD     		pop	{r4, pc}
+ 301              	.L28:
+ 302 003e 00BF     		.align	2
+ 303              	.L27:
+ 304 0040 00000000 		.word	synopGMACdev
+ 305 0044 00000000 		.word	.LANCHOR0
+ 307              		.section	.text.Eth_TransmitFrames,"ax",%progbits
+ 308              		.align	1
+ 309              		.global	Eth_TransmitFrames
+ 310              		.thumb
+ 311              		.thumb_func
+ 313              	Eth_TransmitFrames:
+ 314              		@ args = 0, pretend = 0, frame = 0
+ 315              		@ frame_needed = 0, uses_anonymous_args = 0
+ 316 0000 30B5     		push	{r4, r5, lr}
+ 317 0002 0A46     		mov	r2, r1
+ 318 0004 85B0     		sub	sp, sp, #20
+ 319 0006 0346     		mov	r3, r0
+ 320 0008 08B9     		cbnz	r0, .L30
+ 321              	.L32:
+ 322 000a 0420     		movs	r0, #4
+ 323 000c 10E0     		b	.L31
+ 324              	.L30:
+ 325 000e 094D     		ldr	r5, .L33
+ 326 0010 0024     		movs	r4, #0
+ 327 0012 0121     		movs	r1, #1
+ 328 0014 0391     		str	r1, [sp, #12]
+ 329 0016 0094     		str	r4, [sp, #0]
+ 330 0018 0194     		str	r4, [sp, #4]
+ 331 001a 0294     		str	r4, [sp, #8]
+ 332 001c 2868     		ldr	r0, [r5, #0]
+ 333 001e 1946     		mov	r1, r3
+ 334 0020 FFF7FEFF 		bl	synopGMAC_set_tx_qptr
+ 335 0024 A042     		cmp	r0, r4
+ 336 0026 F0DB     		blt	.L32
+ 337 0028 2868     		ldr	r0, [r5, #0]
+ 338 002a FFF7FEFF 		bl	synopGMAC_resume_dma_tx
+ 339 002e 2046     		mov	r0, r4
+ 340              	.L31:
+ 341 0030 05B0     		add	sp, sp, #20
+ 342 0032 30BD     		pop	{r4, r5, pc}
+ 343              	.L34:
+ 344              		.align	2
+ 345              	.L33:
+ 346 0034 00000000 		.word	synopGMACdev
+ 348              		.section	.text.Eth_ReceiveData,"ax",%progbits
+ 349              		.align	1
+ 350              		.global	Eth_ReceiveData
+ 351              		.thumb
+ 352              		.thumb_func
+ 354              	Eth_ReceiveData:
+ 355              		@ args = 0, pretend = 0, frame = 32
+ 356              		@ frame_needed = 0, uses_anonymous_args = 0
+ 357 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 358 0002 91B0     		sub	sp, sp, #68
+ 359 0004 0023     		movs	r3, #0
+ 360 0006 0522     		movs	r2, #5
+ 361 0008 0893     		str	r3, [sp, #32]
+ 362 000a 0993     		str	r3, [sp, #36]
+ 363 000c 0A92     		str	r2, [sp, #40]
+ 364 000e 0B93     		str	r3, [sp, #44]
+ 365 0010 0C93     		str	r3, [sp, #48]
+ 366              	.L42:
+ 367 0012 544C     		ldr	r4, .L47
+ 368 0014 2068     		ldr	r0, [r4, #0]
+ 369 0016 08A9     		add	r1, sp, #32
+ 370 0018 0CAF     		add	r7, sp, #48
+ 371 001a 09AA     		add	r2, sp, #36
+ 372 001c 856C     		ldr	r5, [r0, #72]
+ 373 001e 0091     		str	r1, [sp, #0]
+ 374 0020 0023     		movs	r3, #0
+ 375 0022 0197     		str	r7, [sp, #4]
+ 376 0024 0392     		str	r2, [sp, #12]
+ 377 0026 0DA9     		add	r1, sp, #52
+ 378 0028 0EAF     		add	r7, sp, #56
+ 379 002a 0FAA     		add	r2, sp, #60
+ 380 002c 0491     		str	r1, [sp, #16]
+ 381 002e 0597     		str	r7, [sp, #20]
+ 382 0030 0692     		str	r2, [sp, #24]
+ 383 0032 0293     		str	r3, [sp, #8]
+ 384 0034 0AA9     		add	r1, sp, #40
+ 385 0036 0BAA     		add	r2, sp, #44
+ 386 0038 FFF7FEFF 		bl	synopGMAC_get_rx_qptr
+ 387 003c 071E     		subs	r7, r0, #0
+ 388 003e C0F28980 		blt	.L36
+ 389 0042 0898     		ldr	r0, [sp, #32]
+ 390 0044 0028     		cmp	r0, #0
+ 391 0046 00F08580 		beq	.L36
+ 392 004a 0A98     		ldr	r0, [sp, #40]
+ 393 004c FFF7FEFF 		bl	synopGMAC_is_rx_desc_valid
+ 394 0050 0028     		cmp	r0, #0
+ 395 0052 4BD0     		beq	.L37
+ 396 0054 0A98     		ldr	r0, [sp, #40]
+ 397 0056 FFF7FEFF 		bl	synopGMAC_get_rx_desc_frame_length
+ 398 005a 0A99     		ldr	r1, [sp, #40]
+ 399 005c 061F     		subs	r6, r0, #4
+ 400 005e 2068     		ldr	r0, [r4, #0]
+ 401 0060 FFF7FEFF 		bl	synopGMAC_is_rx_checksum_error
+ 402 0064 0A99     		ldr	r1, [sp, #40]
+ 403 0066 2068     		ldr	r0, [r4, #0]
+ 404 0068 FFF7FEFF 		bl	synopGMAC_is_rx_checksum_error
+ 405 006c 0A99     		ldr	r1, [sp, #40]
+ 406 006e 2068     		ldr	r0, [r4, #0]
+ 407 0070 FFF7FEFF 		bl	synopGMAC_is_rx_checksum_error
+ 408 0074 0A99     		ldr	r1, [sp, #40]
+ 409 0076 2068     		ldr	r0, [r4, #0]
+ 410 0078 FFF7FEFF 		bl	synopGMAC_is_rx_checksum_error
+ 411 007c 0A99     		ldr	r1, [sp, #40]
+ 412 007e 2068     		ldr	r0, [r4, #0]
+ 413 0080 FFF7FEFF 		bl	synopGMAC_is_rx_checksum_error
+ 414 0084 0A99     		ldr	r1, [sp, #40]
+ 415 0086 2068     		ldr	r0, [r4, #0]
+ 416 0088 FFF7FEFF 		bl	synopGMAC_is_rx_checksum_error
+ 417 008c 0A99     		ldr	r1, [sp, #40]
+ 418 008e 2068     		ldr	r0, [r4, #0]
+ 419 0090 FFF7FEFF 		bl	synopGMAC_is_rx_checksum_error
+ 420 0094 2168     		ldr	r1, [r4, #0]
+ 421 0096 0A6D     		ldr	r2, [r1, #80]
+ 422 0098 8B6D     		ldr	r3, [r1, #88]
+ 423 009a 501C     		adds	r0, r2, #1
+ 424 009c 9A19     		adds	r2, r3, r6
+ 425 009e 0865     		str	r0, [r1, #80]
+ 426 00a0 8A65     		str	r2, [r1, #88]
+ 427 00a2 A868     		ldr	r0, [r5, #8]
+ 428 00a4 3146     		mov	r1, r6
+ 429 00a6 FFF7FEFF 		bl	Eth_Received_Data_Handler
+ 430 00aa 2846     		mov	r0, r5
+ 431 00ac FFF7FEFF 		bl	synopGMAC_is_rx_desc_chained
+ 432 00b0 30B1     		cbz	r0, .L38
+ 433 00b2 2268     		ldr	r2, [r4, #0]
+ 434 00b4 6B6A     		ldr	r3, [r5, #36]
+ 435 00b6 2846     		mov	r0, r5
+ 436 00b8 9364     		str	r3, [r2, #72]
+ 437 00ba FFF7FEFF 		bl	synopGMAC_rx_desc_init_chain
+ 438 00be 38E0     		b	.L39
+ 439              	.L38:
+ 440 00c0 2668     		ldr	r6, [r4, #0]
+ 441 00c2 2946     		mov	r1, r5
+ 442 00c4 3046     		mov	r0, r6
+ 443 00c6 FFF7FEFF 		bl	synopGMAC_is_last_rx_desc
+ 444 00ca 10B1     		cbz	r0, .L40
+ 445 00cc 2668     		ldr	r6, [r4, #0]
+ 446 00ce F169     		ldr	r1, [r6, #28]
+ 447 00d0 01E0     		b	.L41
+ 448              	.L40:
+ 449 00d2 05F12801 		add	r1, r5, #40
+ 450              	.L41:
+ 451 00d6 2348     		ldr	r0, .L47
+ 452 00d8 B164     		str	r1, [r6, #72]
+ 453 00da 0068     		ldr	r0, [r0, #0]
+ 454 00dc 2946     		mov	r1, r5
+ 455 00de FFF7FEFF 		bl	synopGMAC_is_last_rx_desc
+ 456 00e2 0146     		mov	r1, r0
+ 457 00e4 2846     		mov	r0, r5
+ 458 00e6 FFF7FEFF 		bl	synopGMAC_rx_desc_init_ring
+ 459 00ea 22E0     		b	.L39
+ 460              	.L37:
+ 461 00ec 2568     		ldr	r5, [r4, #0]
+ 462 00ee 0A98     		ldr	r0, [sp, #40]
+ 463 00f0 2E6E     		ldr	r6, [r5, #96]
+ 464 00f2 731C     		adds	r3, r6, #1
+ 465 00f4 2B66     		str	r3, [r5, #96]
+ 466 00f6 6E6F     		ldr	r6, [r5, #116]
+ 467 00f8 FFF7FEFF 		bl	synopGMAC_is_rx_frame_collision
+ 468 00fc 8119     		adds	r1, r0, r6
+ 469 00fe 6967     		str	r1, [r5, #116]
+ 470 0100 2568     		ldr	r5, [r4, #0]
+ 471 0102 0A98     		ldr	r0, [sp, #40]
+ 472 0104 D5F88060 		ldr	r6, [r5, #128]
+ 473 0108 FFF7FEFF 		bl	synopGMAC_is_rx_crc
+ 474 010c 8219     		adds	r2, r0, r6
+ 475 010e C5F88020 		str	r2, [r5, #128]
+ 476 0112 2568     		ldr	r5, [r4, #0]
+ 477 0114 0A98     		ldr	r0, [sp, #40]
+ 478 0116 D5F88460 		ldr	r6, [r5, #132]
+ 479 011a FFF7FEFF 		bl	synopGMAC_is_frame_dribbling_errors
+ 480 011e 2468     		ldr	r4, [r4, #0]
+ 481 0120 8019     		adds	r0, r0, r6
+ 482 0122 C5F88400 		str	r0, [r5, #132]
+ 483 0126 0A98     		ldr	r0, [sp, #40]
+ 484 0128 A56F     		ldr	r5, [r4, #120]
+ 485 012a FFF7FEFF 		bl	synopGMAC_is_rx_frame_length_errors
+ 486 012e 4319     		adds	r3, r0, r5
+ 487 0130 A367     		str	r3, [r4, #120]
+ 488              	.L39:
+ 489 0132 0D48     		ldr	r0, .L47+4
+ 490 0134 0B4A     		ldr	r2, .L47
+ 491 0136 40F2DC51 		movw	r1, #1500
+ 492 013a 01FB0701 		mla	r1, r1, r7, r0
+ 493 013e 0027     		movs	r7, #0
+ 494 0140 0097     		str	r7, [sp, #0]
+ 495 0142 0197     		str	r7, [sp, #4]
+ 496 0144 0297     		str	r7, [sp, #8]
+ 497 0146 1068     		ldr	r0, [r2, #0]
+ 498 0148 0B46     		mov	r3, r1
+ 499 014a 4FF4BE62 		mov	r2, #1520
+ 500 014e FFF7FEFF 		bl	synopGMAC_set_rx_qptr
+ 501 0152 0746     		mov	r7, r0
+ 502              	.L36:
+ 503 0154 0020     		movs	r0, #0
+ 504 0156 8742     		cmp	r7, r0
+ 505 0158 0A90     		str	r0, [sp, #40]
+ 506 015a BFF65AAF 		bge	.L42
+ 507 015e 11B0     		add	sp, sp, #68
+ 508 0160 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 509              	.L48:
+ 510 0162 00BF     		.align	2
+ 511              	.L47:
+ 512 0164 00000000 		.word	synopGMACdev
+ 513 0168 14000000 		.word	Eth_RxBuffer+20
+ 515              		.section	.text.ETH0_0_IRQHandler,"ax",%progbits
+ 516              		.align	1
+ 517              		.global	ETH0_0_IRQHandler
+ 518              		.thumb
+ 519              		.thumb_func
+ 521              	ETH0_0_IRQHandler:
+ 522              		@ args = 0, pretend = 0, frame = 8
+ 523              		@ frame_needed = 0, uses_anonymous_args = 0
+ 524 0000 70B5     		push	{r4, r5, r6, lr}
+ 525 0002 5748     		ldr	r0, .L88
+ 526 0004 86B0     		sub	sp, sp, #24
+ 527 0006 1421     		movs	r1, #20
+ 528 0008 FFF7FEFF 		bl	synopGMACReadReg
+ 529 000c 0446     		mov	r4, r0
+ 530 000e 0028     		cmp	r0, #0
+ 531 0010 00F0A380 		beq	.L49
+ 532 0014 534D     		ldr	r5, .L88+4
+ 533 0016 2868     		ldr	r0, [r5, #0]
+ 534 0018 FFF7FEFF 		bl	synopGMAC_disable_interrupt_all
+ 535 001c E200     		lsls	r2, r4, #3
+ 536 001e 02D5     		bpl	.L51
+ 537 0020 2868     		ldr	r0, [r5, #0]
+ 538 0022 FFF7FEFF 		bl	synopGMAC_powerup_mac
+ 539              	.L51:
+ 540 0026 2868     		ldr	r0, [r5, #0]
+ 541 0028 4E4C     		ldr	r4, .L88+4
+ 542 002a FFF7FEFF 		bl	synopGMAC_get_interrupt_type
+ 543 002e 0306     		lsls	r3, r0, #24
+ 544 0030 0546     		mov	r5, r0
+ 545 0032 3ED5     		bpl	.L52
+ 546 0034 4C4B     		ldr	r3, .L88+8
+ 547 0036 1868     		ldr	r0, [r3, #0]	@ unaligned
+ 548 0038 9988     		ldrh	r1, [r3, #4]	@ unaligned
+ 549 003a 0490     		str	r0, [sp, #16]	@ unaligned
+ 550 003c 2068     		ldr	r0, [r4, #0]
+ 551 003e ADF81410 		strh	r1, [sp, #20]	@ unaligned
+ 552 0042 FFF7FEFF 		bl	synopGMAC_disable_dma_tx
+ 553 0046 2068     		ldr	r0, [r4, #0]
+ 554 0048 FFF7FEFF 		bl	synopGMAC_disable_dma_rx
+ 555 004c 2068     		ldr	r0, [r4, #0]
+ 556 004e FFF7FEFF 		bl	synopGMAC_take_desc_ownership_tx
+ 557 0052 2068     		ldr	r0, [r4, #0]
+ 558 0054 FFF7FEFF 		bl	synopGMAC_take_desc_ownership_rx
+ 559 0058 2068     		ldr	r0, [r4, #0]
+ 560 005a FFF7FEFF 		bl	synopGMAC_init_tx_rx_desc_queue
+ 561 005e 2068     		ldr	r0, [r4, #0]
+ 562 0060 FFF7FEFF 		bl	synopGMAC_reset
+ 563 0064 4422     		movs	r2, #68
+ 564 0066 04AB     		add	r3, sp, #16
+ 565 0068 4021     		movs	r1, #64
+ 566 006a 2068     		ldr	r0, [r4, #0]
+ 567 006c FFF7FEFF 		bl	synopGMAC_set_mac_addr
+ 568 0070 3E49     		ldr	r1, .L88+12
+ 569 0072 2068     		ldr	r0, [r4, #0]
+ 570 0074 FFF7FEFF 		bl	synopGMAC_dma_bus_mode_init
+ 571 0078 4FF40011 		mov	r1, #2097152
+ 572 007c 2068     		ldr	r0, [r4, #0]
+ 573 007e FFF7FEFF 		bl	synopGMAC_dma_control_init
+ 574 0082 2068     		ldr	r0, [r4, #0]
+ 575 0084 FFF7FEFF 		bl	synopGMAC_init_rx_desc_base
+ 576 0088 2068     		ldr	r0, [r4, #0]
+ 577 008a FFF7FEFF 		bl	synopGMAC_init_tx_desc_base
+ 578 008e 2068     		ldr	r0, [r4, #0]
+ 579 0090 FFF7FEFF 		bl	synopGMAC_mac_init
+ 580 0094 2068     		ldr	r0, [r4, #0]
+ 581 0096 FFF7FEFF 		bl	synopGMAC_multicast_enable
+ 582 009a 2068     		ldr	r0, [r4, #0]
+ 583 009c FFF7FEFF 		bl	synopGMAC_multicast_hash_filter_enable
+ 584 00a0 2068     		ldr	r0, [r4, #0]
+ 585 00a2 FFF7FEFF 		bl	synopGMAC_broadcast_enable
+ 586 00a6 2068     		ldr	r0, [r4, #0]
+ 587 00a8 FFF7FEFF 		bl	synopGMAC_enable_dma_rx
+ 588 00ac 2068     		ldr	r0, [r4, #0]
+ 589 00ae FFF7FEFF 		bl	synopGMAC_enable_dma_tx
+ 590              	.L52:
+ 591 00b2 EC07     		lsls	r4, r5, #31
+ 592 00b4 01D5     		bpl	.L53
+ 593 00b6 FFF7FEFF 		bl	Eth_ReceiveData
+ 594              	.L53:
+ 595 00ba A807     		lsls	r0, r5, #30
+ 596 00bc 09D5     		bpl	.L54
+ 597 00be 2C4A     		ldr	r2, .L88+16
+ 598 00c0 1468     		ldr	r4, [r2, #0]
+ 599 00c2 34B9     		cbnz	r4, .L54
+ 600 00c4 274B     		ldr	r3, .L88+4
+ 601 00c6 1868     		ldr	r0, [r3, #0]
+ 602 00c8 C16F     		ldr	r1, [r0, #124]
+ 603 00ca 4A1C     		adds	r2, r1, #1
+ 604 00cc C267     		str	r2, [r0, #124]
+ 605 00ce FFF7FEFF 		bl	synopGMAC_resume_dma_rx
+ 606              	.L54:
+ 607 00d2 6907     		lsls	r1, r5, #29
+ 608 00d4 1ED5     		bpl	.L55
+ 609 00d6 2648     		ldr	r0, .L88+16
+ 610 00d8 0468     		ldr	r4, [r0, #0]
+ 611 00da DCB9     		cbnz	r4, .L55
+ 612 00dc 214E     		ldr	r6, .L88+4
+ 613 00de 3368     		ldr	r3, [r6, #0]
+ 614 00e0 D96F     		ldr	r1, [r3, #124]
+ 615 00e2 4A1C     		adds	r2, r1, #1
+ 616 00e4 DA67     		str	r2, [r3, #124]
+ 617 00e6 1424     		movs	r4, #20
+ 618              	.L56:
+ 619 00e8 2248     		ldr	r0, .L88+20
+ 620 00ea 1E4E     		ldr	r6, .L88+4
+ 621 00ec 2118     		adds	r1, r4, r0
+ 622 00ee 0023     		movs	r3, #0
+ 623 00f0 0093     		str	r3, [sp, #0]
+ 624 00f2 0193     		str	r3, [sp, #4]
+ 625 00f4 0293     		str	r3, [sp, #8]
+ 626 00f6 3068     		ldr	r0, [r6, #0]
+ 627 00f8 0B46     		mov	r3, r1
+ 628 00fa 4FF4BE62 		mov	r2, #1520
+ 629 00fe FFF7FEFF 		bl	synopGMAC_set_rx_qptr
+ 630 0102 04F2DC54 		addw	r4, r4, #1500
+ 631 0106 42F23C31 		movw	r1, #9020
+ 632 010a 8C42     		cmp	r4, r1
+ 633 010c ECD1     		bne	.L56
+ 634 010e 3068     		ldr	r0, [r6, #0]
+ 635 0110 FFF7FEFF 		bl	synopGMAC_enable_dma_rx
+ 636              	.L55:
+ 637 0114 2A07     		lsls	r2, r5, #28
+ 638 0116 03D5     		bpl	.L57
+ 639 0118 124A     		ldr	r2, .L88+4
+ 640 011a 1068     		ldr	r0, [r2, #0]
+ 641 011c FFF7FEFF 		bl	synop_handle_transmit_over
+ 642              	.L57:
+ 643 0120 EB06     		lsls	r3, r5, #27
+ 644 0122 06D5     		bpl	.L58
+ 645 0124 1248     		ldr	r0, .L88+16
+ 646 0126 0368     		ldr	r3, [r0, #0]
+ 647 0128 1BB9     		cbnz	r3, .L58
+ 648 012a 0E4C     		ldr	r4, .L88+4
+ 649 012c 2068     		ldr	r0, [r4, #0]
+ 650 012e FFF7FEFF 		bl	synop_handle_transmit_over
+ 651              	.L58:
+ 652 0132 15F0200F 		tst	r5, #32
+ 653 0136 0B4C     		ldr	r4, .L88+4
+ 654 0138 0BD0     		beq	.L59
+ 655 013a 0D49     		ldr	r1, .L88+16
+ 656 013c 0A68     		ldr	r2, [r1, #0]
+ 657 013e 42B9     		cbnz	r2, .L59
+ 658 0140 2068     		ldr	r0, [r4, #0]
+ 659 0142 FFF7FEFF 		bl	synopGMAC_disable_dma_tx
+ 660 0146 2068     		ldr	r0, [r4, #0]
+ 661 0148 FFF7FEFF 		bl	synopGMAC_take_desc_ownership_tx
+ 662 014c 2068     		ldr	r0, [r4, #0]
+ 663 014e FFF7FEFF 		bl	synopGMAC_enable_dma_tx
+ 664              	.L59:
+ 665 0152 2068     		ldr	r0, [r4, #0]
+ 666 0154 0849     		ldr	r1, .L88+24
+ 667 0156 FFF7FEFF 		bl	synopGMAC_enable_interrupt
+ 668              	.L49:
+ 669 015a 06B0     		add	sp, sp, #24
+ 670 015c 70BD     		pop	{r4, r5, r6, pc}
+ 671              	.L89:
+ 672 015e 00BF     		.align	2
+ 673              	.L88:
+ 674 0160 00D00050 		.word	1342230528
+ 675 0164 00000000 		.word	synopGMACdev
+ 676 0168 00000000 		.word	.LANCHOR1
+ 677 016c 08080100 		.word	67592
+ 678 0170 00000000 		.word	GMAC_Power_down
+ 679 0174 00000000 		.word	Eth_RxBuffer
+ 680 0178 E3A10100 		.word	106979
+ 682              		.section	.text.Eth_PerformIoctl,"ax",%progbits
+ 683              		.align	1
+ 684              		.global	Eth_PerformIoctl
+ 685              		.thumb
+ 686              		.thumb_func
+ 688              	Eth_PerformIoctl:
+ 689              		@ args = 0, pretend = 0, frame = 0
+ 690              		@ frame_needed = 0, uses_anonymous_args = 0
+ 691 0000 38B5     		push	{r3, r4, r5, lr}
+ 692 0002 0C46     		mov	r4, r1
+ 693 0004 0029     		cmp	r1, #0
+ 694 0006 00F0AD81 		beq	.L112
+ 695 000a 0928     		cmp	r0, #9
+ 696 000c 00F2AA81 		bhi	.L112
+ 697 0010 DFE810F0 		tbh	[pc, r0, lsl #1]
+ 698              	.L102:
+ 699 0014 0A00     		.2byte	(.L92-.L102)/2
+ 700 0016 1700     		.2byte	(.L93-.L102)/2
+ 701 0018 2400     		.2byte	(.L94-.L102)/2
+ 702 001a 2D00     		.2byte	(.L95-.L102)/2
+ 703 001c 3A00     		.2byte	(.L96-.L102)/2
+ 704 001e 4700     		.2byte	(.L97-.L102)/2
+ 705 0020 7F01     		.2byte	(.L98-.L102)/2
+ 706 0022 9001     		.2byte	(.L99-.L102)/2
+ 707 0024 9601     		.2byte	(.L100-.L102)/2
+ 708 0026 9F01     		.2byte	(.L101-.L102)/2
+ 709              	.L92:
+ 710 0028 0D68     		ldr	r5, [r1, #0]
+ 711 002a 0DB9     		cbnz	r5, .L103
+ 712 002c BE48     		ldr	r0, .L118
+ 713 002e 03E0     		b	.L116
+ 714              	.L103:
+ 715 0030 012D     		cmp	r5, #1
+ 716 0032 40F09581 		bne	.L111
+ 717 0036 BD48     		ldr	r0, .L118+4
+ 718              	.L116:
+ 719 0038 6168     		ldr	r1, [r4, #4]
+ 720 003a FFF7FEFF 		bl	synopGMACReadReg
+ 721 003e A060     		str	r0, [r4, #8]
+ 722 0040 8EE1     		b	.L111
+ 723              	.L93:
+ 724 0042 0D68     		ldr	r5, [r1, #0]
+ 725 0044 0DB9     		cbnz	r5, .L104
+ 726 0046 B848     		ldr	r0, .L118
+ 727 0048 03E0     		b	.L115
+ 728              	.L104:
+ 729 004a 012D     		cmp	r5, #1
+ 730 004c 40F08881 		bne	.L111
+ 731 0050 B648     		ldr	r0, .L118+4
+ 732              	.L115:
+ 733 0052 6168     		ldr	r1, [r4, #4]
+ 734 0054 A268     		ldr	r2, [r4, #8]
+ 735 0056 FFF7FEFF 		bl	synopGMACWriteReg
+ 736 005a 81E1     		b	.L111
+ 737              	.L94:
+ 738 005c 0D68     		ldr	r5, [r1, #0]
+ 739 005e 002D     		cmp	r5, #0
+ 740 0060 40F07E81 		bne	.L111
+ 741 0064 B24B     		ldr	r3, .L118+8
+ 742 0066 4868     		ldr	r0, [r1, #4]
+ 743 0068 1968     		ldr	r1, [r3, #0]
+ 744 006a C422     		movs	r2, #196
+ 745 006c 76E1     		b	.L117
+ 746              	.L95:
+ 747 006e B04B     		ldr	r3, .L118+8
+ 748 0070 1A68     		ldr	r2, [r3, #0]
+ 749 0072 D369     		ldr	r3, [r2, #28]
+ 750 0074 4A68     		ldr	r2, [r1, #4]
+ 751 0076 03F12801 		add	r1, r3, #40
+ 752              	.L105:
+ 753 007a 53F8040B 		ldr	r0, [r3], #4	@ unaligned
+ 754 007e 8B42     		cmp	r3, r1
+ 755 0080 42F8040B 		str	r0, [r2], #4	@ unaligned
+ 756 0084 F9D1     		bne	.L105
+ 757 0086 6BE1     		b	.L111
+ 758              	.L96:
+ 759 0088 A949     		ldr	r1, .L118+8
+ 760 008a 0A68     		ldr	r2, [r1, #0]
+ 761 008c 9369     		ldr	r3, [r2, #24]
+ 762 008e 6268     		ldr	r2, [r4, #4]
+ 763 0090 03F12801 		add	r1, r3, #40
+ 764              	.L106:
+ 765 0094 53F8040B 		ldr	r0, [r3], #4	@ unaligned
+ 766 0098 8B42     		cmp	r3, r1
+ 767 009a 42F8040B 		str	r0, [r2], #4	@ unaligned
+ 768 009e F9D1     		bne	.L106
+ 769 00a0 5EE1     		b	.L111
+ 770              	.L97:
+ 771 00a2 4C68     		ldr	r4, [r1, #4]
+ 772 00a4 A048     		ldr	r0, .L118
+ 773 00a6 4FF48C71 		mov	r1, #280
+ 774 00aa FFF7FEFF 		bl	synopGMACReadReg
+ 775 00ae 4FF48C71 		mov	r1, #280
+ 776 00b2 2060     		str	r0, [r4, #0]
+ 777 00b4 9C48     		ldr	r0, .L118
+ 778 00b6 FFF7FEFF 		bl	synopGMACReadReg
+ 779 00ba 4FF48E71 		mov	r1, #284
+ 780 00be 6060     		str	r0, [r4, #4]
+ 781 00c0 9948     		ldr	r0, .L118
+ 782 00c2 FFF7FEFF 		bl	synopGMACReadReg
+ 783 00c6 4FF49071 		mov	r1, #288
+ 784 00ca A060     		str	r0, [r4, #8]
+ 785 00cc 9648     		ldr	r0, .L118
+ 786 00ce FFF7FEFF 		bl	synopGMACReadReg
+ 787 00d2 4FF49271 		mov	r1, #292
+ 788 00d6 E060     		str	r0, [r4, #12]
+ 789 00d8 9348     		ldr	r0, .L118
+ 790 00da FFF7FEFF 		bl	synopGMACReadReg
+ 791 00de 4FF49471 		mov	r1, #296
+ 792 00e2 2061     		str	r0, [r4, #16]
+ 793 00e4 9048     		ldr	r0, .L118
+ 794 00e6 FFF7FEFF 		bl	synopGMACReadReg
+ 795 00ea 4FF49671 		mov	r1, #300
+ 796 00ee 6061     		str	r0, [r4, #20]
+ 797 00f0 8D48     		ldr	r0, .L118
+ 798 00f2 FFF7FEFF 		bl	synopGMACReadReg
+ 799 00f6 3021     		movs	r1, #48
+ 800 00f8 A061     		str	r0, [r4, #24]
+ 801 00fa 8B48     		ldr	r0, .L118
+ 802 00fc FFF7FEFF 		bl	synopGMACReadReg
+ 803 0100 4FF49A71 		mov	r1, #308
+ 804 0104 E061     		str	r0, [r4, #28]
+ 805 0106 8848     		ldr	r0, .L118
+ 806 0108 FFF7FEFF 		bl	synopGMACReadReg
+ 807 010c 4FF49C71 		mov	r1, #312
+ 808 0110 2062     		str	r0, [r4, #32]
+ 809 0112 8548     		ldr	r0, .L118
+ 810 0114 FFF7FEFF 		bl	synopGMACReadReg
+ 811 0118 4FF49E71 		mov	r1, #316
+ 812 011c 6062     		str	r0, [r4, #36]
+ 813 011e 8248     		ldr	r0, .L118
+ 814 0120 FFF7FEFF 		bl	synopGMACReadReg
+ 815 0124 4FF4A071 		mov	r1, #320
+ 816 0128 A062     		str	r0, [r4, #40]
+ 817 012a 7F48     		ldr	r0, .L118
+ 818 012c FFF7FEFF 		bl	synopGMACReadReg
+ 819 0130 4FF4A271 		mov	r1, #324
+ 820 0134 E062     		str	r0, [r4, #44]
+ 821 0136 7C48     		ldr	r0, .L118
+ 822 0138 FFF7FEFF 		bl	synopGMACReadReg
+ 823 013c 4FF4A471 		mov	r1, #328
+ 824 0140 2063     		str	r0, [r4, #48]
+ 825 0142 7948     		ldr	r0, .L118
+ 826 0144 FFF7FEFF 		bl	synopGMACReadReg
+ 827 0148 4FF4A671 		mov	r1, #332
+ 828 014c 6063     		str	r0, [r4, #52]
+ 829 014e 7648     		ldr	r0, .L118
+ 830 0150 FFF7FEFF 		bl	synopGMACReadReg
+ 831 0154 4FF4A871 		mov	r1, #336
+ 832 0158 A063     		str	r0, [r4, #56]
+ 833 015a 7348     		ldr	r0, .L118
+ 834 015c FFF7FEFF 		bl	synopGMACReadReg
+ 835 0160 4FF4AA71 		mov	r1, #340
+ 836 0164 E063     		str	r0, [r4, #60]
+ 837 0166 7048     		ldr	r0, .L118
+ 838 0168 FFF7FEFF 		bl	synopGMACReadReg
+ 839 016c 4FF4AC71 		mov	r1, #344
+ 840 0170 2064     		str	r0, [r4, #64]
+ 841 0172 6D48     		ldr	r0, .L118
+ 842 0174 FFF7FEFF 		bl	synopGMACReadReg
+ 843 0178 4FF4AE71 		mov	r1, #348
+ 844 017c 6064     		str	r0, [r4, #68]
+ 845 017e 6A48     		ldr	r0, .L118
+ 846 0180 FFF7FEFF 		bl	synopGMACReadReg
+ 847 0184 4FF4B071 		mov	r1, #352
+ 848 0188 A064     		str	r0, [r4, #72]
+ 849 018a 6748     		ldr	r0, .L118
+ 850 018c FFF7FEFF 		bl	synopGMACReadReg
+ 851 0190 4FF4B271 		mov	r1, #356
+ 852 0194 E064     		str	r0, [r4, #76]
+ 853 0196 6448     		ldr	r0, .L118
+ 854 0198 FFF7FEFF 		bl	synopGMACReadReg
+ 855 019c 4FF4B471 		mov	r1, #360
+ 856 01a0 2065     		str	r0, [r4, #80]
+ 857 01a2 6148     		ldr	r0, .L118
+ 858 01a4 FFF7FEFF 		bl	synopGMACReadReg
+ 859 01a8 4FF4B671 		mov	r1, #364
+ 860 01ac 6065     		str	r0, [r4, #84]
+ 861 01ae 5E48     		ldr	r0, .L118
+ 862 01b0 FFF7FEFF 		bl	synopGMACReadReg
+ 863 01b4 4FF4B871 		mov	r1, #368
+ 864 01b8 A065     		str	r0, [r4, #88]
+ 865 01ba 5B48     		ldr	r0, .L118
+ 866 01bc FFF7FEFF 		bl	synopGMACReadReg
+ 867 01c0 4FF4BA71 		mov	r1, #372
+ 868 01c4 E065     		str	r0, [r4, #92]
+ 869 01c6 5848     		ldr	r0, .L118
+ 870 01c8 FFF7FEFF 		bl	synopGMACReadReg
+ 871 01cc 4FF4C071 		mov	r1, #384
+ 872 01d0 2066     		str	r0, [r4, #96]
+ 873 01d2 5548     		ldr	r0, .L118
+ 874 01d4 FFF7FEFF 		bl	synopGMACReadReg
+ 875 01d8 4FF4C271 		mov	r1, #388
+ 876 01dc 6066     		str	r0, [r4, #100]
+ 877 01de 5248     		ldr	r0, .L118
+ 878 01e0 FFF7FEFF 		bl	synopGMACReadReg
+ 879 01e4 4FF4C471 		mov	r1, #392
+ 880 01e8 A066     		str	r0, [r4, #104]
+ 881 01ea 4F48     		ldr	r0, .L118
+ 882 01ec FFF7FEFF 		bl	synopGMACReadReg
+ 883 01f0 4FF4C671 		mov	r1, #396
+ 884 01f4 E066     		str	r0, [r4, #108]
+ 885 01f6 4C48     		ldr	r0, .L118
+ 886 01f8 FFF7FEFF 		bl	synopGMACReadReg
+ 887 01fc 4FF4C871 		mov	r1, #400
+ 888 0200 2067     		str	r0, [r4, #112]
+ 889 0202 4948     		ldr	r0, .L118
+ 890 0204 FFF7FEFF 		bl	synopGMACReadReg
+ 891 0208 4FF4CA71 		mov	r1, #404
+ 892 020c 6067     		str	r0, [r4, #116]
+ 893 020e 4648     		ldr	r0, .L118
+ 894 0210 FFF7FEFF 		bl	synopGMACReadReg
+ 895 0214 4FF4CC71 		mov	r1, #408
+ 896 0218 A067     		str	r0, [r4, #120]
+ 897 021a 4348     		ldr	r0, .L118
+ 898 021c FFF7FEFF 		bl	synopGMACReadReg
+ 899 0220 4FF4CE71 		mov	r1, #412
+ 900 0224 E067     		str	r0, [r4, #124]
+ 901 0226 4048     		ldr	r0, .L118
+ 902 0228 FFF7FEFF 		bl	synopGMACReadReg
+ 903 022c 4FF4D071 		mov	r1, #416
+ 904 0230 C4F88000 		str	r0, [r4, #128]
+ 905 0234 3C48     		ldr	r0, .L118
+ 906 0236 FFF7FEFF 		bl	synopGMACReadReg
+ 907 023a 4FF4D271 		mov	r1, #420
+ 908 023e C4F88400 		str	r0, [r4, #132]
+ 909 0242 3948     		ldr	r0, .L118
+ 910 0244 FFF7FEFF 		bl	synopGMACReadReg
+ 911 0248 4FF4D471 		mov	r1, #424
+ 912 024c C4F88800 		str	r0, [r4, #136]
+ 913 0250 3548     		ldr	r0, .L118
+ 914 0252 FFF7FEFF 		bl	synopGMACReadReg
+ 915 0256 4FF4D671 		mov	r1, #428
+ 916 025a C4F88C00 		str	r0, [r4, #140]
+ 917 025e 3248     		ldr	r0, .L118
+ 918 0260 FFF7FEFF 		bl	synopGMACReadReg
+ 919 0264 4FF4D871 		mov	r1, #432
+ 920 0268 C4F89000 		str	r0, [r4, #144]
+ 921 026c 2E48     		ldr	r0, .L118
+ 922 026e FFF7FEFF 		bl	synopGMACReadReg
+ 923 0272 4FF4DA71 		mov	r1, #436
+ 924 0276 C4F89400 		str	r0, [r4, #148]
+ 925 027a 2B48     		ldr	r0, .L118
+ 926 027c FFF7FEFF 		bl	synopGMACReadReg
+ 927 0280 4FF4DC71 		mov	r1, #440
+ 928 0284 C4F89800 		str	r0, [r4, #152]
+ 929 0288 2748     		ldr	r0, .L118
+ 930 028a FFF7FEFF 		bl	synopGMACReadReg
+ 931 028e 4FF4DE71 		mov	r1, #444
+ 932 0292 C4F89C00 		str	r0, [r4, #156]
+ 933 0296 2448     		ldr	r0, .L118
+ 934 0298 FFF7FEFF 		bl	synopGMACReadReg
+ 935 029c 4FF4E071 		mov	r1, #448
+ 936 02a0 C4F8A000 		str	r0, [r4, #160]
+ 937 02a4 2048     		ldr	r0, .L118
+ 938 02a6 FFF7FEFF 		bl	synopGMACReadReg
+ 939 02aa 4FF4E271 		mov	r1, #452
+ 940 02ae C4F8A400 		str	r0, [r4, #164]
+ 941 02b2 1D48     		ldr	r0, .L118
+ 942 02b4 FFF7FEFF 		bl	synopGMACReadReg
+ 943 02b8 4FF4E471 		mov	r1, #456
+ 944 02bc C4F8A800 		str	r0, [r4, #168]
+ 945 02c0 1948     		ldr	r0, .L118
+ 946 02c2 FFF7FEFF 		bl	synopGMACReadReg
+ 947 02c6 4FF4E671 		mov	r1, #460
+ 948 02ca C4F8AC00 		str	r0, [r4, #172]
+ 949 02ce 1648     		ldr	r0, .L118
+ 950 02d0 FFF7FEFF 		bl	synopGMACReadReg
+ 951 02d4 4FF4E871 		mov	r1, #464
+ 952 02d8 C4F8B000 		str	r0, [r4, #176]
+ 953 02dc 1248     		ldr	r0, .L118
+ 954 02de FFF7FEFF 		bl	synopGMACReadReg
+ 955 02e2 4FF4EA71 		mov	r1, #468
+ 956 02e6 C4F8B400 		str	r0, [r4, #180]
+ 957 02ea 0F48     		ldr	r0, .L118
+ 958 02ec FFF7FEFF 		bl	synopGMACReadReg
+ 959 02f0 4FF4EC71 		mov	r1, #472
+ 960 02f4 C4F8B800 		str	r0, [r4, #184]
+ 961 02f8 0B48     		ldr	r0, .L118
+ 962 02fa FFF7FEFF 		bl	synopGMACReadReg
+ 963 02fe 4FF4EE71 		mov	r1, #476
+ 964 0302 C4F8BC00 		str	r0, [r4, #188]
+ 965 0306 0848     		ldr	r0, .L118
+ 966 0308 FFF7FEFF 		bl	synopGMACReadReg
+ 967 030c C4F8C000 		str	r0, [r4, #192]
+ 968 0310 26E0     		b	.L111
+ 969              	.L98:
+ 970 0312 8968     		ldr	r1, [r1, #8]
+ 971 0314 40F2DC53 		movw	r3, #1500
+ 972 0318 9942     		cmp	r1, r3
+ 973 031a 23D8     		bhi	.L112
+ 974 031c 0448     		ldr	r0, .L118+8
+ 975 031e 0068     		ldr	r0, [r0, #0]
+ 976 0320 FFF7FEFF 		bl	synopGMAC_change_mtu
+ 977 0324 1CE0     		b	.L111
+ 978              	.L119:
+ 979 0326 00BF     		.align	2
+ 980              	.L118:
+ 981 0328 00C00050 		.word	1342226432
+ 982 032c 00D00050 		.word	1342230528
+ 983 0330 00000000 		.word	synopGMACdev
+ 984              	.L99:
+ 985 0334 0C4A     		ldr	r2, .L120
+ 986 0336 4968     		ldr	r1, [r1, #4]
+ 987 0338 1068     		ldr	r0, [r2, #0]
+ 988 033a FFF7FEFF 		bl	synopGMAC_set_mac_address
+ 989 033e 0FE0     		b	.L111
+ 990              	.L100:
+ 991 0340 0948     		ldr	r0, .L120
+ 992 0342 4A68     		ldr	r2, [r1, #4]
+ 993 0344 0368     		ldr	r3, [r0, #0]
+ 994 0346 53F8BC1F 		ldr	r1, [r3, #188]!	@ unaligned
+ 995 034a 1160     		str	r1, [r2, #0]	@ unaligned
+ 996 034c 9888     		ldrh	r0, [r3, #4]	@ unaligned
+ 997 034e 9080     		strh	r0, [r2, #4]	@ unaligned
+ 998 0350 06E0     		b	.L111
+ 999              	.L101:
+ 1000 0352 054B     		ldr	r3, .L120
+ 1001 0354 6068     		ldr	r0, [r4, #4]
+ 1002 0356 1968     		ldr	r1, [r3, #0]
+ 1003 0358 5422     		movs	r2, #84
+ 1004 035a 5031     		adds	r1, r1, #80
+ 1005              	.L117:
+ 1006 035c FFF7FEFF 		bl	memcpy
+ 1007              	.L111:
+ 1008 0360 0020     		movs	r0, #0
+ 1009 0362 38BD     		pop	{r3, r4, r5, pc}
+ 1010              	.L112:
+ 1011 0364 0620     		movs	r0, #6
+ 1012 0366 38BD     		pop	{r3, r4, r5, pc}
+ 1013              	.L121:
+ 1014              		.align	2
+ 1015              	.L120:
+ 1016 0368 00000000 		.word	synopGMACdev
+ 1018              		.section	.text.synopGMAC_RegisterPeriodicTimerCallback,"ax",%progbits
+ 1019              		.align	1
+ 1020              		.global	synopGMAC_RegisterPeriodicTimerCallback
+ 1021              		.thumb
+ 1022              		.thumb_func
+ 1024              	synopGMAC_RegisterPeriodicTimerCallback:
+ 1025              		@ args = 0, pretend = 0, frame = 0
+ 1026              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1027              		@ link register save eliminated.
+ 1028 0000 014B     		ldr	r3, .L123
+ 1029 0002 1860     		str	r0, [r3, #0]
+ 1030 0004 7047     		bx	lr
+ 1031              	.L124:
+ 1032 0006 00BF     		.align	2
+ 1033              	.L123:
+ 1034 0008 00000000 		.word	.LANCHOR0
+ 1036              		.section	.text.synopGMAC_RegisterDeleteTimerCallback,"ax",%progbits
+ 1037              		.align	1
+ 1038              		.global	synopGMAC_RegisterDeleteTimerCallback
+ 1039              		.thumb
+ 1040              		.thumb_func
+ 1042              	synopGMAC_RegisterDeleteTimerCallback:
+ 1043              		@ args = 0, pretend = 0, frame = 0
+ 1044              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1045              		@ link register save eliminated.
+ 1046 0000 014B     		ldr	r3, .L126
+ 1047 0002 5860     		str	r0, [r3, #4]
+ 1048 0004 7047     		bx	lr
+ 1049              	.L127:
+ 1050 0006 00BF     		.align	2
+ 1051              	.L126:
+ 1052 0008 00000000 		.word	.LANCHOR0
+ 1054              		.section	.text.synopGMAC_periodic_check,"ax",%progbits
+ 1055              		.align	1
+ 1056              		.global	synopGMAC_periodic_check
+ 1057              		.thumb
+ 1058              		.thumb_func
+ 1060              	synopGMAC_periodic_check:
+ 1061              		@ args = 0, pretend = 0, frame = 0
+ 1062              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1063              		@ link register save eliminated.
+ 1064 0000 014B     		ldr	r3, .L129
+ 1065 0002 1868     		ldr	r0, [r3, #0]
+ 1066 0004 FFF7FEBF 		b	synopGMAC_cable_unplug_function
+ 1067              	.L130:
+ 1068              		.align	2
+ 1069              	.L129:
+ 1070 0008 00000000 		.word	synopGMACdev
+ 1072              		.comm	GMAC_Power_down,4,4
+ 1073              		.comm	synopGMACdev,4,4
+ 1074              		.comm	GMACdevice,196,4
+ 1075              		.section	.rodata
+ 1076              		.set	.LANCHOR1,. + 0
+ 1077              	.LC0:
+ 1078 0000 00       		.byte	0
+ 1079 0001 03       		.byte	3
+ 1080 0002 19       		.byte	25
+ 1081 0003 45       		.byte	69
+ 1082 0004 00       		.byte	0
+ 1083 0005 00       		.byte	0
+ 1084              		.bss
+ 1085              		.align	2
+ 1086              		.set	.LANCHOR0,. + 0
+ 1089              	SynopGMACPeriodicTimerCallback:
+ 1090 0000 00000000 		.space	4
+ 1093              	SynopGMACDeletePeriodicTimer:
+ 1094 0004 00000000 		.space	4
+ 1095              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 synopGMAC_stack_interface.c
+C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:17     .text.Eth_GetTxBuffer:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:22     .text.Eth_GetTxBuffer:00000000 Eth_GetTxBuffer
+C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:36     .text.Eth_GetTxBuffer:00000010 $d
+                            *COM*:00000004 synopGMACdev
+C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:39     .text.Eth_InitNetworkInterface:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:44     .text.Eth_InitNetworkInterface:00000000 Eth_InitNetworkInterface
+C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:83     .text.Eth_InitNetworkInterface:00000054 $d
+                            *COM*:000000c4 GMACdevice
+C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:93     .text.Eth_ExitNetworkInterface:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:98     .text.Eth_ExitNetworkInterface:00000000 Eth_ExitNetworkInterface
+C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:105    .text.Eth_OpenNetworkInterface:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:110    .text.Eth_OpenNetworkInterface:00000000 Eth_OpenNetworkInterface
+C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:256    .text.Eth_OpenNetworkInterface:00000168 $d
+C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:268    .text.Eth_CloseNetworkInterface:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:273    .text.Eth_CloseNetworkInterface:00000000 Eth_CloseNetworkInterface
+C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:304    .text.Eth_CloseNetworkInterface:00000040 $d
+C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:308    .text.Eth_TransmitFrames:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:313    .text.Eth_TransmitFrames:00000000 Eth_TransmitFrames
+C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:346    .text.Eth_TransmitFrames:00000034 $d
+C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:349    .text.Eth_ReceiveData:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:354    .text.Eth_ReceiveData:00000000 Eth_ReceiveData
+C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:512    .text.Eth_ReceiveData:00000164 $d
+C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:516    .text.ETH0_0_IRQHandler:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:521    .text.ETH0_0_IRQHandler:00000000 ETH0_0_IRQHandler
+C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:674    .text.ETH0_0_IRQHandler:00000160 $d
+                            *COM*:00000004 GMAC_Power_down
+C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:683    .text.Eth_PerformIoctl:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:688    .text.Eth_PerformIoctl:00000000 Eth_PerformIoctl
+C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:699    .text.Eth_PerformIoctl:00000014 $d
+C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:710    .text.Eth_PerformIoctl:00000028 $t
+C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:981    .text.Eth_PerformIoctl:00000328 $d
+C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:985    .text.Eth_PerformIoctl:00000334 $t
+C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:1016   .text.Eth_PerformIoctl:00000368 $d
+C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:1019   .text.synopGMAC_RegisterPeriodicTimerCallback:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:1024   .text.synopGMAC_RegisterPeriodicTimerCallback:00000000 synopGMAC_RegisterPeriodicTimerCallback
+C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:1034   .text.synopGMAC_RegisterPeriodicTimerCallback:00000008 $d
+C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:1037   .text.synopGMAC_RegisterDeleteTimerCallback:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:1042   .text.synopGMAC_RegisterDeleteTimerCallback:00000000 synopGMAC_RegisterDeleteTimerCallback
+C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:1052   .text.synopGMAC_RegisterDeleteTimerCallback:00000008 $d
+C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:1055   .text.synopGMAC_periodic_check:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:1060   .text.synopGMAC_periodic_check:00000000 synopGMAC_periodic_check
+C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:1070   .text.synopGMAC_periodic_check:00000008 $d
+C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:1085   .bss:00000000 $d
+C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:1089   .bss:00000000 SynopGMACPeriodicTimerCallback
+C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:1093   .bss:00000004 SynopGMACDeletePeriodicTimer
+
+UNDEFINED SYMBOLS
+RESET001_DeassertReset
+synopGMAC_attach
+synopGMAC_reset
+synopGMAC_read_version
+synopGMAC_get_mac_addr
+synopGMAC_set_mdc_clk_div
+synopGMAC_get_mdc_clk_div
+PHY_InitializeDevice
+synopGMAC_setup_tx_desc_queue
+synopGMAC_init_tx_desc_base
+synopGMAC_setup_rx_desc_queue
+synopGMAC_init_rx_desc_base
+synopGMAC_dma_bus_mode_init
+synopGMAC_dma_control_init
+synopGMAC_rmii_100mbps_enable
+synopGMAC_mac_init
+synopGMAC_multicast_enable
+synopGMAC_multicast_hash_filter_enable
+synopGMAC_broadcast_enable
+synopGMAC_enable_rx_chksum_offload
+synopGMAC_rx_tcpip_chksum_drop_enable
+synopGMAC_set_rx_qptr
+synopGMAC_set_tx_address
+synopGMAC_clear_interrupt
+synopGMAC_disable_mmc_tx_interrupt
+synopGMAC_disable_mmc_rx_interrupt
+synopGMAC_disable_mmc_ipc_rx_interrupt
+synopGMAC_enable_interrupt
+synopGMAC_enable_dma_rx
+synopGMAC_enable_dma_tx
+Eth_RxBuffer
+Eth_TxBuffer
+synopGMAC_disable_interrupt_all
+synopGMAC_disable_dma_rx
+synopGMAC_take_desc_ownership_rx
+synopGMAC_disable_dma_tx
+synopGMAC_take_desc_ownership_tx
+synopGMAC_giveup_rx_desc_queue
+synopGMAC_giveup_tx_desc_queue
+synopGMAC_set_tx_qptr
+synopGMAC_resume_dma_tx
+synopGMAC_get_rx_qptr
+synopGMAC_is_rx_desc_valid
+synopGMAC_get_rx_desc_frame_length
+synopGMAC_is_rx_checksum_error
+Eth_Received_Data_Handler
+synopGMAC_is_rx_desc_chained
+synopGMAC_rx_desc_init_chain
+synopGMAC_is_last_rx_desc
+synopGMAC_rx_desc_init_ring
+synopGMAC_is_rx_frame_collision
+synopGMAC_is_rx_crc
+synopGMAC_is_frame_dribbling_errors
+synopGMAC_is_rx_frame_length_errors
+synopGMACReadReg
+synopGMAC_powerup_mac
+synopGMAC_get_interrupt_type
+synopGMAC_init_tx_rx_desc_queue
+synopGMAC_set_mac_addr
+synopGMAC_resume_dma_rx
+synop_handle_transmit_over
+synopGMACWriteReg
+synopGMAC_change_mtu
+synopGMAC_set_mac_address
+memcpy
+synopGMAC_cable_unplug_function

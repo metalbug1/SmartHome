@@ -1,0 +1,710 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"dns.c"
+  16              		.section	.text.unlikely.dns_parse_name,"ax",%progbits
+  17              		.align	1
+  18              		.thumb
+  19              		.thumb_func
+  21              	dns_parse_name:
+  22              		@ args = 0, pretend = 0, frame = 0
+  23              		@ frame_needed = 0, uses_anonymous_args = 0
+  24              		@ link register save eliminated.
+  25              	.L3:
+  26 0000 10F8013B 		ldrb	r3, [r0], #1	@ zero_extendqisi2
+  27 0004 03F0C002 		and	r2, r3, #192
+  28 0008 C02A     		cmp	r2, #192
+  29 000a 03D0     		beq	.L2
+  30 000c C018     		adds	r0, r0, r3
+  31 000e 0178     		ldrb	r1, [r0, #0]	@ zero_extendqisi2
+  32 0010 0029     		cmp	r1, #0
+  33 0012 F5D1     		bne	.L3
+  34              	.L2:
+  35 0014 0130     		adds	r0, r0, #1
+  36 0016 7047     		bx	lr
+  38              		.section	.text.dns_send,"ax",%progbits
+  39              		.align	1
+  40              		.thumb
+  41              		.thumb_func
+  43              	dns_send:
+  44              		@ args = 0, pretend = 0, frame = 0
+  45              		@ frame_needed = 0, uses_anonymous_args = 0
+  46 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+  47 0004 0746     		mov	r7, r0
+  48 0006 0020     		movs	r0, #0
+  49 0008 0E46     		mov	r6, r1
+  50 000a 9046     		mov	r8, r2
+  51 000c 4FF48871 		mov	r1, #272
+  52 0010 0246     		mov	r2, r0
+  53 0012 FFF7FEFF 		bl	pbuf_alloc
+  54 0016 0546     		mov	r5, r0
+  55 0018 0028     		cmp	r0, #0
+  56 001a 4AD0     		beq	.L17
+  57 001c 4468     		ldr	r4, [r0, #4]
+  58 001e 0021     		movs	r1, #0
+  59 0020 0C22     		movs	r2, #12
+  60 0022 2046     		mov	r0, r4
+  61 0024 FFF7FEFF 		bl	memset
+  62 0028 4046     		mov	r0, r8
+  63 002a FFF7FEFF 		bl	htons
+  64 002e 2080     		strh	r0, [r4, #0]	@ unaligned
+  65 0030 0120     		movs	r0, #1
+  66 0032 A070     		strb	r0, [r4, #2]
+  67 0034 FFF7FEFF 		bl	htons
+  68 0038 04F10C03 		add	r3, r4, #12
+  69 003c A080     		strh	r0, [r4, #4]	@ unaligned
+  70 003e 711E     		subs	r1, r6, #1
+  71              	.L13:
+  72 0040 5A1C     		adds	r2, r3, #1
+  73 0042 0131     		adds	r1, r1, #1
+  74 0044 1446     		mov	r4, r2
+  75              	.L11:
+  76 0046 0E78     		ldrb	r6, [r1, #0]	@ zero_extendqisi2
+  77 0048 A01A     		subs	r0, r4, r2
+  78 004a 2E2E     		cmp	r6, #46
+  79 004c C0B2     		uxtb	r0, r0
+  80 004e 04D1     		bne	.L12
+  81              	.L16:
+  82 0050 1870     		strb	r0, [r3, #0]
+  83 0052 0B78     		ldrb	r3, [r1, #0]	@ zero_extendqisi2
+  84 0054 3BB1     		cbz	r3, .L20
+  85              	.L18:
+  86 0056 2346     		mov	r3, r4
+  87 0058 F2E7     		b	.L13
+  88              	.L12:
+  89 005a 002E     		cmp	r6, #0
+  90 005c F8D0     		beq	.L16
+  91              	.L15:
+  92 005e 04F8016B 		strb	r6, [r4], #1
+  93 0062 0131     		adds	r1, r1, #1
+  94 0064 EFE7     		b	.L11
+  95              	.L20:
+  96 0066 2370     		strb	r3, [r4, #0]
+  97 0068 0120     		movs	r0, #1
+  98 006a FFF7FEFF 		bl	htons
+  99 006e 0646     		mov	r6, r0
+ 100 0070 0120     		movs	r0, #1
+ 101 0072 FFF7FEFF 		bl	htons
+ 102 0076 A4F80160 		strh	r6, [r4, #1]	@ unaligned
+ 103 007a A4F80300 		strh	r0, [r4, #3]	@ unaligned
+ 104 007e 6A68     		ldr	r2, [r5, #4]
+ 105 0080 611D     		adds	r1, r4, #5
+ 106 0082 8C1A     		subs	r4, r1, r2
+ 107 0084 A1B2     		uxth	r1, r4
+ 108 0086 0D4C     		ldr	r4, .L21
+ 109 0088 2846     		mov	r0, r5
+ 110 008a 04EB8706 		add	r6, r4, r7, lsl #2
+ 111 008e FFF7FEFF 		bl	pbuf_realloc
+ 112 0092 3146     		mov	r1, r6
+ 113 0094 3522     		movs	r2, #53
+ 114 0096 A068     		ldr	r0, [r4, #8]
+ 115 0098 FFF7FEFF 		bl	udp_connect
+ 116 009c A068     		ldr	r0, [r4, #8]
+ 117 009e 2946     		mov	r1, r5
+ 118 00a0 3246     		mov	r2, r6
+ 119 00a2 3523     		movs	r3, #53
+ 120 00a4 FFF7FEFF 		bl	udp_sendto
+ 121 00a8 0446     		mov	r4, r0
+ 122 00aa 2846     		mov	r0, r5
+ 123 00ac FFF7FEFF 		bl	pbuf_free
+ 124 00b0 00E0     		b	.L10
+ 125              	.L17:
+ 126 00b2 FF24     		movs	r4, #255
+ 127              	.L10:
+ 128 00b4 60B2     		sxtb	r0, r4
+ 129 00b6 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 130              	.L22:
+ 131 00ba 00BF     		.align	2
+ 132              	.L21:
+ 133 00bc 00000000 		.word	.LANCHOR0
+ 135              		.section	.text.dns_check_entry,"ax",%progbits
+ 136              		.align	1
+ 137              		.thumb
+ 138              		.thumb_func
+ 140              	dns_check_entry:
+ 141              		@ args = 0, pretend = 0, frame = 0
+ 142              		@ frame_needed = 0, uses_anonymous_args = 0
+ 143 0000 70B5     		push	{r4, r5, r6, lr}
+ 144 0002 2349     		ldr	r1, .L41
+ 145 0004 4FF48C75 		mov	r5, #280
+ 146 0008 4543     		muls	r5, r0, r5
+ 147 000a 01F10C06 		add	r6, r1, #12
+ 148 000e 0246     		mov	r2, r0
+ 149 0010 735D     		ldrb	r3, [r6, r5]	@ zero_extendqisi2
+ 150 0012 022B     		cmp	r3, #2
+ 151 0014 06EB0504 		add	r4, r6, r5
+ 152 0018 0AD0     		beq	.L26
+ 153 001a 032B     		cmp	r3, #3
+ 154 001c 2FD0     		beq	.L27
+ 155 001e 012B     		cmp	r3, #1
+ 156 0020 34D1     		bne	.L23
+ 157 0022 0220     		movs	r0, #2
+ 158 0024 7055     		strb	r0, [r6, r5]
+ 159 0026 0020     		movs	r0, #0
+ 160 0028 6070     		strb	r0, [r4, #1]
+ 161 002a A370     		strb	r3, [r4, #2]
+ 162 002c E070     		strb	r0, [r4, #3]
+ 163 002e 20E0     		b	.L39
+ 164              	.L26:
+ 165 0030 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 166 0032 581E     		subs	r0, r3, #1
+ 167 0034 C3B2     		uxtb	r3, r0
+ 168 0036 A370     		strb	r3, [r4, #2]
+ 169 0038 002B     		cmp	r3, #0
+ 170 003a 27D1     		bne	.L23
+ 171 003c E078     		ldrb	r0, [r4, #3]	@ zero_extendqisi2
+ 172 003e 431C     		adds	r3, r0, #1
+ 173 0040 DBB2     		uxtb	r3, r3
+ 174 0042 042B     		cmp	r3, #4
+ 175 0044 E370     		strb	r3, [r4, #3]
+ 176 0046 6078     		ldrb	r0, [r4, #1]	@ zero_extendqisi2
+ 177 0048 12D1     		bne	.L29
+ 178 004a 30B9     		cbnz	r0, .L30
+ 179 004c 4A68     		ldr	r2, [r1, #4]	@ unaligned
+ 180 004e 22B1     		cbz	r2, .L30
+ 181 0050 0121     		movs	r1, #1
+ 182 0052 6170     		strb	r1, [r4, #1]
+ 183 0054 A170     		strb	r1, [r4, #2]
+ 184 0056 E070     		strb	r0, [r4, #3]
+ 185 0058 70BD     		pop	{r4, r5, r6, pc}
+ 186              	.L30:
+ 187 005a D4F81031 		ldr	r3, [r4, #272]
+ 188 005e 2BB1     		cbz	r3, .L31
+ 189 0060 04F10C00 		add	r0, r4, #12
+ 190 0064 0021     		movs	r1, #0
+ 191 0066 D4F81421 		ldr	r2, [r4, #276]
+ 192 006a 9847     		blx	r3
+ 193              	.L31:
+ 194 006c 0021     		movs	r1, #0
+ 195 006e 0AE0     		b	.L40
+ 196              	.L29:
+ 197 0070 A370     		strb	r3, [r4, #2]
+ 198              	.L39:
+ 199 0072 04F10C01 		add	r1, r4, #12
+ 200 0076 BDE87040 		pop	{r4, r5, r6, lr}
+ 201 007a FFF7FEBF 		b	dns_send
+ 202              	.L27:
+ 203 007e A268     		ldr	r2, [r4, #8]
+ 204 0080 511E     		subs	r1, r2, #1
+ 205 0082 A160     		str	r1, [r4, #8]
+ 206 0084 11B9     		cbnz	r1, .L23
+ 207              	.L40:
+ 208 0086 7155     		strb	r1, [r6, r5]
+ 209 0088 C4F81011 		str	r1, [r4, #272]
+ 210              	.L23:
+ 211 008c 70BD     		pop	{r4, r5, r6, pc}
+ 212              	.L42:
+ 213 008e 00BF     		.align	2
+ 214              	.L41:
+ 215 0090 00000000 		.word	.LANCHOR0
+ 217              		.section	.text.dns_recv,"ax",%progbits
+ 218              		.align	1
+ 219              		.thumb
+ 220              		.thumb_func
+ 222              	dns_recv:
+ 223              		@ args = 4, pretend = 0, frame = 16
+ 224              		@ frame_needed = 0, uses_anonymous_args = 0
+ 225 0000 2DE9F04F 		push	{r4, r5, r6, r7, r8, r9, sl, fp, lr}
+ 226 0004 1646     		mov	r6, r2
+ 227 0006 1289     		ldrh	r2, [r2, #8]
+ 228 0008 B2F5007F 		cmp	r2, #512
+ 229 000c 85B0     		sub	sp, sp, #20
+ 230 000e 6BD8     		bhi	.L58
+ 231 0010 192A     		cmp	r2, #25
+ 232 0012 69D9     		bls	.L58
+ 233 0014 0023     		movs	r3, #0
+ 234 0016 3046     		mov	r0, r6
+ 235 0018 5949     		ldr	r1, .L68
+ 236 001a 5A4D     		ldr	r5, .L68+4
+ 237 001c FFF7FEFF 		bl	pbuf_copy_partial
+ 238 0020 3389     		ldrh	r3, [r6, #8]
+ 239 0022 8342     		cmp	r3, r0
+ 240 0024 60D1     		bne	.L58
+ 241 0026 B5F86C04 		ldrh	r0, [r5, #1132]	@ unaligned
+ 242 002a FFF7FEFF 		bl	htons
+ 243 002e C0B2     		uxtb	r0, r0
+ 244 0030 0328     		cmp	r0, #3
+ 245 0032 59D8     		bhi	.L58
+ 246 0034 4FF48C78 		mov	r8, #280
+ 247 0038 05F10C07 		add	r7, r5, #12
+ 248 003c 08FB00F8 		mul	r8, r8, r0
+ 249 0040 07EB0804 		add	r4, r7, r8
+ 250 0044 17F80810 		ldrb	r1, [r7, r8]	@ zero_extendqisi2
+ 251 0048 0229     		cmp	r1, #2
+ 252 004a 4DD1     		bne	.L58
+ 253 004c 95F86F34 		ldrb	r3, [r5, #1135]	@ zero_extendqisi2
+ 254 0050 0322     		movs	r2, #3
+ 255 0052 03F00F00 		and	r0, r3, #15
+ 256 0056 07F80820 		strb	r2, [r7, r8]
+ 257 005a 6071     		strb	r0, [r4, #5]
+ 258 005c B5F87004 		ldrh	r0, [r5, #1136]	@ unaligned
+ 259 0060 FFF7FEFF 		bl	htons
+ 260 0064 8146     		mov	r9, r0
+ 261 0066 B5F87204 		ldrh	r0, [r5, #1138]	@ unaligned
+ 262 006a FFF7FEFF 		bl	htons
+ 263 006e 95F96E14 		ldrsb	r1, [r5, #1134]
+ 264 0072 0029     		cmp	r1, #0
+ 265 0074 09DB     		blt	.L47
+ 266              	.L50:
+ 267 0076 D4F81031 		ldr	r3, [r4, #272]
+ 268 007a 83B3     		cbz	r3, .L49
+ 269              	.L48:
+ 270 007c 04F10C00 		add	r0, r4, #12
+ 271 0080 0021     		movs	r1, #0
+ 272 0082 D4F81421 		ldr	r2, [r4, #276]
+ 273 0086 9847     		blx	r3
+ 274 0088 29E0     		b	.L49
+ 275              	.L47:
+ 276 008a 6279     		ldrb	r2, [r4, #5]	@ zero_extendqisi2
+ 277 008c 002A     		cmp	r2, #0
+ 278 008e F2D1     		bne	.L50
+ 279 0090 5FFA89F9 		uxtb	r9, r9
+ 280 0094 B9F1010F 		cmp	r9, #1
+ 281 0098 EDD1     		bne	.L50
+ 282 009a 04F10C0B 		add	fp, r4, #12
+ 283 009e 5A46     		mov	r2, fp
+ 284 00a0 05F58F65 		add	r5, r5, #1144
+ 285              	.L54:
+ 286 00a4 15F8011B 		ldrb	r1, [r5], #1	@ zero_extendqisi2
+ 287 00a8 01F0C003 		and	r3, r1, #192
+ 288 00ac C02B     		cmp	r3, #192
+ 289 00ae 21D0     		beq	.L51
+ 290 00b0 1346     		mov	r3, r2
+ 291              	.L52:
+ 292 00b2 01EB0209 		add	r9, r1, r2
+ 293 00b6 5FFA89FE 		uxtb	lr, r9
+ 294 00ba 5FFA83FC 		uxtb	ip, r3
+ 295 00be E645     		cmp	lr, ip
+ 296 00c0 08D0     		beq	.L67
+ 297              	.L53:
+ 298 00c2 93F80090 		ldrb	r9, [r3, #0]	@ zero_extendqisi2
+ 299 00c6 95F800E0 		ldrb	lr, [r5, #0]	@ zero_extendqisi2
+ 300 00ca F145     		cmp	r9, lr
+ 301 00cc D3D1     		bne	.L50
+ 302 00ce 0135     		adds	r5, r5, #1
+ 303 00d0 0133     		adds	r3, r3, #1
+ 304 00d2 EEE7     		b	.L52
+ 305              	.L67:
+ 306 00d4 2978     		ldrb	r1, [r5, #0]	@ zero_extendqisi2
+ 307 00d6 5A1C     		adds	r2, r3, #1
+ 308 00d8 0029     		cmp	r1, #0
+ 309 00da E3D1     		bne	.L54
+ 310 00dc 0AE0     		b	.L51
+ 311              	.L49:
+ 312 00de 0020     		movs	r0, #0
+ 313 00e0 07F80800 		strb	r0, [r7, r8]
+ 314 00e4 C4F81001 		str	r0, [r4, #272]
+ 315              	.L45:
+ 316              	.L58:
+ 317 00e8 3046     		mov	r0, r6
+ 318 00ea 05B0     		add	sp, sp, #20
+ 319 00ec BDE8F04F 		pop	{r4, r5, r6, r7, r8, r9, sl, fp, lr}
+ 320 00f0 FFF7FEBF 		b	pbuf_free
+ 321              	.L51:
+ 322 00f4 C0B2     		uxtb	r0, r0
+ 323 00f6 0290     		str	r0, [sp, #8]
+ 324 00f8 2348     		ldr	r0, .L68+8
+ 325 00fa FFF7FEFF 		bl	dns_parse_name
+ 326 00fe 4FF00009 		mov	r9, #0
+ 327 0102 0430     		adds	r0, r0, #4
+ 328              	.L59:
+ 329 0104 029A     		ldr	r2, [sp, #8]
+ 330 0106 5FFA89F1 		uxtb	r1, r9
+ 331 010a 8A42     		cmp	r2, r1
+ 332 010c B3D0     		beq	.L50
+ 333              	.L57:
+ 334 010e FFF7FEFF 		bl	dns_parse_name
+ 335 0112 4388     		ldrh	r3, [r0, #2]	@ unaligned
+ 336 0114 0546     		mov	r5, r0
+ 337 0116 4068     		ldr	r0, [r0, #4]	@ unaligned
+ 338 0118 0390     		str	r0, [sp, #12]
+ 339 011a 2888     		ldrh	r0, [r5, #0]	@ unaligned
+ 340 011c B5F808A0 		ldrh	sl, [r5, #8]	@ unaligned
+ 341 0120 0193     		str	r3, [sp, #4]
+ 342 0122 FFF7FEFF 		bl	ntohs
+ 343 0126 0128     		cmp	r0, #1
+ 344 0128 0199     		ldr	r1, [sp, #4]
+ 345 012a 20D1     		bne	.L55
+ 346 012c 0846     		mov	r0, r1
+ 347 012e FFF7FEFF 		bl	ntohs
+ 348 0132 0128     		cmp	r0, #1
+ 349 0134 1BD1     		bne	.L55
+ 350 0136 5046     		mov	r0, sl
+ 351 0138 FFF7FEFF 		bl	ntohs
+ 352 013c 0428     		cmp	r0, #4
+ 353 013e 16D1     		bne	.L55
+ 354 0140 0398     		ldr	r0, [sp, #12]
+ 355 0142 FFF7FEFF 		bl	ntohl
+ 356 0146 114A     		ldr	r2, .L68+12
+ 357 0148 A060     		str	r0, [r4, #8]
+ 358 014a 9042     		cmp	r0, r2
+ 359 014c 88BF     		it	hi
+ 360 014e A260     		strhi	r2, [r4, #8]
+ 361 0150 D5F80A30 		ldr	r3, [r5, #10]	@ unaligned
+ 362 0154 C4F80C31 		str	r3, [r4, #268]	@ unaligned
+ 363 0158 D4F81031 		ldr	r3, [r4, #272]
+ 364 015c 04F58671 		add	r1, r4, #268
+ 365 0160 002B     		cmp	r3, #0
+ 366 0162 C1D0     		beq	.L58
+ 367 0164 5846     		mov	r0, fp
+ 368 0166 D4F81421 		ldr	r2, [r4, #276]
+ 369 016a 9847     		blx	r3
+ 370 016c BCE7     		b	.L58
+ 371              	.L55:
+ 372 016e 5046     		mov	r0, sl
+ 373 0170 FFF7FEFF 		bl	htons
+ 374 0174 0A30     		adds	r0, r0, #10
+ 375 0176 2818     		adds	r0, r5, r0
+ 376 0178 09F10109 		add	r9, r9, #1
+ 377 017c C2E7     		b	.L59
+ 378              	.L69:
+ 379 017e 00BF     		.align	2
+ 380              	.L68:
+ 381 0180 6C040000 		.word	.LANCHOR0+1132
+ 382 0184 00000000 		.word	.LANCHOR0
+ 383 0188 78040000 		.word	.LANCHOR0+1144
+ 384 018c 803A0900 		.word	604800
+ 386              		.section	.text.dns_setserver,"ax",%progbits
+ 387              		.align	1
+ 388              		.global	dns_setserver
+ 389              		.thumb
+ 390              		.thumb_func
+ 392              	dns_setserver:
+ 393              		@ args = 0, pretend = 0, frame = 0
+ 394              		@ frame_needed = 0, uses_anonymous_args = 0
+ 395              		@ link register save eliminated.
+ 396 0000 0128     		cmp	r0, #1
+ 397 0002 07D8     		bhi	.L70
+ 398 0004 044B     		ldr	r3, .L81
+ 399 0006 9A68     		ldr	r2, [r3, #8]
+ 400 0008 22B1     		cbz	r2, .L70
+ 401 000a 19B1     		cbz	r1, .L70
+ 402 000c 0968     		ldr	r1, [r1, #0]	@ unaligned
+ 403 000e 09B1     		cbz	r1, .L70
+ 404 0010 43F82010 		str	r1, [r3, r0, lsl #2]	@ unaligned
+ 405              	.L70:
+ 406 0014 7047     		bx	lr
+ 407              	.L82:
+ 408 0016 00BF     		.align	2
+ 409              	.L81:
+ 410 0018 00000000 		.word	.LANCHOR0
+ 412              		.section	.text.dns_init,"ax",%progbits
+ 413              		.align	1
+ 414              		.global	dns_init
+ 415              		.thumb
+ 416              		.thumb_func
+ 418              	dns_init:
+ 419              		@ args = 0, pretend = 0, frame = 8
+ 420              		@ frame_needed = 0, uses_anonymous_args = 0
+ 421 0000 37B5     		push	{r0, r1, r2, r4, r5, lr}
+ 422 0002 0C48     		ldr	r0, .L90
+ 423 0004 0C4D     		ldr	r5, .L90+4
+ 424 0006 FFF7FEFF 		bl	inet_addr
+ 425 000a AC68     		ldr	r4, [r5, #8]
+ 426 000c 0190     		str	r0, [sp, #4]
+ 427 000e 84B9     		cbnz	r4, .L83
+ 428 0010 FFF7FEFF 		bl	udp_new
+ 429 0014 A860     		str	r0, [r5, #8]
+ 430 0016 60B1     		cbz	r0, .L83
+ 431 0018 0849     		ldr	r1, .L90+8
+ 432 001a 2246     		mov	r2, r4
+ 433 001c FFF7FEFF 		bl	udp_bind
+ 434 0020 A868     		ldr	r0, [r5, #8]
+ 435 0022 0749     		ldr	r1, .L90+12
+ 436 0024 2246     		mov	r2, r4
+ 437 0026 FFF7FEFF 		bl	udp_recv
+ 438 002a 2046     		mov	r0, r4
+ 439 002c 01A9     		add	r1, sp, #4
+ 440 002e FFF7FEFF 		bl	dns_setserver
+ 441              	.L83:
+ 442 0032 3EBD     		pop	{r1, r2, r3, r4, r5, pc}
+ 443              	.L91:
+ 444              		.align	2
+ 445              	.L90:
+ 446 0034 00000000 		.word	.LC0
+ 447 0038 00000000 		.word	.LANCHOR0
+ 448 003c 00000000 		.word	ip_addr_any
+ 449 0040 00000000 		.word	dns_recv
+ 451              		.section	.text.dns_getserver,"ax",%progbits
+ 452              		.align	1
+ 453              		.global	dns_getserver
+ 454              		.thumb
+ 455              		.thumb_func
+ 457              	dns_getserver:
+ 458              		@ args = 0, pretend = 0, frame = 8
+ 459              		@ frame_needed = 0, uses_anonymous_args = 0
+ 460              		@ link register save eliminated.
+ 461 0000 0128     		cmp	r0, #1
+ 462 0002 95BF     		itete	ls
+ 463 0004 0C4B     		ldrls	r3, .L96
+ 464 0006 0D4B     		ldrhi	r3, .L96+4
+ 465 0008 53F82000 		ldrls	r0, [r3, r0, lsl #2]	@ unaligned
+ 466 000c 1868     		ldrhi	r0, [r3, #0]	@ unaligned
+ 467 000e 82B0     		sub	sp, sp, #8
+ 468 0010 0190     		str	r0, [sp, #4]	@ unaligned
+ 469 0012 9DF80430 		ldrb	r3, [sp, #4]	@ zero_extendqisi2
+ 470 0016 9DF80510 		ldrb	r1, [sp, #5]	@ zero_extendqisi2
+ 471 001a 9DF80620 		ldrb	r2, [sp, #6]	@ zero_extendqisi2
+ 472 001e 0020     		movs	r0, #0
+ 473 0020 63F30700 		bfi	r0, r3, #0, #8
+ 474 0024 61F30F20 		bfi	r0, r1, #8, #8
+ 475 0028 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
+ 476 002c 62F31740 		bfi	r0, r2, #16, #8
+ 477 0030 63F31F60 		bfi	r0, r3, #24, #8
+ 478 0034 02B0     		add	sp, sp, #8
+ 479 0036 7047     		bx	lr
+ 480              	.L97:
+ 481              		.align	2
+ 482              	.L96:
+ 483 0038 00000000 		.word	.LANCHOR0
+ 484 003c 00000000 		.word	ip_addr_any
+ 486              		.section	.text.dns_tmr,"ax",%progbits
+ 487              		.align	1
+ 488              		.global	dns_tmr
+ 489              		.thumb
+ 490              		.thumb_func
+ 492              	dns_tmr:
+ 493              		@ args = 0, pretend = 0, frame = 0
+ 494              		@ frame_needed = 0, uses_anonymous_args = 0
+ 495 0000 08B5     		push	{r3, lr}
+ 496 0002 094B     		ldr	r3, .L100
+ 497 0004 9868     		ldr	r0, [r3, #8]
+ 498 0006 68B1     		cbz	r0, .L98
+ 499 0008 0020     		movs	r0, #0
+ 500 000a FFF7FEFF 		bl	dns_check_entry
+ 501 000e 0120     		movs	r0, #1
+ 502 0010 FFF7FEFF 		bl	dns_check_entry
+ 503 0014 0220     		movs	r0, #2
+ 504 0016 FFF7FEFF 		bl	dns_check_entry
+ 505 001a 0320     		movs	r0, #3
+ 506 001c BDE80840 		pop	{r3, lr}
+ 507 0020 FFF7FEBF 		b	dns_check_entry
+ 508              	.L98:
+ 509 0024 08BD     		pop	{r3, pc}
+ 510              	.L101:
+ 511 0026 00BF     		.align	2
+ 512              	.L100:
+ 513 0028 00000000 		.word	.LANCHOR0
+ 515              		.section	.text.dns_gethostbyname,"ax",%progbits
+ 516              		.align	1
+ 517              		.global	dns_gethostbyname
+ 518              		.thumb
+ 519              		.thumb_func
+ 521              	dns_gethostbyname:
+ 522              		@ args = 0, pretend = 0, frame = 0
+ 523              		@ frame_needed = 0, uses_anonymous_args = 0
+ 524 0000 2DE9F047 		push	{r4, r5, r6, r7, r8, r9, sl, lr}
+ 525 0004 1F46     		mov	r7, r3
+ 526 0006 404B     		ldr	r3, .L127
+ 527 0008 0D46     		mov	r5, r1
+ 528 000a 9968     		ldr	r1, [r3, #8]
+ 529 000c 0646     		mov	r6, r0
+ 530 000e 9046     		mov	r8, r2
+ 531 0010 0029     		cmp	r1, #0
+ 532 0012 74D0     		beq	.L118
+ 533 0014 002D     		cmp	r5, #0
+ 534 0016 72D0     		beq	.L118
+ 535 0018 0028     		cmp	r0, #0
+ 536 001a 70D0     		beq	.L118
+ 537 001c 0278     		ldrb	r2, [r0, #0]	@ zero_extendqisi2
+ 538 001e 002A     		cmp	r2, #0
+ 539 0020 6DD0     		beq	.L118
+ 540 0022 FFF7FEFF 		bl	strlen
+ 541 0026 FF28     		cmp	r0, #255
+ 542 0028 69D8     		bhi	.L118
+ 543 002a 3046     		mov	r0, r6
+ 544 002c FFF7FEFF 		bl	inet_addr
+ 545 0030 2860     		str	r0, [r5, #0]	@ unaligned
+ 546 0032 0130     		adds	r0, r0, #1
+ 547 0034 01D0     		beq	.L119
+ 548              	.L107:
+ 549 0036 0021     		movs	r1, #0
+ 550 0038 62E0     		b	.L103
+ 551              	.L119:
+ 552 003a 0024     		movs	r4, #0
+ 553              	.L104:
+ 554 003c DFF8C8A0 		ldr	sl, .L127
+ 555 0040 4FF48C79 		mov	r9, #280
+ 556 0044 0AF10C00 		add	r0, sl, #12
+ 557 0048 09FB04F9 		mul	r9, r9, r4
+ 558 004c 19F80030 		ldrb	r3, [r9, r0]	@ zero_extendqisi2
+ 559 0050 032B     		cmp	r3, #3
+ 560 0052 0BD1     		bne	.L105
+ 561 0054 00EB0901 		add	r1, r0, r9
+ 562 0058 0C31     		adds	r1, r1, #12
+ 563 005a 3046     		mov	r0, r6
+ 564 005c FFF7FEFF 		bl	strcmp
+ 565 0060 20B9     		cbnz	r0, .L105
+ 566 0062 0AEB0902 		add	r2, sl, r9
+ 567 0066 D2F81811 		ldr	r1, [r2, #280]
+ 568 006a 04E0     		b	.L106
+ 569              	.L105:
+ 570 006c 0134     		adds	r4, r4, #1
+ 571 006e 042C     		cmp	r4, #4
+ 572 0070 E4D1     		bne	.L104
+ 573 0072 4FF0FF31 		mov	r1, #-1
+ 574              	.L106:
+ 575 0076 4B1C     		adds	r3, r1, #1
+ 576 0078 2960     		str	r1, [r5, #0]	@ unaligned
+ 577 007a DCD1     		bne	.L107
+ 578 007c 224C     		ldr	r4, .L127
+ 579 007e 0025     		movs	r5, #0
+ 580 0080 94F86CC6 		ldrb	ip, [r4, #1644]	@ zero_extendqisi2
+ 581 0084 2946     		mov	r1, r5
+ 582 0086 2B46     		mov	r3, r5
+ 583              	.L110:
+ 584 0088 4FF48C72 		mov	r2, #280
+ 585 008c 1F48     		ldr	r0, .L127+4
+ 586 008e 6A43     		muls	r2, r5, r2
+ 587 0090 8418     		adds	r4, r0, r2
+ 588 0092 805C     		ldrb	r0, [r0, r2]	@ zero_extendqisi2
+ 589 0094 5FFA85F9 		uxtb	r9, r5
+ 590 0098 C0B1     		cbz	r0, .L108
+ 591 009a 0328     		cmp	r0, #3
+ 592 009c 06D1     		bne	.L109
+ 593 009e 2279     		ldrb	r2, [r4, #4]	@ zero_extendqisi2
+ 594 00a0 C2EB0C00 		rsb	r0, r2, ip
+ 595 00a4 9842     		cmp	r0, r3
+ 596 00a6 C4BF     		itt	gt
+ 597 00a8 C3B2     		uxtbgt	r3, r0
+ 598 00aa 4946     		movgt	r1, r9
+ 599              	.L109:
+ 600 00ac 0135     		adds	r5, r5, #1
+ 601 00ae 042D     		cmp	r5, #4
+ 602 00b0 EAD1     		bne	.L110
+ 603 00b2 0329     		cmp	r1, #3
+ 604 00b4 21D8     		bhi	.L121
+ 605 00b6 144C     		ldr	r4, .L127
+ 606 00b8 4FF48C73 		mov	r3, #280
+ 607 00bc 4B43     		muls	r3, r1, r3
+ 608 00be E218     		adds	r2, r4, r3
+ 609 00c0 107B     		ldrb	r0, [r2, #12]	@ zero_extendqisi2
+ 610 00c2 0328     		cmp	r0, #3
+ 611 00c4 19D1     		bne	.L121
+ 612 00c6 0C34     		adds	r4, r4, #12
+ 613 00c8 E418     		adds	r4, r4, r3
+ 614 00ca 8946     		mov	r9, r1
+ 615              	.L108:
+ 616 00cc 0E4B     		ldr	r3, .L127
+ 617 00ce C4F81081 		str	r8, [r4, #272]
+ 618 00d2 93F86C26 		ldrb	r2, [r3, #1644]	@ zero_extendqisi2
+ 619 00d6 C4F81471 		str	r7, [r4, #276]
+ 620 00da 501C     		adds	r0, r2, #1
+ 621 00dc 0121     		movs	r1, #1
+ 622 00de 83F86C06 		strb	r0, [r3, #1644]
+ 623 00e2 2170     		strb	r1, [r4, #0]
+ 624 00e4 2271     		strb	r2, [r4, #4]
+ 625 00e6 3146     		mov	r1, r6
+ 626 00e8 04F10C00 		add	r0, r4, #12
+ 627 00ec FFF7FEFF 		bl	strcpy
+ 628 00f0 4846     		mov	r0, r9
+ 629 00f2 FFF7FEFF 		bl	dns_check_entry
+ 630 00f6 F221     		movs	r1, #242
+ 631 00f8 02E0     		b	.L103
+ 632              	.L121:
+ 633 00fa FF21     		movs	r1, #255
+ 634 00fc 00E0     		b	.L103
+ 635              	.L118:
+ 636 00fe F721     		movs	r1, #247
+ 637              	.L103:
+ 638 0100 48B2     		sxtb	r0, r1
+ 639 0102 BDE8F087 		pop	{r4, r5, r6, r7, r8, r9, sl, pc}
+ 640              	.L128:
+ 641 0106 00BF     		.align	2
+ 642              	.L127:
+ 643 0108 00000000 		.word	.LANCHOR0
+ 644 010c 0C000000 		.word	.LANCHOR0+12
+ 646              		.section	.rodata.str1.1,"aMS",%progbits,1
+ 647              	.LC0:
+ 648 0000 3230382E 		.ascii	"208.67.222.222\000"
+ 648      36372E32 
+ 648      32322E32 
+ 648      323200
+ 649              		.bss
+ 650              		.align	2
+ 651              		.set	.LANCHOR0,. + 0
+ 654              	dns_servers:
+ 655 0000 00000000 		.space	8
+ 655      00000000 
+ 658              	dns_pcb:
+ 659 0008 00000000 		.space	4
+ 662              	dns_table:
+ 663 000c 00000000 		.space	1120
+ 663      00000000 
+ 663      00000000 
+ 663      00000000 
+ 663      00000000 
+ 666              	dns_payload:
+ 667 046c 00000000 		.space	512
+ 667      00000000 
+ 667      00000000 
+ 667      00000000 
+ 667      00000000 
+ 670              	dns_seqno:
+ 671 066c 00       		.space	1
+ 672 066d 000000   		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 dns.c
+C:\Users\Mihai\AppData\Local\Temp\ccTQUmqg.s:17     .text.unlikely.dns_parse_name:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccTQUmqg.s:21     .text.unlikely.dns_parse_name:00000000 dns_parse_name
+C:\Users\Mihai\AppData\Local\Temp\ccTQUmqg.s:39     .text.dns_send:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccTQUmqg.s:43     .text.dns_send:00000000 dns_send
+C:\Users\Mihai\AppData\Local\Temp\ccTQUmqg.s:133    .text.dns_send:000000bc $d
+C:\Users\Mihai\AppData\Local\Temp\ccTQUmqg.s:136    .text.dns_check_entry:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccTQUmqg.s:140    .text.dns_check_entry:00000000 dns_check_entry
+C:\Users\Mihai\AppData\Local\Temp\ccTQUmqg.s:215    .text.dns_check_entry:00000090 $d
+C:\Users\Mihai\AppData\Local\Temp\ccTQUmqg.s:218    .text.dns_recv:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccTQUmqg.s:222    .text.dns_recv:00000000 dns_recv
+C:\Users\Mihai\AppData\Local\Temp\ccTQUmqg.s:381    .text.dns_recv:00000180 $d
+C:\Users\Mihai\AppData\Local\Temp\ccTQUmqg.s:387    .text.dns_setserver:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccTQUmqg.s:392    .text.dns_setserver:00000000 dns_setserver
+C:\Users\Mihai\AppData\Local\Temp\ccTQUmqg.s:410    .text.dns_setserver:00000018 $d
+C:\Users\Mihai\AppData\Local\Temp\ccTQUmqg.s:413    .text.dns_init:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccTQUmqg.s:418    .text.dns_init:00000000 dns_init
+C:\Users\Mihai\AppData\Local\Temp\ccTQUmqg.s:446    .text.dns_init:00000034 $d
+C:\Users\Mihai\AppData\Local\Temp\ccTQUmqg.s:452    .text.dns_getserver:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccTQUmqg.s:457    .text.dns_getserver:00000000 dns_getserver
+C:\Users\Mihai\AppData\Local\Temp\ccTQUmqg.s:483    .text.dns_getserver:00000038 $d
+C:\Users\Mihai\AppData\Local\Temp\ccTQUmqg.s:487    .text.dns_tmr:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccTQUmqg.s:492    .text.dns_tmr:00000000 dns_tmr
+C:\Users\Mihai\AppData\Local\Temp\ccTQUmqg.s:513    .text.dns_tmr:00000028 $d
+C:\Users\Mihai\AppData\Local\Temp\ccTQUmqg.s:516    .text.dns_gethostbyname:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccTQUmqg.s:521    .text.dns_gethostbyname:00000000 dns_gethostbyname
+C:\Users\Mihai\AppData\Local\Temp\ccTQUmqg.s:643    .text.dns_gethostbyname:00000108 $d
+C:\Users\Mihai\AppData\Local\Temp\ccTQUmqg.s:650    .bss:00000000 $d
+C:\Users\Mihai\AppData\Local\Temp\ccTQUmqg.s:654    .bss:00000000 dns_servers
+C:\Users\Mihai\AppData\Local\Temp\ccTQUmqg.s:658    .bss:00000008 dns_pcb
+C:\Users\Mihai\AppData\Local\Temp\ccTQUmqg.s:662    .bss:0000000c dns_table
+C:\Users\Mihai\AppData\Local\Temp\ccTQUmqg.s:666    .bss:0000046c dns_payload
+C:\Users\Mihai\AppData\Local\Temp\ccTQUmqg.s:670    .bss:0000066c dns_seqno
+
+UNDEFINED SYMBOLS
+pbuf_alloc
+memset
+htons
+pbuf_realloc
+udp_connect
+udp_sendto
+pbuf_free
+pbuf_copy_partial
+ntohs
+ntohl
+inet_addr
+udp_new
+udp_bind
+udp_recv
+ip_addr_any
+strlen
+strcmp
+strcpy

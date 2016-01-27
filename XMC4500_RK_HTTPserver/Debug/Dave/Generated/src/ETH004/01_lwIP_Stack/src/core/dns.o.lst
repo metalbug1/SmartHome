@@ -1,0 +1,2653 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"dns.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.bss
+  20              		.align	2
+  21              	dns_pcb:
+  22 0000 00000000 		.space	4
+  23              	dns_seqno:
+  24 0004 00       		.space	1
+  25 0005 000000   		.align	2
+  26              	dns_table:
+  27 0008 00000000 		.space	1120
+  27      00000000 
+  27      00000000 
+  27      00000000 
+  27      00000000 
+  28              		.align	2
+  29              	dns_servers:
+  30 0468 00000000 		.space	8
+  30      00000000 
+  31              		.align	2
+  32              	dns_payload:
+  33 0470 00000000 		.space	512
+  33      00000000 
+  33      00000000 
+  33      00000000 
+  33      00000000 
+  34              		.section	.rodata
+  35              		.align	2
+  36              	.LC0:
+  37 0000 3139322E 		.ascii	"192.168.1.1\000"
+  37      3136382E 
+  37      312E3100 
+  38              		.section	.text.dns_init,"ax",%progbits
+  39              		.align	2
+  40              		.global	dns_init
+  41              		.thumb
+  42              		.thumb_func
+  44              	dns_init:
+  45              	.LFB0:
+  46              		.file 1 "../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c"
+   1:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** /**
+   2:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * @file
+   3:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * DNS - host name to IP address resolver.
+   4:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  *
+   5:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  */
+   6:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+   7:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** /**
+   8:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+   9:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * This file implements a DNS host name to IP address resolver.
+  10:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+  11:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * Port to lwIP from uIP
+  12:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * by Jim Pettinato April 2007
+  13:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+  14:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * uIP version Copyright (c) 2002-2003, Adam Dunkels.
+  15:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * All rights reserved.
+  16:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  *
+  17:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * Redistribution and use in source and binary forms, with or without
+  18:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * modification, are permitted provided that the following conditions
+  19:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * are met:
+  20:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * 1. Redistributions of source code must retain the above copyright
+  21:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  *    notice, this list of conditions and the following disclaimer.
+  22:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * 2. Redistributions in binary form must reproduce the above copyright
+  23:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  *    notice, this list of conditions and the following disclaimer in the
+  24:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  *    documentation and/or other materials provided with the distribution.
+  25:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * 3. The name of the author may not be used to endorse or promote
+  26:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  *    products derived from this software without specific prior
+  27:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  *    written permission.
+  28:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  *
+  29:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS
+  30:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+  31:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+  32:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY
+  33:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+  34:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE
+  35:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+  36:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+  37:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+  38:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+  39:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  40:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  *
+  41:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  *
+  42:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * DNS.C
+  43:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  *
+  44:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * The lwIP DNS resolver functions are used to lookup a host name and
+  45:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * map it to a numerical IP address. It maintains a list of resolved
+  46:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * hostnames that can be queried with the dns_lookup() function.
+  47:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * New hostnames can be resolved using the dns_query() function.
+  48:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  *
+  49:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * The lwIP version of the resolver also adds a non-blocking version of
+  50:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * gethostbyname() that will work with a raw API application. This function
+  51:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * checks for an IP address string first and converts it if it is valid.
+  52:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * gethostbyname() then does a dns_lookup() to see if the name is 
+  53:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * already in the table. If so, the IP is returned. If not, a query is 
+  54:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * issued and the function returns with a ERR_INPROGRESS status. The app
+  55:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * using the dns client must then go into a waiting state.
+  56:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  *
+  57:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * Once a hostname has been resolved (or found to be non-existent),
+  58:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * the resolver code calls a specified callback function (which 
+  59:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * must be implemented by the module that uses the resolver).
+  60:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  */
+  61:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+  62:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** /*-----------------------------------------------------------------------------
+  63:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * RFC 1035 - Domain names - implementation and specification
+  64:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * RFC 2181 - Clarifications to the DNS Specification
+  65:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  *----------------------------------------------------------------------------*/
+  66:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+  67:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** /** @todo: define good default values (rfc compliance) */
+  68:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** /** @todo: improve answer parsing, more checkings... */
+  69:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** /** @todo: check RFC1035 - 7.3. Processing responses */
+  70:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+  71:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** /*-----------------------------------------------------------------------------
+  72:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * Includes
+  73:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  *----------------------------------------------------------------------------*/
+  74:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+  75:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #include "lwip/opt.h"
+  76:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #include "lwip/err.h"
+  77:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #if LWIP_DNS /* don't build if not configured for use in lwipopts.h */
+  78:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+  79:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #include "lwip/udp.h"
+  80:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #include "lwip/mem.h"
+  81:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #include "lwip/dns.h"
+  82:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+  83:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #include <string.h>
+  84:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+  85:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** /** DNS server IP address */
+  86:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** //#ifndef DNS_SERVER_ADDRESS
+  87:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** //#define DNS_SERVER_ADDRESS        inet_addr("208.67.222.222") /* resolver1.opendns.com */
+  88:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** //#endif
+  89:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+  90:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** /** DNS server port address */
+  91:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #ifndef DNS_SERVER_PORT
+  92:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #define DNS_SERVER_PORT           53
+  93:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #endif
+  94:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+  95:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** /** DNS maximum number of retries when asking for a name, before "timeout". */
+  96:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #ifndef DNS_MAX_RETRIES
+  97:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #define DNS_MAX_RETRIES           4
+  98:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #endif
+  99:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 100:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** /** DNS resource record max. TTL (one week as default) */
+ 101:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #ifndef DNS_MAX_TTL
+ 102:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #define DNS_MAX_TTL               604800
+ 103:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #endif
+ 104:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 105:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** /* DNS protocol flags */
+ 106:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #define DNS_FLAG1_RESPONSE        0x80
+ 107:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #define DNS_FLAG1_OPCODE_STATUS   0x10
+ 108:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #define DNS_FLAG1_OPCODE_INVERSE  0x08
+ 109:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #define DNS_FLAG1_OPCODE_STANDARD 0x00
+ 110:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #define DNS_FLAG1_AUTHORATIVE     0x04
+ 111:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #define DNS_FLAG1_TRUNC           0x02
+ 112:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #define DNS_FLAG1_RD              0x01
+ 113:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #define DNS_FLAG2_RA              0x80
+ 114:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #define DNS_FLAG2_ERR_MASK        0x0f
+ 115:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #define DNS_FLAG2_ERR_NONE        0x00
+ 116:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #define DNS_FLAG2_ERR_NAME        0x03
+ 117:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 118:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** /* DNS protocol states */
+ 119:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #define DNS_STATE_UNUSED          0
+ 120:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #define DNS_STATE_NEW             1
+ 121:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #define DNS_STATE_ASKING          2
+ 122:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #define DNS_STATE_DONE            3
+ 123:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 124:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #ifdef PACK_STRUCT_USE_INCLUDES
+ 125:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #  include "arch/bpstruct.h"
+ 126:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #endif
+ 127:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** PACK_STRUCT_BEGIN
+ 128:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** /** DNS message header */
+ 129:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** struct dns_hdr {
+ 130:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   PACK_STRUCT_FIELD(u16_t id);
+ 131:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   PACK_STRUCT_FIELD(u8_t flags1);
+ 132:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   PACK_STRUCT_FIELD(u8_t flags2);
+ 133:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   PACK_STRUCT_FIELD(u16_t numquestions);
+ 134:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   PACK_STRUCT_FIELD(u16_t numanswers);
+ 135:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   PACK_STRUCT_FIELD(u16_t numauthrr);
+ 136:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   PACK_STRUCT_FIELD(u16_t numextrarr);
+ 137:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** } PACK_STRUCT_STRUCT;
+ 138:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** PACK_STRUCT_END
+ 139:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #ifdef PACK_STRUCT_USE_INCLUDES
+ 140:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #  include "arch/epstruct.h"
+ 141:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #endif
+ 142:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #define SIZEOF_DNS_HDR 12
+ 143:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 144:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #ifdef PACK_STRUCT_USE_INCLUDES
+ 145:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #  include "arch/bpstruct.h"
+ 146:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #endif
+ 147:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** PACK_STRUCT_BEGIN
+ 148:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** /** DNS query message structure */
+ 149:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** struct dns_query {
+ 150:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   /* DNS query record starts with either a domain name or a pointer
+ 151:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****      to a name already present somewhere in the packet. */
+ 152:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   PACK_STRUCT_FIELD(u16_t type);
+ 153:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   PACK_STRUCT_FIELD(u16_t class);
+ 154:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** } PACK_STRUCT_STRUCT;
+ 155:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** PACK_STRUCT_END
+ 156:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #ifdef PACK_STRUCT_USE_INCLUDES
+ 157:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #  include "arch/epstruct.h"
+ 158:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #endif
+ 159:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #define SIZEOF_DNS_QUERY 4
+ 160:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 161:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #ifdef PACK_STRUCT_USE_INCLUDES
+ 162:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #  include "arch/bpstruct.h"
+ 163:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #endif
+ 164:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** PACK_STRUCT_BEGIN
+ 165:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** /** DNS answer message structure */
+ 166:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** struct dns_answer {
+ 167:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   /* DNS answer record starts with either a domain name or a pointer
+ 168:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****      to a name already present somewhere in the packet. */
+ 169:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   PACK_STRUCT_FIELD(u16_t type);
+ 170:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   PACK_STRUCT_FIELD(u16_t class);
+ 171:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   PACK_STRUCT_FIELD(u32_t ttl);
+ 172:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   PACK_STRUCT_FIELD(u16_t len);
+ 173:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** } PACK_STRUCT_STRUCT;
+ 174:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** PACK_STRUCT_END
+ 175:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #ifdef PACK_STRUCT_USE_INCLUDES
+ 176:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #  include "arch/epstruct.h"
+ 177:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #endif
+ 178:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #define SIZEOF_DNS_ANSWER 10
+ 179:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 180:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** /** DNS table entry */
+ 181:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** struct dns_table_entry {
+ 182:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   u8_t  state;
+ 183:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   u8_t  numdns;
+ 184:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   u8_t  tmr;
+ 185:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   u8_t  retries;
+ 186:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   u8_t  seqno;
+ 187:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   u8_t  err;
+ 188:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   u32_t ttl;
+ 189:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   char name[DNS_MAX_NAME_LENGTH];
+ 190:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   struct ip_addr ipaddr;
+ 191:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   /* pointer to callback on DNS query done */
+ 192:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   dns_found_callback found;
+ 193:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   void *arg;
+ 194:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** };
+ 195:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 196:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #if DNS_LOCAL_HOSTLIST
+ 197:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** /** struct used for local host-list */
+ 198:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** struct local_hostlist_entry {
+ 199:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   /** static hostname */
+ 200:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   const char *name;
+ 201:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   /** static host address in network byteorder */
+ 202:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   u32_t addr;
+ 203:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   struct local_hostlist_entry *next;
+ 204:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** };
+ 205:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 206:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #if DNS_LOCAL_HOSTLIST_IS_DYNAMIC
+ 207:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** /** Local host-list. For hostnames in this list, no
+ 208:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  *  external name resolution is performed */
+ 209:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** static struct local_hostlist_entry *local_hostlist_dynamic;
+ 210:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #else /* DNS_LOCAL_HOSTLIST_IS_DYNAMIC */
+ 211:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 212:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** /** Defining this allows the local_hostlist_static to be placed in a different
+ 213:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * linker section (e.g. FLASH) */
+ 214:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #ifndef DNS_LOCAL_HOSTLIST_STORAGE_PRE
+ 215:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #define DNS_LOCAL_HOSTLIST_STORAGE_PRE static
+ 216:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #endif /* DNS_LOCAL_HOSTLIST_STORAGE_PRE */
+ 217:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** /** Defining this allows the local_hostlist_static to be placed in a different
+ 218:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * linker section (e.g. FLASH) */
+ 219:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #ifndef DNS_LOCAL_HOSTLIST_STORAGE_POST
+ 220:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #define DNS_LOCAL_HOSTLIST_STORAGE_POST
+ 221:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #endif /* DNS_LOCAL_HOSTLIST_STORAGE_POST */
+ 222:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** DNS_LOCAL_HOSTLIST_STORAGE_PRE struct local_hostlist_entry local_hostlist_static[]
+ 223:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   DNS_LOCAL_HOSTLIST_STORAGE_POST = DNS_LOCAL_HOSTLIST_INIT;
+ 224:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 225:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #endif /* DNS_LOCAL_HOSTLIST_IS_DYNAMIC */
+ 226:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 227:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** static void dns_init_local();
+ 228:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #endif /* DNS_LOCAL_HOSTLIST */
+ 229:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 230:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 231:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** /* forward declarations */
+ 232:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** static void dns_recv(void *s, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, u16_t port
+ 233:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** static void dns_check_entries(void);
+ 234:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 235:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** /*-----------------------------------------------------------------------------
+ 236:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * Globales
+ 237:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  *----------------------------------------------------------------------------*/
+ 238:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 239:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** /* DNS variables */
+ 240:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** static struct udp_pcb        *dns_pcb;
+ 241:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** static u8_t                   dns_seqno;
+ 242:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** static struct dns_table_entry dns_table[DNS_TABLE_SIZE];
+ 243:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** static struct ip_addr         dns_servers[DNS_MAX_SERVERS];
+ 244:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 245:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #if (DNS_USES_STATIC_BUF == 1)
+ 246:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** static u8_t                   dns_payload[DNS_MSG_SIZE];
+ 247:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #endif /* (DNS_USES_STATIC_BUF == 1) */
+ 248:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 249:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** /**
+ 250:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * Initialize the resolver: set up the UDP pcb and configure the default server
+ 251:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * (DNS_SERVER_ADDRESS).
+ 252:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  */
+ 253:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** void
+ 254:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** dns_init()
+ 255:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** {
+  47              		.loc 1 255 0
+  48              		.cfi_startproc
+  49              		@ args = 0, pretend = 0, frame = 8
+  50              		@ frame_needed = 1, uses_anonymous_args = 0
+  51 0000 80B5     		push	{r7, lr}
+  52              	.LCFI0:
+  53              		.cfi_def_cfa_offset 8
+  54              		.cfi_offset 7, -8
+  55              		.cfi_offset 14, -4
+  56 0002 82B0     		sub	sp, sp, #8
+  57              	.LCFI1:
+  58              		.cfi_def_cfa_offset 16
+  59 0004 00AF     		add	r7, sp, #0
+  60              	.LCFI2:
+  61              		.cfi_def_cfa_register 7
+ 256:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   struct ip_addr dnsserver;
+ 257:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   
+ 258:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   /* initialize default DNS server address */
+ 259:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   dnsserver.addr = DNS_SERVER_ADDRESS;
+  62              		.loc 1 259 0
+  63 0006 40F20000 		movw	r0, #:lower16:.LC0
+  64 000a C0F20000 		movt	r0, #:upper16:.LC0
+  65 000e FFF7FEFF 		bl	inet_addr
+  66 0012 0346     		mov	r3, r0
+  67 0014 7B60     		str	r3, [r7, #4]
+ 260:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 261:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   LWIP_DEBUGF(DNS_DEBUG, ("dns_init: initializing\n"));
+ 262:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 263:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   /* if dns client not yet initialized... */
+ 264:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   if (dns_pcb == NULL) {
+  68              		.loc 1 264 0
+  69 0016 40F20003 		movw	r3, #:lower16:dns_pcb
+  70 001a C0F20003 		movt	r3, #:upper16:dns_pcb
+  71 001e 1B68     		ldr	r3, [r3, #0]
+  72 0020 002B     		cmp	r3, #0
+  73 0022 31D1     		bne	.L1
+ 265:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     dns_pcb = udp_new();
+  74              		.loc 1 265 0
+  75 0024 FFF7FEFF 		bl	udp_new
+  76 0028 0246     		mov	r2, r0
+  77 002a 40F20003 		movw	r3, #:lower16:dns_pcb
+  78 002e C0F20003 		movt	r3, #:upper16:dns_pcb
+  79 0032 1A60     		str	r2, [r3, #0]
+ 266:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 267:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     if (dns_pcb != NULL) {
+  80              		.loc 1 267 0
+  81 0034 40F20003 		movw	r3, #:lower16:dns_pcb
+  82 0038 C0F20003 		movt	r3, #:upper16:dns_pcb
+  83 003c 1B68     		ldr	r3, [r3, #0]
+  84 003e 002B     		cmp	r3, #0
+  85 0040 22D0     		beq	.L1
+ 268:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       /* initialize DNS table not needed (initialized to zero since it is a
+ 269:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****        * global variable) */
+ 270:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       LWIP_ASSERT("For implicit initialization to work, DNS_STATE_UNUSED needs to be 0",
+ 271:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****         DNS_STATE_UNUSED == 0);
+ 272:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 273:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       /* initialize DNS client */
+ 274:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       udp_bind(dns_pcb, IP_ADDR_ANY, 0);
+  86              		.loc 1 274 0
+  87 0042 40F20003 		movw	r3, #:lower16:dns_pcb
+  88 0046 C0F20003 		movt	r3, #:upper16:dns_pcb
+  89 004a 1B68     		ldr	r3, [r3, #0]
+  90 004c 1846     		mov	r0, r3
+  91 004e 40F20001 		movw	r1, #:lower16:ip_addr_any
+  92 0052 C0F20001 		movt	r1, #:upper16:ip_addr_any
+  93 0056 4FF00002 		mov	r2, #0
+  94 005a FFF7FEFF 		bl	udp_bind
+ 275:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       udp_recv(dns_pcb, dns_recv, NULL);
+  95              		.loc 1 275 0
+  96 005e 40F20003 		movw	r3, #:lower16:dns_pcb
+  97 0062 C0F20003 		movt	r3, #:upper16:dns_pcb
+  98 0066 1B68     		ldr	r3, [r3, #0]
+  99 0068 1846     		mov	r0, r3
+ 100 006a 40F20001 		movw	r1, #:lower16:dns_recv
+ 101 006e C0F20001 		movt	r1, #:upper16:dns_recv
+ 102 0072 4FF00002 		mov	r2, #0
+ 103 0076 FFF7FEFF 		bl	udp_recv
+ 276:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 277:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       /* initialize default DNS primary server */
+ 278:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       dns_setserver(0, &dnsserver);
+ 104              		.loc 1 278 0
+ 105 007a 07F10403 		add	r3, r7, #4
+ 106 007e 4FF00000 		mov	r0, #0
+ 107 0082 1946     		mov	r1, r3
+ 108 0084 FFF7FEFF 		bl	dns_setserver
+ 109              	.L1:
+ 279:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     }
+ 280:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   }
+ 281:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #if DNS_LOCAL_HOSTLIST
+ 282:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   dns_init_local();
+ 283:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #endif
+ 284:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** }
+ 110              		.loc 1 284 0
+ 111 0088 07F10807 		add	r7, r7, #8
+ 112 008c BD46     		mov	sp, r7
+ 113 008e 80BD     		pop	{r7, pc}
+ 114              		.cfi_endproc
+ 115              	.LFE0:
+ 117              		.section	.text.dns_setserver,"ax",%progbits
+ 118              		.align	2
+ 119              		.global	dns_setserver
+ 120              		.thumb
+ 121              		.thumb_func
+ 123              	dns_setserver:
+ 124              	.LFB1:
+ 285:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 286:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** /**
+ 287:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * Initialize one of the DNS servers.
+ 288:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  *
+ 289:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * @param numdns the index of the DNS server to set must be < DNS_MAX_SERVERS
+ 290:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * @param dnsserver IP address of the DNS server to set
+ 291:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  */
+ 292:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** void
+ 293:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** dns_setserver(u8_t numdns, struct ip_addr *dnsserver)
+ 294:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** {
+ 125              		.loc 1 294 0
+ 126              		.cfi_startproc
+ 127              		@ args = 0, pretend = 0, frame = 8
+ 128              		@ frame_needed = 1, uses_anonymous_args = 0
+ 129              		@ link register save eliminated.
+ 130 0000 80B4     		push	{r7}
+ 131              	.LCFI3:
+ 132              		.cfi_def_cfa_offset 4
+ 133              		.cfi_offset 7, -4
+ 134 0002 83B0     		sub	sp, sp, #12
+ 135              	.LCFI4:
+ 136              		.cfi_def_cfa_offset 16
+ 137 0004 00AF     		add	r7, sp, #0
+ 138              	.LCFI5:
+ 139              		.cfi_def_cfa_register 7
+ 140 0006 0346     		mov	r3, r0
+ 141 0008 3960     		str	r1, [r7, #0]
+ 142 000a FB71     		strb	r3, [r7, #7]
+ 295:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   if ((numdns < DNS_MAX_SERVERS) && (dns_pcb != NULL) &&
+ 143              		.loc 1 295 0
+ 144 000c FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 145 000e 012B     		cmp	r3, #1
+ 146 0010 19D8     		bhi	.L3
+ 147              		.loc 1 295 0 is_stmt 0 discriminator 1
+ 148 0012 40F20003 		movw	r3, #:lower16:dns_pcb
+ 149 0016 C0F20003 		movt	r3, #:upper16:dns_pcb
+ 150 001a 1B68     		ldr	r3, [r3, #0]
+ 151 001c 002B     		cmp	r3, #0
+ 152 001e 12D0     		beq	.L3
+ 153 0020 3B68     		ldr	r3, [r7, #0]
+ 154 0022 002B     		cmp	r3, #0
+ 155 0024 0FD0     		beq	.L3
+ 296:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       (dnsserver != NULL) && (dnsserver->addr !=0 )) {
+ 156              		.loc 1 296 0 is_stmt 1
+ 157 0026 3B68     		ldr	r3, [r7, #0]
+ 158 0028 1B68     		ldr	r3, [r3, #0]	@ unaligned
+ 159 002a 002B     		cmp	r3, #0
+ 160 002c 0BD0     		beq	.L3
+ 297:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     dns_servers[numdns] = (*dnsserver);
+ 161              		.loc 1 297 0
+ 162 002e FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 163 0030 40F20002 		movw	r2, #:lower16:dns_servers
+ 164 0034 C0F20002 		movt	r2, #:upper16:dns_servers
+ 165 0038 3968     		ldr	r1, [r7, #0]
+ 166 003a 4FEA8303 		lsl	r3, r3, #2
+ 167 003e D318     		adds	r3, r2, r3
+ 168 0040 0A46     		mov	r2, r1
+ 169 0042 1068     		ldr	r0, [r2, #0]	@ unaligned
+ 170 0044 1860     		str	r0, [r3, #0]	@ unaligned
+ 171              	.L3:
+ 298:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   }
+ 299:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** }
+ 172              		.loc 1 299 0
+ 173 0046 07F10C07 		add	r7, r7, #12
+ 174 004a BD46     		mov	sp, r7
+ 175 004c 80BC     		pop	{r7}
+ 176 004e 7047     		bx	lr
+ 177              		.cfi_endproc
+ 178              	.LFE1:
+ 180              		.section	.text.dns_getserver,"ax",%progbits
+ 181              		.align	2
+ 182              		.global	dns_getserver
+ 183              		.thumb
+ 184              		.thumb_func
+ 186              	dns_getserver:
+ 187              	.LFB2:
+ 300:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 301:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** /**
+ 302:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * Obtain one of the currently configured DNS server.
+ 303:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  *
+ 304:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * @param numdns the index of the DNS server
+ 305:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * @return IP address of the indexed DNS server or "ip_addr_any" if the DNS
+ 306:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  *         server has not been configured.
+ 307:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  */
+ 308:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** struct ip_addr
+ 309:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** dns_getserver(u8_t numdns)
+ 310:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** {
+ 188              		.loc 1 310 0
+ 189              		.cfi_startproc
+ 190              		@ args = 0, pretend = 0, frame = 16
+ 191              		@ frame_needed = 1, uses_anonymous_args = 0
+ 192              		@ link register save eliminated.
+ 193 0000 80B4     		push	{r7}
+ 194              	.LCFI6:
+ 195              		.cfi_def_cfa_offset 4
+ 196              		.cfi_offset 7, -4
+ 197 0002 85B0     		sub	sp, sp, #20
+ 198              	.LCFI7:
+ 199              		.cfi_def_cfa_offset 24
+ 200 0004 00AF     		add	r7, sp, #0
+ 201              	.LCFI8:
+ 202              		.cfi_def_cfa_register 7
+ 203 0006 0346     		mov	r3, r0
+ 204 0008 FB71     		strb	r3, [r7, #7]
+ 311:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   if (numdns < DNS_MAX_SERVERS) {
+ 205              		.loc 1 311 0
+ 206 000a FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 207 000c 012B     		cmp	r3, #1
+ 208 000e 08D8     		bhi	.L6
+ 312:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     return dns_servers[numdns];
+ 209              		.loc 1 312 0
+ 210 0010 FA79     		ldrb	r2, [r7, #7]	@ zero_extendqisi2
+ 211 0012 40F20003 		movw	r3, #:lower16:dns_servers
+ 212 0016 C0F20003 		movt	r3, #:upper16:dns_servers
+ 213 001a 53F82230 		ldr	r3, [r3, r2, lsl #2]
+ 214 001e FB60     		str	r3, [r7, #12]
+ 215 0020 07E0     		b	.L7
+ 216              	.L6:
+ 313:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   } else {
+ 314:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     return *IP_ADDR_ANY;
+ 217              		.loc 1 314 0
+ 218 0022 40F20003 		movw	r3, #:lower16:ip_addr_any
+ 219 0026 C0F20003 		movt	r3, #:upper16:ip_addr_any
+ 220 002a 07F10C02 		add	r2, r7, #12
+ 221 002e 1868     		ldr	r0, [r3, #0]	@ unaligned
+ 222 0030 1060     		str	r0, [r2, #0]	@ unaligned
+ 223              	.L7:
+ 224 0032 4FF00003 		mov	r3, #0
+ 225 0036 3A7B     		ldrb	r2, [r7, #12]	@ zero_extendqisi2
+ 226 0038 62F30703 		bfi	r3, r2, #0, #8
+ 227 003c 7A7B     		ldrb	r2, [r7, #13]	@ zero_extendqisi2
+ 228 003e 62F30F23 		bfi	r3, r2, #8, #8
+ 229 0042 BA7B     		ldrb	r2, [r7, #14]	@ zero_extendqisi2
+ 230 0044 62F31743 		bfi	r3, r2, #16, #8
+ 231 0048 FA7B     		ldrb	r2, [r7, #15]	@ zero_extendqisi2
+ 232 004a 62F31F63 		bfi	r3, r2, #24, #8
+ 315:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   }
+ 316:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** }
+ 233              		.loc 1 316 0
+ 234 004e 1846     		mov	r0, r3
+ 235 0050 07F11407 		add	r7, r7, #20
+ 236 0054 BD46     		mov	sp, r7
+ 237 0056 80BC     		pop	{r7}
+ 238 0058 7047     		bx	lr
+ 239              		.cfi_endproc
+ 240              	.LFE2:
+ 242 005a 00BF     		.section	.text.dns_tmr,"ax",%progbits
+ 243              		.align	2
+ 244              		.global	dns_tmr
+ 245              		.thumb
+ 246              		.thumb_func
+ 248              	dns_tmr:
+ 249              	.LFB3:
+ 317:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 318:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** /**
+ 319:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * The DNS resolver client timer - handle retries and timeouts and should
+ 320:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * be called every DNS_TMR_INTERVAL milliseconds (every second by default).
+ 321:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  */
+ 322:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** void
+ 323:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** dns_tmr(void)
+ 324:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** {
+ 250              		.loc 1 324 0
+ 251              		.cfi_startproc
+ 252              		@ args = 0, pretend = 0, frame = 0
+ 253              		@ frame_needed = 1, uses_anonymous_args = 0
+ 254 0000 80B5     		push	{r7, lr}
+ 255              	.LCFI9:
+ 256              		.cfi_def_cfa_offset 8
+ 257              		.cfi_offset 7, -8
+ 258              		.cfi_offset 14, -4
+ 259 0002 00AF     		add	r7, sp, #0
+ 260              	.LCFI10:
+ 261              		.cfi_def_cfa_register 7
+ 325:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   if (dns_pcb != NULL) {
+ 262              		.loc 1 325 0
+ 263 0004 40F20003 		movw	r3, #:lower16:dns_pcb
+ 264 0008 C0F20003 		movt	r3, #:upper16:dns_pcb
+ 265 000c 1B68     		ldr	r3, [r3, #0]
+ 266 000e 002B     		cmp	r3, #0
+ 267 0010 01D0     		beq	.L8
+ 326:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     LWIP_DEBUGF(DNS_DEBUG, ("dns_tmr: dns_check_entries\n"));
+ 327:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     dns_check_entries();
+ 268              		.loc 1 327 0
+ 269 0012 FFF7FEFF 		bl	dns_check_entries
+ 270              	.L8:
+ 328:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   }
+ 329:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** }
+ 271              		.loc 1 329 0
+ 272 0016 80BD     		pop	{r7, pc}
+ 273              		.cfi_endproc
+ 274              	.LFE3:
+ 276              		.section	.text.dns_lookup,"ax",%progbits
+ 277              		.align	2
+ 278              		.thumb
+ 279              		.thumb_func
+ 281              	dns_lookup:
+ 282              	.LFB4:
+ 330:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 331:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #if DNS_LOCAL_HOSTLIST
+ 332:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** static void
+ 333:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** dns_init_local()
+ 334:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** {
+ 335:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #if DNS_LOCAL_HOSTLIST_IS_DYNAMIC && defined(DNS_LOCAL_HOSTLIST_INIT)
+ 336:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   int i;
+ 337:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   struct local_hostlist_entry *entry;
+ 338:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   /* Dynamic: copy entries from DNS_LOCAL_HOSTLIST_INIT to list */
+ 339:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   struct local_hostlist_entry local_hostlist_init[] = DNS_LOCAL_HOSTLIST_INIT;
+ 340:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   for (i = 0; i < sizeof(local_hostlist_init) / sizeof(struct local_hostlist_entry); i++) {
+ 341:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     entry = mem_malloc(sizeof(struct local_hostlist_entry));
+ 342:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     LWIP_ASSERT("mem-error in dns_init_local", entry != NULL);
+ 343:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     if (entry != NULL) {
+ 344:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       struct local_hostlist_entry *init_entry = &local_hostlist_init[i];
+ 345:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       entry->name = init_entry->name;
+ 346:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       entry->addr = init_entry->addr;
+ 347:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       entry->next = local_hostlist_dynamic;
+ 348:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       local_hostlist_dynamic = entry;
+ 349:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     }
+ 350:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   }
+ 351:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #endif /* DNS_LOCAL_HOSTLIST_IS_DYNAMIC && defined(DNS_LOCAL_HOSTLIST_INIT) */
+ 352:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** }
+ 353:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 354:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** /**
+ 355:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * Scans the local host-list for a hostname.
+ 356:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  *
+ 357:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * @param hostname Hostname to look for in the local host-list
+ 358:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * @return The first IP address for the hostname in the local host-list or
+ 359:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  *         INADDR_NONE if not found.
+ 360:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  */
+ 361:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** static u32_t
+ 362:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** dns_lookup_local(const char *hostname)
+ 363:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** {
+ 364:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #if DNS_LOCAL_HOSTLIST_IS_DYNAMIC
+ 365:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   struct local_hostlist_entry *entry = local_hostlist_dynamic;
+ 366:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   while(entry != NULL) {
+ 367:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     if(strcmp(entry->name, hostname) == 0) {
+ 368:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       return entry->addr;
+ 369:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     }
+ 370:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     entry = entry->next;
+ 371:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   }
+ 372:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #else /* DNS_LOCAL_HOSTLIST_IS_DYNAMIC */
+ 373:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   int i;
+ 374:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   for (i = 0; i < sizeof(local_hostlist_static) / sizeof(struct local_hostlist_entry); i++) {
+ 375:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     if(strcmp(local_hostlist_static[i].name, hostname) == 0) {
+ 376:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       return local_hostlist_static[i].addr;
+ 377:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     }
+ 378:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   }
+ 379:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #endif /* DNS_LOCAL_HOSTLIST_IS_DYNAMIC */
+ 380:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   return INADDR_NONE;
+ 381:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** }
+ 382:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 383:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #if DNS_LOCAL_HOSTLIST_IS_DYNAMIC
+ 384:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** /** Remove all entries from the local host-list for a specific hostname
+ 385:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * and/or IP addess
+ 386:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  *
+ 387:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * @param hostname hostname for which entries shall be removed from the local
+ 388:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  *                 host-list
+ 389:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * @param addr address for which entries shall be removed from the local host-list
+ 390:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * @return the number of removed entries
+ 391:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  */
+ 392:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** int
+ 393:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** dns_local_removehost(const char *hostname, const struct ip_addr *addr)
+ 394:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** {
+ 395:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   int removed = 0;
+ 396:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   struct local_hostlist_entry *entry = local_hostlist_dynamic;
+ 397:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   struct local_hostlist_entry *last_entry = NULL;
+ 398:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   while (entry != NULL) {
+ 399:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     if (((hostname == NULL) || !strcmp(entry->name, hostname)) &&
+ 400:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****         ((addr == NULL) || (entry->addr == addr->addr))) {
+ 401:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       struct local_hostlist_entry *free_entry;
+ 402:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       if (last_entry != NULL) {
+ 403:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****         last_entry->next = entry->next;
+ 404:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       } else {
+ 405:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****         local_hostlist_dynamic = entry->next;
+ 406:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       }
+ 407:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       free_entry = entry;
+ 408:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       entry = entry->next;
+ 409:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       mem_free(free_entry);
+ 410:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       removed++;
+ 411:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     } else {
+ 412:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       last_entry = entry;
+ 413:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       entry = entry->next;
+ 414:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     }
+ 415:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   }
+ 416:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   return removed;
+ 417:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** }
+ 418:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 419:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** /**
+ 420:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * Add a hostname/IP address pair to the local host-list.
+ 421:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * Duplicates are not checked.
+ 422:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  *
+ 423:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * @param hostname hostname of the new entry
+ 424:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * @param addr IP address of the new entry
+ 425:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * @return ERR_OK if succeeded or ERR_MEM on memory error
+ 426:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  */
+ 427:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** err_t
+ 428:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** dns_local_addhost(const char *hostname, const struct ip_addr *addr)
+ 429:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** {
+ 430:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   struct local_hostlist_entry *entry;
+ 431:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   entry = mem_malloc(sizeof(struct local_hostlist_entry));
+ 432:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   if (entry == NULL) {
+ 433:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     return ERR_MEM;
+ 434:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   }
+ 435:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   entry->name = hostname;
+ 436:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   entry->addr = addr->addr;
+ 437:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   entry->next = local_hostlist_dynamic;
+ 438:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   local_hostlist_dynamic = entry;
+ 439:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   return ERR_OK;
+ 440:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** }
+ 441:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #endif /* DNS_LOCAL_HOSTLIST_IS_DYNAMIC*/
+ 442:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #endif /* DNS_LOCAL_HOSTLIST */
+ 443:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 444:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** /**
+ 445:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * Look up a hostname in the array of known hostnames.
+ 446:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  *
+ 447:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * @note This function only looks in the internal array of known
+ 448:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * hostnames, it does not send out a query for the hostname if none
+ 449:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * was found. The function dns_enqueue() can be used to send a query
+ 450:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * for a hostname.
+ 451:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  *
+ 452:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * @param name the hostname to look up
+ 453:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * @return the hostname's IP address, as u32_t (instead of struct ip_addr to
+ 454:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  *         better check for failure: != INADDR_NONE) or INADDR_NONE if the hostname
+ 455:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  *         was not found in the cached dns_table.
+ 456:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  */
+ 457:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** static u32_t
+ 458:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** dns_lookup(const char *name)
+ 459:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** {
+ 283              		.loc 1 459 0
+ 284              		.cfi_startproc
+ 285              		@ args = 0, pretend = 0, frame = 16
+ 286              		@ frame_needed = 1, uses_anonymous_args = 0
+ 287 0000 80B5     		push	{r7, lr}
+ 288              	.LCFI11:
+ 289              		.cfi_def_cfa_offset 8
+ 290              		.cfi_offset 7, -8
+ 291              		.cfi_offset 14, -4
+ 292 0002 84B0     		sub	sp, sp, #16
+ 293              	.LCFI12:
+ 294              		.cfi_def_cfa_offset 24
+ 295 0004 00AF     		add	r7, sp, #0
+ 296              	.LCFI13:
+ 297              		.cfi_def_cfa_register 7
+ 298 0006 7860     		str	r0, [r7, #4]
+ 460:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   u8_t i;
+ 461:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #if DNS_LOCAL_HOSTLIST || defined(DNS_LOOKUP_LOCAL_EXTERN)
+ 462:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   u32_t addr;
+ 463:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #endif /* DNS_LOCAL_HOSTLIST || defined(DNS_LOOKUP_LOCAL_EXTERN) */
+ 464:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #if DNS_LOCAL_HOSTLIST
+ 465:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   if ((addr = dns_lookup_local(name)) != INADDR_NONE) {
+ 466:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     return addr;
+ 467:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   }
+ 468:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #endif /* DNS_LOCAL_HOSTLIST */
+ 469:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #ifdef DNS_LOOKUP_LOCAL_EXTERN
+ 470:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   if((addr = DNS_LOOKUP_LOCAL_EXTERN(name)) != INADDR_NONE) {
+ 471:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     return addr;
+ 472:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   }
+ 473:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #endif /* DNS_LOOKUP_LOCAL_EXTERN */
+ 474:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 475:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   /* Walk through name list, return entry if found. If not, return NULL. */
+ 476:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   for (i = 0; i < DNS_TABLE_SIZE; ++i) {
+ 299              		.loc 1 476 0
+ 300 0008 4FF00003 		mov	r3, #0
+ 301 000c FB73     		strb	r3, [r7, #15]
+ 302 000e 33E0     		b	.L11
+ 303              	.L14:
+ 477:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     if ((dns_table[i].state == DNS_STATE_DONE) &&
+ 304              		.loc 1 477 0
+ 305 0010 FA7B     		ldrb	r2, [r7, #15]	@ zero_extendqisi2
+ 306 0012 40F20003 		movw	r3, #:lower16:dns_table
+ 307 0016 C0F20003 		movt	r3, #:upper16:dns_table
+ 308 001a 4FF48C71 		mov	r1, #280
+ 309 001e 01FB02F2 		mul	r2, r1, r2
+ 310 0022 9B18     		adds	r3, r3, r2
+ 311 0024 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 312 0026 032B     		cmp	r3, #3
+ 313 0028 22D1     		bne	.L12
+ 478:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****         (strcmp(name, dns_table[i].name) == 0)) {
+ 314              		.loc 1 478 0 discriminator 1
+ 315 002a FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 316 002c 4FF48C72 		mov	r2, #280
+ 317 0030 02FB03F3 		mul	r3, r2, r3
+ 318 0034 03F10802 		add	r2, r3, #8
+ 319 0038 40F20003 		movw	r3, #:lower16:dns_table
+ 320 003c C0F20003 		movt	r3, #:upper16:dns_table
+ 321 0040 D318     		adds	r3, r2, r3
+ 322 0042 03F10403 		add	r3, r3, #4
+ 323 0046 7868     		ldr	r0, [r7, #4]
+ 324 0048 1946     		mov	r1, r3
+ 325 004a FFF7FEFF 		bl	strcmp
+ 326 004e 0346     		mov	r3, r0
+ 477:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     if ((dns_table[i].state == DNS_STATE_DONE) &&
+ 327              		.loc 1 477 0 discriminator 1
+ 328 0050 002B     		cmp	r3, #0
+ 329 0052 0DD1     		bne	.L12
+ 479:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       LWIP_DEBUGF(DNS_DEBUG, ("dns_lookup: \"%s\": found = ", name));
+ 480:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       ip_addr_debug_print(DNS_DEBUG, &(dns_table[i].ipaddr));
+ 481:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       LWIP_DEBUGF(DNS_DEBUG, ("\n"));
+ 482:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       return dns_table[i].ipaddr.addr;
+ 330              		.loc 1 482 0
+ 331 0054 FA7B     		ldrb	r2, [r7, #15]	@ zero_extendqisi2
+ 332 0056 40F20003 		movw	r3, #:lower16:dns_table
+ 333 005a C0F20003 		movt	r3, #:upper16:dns_table
+ 334 005e 4FF48C71 		mov	r1, #280
+ 335 0062 01FB02F2 		mul	r2, r1, r2
+ 336 0066 9B18     		adds	r3, r3, r2
+ 337 0068 03F58673 		add	r3, r3, #268
+ 338 006c 1B68     		ldr	r3, [r3, #0]
+ 339 006e 08E0     		b	.L13
+ 340              	.L12:
+ 476:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   for (i = 0; i < DNS_TABLE_SIZE; ++i) {
+ 341              		.loc 1 476 0
+ 342 0070 FB7B     		ldrb	r3, [r7, #15]
+ 343 0072 03F10103 		add	r3, r3, #1
+ 344 0076 FB73     		strb	r3, [r7, #15]
+ 345              	.L11:
+ 476:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   for (i = 0; i < DNS_TABLE_SIZE; ++i) {
+ 346              		.loc 1 476 0 is_stmt 0 discriminator 1
+ 347 0078 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 348 007a 032B     		cmp	r3, #3
+ 349 007c C8D9     		bls	.L14
+ 483:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     }
+ 484:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   }
+ 485:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 486:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   return INADDR_NONE;
+ 350              		.loc 1 486 0 is_stmt 1
+ 351 007e 4FF0FF33 		mov	r3, #-1
+ 352              	.L13:
+ 487:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** }
+ 353              		.loc 1 487 0
+ 354 0082 1846     		mov	r0, r3
+ 355 0084 07F11007 		add	r7, r7, #16
+ 356 0088 BD46     		mov	sp, r7
+ 357 008a 80BD     		pop	{r7, pc}
+ 358              		.cfi_endproc
+ 359              	.LFE4:
+ 361              		.section	.text.dns_compare_name,"ax",%progbits
+ 362              		.align	2
+ 363              		.thumb
+ 364              		.thumb_func
+ 366              	dns_compare_name:
+ 367              	.LFB5:
+ 488:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 489:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #if DNS_DOES_NAME_CHECK
+ 490:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** /**
+ 491:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * Compare the "dotted" name "query" with the encoded name "response"
+ 492:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * to make sure an answer from the DNS server matches the current dns_table
+ 493:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * entry (otherwise, answers might arrive late for hostname not on the list
+ 494:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * any more).
+ 495:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  *
+ 496:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * @param query hostname (not encoded) from the dns_table
+ 497:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * @param response encoded hostname in the DNS response
+ 498:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * @return 0: names equal; 1: names differ
+ 499:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  */
+ 500:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** static u8_t
+ 501:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** dns_compare_name(unsigned char *query, unsigned char *response)
+ 502:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** {
+ 368              		.loc 1 502 0
+ 369              		.cfi_startproc
+ 370              		@ args = 0, pretend = 0, frame = 16
+ 371              		@ frame_needed = 1, uses_anonymous_args = 0
+ 372              		@ link register save eliminated.
+ 373 0000 80B4     		push	{r7}
+ 374              	.LCFI14:
+ 375              		.cfi_def_cfa_offset 4
+ 376              		.cfi_offset 7, -4
+ 377 0002 85B0     		sub	sp, sp, #20
+ 378              	.LCFI15:
+ 379              		.cfi_def_cfa_offset 24
+ 380 0004 00AF     		add	r7, sp, #0
+ 381              	.LCFI16:
+ 382              		.cfi_def_cfa_register 7
+ 383 0006 7860     		str	r0, [r7, #4]
+ 384 0008 3960     		str	r1, [r7, #0]
+ 385              	.L22:
+ 503:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   unsigned char n;
+ 504:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 505:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   do {
+ 506:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     n = *response++;
+ 386              		.loc 1 506 0
+ 387 000a 3B68     		ldr	r3, [r7, #0]
+ 388 000c 1B78     		ldrb	r3, [r3, #0]
+ 389 000e FB73     		strb	r3, [r7, #15]
+ 390 0010 3B68     		ldr	r3, [r7, #0]
+ 391 0012 03F10103 		add	r3, r3, #1
+ 392 0016 3B60     		str	r3, [r7, #0]
+ 507:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     /** @see RFC 1035 - 4.1.4. Message compression */
+ 508:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     if ((n & 0xc0) == 0xc0) {
+ 393              		.loc 1 508 0
+ 394 0018 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 395 001a 03F0C003 		and	r3, r3, #192
+ 396 001e C02B     		cmp	r3, #192
+ 397 0020 15D1     		bne	.L18
+ 509:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       /* Compressed name */
+ 510:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       break;
+ 398              		.loc 1 510 0
+ 399 0022 1FE0     		b	.L17
+ 400              	.L21:
+ 511:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     } else {
+ 512:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       /* Not compressed name */
+ 513:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       while (n > 0) {
+ 514:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****         if ((*query) != (*response)) {
+ 401              		.loc 1 514 0
+ 402 0024 7B68     		ldr	r3, [r7, #4]
+ 403 0026 1A78     		ldrb	r2, [r3, #0]	@ zero_extendqisi2
+ 404 0028 3B68     		ldr	r3, [r7, #0]
+ 405 002a 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 406 002c 9A42     		cmp	r2, r3
+ 407 002e 02D0     		beq	.L19
+ 515:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****           return 1;
+ 408              		.loc 1 515 0
+ 409 0030 4FF00103 		mov	r3, #1
+ 410 0034 18E0     		b	.L20
+ 411              	.L19:
+ 516:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****         }
+ 517:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****         ++response;
+ 412              		.loc 1 517 0
+ 413 0036 3B68     		ldr	r3, [r7, #0]
+ 414 0038 03F10103 		add	r3, r3, #1
+ 415 003c 3B60     		str	r3, [r7, #0]
+ 518:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****         ++query;
+ 416              		.loc 1 518 0
+ 417 003e 7B68     		ldr	r3, [r7, #4]
+ 418 0040 03F10103 		add	r3, r3, #1
+ 419 0044 7B60     		str	r3, [r7, #4]
+ 519:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****         --n;
+ 420              		.loc 1 519 0
+ 421 0046 FB7B     		ldrb	r3, [r7, #15]
+ 422 0048 03F1FF33 		add	r3, r3, #-1
+ 423 004c FB73     		strb	r3, [r7, #15]
+ 424              	.L18:
+ 513:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       while (n > 0) {
+ 425              		.loc 1 513 0 discriminator 1
+ 426 004e FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 427 0050 002B     		cmp	r3, #0
+ 428 0052 E7D1     		bne	.L21
+ 520:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       };
+ 521:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       ++query;
+ 429              		.loc 1 521 0
+ 430 0054 7B68     		ldr	r3, [r7, #4]
+ 431 0056 03F10103 		add	r3, r3, #1
+ 432 005a 7B60     		str	r3, [r7, #4]
+ 522:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     }
+ 523:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   } while (*response != 0);
+ 433              		.loc 1 523 0
+ 434 005c 3B68     		ldr	r3, [r7, #0]
+ 435 005e 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 436 0060 002B     		cmp	r3, #0
+ 437 0062 D2D1     		bne	.L22
+ 438              	.L17:
+ 524:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 525:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   return 0;
+ 439              		.loc 1 525 0
+ 440 0064 4FF00003 		mov	r3, #0
+ 441              	.L20:
+ 526:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** }
+ 442              		.loc 1 526 0
+ 443 0068 1846     		mov	r0, r3
+ 444 006a 07F11407 		add	r7, r7, #20
+ 445 006e BD46     		mov	sp, r7
+ 446 0070 80BC     		pop	{r7}
+ 447 0072 7047     		bx	lr
+ 448              		.cfi_endproc
+ 449              	.LFE5:
+ 451              		.section	.text.dns_parse_name,"ax",%progbits
+ 452              		.align	2
+ 453              		.thumb
+ 454              		.thumb_func
+ 456              	dns_parse_name:
+ 457              	.LFB6:
+ 527:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #endif /* DNS_DOES_NAME_CHECK */
+ 528:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 529:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** /**
+ 530:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * Walk through a compact encoded DNS name and return the end of the name.
+ 531:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  *
+ 532:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * @param query encoded DNS name in the DNS server response
+ 533:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * @return end of the name
+ 534:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  */
+ 535:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** static unsigned char *
+ 536:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** dns_parse_name(unsigned char *query)
+ 537:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** {
+ 458              		.loc 1 537 0
+ 459              		.cfi_startproc
+ 460              		@ args = 0, pretend = 0, frame = 16
+ 461              		@ frame_needed = 1, uses_anonymous_args = 0
+ 462              		@ link register save eliminated.
+ 463 0000 80B4     		push	{r7}
+ 464              	.LCFI17:
+ 465              		.cfi_def_cfa_offset 4
+ 466              		.cfi_offset 7, -4
+ 467 0002 85B0     		sub	sp, sp, #20
+ 468              	.LCFI18:
+ 469              		.cfi_def_cfa_offset 24
+ 470 0004 00AF     		add	r7, sp, #0
+ 471              	.LCFI19:
+ 472              		.cfi_def_cfa_register 7
+ 473 0006 7860     		str	r0, [r7, #4]
+ 474              	.L28:
+ 538:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   unsigned char n;
+ 539:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 540:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   do {
+ 541:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     n = *query++;
+ 475              		.loc 1 541 0
+ 476 0008 7B68     		ldr	r3, [r7, #4]
+ 477 000a 1B78     		ldrb	r3, [r3, #0]
+ 478 000c FB73     		strb	r3, [r7, #15]
+ 479 000e 7B68     		ldr	r3, [r7, #4]
+ 480 0010 03F10103 		add	r3, r3, #1
+ 481 0014 7B60     		str	r3, [r7, #4]
+ 542:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     /** @see RFC 1035 - 4.1.4. Message compression */
+ 543:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     if ((n & 0xc0) == 0xc0) {
+ 482              		.loc 1 543 0
+ 483 0016 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 484 0018 03F0C003 		and	r3, r3, #192
+ 485 001c C02B     		cmp	r3, #192
+ 486 001e 08D1     		bne	.L26
+ 544:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       /* Compressed name */
+ 545:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       break;
+ 487              		.loc 1 545 0
+ 488 0020 0EE0     		b	.L25
+ 489              	.L27:
+ 546:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     } else {
+ 547:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       /* Not compressed name */
+ 548:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       while (n > 0) {
+ 549:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****         ++query;
+ 490              		.loc 1 549 0
+ 491 0022 7B68     		ldr	r3, [r7, #4]
+ 492 0024 03F10103 		add	r3, r3, #1
+ 493 0028 7B60     		str	r3, [r7, #4]
+ 550:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****         --n;
+ 494              		.loc 1 550 0
+ 495 002a FB7B     		ldrb	r3, [r7, #15]
+ 496 002c 03F1FF33 		add	r3, r3, #-1
+ 497 0030 FB73     		strb	r3, [r7, #15]
+ 498              	.L26:
+ 548:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       while (n > 0) {
+ 499              		.loc 1 548 0 discriminator 1
+ 500 0032 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 501 0034 002B     		cmp	r3, #0
+ 502 0036 F4D1     		bne	.L27
+ 551:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       };
+ 552:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     }
+ 553:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   } while (*query != 0);
+ 503              		.loc 1 553 0
+ 504 0038 7B68     		ldr	r3, [r7, #4]
+ 505 003a 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 506 003c 002B     		cmp	r3, #0
+ 507 003e E3D1     		bne	.L28
+ 508              	.L25:
+ 554:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 555:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   return query + 1;
+ 509              		.loc 1 555 0
+ 510 0040 7B68     		ldr	r3, [r7, #4]
+ 511 0042 03F10103 		add	r3, r3, #1
+ 556:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** }
+ 512              		.loc 1 556 0
+ 513 0046 1846     		mov	r0, r3
+ 514 0048 07F11407 		add	r7, r7, #20
+ 515 004c BD46     		mov	sp, r7
+ 516 004e 80BC     		pop	{r7}
+ 517 0050 7047     		bx	lr
+ 518              		.cfi_endproc
+ 519              	.LFE6:
+ 521 0052 00BF     		.section	.text.dns_send,"ax",%progbits
+ 522              		.align	2
+ 523              		.thumb
+ 524              		.thumb_func
+ 526              	dns_send:
+ 527              	.LFB7:
+ 557:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 558:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** /**
+ 559:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * Send a DNS query packet.
+ 560:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  *
+ 561:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * @param numdns index of the DNS server in the dns_servers table
+ 562:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * @param name hostname to query
+ 563:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * @param id index of the hostname in dns_table, used as transaction ID in the
+ 564:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  *        DNS query packet
+ 565:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * @return ERR_OK if packet is sent; an err_t indicating the problem otherwise
+ 566:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  */
+ 567:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** static err_t
+ 568:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** dns_send(u8_t numdns, const char* name, u8_t id)
+ 569:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** {
+ 528              		.loc 1 569 0
+ 529              		.cfi_startproc
+ 530              		@ args = 0, pretend = 0, frame = 40
+ 531              		@ frame_needed = 1, uses_anonymous_args = 0
+ 532 0000 80B5     		push	{r7, lr}
+ 533              	.LCFI20:
+ 534              		.cfi_def_cfa_offset 8
+ 535              		.cfi_offset 7, -8
+ 536              		.cfi_offset 14, -4
+ 537 0002 8AB0     		sub	sp, sp, #40
+ 538              	.LCFI21:
+ 539              		.cfi_def_cfa_offset 48
+ 540 0004 00AF     		add	r7, sp, #0
+ 541              	.LCFI22:
+ 542              		.cfi_def_cfa_register 7
+ 543 0006 3960     		str	r1, [r7, #0]
+ 544 0008 1346     		mov	r3, r2
+ 545 000a 0246     		mov	r2, r0
+ 546 000c FA71     		strb	r2, [r7, #7]
+ 547 000e BB71     		strb	r3, [r7, #6]
+ 570:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   err_t err;
+ 571:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   struct dns_hdr *hdr;
+ 572:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   struct dns_query qry;
+ 573:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   struct pbuf *p;
+ 574:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   char *query, *nptr;
+ 575:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   const char *pHostname;
+ 576:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   u8_t n;
+ 577:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 578:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   LWIP_DEBUGF(DNS_DEBUG, ("dns_send: dns_servers[%"U16_F"] \"%s\": request\n",
+ 579:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****               (u16_t)(numdns), name));
+ 580:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   LWIP_ASSERT("dns server out of array", numdns < DNS_MAX_SERVERS);
+ 581:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   LWIP_ASSERT("dns server has no IP address set", dns_servers[numdns].addr != 0);
+ 582:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 583:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   /* if here, we have either a new query or a retry on a previous query to process */
+ 584:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   p = pbuf_alloc(PBUF_TRANSPORT, SIZEOF_DNS_HDR + DNS_MAX_NAME_LENGTH +
+ 548              		.loc 1 584 0
+ 549 0010 4FF00000 		mov	r0, #0
+ 550 0014 4FF48871 		mov	r1, #272
+ 551 0018 4FF00002 		mov	r2, #0
+ 552 001c FFF7FEFF 		bl	pbuf_alloc
+ 553 0020 7861     		str	r0, [r7, #20]
+ 585:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****                  SIZEOF_DNS_QUERY, PBUF_RAM);
+ 586:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   if (p != NULL) {
+ 554              		.loc 1 586 0
+ 555 0022 7B69     		ldr	r3, [r7, #20]
+ 556 0024 002B     		cmp	r3, #0
+ 557 0026 00F0A980 		beq	.L31
+ 587:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     LWIP_ASSERT("pbuf must be in one piece", p->next == NULL);
+ 588:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     /* fill dns header */
+ 589:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     hdr = (struct dns_hdr*)p->payload;
+ 558              		.loc 1 589 0
+ 559 002a 7B69     		ldr	r3, [r7, #20]
+ 560 002c 5B68     		ldr	r3, [r3, #4]
+ 561 002e 3B61     		str	r3, [r7, #16]
+ 590:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     memset(hdr, 0, SIZEOF_DNS_HDR);
+ 562              		.loc 1 590 0
+ 563 0030 3869     		ldr	r0, [r7, #16]
+ 564 0032 4FF00001 		mov	r1, #0
+ 565 0036 4FF00C02 		mov	r2, #12
+ 566 003a FFF7FEFF 		bl	memset
+ 591:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     hdr->id = htons(id);
+ 567              		.loc 1 591 0
+ 568 003e BB79     		ldrb	r3, [r7, #6]	@ zero_extendqisi2
+ 569 0040 9BB2     		uxth	r3, r3
+ 570 0042 1846     		mov	r0, r3
+ 571 0044 FFF7FEFF 		bl	htons
+ 572 0048 0346     		mov	r3, r0
+ 573 004a 1A46     		mov	r2, r3
+ 574 004c 3B69     		ldr	r3, [r7, #16]
+ 575 004e 1A80     		strh	r2, [r3, #0]	@ unaligned
+ 592:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     hdr->flags1 = DNS_FLAG1_RD;
+ 576              		.loc 1 592 0
+ 577 0050 3B69     		ldr	r3, [r7, #16]
+ 578 0052 4FF00102 		mov	r2, #1
+ 579 0056 9A70     		strb	r2, [r3, #2]
+ 593:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     hdr->numquestions = htons(1);
+ 580              		.loc 1 593 0
+ 581 0058 4FF00100 		mov	r0, #1
+ 582 005c FFF7FEFF 		bl	htons
+ 583 0060 0346     		mov	r3, r0
+ 584 0062 1A46     		mov	r2, r3
+ 585 0064 3B69     		ldr	r3, [r7, #16]
+ 586 0066 9A80     		strh	r2, [r3, #4]	@ unaligned
+ 594:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     query = (char*)hdr + SIZEOF_DNS_HDR;
+ 587              		.loc 1 594 0
+ 588 0068 3B69     		ldr	r3, [r7, #16]
+ 589 006a 03F10C03 		add	r3, r3, #12
+ 590 006e 3B62     		str	r3, [r7, #32]
+ 595:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     pHostname = name;
+ 591              		.loc 1 595 0
+ 592 0070 3B68     		ldr	r3, [r7, #0]
+ 593 0072 FB61     		str	r3, [r7, #28]
+ 596:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     --pHostname;
+ 594              		.loc 1 596 0
+ 595 0074 FB69     		ldr	r3, [r7, #28]
+ 596 0076 03F1FF33 		add	r3, r3, #-1
+ 597 007a FB61     		str	r3, [r7, #28]
+ 598              	.L35:
+ 597:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 598:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     /* convert hostname into suitable query format. */
+ 599:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     do {
+ 600:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       ++pHostname;
+ 599              		.loc 1 600 0
+ 600 007c FB69     		ldr	r3, [r7, #28]
+ 601 007e 03F10103 		add	r3, r3, #1
+ 602 0082 FB61     		str	r3, [r7, #28]
+ 601:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       nptr = query;
+ 603              		.loc 1 601 0
+ 604 0084 3B6A     		ldr	r3, [r7, #32]
+ 605 0086 FB60     		str	r3, [r7, #12]
+ 602:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       ++query;
+ 606              		.loc 1 602 0
+ 607 0088 3B6A     		ldr	r3, [r7, #32]
+ 608 008a 03F10103 		add	r3, r3, #1
+ 609 008e 3B62     		str	r3, [r7, #32]
+ 603:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       for(n = 0; *pHostname != '.' && *pHostname != 0; ++pHostname) {
+ 610              		.loc 1 603 0
+ 611 0090 4FF00003 		mov	r3, #0
+ 612 0094 FB76     		strb	r3, [r7, #27]
+ 613 0096 0FE0     		b	.L32
+ 614              	.L34:
+ 604:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****         *query = *pHostname;
+ 615              		.loc 1 604 0 discriminator 1
+ 616 0098 FB69     		ldr	r3, [r7, #28]
+ 617 009a 1A78     		ldrb	r2, [r3, #0]	@ zero_extendqisi2
+ 618 009c 3B6A     		ldr	r3, [r7, #32]
+ 619 009e 1A70     		strb	r2, [r3, #0]
+ 605:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****         ++query;
+ 620              		.loc 1 605 0 discriminator 1
+ 621 00a0 3B6A     		ldr	r3, [r7, #32]
+ 622 00a2 03F10103 		add	r3, r3, #1
+ 623 00a6 3B62     		str	r3, [r7, #32]
+ 606:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****         ++n;
+ 624              		.loc 1 606 0 discriminator 1
+ 625 00a8 FB7E     		ldrb	r3, [r7, #27]
+ 626 00aa 03F10103 		add	r3, r3, #1
+ 627 00ae FB76     		strb	r3, [r7, #27]
+ 603:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       for(n = 0; *pHostname != '.' && *pHostname != 0; ++pHostname) {
+ 628              		.loc 1 603 0 discriminator 1
+ 629 00b0 FB69     		ldr	r3, [r7, #28]
+ 630 00b2 03F10103 		add	r3, r3, #1
+ 631 00b6 FB61     		str	r3, [r7, #28]
+ 632              	.L32:
+ 633 00b8 FB69     		ldr	r3, [r7, #28]
+ 634 00ba 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 635 00bc 2E2B     		cmp	r3, #46
+ 636 00be 03D0     		beq	.L33
+ 603:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       for(n = 0; *pHostname != '.' && *pHostname != 0; ++pHostname) {
+ 637              		.loc 1 603 0 is_stmt 0 discriminator 2
+ 638 00c0 FB69     		ldr	r3, [r7, #28]
+ 639 00c2 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 640 00c4 002B     		cmp	r3, #0
+ 641 00c6 E7D1     		bne	.L34
+ 642              	.L33:
+ 607:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       }
+ 608:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       *nptr = n;
+ 643              		.loc 1 608 0 is_stmt 1
+ 644 00c8 FB68     		ldr	r3, [r7, #12]
+ 645 00ca FA7E     		ldrb	r2, [r7, #27]
+ 646 00cc 1A70     		strb	r2, [r3, #0]
+ 609:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     } while(*pHostname != 0);
+ 647              		.loc 1 609 0
+ 648 00ce FB69     		ldr	r3, [r7, #28]
+ 649 00d0 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 650 00d2 002B     		cmp	r3, #0
+ 651 00d4 D2D1     		bne	.L35
+ 610:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     *query++='\0';
+ 652              		.loc 1 610 0
+ 653 00d6 3B6A     		ldr	r3, [r7, #32]
+ 654 00d8 4FF00002 		mov	r2, #0
+ 655 00dc 1A70     		strb	r2, [r3, #0]
+ 656 00de 3B6A     		ldr	r3, [r7, #32]
+ 657 00e0 03F10103 		add	r3, r3, #1
+ 658 00e4 3B62     		str	r3, [r7, #32]
+ 611:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 612:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     /* fill dns query */
+ 613:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     qry.type  = htons(DNS_RRTYPE_A);
+ 659              		.loc 1 613 0
+ 660 00e6 4FF00100 		mov	r0, #1
+ 661 00ea FFF7FEFF 		bl	htons
+ 662 00ee 0346     		mov	r3, r0
+ 663 00f0 3B81     		strh	r3, [r7, #8]	@ movhi
+ 614:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     qry.class = htons(DNS_RRCLASS_IN);
+ 664              		.loc 1 614 0
+ 665 00f2 4FF00100 		mov	r0, #1
+ 666 00f6 FFF7FEFF 		bl	htons
+ 667 00fa 0346     		mov	r3, r0
+ 668 00fc 7B81     		strh	r3, [r7, #10]	@ movhi
+ 615:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     MEMCPY( query, &qry, SIZEOF_DNS_QUERY);
+ 669              		.loc 1 615 0
+ 670 00fe 3B6A     		ldr	r3, [r7, #32]
+ 671 0100 07F10802 		add	r2, r7, #8
+ 672 0104 1068     		ldr	r0, [r2, #0]	@ unaligned
+ 673 0106 1860     		str	r0, [r3, #0]	@ unaligned
+ 616:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 617:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     /* resize pbuf to the exact dns query */
+ 618:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     pbuf_realloc(p, (query + SIZEOF_DNS_QUERY) - ((char*)(p->payload)));
+ 674              		.loc 1 618 0
+ 675 0108 3B6A     		ldr	r3, [r7, #32]
+ 676 010a 03F10403 		add	r3, r3, #4
+ 677 010e 1A46     		mov	r2, r3
+ 678 0110 7B69     		ldr	r3, [r7, #20]
+ 679 0112 5B68     		ldr	r3, [r3, #4]
+ 680 0114 D31A     		subs	r3, r2, r3
+ 681 0116 9BB2     		uxth	r3, r3
+ 682 0118 7869     		ldr	r0, [r7, #20]
+ 683 011a 1946     		mov	r1, r3
+ 684 011c FFF7FEFF 		bl	pbuf_realloc
+ 619:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 620:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     /* connect to the server for faster receiving */
+ 621:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     udp_connect(dns_pcb, &dns_servers[numdns], DNS_SERVER_PORT);
+ 685              		.loc 1 621 0
+ 686 0120 40F20003 		movw	r3, #:lower16:dns_pcb
+ 687 0124 C0F20003 		movt	r3, #:upper16:dns_pcb
+ 688 0128 1A68     		ldr	r2, [r3, #0]
+ 689 012a FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 690 012c 4FEA8301 		lsl	r1, r3, #2
+ 691 0130 40F20003 		movw	r3, #:lower16:dns_servers
+ 692 0134 C0F20003 		movt	r3, #:upper16:dns_servers
+ 693 0138 CB18     		adds	r3, r1, r3
+ 694 013a 1046     		mov	r0, r2
+ 695 013c 1946     		mov	r1, r3
+ 696 013e 4FF03502 		mov	r2, #53
+ 697 0142 FFF7FEFF 		bl	udp_connect
+ 622:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     /* send dns packet */
+ 623:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     err = udp_sendto(dns_pcb, p, &dns_servers[numdns], DNS_SERVER_PORT);
+ 698              		.loc 1 623 0
+ 699 0146 40F20003 		movw	r3, #:lower16:dns_pcb
+ 700 014a C0F20003 		movt	r3, #:upper16:dns_pcb
+ 701 014e 1A68     		ldr	r2, [r3, #0]
+ 702 0150 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 703 0152 4FEA8301 		lsl	r1, r3, #2
+ 704 0156 40F20003 		movw	r3, #:lower16:dns_servers
+ 705 015a C0F20003 		movt	r3, #:upper16:dns_servers
+ 706 015e CB18     		adds	r3, r1, r3
+ 707 0160 1046     		mov	r0, r2
+ 708 0162 7969     		ldr	r1, [r7, #20]
+ 709 0164 1A46     		mov	r2, r3
+ 710 0166 4FF03503 		mov	r3, #53
+ 711 016a FFF7FEFF 		bl	udp_sendto
+ 712 016e 0346     		mov	r3, r0
+ 713 0170 87F82730 		strb	r3, [r7, #39]
+ 624:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 625:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     /* free pbuf */
+ 626:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     pbuf_free(p);
+ 714              		.loc 1 626 0
+ 715 0174 7869     		ldr	r0, [r7, #20]
+ 716 0176 FFF7FEFF 		bl	pbuf_free
+ 717 017a 03E0     		b	.L36
+ 718              	.L31:
+ 627:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   } else {
+ 628:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     err = ERR_MEM;
+ 719              		.loc 1 628 0
+ 720 017c 4FF0FF03 		mov	r3, #255
+ 721 0180 87F82730 		strb	r3, [r7, #39]
+ 722              	.L36:
+ 629:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   }
+ 630:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 631:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   return err;
+ 723              		.loc 1 631 0
+ 724 0184 97F82730 		ldrb	r3, [r7, #39]	@ zero_extendqisi2
+ 725 0188 5BB2     		sxtb	r3, r3
+ 632:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** }
+ 726              		.loc 1 632 0
+ 727 018a 1846     		mov	r0, r3
+ 728 018c 07F12807 		add	r7, r7, #40
+ 729 0190 BD46     		mov	sp, r7
+ 730 0192 80BD     		pop	{r7, pc}
+ 731              		.cfi_endproc
+ 732              	.LFE7:
+ 734              		.section	.text.dns_check_entry,"ax",%progbits
+ 735              		.align	2
+ 736              		.thumb
+ 737              		.thumb_func
+ 739              	dns_check_entry:
+ 740              	.LFB8:
+ 633:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 634:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** /**
+ 635:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * dns_check_entry() - see if pEntry has not yet been queried and, if so, sends out a query.
+ 636:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * Check an entry in the dns_table:
+ 637:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * - send out query for new entries
+ 638:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * - retry old pending entries on timeout (also with different servers)
+ 639:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * - remove completed entries from the table if their TTL has expired
+ 640:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  *
+ 641:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * @param i index of the dns_table entry to check
+ 642:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  */
+ 643:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** static void
+ 644:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** dns_check_entry(u8_t i)
+ 645:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** {
+ 741              		.loc 1 645 0
+ 742              		.cfi_startproc
+ 743              		@ args = 0, pretend = 0, frame = 16
+ 744              		@ frame_needed = 1, uses_anonymous_args = 0
+ 745 0000 80B5     		push	{r7, lr}
+ 746              	.LCFI23:
+ 747              		.cfi_def_cfa_offset 8
+ 748              		.cfi_offset 7, -8
+ 749              		.cfi_offset 14, -4
+ 750 0002 84B0     		sub	sp, sp, #16
+ 751              	.LCFI24:
+ 752              		.cfi_def_cfa_offset 24
+ 753 0004 00AF     		add	r7, sp, #0
+ 754              	.LCFI25:
+ 755              		.cfi_def_cfa_register 7
+ 756 0006 0346     		mov	r3, r0
+ 757 0008 FB71     		strb	r3, [r7, #7]
+ 646:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   struct dns_table_entry *pEntry = &dns_table[i];
+ 758              		.loc 1 646 0
+ 759 000a FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 760 000c 4FF48C72 		mov	r2, #280
+ 761 0010 02FB03F2 		mul	r2, r2, r3
+ 762 0014 40F20003 		movw	r3, #:lower16:dns_table
+ 763 0018 C0F20003 		movt	r3, #:upper16:dns_table
+ 764 001c D318     		adds	r3, r2, r3
+ 765 001e FB60     		str	r3, [r7, #12]
+ 647:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 648:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   LWIP_ASSERT("array index out of bounds", i < DNS_TABLE_SIZE);
+ 649:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 650:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   switch(pEntry->state) {
+ 766              		.loc 1 650 0
+ 767 0020 FB68     		ldr	r3, [r7, #12]
+ 768 0022 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 769 0024 032B     		cmp	r3, #3
+ 770 0026 00F29F80 		bhi	.L51
+ 771 002a 01A2     		adr	r2, .L44
+ 772 002c 52F823F0 		ldr	pc, [r2, r3, lsl #2]
+ 773              		.align	2
+ 774              	.L44:
+ 775 0030 69010000 		.word	.L51+1
+ 776 0034 41000000 		.word	.L41+1
+ 777 0038 79000000 		.word	.L42+1
+ 778 003c 41010000 		.word	.L43+1
+ 779              	.L41:
+ 651:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 652:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     case DNS_STATE_NEW: {
+ 653:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       /* initialize new entry */
+ 654:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       pEntry->state   = DNS_STATE_ASKING;
+ 780              		.loc 1 654 0
+ 781 0040 FB68     		ldr	r3, [r7, #12]
+ 782 0042 4FF00202 		mov	r2, #2
+ 783 0046 1A70     		strb	r2, [r3, #0]
+ 655:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       pEntry->numdns  = 0;
+ 784              		.loc 1 655 0
+ 785 0048 FB68     		ldr	r3, [r7, #12]
+ 786 004a 4FF00002 		mov	r2, #0
+ 787 004e 5A70     		strb	r2, [r3, #1]
+ 656:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       pEntry->tmr     = 1;
+ 788              		.loc 1 656 0
+ 789 0050 FB68     		ldr	r3, [r7, #12]
+ 790 0052 4FF00102 		mov	r2, #1
+ 791 0056 9A70     		strb	r2, [r3, #2]
+ 657:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       pEntry->retries = 0;
+ 792              		.loc 1 657 0
+ 793 0058 FB68     		ldr	r3, [r7, #12]
+ 794 005a 4FF00002 		mov	r2, #0
+ 795 005e DA70     		strb	r2, [r3, #3]
+ 658:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       
+ 659:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       /* send DNS packet for this entry */
+ 660:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       dns_send(pEntry->numdns, pEntry->name, i);
+ 796              		.loc 1 660 0
+ 797 0060 FB68     		ldr	r3, [r7, #12]
+ 798 0062 5978     		ldrb	r1, [r3, #1]	@ zero_extendqisi2
+ 799 0064 FB68     		ldr	r3, [r7, #12]
+ 800 0066 03F10C02 		add	r2, r3, #12
+ 801 006a FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 802 006c 0846     		mov	r0, r1
+ 803 006e 1146     		mov	r1, r2
+ 804 0070 1A46     		mov	r2, r3
+ 805 0072 FFF7FEFF 		bl	dns_send
+ 661:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       break;
+ 806              		.loc 1 661 0
+ 807 0076 7CE0     		b	.L38
+ 808              	.L42:
+ 662:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     }
+ 663:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 664:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     case DNS_STATE_ASKING: {
+ 665:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       if (--pEntry->tmr == 0) {
+ 809              		.loc 1 665 0
+ 810 0078 FB68     		ldr	r3, [r7, #12]
+ 811 007a 9B78     		ldrb	r3, [r3, #2]	@ zero_extendqisi2
+ 812 007c 03F1FF33 		add	r3, r3, #-1
+ 813 0080 DAB2     		uxtb	r2, r3
+ 814 0082 FB68     		ldr	r3, [r7, #12]
+ 815 0084 9A70     		strb	r2, [r3, #2]
+ 816 0086 FB68     		ldr	r3, [r7, #12]
+ 817 0088 9B78     		ldrb	r3, [r3, #2]	@ zero_extendqisi2
+ 818 008a 002B     		cmp	r3, #0
+ 819 008c 6ED1     		bne	.L52
+ 666:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****         if (++pEntry->retries == DNS_MAX_RETRIES) {
+ 820              		.loc 1 666 0
+ 821 008e FB68     		ldr	r3, [r7, #12]
+ 822 0090 DB78     		ldrb	r3, [r3, #3]	@ zero_extendqisi2
+ 823 0092 03F10103 		add	r3, r3, #1
+ 824 0096 DAB2     		uxtb	r2, r3
+ 825 0098 FB68     		ldr	r3, [r7, #12]
+ 826 009a DA70     		strb	r2, [r3, #3]
+ 827 009c FB68     		ldr	r3, [r7, #12]
+ 828 009e DB78     		ldrb	r3, [r3, #3]	@ zero_extendqisi2
+ 829 00a0 042B     		cmp	r3, #4
+ 830 00a2 3DD1     		bne	.L47
+ 667:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****           if ((pEntry->numdns+1<DNS_MAX_SERVERS) && (dns_servers[pEntry->numdns+1].addr!=0)) {
+ 831              		.loc 1 667 0
+ 832 00a4 FB68     		ldr	r3, [r7, #12]
+ 833 00a6 5B78     		ldrb	r3, [r3, #1]	@ zero_extendqisi2
+ 834 00a8 03F10103 		add	r3, r3, #1
+ 835 00ac 012B     		cmp	r3, #1
+ 836 00ae 1BDC     		bgt	.L48
+ 837              		.loc 1 667 0 is_stmt 0 discriminator 1
+ 838 00b0 FB68     		ldr	r3, [r7, #12]
+ 839 00b2 5B78     		ldrb	r3, [r3, #1]	@ zero_extendqisi2
+ 840 00b4 03F10102 		add	r2, r3, #1
+ 841 00b8 40F20003 		movw	r3, #:lower16:dns_servers
+ 842 00bc C0F20003 		movt	r3, #:upper16:dns_servers
+ 843 00c0 53F82230 		ldr	r3, [r3, r2, lsl #2]
+ 844 00c4 002B     		cmp	r3, #0
+ 845 00c6 0FD0     		beq	.L48
+ 668:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****             /* change of server */
+ 669:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****             pEntry->numdns++;
+ 846              		.loc 1 669 0 is_stmt 1
+ 847 00c8 FB68     		ldr	r3, [r7, #12]
+ 848 00ca 5B78     		ldrb	r3, [r3, #1]	@ zero_extendqisi2
+ 849 00cc 03F10103 		add	r3, r3, #1
+ 850 00d0 DAB2     		uxtb	r2, r3
+ 851 00d2 FB68     		ldr	r3, [r7, #12]
+ 852 00d4 5A70     		strb	r2, [r3, #1]
+ 670:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****             pEntry->tmr     = 1;
+ 853              		.loc 1 670 0
+ 854 00d6 FB68     		ldr	r3, [r7, #12]
+ 855 00d8 4FF00102 		mov	r2, #1
+ 856 00dc 9A70     		strb	r2, [r3, #2]
+ 671:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****             pEntry->retries = 0;
+ 857              		.loc 1 671 0
+ 858 00de FB68     		ldr	r3, [r7, #12]
+ 859 00e0 4FF00002 		mov	r2, #0
+ 860 00e4 DA70     		strb	r2, [r3, #3]
+ 672:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****             break;
+ 861              		.loc 1 672 0
+ 862 00e6 44E0     		b	.L38
+ 863              	.L48:
+ 673:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****           } else {
+ 674:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****             LWIP_DEBUGF(DNS_DEBUG, ("dns_check_entry: \"%s\": timeout\n", pEntry->name));
+ 675:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****             /* call specified callback function if provided */
+ 676:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****             if (pEntry->found)
+ 864              		.loc 1 676 0
+ 865 00e8 FB68     		ldr	r3, [r7, #12]
+ 866 00ea D3F81031 		ldr	r3, [r3, #272]
+ 867 00ee 002B     		cmp	r3, #0
+ 868 00f0 0CD0     		beq	.L49
+ 677:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****               (*pEntry->found)(pEntry->name, NULL, pEntry->arg);
+ 869              		.loc 1 677 0
+ 870 00f2 FB68     		ldr	r3, [r7, #12]
+ 871 00f4 D3F81031 		ldr	r3, [r3, #272]
+ 872 00f8 FA68     		ldr	r2, [r7, #12]
+ 873 00fa 02F10C01 		add	r1, r2, #12
+ 874 00fe FA68     		ldr	r2, [r7, #12]
+ 875 0100 D2F81421 		ldr	r2, [r2, #276]
+ 876 0104 0846     		mov	r0, r1
+ 877 0106 4FF00001 		mov	r1, #0
+ 878 010a 9847     		blx	r3
+ 879              	.L49:
+ 678:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****             /* flush this entry */
+ 679:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****             pEntry->state   = DNS_STATE_UNUSED;
+ 880              		.loc 1 679 0
+ 881 010c FB68     		ldr	r3, [r7, #12]
+ 882 010e 4FF00002 		mov	r2, #0
+ 883 0112 1A70     		strb	r2, [r3, #0]
+ 680:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****             pEntry->found   = NULL;
+ 884              		.loc 1 680 0
+ 885 0114 FB68     		ldr	r3, [r7, #12]
+ 886 0116 4FF00002 		mov	r2, #0
+ 887 011a C3F81021 		str	r2, [r3, #272]
+ 681:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****             break;
+ 888              		.loc 1 681 0
+ 889 011e 28E0     		b	.L38
+ 890              	.L47:
+ 682:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****           }
+ 683:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****         }
+ 684:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 685:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****         /* wait longer for the next retry */
+ 686:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****         pEntry->tmr = pEntry->retries;
+ 891              		.loc 1 686 0
+ 892 0120 FB68     		ldr	r3, [r7, #12]
+ 893 0122 DA78     		ldrb	r2, [r3, #3]	@ zero_extendqisi2
+ 894 0124 FB68     		ldr	r3, [r7, #12]
+ 895 0126 9A70     		strb	r2, [r3, #2]
+ 687:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 688:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****         /* send DNS packet for this entry */
+ 689:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****         dns_send(pEntry->numdns, pEntry->name, i);
+ 896              		.loc 1 689 0
+ 897 0128 FB68     		ldr	r3, [r7, #12]
+ 898 012a 5978     		ldrb	r1, [r3, #1]	@ zero_extendqisi2
+ 899 012c FB68     		ldr	r3, [r7, #12]
+ 900 012e 03F10C02 		add	r2, r3, #12
+ 901 0132 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 902 0134 0846     		mov	r0, r1
+ 903 0136 1146     		mov	r1, r2
+ 904 0138 1A46     		mov	r2, r3
+ 905 013a FFF7FEFF 		bl	dns_send
+ 690:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       }
+ 691:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       break;
+ 906              		.loc 1 691 0
+ 907 013e 15E0     		b	.L52
+ 908              	.L43:
+ 692:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     }
+ 693:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 694:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     case DNS_STATE_DONE: {
+ 695:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       /* if the time to live is nul */
+ 696:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       if (--pEntry->ttl == 0) {
+ 909              		.loc 1 696 0
+ 910 0140 FB68     		ldr	r3, [r7, #12]
+ 911 0142 9B68     		ldr	r3, [r3, #8]
+ 912 0144 03F1FF32 		add	r2, r3, #-1
+ 913 0148 FB68     		ldr	r3, [r7, #12]
+ 914 014a 9A60     		str	r2, [r3, #8]
+ 915 014c FB68     		ldr	r3, [r7, #12]
+ 916 014e 9B68     		ldr	r3, [r3, #8]
+ 917 0150 002B     		cmp	r3, #0
+ 918 0152 0DD1     		bne	.L53
+ 697:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****         LWIP_DEBUGF(DNS_DEBUG, ("dns_check_entry: \"%s\": flush\n", pEntry->name));
+ 698:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****         /* flush this entry */
+ 699:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****         pEntry->state = DNS_STATE_UNUSED;
+ 919              		.loc 1 699 0
+ 920 0154 FB68     		ldr	r3, [r7, #12]
+ 921 0156 4FF00002 		mov	r2, #0
+ 922 015a 1A70     		strb	r2, [r3, #0]
+ 700:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****         pEntry->found = NULL;
+ 923              		.loc 1 700 0
+ 924 015c FB68     		ldr	r3, [r7, #12]
+ 925 015e 4FF00002 		mov	r2, #0
+ 926 0162 C3F81021 		str	r2, [r3, #272]
+ 701:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       }
+ 702:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       break;
+ 927              		.loc 1 702 0
+ 928 0166 03E0     		b	.L53
+ 929              	.L51:
+ 703:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     }
+ 704:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     case DNS_STATE_UNUSED:
+ 705:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       /* nothing to do */
+ 706:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       break;
+ 707:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     default:
+ 708:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       LWIP_ASSERT("unknown dns_table entry state:", 0);
+ 709:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       break;
+ 930              		.loc 1 709 0
+ 931 0168 00BF     		nop
+ 932 016a 02E0     		b	.L38
+ 933              	.L52:
+ 691:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       break;
+ 934              		.loc 1 691 0
+ 935 016c 00BF     		nop
+ 936 016e 00E0     		b	.L38
+ 937              	.L53:
+ 702:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       break;
+ 938              		.loc 1 702 0
+ 939 0170 00BF     		nop
+ 940              	.L38:
+ 710:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   }
+ 711:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** }
+ 941              		.loc 1 711 0
+ 942 0172 07F11007 		add	r7, r7, #16
+ 943 0176 BD46     		mov	sp, r7
+ 944 0178 80BD     		pop	{r7, pc}
+ 945              		.cfi_endproc
+ 946              	.LFE8:
+ 948 017a 00BF     		.section	.text.dns_check_entries,"ax",%progbits
+ 949              		.align	2
+ 950              		.thumb
+ 951              		.thumb_func
+ 953              	dns_check_entries:
+ 954              	.LFB9:
+ 712:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 713:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** /**
+ 714:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * Call dns_check_entry for each entry in dns_table - check all entries.
+ 715:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  */
+ 716:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** static void
+ 717:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** dns_check_entries(void)
+ 718:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** {
+ 955              		.loc 1 718 0
+ 956              		.cfi_startproc
+ 957              		@ args = 0, pretend = 0, frame = 8
+ 958              		@ frame_needed = 1, uses_anonymous_args = 0
+ 959 0000 80B5     		push	{r7, lr}
+ 960              	.LCFI26:
+ 961              		.cfi_def_cfa_offset 8
+ 962              		.cfi_offset 7, -8
+ 963              		.cfi_offset 14, -4
+ 964 0002 82B0     		sub	sp, sp, #8
+ 965              	.LCFI27:
+ 966              		.cfi_def_cfa_offset 16
+ 967 0004 00AF     		add	r7, sp, #0
+ 968              	.LCFI28:
+ 969              		.cfi_def_cfa_register 7
+ 719:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   u8_t i;
+ 720:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 721:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   for (i = 0; i < DNS_TABLE_SIZE; ++i) {
+ 970              		.loc 1 721 0
+ 971 0006 4FF00003 		mov	r3, #0
+ 972 000a FB71     		strb	r3, [r7, #7]
+ 973 000c 07E0     		b	.L55
+ 974              	.L56:
+ 722:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     dns_check_entry(i);
+ 975              		.loc 1 722 0 discriminator 2
+ 976 000e FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 977 0010 1846     		mov	r0, r3
+ 978 0012 FFF7FEFF 		bl	dns_check_entry
+ 721:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   for (i = 0; i < DNS_TABLE_SIZE; ++i) {
+ 979              		.loc 1 721 0 discriminator 2
+ 980 0016 FB79     		ldrb	r3, [r7, #7]
+ 981 0018 03F10103 		add	r3, r3, #1
+ 982 001c FB71     		strb	r3, [r7, #7]
+ 983              	.L55:
+ 721:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   for (i = 0; i < DNS_TABLE_SIZE; ++i) {
+ 984              		.loc 1 721 0 is_stmt 0 discriminator 1
+ 985 001e FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 986 0020 032B     		cmp	r3, #3
+ 987 0022 F4D9     		bls	.L56
+ 723:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   }
+ 724:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** }
+ 988              		.loc 1 724 0 is_stmt 1
+ 989 0024 07F10807 		add	r7, r7, #8
+ 990 0028 BD46     		mov	sp, r7
+ 991 002a 80BD     		pop	{r7, pc}
+ 992              		.cfi_endproc
+ 993              	.LFE9:
+ 995              		.section	.text.dns_recv,"ax",%progbits
+ 996              		.align	2
+ 997              		.thumb
+ 998              		.thumb_func
+ 1000              	dns_recv:
+ 1001              	.LFB10:
+ 725:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 726:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** /**
+ 727:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * Receive input function for DNS response packets arriving for the dns UDP pcb.
+ 728:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  *
+ 729:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * @params see udp.h
+ 730:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  */
+ 731:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** static void
+ 732:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** dns_recv(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, u16_t port)
+ 733:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** {
+ 1002              		.loc 1 733 0
+ 1003              		.cfi_startproc
+ 1004              		@ args = 4, pretend = 0, frame = 48
+ 1005              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1006 0000 80B5     		push	{r7, lr}
+ 1007              	.LCFI29:
+ 1008              		.cfi_def_cfa_offset 8
+ 1009              		.cfi_offset 7, -8
+ 1010              		.cfi_offset 14, -4
+ 1011 0002 8CB0     		sub	sp, sp, #48
+ 1012              	.LCFI30:
+ 1013              		.cfi_def_cfa_offset 56
+ 1014 0004 00AF     		add	r7, sp, #0
+ 1015              	.LCFI31:
+ 1016              		.cfi_def_cfa_register 7
+ 1017 0006 F860     		str	r0, [r7, #12]
+ 1018 0008 B960     		str	r1, [r7, #8]
+ 1019 000a 7A60     		str	r2, [r7, #4]
+ 1020 000c 3B60     		str	r3, [r7, #0]
+ 734:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   u8_t i;
+ 735:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   char *pHostname;
+ 736:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   struct dns_hdr *hdr;
+ 737:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   struct dns_answer ans;
+ 738:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   struct dns_table_entry *pEntry;
+ 739:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   u8_t nquestions, nanswers;
+ 740:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #if (DNS_USES_STATIC_BUF == 0)
+ 741:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   u8_t dns_payload[DNS_MSG_SIZE];
+ 742:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #endif /* (DNS_USES_STATIC_BUF == 0) */
+ 743:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #if (DNS_USES_STATIC_BUF == 2)
+ 744:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   u8_t* dns_payload;
+ 745:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #endif /* (DNS_USES_STATIC_BUF == 2) */
+ 746:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 747:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   LWIP_UNUSED_ARG(arg);
+ 748:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   LWIP_UNUSED_ARG(pcb);
+ 749:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   LWIP_UNUSED_ARG(addr);
+ 750:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   LWIP_UNUSED_ARG(port);
+ 751:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 752:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   /* is the dns message too big ? */
+ 753:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   if (p->tot_len > DNS_MSG_SIZE) {
+ 1021              		.loc 1 753 0
+ 1022 000e 7B68     		ldr	r3, [r7, #4]
+ 1023 0010 1B89     		ldrh	r3, [r3, #8]
+ 1024 0012 B3F5007F 		cmp	r3, #512
+ 1025 0016 00F2FF80 		bhi	.L72
+ 1026              	.L58:
+ 754:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     LWIP_DEBUGF(DNS_DEBUG, ("dns_recv: pbuf too big\n"));
+ 755:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     /* free pbuf and return */
+ 756:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     goto memerr1;
+ 757:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   }
+ 758:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 759:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   /* is the dns message big enough ? */
+ 760:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   if (p->tot_len < (SIZEOF_DNS_HDR + SIZEOF_DNS_QUERY + SIZEOF_DNS_ANSWER)) {
+ 1027              		.loc 1 760 0
+ 1028 001a 7B68     		ldr	r3, [r7, #4]
+ 1029 001c 1B89     		ldrh	r3, [r3, #8]
+ 1030 001e 192B     		cmp	r3, #25
+ 1031 0020 40F2FC80 		bls	.L73
+ 1032              	.L60:
+ 761:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     LWIP_DEBUGF(DNS_DEBUG, ("dns_recv: pbuf too small\n"));
+ 762:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     /* free pbuf and return */
+ 763:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     goto memerr1;
+ 764:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   }
+ 765:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 766:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #if (DNS_USES_STATIC_BUF == 2)
+ 767:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   dns_payload = mem_malloc(p->tot_len);
+ 768:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   if (dns_payload == NULL) {
+ 769:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     LWIP_DEBUGF(DNS_DEBUG, ("dns_recv: mem_malloc error\n"));
+ 770:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     /* free pbuf and return */
+ 771:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     goto memerr1;
+ 772:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   }
+ 773:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #endif /* (DNS_USES_STATIC_BUF == 2) */
+ 774:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 775:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   /* copy dns payload inside static buffer for processing */ 
+ 776:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   if (pbuf_copy_partial(p, dns_payload, p->tot_len, 0) == p->tot_len) {
+ 1033              		.loc 1 776 0
+ 1034 0024 7B68     		ldr	r3, [r7, #4]
+ 1035 0026 1B89     		ldrh	r3, [r3, #8]
+ 1036 0028 7868     		ldr	r0, [r7, #4]
+ 1037 002a 40F20001 		movw	r1, #:lower16:dns_payload
+ 1038 002e C0F20001 		movt	r1, #:upper16:dns_payload
+ 1039 0032 1A46     		mov	r2, r3
+ 1040 0034 4FF00003 		mov	r3, #0
+ 1041 0038 FFF7FEFF 		bl	pbuf_copy_partial
+ 1042 003c 0346     		mov	r3, r0
+ 1043 003e 1A46     		mov	r2, r3
+ 1044 0040 7B68     		ldr	r3, [r7, #4]
+ 1045 0042 1B89     		ldrh	r3, [r3, #8]
+ 1046 0044 9A42     		cmp	r2, r3
+ 1047 0046 40F0EB80 		bne	.L74
+ 777:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     /* The ID in the DNS header should be our entry into the name table. */
+ 778:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     hdr = (struct dns_hdr*)dns_payload;
+ 1048              		.loc 1 778 0
+ 1049 004a 40F20003 		movw	r3, #:lower16:dns_payload
+ 1050 004e C0F20003 		movt	r3, #:upper16:dns_payload
+ 1051 0052 7B62     		str	r3, [r7, #36]
+ 779:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     i = htons(hdr->id);
+ 1052              		.loc 1 779 0
+ 1053 0054 7B6A     		ldr	r3, [r7, #36]
+ 1054 0056 1B88     		ldrh	r3, [r3, #0]	@ unaligned
+ 1055 0058 9BB2     		uxth	r3, r3
+ 1056 005a 1846     		mov	r0, r3
+ 1057 005c FFF7FEFF 		bl	htons
+ 1058 0060 0346     		mov	r3, r0
+ 1059 0062 87F82330 		strb	r3, [r7, #35]
+ 780:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     if (i < DNS_TABLE_SIZE) {
+ 1060              		.loc 1 780 0
+ 1061 0066 97F82330 		ldrb	r3, [r7, #35]	@ zero_extendqisi2
+ 1062 006a 032B     		cmp	r3, #3
+ 1063 006c 00F2D880 		bhi	.L74
+ 781:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       pEntry = &dns_table[i];
+ 1064              		.loc 1 781 0
+ 1065 0070 97F82330 		ldrb	r3, [r7, #35]	@ zero_extendqisi2
+ 1066 0074 4FF48C72 		mov	r2, #280
+ 1067 0078 02FB03F2 		mul	r2, r2, r3
+ 1068 007c 40F20003 		movw	r3, #:lower16:dns_table
+ 1069 0080 C0F20003 		movt	r3, #:upper16:dns_table
+ 1070 0084 D318     		adds	r3, r2, r3
+ 1071 0086 FB61     		str	r3, [r7, #28]
+ 782:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       if(pEntry->state == DNS_STATE_ASKING) {
+ 1072              		.loc 1 782 0
+ 1073 0088 FB69     		ldr	r3, [r7, #28]
+ 1074 008a 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 1075 008c 022B     		cmp	r3, #2
+ 1076 008e 40F0C780 		bne	.L74
+ 783:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****         /* This entry is now completed. */
+ 784:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****         pEntry->state = DNS_STATE_DONE;
+ 1077              		.loc 1 784 0
+ 1078 0092 FB69     		ldr	r3, [r7, #28]
+ 1079 0094 4FF00302 		mov	r2, #3
+ 1080 0098 1A70     		strb	r2, [r3, #0]
+ 785:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****         pEntry->err   = hdr->flags2 & DNS_FLAG2_ERR_MASK;
+ 1081              		.loc 1 785 0
+ 1082 009a 7B6A     		ldr	r3, [r7, #36]
+ 1083 009c DB78     		ldrb	r3, [r3, #3]	@ zero_extendqisi2
+ 1084 009e 03F00F03 		and	r3, r3, #15
+ 1085 00a2 DAB2     		uxtb	r2, r3
+ 1086 00a4 FB69     		ldr	r3, [r7, #28]
+ 1087 00a6 5A71     		strb	r2, [r3, #5]
+ 786:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 787:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****         /* We only care about the question(s) and the answers. The authrr
+ 788:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****            and the extrarr are simply discarded. */
+ 789:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****         nquestions = htons(hdr->numquestions);
+ 1088              		.loc 1 789 0
+ 1089 00a8 7B6A     		ldr	r3, [r7, #36]
+ 1090 00aa 9B88     		ldrh	r3, [r3, #4]	@ unaligned
+ 1091 00ac 9BB2     		uxth	r3, r3
+ 1092 00ae 1846     		mov	r0, r3
+ 1093 00b0 FFF7FEFF 		bl	htons
+ 1094 00b4 0346     		mov	r3, r0
+ 1095 00b6 FB76     		strb	r3, [r7, #27]
+ 790:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****         nanswers   = htons(hdr->numanswers);
+ 1096              		.loc 1 790 0
+ 1097 00b8 7B6A     		ldr	r3, [r7, #36]
+ 1098 00ba DB88     		ldrh	r3, [r3, #6]	@ unaligned
+ 1099 00bc 9BB2     		uxth	r3, r3
+ 1100 00be 1846     		mov	r0, r3
+ 1101 00c0 FFF7FEFF 		bl	htons
+ 1102 00c4 0346     		mov	r3, r0
+ 1103 00c6 87F82B30 		strb	r3, [r7, #43]
+ 791:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 792:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****         /* Check for error. If so, call callback to inform. */
+ 793:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****         if (((hdr->flags1 & DNS_FLAG1_RESPONSE) == 0) || (pEntry->err != 0) || (nquestions != 1)) {
+ 1104              		.loc 1 793 0
+ 1105 00ca 7B6A     		ldr	r3, [r7, #36]
+ 1106 00cc 9B78     		ldrb	r3, [r3, #2]	@ zero_extendqisi2
+ 1107 00ce DBB2     		uxtb	r3, r3
+ 1108 00d0 5BB2     		sxtb	r3, r3
+ 1109 00d2 002B     		cmp	r3, #0
+ 1110 00d4 80F28480 		bge	.L62
+ 1111              		.loc 1 793 0 is_stmt 0 discriminator 1
+ 1112 00d8 FB69     		ldr	r3, [r7, #28]
+ 1113 00da 5B79     		ldrb	r3, [r3, #5]	@ zero_extendqisi2
+ 1114 00dc 002B     		cmp	r3, #0
+ 1115 00de 7FD1     		bne	.L62
+ 1116 00e0 FB7E     		ldrb	r3, [r7, #27]	@ zero_extendqisi2
+ 1117 00e2 012B     		cmp	r3, #1
+ 1118 00e4 7CD1     		bne	.L62
+ 794:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****           LWIP_DEBUGF(DNS_DEBUG, ("dns_recv: \"%s\": error in flags\n", pEntry->name));
+ 795:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****           /* call callback to indicate error, clean up memory and return */
+ 796:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****           goto responseerr;
+ 797:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****         }
+ 798:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 799:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #if DNS_DOES_NAME_CHECK
+ 800:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****         /* Check if the name in the "question" part match with the name in the entry. */
+ 801:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****         if (dns_compare_name((unsigned char *)(pEntry->name), (unsigned char *)dns_payload + SIZEOF
+ 1119              		.loc 1 801 0 is_stmt 1
+ 1120 00e6 FB69     		ldr	r3, [r7, #28]
+ 1121 00e8 03F10C03 		add	r3, r3, #12
+ 1122 00ec 1846     		mov	r0, r3
+ 1123 00ee 5149     		ldr	r1, .L77
+ 1124 00f0 FFF7FEFF 		bl	dns_compare_name
+ 1125 00f4 0346     		mov	r3, r0
+ 1126 00f6 002B     		cmp	r3, #0
+ 1127 00f8 71D1     		bne	.L75
+ 1128              	.L63:
+ 802:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****           LWIP_DEBUGF(DNS_DEBUG, ("dns_recv: \"%s\": response not match to query\n", pEntry->name))
+ 803:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****           /* call callback to indicate error, clean up memory and return */
+ 804:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****           goto responseerr;
+ 805:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****         }
+ 806:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #endif /* DNS_DOES_NAME_CHECK */
+ 807:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 808:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****         /* Skip the name in the "question" part */
+ 809:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****         pHostname = (char *) dns_parse_name((unsigned char *)dns_payload + SIZEOF_DNS_HDR) + SIZEOF
+ 1129              		.loc 1 809 0
+ 1130 00fa 4E48     		ldr	r0, .L77
+ 1131 00fc FFF7FEFF 		bl	dns_parse_name
+ 1132 0100 0346     		mov	r3, r0
+ 1133 0102 03F10403 		add	r3, r3, #4
+ 1134 0106 FB62     		str	r3, [r7, #44]
+ 810:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 811:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****         while(nanswers > 0) {
+ 1135              		.loc 1 811 0
+ 1136 0108 64E0     		b	.L64
+ 1137              	.L68:
+ 812:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****           /* skip answer resource record's host name */
+ 813:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****           pHostname = (char *) dns_parse_name((unsigned char *)pHostname);
+ 1138              		.loc 1 813 0
+ 1139 010a F86A     		ldr	r0, [r7, #44]
+ 1140 010c FFF7FEFF 		bl	dns_parse_name
+ 1141 0110 F862     		str	r0, [r7, #44]
+ 814:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 815:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****           /* Check for IP address type and Internet class. Others are discarded. */
+ 816:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****           MEMCPY(&ans, pHostname, SIZEOF_DNS_ANSWER);
+ 1142              		.loc 1 816 0
+ 1143 0112 FA6A     		ldr	r2, [r7, #44]
+ 1144 0114 07F11003 		add	r3, r7, #16
+ 1145 0118 1068     		ldr	r0, [r2, #0]	@ unaligned
+ 1146 011a 5168     		ldr	r1, [r2, #4]	@ unaligned
+ 1147 011c 03C3     		stmia	r3!, {r0, r1}
+ 1148 011e 1289     		ldrh	r2, [r2, #8]	@ unaligned
+ 1149 0120 1A80     		strh	r2, [r3, #0]	@ unaligned
+ 817:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****           if((ntohs(ans.type) == DNS_RRTYPE_A) && (ntohs(ans.class) == DNS_RRCLASS_IN) && (ntohs(an
+ 1150              		.loc 1 817 0
+ 1151 0122 3B8A     		ldrh	r3, [r7, #16]
+ 1152 0124 1846     		mov	r0, r3
+ 1153 0126 FFF7FEFF 		bl	ntohs
+ 1154 012a 0346     		mov	r3, r0
+ 1155 012c 012B     		cmp	r3, #1
+ 1156 012e 41D1     		bne	.L65
+ 1157              		.loc 1 817 0 is_stmt 0 discriminator 1
+ 1158 0130 7B8A     		ldrh	r3, [r7, #18]
+ 1159 0132 1846     		mov	r0, r3
+ 1160 0134 FFF7FEFF 		bl	ntohs
+ 1161 0138 0346     		mov	r3, r0
+ 1162 013a 012B     		cmp	r3, #1
+ 1163 013c 3AD1     		bne	.L65
+ 1164 013e 3B8B     		ldrh	r3, [r7, #24]
+ 1165 0140 1846     		mov	r0, r3
+ 1166 0142 FFF7FEFF 		bl	ntohs
+ 1167 0146 0346     		mov	r3, r0
+ 1168 0148 042B     		cmp	r3, #4
+ 1169 014a 33D1     		bne	.L65
+ 818:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****             /* read the answer resource record's TTL, and maximize it if needed */
+ 819:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****             pEntry->ttl = ntohl(ans.ttl);
+ 1170              		.loc 1 819 0 is_stmt 1
+ 1171 014c 7B69     		ldr	r3, [r7, #20]
+ 1172 014e 1846     		mov	r0, r3
+ 1173 0150 FFF7FEFF 		bl	ntohl
+ 1174 0154 0246     		mov	r2, r0
+ 1175 0156 FB69     		ldr	r3, [r7, #28]
+ 1176 0158 9A60     		str	r2, [r3, #8]
+ 820:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****             if (pEntry->ttl > DNS_MAX_TTL) {
+ 1177              		.loc 1 820 0
+ 1178 015a FB69     		ldr	r3, [r7, #28]
+ 1179 015c 9A68     		ldr	r2, [r3, #8]
+ 1180 015e 4FF46A53 		mov	r3, #14976
+ 1181 0162 C0F20903 		movt	r3, 9
+ 1182 0166 9A42     		cmp	r2, r3
+ 1183 0168 05D9     		bls	.L66
+ 821:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****               pEntry->ttl = DNS_MAX_TTL;
+ 1184              		.loc 1 821 0
+ 1185 016a FA69     		ldr	r2, [r7, #28]
+ 1186 016c 4FF46A53 		mov	r3, #14976
+ 1187 0170 C0F20903 		movt	r3, 9
+ 1188 0174 9360     		str	r3, [r2, #8]
+ 1189              	.L66:
+ 822:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****             }
+ 823:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****             /* read the IP address after answer resource record's header */
+ 824:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****             MEMCPY( &(pEntry->ipaddr), (pHostname+SIZEOF_DNS_ANSWER), sizeof(struct ip_addr));
+ 1190              		.loc 1 824 0
+ 1191 0176 FB69     		ldr	r3, [r7, #28]
+ 1192 0178 03F58672 		add	r2, r3, #268
+ 1193 017c FB6A     		ldr	r3, [r7, #44]
+ 1194 017e 03F10A03 		add	r3, r3, #10
+ 1195 0182 1046     		mov	r0, r2
+ 1196 0184 1946     		mov	r1, r3
+ 1197 0186 4FF00402 		mov	r2, #4
+ 1198 018a FFF7FEFF 		bl	memcpy
+ 825:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****             LWIP_DEBUGF(DNS_DEBUG, ("dns_recv: \"%s\": response = ", pEntry->name));
+ 826:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****             ip_addr_debug_print(DNS_DEBUG, (&(pEntry->ipaddr)));
+ 827:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****             LWIP_DEBUGF(DNS_DEBUG, ("\n"));
+ 828:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****             /* call specified callback function if provided */
+ 829:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****             if (pEntry->found) {
+ 1199              		.loc 1 829 0
+ 1200 018e FB69     		ldr	r3, [r7, #28]
+ 1201 0190 D3F81031 		ldr	r3, [r3, #272]
+ 1202 0194 002B     		cmp	r3, #0
+ 1203 0196 45D0     		beq	.L76
+ 830:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****               (*pEntry->found)(pEntry->name, &pEntry->ipaddr, pEntry->arg);
+ 1204              		.loc 1 830 0
+ 1205 0198 FB69     		ldr	r3, [r7, #28]
+ 1206 019a D3F81031 		ldr	r3, [r3, #272]
+ 1207 019e FA69     		ldr	r2, [r7, #28]
+ 1208 01a0 02F10C00 		add	r0, r2, #12
+ 1209 01a4 FA69     		ldr	r2, [r7, #28]
+ 1210 01a6 02F58671 		add	r1, r2, #268
+ 1211 01aa FA69     		ldr	r2, [r7, #28]
+ 1212 01ac D2F81421 		ldr	r2, [r2, #276]
+ 1213 01b0 9847     		blx	r3
+ 831:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****             }
+ 832:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****             /* deallocate memory and return */
+ 833:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****             goto memerr2;
+ 1214              		.loc 1 833 0
+ 1215 01b2 37E0     		b	.L76
+ 1216              	.L65:
+ 834:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****           } else {
+ 835:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****             pHostname = pHostname + SIZEOF_DNS_ANSWER + htons(ans.len);
+ 1217              		.loc 1 835 0
+ 1218 01b4 3B8B     		ldrh	r3, [r7, #24]
+ 1219 01b6 1846     		mov	r0, r3
+ 1220 01b8 FFF7FEFF 		bl	htons
+ 1221 01bc 0346     		mov	r3, r0
+ 1222 01be 03F10A03 		add	r3, r3, #10
+ 1223 01c2 FA6A     		ldr	r2, [r7, #44]
+ 1224 01c4 D318     		adds	r3, r2, r3
+ 1225 01c6 FB62     		str	r3, [r7, #44]
+ 836:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****           }
+ 837:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****           --nanswers;
+ 1226              		.loc 1 837 0
+ 1227 01c8 97F82B30 		ldrb	r3, [r7, #43]
+ 1228 01cc 03F1FF33 		add	r3, r3, #-1
+ 1229 01d0 87F82B30 		strb	r3, [r7, #43]
+ 1230              	.L64:
+ 811:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****         while(nanswers > 0) {
+ 1231              		.loc 1 811 0 discriminator 1
+ 1232 01d4 97F82B30 		ldrb	r3, [r7, #43]	@ zero_extendqisi2
+ 1233 01d8 002B     		cmp	r3, #0
+ 1234 01da 96D1     		bne	.L68
+ 838:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****         }
+ 839:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****         LWIP_DEBUGF(DNS_DEBUG, ("dns_recv: \"%s\": error in response\n", pEntry->name));
+ 840:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****         /* call callback to indicate error, clean up memory and return */
+ 841:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****         goto responseerr;
+ 1235              		.loc 1 841 0
+ 1236 01dc 00E0     		b	.L62
+ 1237              	.L75:
+ 804:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****           goto responseerr;
+ 1238              		.loc 1 804 0
+ 1239 01de 00BF     		nop
+ 1240              	.L62:
+ 842:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       }
+ 843:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     }
+ 844:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   }
+ 845:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 846:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   /* deallocate memory and return */
+ 847:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   goto memerr2;
+ 848:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 849:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** responseerr:
+ 850:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   /* ERROR: call specified callback function with NULL as name to indicate an error */
+ 851:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   if (pEntry->found) {
+ 1241              		.loc 1 851 0
+ 1242 01e0 FB69     		ldr	r3, [r7, #28]
+ 1243 01e2 D3F81031 		ldr	r3, [r3, #272]
+ 1244 01e6 002B     		cmp	r3, #0
+ 1245 01e8 0CD0     		beq	.L69
+ 852:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     (*pEntry->found)(pEntry->name, NULL, pEntry->arg);
+ 1246              		.loc 1 852 0
+ 1247 01ea FB69     		ldr	r3, [r7, #28]
+ 1248 01ec D3F81031 		ldr	r3, [r3, #272]
+ 1249 01f0 FA69     		ldr	r2, [r7, #28]
+ 1250 01f2 02F10C01 		add	r1, r2, #12
+ 1251 01f6 FA69     		ldr	r2, [r7, #28]
+ 1252 01f8 D2F81421 		ldr	r2, [r2, #276]
+ 1253 01fc 0846     		mov	r0, r1
+ 1254 01fe 4FF00001 		mov	r1, #0
+ 1255 0202 9847     		blx	r3
+ 1256              	.L69:
+ 853:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   }
+ 854:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   /* flush this entry */
+ 855:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   pEntry->state = DNS_STATE_UNUSED;
+ 1257              		.loc 1 855 0
+ 1258 0204 FB69     		ldr	r3, [r7, #28]
+ 1259 0206 4FF00002 		mov	r2, #0
+ 1260 020a 1A70     		strb	r2, [r3, #0]
+ 856:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   pEntry->found = NULL;
+ 1261              		.loc 1 856 0
+ 1262 020c FB69     		ldr	r3, [r7, #28]
+ 1263 020e 4FF00002 		mov	r2, #0
+ 1264 0212 C3F81021 		str	r2, [r3, #272]
+ 1265              	.L59:
+ 1266 0216 06E0     		b	.L70
+ 1267              	.L72:
+ 756:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     goto memerr1;
+ 1268              		.loc 1 756 0
+ 1269 0218 00BF     		nop
+ 1270 021a 04E0     		b	.L70
+ 1271              	.L73:
+ 763:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     goto memerr1;
+ 1272              		.loc 1 763 0
+ 1273 021c 00BF     		nop
+ 1274 021e 02E0     		b	.L70
+ 1275              	.L74:
+ 847:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   goto memerr2;
+ 1276              		.loc 1 847 0
+ 1277 0220 00BF     		nop
+ 1278 0222 00E0     		b	.L70
+ 1279              	.L76:
+ 833:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****             goto memerr2;
+ 1280              		.loc 1 833 0
+ 1281 0224 00BF     		nop
+ 1282              	.L70:
+ 857:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 858:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** memerr2:
+ 859:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #if (DNS_USES_STATIC_BUF == 2)
+ 860:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   /* free dns buffer */
+ 861:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   mem_free(dns_payload);
+ 862:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #endif /* (DNS_USES_STATIC_BUF == 2) */
+ 863:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 864:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** memerr1:
+ 865:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   /* free pbuf */
+ 866:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   pbuf_free(p);
+ 1283              		.loc 1 866 0
+ 1284 0226 7868     		ldr	r0, [r7, #4]
+ 1285 0228 FFF7FEFF 		bl	pbuf_free
+ 867:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   return;
+ 868:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** }
+ 1286              		.loc 1 868 0
+ 1287 022c 07F13007 		add	r7, r7, #48
+ 1288 0230 BD46     		mov	sp, r7
+ 1289 0232 80BD     		pop	{r7, pc}
+ 1290              	.L78:
+ 1291              		.align	2
+ 1292              	.L77:
+ 1293 0234 7C040000 		.word	dns_payload+12
+ 1294              		.cfi_endproc
+ 1295              	.LFE10:
+ 1297              		.section	.text.dns_enqueue,"ax",%progbits
+ 1298              		.align	2
+ 1299              		.thumb
+ 1300              		.thumb_func
+ 1302              	dns_enqueue:
+ 1303              	.LFB11:
+ 869:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 870:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** /**
+ 871:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * Queues a new hostname to resolve and sends out a DNS query for that hostname
+ 872:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  *
+ 873:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * @param name the hostname that is to be queried
+ 874:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * @param found a callback founction to be called on success, failure or timeout
+ 875:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * @param callback_arg argument to pass to the callback function
+ 876:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * @return @return a err_t return code.
+ 877:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  */
+ 878:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** static err_t
+ 879:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** dns_enqueue(const char *name, dns_found_callback found, void *callback_arg)
+ 880:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** {
+ 1304              		.loc 1 880 0
+ 1305              		.cfi_startproc
+ 1306              		@ args = 0, pretend = 0, frame = 24
+ 1307              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1308 0000 80B5     		push	{r7, lr}
+ 1309              	.LCFI32:
+ 1310              		.cfi_def_cfa_offset 8
+ 1311              		.cfi_offset 7, -8
+ 1312              		.cfi_offset 14, -4
+ 1313 0002 86B0     		sub	sp, sp, #24
+ 1314              	.LCFI33:
+ 1315              		.cfi_def_cfa_offset 32
+ 1316 0004 00AF     		add	r7, sp, #0
+ 1317              	.LCFI34:
+ 1318              		.cfi_def_cfa_register 7
+ 1319 0006 F860     		str	r0, [r7, #12]
+ 1320 0008 B960     		str	r1, [r7, #8]
+ 1321 000a 7A60     		str	r2, [r7, #4]
+ 881:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   u8_t i;
+ 882:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   u8_t lseq, lseqi;
+ 883:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   struct dns_table_entry *pEntry = NULL;
+ 1322              		.loc 1 883 0
+ 1323 000c 4FF00003 		mov	r3, #0
+ 1324 0010 3B61     		str	r3, [r7, #16]
+ 884:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 885:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   /* search an unused entry, or the oldest one */
+ 886:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   lseq = lseqi = 0;
+ 1325              		.loc 1 886 0
+ 1326 0012 4FF00003 		mov	r3, #0
+ 1327 0016 7B75     		strb	r3, [r7, #21]
+ 1328 0018 7B7D     		ldrb	r3, [r7, #21]
+ 1329 001a BB75     		strb	r3, [r7, #22]
+ 887:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   for (i = 0; i < DNS_TABLE_SIZE; ++i) {
+ 1330              		.loc 1 887 0
+ 1331 001c 4FF00003 		mov	r3, #0
+ 1332 0020 FB75     		strb	r3, [r7, #23]
+ 1333 0022 2DE0     		b	.L80
+ 1334              	.L84:
+ 888:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     pEntry = &dns_table[i];
+ 1335              		.loc 1 888 0
+ 1336 0024 FB7D     		ldrb	r3, [r7, #23]	@ zero_extendqisi2
+ 1337 0026 4FF48C72 		mov	r2, #280
+ 1338 002a 02FB03F2 		mul	r2, r2, r3
+ 1339 002e 40F20003 		movw	r3, #:lower16:dns_table
+ 1340 0032 C0F20003 		movt	r3, #:upper16:dns_table
+ 1341 0036 D318     		adds	r3, r2, r3
+ 1342 0038 3B61     		str	r3, [r7, #16]
+ 889:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     /* is it an unused entry ? */
+ 890:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     if (pEntry->state == DNS_STATE_UNUSED)
+ 1343              		.loc 1 890 0
+ 1344 003a 3B69     		ldr	r3, [r7, #16]
+ 1345 003c 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 1346 003e 002B     		cmp	r3, #0
+ 1347 0040 22D0     		beq	.L89
+ 1348              	.L81:
+ 891:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       break;
+ 892:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 893:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     /* check if this is the oldest completed entry */
+ 894:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     if (pEntry->state == DNS_STATE_DONE) {
+ 1349              		.loc 1 894 0
+ 1350 0042 3B69     		ldr	r3, [r7, #16]
+ 1351 0044 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 1352 0046 032B     		cmp	r3, #3
+ 1353 0048 16D1     		bne	.L83
+ 895:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       if ((dns_seqno - pEntry->seqno) > lseq) {
+ 1354              		.loc 1 895 0
+ 1355 004a 40F20003 		movw	r3, #:lower16:dns_seqno
+ 1356 004e C0F20003 		movt	r3, #:upper16:dns_seqno
+ 1357 0052 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 1358 0054 1A46     		mov	r2, r3
+ 1359 0056 3B69     		ldr	r3, [r7, #16]
+ 1360 0058 1B79     		ldrb	r3, [r3, #4]	@ zero_extendqisi2
+ 1361 005a D21A     		subs	r2, r2, r3
+ 1362 005c BB7D     		ldrb	r3, [r7, #22]	@ zero_extendqisi2
+ 1363 005e 9A42     		cmp	r2, r3
+ 1364 0060 0ADD     		ble	.L83
+ 896:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****         lseq = dns_seqno - pEntry->seqno;
+ 1365              		.loc 1 896 0
+ 1366 0062 40F20003 		movw	r3, #:lower16:dns_seqno
+ 1367 0066 C0F20003 		movt	r3, #:upper16:dns_seqno
+ 1368 006a 1A78     		ldrb	r2, [r3, #0]	@ zero_extendqisi2
+ 1369 006c 3B69     		ldr	r3, [r7, #16]
+ 1370 006e 1B79     		ldrb	r3, [r3, #4]	@ zero_extendqisi2
+ 1371 0070 D31A     		subs	r3, r2, r3
+ 1372 0072 BB75     		strb	r3, [r7, #22]
+ 897:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****         lseqi = i;
+ 1373              		.loc 1 897 0
+ 1374 0074 FB7D     		ldrb	r3, [r7, #23]
+ 1375 0076 7B75     		strb	r3, [r7, #21]
+ 1376              	.L83:
+ 887:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   for (i = 0; i < DNS_TABLE_SIZE; ++i) {
+ 1377              		.loc 1 887 0
+ 1378 0078 FB7D     		ldrb	r3, [r7, #23]
+ 1379 007a 03F10103 		add	r3, r3, #1
+ 1380 007e FB75     		strb	r3, [r7, #23]
+ 1381              	.L80:
+ 887:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   for (i = 0; i < DNS_TABLE_SIZE; ++i) {
+ 1382              		.loc 1 887 0 is_stmt 0 discriminator 1
+ 1383 0080 FB7D     		ldrb	r3, [r7, #23]	@ zero_extendqisi2
+ 1384 0082 032B     		cmp	r3, #3
+ 1385 0084 CED9     		bls	.L84
+ 1386 0086 00E0     		b	.L82
+ 1387              	.L89:
+ 891:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       break;
+ 1388              		.loc 1 891 0 is_stmt 1
+ 1389 0088 00BF     		nop
+ 1390              	.L82:
+ 898:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       }
+ 899:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     }
+ 900:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   }
+ 901:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 902:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   /* if we don't have found an unused entry, use the oldest completed one */
+ 903:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   if (i == DNS_TABLE_SIZE) {
+ 1391              		.loc 1 903 0
+ 1392 008a FB7D     		ldrb	r3, [r7, #23]	@ zero_extendqisi2
+ 1393 008c 042B     		cmp	r3, #4
+ 1394 008e 1FD1     		bne	.L85
+ 904:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     if ((lseqi >= DNS_TABLE_SIZE) || (dns_table[lseqi].state != DNS_STATE_DONE)) {
+ 1395              		.loc 1 904 0
+ 1396 0090 7B7D     		ldrb	r3, [r7, #21]	@ zero_extendqisi2
+ 1397 0092 032B     		cmp	r3, #3
+ 1398 0094 0CD8     		bhi	.L86
+ 1399              		.loc 1 904 0 is_stmt 0 discriminator 1
+ 1400 0096 7A7D     		ldrb	r2, [r7, #21]	@ zero_extendqisi2
+ 1401 0098 40F20003 		movw	r3, #:lower16:dns_table
+ 1402 009c C0F20003 		movt	r3, #:upper16:dns_table
+ 1403 00a0 4FF48C71 		mov	r1, #280
+ 1404 00a4 01FB02F2 		mul	r2, r1, r2
+ 1405 00a8 9B18     		adds	r3, r3, r2
+ 1406 00aa 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 1407 00ac 032B     		cmp	r3, #3
+ 1408 00ae 02D0     		beq	.L87
+ 1409              	.L86:
+ 905:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       /* no entry can't be used now, table is full */
+ 906:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       LWIP_DEBUGF(DNS_DEBUG, ("dns_enqueue: \"%s\": DNS entries table is full\n", name));
+ 907:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       return ERR_MEM;
+ 1410              		.loc 1 907 0 is_stmt 1
+ 1411 00b0 4FF0FF03 		mov	r3, #255
+ 1412 00b4 35E0     		b	.L88
+ 1413              	.L87:
+ 908:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     } else {
+ 909:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       /* use the oldest completed one */
+ 910:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       i = lseqi;
+ 1414              		.loc 1 910 0
+ 1415 00b6 7B7D     		ldrb	r3, [r7, #21]
+ 1416 00b8 FB75     		strb	r3, [r7, #23]
+ 911:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       pEntry = &dns_table[i];
+ 1417              		.loc 1 911 0
+ 1418 00ba FB7D     		ldrb	r3, [r7, #23]	@ zero_extendqisi2
+ 1419 00bc 4FF48C72 		mov	r2, #280
+ 1420 00c0 02FB03F2 		mul	r2, r2, r3
+ 1421 00c4 40F20003 		movw	r3, #:lower16:dns_table
+ 1422 00c8 C0F20003 		movt	r3, #:upper16:dns_table
+ 1423 00cc D318     		adds	r3, r2, r3
+ 1424 00ce 3B61     		str	r3, [r7, #16]
+ 1425              	.L85:
+ 912:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     }
+ 913:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   }
+ 914:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 915:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   /* use this entry */
+ 916:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   LWIP_DEBUGF(DNS_DEBUG, ("dns_enqueue: \"%s\": use DNS entry %"U16_F"\n", name, (u16_t)(i)));
+ 917:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 918:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   /* fill the entry */
+ 919:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   pEntry->state = DNS_STATE_NEW;
+ 1426              		.loc 1 919 0
+ 1427 00d0 3B69     		ldr	r3, [r7, #16]
+ 1428 00d2 4FF00102 		mov	r2, #1
+ 1429 00d6 1A70     		strb	r2, [r3, #0]
+ 920:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   pEntry->seqno = dns_seqno++;
+ 1430              		.loc 1 920 0
+ 1431 00d8 40F20003 		movw	r3, #:lower16:dns_seqno
+ 1432 00dc C0F20003 		movt	r3, #:upper16:dns_seqno
+ 1433 00e0 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 1434 00e2 3A69     		ldr	r2, [r7, #16]
+ 1435 00e4 1946     		mov	r1, r3
+ 1436 00e6 1171     		strb	r1, [r2, #4]
+ 1437 00e8 03F10103 		add	r3, r3, #1
+ 1438 00ec DAB2     		uxtb	r2, r3
+ 1439 00ee 40F20003 		movw	r3, #:lower16:dns_seqno
+ 1440 00f2 C0F20003 		movt	r3, #:upper16:dns_seqno
+ 1441 00f6 1A70     		strb	r2, [r3, #0]
+ 921:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   pEntry->found = found;
+ 1442              		.loc 1 921 0
+ 1443 00f8 3B69     		ldr	r3, [r7, #16]
+ 1444 00fa BA68     		ldr	r2, [r7, #8]
+ 1445 00fc C3F81021 		str	r2, [r3, #272]
+ 922:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   pEntry->arg   = callback_arg;
+ 1446              		.loc 1 922 0
+ 1447 0100 3B69     		ldr	r3, [r7, #16]
+ 1448 0102 7A68     		ldr	r2, [r7, #4]
+ 1449 0104 C3F81421 		str	r2, [r3, #276]
+ 923:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   strcpy(pEntry->name, name);
+ 1450              		.loc 1 923 0
+ 1451 0108 3B69     		ldr	r3, [r7, #16]
+ 1452 010a 03F10C03 		add	r3, r3, #12
+ 1453 010e 1846     		mov	r0, r3
+ 1454 0110 F968     		ldr	r1, [r7, #12]
+ 1455 0112 FFF7FEFF 		bl	strcpy
+ 924:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 925:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   /* force to send query without waiting timer */
+ 926:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   dns_check_entry(i);
+ 1456              		.loc 1 926 0
+ 1457 0116 FB7D     		ldrb	r3, [r7, #23]	@ zero_extendqisi2
+ 1458 0118 1846     		mov	r0, r3
+ 1459 011a FFF7FEFF 		bl	dns_check_entry
+ 927:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 928:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   /* dns query is enqueued */
+ 929:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   return ERR_INPROGRESS;
+ 1460              		.loc 1 929 0
+ 1461 011e 4FF0F203 		mov	r3, #242
+ 1462              	.L88:
+ 1463 0122 5BB2     		sxtb	r3, r3
+ 930:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** }
+ 1464              		.loc 1 930 0
+ 1465 0124 1846     		mov	r0, r3
+ 1466 0126 07F11807 		add	r7, r7, #24
+ 1467 012a BD46     		mov	sp, r7
+ 1468 012c 80BD     		pop	{r7, pc}
+ 1469              		.cfi_endproc
+ 1470              	.LFE11:
+ 1472 012e 00BF     		.section	.text.dns_gethostbyname,"ax",%progbits
+ 1473              		.align	2
+ 1474              		.global	dns_gethostbyname
+ 1475              		.thumb
+ 1476              		.thumb_func
+ 1478              	dns_gethostbyname:
+ 1479              	.LFB12:
+ 931:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 932:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** /**
+ 933:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * Resolve a hostname (string) into an IP address.
+ 934:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * NON-BLOCKING callback version for use with raw API!!!
+ 935:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  *
+ 936:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * Returns immediately with one of err_t return codes:
+ 937:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * - ERR_OK if hostname is a valid IP address string or the host
+ 938:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  *   name is already in the local names table.
+ 939:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * - ERR_INPROGRESS enqueue a request to be sent to the DNS server
+ 940:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  *   for resolution if no errors are present.
+ 941:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  *
+ 942:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * @param hostname the hostname that is to be queried
+ 943:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * @param addr pointer to a struct ip_addr where to store the address if it is already
+ 944:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  *             cached in the dns_table (only valid if ERR_OK is returned!)
+ 945:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * @param found a callback function to be called on success, failure or timeout (only if
+ 946:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  *              ERR_INPROGRESS is returned!)
+ 947:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * @param callback_arg argument to pass to the callback function
+ 948:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  * @return a err_t return code.
+ 949:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****  */
+ 950:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** err_t
+ 951:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** dns_gethostbyname(const char *hostname, struct ip_addr *addr, dns_found_callback found,
+ 952:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****                   void *callback_arg)
+ 953:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** {
+ 1480              		.loc 1 953 0
+ 1481              		.cfi_startproc
+ 1482              		@ args = 0, pretend = 0, frame = 16
+ 1483              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1484 0000 80B5     		push	{r7, lr}
+ 1485              	.LCFI35:
+ 1486              		.cfi_def_cfa_offset 8
+ 1487              		.cfi_offset 7, -8
+ 1488              		.cfi_offset 14, -4
+ 1489 0002 84B0     		sub	sp, sp, #16
+ 1490              	.LCFI36:
+ 1491              		.cfi_def_cfa_offset 24
+ 1492 0004 00AF     		add	r7, sp, #0
+ 1493              	.LCFI37:
+ 1494              		.cfi_def_cfa_register 7
+ 1495 0006 F860     		str	r0, [r7, #12]
+ 1496 0008 B960     		str	r1, [r7, #8]
+ 1497 000a 7A60     		str	r2, [r7, #4]
+ 1498 000c 3B60     		str	r3, [r7, #0]
+ 954:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   /* not initialized or no valid server yet, or invalid addr pointer
+ 955:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****    * or invalid hostname or invalid hostname length */
+ 956:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   if ((dns_pcb == NULL) || (addr == NULL) ||
+ 1499              		.loc 1 956 0
+ 1500 000e 40F20003 		movw	r3, #:lower16:dns_pcb
+ 1501 0012 C0F20003 		movt	r3, #:upper16:dns_pcb
+ 1502 0016 1B68     		ldr	r3, [r3, #0]
+ 1503 0018 002B     		cmp	r3, #0
+ 1504 001a 0FD0     		beq	.L91
+ 1505              		.loc 1 956 0 is_stmt 0 discriminator 1
+ 1506 001c BB68     		ldr	r3, [r7, #8]
+ 1507 001e 002B     		cmp	r3, #0
+ 1508 0020 0CD0     		beq	.L91
+ 1509 0022 FB68     		ldr	r3, [r7, #12]
+ 1510 0024 002B     		cmp	r3, #0
+ 1511 0026 09D0     		beq	.L91
+ 957:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       (!hostname) || (!hostname[0]) ||
+ 1512              		.loc 1 957 0 is_stmt 1
+ 1513 0028 FB68     		ldr	r3, [r7, #12]
+ 1514 002a 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 1515 002c 002B     		cmp	r3, #0
+ 1516 002e 05D0     		beq	.L91
+ 958:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       (strlen(hostname) >= DNS_MAX_NAME_LENGTH)) {
+ 1517              		.loc 1 958 0 discriminator 1
+ 1518 0030 F868     		ldr	r0, [r7, #12]
+ 1519 0032 FFF7FEFF 		bl	strlen
+ 1520 0036 0346     		mov	r3, r0
+ 957:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       (!hostname) || (!hostname[0]) ||
+ 1521              		.loc 1 957 0 discriminator 1
+ 1522 0038 FF2B     		cmp	r3, #255
+ 1523 003a 02D9     		bls	.L92
+ 1524              	.L91:
+ 959:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     return ERR_VAL;
+ 1525              		.loc 1 959 0
+ 1526 003c 4FF0F703 		mov	r3, #247
+ 1527 0040 1EE0     		b	.L93
+ 1528              	.L92:
+ 960:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   }
+ 961:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 962:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #if LWIP_HAVE_LOOPIF
+ 963:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   if (strcmp(hostname,"localhost")==0) {
+ 964:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     addr->addr = htonl(INADDR_LOOPBACK);
+ 965:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     return ERR_OK;
+ 966:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   }
+ 967:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** #endif /* LWIP_HAVE_LOOPIF */
+ 968:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 969:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   /* host name already in octet notation? set ip addr and return ERR_OK
+ 970:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****    * already have this address cached? */
+ 971:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   if (((addr->addr = inet_addr(hostname)) != INADDR_NONE) ||
+ 1529              		.loc 1 971 0
+ 1530 0042 F868     		ldr	r0, [r7, #12]
+ 1531 0044 FFF7FEFF 		bl	inet_addr
+ 1532 0048 0246     		mov	r2, r0
+ 1533 004a BB68     		ldr	r3, [r7, #8]
+ 1534 004c 1A60     		str	r2, [r3, #0]	@ unaligned
+ 1535 004e BB68     		ldr	r3, [r7, #8]
+ 1536 0050 1B68     		ldr	r3, [r3, #0]	@ unaligned
+ 1537 0052 B3F1FF3F 		cmp	r3, #-1
+ 1538 0056 0AD1     		bne	.L94
+ 972:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****       ((addr->addr = dns_lookup(hostname)) != INADDR_NONE)) {
+ 1539              		.loc 1 972 0 discriminator 1
+ 1540 0058 F868     		ldr	r0, [r7, #12]
+ 1541 005a FFF7FEFF 		bl	dns_lookup
+ 1542 005e 0246     		mov	r2, r0
+ 1543 0060 BB68     		ldr	r3, [r7, #8]
+ 1544 0062 1A60     		str	r2, [r3, #0]	@ unaligned
+ 1545 0064 BB68     		ldr	r3, [r7, #8]
+ 1546 0066 1B68     		ldr	r3, [r3, #0]	@ unaligned
+ 971:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   if (((addr->addr = inet_addr(hostname)) != INADDR_NONE) ||
+ 1547              		.loc 1 971 0 discriminator 1
+ 1548 0068 B3F1FF3F 		cmp	r3, #-1
+ 1549 006c 02D0     		beq	.L95
+ 1550              	.L94:
+ 973:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****     return ERR_OK;
+ 1551              		.loc 1 973 0
+ 1552 006e 4FF00003 		mov	r3, #0
+ 1553 0072 05E0     		b	.L93
+ 1554              	.L95:
+ 974:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   }
+ 975:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** 
+ 976:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   /* queue query with specified callback */
+ 977:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c ****   return dns_enqueue(hostname, found, callback_arg);
+ 1555              		.loc 1 977 0
+ 1556 0074 F868     		ldr	r0, [r7, #12]
+ 1557 0076 7968     		ldr	r1, [r7, #4]
+ 1558 0078 3A68     		ldr	r2, [r7, #0]
+ 1559 007a FFF7FEFF 		bl	dns_enqueue
+ 1560 007e 0346     		mov	r3, r0
+ 1561              	.L93:
+ 1562 0080 5BB2     		sxtb	r3, r3
+ 978:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.c **** }
+ 1563              		.loc 1 978 0
+ 1564 0082 1846     		mov	r0, r3
+ 1565 0084 07F11007 		add	r7, r7, #16
+ 1566 0088 BD46     		mov	sp, r7
+ 1567 008a 80BD     		pop	{r7, pc}
+ 1568              		.cfi_endproc
+ 1569              	.LFE12:
+ 1571              		.text
+ 1572              	.Letext0:
+ 1573              		.file 2 "C:\\DAVE3_workspace\\ws3.1.10\\XMC4500_RK_HTTPserver\\XMC4500_RK_HTTPserver\\Dave\\Genera
+ 1574              		.file 3 "C:\\DAVE3_workspace\\ws3.1.10\\XMC4500_RK_HTTPserver\\XMC4500_RK_HTTPserver\\Dave\\Genera
+ 1575              		.file 4 "C:\\DAVE3_workspace\\ws3.1.10\\XMC4500_RK_HTTPserver\\XMC4500_RK_HTTPserver\\Dave\\Genera
+ 1576              		.file 5 "C:\\DAVE3_workspace\\ws3.1.10\\XMC4500_RK_HTTPserver\\XMC4500_RK_HTTPserver\\Dave\\Genera
+ 1577              		.file 6 "C:\\DAVE3_workspace\\ws3.1.10\\XMC4500_RK_HTTPserver\\XMC4500_RK_HTTPserver\\Dave\\Genera
+ 1578              		.file 7 "C:\\DAVE3_workspace\\ws3.1.10\\XMC4500_RK_HTTPserver\\XMC4500_RK_HTTPserver\\Dave\\Genera
+DEFINED SYMBOLS
+                            *ABS*:00000000 dns.c
+C:\Users\Mihai\AppData\Local\Temp\cc44I8zP.s:20     .bss:00000000 $d
+C:\Users\Mihai\AppData\Local\Temp\cc44I8zP.s:21     .bss:00000000 dns_pcb
+C:\Users\Mihai\AppData\Local\Temp\cc44I8zP.s:23     .bss:00000004 dns_seqno
+C:\Users\Mihai\AppData\Local\Temp\cc44I8zP.s:26     .bss:00000008 dns_table
+C:\Users\Mihai\AppData\Local\Temp\cc44I8zP.s:29     .bss:00000468 dns_servers
+C:\Users\Mihai\AppData\Local\Temp\cc44I8zP.s:32     .bss:00000470 dns_payload
+C:\Users\Mihai\AppData\Local\Temp\cc44I8zP.s:35     .rodata:00000000 $d
+C:\Users\Mihai\AppData\Local\Temp\cc44I8zP.s:36     .rodata:00000000 .LC0
+C:\Users\Mihai\AppData\Local\Temp\cc44I8zP.s:39     .text.dns_init:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc44I8zP.s:44     .text.dns_init:00000000 dns_init
+C:\Users\Mihai\AppData\Local\Temp\cc44I8zP.s:1000   .text.dns_recv:00000000 dns_recv
+C:\Users\Mihai\AppData\Local\Temp\cc44I8zP.s:123    .text.dns_setserver:00000000 dns_setserver
+C:\Users\Mihai\AppData\Local\Temp\cc44I8zP.s:118    .text.dns_setserver:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc44I8zP.s:181    .text.dns_getserver:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc44I8zP.s:186    .text.dns_getserver:00000000 dns_getserver
+C:\Users\Mihai\AppData\Local\Temp\cc44I8zP.s:243    .text.dns_tmr:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc44I8zP.s:248    .text.dns_tmr:00000000 dns_tmr
+C:\Users\Mihai\AppData\Local\Temp\cc44I8zP.s:953    .text.dns_check_entries:00000000 dns_check_entries
+C:\Users\Mihai\AppData\Local\Temp\cc44I8zP.s:277    .text.dns_lookup:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc44I8zP.s:281    .text.dns_lookup:00000000 dns_lookup
+C:\Users\Mihai\AppData\Local\Temp\cc44I8zP.s:362    .text.dns_compare_name:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc44I8zP.s:366    .text.dns_compare_name:00000000 dns_compare_name
+C:\Users\Mihai\AppData\Local\Temp\cc44I8zP.s:452    .text.dns_parse_name:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc44I8zP.s:456    .text.dns_parse_name:00000000 dns_parse_name
+C:\Users\Mihai\AppData\Local\Temp\cc44I8zP.s:522    .text.dns_send:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc44I8zP.s:526    .text.dns_send:00000000 dns_send
+C:\Users\Mihai\AppData\Local\Temp\cc44I8zP.s:735    .text.dns_check_entry:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc44I8zP.s:739    .text.dns_check_entry:00000000 dns_check_entry
+C:\Users\Mihai\AppData\Local\Temp\cc44I8zP.s:775    .text.dns_check_entry:00000030 $d
+C:\Users\Mihai\AppData\Local\Temp\cc44I8zP.s:781    .text.dns_check_entry:00000040 $t
+C:\Users\Mihai\AppData\Local\Temp\cc44I8zP.s:949    .text.dns_check_entries:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc44I8zP.s:996    .text.dns_recv:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc44I8zP.s:1293   .text.dns_recv:00000234 $d
+C:\Users\Mihai\AppData\Local\Temp\cc44I8zP.s:1298   .text.dns_enqueue:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc44I8zP.s:1302   .text.dns_enqueue:00000000 dns_enqueue
+C:\Users\Mihai\AppData\Local\Temp\cc44I8zP.s:1473   .text.dns_gethostbyname:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc44I8zP.s:1478   .text.dns_gethostbyname:00000000 dns_gethostbyname
+                     .debug_frame:00000010 $d
+                           .group:00000000 wm4.1.1791a5ae2e936ca1033c1c44be394cc7
+                           .group:00000000 wm4.ETH004_Conf.h.56.564c3f309c32b3c742fc91049cf66940
+                           .group:00000000 wm4.lwipopts.h.73.a7a63bda1e8216abd1d90275eaaa0027
+                           .group:00000000 wm4.arch.h.33.6fa4aa86d33d1490ae882caef7316405
+                           .group:00000000 wm4.cpu.h.33.b213c7fd77614ebc3691cef18ad2ff22
+                           .group:00000000 wm4.cc.h.66.ec134211c658dcc89de4610e4e7bab46
+                           .group:00000000 wm4.arch.h.47.5153c52bfb94ee3b37299920afab6afd
+                           .group:00000000 wm4.debug.h.43.557ecd6c90cc70b375bb8a29118be47b
+                           .group:00000000 wm4.opt.h.94.d36882acafebb8726bce646fc8b2397b
+                           .group:00000000 wm4.err.h.52.37c5d17538f8e8347a9c84196701e92d
+                           .group:00000000 wm4.pbuf.h.43.e9a1ad12b97478787a109e22d5306820
+                           .group:00000000 wm4.inet.h.46.b516065779826845d16d49f513869a2b
+                           .group:00000000 wm4.ip_addr.h.79.9a0ce887ca8c88c22ad7686bcb5105df
+                           .group:00000000 wm4.netif.h.77.eb641fb35cae7e4880920e0acf78586f
+                           .group:00000000 wm4.def.h.33.f5df81959e69d85e6b3a0a040438efaf
+                           .group:00000000 wm4.ip.h.48.ad46847692d4d729760949b27e48a442
+                           .group:00000000 wm4.udp.h.48.1a8dde095cd0a13580afaba1443e5a3f
+                           .group:00000000 wm4.mem.h.96.20770766e6c9e6c42af6bfa95ef5c63f
+                           .group:00000000 wm4.dns.h.43.008401dfc4c9b0091d6c572f5c53ebc6
+                           .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
+                           .group:00000000 wm4.features.h.22.b72b3baab2bb2eab3661375590100b6b
+                           .group:00000000 wm4.config.h.193.5fb8ef056cdff92dec3dee9552839d8c
+                           .group:00000000 wm4._ansi.h.23.7aefdac4826acebbfc9f3822a0aeb14c
+                           .group:00000000 wm4._default_types.h.6.5e12cd604db8ce00b62bb2f02708eaf3
+                           .group:00000000 wm4.lock.h.2.9bc98482741e5e2a9450b12934a684ea
+                           .group:00000000 wm4.stddef.h.349.31f4c5baff3fa2689010b32028da9c47
+                           .group:00000000 wm4.reent.h.16.9e42f0e588b85e70b2bf6572af57ce64
+                           .group:00000000 wm4.stddef.h.187.9e651b6b8b16e149c1353259404973ea
+                           .group:00000000 wm4.string.h.86.d5c872ff52e2712c985b588a0ef39f3c
+
+UNDEFINED SYMBOLS
+inet_addr
+udp_new
+ip_addr_any
+udp_bind
+udp_recv
+strcmp
+pbuf_alloc
+memset
+htons
+pbuf_realloc
+udp_connect
+udp_sendto
+pbuf_free
+pbuf_copy_partial
+ntohs
+ntohl
+memcpy
+strcpy
+strlen

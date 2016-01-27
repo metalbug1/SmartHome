@@ -1,0 +1,122 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"syscall.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              	.Letext0:
+  20              		.file 1 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
+  21              		.file 2 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Include/core_cm4.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 syscall.c
+                           .group:00000000 wm4.1.1791a5ae2e936ca1033c1c44be394cc7
+                           .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
+                           .group:00000000 wm4.features.h.22.b72b3baab2bb2eab3661375590100b6b
+                           .group:00000000 wm4.config.h.193.5fb8ef056cdff92dec3dee9552839d8c
+                           .group:00000000 wm4._ansi.h.23.7aefdac4826acebbfc9f3822a0aeb14c
+                           .group:00000000 wm4.stdlib.h.13.603ed7eb09a1561ab06840b7c0fcff58
+                           .group:00000000 wm4.stddef.h.187.40b3a084f9bc2c020a9e00b9eabe9c14
+                           .group:00000000 wm4._default_types.h.6.5e12cd604db8ce00b62bb2f02708eaf3
+                           .group:00000000 wm4.lock.h.2.9bc98482741e5e2a9450b12934a684ea
+                           .group:00000000 wm4.stddef.h.349.31f4c5baff3fa2689010b32028da9c47
+                           .group:00000000 wm4.reent.h.16.9e42f0e588b85e70b2bf6572af57ce64
+                           .group:00000000 wm4.alloca.h.8.dfc0c703c47ec3e69746825b17d9e66d
+                           .group:00000000 wm4.stdlib.h.50.f5923f1950ced340a337f4676566f65a
+                           .group:00000000 wm4.XMC4500.h.45.215f4b8c79f46c7645c15373868d08c0
+                           .group:00000000 wm4.core_cm4.h.47.41af406cb4cda82c972f112a9cd0a024
+                           .group:00000000 wm4.stdint.h.10.90b695f550ca6cc3fb08fa83baf01e05
+                           .group:00000000 wm4.core_cmInstr.h.39.3d3d1b4a79aef37532666dc6ee87c6ac
+                           .group:00000000 wm4.core_cm4_simd.h.43.b5d1d38735af6366227b4256d330cf13
+                           .group:00000000 wm4.core_cm4.h.178.e5ef5ce66d198d7f00f9d0076e267c41
+                           .group:00000000 wm4.system_XMC4500.h.29.827f68baa362c84f2abae4ab67dde7c9
+                           .group:00000000 wm4.XMC4500.h.198.8e022f279ff353ed081df898dc7b9cf3
+                           .group:00000000 wm4.stddef.h.40.b60a1c1ee3f272eef5327a730cbabca6
+                           .group:00000000 wm4.types.h.55.0006b5fda1d606516f2dcaf4aca92b11
+                           .group:00000000 wm4.MULTIPLEXER.h.43.4aa654be3ec80895f631b5281bbb9105
+                           .group:00000000 wm4.CCU8PWMLIB.h.70.a5d6a5267902b8b4aea2a0224518259a
+                           .group:00000000 wm4.DBG001.h.116.d6d9e7459a0faa3905c97c1d2edb339d
+                           .group:00000000 wm4.SYSTM001.h.63.668098b2213d40a5bd0db5fbe813cf05
+                           .group:00000000 wm4.ETH002_Conf.h.56.5bd2b085b66f43d51abd69396be7f35f
+                           .group:00000000 wm4.EthernetPHY.h.54.7af1709186b21e62a5f1d4049da3988b
+                           .group:00000000 wm4.ETH001_Conf.h.71.1e151af1ba54dd023e1f942bdf922819
+                           .group:00000000 wm4.synopGMAC_plat.h.78.7a90e072b497857344aea4ba1e994097
+                           .group:00000000 wm4.synopGMAC_stack_interface.h.73.6be6aaee0ac6637432f4d0589044479b
+                           .group:00000000 wm4.SynopGMAC_Dev.h.72.7c89c07cf666d37f5c9b615720d5e111
+                           .group:00000000 wm4.synopGMAC_network_interface.h.73.4dd08316a11bc43c8c4a9da15277fb0f
+                           .group:00000000 wm4.string.h.8.ef946ad0bc9ad5c970c365dcd1fc4b0a
+                           .group:00000000 wm4.stddef.h.161.e50ff8a9d5d1abbc15641da28ac571bf
+                           .group:00000000 wm4.string.h.86.d5c872ff52e2712c985b588a0ef39f3c
+                           .group:00000000 wm4.ETH004_Conf.h.56.564c3f309c32b3c742fc91049cf66940
+                           .group:00000000 wm4.lwipopts.h.73.a7a63bda1e8216abd1d90275eaaa0027
+                           .group:00000000 wm4.arch.h.33.6fa4aa86d33d1490ae882caef7316405
+                           .group:00000000 wm4.cpu.h.33.b213c7fd77614ebc3691cef18ad2ff22
+                           .group:00000000 wm4.cc.h.66.ec134211c658dcc89de4610e4e7bab46
+                           .group:00000000 wm4.arch.h.47.5153c52bfb94ee3b37299920afab6afd
+                           .group:00000000 wm4.debug.h.43.557ecd6c90cc70b375bb8a29118be47b
+                           .group:00000000 wm4.opt.h.94.d36882acafebb8726bce646fc8b2397b
+                           .group:00000000 wm4.err.h.52.37c5d17538f8e8347a9c84196701e92d
+                           .group:00000000 wm4.pbuf.h.43.e9a1ad12b97478787a109e22d5306820
+                           .group:00000000 wm4.inet.h.46.b516065779826845d16d49f513869a2b
+                           .group:00000000 wm4.ip_addr.h.79.9a0ce887ca8c88c22ad7686bcb5105df
+                           .group:00000000 wm4.sys.h.65.4a0cd87b9e0d8bb4cd6b30e939b2ca7e
+                           .group:00000000 wm4.mem.h.96.20770766e6c9e6c42af6bfa95ef5c63f
+                           .group:00000000 wm4.def.h.33.049f911dab26023a266ed46ced0ce4bc
+                           .group:00000000 wm4.netif.h.53.c13431a64f0e73a26710e71455725e84
+                           .group:00000000 wm4.ip.h.48.ad46847692d4d729760949b27e48a442
+                           .group:00000000 wm4.icmp.h.44.450dbf91f594cc26ad19d086cdc83713
+                           .group:00000000 wm4.tcp.h.55.5c30b9432fa60afaa85cbdd225b0c683
+                           .group:00000000 wm4.udp.h.48.1a8dde095cd0a13580afaba1443e5a3f
+                           .group:00000000 wm4.SDMMC003_Conf.h.50.e707c07613fb4e6f2eaec982a892429d
+                           .group:00000000 wm4.SDMMC003.h.85.b66055f6032a052f5173e3d123f9c61e
+                           .group:00000000 wm4.SDMMC001.h.50.3e2fedc7e5ace33db4121d5cc027e8a4
+                           .group:00000000 wm4.types.h.23.0d949686bbcadd1621462d4fa1f884f9
+                           .group:00000000 wm4.types.h.2.e9cec8c90ab35f77d9f499e06ae02400
+                           .group:00000000 wm4.types.h.80.1f2c84c0d57dd52dd9936095d9ac218e
+                           .group:00000000 wm4.time.h.16.a4579e68956d2601c6113814b546764b
+                           .group:00000000 wm4.diskio.h.7.93a3c8131d08770c060b04d2180fd09a
+                           .group:00000000 wm4.diskio.h.42.a863614abe78d56d18ed7cb292d0028d
+                           .group:00000000 wm4.ffconf.h.57.4ab321a2116d35ff7f28236ac31fad7c
+                           .group:00000000 wm4.ff.h.82.8f05a37d35a49dba2681a7f047fee4ee
+                           .group:00000000 wm4.lmm001_debuglog.h.40.8031299705ecf04ad726bd19baff976d
+                           .group:00000000 wm4.LMM001.h.42.c21fe9cbedc336738c3dc89405cad216
+                           .group:00000000 wm4.stdio.h.27.f2ac352bab34f31f9f478442827b2ba6
+                           .group:00000000 wm4.stdarg.h.34.3a23a216c0c293b3d2ea2e89281481e6
+                           .group:00000000 wm4.stdio.h.2.4aa87247282eca6c8f36f9de33d8df1a
+                           .group:00000000 wm4.stdio.h.63.dfdea6580b080784d08faace69b6ed76
+                           .group:00000000 wm4.time.h.2.9857e62ad6ac99431e29d58067232314
+                           .group:00000000 wm4.time.h.24.c499d4c1915694df17abb795fd34b719
+                           .group:00000000 wm4.time.h.124.10ced469f846269cafc58b59c853e1bb
+                           .group:00000000 wm4.errno.h.2.ba016d646105af6cad23be83630b6a3f
+                           .group:00000000 wm4.errno.h.9.65044c2b5d8494e43f5986ab0a1d770f
+                           .group:00000000 wm4.unistd.h.2.6ce1b91c4223f6078c1b210c7538c1d2
+                           .group:00000000 wm4.unistd.h.251.605bc560cdc6c3b07b599bb71ac4e425
+                           .group:00000000 wm4.malloc.h.4.62bd13b8107d5245f60bd92bb5994838
+                           .group:00000000 wm4.malloc.h.148.73b7de3bd065dafbd594b04197a9466e
+                           .group:00000000 wm4.reent.h.91.faac4d0ac97c0fcf23d10d0786197642
+                           .group:00000000 wm4.SLTHA003.h.100.69cb08672bc6ab3f052aa9d5bd6dc5ca
+                           .group:00000000 wm4._default_fcntl.h.6.d036cf640d0f9a06bcff1be55acd66be
+                           .group:00000000 wm4.stat.h.2.a761b02482a54847ff0d09dfcff24a5c
+                           .group:00000000 wm4.fcntl.h.9.9336f33d7f5028f694c75e6e224e0cf7
+                           .group:00000000 wm4.SLTHA001.h.97.d7e87c19a31e3244bdd5839e7cc42a61
+                           .group:00000000 wm4.WEBSERVER001_Conf.h.54.cd6d29aaa96a848cbc5321bab5d6cd90
+                           .group:00000000 wm4.ADCGROUP001.h.48.081c7f952eb4b6ea2df7d05180ee1663
+                           .group:00000000 wm4.IO001.h.49.1da965fb490206cf7cde64a90f6912e1
+                           .group:00000000 wm4.MOTORLIBS.h.59.b2e97de0df555dedfa51e24447b57ab8
+                           .group:00000000 wm4.uc_id.h.35.a6c4837fad81477ba31967683332b8cc
+                           .group:00000000 wm4.Usic.h.90.22743468abc46f16747d12430b219aaf
+                           .group:00000000 wm4.UART001_Conf.h.53.c5c972f6f634bc5116c171852aaab668
+                           .group:00000000 wm4.UART001.h.109.3e835815a7a59791d8bd39655f4d4cc9
+
+NO UNDEFINED SYMBOLS

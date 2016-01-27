@@ -1,0 +1,531 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"init.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.lwip_init,"ax",%progbits
+  20              		.align	2
+  21              		.global	lwip_init
+  22              		.thumb
+  23              		.thumb_func
+  25              	lwip_init:
+  26              	.LFB112:
+  27              		.file 1 "../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c"
+   1:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** /**
+   2:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****  * @file
+   3:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****  * Modules initialization
+   4:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****  *
+   5:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****  */
+   6:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** 
+   7:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** /*
+   8:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****  * Copyright (c) 2001-2004 Swedish Institute of Computer Science.
+   9:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****  * All rights reserved. 
+  10:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****  * 
+  11:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****  * Redistribution and use in source and binary forms, with or without modification, 
+  12:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****  * are permitted provided that the following conditions are met:
+  13:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****  *
+  14:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****  * 1. Redistributions of source code must retain the above copyright notice,
+  15:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****  *    this list of conditions and the following disclaimer.
+  16:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****  * 2. Redistributions in binary form must reproduce the above copyright notice,
+  17:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****  *    this list of conditions and the following disclaimer in the documentation
+  18:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****  *    and/or other materials provided with the distribution.
+  19:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****  * 3. The name of the author may not be used to endorse or promote products
+  20:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****  *    derived from this software without specific prior written permission. 
+  21:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****  *
+  22:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****  * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR IMPLIED 
+  23:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****  * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF 
+  24:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****  * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT 
+  25:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****  * SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, 
+  26:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****  * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT 
+  27:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****  * OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS 
+  28:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****  * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN 
+  29:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****  * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING 
+  30:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****  * IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY 
+  31:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****  * OF SUCH DAMAGE.
+  32:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****  *
+  33:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****  * This file is part of the lwIP TCP/IP stack.
+  34:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****  * 
+  35:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****  * Author: Adam Dunkels <adam@sics.se>
+  36:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****  *
+  37:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****  */
+  38:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** /* =========================================================================== *
+  39:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****  * Copyright (c) 2011, Infineon Technologies AG                                *
+  40:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****  * All rights reserved.                                                        *
+  41:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****  *                                                                             *
+  42:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****  * Redistribution and use in source and binary forms, with or without          *
+  43:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****  * modification, are permitted provided that the following conditions are met: *
+  44:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****  * Redistributions of source code must retain the above copyright notice, this *
+  45:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****  * list of conditions and the following disclaimer. Redistributions in binary  *
+  46:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****  * form must reproduce the above copyright notice, this list of conditions and *
+  47:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****  * the following disclaimer in the documentation and/or other materials        *
+  48:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****  * provided with the distribution. Neither the name of the copyright holders   *
+  49:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****  * nor the names of its contributors may be used to endorse or promote         *
+  50:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****  * products derived from this software without specific prior written          *
+  51:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****  * permission.                                                                 *
+  52:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****  *                                                                             *
+  53:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" *
+  54:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,       *
+  55:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****  * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR      *
+  56:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****  * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR           *
+  57:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****  * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,       *
+  58:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****  * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,         *
+  59:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****  * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; *
+  60:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****  * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,    *
+  61:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****  * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR     *
+  62:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****  * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF      *
+  63:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.                                  *
+  64:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****  * To improve the quality of the software, users are encouraged to share       *
+  65:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****  * modifications, enhancements or bug fixes with                               *
+  66:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****  * Infineon Technologies AG (dave@infineon.com).                               *
+  67:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****  *                                                                             *
+  68:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****  * ==========================================================================  *
+  69:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** ********************************************************************************
+  70:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** **                                                                            **
+  71:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** **                                                                            **
+  72:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** ** PLATFORM : Infineon XMC4000 Series                                         **
+  73:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** **                                                                            **
+  74:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** ** COMPILER : Compiler Independent                                            **
+  75:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** **                                                                            **
+  76:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** ** AUTHOR : App Developer                                                     **
+  77:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** **                                                                            **
+  78:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** ** MAY BE CHANGED BY USER [Yes/No]: Yes                                       **
+  79:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** **                                                                            **
+  80:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** ** MODIFICATION DATE : Jul 25, 2012                                           **
+  81:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** **                                                                            **
+  82:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** *******************************************************************************/
+  83:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** 
+  84:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** /*******************************************************************************
+  85:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** **                       Author(s) Identity                                   **
+  86:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** ********************************************************************************
+  87:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** **                                                                            **
+  88:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** ** Initials     Name                                                          **
+  89:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** ** ---------------------------------------------------------------------------**
+  90:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** ** JJ          App Developer                                                  **
+  91:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** *******************************************************************************/
+  92:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #include <DAVE3.h>
+  93:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #include "lwip/opt.h"
+  94:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** 
+  95:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #include "lwip/init.h"
+  96:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #include "lwip/stats.h"
+  97:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #include "lwip/sys.h"
+  98:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #include "lwip/mem.h"
+  99:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #include "lwip/memp.h"
+ 100:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #include "lwip/pbuf.h"
+ 101:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #include "lwip/netif.h"
+ 102:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #include "lwip/sockets.h"
+ 103:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #include "lwip/ip.h"
+ 104:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #include "lwip/raw.h"
+ 105:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #include "lwip/udp.h"
+ 106:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #include "lwip/tcp.h"
+ 107:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #include "lwip/snmp_msg.h"
+ 108:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #include "lwip/autoip.h"
+ 109:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #include "lwip/igmp.h"
+ 110:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #include "lwip/dns.h"
+ 111:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #include "netif/etharp.h"
+ 112:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** 
+ 113:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** /* Compile-time sanity checks for configuration errors.
+ 114:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****  * These can be done independently of LWIP_DEBUG, without penalty.
+ 115:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****  */
+ 116:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #ifndef BYTE_ORDER
+ 117:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****   #error "BYTE_ORDER is not defined, you have to define it in your cc.h"
+ 118:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #endif
+ 119:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #if (!IP_SOF_BROADCAST && IP_SOF_BROADCAST_RECV)
+ 120:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****   #error "If you want to use broadcast filter per pcb on recv operations, you have to define IP_SOF
+ 121:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #endif
+ 122:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #if (!LWIP_ARP && ARP_QUEUEING)
+ 123:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****   #error "If you want to use ARP Queueing, you have to define LWIP_ARP=1 in your lwipopts.h"
+ 124:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #endif
+ 125:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #if (!LWIP_UDP && LWIP_UDPLITE)
+ 126:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****   #error "If you want to use UDP Lite, you have to define LWIP_UDP=1 in your lwipopts.h"
+ 127:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #endif
+ 128:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #if (!LWIP_UDP && LWIP_SNMP)
+ 129:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****   #error "If you want to use SNMP, you have to define LWIP_UDP=1 in your lwipopts.h"
+ 130:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #endif
+ 131:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #if (!LWIP_UDP && LWIP_DHCP)
+ 132:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****   #error "If you want to use DHCP, you have to define LWIP_UDP=1 in your lwipopts.h"
+ 133:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #endif
+ 134:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #if (!LWIP_UDP && LWIP_IGMP)
+ 135:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****   #error "If you want to use IGMP, you have to define LWIP_UDP=1 in your lwipopts.h"
+ 136:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #endif
+ 137:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #if (!LWIP_UDP && LWIP_DNS)
+ 138:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****   #error "If you want to use DNS, you have to define LWIP_UDP=1 in your lwipopts.h"
+ 139:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #endif
+ 140:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #if (LWIP_ARP && (ARP_TABLE_SIZE > 0x7f))
+ 141:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****   #error "If you want to use ARP, ARP_TABLE_SIZE must fit in an s8_t, so, you have to reduce it in 
+ 142:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #endif
+ 143:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #if (LWIP_ARP && ARP_QUEUEING && (MEMP_NUM_ARP_QUEUE<=0))
+ 144:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****   #error "If you want to use ARP Queueing, you have to define MEMP_NUM_ARP_QUEUE>=1 in your lwipopt
+ 145:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #endif
+ 146:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #if (LWIP_RAW && (MEMP_NUM_RAW_PCB<=0))
+ 147:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****   #error "If you want to use RAW, you have to define MEMP_NUM_RAW_PCB>=1 in your lwipopts.h"
+ 148:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #endif
+ 149:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #if (LWIP_UDP && (MEMP_NUM_UDP_PCB<=0))
+ 150:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****   #error "If you want to use UDP, you have to define MEMP_NUM_UDP_PCB>=1 in your lwipopts.h"
+ 151:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #endif
+ 152:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #if (LWIP_TCP && (MEMP_NUM_TCP_PCB<=0))
+ 153:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****   #error "If you want to use TCP, you have to define MEMP_NUM_TCP_PCB>=1 in your lwipopts.h"
+ 154:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #endif
+ 155:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #if (LWIP_TCP && (TCP_WND > 0xffff))
+ 156:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****   #error "If you want to use TCP, TCP_WND must fit in an u16_t, so, you have to reduce it in your l
+ 157:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #endif
+ 158:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #if (LWIP_TCP && (TCP_SND_QUEUELEN > 0xffff))
+ 159:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****   #error "If you want to use TCP, TCP_SND_QUEUELEN must fit in an u16_t, so, you have to reduce it 
+ 160:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #endif
+ 161:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #if (LWIP_TCP && ((TCP_MAXRTX > 12) || (TCP_SYNMAXRTX > 12)))
+ 162:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****   #error "If you want to use TCP, TCP_MAXRTX and TCP_SYNMAXRTX must less or equal to 12 (due to tcp
+ 163:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #endif
+ 164:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #if (LWIP_TCP && TCP_LISTEN_BACKLOG && (TCP_DEFAULT_LISTEN_BACKLOG < 0) || (TCP_DEFAULT_LISTEN_BACK
+ 165:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****   #error "If you want to use TCP backlog, TCP_DEFAULT_LISTEN_BACKLOG must fit into an u8_t"
+ 166:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #endif
+ 167:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #if (LWIP_IGMP && (MEMP_NUM_IGMP_GROUP<=1))
+ 168:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****   #error "If you want to use IGMP, you have to define MEMP_NUM_IGMP_GROUP>1 in your lwipopts.h"
+ 169:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #endif
+ 170:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #if (PPP_SUPPORT && (NO_SYS==1))
+ 171:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****   #error "If you want to use PPP, you have to define NO_SYS=0 in your lwipopts.h"
+ 172:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #endif 
+ 173:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #if (LWIP_NETIF_API && (NO_SYS==1))
+ 174:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****   #error "If you want to use NETIF API, you have to define NO_SYS=0 in your lwipopts.h"
+ 175:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #endif
+ 176:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #if ((LWIP_SOCKET || LWIP_NETCONN) && (NO_SYS==1))
+ 177:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****   #error "If you want to use Sequential API, you have to define NO_SYS=0 in your lwipopts.h"
+ 178:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #endif
+ 179:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #if ((LWIP_NETCONN || LWIP_SOCKET) && (MEMP_NUM_TCPIP_MSG_API<=0))
+ 180:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****   #error "If you want to use Sequential API, you have to define MEMP_NUM_TCPIP_MSG_API>=1 in your l
+ 181:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #endif
+ 182:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #if (!LWIP_NETCONN && LWIP_SOCKET)
+ 183:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****   #error "If you want to use Socket API, you have to define LWIP_NETCONN=1 in your lwipopts.h"
+ 184:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #endif
+ 185:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #if (((!LWIP_DHCP) || (!LWIP_AUTOIP)) && LWIP_DHCP_AUTOIP_COOP)
+ 186:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****   #error "If you want to use DHCP/AUTOIP cooperation mode, you have to define LWIP_DHCP=1 and LWIP_
+ 187:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #endif
+ 188:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #if (((!LWIP_DHCP) || (!LWIP_ARP)) && DHCP_DOES_ARP_CHECK)
+ 189:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****   #error "If you want to use DHCP ARP checking, you have to define LWIP_DHCP=1 and LWIP_ARP=1 in yo
+ 190:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #endif
+ 191:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #if (!LWIP_ARP && LWIP_AUTOIP)
+ 192:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****   #error "If you want to use AUTOIP, you have to define LWIP_ARP=1 in your lwipopts.h"
+ 193:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #endif
+ 194:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #if (LWIP_SNMP && (SNMP_CONCURRENT_REQUESTS<=0))
+ 195:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****   #error "If you want to use SNMP, you have to define SNMP_CONCURRENT_REQUESTS>=1 in your lwipopts.
+ 196:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #endif
+ 197:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #if (LWIP_SNMP && (SNMP_TRAP_DESTINATIONS<=0))
+ 198:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****   #error "If you want to use SNMP, you have to define SNMP_TRAP_DESTINATIONS>=1 in your lwipopts.h"
+ 199:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #endif
+ 200:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #if (LWIP_TCP && ((LWIP_EVENT_API && LWIP_CALLBACK_API) || (!LWIP_EVENT_API && !LWIP_CALLBACK_API))
+ 201:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****   #error "One and exactly one of LWIP_EVENT_API and LWIP_CALLBACK_API has to be enabled in your lwi
+ 202:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #endif
+ 203:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** /* There must be sufficient timeouts, taking into account requirements of the subsystems. */
+ 204:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #if ((NO_SYS==0) && (MEMP_NUM_SYS_TIMEOUT < (LWIP_TCP + IP_REASSEMBLY + LWIP_ARP + (2*LWIP_DHCP) + 
+ 205:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****   #error "MEMP_NUM_SYS_TIMEOUT is too low to accomodate all required timeouts"
+ 206:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #endif
+ 207:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #if (IP_REASSEMBLY && (MEMP_NUM_REASSDATA > IP_REASS_MAX_PBUFS))
+ 208:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****   #error "MEMP_NUM_REASSDATA > IP_REASS_MAX_PBUFS doesn't make sense since each struct ip_reassdata
+ 209:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #endif
+ 210:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #if (MEM_LIBC_MALLOC && MEM_USE_POOLS)
+ 211:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****   #error "MEM_LIBC_MALLOC and MEM_USE_POOLS may not both be simultaneously enabled in your lwipopts
+ 212:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #endif
+ 213:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #if (MEM_USE_POOLS && !MEMP_USE_CUSTOM_POOLS)
+ 214:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****   #error "MEM_USE_POOLS requires custom pools (MEMP_USE_CUSTOM_POOLS) to be enabled in your lwipopt
+ 215:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #endif
+ 216:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #if (PBUF_POOL_BUFSIZE <= MEM_ALIGNMENT)
+ 217:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****   #error "PBUF_POOL_BUFSIZE must be greater than MEM_ALIGNMENT or the offset may take the full firs
+ 218:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #endif
+ 219:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #if (TCP_QUEUE_OOSEQ && !LWIP_TCP)
+ 220:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****   #error "TCP_QUEUE_OOSEQ requires LWIP_TCP"
+ 221:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #endif
+ 222:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #if (DNS_LOCAL_HOSTLIST && !DNS_LOCAL_HOSTLIST_IS_DYNAMIC && !(defined(DNS_LOCAL_HOSTLIST_INIT)))
+ 223:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****   #error "you have to define define DNS_LOCAL_HOSTLIST_INIT {{'host1', 0x123}, {'host2', 0x234}} to
+ 224:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #endif
+ 225:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #if PPP_SUPPORT && !PPPOS_SUPPORT & !PPPOE_SUPPORT
+ 226:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****   #error "PPP_SUPPORT needs either PPPOS_SUPPORT or PPPOE_SUPPORT turned on"
+ 227:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #endif
+ 228:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** 
+ 229:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** 
+ 230:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** /* Compile-time checks for deprecated options.
+ 231:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****  */
+ 232:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #ifdef MEMP_NUM_TCPIP_MSG
+ 233:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****   #error "MEMP_NUM_TCPIP_MSG option is deprecated. Remove it from your lwipopts.h."
+ 234:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #endif
+ 235:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #ifdef MEMP_NUM_API_MSG
+ 236:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****   #error "MEMP_NUM_API_MSG option is deprecated. Remove it from your lwipopts.h."
+ 237:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #endif
+ 238:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #ifdef TCP_REXMIT_DEBUG
+ 239:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****   #error "TCP_REXMIT_DEBUG option is deprecated. Remove it from your lwipopts.h."
+ 240:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #endif
+ 241:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #ifdef RAW_STATS
+ 242:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****   #error "RAW_STATS option is deprecated. Remove it from your lwipopts.h."
+ 243:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #endif
+ 244:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #ifdef ETHARP_QUEUE_FIRST
+ 245:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****   #error "ETHARP_QUEUE_FIRST option is deprecated. Remove it from your lwipopts.h."
+ 246:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #endif
+ 247:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #ifdef ETHARP_ALWAYS_INSERT
+ 248:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****   #error "ETHARP_ALWAYS_INSERT option is deprecated. Remove it from your lwipopts.h."
+ 249:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #endif
+ 250:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #if SO_REUSE
+ 251:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** /* I removed the lot since this was an ugly hack. It broke the raw-API.
+ 252:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****    It also came with many ugly goto's, Christiaan Simons. */
+ 253:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****   #error "SO_REUSE currently unavailable, this was a hack"
+ 254:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #endif
+ 255:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** 
+ 256:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #ifdef LWIP_DEBUG
+ 257:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** static void
+ 258:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** lwip_sanity_check(void)
+ 259:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** {
+ 260:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****   /* Warnings */
+ 261:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #if LWIP_NETCONN
+ 262:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****   if (MEMP_NUM_NETCONN > (MEMP_NUM_TCP_PCB+MEMP_NUM_TCP_PCB_LISTEN+MEMP_NUM_UDP_PCB+MEMP_NUM_RAW_PC
+ 263:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****     LWIP_PLATFORM_DIAG(("lwip_sanity_check: WARNING: MEMP_NUM_NETCONN should be less than the sum o
+ 264:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #endif /* LWIP_NETCONN */
+ 265:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #if LWIP_TCP
+ 266:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****   if (MEMP_NUM_TCP_SEG < TCP_SND_QUEUELEN)
+ 267:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****     LWIP_PLATFORM_DIAG(("lwip_sanity_check: WARNING: MEMP_NUM_TCP_SEG should be at least as big as 
+ 268:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****   if (TCP_SND_BUF < 2 * TCP_MSS)
+ 269:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****     LWIP_PLATFORM_DIAG(("lwip_sanity_check: WARNING: TCP_SND_BUF must be at least as much as (2 * T
+ 270:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****   if (TCP_SND_QUEUELEN < (2 * (TCP_SND_BUF/TCP_MSS)))
+ 271:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****     LWIP_PLATFORM_DIAG(("lwip_sanity_check: WARNING: TCP_SND_QUEUELEN must be at least as much as (
+ 272:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****   if (TCP_SNDLOWAT > TCP_SND_BUF)
+ 273:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****     LWIP_PLATFORM_DIAG(("lwip_sanity_check: WARNING: TCP_SNDLOWAT must be less than or equal to TCP
+ 274:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****   if (TCP_WND > (PBUF_POOL_SIZE*PBUF_POOL_BUFSIZE))
+ 275:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****     LWIP_PLATFORM_DIAG(("lwip_sanity_check: WARNING: TCP_WND is larger than space provided by PBUF_
+ 276:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****   if (TCP_WND < TCP_MSS)
+ 277:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****     LWIP_PLATFORM_DIAG(("lwip_sanity_check: WARNING: TCP_WND is smaller than MSS\n"));
+ 278:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #endif /* LWIP_TCP */
+ 279:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** }
+ 280:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #else  /* LWIP_DEBUG */
+ 281:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #define lwip_sanity_check()
+ 282:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #endif /* LWIP_DEBUG */
+ 283:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** 
+ 284:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** /**
+ 285:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****  * Perform Sanity check of user-configurable values, and initialize all modules.
+ 286:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****  */
+ 287:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** void
+ 288:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** lwip_init(void)
+ 289:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** {
+  28              		.loc 1 289 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 1, uses_anonymous_args = 0
+  32 0000 80B5     		push	{r7, lr}
+  33              	.LCFI0:
+  34              		.cfi_def_cfa_offset 8
+  35              		.cfi_offset 7, -8
+  36              		.cfi_offset 14, -4
+  37 0002 00AF     		add	r7, sp, #0
+  38              	.LCFI1:
+  39              		.cfi_def_cfa_register 7
+ 290:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****   /* Sanity check user-configurable values */
+ 291:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****   lwip_sanity_check();
+ 292:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** 
+ 293:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****   /* Modules initialization */
+ 294:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****   stats_init();
+ 295:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****   sys_init();
+ 296:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****   mem_init();
+  40              		.loc 1 296 0
+  41 0004 FFF7FEFF 		bl	mem_init
+ 297:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****   memp_init();
+ 298:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****   pbuf_init();
+ 299:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****   netif_init();
+ 300:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #if LWIP_SOCKET
+ 301:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****   lwip_socket_init();
+ 302:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #endif /* LWIP_SOCKET */
+ 303:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****   ip_init();
+ 304:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #if LWIP_ARP
+ 305:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****   etharp_init();
+ 306:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #endif /* LWIP_ARP */
+ 307:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #if LWIP_RAW
+ 308:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****   raw_init();
+ 309:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #endif /* LWIP_RAW */
+ 310:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #if LWIP_UDP
+ 311:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****   udp_init();
+ 312:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #endif /* LWIP_UDP */
+ 313:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #if LWIP_TCP
+ 314:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****   tcp_init();
+ 315:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #endif /* LWIP_TCP */
+ 316:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #if LWIP_SNMP
+ 317:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #if ENABLE_SNMP
+ 318:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****   {
+ 319:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** 	        handle_t Snmp_Timer_Id;
+ 320:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** 	  	    struct ip_addr trapdestip;
+ 321:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** 	  	  	extern int TrapIPpos1;
+ 322:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** 	  	  	extern int TrapIPpos2;
+ 323:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** 	  	  	extern int TrapIPpos3;
+ 324:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** 	  	  	extern int TrapIPpos4;
+ 325:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** 
+ 326:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** 	  	  	static u8_t authtrap_value =1; /*Value for Enabling/Disabling SNMP Traps*/
+ 327:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** 	  	  	static u8_t sysdescr_value[255]="lwIP",sysname_value[255]="FQDN-unk";
+ 328:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** 	  	  	static u8_t	sysloc_value[255]=" ",syscontact_value[255]=" ";
+ 329:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** 	  	  	static u8_t syscontact_len=0,sysname_len=8,sysdescr_len=4,sysloc_len=0;
+ 330:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** 
+ 331:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** 	  	      //a.addr = 0x0a71b0c0;
+ 332:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** 	  	  	//a.addr = 0x0ade06fc;
+ 333:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** 	  	  	IP4_ADDR(&trapdestip, TrapIPpos4, TrapIPpos3, TrapIPpos2, TrapIPpos1);
+ 334:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** 	  	  	/*System Description*/
+ 335:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** 	  	  	snmp_set_sysdesr(sysdescr_value,&sysdescr_len);
+ 336:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** 	  	  	/*System COntact*/
+ 337:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** 	  	  	snmp_set_syscontact(syscontact_value,&syscontact_len);
+ 338:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** 	  	  	/*System Name*/
+ 339:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** 	  	  	snmp_set_sysname(sysname_value,&sysname_len);
+ 340:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** 	  	  	/*System Location*/
+ 341:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** 	  	  	snmp_set_syslocation(sysloc_value,&sysloc_len);
+ 342:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** 	  	  	snmp_set_snmpenableauthentraps(&authtrap_value);
+ 343:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** 	  	  	snmp_trap_dst_enable(0,1);
+ 344:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** 	  	  	snmp_trap_dst_ip_set(0,&trapdestip);
+ 345:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** 	  	  	snmp_init();
+ 346:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** 	  	  	/* For Updating System Up Time*/
+ 347:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** 	  	  	Snmp_Timer_Id = SYSTM001_CreateTimer(10,SYSTM001_PERIODIC,(SYSTM001_TimerCallBackPtr)snmp_in
+ 348:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** 	  	  	if(Snmp_Timer_Id!=0)
+ 349:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** 	  	  	{
+ 350:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** 	  	  		SYSTM001_StartTimer(Snmp_Timer_Id);
+ 351:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** 	  	  	}
+ 352:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** 
+ 353:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****   }
+ 354:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #endif
+ 355:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #endif /* LWIP_SNMP */
+ 356:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #if LWIP_AUTOIP
+ 357:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****   autoip_init();
+ 358:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #endif /* LWIP_AUTOIP */
+ 359:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #if LWIP_IGMP
+ 360:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****   igmp_init();
+  42              		.loc 1 360 0
+  43 0008 FFF7FEFF 		bl	igmp_init
+ 361:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #endif /* LWIP_IGMP */
+ 362:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #if LWIP_DNS
+ 363:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c ****   dns_init();
+  44              		.loc 1 363 0
+  45 000c FFF7FEFF 		bl	dns_init
+ 364:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** #endif /* LWIP_DNS */
+ 365:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.c **** }
+  46              		.loc 1 365 0
+  47 0010 80BD     		pop	{r7, pc}
+  48              		.cfi_endproc
+  49              	.LFE112:
+  51 0012 00BF     		.text
+  52              	.Letext0:
+  53              		.file 2 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
+  54              		.file 3 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Include/core_cm4.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 init.c
+C:\Users\Mihai\AppData\Local\Temp\ccsFzYZc.s:20     .text.lwip_init:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccsFzYZc.s:25     .text.lwip_init:00000000 lwip_init
+                     .debug_frame:00000010 $d
+                           .group:00000000 wm4.1.1791a5ae2e936ca1033c1c44be394cc7
+                           .group:00000000 wm4.XMC4500.h.45.215f4b8c79f46c7645c15373868d08c0
+                           .group:00000000 wm4.core_cm4.h.47.41af406cb4cda82c972f112a9cd0a024
+                           .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
+                           .group:00000000 wm4.features.h.22.b72b3baab2bb2eab3661375590100b6b
+                           .group:00000000 wm4.config.h.193.5fb8ef056cdff92dec3dee9552839d8c
+                           .group:00000000 wm4._ansi.h.23.7aefdac4826acebbfc9f3822a0aeb14c
+                           .group:00000000 wm4.stdint.h.20.54ad762faa59e3c05491630641c8d8bf
+                           .group:00000000 wm4.core_cmInstr.h.39.3d3d1b4a79aef37532666dc6ee87c6ac
+                           .group:00000000 wm4.core_cm4_simd.h.43.b5d1d38735af6366227b4256d330cf13
+                           .group:00000000 wm4.core_cm4.h.178.e5ef5ce66d198d7f00f9d0076e267c41
+                           .group:00000000 wm4.system_XMC4500.h.29.827f68baa362c84f2abae4ab67dde7c9
+                           .group:00000000 wm4.XMC4500.h.198.8e022f279ff353ed081df898dc7b9cf3
+                           .group:00000000 wm4.stddef.h.40.50cf36416e06376af8a9dca28536f2e4
+                           .group:00000000 wm4.types.h.55.0006b5fda1d606516f2dcaf4aca92b11
+                           .group:00000000 wm4.MULTIPLEXER.h.43.4aa654be3ec80895f631b5281bbb9105
+                           .group:00000000 wm4.CCU8PWMLIB.h.70.a5d6a5267902b8b4aea2a0224518259a
+                           .group:00000000 wm4.DBG001.h.116.d6d9e7459a0faa3905c97c1d2edb339d
+                           .group:00000000 wm4.SYSTM001.h.63.668098b2213d40a5bd0db5fbe813cf05
+                           .group:00000000 wm4.ETH002_Conf.h.56.5bd2b085b66f43d51abd69396be7f35f
+                           .group:00000000 wm4.EthernetPHY.h.54.7af1709186b21e62a5f1d4049da3988b
+                           .group:00000000 wm4.ETH001_Conf.h.71.1e151af1ba54dd023e1f942bdf922819
+                           .group:00000000 wm4.synopGMAC_plat.h.78.7a90e072b497857344aea4ba1e994097
+                           .group:00000000 wm4.synopGMAC_stack_interface.h.73.6be6aaee0ac6637432f4d0589044479b
+                           .group:00000000 wm4.SynopGMAC_Dev.h.72.7c89c07cf666d37f5c9b615720d5e111
+                           .group:00000000 wm4.synopGMAC_network_interface.h.73.4dd08316a11bc43c8c4a9da15277fb0f
+                           .group:00000000 wm4.stdlib.h.13.603ed7eb09a1561ab06840b7c0fcff58
+                           .group:00000000 wm4.stddef.h.161.e50ff8a9d5d1abbc15641da28ac571bf
+                           .group:00000000 wm4._default_types.h.6.5e12cd604db8ce00b62bb2f02708eaf3
+                           .group:00000000 wm4.lock.h.2.9bc98482741e5e2a9450b12934a684ea
+                           .group:00000000 wm4.stddef.h.161.c6104a0666cf681b6269ddc9b4f516d4
+                           .group:00000000 wm4.reent.h.16.9e42f0e588b85e70b2bf6572af57ce64
+                           .group:00000000 wm4.alloca.h.8.dfc0c703c47ec3e69746825b17d9e66d
+                           .group:00000000 wm4.stdlib.h.53.c69c7609933ff56d59c757cec2d13230
+                           .group:00000000 wm4.string.h.8.ef946ad0bc9ad5c970c365dcd1fc4b0a
+                           .group:00000000 wm4.string.h.86.d5c872ff52e2712c985b588a0ef39f3c
+                           .group:00000000 wm4.ETH004_Conf.h.56.564c3f309c32b3c742fc91049cf66940
+                           .group:00000000 wm4.lwipopts.h.73.a7a63bda1e8216abd1d90275eaaa0027
+                           .group:00000000 wm4.arch.h.33.6fa4aa86d33d1490ae882caef7316405
+                           .group:00000000 wm4.cpu.h.33.b213c7fd77614ebc3691cef18ad2ff22
+                           .group:00000000 wm4.cc.h.66.ec134211c658dcc89de4610e4e7bab46
+                           .group:00000000 wm4.arch.h.47.5153c52bfb94ee3b37299920afab6afd
+                           .group:00000000 wm4.debug.h.43.557ecd6c90cc70b375bb8a29118be47b
+                           .group:00000000 wm4.opt.h.94.d36882acafebb8726bce646fc8b2397b
+                           .group:00000000 wm4.err.h.52.37c5d17538f8e8347a9c84196701e92d
+                           .group:00000000 wm4.pbuf.h.43.e9a1ad12b97478787a109e22d5306820
+                           .group:00000000 wm4.inet.h.46.b516065779826845d16d49f513869a2b
+                           .group:00000000 wm4.ip_addr.h.79.9a0ce887ca8c88c22ad7686bcb5105df
+                           .group:00000000 wm4.sys.h.65.4a0cd87b9e0d8bb4cd6b30e939b2ca7e
+                           .group:00000000 wm4.mem.h.96.20770766e6c9e6c42af6bfa95ef5c63f
+                           .group:00000000 wm4.def.h.33.049f911dab26023a266ed46ced0ce4bc
+                           .group:00000000 wm4.netif.h.53.c13431a64f0e73a26710e71455725e84
+                           .group:00000000 wm4.ip.h.48.ad46847692d4d729760949b27e48a442
+                           .group:00000000 wm4.icmp.h.44.450dbf91f594cc26ad19d086cdc83713
+                           .group:00000000 wm4.tcp.h.55.5c30b9432fa60afaa85cbdd225b0c683
+                           .group:00000000 wm4.udp.h.48.1a8dde095cd0a13580afaba1443e5a3f
+                           .group:00000000 wm4.SDMMC003_Conf.h.50.e707c07613fb4e6f2eaec982a892429d
+                           .group:00000000 wm4.SDMMC003.h.85.b66055f6032a052f5173e3d123f9c61e
+                           .group:00000000 wm4.SDMMC001.h.50.3e2fedc7e5ace33db4121d5cc027e8a4
+                           .group:00000000 wm4.types.h.23.0d949686bbcadd1621462d4fa1f884f9
+                           .group:00000000 wm4.types.h.2.e9cec8c90ab35f77d9f499e06ae02400
+                           .group:00000000 wm4.types.h.80.1f2c84c0d57dd52dd9936095d9ac218e
+                           .group:00000000 wm4.time.h.16.a4579e68956d2601c6113814b546764b
+                           .group:00000000 wm4.diskio.h.7.93a3c8131d08770c060b04d2180fd09a
+                           .group:00000000 wm4.diskio.h.42.a863614abe78d56d18ed7cb292d0028d
+                           .group:00000000 wm4.ffconf.h.57.4ab321a2116d35ff7f28236ac31fad7c
+                           .group:00000000 wm4.ff.h.82.8f05a37d35a49dba2681a7f047fee4ee
+                           .group:00000000 wm4.lmm001_debuglog.h.40.8031299705ecf04ad726bd19baff976d
+                           .group:00000000 wm4.LMM001.h.42.c21fe9cbedc336738c3dc89405cad216
+                           .group:00000000 wm4.stdio.h.27.f2ac352bab34f31f9f478442827b2ba6
+                           .group:00000000 wm4.stdarg.h.34.3a23a216c0c293b3d2ea2e89281481e6
+                           .group:00000000 wm4.stdio.h.2.4aa87247282eca6c8f36f9de33d8df1a
+                           .group:00000000 wm4.stdio.h.63.dfdea6580b080784d08faace69b6ed76
+                           .group:00000000 wm4.time.h.2.9857e62ad6ac99431e29d58067232314
+                           .group:00000000 wm4.time.h.24.c499d4c1915694df17abb795fd34b719
+                           .group:00000000 wm4.time.h.124.10ced469f846269cafc58b59c853e1bb
+                           .group:00000000 wm4.errno.h.2.ba016d646105af6cad23be83630b6a3f
+                           .group:00000000 wm4.errno.h.9.65044c2b5d8494e43f5986ab0a1d770f
+                           .group:00000000 wm4.unistd.h.2.6ce1b91c4223f6078c1b210c7538c1d2
+                           .group:00000000 wm4.unistd.h.251.605bc560cdc6c3b07b599bb71ac4e425
+                           .group:00000000 wm4.malloc.h.4.62bd13b8107d5245f60bd92bb5994838
+                           .group:00000000 wm4.malloc.h.148.73b7de3bd065dafbd594b04197a9466e
+                           .group:00000000 wm4.reent.h.91.faac4d0ac97c0fcf23d10d0786197642
+                           .group:00000000 wm4.SLTHA003.h.100.69cb08672bc6ab3f052aa9d5bd6dc5ca
+                           .group:00000000 wm4._default_fcntl.h.6.d036cf640d0f9a06bcff1be55acd66be
+                           .group:00000000 wm4.stat.h.2.a761b02482a54847ff0d09dfcff24a5c
+                           .group:00000000 wm4.fcntl.h.9.9336f33d7f5028f694c75e6e224e0cf7
+                           .group:00000000 wm4.SLTHA001.h.97.d7e87c19a31e3244bdd5839e7cc42a61
+                           .group:00000000 wm4.WEBSERVER001_Conf.h.54.cd6d29aaa96a848cbc5321bab5d6cd90
+                           .group:00000000 wm4.ADCGROUP001.h.48.081c7f952eb4b6ea2df7d05180ee1663
+                           .group:00000000 wm4.IO001.h.49.1da965fb490206cf7cde64a90f6912e1
+                           .group:00000000 wm4.MOTORLIBS.h.59.b2e97de0df555dedfa51e24447b57ab8
+                           .group:00000000 wm4.uc_id.h.35.a6c4837fad81477ba31967683332b8cc
+                           .group:00000000 wm4.Usic.h.90.22743468abc46f16747d12430b219aaf
+                           .group:00000000 wm4.UART001_Conf.h.53.c5c972f6f634bc5116c171852aaab668
+                           .group:00000000 wm4.UART001.h.109.3e835815a7a59791d8bd39655f4d4cc9
+                           .group:00000000 wm4.init.h.42.a1e632536572909d58007a21500cc83b
+                           .group:00000000 wm4.memp_std.h.15.aec196dc1c3fb1142dd450db0c167cbf
+                           .group:00000000 wm4.memp.h.86.dbc4cb1b8d6b9ea113f04174f716e4c0
+                           .group:00000000 wm4.stats.h.147.58ec5b890fad5bbc2a7711ad8105f087
+                           .group:00000000 wm4.snmp.h.231.ffb5dc2779dd945785c887dfa42d86eb
+                           .group:00000000 wm4.igmp.h.52.4b87c73c5052131fa24f56c9d0dd53d2
+                           .group:00000000 wm4.dns.h.43.008401dfc4c9b0091d6c572f5c53ebc6
+                           .group:00000000 wm4.etharp.h.52.95fd625a46d8a56126e59f92e1dd6365
+
+UNDEFINED SYMBOLS
+mem_init
+igmp_init
+dns_init

@@ -1,0 +1,2143 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"udp.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.comm	udp_pcbs,4,4
+  20              		.section	.text.udp_input,"ax",%progbits
+  21              		.align	2
+  22              		.global	udp_input
+  23              		.thumb
+  24              		.thumb_func
+  26              	udp_input:
+  27              	.LFB0:
+  28              		.file 1 "../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c"
+   1:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** /**
+   2:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * @file
+   3:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * User Datagram Protocol module
+   4:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  *
+   5:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  */
+   6:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** 
+   7:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** /*
+   8:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * Copyright (c) 2001-2004 Swedish Institute of Computer Science.
+   9:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * All rights reserved.
+  10:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  *
+  11:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * Redistribution and use in source and binary forms, with or without modification,
+  12:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * are permitted provided that the following conditions are met:
+  13:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  *
+  14:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * 1. Redistributions of source code must retain the above copyright notice,
+  15:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  *    this list of conditions and the following disclaimer.
+  16:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * 2. Redistributions in binary form must reproduce the above copyright notice,
+  17:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  *    this list of conditions and the following disclaimer in the documentation
+  18:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  *    and/or other materials provided with the distribution.
+  19:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * 3. The name of the author may not be used to endorse or promote products
+  20:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  *    derived from this software without specific prior written permission.
+  21:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  *
+  22:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR IMPLIED
+  23:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+  24:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT
+  25:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+  26:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT
+  27:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+  28:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+  29:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING
+  30:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+  31:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * OF SUCH DAMAGE.
+  32:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  *
+  33:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * This file is part of the lwIP TCP/IP stack.
+  34:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  *
+  35:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * Author: Adam Dunkels <adam@sics.se>
+  36:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  *
+  37:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  */
+  38:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** 
+  39:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** 
+  40:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** /* udp.c
+  41:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  *
+  42:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * The code for the User Datagram Protocol UDP & UDPLite (RFC 3828).
+  43:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  *
+  44:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  */
+  45:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** 
+  46:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** /* @todo Check the use of '(struct udp_pcb).chksum_len_rx'!
+  47:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  */
+  48:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** 
+  49:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** #include "lwip/opt.h"
+  50:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** 
+  51:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** #if LWIP_UDP /* don't build if not configured for use in lwipopts.h */
+  52:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** 
+  53:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** #include "lwip/udp.h"
+  54:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** #include "lwip/def.h"
+  55:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** #include "lwip/memp.h"
+  56:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** #include "lwip/inet.h"
+  57:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** #include "lwip/inet_chksum.h"
+  58:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** #include "lwip/ip_addr.h"
+  59:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** #include "lwip/netif.h"
+  60:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** #include "lwip/icmp.h"
+  61:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** #include "lwip/stats.h"
+  62:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** #include "lwip/snmp.h"
+  63:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** #include "arch/perf.h"
+  64:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** #include "lwip/dhcp.h"
+  65:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** 
+  66:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** #include <string.h>
+  67:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** 
+  68:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** /* The list of UDP PCBs */
+  69:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** /* exported in udp.h (was static) */
+  70:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** struct udp_pcb *udp_pcbs;
+  71:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** 
+  72:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** /**
+  73:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * Process an incoming UDP datagram.
+  74:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  *
+  75:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * Given an incoming UDP datagram (as a chain of pbufs) this function
+  76:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * finds a corresponding UDP PCB and hands over the pbuf to the pcbs
+  77:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * recv function. If no pcb is found or the datagram is incorrect, the
+  78:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * pbuf is freed.
+  79:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  *
+  80:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * @param p pbuf to be demultiplexed to a UDP PCB.
+  81:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * @param inp network interface on which the datagram was received.
+  82:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  *
+  83:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  */
+  84:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** void
+  85:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** udp_input(struct pbuf *p, struct netif *inp)
+  86:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** {
+  29              		.loc 1 86 0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 40
+  32              		@ frame_needed = 1, uses_anonymous_args = 0
+  33 0000 90B5     		push	{r4, r7, lr}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 12
+  36              		.cfi_offset 4, -12
+  37              		.cfi_offset 7, -8
+  38              		.cfi_offset 14, -4
+  39 0002 8DB0     		sub	sp, sp, #52
+  40              	.LCFI1:
+  41              		.cfi_def_cfa_offset 64
+  42 0004 02AF     		add	r7, sp, #8
+  43              	.LCFI2:
+  44              		.cfi_def_cfa 7, 56
+  45 0006 7860     		str	r0, [r7, #4]
+  46 0008 3960     		str	r1, [r7, #0]
+  87:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   struct udp_hdr *udphdr;
+  88:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   struct udp_pcb *pcb, *prev;
+  89:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   struct udp_pcb *uncon_pcb;
+  90:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   struct ip_hdr *iphdr;
+  91:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   u16_t src, dest;
+  92:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   u8_t local_match;
+  93:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   u8_t broadcast;
+  94:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** 
+  95:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   PERF_START;
+  96:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** 
+  97:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   UDP_STATS_INC(udp.recv);
+  98:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** 
+  99:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   iphdr = p->payload;
+  47              		.loc 1 99 0
+  48 000a 7B68     		ldr	r3, [r7, #4]
+  49 000c 5B68     		ldr	r3, [r3, #4]
+  50 000e 7B61     		str	r3, [r7, #20]
+ 100:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** 
+ 101:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   /* Check minimum length (IP header + UDP header)
+ 102:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****    * and move payload pointer to UDP header */
+ 103:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   if (p->tot_len < (IPH_HL(iphdr) * 4 + UDP_HLEN) || pbuf_header(p, -(s16_t)(IPH_HL(iphdr) * 4))) {
+  51              		.loc 1 103 0
+  52 0010 7B68     		ldr	r3, [r7, #4]
+  53 0012 1B89     		ldrh	r3, [r3, #8]
+  54 0014 1C46     		mov	r4, r3
+  55 0016 7B69     		ldr	r3, [r7, #20]
+  56 0018 1B88     		ldrh	r3, [r3, #0]	@ unaligned
+  57 001a 9BB2     		uxth	r3, r3
+  58 001c 1846     		mov	r0, r3
+  59 001e FFF7FEFF 		bl	ntohs
+  60 0022 0346     		mov	r3, r0
+  61 0024 4FEA1323 		lsr	r3, r3, #8
+  62 0028 9BB2     		uxth	r3, r3
+  63 002a 03F00F03 		and	r3, r3, #15
+  64 002e 03F10203 		add	r3, r3, #2
+  65 0032 4FEA8303 		lsl	r3, r3, #2
+  66 0036 9C42     		cmp	r4, r3
+  67 0038 1BDB     		blt	.L2
+  68              		.loc 1 103 0 is_stmt 0 discriminator 1
+  69 003a 7B69     		ldr	r3, [r7, #20]
+  70 003c 1B88     		ldrh	r3, [r3, #0]	@ unaligned
+  71 003e 9BB2     		uxth	r3, r3
+  72 0040 1846     		mov	r0, r3
+  73 0042 FFF7FEFF 		bl	ntohs
+  74 0046 0346     		mov	r3, r0
+  75 0048 4FEA1323 		lsr	r3, r3, #8
+  76 004c 9BB2     		uxth	r3, r3
+  77 004e 03F00F03 		and	r3, r3, #15
+  78 0052 9BB2     		uxth	r3, r3
+  79 0054 4FEA8303 		lsl	r3, r3, #2
+  80 0058 9BB2     		uxth	r3, r3
+  81 005a C3F10003 		rsb	r3, r3, #0
+  82 005e 9BB2     		uxth	r3, r3
+  83 0060 9BB2     		uxth	r3, r3
+  84 0062 1BB2     		sxth	r3, r3
+  85 0064 7868     		ldr	r0, [r7, #4]
+  86 0066 1946     		mov	r1, r3
+  87 0068 FFF7FEFF 		bl	pbuf_header
+  88 006c 0346     		mov	r3, r0
+  89 006e 002B     		cmp	r3, #0
+  90 0070 03D0     		beq	.L3
+  91              	.L2:
+ 104:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     /* drop short packets */
+ 105:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     LWIP_DEBUGF(UDP_DEBUG,
+ 106:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****                 ("udp_input: short UDP datagram (%"U16_F" bytes) discarded\n", p->tot_len));
+ 107:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     UDP_STATS_INC(udp.lenerr);
+ 108:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     UDP_STATS_INC(udp.drop);
+ 109:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     snmp_inc_udpinerrors();
+ 110:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     pbuf_free(p);
+  92              		.loc 1 110 0 is_stmt 1
+  93 0072 7868     		ldr	r0, [r7, #4]
+  94 0074 FFF7FEFF 		bl	pbuf_free
+ 111:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     goto end;
+  95              		.loc 1 111 0
+  96 0078 02E1     		b	.L1
+  97              	.L3:
+ 112:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   }
+ 113:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** 
+ 114:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   udphdr = (struct udp_hdr *)p->payload;
+  98              		.loc 1 114 0
+  99 007a 7B68     		ldr	r3, [r7, #4]
+ 100 007c 5B68     		ldr	r3, [r3, #4]
+ 101 007e 3B61     		str	r3, [r7, #16]
+ 115:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** 
+ 116:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   /* is broadcast packet ? */
+ 117:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   broadcast = ip_addr_isbroadcast(&(iphdr->dest), inp);
+ 102              		.loc 1 117 0
+ 103 0080 7B69     		ldr	r3, [r7, #20]
+ 104 0082 03F11003 		add	r3, r3, #16
+ 105 0086 1846     		mov	r0, r3
+ 106 0088 3968     		ldr	r1, [r7, #0]
+ 107 008a FFF7FEFF 		bl	ip_addr_isbroadcast
+ 108 008e 0346     		mov	r3, r0
+ 109 0090 FB73     		strb	r3, [r7, #15]
+ 118:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** 
+ 119:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   LWIP_DEBUGF(UDP_DEBUG, ("udp_input: received datagram of length %"U16_F"\n", p->tot_len));
+ 120:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** 
+ 121:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   /* convert src and dest ports to host byte order */
+ 122:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   src = ntohs(udphdr->src);
+ 110              		.loc 1 122 0
+ 111 0092 3B69     		ldr	r3, [r7, #16]
+ 112 0094 1B88     		ldrh	r3, [r3, #0]	@ unaligned
+ 113 0096 9BB2     		uxth	r3, r3
+ 114 0098 1846     		mov	r0, r3
+ 115 009a FFF7FEFF 		bl	ntohs
+ 116 009e 0346     		mov	r3, r0
+ 117 00a0 BB81     		strh	r3, [r7, #12]	@ movhi
+ 123:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   dest = ntohs(udphdr->dest);
+ 118              		.loc 1 123 0
+ 119 00a2 3B69     		ldr	r3, [r7, #16]
+ 120 00a4 5B88     		ldrh	r3, [r3, #2]	@ unaligned
+ 121 00a6 9BB2     		uxth	r3, r3
+ 122 00a8 1846     		mov	r0, r3
+ 123 00aa FFF7FEFF 		bl	ntohs
+ 124 00ae 0346     		mov	r3, r0
+ 125 00b0 7B81     		strh	r3, [r7, #10]	@ movhi
+ 124:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** 
+ 125:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   udp_debug_print(udphdr);
+ 126:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** 
+ 127:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   /* print the UDP source and destination */
+ 128:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   LWIP_DEBUGF(UDP_DEBUG,
+ 129:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****               ("udp (%"U16_F".%"U16_F".%"U16_F".%"U16_F", %"U16_F") <-- "
+ 130:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****                "(%"U16_F".%"U16_F".%"U16_F".%"U16_F", %"U16_F")\n",
+ 131:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****                ip4_addr1(&iphdr->dest), ip4_addr2(&iphdr->dest),
+ 132:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****                ip4_addr3(&iphdr->dest), ip4_addr4(&iphdr->dest), ntohs(udphdr->dest),
+ 133:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****                ip4_addr1(&iphdr->src), ip4_addr2(&iphdr->src),
+ 134:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****                ip4_addr3(&iphdr->src), ip4_addr4(&iphdr->src), ntohs(udphdr->src)));
+ 135:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** 
+ 136:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** #if LWIP_DHCP
+ 137:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   pcb = NULL;
+ 138:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   /* when LWIP_DHCP is active, packets to DHCP_CLIENT_PORT may only be processed by
+ 139:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****      the dhcp module, no other UDP pcb may use the local UDP port DHCP_CLIENT_PORT */
+ 140:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   if (dest == DHCP_CLIENT_PORT) {
+ 141:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     /* all packets for DHCP_CLIENT_PORT not coming from DHCP_SERVER_PORT are dropped! */
+ 142:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     if (src == DHCP_SERVER_PORT) {
+ 143:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       if ((inp->dhcp != NULL) && (inp->dhcp->pcb != NULL)) {
+ 144:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****         /* accept the packe if 
+ 145:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****            (- broadcast or directed to us) -> DHCP is link-layer-addressed, local ip is always ANY!
+ 146:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****            - inp->dhcp->pcb->remote == ANY or iphdr->src */
+ 147:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****         if ((ip_addr_isany(&inp->dhcp->pcb->remote_ip) ||
+ 148:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****            ip_addr_cmp(&(inp->dhcp->pcb->remote_ip), &(iphdr->src)))) {
+ 149:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****           pcb = inp->dhcp->pcb;
+ 150:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****         }
+ 151:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       }
+ 152:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     }
+ 153:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   } else
+ 154:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** #endif /* LWIP_DHCP */
+ 155:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   {
+ 156:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     prev = NULL;
+ 126              		.loc 1 156 0
+ 127 00b2 4FF00003 		mov	r3, #0
+ 128 00b6 3B62     		str	r3, [r7, #32]
+ 157:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     local_match = 0;
+ 129              		.loc 1 157 0
+ 130 00b8 4FF00003 		mov	r3, #0
+ 131 00bc FB76     		strb	r3, [r7, #27]
+ 158:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     uncon_pcb = NULL;
+ 132              		.loc 1 158 0
+ 133 00be 4FF00003 		mov	r3, #0
+ 134 00c2 FB61     		str	r3, [r7, #28]
+ 159:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     /* Iterate through the UDP pcb list for a matching pcb.
+ 160:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****      * 'Perfect match' pcbs (connected to the remote port & ip address) are
+ 161:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****      * preferred. If no perfect match is found, the first unconnected pcb that
+ 162:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****      * matches the local port and ip address gets the datagram. */
+ 163:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     for (pcb = udp_pcbs; pcb != NULL; pcb = pcb->next) {
+ 135              		.loc 1 163 0
+ 136 00c4 40F20003 		movw	r3, #:lower16:udp_pcbs
+ 137 00c8 C0F20003 		movt	r3, #:upper16:udp_pcbs
+ 138 00cc 1B68     		ldr	r3, [r3, #0]
+ 139 00ce 7B62     		str	r3, [r7, #36]
+ 140 00d0 68E0     		b	.L5
+ 141              	.L13:
+ 164:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       local_match = 0;
+ 142              		.loc 1 164 0
+ 143 00d2 4FF00003 		mov	r3, #0
+ 144 00d6 FB76     		strb	r3, [r7, #27]
+ 165:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       /* print the PCB local and remote address */
+ 166:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       LWIP_DEBUGF(UDP_DEBUG,
+ 167:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****                   ("pcb (%"U16_F".%"U16_F".%"U16_F".%"U16_F", %"U16_F") --- "
+ 168:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****                    "(%"U16_F".%"U16_F".%"U16_F".%"U16_F", %"U16_F")\n",
+ 169:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****                    ip4_addr1(&pcb->local_ip), ip4_addr2(&pcb->local_ip),
+ 170:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****                    ip4_addr3(&pcb->local_ip), ip4_addr4(&pcb->local_ip), pcb->local_port,
+ 171:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****                    ip4_addr1(&pcb->remote_ip), ip4_addr2(&pcb->remote_ip),
+ 172:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****                    ip4_addr3(&pcb->remote_ip), ip4_addr4(&pcb->remote_ip), pcb->remote_port));
+ 173:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** 
+ 174:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       /* compare PCB local addr+port to UDP destination addr+port */
+ 175:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       if ((pcb->local_port == dest) &&
+ 145              		.loc 1 175 0
+ 146 00d8 7B6A     		ldr	r3, [r7, #36]
+ 147 00da 5B8A     		ldrh	r3, [r3, #18]
+ 148 00dc 7A89     		ldrh	r2, [r7, #10]
+ 149 00de 9A42     		cmp	r2, r3
+ 150 00e0 2FD1     		bne	.L6
+ 151              		.loc 1 175 0 is_stmt 0 discriminator 1
+ 152 00e2 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 153 00e4 002B     		cmp	r3, #0
+ 154 00e6 06D1     		bne	.L7
+ 176:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****           ((!broadcast && ip_addr_isany(&pcb->local_ip)) ||
+ 155              		.loc 1 176 0 is_stmt 1
+ 156 00e8 7B6A     		ldr	r3, [r7, #36]
+ 157 00ea 002B     		cmp	r3, #0
+ 158 00ec 1BD0     		beq	.L8
+ 159              		.loc 1 176 0 is_stmt 0 discriminator 1
+ 160 00ee 7B6A     		ldr	r3, [r7, #36]
+ 161 00f0 1B68     		ldr	r3, [r3, #0]
+ 162 00f2 002B     		cmp	r3, #0
+ 163 00f4 17D0     		beq	.L8
+ 164              	.L7:
+ 177:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****            ip_addr_cmp(&(pcb->local_ip), &(iphdr->dest)) ||
+ 165              		.loc 1 177 0 is_stmt 1 discriminator 1
+ 166 00f6 7B6A     		ldr	r3, [r7, #36]
+ 167 00f8 1A68     		ldr	r2, [r3, #0]
+ 168 00fa 7B69     		ldr	r3, [r7, #20]
+ 169 00fc 1B69     		ldr	r3, [r3, #16]	@ unaligned
+ 176:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****           ((!broadcast && ip_addr_isany(&pcb->local_ip)) ||
+ 170              		.loc 1 176 0 discriminator 1
+ 171 00fe 9A42     		cmp	r2, r3
+ 172 0100 11D0     		beq	.L8
+ 178:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** #if LWIP_IGMP
+ 179:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****            ip_addr_ismulticast(&(iphdr->dest)) ||
+ 173              		.loc 1 179 0
+ 174 0102 7B69     		ldr	r3, [r7, #20]
+ 175 0104 1C69     		ldr	r4, [r3, #16]	@ unaligned
+ 176 0106 4FF07040 		mov	r0, #-268435456
+ 177 010a FFF7FEFF 		bl	ntohl
+ 178 010e 0346     		mov	r3, r0
+ 179 0110 1C40     		ands	r4, r4, r3
+ 180 0112 4FF06040 		mov	r0, #-536870912
+ 181 0116 FFF7FEFF 		bl	ntohl
+ 182 011a 0346     		mov	r3, r0
+ 177:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****            ip_addr_cmp(&(pcb->local_ip), &(iphdr->dest)) ||
+ 183              		.loc 1 177 0
+ 184 011c 9C42     		cmp	r4, r3
+ 185 011e 02D0     		beq	.L8
+ 186              		.loc 1 179 0
+ 187 0120 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 188 0122 002B     		cmp	r3, #0
+ 189 0124 0DD0     		beq	.L6
+ 190              	.L8:
+ 180:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** #endif /* LWIP_IGMP */
+ 181:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** #if IP_SOF_BROADCAST_RECV
+ 182:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****            (broadcast && (pcb->so_options & SOF_BROADCAST)))) {
+ 183:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** #else  /* IP_SOF_BROADCAST_RECV */
+ 184:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****            (broadcast))) {
+ 185:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** #endif /* IP_SOF_BROADCAST_RECV */
+ 186:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****         local_match = 1;
+ 191              		.loc 1 186 0
+ 192 0126 4FF00103 		mov	r3, #1
+ 193 012a FB76     		strb	r3, [r7, #27]
+ 187:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****         if ((uncon_pcb == NULL) && 
+ 194              		.loc 1 187 0
+ 195 012c FB69     		ldr	r3, [r7, #28]
+ 196 012e 002B     		cmp	r3, #0
+ 197 0130 07D1     		bne	.L6
+ 188:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****             ((pcb->flags & UDP_FLAGS_CONNECTED) == 0)) {
+ 198              		.loc 1 188 0 discriminator 1
+ 199 0132 7B6A     		ldr	r3, [r7, #36]
+ 200 0134 1B7C     		ldrb	r3, [r3, #16]	@ zero_extendqisi2
+ 201 0136 03F00403 		and	r3, r3, #4
+ 187:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****         if ((uncon_pcb == NULL) && 
+ 202              		.loc 1 187 0 discriminator 1
+ 203 013a 002B     		cmp	r3, #0
+ 204 013c 01D1     		bne	.L6
+ 189:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****           /* the first unconnected matching PCB */
+ 190:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****           uncon_pcb = pcb;
+ 205              		.loc 1 190 0
+ 206 013e 7B6A     		ldr	r3, [r7, #36]
+ 207 0140 FB61     		str	r3, [r7, #28]
+ 208              	.L6:
+ 191:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****         }
+ 192:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       }
+ 193:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       /* compare PCB remote addr+port to UDP source addr+port */
+ 194:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       if ((local_match != 0) &&
+ 209              		.loc 1 194 0
+ 210 0142 FB7E     		ldrb	r3, [r7, #27]	@ zero_extendqisi2
+ 211 0144 002B     		cmp	r3, #0
+ 212 0146 28D0     		beq	.L9
+ 195:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****           (pcb->remote_port == src) &&
+ 213              		.loc 1 195 0 discriminator 1
+ 214 0148 7B6A     		ldr	r3, [r7, #36]
+ 215 014a 9B8A     		ldrh	r3, [r3, #20]
+ 194:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       if ((local_match != 0) &&
+ 216              		.loc 1 194 0 discriminator 1
+ 217 014c BA89     		ldrh	r2, [r7, #12]
+ 218 014e 9A42     		cmp	r2, r3
+ 219 0150 23D1     		bne	.L9
+ 196:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****           (ip_addr_isany(&pcb->remote_ip) ||
+ 220              		.loc 1 196 0
+ 221 0152 7B6A     		ldr	r3, [r7, #36]
+ 222 0154 03F10403 		add	r3, r3, #4
+ 195:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****           (pcb->remote_port == src) &&
+ 223              		.loc 1 195 0
+ 224 0158 002B     		cmp	r3, #0
+ 225 015a 09D0     		beq	.L10
+ 226              		.loc 1 196 0
+ 227 015c 7B6A     		ldr	r3, [r7, #36]
+ 228 015e 5B68     		ldr	r3, [r3, #4]
+ 229 0160 002B     		cmp	r3, #0
+ 230 0162 05D0     		beq	.L10
+ 197:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****            ip_addr_cmp(&(pcb->remote_ip), &(iphdr->src)))) {
+ 231              		.loc 1 197 0 discriminator 1
+ 232 0164 7B6A     		ldr	r3, [r7, #36]
+ 233 0166 5A68     		ldr	r2, [r3, #4]
+ 234 0168 7B69     		ldr	r3, [r7, #20]
+ 235 016a DB68     		ldr	r3, [r3, #12]	@ unaligned
+ 196:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****           (ip_addr_isany(&pcb->remote_ip) ||
+ 236              		.loc 1 196 0 discriminator 1
+ 237 016c 9A42     		cmp	r2, r3
+ 238 016e 14D1     		bne	.L9
+ 239              	.L10:
+ 198:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****         /* the first fully matching PCB */
+ 199:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****         if (prev != NULL) {
+ 240              		.loc 1 199 0
+ 241 0170 3B6A     		ldr	r3, [r7, #32]
+ 242 0172 002B     		cmp	r3, #0
+ 243 0174 1AD0     		beq	.L22
+ 200:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****           /* move the pcb to the front of udp_pcbs so that is
+ 201:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****              found faster next time */
+ 202:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****           prev->next = pcb->next;
+ 244              		.loc 1 202 0
+ 245 0176 7B6A     		ldr	r3, [r7, #36]
+ 246 0178 DA68     		ldr	r2, [r3, #12]
+ 247 017a 3B6A     		ldr	r3, [r7, #32]
+ 248 017c DA60     		str	r2, [r3, #12]
+ 203:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****           pcb->next = udp_pcbs;
+ 249              		.loc 1 203 0
+ 250 017e 40F20003 		movw	r3, #:lower16:udp_pcbs
+ 251 0182 C0F20003 		movt	r3, #:upper16:udp_pcbs
+ 252 0186 1A68     		ldr	r2, [r3, #0]
+ 253 0188 7B6A     		ldr	r3, [r7, #36]
+ 254 018a DA60     		str	r2, [r3, #12]
+ 204:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****           udp_pcbs = pcb;
+ 255              		.loc 1 204 0
+ 256 018c 40F20003 		movw	r3, #:lower16:udp_pcbs
+ 257 0190 C0F20003 		movt	r3, #:upper16:udp_pcbs
+ 258 0194 7A6A     		ldr	r2, [r7, #36]
+ 259 0196 1A60     		str	r2, [r3, #0]
+ 205:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****         } else {
+ 206:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****           UDP_STATS_INC(udp.cachehit);
+ 207:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****         }
+ 208:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****         break;
+ 260              		.loc 1 208 0
+ 261 0198 08E0     		b	.L22
+ 262              	.L9:
+ 209:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       }
+ 210:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       prev = pcb;
+ 263              		.loc 1 210 0
+ 264 019a 7B6A     		ldr	r3, [r7, #36]
+ 265 019c 3B62     		str	r3, [r7, #32]
+ 163:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     for (pcb = udp_pcbs; pcb != NULL; pcb = pcb->next) {
+ 266              		.loc 1 163 0
+ 267 019e 7B6A     		ldr	r3, [r7, #36]
+ 268 01a0 DB68     		ldr	r3, [r3, #12]
+ 269 01a2 7B62     		str	r3, [r7, #36]
+ 270              	.L5:
+ 163:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     for (pcb = udp_pcbs; pcb != NULL; pcb = pcb->next) {
+ 271              		.loc 1 163 0 is_stmt 0 discriminator 1
+ 272 01a4 7B6A     		ldr	r3, [r7, #36]
+ 273 01a6 002B     		cmp	r3, #0
+ 274 01a8 93D1     		bne	.L13
+ 275 01aa 00E0     		b	.L12
+ 276              	.L22:
+ 208:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****         break;
+ 277              		.loc 1 208 0 is_stmt 1
+ 278 01ac 00BF     		nop
+ 279              	.L12:
+ 211:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     }
+ 212:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     /* no fully matching pcb found? then look for an unconnected pcb */
+ 213:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     if (pcb == NULL) {
+ 280              		.loc 1 213 0
+ 281 01ae 7B6A     		ldr	r3, [r7, #36]
+ 282 01b0 002B     		cmp	r3, #0
+ 283 01b2 01D1     		bne	.L14
+ 214:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       pcb = uncon_pcb;
+ 284              		.loc 1 214 0
+ 285 01b4 FB69     		ldr	r3, [r7, #28]
+ 286 01b6 7B62     		str	r3, [r7, #36]
+ 287              	.L14:
+ 215:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     }
+ 216:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   }
+ 217:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** 
+ 218:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   /* Check checksum if this is a match or if it was directed at us. */
+ 219:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   if (pcb != NULL || ip_addr_cmp(&inp->ip_addr, &iphdr->dest)) {
+ 288              		.loc 1 219 0
+ 289 01b8 7B6A     		ldr	r3, [r7, #36]
+ 290 01ba 002B     		cmp	r3, #0
+ 291 01bc 05D1     		bne	.L15
+ 292              		.loc 1 219 0 is_stmt 0 discriminator 1
+ 293 01be 3B68     		ldr	r3, [r7, #0]
+ 294 01c0 5A68     		ldr	r2, [r3, #4]
+ 295 01c2 7B69     		ldr	r3, [r7, #20]
+ 296 01c4 1B69     		ldr	r3, [r3, #16]	@ unaligned
+ 297 01c6 9A42     		cmp	r2, r3
+ 298 01c8 57D1     		bne	.L16
+ 299              	.L15:
+ 220:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     LWIP_DEBUGF(UDP_DEBUG | LWIP_DBG_TRACE, ("udp_input: calculating checksum\n"));
+ 221:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** #if LWIP_UDPLITE
+ 222:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     if (IPH_PROTO(iphdr) == IP_PROTO_UDPLITE) {
+ 223:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       /* Do the UDP Lite checksum */
+ 224:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** #if CHECKSUM_CHECK_UDP
+ 225:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       u16_t chklen = ntohs(udphdr->len);
+ 226:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       if (chklen < sizeof(struct udp_hdr)) {
+ 227:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****         if (chklen == 0) {
+ 228:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****           /* For UDP-Lite, checksum length of 0 means checksum
+ 229:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****              over the complete packet (See RFC 3828 chap. 3.1) */
+ 230:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****           chklen = p->tot_len;
+ 231:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****         } else {
+ 232:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****           /* At least the UDP-Lite header must be covered by the
+ 233:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****              checksum! (Again, see RFC 3828 chap. 3.1) */
+ 234:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****           UDP_STATS_INC(udp.chkerr);
+ 235:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****           UDP_STATS_INC(udp.drop);
+ 236:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****           snmp_inc_udpinerrors();
+ 237:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****           pbuf_free(p);
+ 238:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****           goto end;
+ 239:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****         }
+ 240:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       }
+ 241:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       if (inet_chksum_pseudo_partial(p, (struct ip_addr *)&(iphdr->src),
+ 242:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****                              (struct ip_addr *)&(iphdr->dest),
+ 243:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****                              IP_PROTO_UDPLITE, p->tot_len, chklen) != 0) {
+ 244:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****        LWIP_DEBUGF(UDP_DEBUG | LWIP_DBG_LEVEL_SERIOUS,
+ 245:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****                    ("udp_input: UDP Lite datagram discarded due to failing checksum\n"));
+ 246:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****         UDP_STATS_INC(udp.chkerr);
+ 247:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****         UDP_STATS_INC(udp.drop);
+ 248:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****         snmp_inc_udpinerrors();
+ 249:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****         pbuf_free(p);
+ 250:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****         goto end;
+ 251:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       }
+ 252:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** #endif /* CHECKSUM_CHECK_UDP */
+ 253:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     } else
+ 254:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** #endif /* LWIP_UDPLITE */
+ 255:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     {
+ 256:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** #if CHECKSUM_CHECK_UDP
+ 257:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       if (udphdr->chksum != 0) {
+ 258:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****         if (inet_chksum_pseudo(p, (struct ip_addr *)&(iphdr->src),
+ 259:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****                                (struct ip_addr *)&(iphdr->dest),
+ 260:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****                                IP_PROTO_UDP, p->tot_len) != 0) {
+ 261:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****           LWIP_DEBUGF(UDP_DEBUG | LWIP_DBG_LEVEL_SERIOUS,
+ 262:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****                       ("udp_input: UDP datagram discarded due to failing checksum\n"));
+ 263:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****           UDP_STATS_INC(udp.chkerr);
+ 264:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****           UDP_STATS_INC(udp.drop);
+ 265:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****           snmp_inc_udpinerrors();
+ 266:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****           pbuf_free(p);
+ 267:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****           goto end;
+ 268:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****         }
+ 269:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       }
+ 270:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** #endif /* CHECKSUM_CHECK_UDP */
+ 271:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     }
+ 272:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     if(pbuf_header(p, -UDP_HLEN)) {
+ 300              		.loc 1 272 0 is_stmt 1
+ 301 01ca 7868     		ldr	r0, [r7, #4]
+ 302 01cc 6FF00701 		mvn	r1, #7
+ 303 01d0 FFF7FEFF 		bl	pbuf_header
+ 304 01d4 0346     		mov	r3, r0
+ 305 01d6 002B     		cmp	r3, #0
+ 306 01d8 03D0     		beq	.L17
+ 273:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       /* Can we cope with this failing? Just assert for now */
+ 274:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       LWIP_ASSERT("pbuf_header failed\n", 0);
+ 275:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       UDP_STATS_INC(udp.drop);
+ 276:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       snmp_inc_udpinerrors();
+ 277:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       pbuf_free(p);
+ 307              		.loc 1 277 0
+ 308 01da 7868     		ldr	r0, [r7, #4]
+ 309 01dc FFF7FEFF 		bl	pbuf_free
+ 278:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       goto end;
+ 310              		.loc 1 278 0
+ 311 01e0 4EE0     		b	.L1
+ 312              	.L17:
+ 279:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     }
+ 280:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     if (pcb != NULL) {
+ 313              		.loc 1 280 0
+ 314 01e2 7B6A     		ldr	r3, [r7, #36]
+ 315 01e4 002B     		cmp	r3, #0
+ 316 01e6 15D0     		beq	.L18
+ 281:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       snmp_inc_udpindatagrams();
+ 282:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       /* callback */
+ 283:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       if (pcb->recv != NULL) {
+ 317              		.loc 1 283 0
+ 318 01e8 7B6A     		ldr	r3, [r7, #36]
+ 319 01ea DB69     		ldr	r3, [r3, #28]
+ 320 01ec 002B     		cmp	r3, #0
+ 321 01ee 0DD0     		beq	.L19
+ 284:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****         /* now the recv function is responsible for freeing p */
+ 285:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****         pcb->recv(pcb->recv_arg, pcb, p, &iphdr->src, src);
+ 322              		.loc 1 285 0
+ 323 01f0 7B6A     		ldr	r3, [r7, #36]
+ 324 01f2 DC69     		ldr	r4, [r3, #28]
+ 325 01f4 7B6A     		ldr	r3, [r7, #36]
+ 326 01f6 1A6A     		ldr	r2, [r3, #32]
+ 327 01f8 7B69     		ldr	r3, [r7, #20]
+ 328 01fa 03F10C03 		add	r3, r3, #12
+ 329 01fe B989     		ldrh	r1, [r7, #12]
+ 330 0200 0091     		str	r1, [sp, #0]
+ 331 0202 1046     		mov	r0, r2
+ 332 0204 796A     		ldr	r1, [r7, #36]
+ 333 0206 7A68     		ldr	r2, [r7, #4]
+ 334 0208 A047     		blx	r4
+ 280:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     if (pcb != NULL) {
+ 335              		.loc 1 280 0
+ 336 020a 39E0     		b	.L1
+ 337              	.L19:
+ 286:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       } else {
+ 287:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****         /* no recv function registered? then we have to free the pbuf! */
+ 288:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****         pbuf_free(p);
+ 338              		.loc 1 288 0
+ 339 020c 7868     		ldr	r0, [r7, #4]
+ 340 020e FFF7FEFF 		bl	pbuf_free
+ 289:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****         goto end;
+ 341              		.loc 1 289 0
+ 342 0212 35E0     		b	.L1
+ 343              	.L18:
+ 290:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       }
+ 291:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     } else {
+ 292:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       LWIP_DEBUGF(UDP_DEBUG | LWIP_DBG_TRACE, ("udp_input: not for us.\n"));
+ 293:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** 
+ 294:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** #if LWIP_ICMP
+ 295:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       /* No match was found, send ICMP destination port unreachable unless
+ 296:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****          destination address was broadcast/multicast. */
+ 297:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       if (!broadcast &&
+ 344              		.loc 1 297 0
+ 345 0214 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 346 0216 002B     		cmp	r3, #0
+ 347 0218 2BD1     		bne	.L21
+ 298:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****           !ip_addr_ismulticast(&iphdr->dest)) {
+ 348              		.loc 1 298 0 discriminator 1
+ 349 021a 7B69     		ldr	r3, [r7, #20]
+ 350 021c 1C69     		ldr	r4, [r3, #16]	@ unaligned
+ 351 021e 4FF07040 		mov	r0, #-268435456
+ 352 0222 FFF7FEFF 		bl	ntohl
+ 353 0226 0346     		mov	r3, r0
+ 354 0228 1C40     		ands	r4, r4, r3
+ 355 022a 4FF06040 		mov	r0, #-536870912
+ 356 022e FFF7FEFF 		bl	ntohl
+ 357 0232 0346     		mov	r3, r0
+ 297:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       if (!broadcast &&
+ 358              		.loc 1 297 0 discriminator 1
+ 359 0234 9C42     		cmp	r4, r3
+ 360 0236 1CD0     		beq	.L21
+ 299:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****         /* move payload pointer back to ip header */
+ 300:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****         pbuf_header(p, (IPH_HL(iphdr) * 4) + UDP_HLEN);
+ 361              		.loc 1 300 0
+ 362 0238 7B69     		ldr	r3, [r7, #20]
+ 363 023a 1B88     		ldrh	r3, [r3, #0]	@ unaligned
+ 364 023c 9BB2     		uxth	r3, r3
+ 365 023e 1846     		mov	r0, r3
+ 366 0240 FFF7FEFF 		bl	ntohs
+ 367 0244 0346     		mov	r3, r0
+ 368 0246 4FEA1323 		lsr	r3, r3, #8
+ 369 024a 9BB2     		uxth	r3, r3
+ 370 024c 03F00F03 		and	r3, r3, #15
+ 371 0250 03F10203 		add	r3, r3, #2
+ 372 0254 9BB2     		uxth	r3, r3
+ 373 0256 4FEA8303 		lsl	r3, r3, #2
+ 374 025a 9BB2     		uxth	r3, r3
+ 375 025c 9BB2     		uxth	r3, r3
+ 376 025e 1BB2     		sxth	r3, r3
+ 377 0260 7868     		ldr	r0, [r7, #4]
+ 378 0262 1946     		mov	r1, r3
+ 379 0264 FFF7FEFF 		bl	pbuf_header
+ 301:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****         LWIP_ASSERT("p->payload == iphdr", (p->payload == iphdr));
+ 302:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****         icmp_dest_unreach(p, ICMP_DUR_PORT);
+ 380              		.loc 1 302 0
+ 381 0268 7868     		ldr	r0, [r7, #4]
+ 382 026a 4FF00301 		mov	r1, #3
+ 383 026e FFF7FEFF 		bl	icmp_dest_unreach
+ 384              	.L21:
+ 303:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       }
+ 304:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** #endif /* LWIP_ICMP */
+ 305:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       UDP_STATS_INC(udp.proterr);
+ 306:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       UDP_STATS_INC(udp.drop);
+ 307:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       snmp_inc_udpnoports();
+ 308:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       pbuf_free(p);
+ 385              		.loc 1 308 0
+ 386 0272 7868     		ldr	r0, [r7, #4]
+ 387 0274 FFF7FEFF 		bl	pbuf_free
+ 280:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     if (pcb != NULL) {
+ 388              		.loc 1 280 0
+ 389 0278 02E0     		b	.L1
+ 390              	.L16:
+ 309:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     }
+ 310:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   } else {
+ 311:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     pbuf_free(p);
+ 391              		.loc 1 311 0
+ 392 027a 7868     		ldr	r0, [r7, #4]
+ 393 027c FFF7FEFF 		bl	pbuf_free
+ 394              	.L4:
+ 395              	.L1:
+ 312:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   }
+ 313:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** end:
+ 314:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   PERF_STOP("udp_input");
+ 315:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** }
+ 396              		.loc 1 315 0
+ 397 0280 07F12C07 		add	r7, r7, #44
+ 398 0284 BD46     		mov	sp, r7
+ 399 0286 90BD     		pop	{r4, r7, pc}
+ 400              		.cfi_endproc
+ 401              	.LFE0:
+ 403              		.section	.text.udp_send,"ax",%progbits
+ 404              		.align	2
+ 405              		.global	udp_send
+ 406              		.thumb
+ 407              		.thumb_func
+ 409              	udp_send:
+ 410              	.LFB1:
+ 316:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** 
+ 317:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** /**
+ 318:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * Send data using UDP.
+ 319:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  *
+ 320:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * @param pcb UDP PCB used to send the data.
+ 321:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * @param p chain of pbuf's to be sent.
+ 322:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  *
+ 323:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * The datagram will be sent to the current remote_ip & remote_port
+ 324:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * stored in pcb. If the pcb is not bound to a port, it will
+ 325:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * automatically be bound to a random port.
+ 326:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  *
+ 327:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * @return lwIP error code.
+ 328:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * - ERR_OK. Successful. No error occured.
+ 329:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * - ERR_MEM. Out of memory.
+ 330:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * - ERR_RTE. Could not find route to destination address.
+ 331:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * - More errors could be returned by lower protocol layers.
+ 332:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  *
+ 333:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * @see udp_disconnect() udp_sendto()
+ 334:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  */
+ 335:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** err_t
+ 336:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** udp_send(struct udp_pcb *pcb, struct pbuf *p)
+ 337:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** {
+ 411              		.loc 1 337 0
+ 412              		.cfi_startproc
+ 413              		@ args = 0, pretend = 0, frame = 8
+ 414              		@ frame_needed = 1, uses_anonymous_args = 0
+ 415 0000 80B5     		push	{r7, lr}
+ 416              	.LCFI3:
+ 417              		.cfi_def_cfa_offset 8
+ 418              		.cfi_offset 7, -8
+ 419              		.cfi_offset 14, -4
+ 420 0002 82B0     		sub	sp, sp, #8
+ 421              	.LCFI4:
+ 422              		.cfi_def_cfa_offset 16
+ 423 0004 00AF     		add	r7, sp, #0
+ 424              	.LCFI5:
+ 425              		.cfi_def_cfa_register 7
+ 426 0006 7860     		str	r0, [r7, #4]
+ 427 0008 3960     		str	r1, [r7, #0]
+ 338:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   /* send to the packet using remote ip and port stored in the pcb */
+ 339:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   return udp_sendto(pcb, p, &pcb->remote_ip, pcb->remote_port);
+ 428              		.loc 1 339 0
+ 429 000a 7B68     		ldr	r3, [r7, #4]
+ 430 000c 03F10402 		add	r2, r3, #4
+ 431 0010 7B68     		ldr	r3, [r7, #4]
+ 432 0012 9B8A     		ldrh	r3, [r3, #20]
+ 433 0014 7868     		ldr	r0, [r7, #4]
+ 434 0016 3968     		ldr	r1, [r7, #0]
+ 435 0018 FFF7FEFF 		bl	udp_sendto
+ 436 001c 0346     		mov	r3, r0
+ 340:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** }
+ 437              		.loc 1 340 0
+ 438 001e 1846     		mov	r0, r3
+ 439 0020 07F10807 		add	r7, r7, #8
+ 440 0024 BD46     		mov	sp, r7
+ 441 0026 80BD     		pop	{r7, pc}
+ 442              		.cfi_endproc
+ 443              	.LFE1:
+ 445              		.section	.text.udp_sendto,"ax",%progbits
+ 446              		.align	2
+ 447              		.global	udp_sendto
+ 448              		.thumb
+ 449              		.thumb_func
+ 451              	udp_sendto:
+ 452              	.LFB2:
+ 341:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** 
+ 342:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** /**
+ 343:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * Send data to a specified address using UDP.
+ 344:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  *
+ 345:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * @param pcb UDP PCB used to send the data.
+ 346:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * @param p chain of pbuf's to be sent.
+ 347:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * @param dst_ip Destination IP address.
+ 348:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * @param dst_port Destination UDP port.
+ 349:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  *
+ 350:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * dst_ip & dst_port are expected to be in the same byte order as in the pcb.
+ 351:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  *
+ 352:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * If the PCB already has a remote address association, it will
+ 353:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * be restored after the data is sent.
+ 354:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * 
+ 355:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * @return lwIP error code (@see udp_send for possible error codes)
+ 356:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  *
+ 357:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * @see udp_disconnect() udp_send()
+ 358:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  */
+ 359:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** err_t
+ 360:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** udp_sendto(struct udp_pcb *pcb, struct pbuf *p,
+ 361:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   struct ip_addr *dst_ip, u16_t dst_port)
+ 362:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** {
+ 453              		.loc 1 362 0
+ 454              		.cfi_startproc
+ 455              		@ args = 0, pretend = 0, frame = 24
+ 456              		@ frame_needed = 1, uses_anonymous_args = 0
+ 457 0000 90B5     		push	{r4, r7, lr}
+ 458              	.LCFI6:
+ 459              		.cfi_def_cfa_offset 12
+ 460              		.cfi_offset 4, -12
+ 461              		.cfi_offset 7, -8
+ 462              		.cfi_offset 14, -4
+ 463 0002 89B0     		sub	sp, sp, #36
+ 464              	.LCFI7:
+ 465              		.cfi_def_cfa_offset 48
+ 466 0004 02AF     		add	r7, sp, #8
+ 467              	.LCFI8:
+ 468              		.cfi_def_cfa 7, 40
+ 469 0006 F860     		str	r0, [r7, #12]
+ 470 0008 B960     		str	r1, [r7, #8]
+ 471 000a 7A60     		str	r2, [r7, #4]
+ 472 000c 7B80     		strh	r3, [r7, #2]	@ movhi
+ 363:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   struct netif *netif;
+ 364:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** 
+ 365:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   LWIP_DEBUGF(UDP_DEBUG | LWIP_DBG_TRACE, ("udp_send\n"));
+ 366:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** 
+ 367:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   /* find the outgoing network interface for this packet */
+ 368:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** #if LWIP_IGMP
+ 369:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   netif = ip_route((ip_addr_ismulticast(dst_ip))?(&(pcb->multicast_ip)):(dst_ip));
+ 473              		.loc 1 369 0
+ 474 000e 7B68     		ldr	r3, [r7, #4]
+ 475 0010 1C68     		ldr	r4, [r3, #0]	@ unaligned
+ 476 0012 4FF07040 		mov	r0, #-268435456
+ 477 0016 FFF7FEFF 		bl	ntohl
+ 478 001a 0346     		mov	r3, r0
+ 479 001c 1C40     		ands	r4, r4, r3
+ 480 001e 4FF06040 		mov	r0, #-536870912
+ 481 0022 FFF7FEFF 		bl	ntohl
+ 482 0026 0346     		mov	r3, r0
+ 483 0028 9C42     		cmp	r4, r3
+ 484 002a 03D1     		bne	.L26
+ 485              		.loc 1 369 0 is_stmt 0 discriminator 1
+ 486 002c FB68     		ldr	r3, [r7, #12]
+ 487 002e 03F11603 		add	r3, r3, #22
+ 488 0032 00E0     		b	.L27
+ 489              	.L26:
+ 490              		.loc 1 369 0 discriminator 2
+ 491 0034 7B68     		ldr	r3, [r7, #4]
+ 492              	.L27:
+ 493              		.loc 1 369 0 discriminator 3
+ 494 0036 1846     		mov	r0, r3
+ 495 0038 FFF7FEFF 		bl	ip_route
+ 496 003c 7861     		str	r0, [r7, #20]
+ 370:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** #else
+ 371:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   netif = ip_route(dst_ip);
+ 372:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** #endif /* LWIP_IGMP */
+ 373:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** 
+ 374:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   /* no outgoing network interface could be found? */
+ 375:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   if (netif == NULL) {
+ 497              		.loc 1 375 0 is_stmt 1 discriminator 3
+ 498 003e 7B69     		ldr	r3, [r7, #20]
+ 499 0040 002B     		cmp	r3, #0
+ 500 0042 02D1     		bne	.L28
+ 376:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     LWIP_DEBUGF(UDP_DEBUG | LWIP_DBG_LEVEL_SERIOUS, ("udp_send: No route to 0x%"X32_F"\n", dst_ip->
+ 377:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     UDP_STATS_INC(udp.rterr);
+ 378:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     return ERR_RTE;
+ 501              		.loc 1 378 0
+ 502 0044 4FF0FC03 		mov	r3, #252
+ 503 0048 08E0     		b	.L29
+ 504              	.L28:
+ 379:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   }
+ 380:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   return udp_sendto_if(pcb, p, dst_ip, dst_port, netif);
+ 505              		.loc 1 380 0
+ 506 004a 7B88     		ldrh	r3, [r7, #2]
+ 507 004c 7A69     		ldr	r2, [r7, #20]
+ 508 004e 0092     		str	r2, [sp, #0]
+ 509 0050 F868     		ldr	r0, [r7, #12]
+ 510 0052 B968     		ldr	r1, [r7, #8]
+ 511 0054 7A68     		ldr	r2, [r7, #4]
+ 512 0056 FFF7FEFF 		bl	udp_sendto_if
+ 513 005a 0346     		mov	r3, r0
+ 514              	.L29:
+ 515 005c 5BB2     		sxtb	r3, r3
+ 381:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** }
+ 516              		.loc 1 381 0
+ 517 005e 1846     		mov	r0, r3
+ 518 0060 07F11C07 		add	r7, r7, #28
+ 519 0064 BD46     		mov	sp, r7
+ 520 0066 90BD     		pop	{r4, r7, pc}
+ 521              		.cfi_endproc
+ 522              	.LFE2:
+ 524              		.section	.text.udp_sendto_if,"ax",%progbits
+ 525              		.align	2
+ 526              		.global	udp_sendto_if
+ 527              		.thumb
+ 528              		.thumb_func
+ 530              	udp_sendto_if:
+ 531              	.LFB3:
+ 382:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** 
+ 383:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** /**
+ 384:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * Send data to a specified address using UDP.
+ 385:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * The netif used for sending can be specified.
+ 386:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  *
+ 387:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * This function exists mainly for DHCP, to be able to send UDP packets
+ 388:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * on a netif that is still down.
+ 389:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  *
+ 390:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * @param pcb UDP PCB used to send the data.
+ 391:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * @param p chain of pbuf's to be sent.
+ 392:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * @param dst_ip Destination IP address.
+ 393:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * @param dst_port Destination UDP port.
+ 394:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * @param netif the netif used for sending.
+ 395:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  *
+ 396:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * dst_ip & dst_port are expected to be in the same byte order as in the pcb.
+ 397:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  *
+ 398:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * @return lwIP error code (@see udp_send for possible error codes)
+ 399:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  *
+ 400:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * @see udp_disconnect() udp_send()
+ 401:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  */
+ 402:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** err_t
+ 403:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** udp_sendto_if(struct udp_pcb *pcb, struct pbuf *p,
+ 404:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   struct ip_addr *dst_ip, u16_t dst_port, struct netif *netif)
+ 405:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** {
+ 532              		.loc 1 405 0
+ 533              		.cfi_startproc
+ 534              		@ args = 4, pretend = 0, frame = 32
+ 535              		@ frame_needed = 1, uses_anonymous_args = 0
+ 536 0000 80B5     		push	{r7, lr}
+ 537              	.LCFI9:
+ 538              		.cfi_def_cfa_offset 8
+ 539              		.cfi_offset 7, -8
+ 540              		.cfi_offset 14, -4
+ 541 0002 8CB0     		sub	sp, sp, #48
+ 542              	.LCFI10:
+ 543              		.cfi_def_cfa_offset 56
+ 544 0004 04AF     		add	r7, sp, #16
+ 545              	.LCFI11:
+ 546              		.cfi_def_cfa 7, 40
+ 547 0006 F860     		str	r0, [r7, #12]
+ 548 0008 B960     		str	r1, [r7, #8]
+ 549 000a 7A60     		str	r2, [r7, #4]
+ 550 000c 7B80     		strh	r3, [r7, #2]	@ movhi
+ 406:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   struct udp_hdr *udphdr;
+ 407:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   struct ip_addr *src_ip;
+ 408:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   err_t err;
+ 409:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   struct pbuf *q; /* q will be sent down the stack */
+ 410:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** 
+ 411:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** #if IP_SOF_BROADCAST
+ 412:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   /* broadcast filter? */
+ 413:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   if ( ((pcb->so_options & SOF_BROADCAST) == 0) && ip_addr_isbroadcast(dst_ip, netif) ) {
+ 414:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     LWIP_DEBUGF(UDP_DEBUG | LWIP_DBG_LEVEL_SERIOUS,
+ 415:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       ("udp_sendto_if: SOF_BROADCAST not enabled on pcb %p\n", (void *)pcb));
+ 416:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     return ERR_VAL;
+ 417:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   }
+ 418:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** #endif /* IP_SOF_BROADCAST */
+ 419:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** 
+ 420:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   /* if the PCB is not yet bound to a port, bind it here */
+ 421:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   if (pcb->local_port == 0) {
+ 551              		.loc 1 421 0
+ 552 000e FB68     		ldr	r3, [r7, #12]
+ 553 0010 5B8A     		ldrh	r3, [r3, #18]
+ 554 0012 002B     		cmp	r3, #0
+ 555 0014 0FD1     		bne	.L31
+ 422:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     LWIP_DEBUGF(UDP_DEBUG | LWIP_DBG_TRACE, ("udp_send: not yet bound to a port, binding now\n"));
+ 423:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     err = udp_bind(pcb, &pcb->local_ip, pcb->local_port);
+ 556              		.loc 1 423 0
+ 557 0016 FA68     		ldr	r2, [r7, #12]
+ 558 0018 FB68     		ldr	r3, [r7, #12]
+ 559 001a 5B8A     		ldrh	r3, [r3, #18]
+ 560 001c F868     		ldr	r0, [r7, #12]
+ 561 001e 1146     		mov	r1, r2
+ 562 0020 1A46     		mov	r2, r3
+ 563 0022 FFF7FEFF 		bl	udp_bind
+ 564 0026 0346     		mov	r3, r0
+ 565 0028 FB75     		strb	r3, [r7, #23]
+ 424:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     if (err != ERR_OK) {
+ 566              		.loc 1 424 0
+ 567 002a 97F91730 		ldrsb	r3, [r7, #23]
+ 568 002e 002B     		cmp	r3, #0
+ 569 0030 01D0     		beq	.L31
+ 425:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       LWIP_DEBUGF(UDP_DEBUG | LWIP_DBG_TRACE | LWIP_DBG_LEVEL_SERIOUS, ("udp_send: forced port bind
+ 426:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       return err;
+ 570              		.loc 1 426 0
+ 571 0032 FB7D     		ldrb	r3, [r7, #23]	@ zero_extendqisi2
+ 572 0034 7EE0     		b	.L32
+ 573              	.L31:
+ 427:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     }
+ 428:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   }
+ 429:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** 
+ 430:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   /* not enough space to add an UDP header to first pbuf in given p chain? */
+ 431:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   if (pbuf_header(p, UDP_HLEN)) {
+ 574              		.loc 1 431 0
+ 575 0036 B868     		ldr	r0, [r7, #8]
+ 576 0038 4FF00801 		mov	r1, #8
+ 577 003c FFF7FEFF 		bl	pbuf_header
+ 578 0040 0346     		mov	r3, r0
+ 579 0042 002B     		cmp	r3, #0
+ 580 0044 13D0     		beq	.L33
+ 432:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     /* allocate header in a separate new pbuf */
+ 433:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     q = pbuf_alloc(PBUF_IP, UDP_HLEN, PBUF_RAM);
+ 581              		.loc 1 433 0
+ 582 0046 4FF00100 		mov	r0, #1
+ 583 004a 4FF00801 		mov	r1, #8
+ 584 004e 4FF00002 		mov	r2, #0
+ 585 0052 FFF7FEFF 		bl	pbuf_alloc
+ 586 0056 B861     		str	r0, [r7, #24]
+ 434:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     /* new header pbuf could not be allocated? */
+ 435:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     if (q == NULL) {
+ 587              		.loc 1 435 0
+ 588 0058 BB69     		ldr	r3, [r7, #24]
+ 589 005a 002B     		cmp	r3, #0
+ 590 005c 02D1     		bne	.L34
+ 436:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       LWIP_DEBUGF(UDP_DEBUG | LWIP_DBG_TRACE | LWIP_DBG_LEVEL_SERIOUS, ("udp_send: could not alloca
+ 437:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       return ERR_MEM;
+ 591              		.loc 1 437 0
+ 592 005e 4FF0FF03 		mov	r3, #255
+ 593 0062 67E0     		b	.L32
+ 594              	.L34:
+ 438:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     }
+ 439:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     /* chain header q in front of given pbuf p */
+ 440:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     pbuf_chain(q, p);
+ 595              		.loc 1 440 0
+ 596 0064 B869     		ldr	r0, [r7, #24]
+ 597 0066 B968     		ldr	r1, [r7, #8]
+ 598 0068 FFF7FEFF 		bl	pbuf_chain
+ 599 006c 01E0     		b	.L35
+ 600              	.L33:
+ 441:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     /* first pbuf q points to header pbuf */
+ 442:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     LWIP_DEBUGF(UDP_DEBUG,
+ 443:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****                 ("udp_send: added header pbuf %p before given pbuf %p\n", (void *)q, (void *)p));
+ 444:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   } else {
+ 445:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     /* adding space for header within p succeeded */
+ 446:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     /* first pbuf q equals given pbuf */
+ 447:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     q = p;
+ 601              		.loc 1 447 0
+ 602 006e BB68     		ldr	r3, [r7, #8]
+ 603 0070 BB61     		str	r3, [r7, #24]
+ 604              	.L35:
+ 448:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     LWIP_DEBUGF(UDP_DEBUG, ("udp_send: added header in given pbuf %p\n", (void *)p));
+ 449:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   }
+ 450:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   LWIP_ASSERT("check that first pbuf can hold struct udp_hdr",
+ 451:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****               (q->len >= sizeof(struct udp_hdr)));
+ 452:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   /* q now represents the packet to be sent */
+ 453:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   udphdr = q->payload;
+ 605              		.loc 1 453 0
+ 606 0072 BB69     		ldr	r3, [r7, #24]
+ 607 0074 5B68     		ldr	r3, [r3, #4]
+ 608 0076 3B61     		str	r3, [r7, #16]
+ 454:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   udphdr->src = htons(pcb->local_port);
+ 609              		.loc 1 454 0
+ 610 0078 FB68     		ldr	r3, [r7, #12]
+ 611 007a 5B8A     		ldrh	r3, [r3, #18]
+ 612 007c 1846     		mov	r0, r3
+ 613 007e FFF7FEFF 		bl	htons
+ 614 0082 0346     		mov	r3, r0
+ 615 0084 1A46     		mov	r2, r3
+ 616 0086 3B69     		ldr	r3, [r7, #16]
+ 617 0088 1A80     		strh	r2, [r3, #0]	@ unaligned
+ 455:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   udphdr->dest = htons(dst_port);
+ 618              		.loc 1 455 0
+ 619 008a 7B88     		ldrh	r3, [r7, #2]
+ 620 008c 1846     		mov	r0, r3
+ 621 008e FFF7FEFF 		bl	htons
+ 622 0092 0346     		mov	r3, r0
+ 623 0094 1A46     		mov	r2, r3
+ 624 0096 3B69     		ldr	r3, [r7, #16]
+ 625 0098 5A80     		strh	r2, [r3, #2]	@ unaligned
+ 456:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   /* in UDP, 0 checksum means 'no checksum' */
+ 457:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   udphdr->chksum = 0x0000; 
+ 626              		.loc 1 457 0
+ 627 009a 3B69     		ldr	r3, [r7, #16]
+ 628 009c 4FF00002 		mov	r2, #0
+ 629 00a0 9A71     		strb	r2, [r3, #6]
+ 630 00a2 4FF00002 		mov	r2, #0
+ 631 00a6 DA71     		strb	r2, [r3, #7]
+ 458:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** 
+ 459:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   /* PCB local address is IP_ANY_ADDR? */
+ 460:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   if (ip_addr_isany(&pcb->local_ip)) {
+ 632              		.loc 1 460 0
+ 633 00a8 FB68     		ldr	r3, [r7, #12]
+ 634 00aa 002B     		cmp	r3, #0
+ 635 00ac 03D0     		beq	.L36
+ 636              		.loc 1 460 0 is_stmt 0 discriminator 1
+ 637 00ae FB68     		ldr	r3, [r7, #12]
+ 638 00b0 1B68     		ldr	r3, [r3, #0]
+ 639 00b2 002B     		cmp	r3, #0
+ 640 00b4 04D1     		bne	.L37
+ 641              	.L36:
+ 461:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     /* use outgoing network interface IP address as source address */
+ 462:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     src_ip = &(netif->ip_addr);
+ 642              		.loc 1 462 0 is_stmt 1
+ 643 00b6 BB6A     		ldr	r3, [r7, #40]
+ 644 00b8 03F10403 		add	r3, r3, #4
+ 645 00bc FB61     		str	r3, [r7, #28]
+ 646 00be 14E0     		b	.L38
+ 647              	.L37:
+ 463:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   } else {
+ 464:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     /* check if UDP PCB local IP address is correct
+ 465:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****      * this could be an old address if netif->ip_addr has changed */
+ 466:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     if (!ip_addr_cmp(&(pcb->local_ip), &(netif->ip_addr))) {
+ 648              		.loc 1 466 0
+ 649 00c0 FB68     		ldr	r3, [r7, #12]
+ 650 00c2 1A68     		ldr	r2, [r3, #0]
+ 651 00c4 BB6A     		ldr	r3, [r7, #40]
+ 652 00c6 5B68     		ldr	r3, [r3, #4]
+ 653 00c8 9A42     		cmp	r2, r3
+ 654 00ca 0CD0     		beq	.L39
+ 467:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       /* local_ip doesn't match, drop the packet */
+ 468:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       if (q != p) {
+ 655              		.loc 1 468 0
+ 656 00cc BA69     		ldr	r2, [r7, #24]
+ 657 00ce BB68     		ldr	r3, [r7, #8]
+ 658 00d0 9A42     		cmp	r2, r3
+ 659 00d2 05D0     		beq	.L40
+ 469:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****         /* free the header pbuf */
+ 470:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****         pbuf_free(q);
+ 660              		.loc 1 470 0
+ 661 00d4 B869     		ldr	r0, [r7, #24]
+ 662 00d6 FFF7FEFF 		bl	pbuf_free
+ 471:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****         q = NULL;
+ 663              		.loc 1 471 0
+ 664 00da 4FF00003 		mov	r3, #0
+ 665 00de BB61     		str	r3, [r7, #24]
+ 666              	.L40:
+ 472:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****         /* p is still referenced by the caller, and will live on */
+ 473:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       }
+ 474:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       return ERR_VAL;
+ 667              		.loc 1 474 0
+ 668 00e0 4FF0F703 		mov	r3, #247
+ 669 00e4 26E0     		b	.L32
+ 670              	.L39:
+ 475:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     }
+ 476:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     /* use UDP PCB local IP address as source address */
+ 477:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     src_ip = &(pcb->local_ip);
+ 671              		.loc 1 477 0
+ 672 00e6 FB68     		ldr	r3, [r7, #12]
+ 673 00e8 FB61     		str	r3, [r7, #28]
+ 674              	.L38:
+ 478:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   }
+ 479:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** 
+ 480:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   LWIP_DEBUGF(UDP_DEBUG, ("udp_send: sending datagram of length %"U16_F"\n", q->tot_len));
+ 481:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** 
+ 482:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** #if LWIP_UDPLITE
+ 483:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   /* UDP Lite protocol? */
+ 484:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   if (pcb->flags & UDP_FLAGS_UDPLITE) {
+ 485:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     u16_t chklen, chklen_hdr;
+ 486:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     LWIP_DEBUGF(UDP_DEBUG, ("udp_send: UDP LITE packet length %"U16_F"\n", q->tot_len));
+ 487:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     /* set UDP message length in UDP header */
+ 488:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     chklen_hdr = chklen = pcb->chksum_len_tx;
+ 489:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     if ((chklen < sizeof(struct udp_hdr)) || (chklen > q->tot_len)) {
+ 490:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       if (chklen != 0) {
+ 491:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****         LWIP_DEBUGF(UDP_DEBUG, ("udp_send: UDP LITE pcb->chksum_len is illegal: %"U16_F"\n", chklen
+ 492:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       }
+ 493:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       /* For UDP-Lite, checksum length of 0 means checksum
+ 494:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****          over the complete packet. (See RFC 3828 chap. 3.1)
+ 495:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****          At least the UDP-Lite header must be covered by the
+ 496:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****          checksum, therefore, if chksum_len has an illegal
+ 497:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****          value, we generate the checksum over the complete
+ 498:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****          packet to be safe. */
+ 499:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       chklen_hdr = 0;
+ 500:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       chklen = q->tot_len;
+ 501:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     }
+ 502:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     udphdr->len = htons(chklen_hdr);
+ 503:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     /* calculate checksum */
+ 504:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** #if CHECKSUM_GEN_UDP
+ 505:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     udphdr->chksum = inet_chksum_pseudo_partial(q, src_ip, dst_ip,
+ 506:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****                                         IP_PROTO_UDPLITE, q->tot_len, chklen);
+ 507:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     /* chksum zero must become 0xffff, as zero means 'no checksum' */
+ 508:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     if (udphdr->chksum == 0x0000)
+ 509:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       udphdr->chksum = 0xffff;
+ 510:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** #endif /* CHECKSUM_CHECK_UDP */
+ 511:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     /* output to IP */
+ 512:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     LWIP_DEBUGF(UDP_DEBUG, ("udp_send: ip_output_if (,,,,IP_PROTO_UDPLITE,)\n"));
+ 513:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** #if LWIP_NETIF_HWADDRHINT
+ 514:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     netif->addr_hint = &(pcb->addr_hint);
+ 515:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** #endif /* LWIP_NETIF_HWADDRHINT*/
+ 516:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     err = ip_output_if(q, src_ip, dst_ip, pcb->ttl, pcb->tos, IP_PROTO_UDPLITE, netif);
+ 517:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** #if LWIP_NETIF_HWADDRHINT
+ 518:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     netif->addr_hint = NULL;
+ 519:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** #endif /* LWIP_NETIF_HWADDRHINT*/
+ 520:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   } else
+ 521:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** #endif /* LWIP_UDPLITE */
+ 522:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   {      /* UDP */
+ 523:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     LWIP_DEBUGF(UDP_DEBUG, ("udp_send: UDP packet length %"U16_F"\n", q->tot_len));
+ 524:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     udphdr->len = htons(q->tot_len);
+ 675              		.loc 1 524 0
+ 676 00ea BB69     		ldr	r3, [r7, #24]
+ 677 00ec 1B89     		ldrh	r3, [r3, #8]
+ 678 00ee 1846     		mov	r0, r3
+ 679 00f0 FFF7FEFF 		bl	htons
+ 680 00f4 0346     		mov	r3, r0
+ 681 00f6 1A46     		mov	r2, r3
+ 682 00f8 3B69     		ldr	r3, [r7, #16]
+ 683 00fa 9A80     		strh	r2, [r3, #4]	@ unaligned
+ 525:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     /* calculate checksum */
+ 526:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** #if CHECKSUM_GEN_UDP
+ 527:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     if ((pcb->flags & UDP_FLAGS_NOCHKSUM) == 0) {
+ 528:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       udphdr->chksum = inet_chksum_pseudo(q, src_ip, dst_ip, IP_PROTO_UDP, q->tot_len);
+ 529:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       /* chksum zero must become 0xffff, as zero means 'no checksum' */
+ 530:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       if (udphdr->chksum == 0x0000) udphdr->chksum = 0xffff;
+ 531:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     }
+ 532:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** #endif /* CHECKSUM_CHECK_UDP */
+ 533:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     LWIP_DEBUGF(UDP_DEBUG, ("udp_send: UDP checksum 0x%04"X16_F"\n", udphdr->chksum));
+ 534:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     LWIP_DEBUGF(UDP_DEBUG, ("udp_send: ip_output_if (,,,,IP_PROTO_UDP,)\n"));
+ 535:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     /* output to IP */
+ 536:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** #if LWIP_NETIF_HWADDRHINT
+ 537:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     netif->addr_hint = &(pcb->addr_hint);
+ 538:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** #endif /* LWIP_NETIF_HWADDRHINT*/
+ 539:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     err = ip_output_if(q, src_ip, dst_ip, pcb->ttl, pcb->tos, IP_PROTO_UDP, netif);
+ 684              		.loc 1 539 0
+ 685 00fc FB68     		ldr	r3, [r7, #12]
+ 686 00fe DB7A     		ldrb	r3, [r3, #11]	@ zero_extendqisi2
+ 687 0100 FA68     		ldr	r2, [r7, #12]
+ 688 0102 927A     		ldrb	r2, [r2, #10]	@ zero_extendqisi2
+ 689 0104 0092     		str	r2, [sp, #0]
+ 690 0106 4FF01102 		mov	r2, #17
+ 691 010a 0192     		str	r2, [sp, #4]
+ 692 010c BA6A     		ldr	r2, [r7, #40]
+ 693 010e 0292     		str	r2, [sp, #8]
+ 694 0110 B869     		ldr	r0, [r7, #24]
+ 695 0112 F969     		ldr	r1, [r7, #28]
+ 696 0114 7A68     		ldr	r2, [r7, #4]
+ 697 0116 FFF7FEFF 		bl	ip_output_if
+ 698 011a 0346     		mov	r3, r0
+ 699 011c FB75     		strb	r3, [r7, #23]
+ 540:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** #if LWIP_NETIF_HWADDRHINT
+ 541:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     netif->addr_hint = NULL;
+ 542:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** #endif /* LWIP_NETIF_HWADDRHINT*/
+ 543:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   }
+ 544:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   /* TODO: must this be increased even if error occured? */
+ 545:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   snmp_inc_udpoutdatagrams();
+ 546:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** 
+ 547:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   /* did we chain a separate header pbuf earlier? */
+ 548:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   if (q != p) {
+ 700              		.loc 1 548 0
+ 701 011e BA69     		ldr	r2, [r7, #24]
+ 702 0120 BB68     		ldr	r3, [r7, #8]
+ 703 0122 9A42     		cmp	r2, r3
+ 704 0124 05D0     		beq	.L41
+ 549:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     /* free the header pbuf */
+ 550:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     pbuf_free(q);
+ 705              		.loc 1 550 0
+ 706 0126 B869     		ldr	r0, [r7, #24]
+ 707 0128 FFF7FEFF 		bl	pbuf_free
+ 551:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     q = NULL;
+ 708              		.loc 1 551 0
+ 709 012c 4FF00003 		mov	r3, #0
+ 710 0130 BB61     		str	r3, [r7, #24]
+ 711              	.L41:
+ 552:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     /* p is still referenced by the caller, and will live on */
+ 553:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   }
+ 554:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** 
+ 555:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   UDP_STATS_INC(udp.xmit);
+ 556:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   return err;
+ 712              		.loc 1 556 0
+ 713 0132 FB7D     		ldrb	r3, [r7, #23]	@ zero_extendqisi2
+ 714              	.L32:
+ 715 0134 5BB2     		sxtb	r3, r3
+ 557:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** }
+ 716              		.loc 1 557 0
+ 717 0136 1846     		mov	r0, r3
+ 718 0138 07F12007 		add	r7, r7, #32
+ 719 013c BD46     		mov	sp, r7
+ 720 013e 80BD     		pop	{r7, pc}
+ 721              		.cfi_endproc
+ 722              	.LFE3:
+ 724              		.section	.text.udp_bind,"ax",%progbits
+ 725              		.align	2
+ 726              		.global	udp_bind
+ 727              		.thumb
+ 728              		.thumb_func
+ 730              	udp_bind:
+ 731              	.LFB4:
+ 558:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** 
+ 559:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** /**
+ 560:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * Bind an UDP PCB.
+ 561:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  *
+ 562:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * @param pcb UDP PCB to be bound with a local address ipaddr and port.
+ 563:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * @param ipaddr local IP address to bind with. Use IP_ADDR_ANY to
+ 564:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * bind to all local interfaces.
+ 565:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * @param port local UDP port to bind with. Use 0 to automatically bind
+ 566:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * to a random port between UDP_LOCAL_PORT_RANGE_START and
+ 567:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * UDP_LOCAL_PORT_RANGE_END.
+ 568:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  *
+ 569:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * ipaddr & port are expected to be in the same byte order as in the pcb.
+ 570:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  *
+ 571:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * @return lwIP error code.
+ 572:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * - ERR_OK. Successful. No error occured.
+ 573:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * - ERR_USE. The specified ipaddr and port are already bound to by
+ 574:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * another UDP PCB.
+ 575:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  *
+ 576:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * @see udp_disconnect()
+ 577:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  */
+ 578:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** err_t
+ 579:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** udp_bind(struct udp_pcb *pcb, struct ip_addr *ipaddr, u16_t port)
+ 580:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** {
+ 732              		.loc 1 580 0
+ 733              		.cfi_startproc
+ 734              		@ args = 0, pretend = 0, frame = 24
+ 735              		@ frame_needed = 1, uses_anonymous_args = 0
+ 736              		@ link register save eliminated.
+ 737 0000 80B4     		push	{r7}
+ 738              	.LCFI12:
+ 739              		.cfi_def_cfa_offset 4
+ 740              		.cfi_offset 7, -4
+ 741 0002 87B0     		sub	sp, sp, #28
+ 742              	.LCFI13:
+ 743              		.cfi_def_cfa_offset 32
+ 744 0004 00AF     		add	r7, sp, #0
+ 745              	.LCFI14:
+ 746              		.cfi_def_cfa_register 7
+ 747 0006 F860     		str	r0, [r7, #12]
+ 748 0008 B960     		str	r1, [r7, #8]
+ 749 000a 1346     		mov	r3, r2
+ 750 000c FB80     		strh	r3, [r7, #6]	@ movhi
+ 581:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   struct udp_pcb *ipcb;
+ 582:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   u8_t rebind;
+ 583:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** 
+ 584:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   LWIP_DEBUGF(UDP_DEBUG | LWIP_DBG_TRACE, ("udp_bind(ipaddr = "));
+ 585:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   ip_addr_debug_print(UDP_DEBUG, ipaddr);
+ 586:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   LWIP_DEBUGF(UDP_DEBUG | LWIP_DBG_TRACE, (", port = %"U16_F")\n", port));
+ 587:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** 
+ 588:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   rebind = 0;
+ 751              		.loc 1 588 0
+ 752 000e 4FF00003 		mov	r3, #0
+ 753 0012 FB74     		strb	r3, [r7, #19]
+ 589:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   /* Check for double bind and rebind of the same pcb */
+ 590:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   for (ipcb = udp_pcbs; ipcb != NULL; ipcb = ipcb->next) {
+ 754              		.loc 1 590 0
+ 755 0014 40F20003 		movw	r3, #:lower16:udp_pcbs
+ 756 0018 C0F20003 		movt	r3, #:upper16:udp_pcbs
+ 757 001c 1B68     		ldr	r3, [r3, #0]
+ 758 001e 7B61     		str	r3, [r7, #20]
+ 759 0020 09E0     		b	.L43
+ 760              	.L45:
+ 591:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     /* is this UDP PCB already on active list? */
+ 592:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     if (pcb == ipcb) {
+ 761              		.loc 1 592 0
+ 762 0022 FA68     		ldr	r2, [r7, #12]
+ 763 0024 7B69     		ldr	r3, [r7, #20]
+ 764 0026 9A42     		cmp	r2, r3
+ 765 0028 02D1     		bne	.L44
+ 593:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       /* pcb may occur at most once in active list */
+ 594:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       LWIP_ASSERT("rebind == 0", rebind == 0);
+ 595:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       /* pcb already in list, just rebind */
+ 596:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       rebind = 1;
+ 766              		.loc 1 596 0
+ 767 002a 4FF00103 		mov	r3, #1
+ 768 002e FB74     		strb	r3, [r7, #19]
+ 769              	.L44:
+ 590:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   for (ipcb = udp_pcbs; ipcb != NULL; ipcb = ipcb->next) {
+ 770              		.loc 1 590 0
+ 771 0030 7B69     		ldr	r3, [r7, #20]
+ 772 0032 DB68     		ldr	r3, [r3, #12]
+ 773 0034 7B61     		str	r3, [r7, #20]
+ 774              	.L43:
+ 590:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   for (ipcb = udp_pcbs; ipcb != NULL; ipcb = ipcb->next) {
+ 775              		.loc 1 590 0 is_stmt 0 discriminator 1
+ 776 0036 7B69     		ldr	r3, [r7, #20]
+ 777 0038 002B     		cmp	r3, #0
+ 778 003a F2D1     		bne	.L45
+ 597:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     }
+ 598:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** 
+ 599:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     /* this code does not allow upper layer to share a UDP port for
+ 600:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****        listening to broadcast or multicast traffic (See SO_REUSE_ADDR and
+ 601:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****        SO_REUSE_PORT under *BSD). TODO: See where it fits instead, OR
+ 602:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****        combine with implementation of UDP PCB flags. Leon Woestenberg. */
+ 603:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** #ifdef LWIP_UDP_TODO
+ 604:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     /* port matches that of PCB in list? */
+ 605:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     else
+ 606:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       if ((ipcb->local_port == port) &&
+ 607:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****           /* IP address matches, or one is IP_ADDR_ANY? */
+ 608:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****           (ip_addr_isany(&(ipcb->local_ip)) ||
+ 609:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****            ip_addr_isany(ipaddr) ||
+ 610:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****            ip_addr_cmp(&(ipcb->local_ip), ipaddr))) {
+ 611:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****         /* other PCB already binds to this local IP and port */
+ 612:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****         LWIP_DEBUGF(UDP_DEBUG,
+ 613:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****                     ("udp_bind: local port %"U16_F" already bound by another pcb\n", port));
+ 614:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****         return ERR_USE;
+ 615:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       }
+ 616:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** #endif
+ 617:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   }
+ 618:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** 
+ 619:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   ip_addr_set(&pcb->local_ip, ipaddr);
+ 779              		.loc 1 619 0 is_stmt 1
+ 780 003c BB68     		ldr	r3, [r7, #8]
+ 781 003e 002B     		cmp	r3, #0
+ 782 0040 02D0     		beq	.L46
+ 783              		.loc 1 619 0 is_stmt 0 discriminator 1
+ 784 0042 BB68     		ldr	r3, [r7, #8]
+ 785 0044 1B68     		ldr	r3, [r3, #0]	@ unaligned
+ 786 0046 01E0     		b	.L47
+ 787              	.L46:
+ 788              		.loc 1 619 0 discriminator 2
+ 789 0048 4FF00003 		mov	r3, #0
+ 790              	.L47:
+ 791              		.loc 1 619 0 discriminator 3
+ 792 004c FA68     		ldr	r2, [r7, #12]
+ 793 004e 1360     		str	r3, [r2, #0]
+ 620:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** 
+ 621:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   /* no port specified? */
+ 622:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   if (port == 0) {
+ 794              		.loc 1 622 0 is_stmt 1 discriminator 3
+ 795 0050 FB88     		ldrh	r3, [r7, #6]
+ 796 0052 002B     		cmp	r3, #0
+ 797 0054 2AD1     		bne	.L48
+ 623:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** #ifndef UDP_LOCAL_PORT_RANGE_START
+ 624:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** #define UDP_LOCAL_PORT_RANGE_START 4096
+ 625:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** #define UDP_LOCAL_PORT_RANGE_END   0x7fff
+ 626:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** #endif
+ 627:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     port = UDP_LOCAL_PORT_RANGE_START;
+ 798              		.loc 1 627 0
+ 799 0056 4FF48053 		mov	r3, #4096
+ 800 005a FB80     		strh	r3, [r7, #6]	@ movhi
+ 628:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     ipcb = udp_pcbs;
+ 801              		.loc 1 628 0
+ 802 005c 40F20003 		movw	r3, #:lower16:udp_pcbs
+ 803 0060 C0F20003 		movt	r3, #:upper16:udp_pcbs
+ 804 0064 1B68     		ldr	r3, [r3, #0]
+ 805 0066 7B61     		str	r3, [r7, #20]
+ 629:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     while ((ipcb != NULL) && (port != UDP_LOCAL_PORT_RANGE_END)) {
+ 806              		.loc 1 629 0
+ 807 0068 12E0     		b	.L49
+ 808              	.L52:
+ 630:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       if (ipcb->local_port == port) {
+ 809              		.loc 1 630 0
+ 810 006a 7B69     		ldr	r3, [r7, #20]
+ 811 006c 5B8A     		ldrh	r3, [r3, #18]
+ 812 006e FA88     		ldrh	r2, [r7, #6]
+ 813 0070 9A42     		cmp	r2, r3
+ 814 0072 0AD1     		bne	.L50
+ 631:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****         /* port is already used by another udp_pcb */
+ 632:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****         port++;
+ 815              		.loc 1 632 0
+ 816 0074 FB88     		ldrh	r3, [r7, #6]	@ movhi
+ 817 0076 03F10103 		add	r3, r3, #1
+ 818 007a FB80     		strh	r3, [r7, #6]	@ movhi
+ 633:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****         /* restart scanning all udp pcbs */
+ 634:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****         ipcb = udp_pcbs;
+ 819              		.loc 1 634 0
+ 820 007c 40F20003 		movw	r3, #:lower16:udp_pcbs
+ 821 0080 C0F20003 		movt	r3, #:upper16:udp_pcbs
+ 822 0084 1B68     		ldr	r3, [r3, #0]
+ 823 0086 7B61     		str	r3, [r7, #20]
+ 824 0088 02E0     		b	.L49
+ 825              	.L50:
+ 635:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       } else
+ 636:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****         /* go on with next udp pcb */
+ 637:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****         ipcb = ipcb->next;
+ 826              		.loc 1 637 0
+ 827 008a 7B69     		ldr	r3, [r7, #20]
+ 828 008c DB68     		ldr	r3, [r3, #12]
+ 829 008e 7B61     		str	r3, [r7, #20]
+ 830              	.L49:
+ 629:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     while ((ipcb != NULL) && (port != UDP_LOCAL_PORT_RANGE_END)) {
+ 831              		.loc 1 629 0 discriminator 1
+ 832 0090 7B69     		ldr	r3, [r7, #20]
+ 833 0092 002B     		cmp	r3, #0
+ 834 0094 04D0     		beq	.L51
+ 629:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     while ((ipcb != NULL) && (port != UDP_LOCAL_PORT_RANGE_END)) {
+ 835              		.loc 1 629 0 is_stmt 0 discriminator 2
+ 836 0096 FA88     		ldrh	r2, [r7, #6]
+ 837 0098 47F6FF73 		movw	r3, #32767
+ 838 009c 9A42     		cmp	r2, r3
+ 839 009e E4D1     		bne	.L52
+ 840              	.L51:
+ 638:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     }
+ 639:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     if (ipcb != NULL) {
+ 841              		.loc 1 639 0 is_stmt 1
+ 842 00a0 7B69     		ldr	r3, [r7, #20]
+ 843 00a2 002B     		cmp	r3, #0
+ 844 00a4 02D0     		beq	.L48
+ 640:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       /* no more ports available in local range */
+ 641:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       LWIP_DEBUGF(UDP_DEBUG, ("udp_bind: out of free UDP ports\n"));
+ 642:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       return ERR_USE;
+ 845              		.loc 1 642 0
+ 846 00a6 4FF0F503 		mov	r3, #245
+ 847 00aa 14E0     		b	.L53
+ 848              	.L48:
+ 643:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     }
+ 644:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   }
+ 645:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   pcb->local_port = port;
+ 849              		.loc 1 645 0
+ 850 00ac FB68     		ldr	r3, [r7, #12]
+ 851 00ae FA88     		ldrh	r2, [r7, #6]	@ movhi
+ 852 00b0 5A82     		strh	r2, [r3, #18]	@ movhi
+ 646:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   snmp_insert_udpidx_tree(pcb);
+ 647:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   /* pcb not active yet? */
+ 648:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   if (rebind == 0) {
+ 853              		.loc 1 648 0
+ 854 00b2 FB7C     		ldrb	r3, [r7, #19]	@ zero_extendqisi2
+ 855 00b4 002B     		cmp	r3, #0
+ 856 00b6 0CD1     		bne	.L54
+ 649:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     /* place the PCB on the active list if not already there */
+ 650:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     pcb->next = udp_pcbs;
+ 857              		.loc 1 650 0
+ 858 00b8 40F20003 		movw	r3, #:lower16:udp_pcbs
+ 859 00bc C0F20003 		movt	r3, #:upper16:udp_pcbs
+ 860 00c0 1A68     		ldr	r2, [r3, #0]
+ 861 00c2 FB68     		ldr	r3, [r7, #12]
+ 862 00c4 DA60     		str	r2, [r3, #12]
+ 651:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     udp_pcbs = pcb;
+ 863              		.loc 1 651 0
+ 864 00c6 40F20003 		movw	r3, #:lower16:udp_pcbs
+ 865 00ca C0F20003 		movt	r3, #:upper16:udp_pcbs
+ 866 00ce FA68     		ldr	r2, [r7, #12]
+ 867 00d0 1A60     		str	r2, [r3, #0]
+ 868              	.L54:
+ 652:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   }
+ 653:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   LWIP_DEBUGF(UDP_DEBUG | LWIP_DBG_TRACE | LWIP_DBG_STATE,
+ 654:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****               ("udp_bind: bound to %"U16_F".%"U16_F".%"U16_F".%"U16_F", port %"U16_F"\n",
+ 655:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****                (u16_t)((ntohl(pcb->local_ip.addr) >> 24) & 0xff),
+ 656:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****                (u16_t)((ntohl(pcb->local_ip.addr) >> 16) & 0xff),
+ 657:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****                (u16_t)((ntohl(pcb->local_ip.addr) >> 8) & 0xff),
+ 658:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****                (u16_t)(ntohl(pcb->local_ip.addr) & 0xff), pcb->local_port));
+ 659:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   return ERR_OK;
+ 869              		.loc 1 659 0
+ 870 00d2 4FF00003 		mov	r3, #0
+ 871              	.L53:
+ 872 00d6 5BB2     		sxtb	r3, r3
+ 660:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** }
+ 873              		.loc 1 660 0
+ 874 00d8 1846     		mov	r0, r3
+ 875 00da 07F11C07 		add	r7, r7, #28
+ 876 00de BD46     		mov	sp, r7
+ 877 00e0 80BC     		pop	{r7}
+ 878 00e2 7047     		bx	lr
+ 879              		.cfi_endproc
+ 880              	.LFE4:
+ 882              		.section	.text.udp_connect,"ax",%progbits
+ 883              		.align	2
+ 884              		.global	udp_connect
+ 885              		.thumb
+ 886              		.thumb_func
+ 888              	udp_connect:
+ 889              	.LFB5:
+ 661:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** /**
+ 662:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * Connect an UDP PCB.
+ 663:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  *
+ 664:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * This will associate the UDP PCB with the remote address.
+ 665:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  *
+ 666:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * @param pcb UDP PCB to be connected with remote address ipaddr and port.
+ 667:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * @param ipaddr remote IP address to connect with.
+ 668:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * @param port remote UDP port to connect with.
+ 669:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  *
+ 670:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * @return lwIP error code
+ 671:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  *
+ 672:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * ipaddr & port are expected to be in the same byte order as in the pcb.
+ 673:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  *
+ 674:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * The udp pcb is bound to a random local port if not already bound.
+ 675:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  *
+ 676:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * @see udp_disconnect()
+ 677:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  */
+ 678:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** err_t
+ 679:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** udp_connect(struct udp_pcb *pcb, struct ip_addr *ipaddr, u16_t port)
+ 680:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** {
+ 890              		.loc 1 680 0
+ 891              		.cfi_startproc
+ 892              		@ args = 0, pretend = 0, frame = 24
+ 893              		@ frame_needed = 1, uses_anonymous_args = 0
+ 894 0000 80B5     		push	{r7, lr}
+ 895              	.LCFI15:
+ 896              		.cfi_def_cfa_offset 8
+ 897              		.cfi_offset 7, -8
+ 898              		.cfi_offset 14, -4
+ 899 0002 86B0     		sub	sp, sp, #24
+ 900              	.LCFI16:
+ 901              		.cfi_def_cfa_offset 32
+ 902 0004 00AF     		add	r7, sp, #0
+ 903              	.LCFI17:
+ 904              		.cfi_def_cfa_register 7
+ 905 0006 F860     		str	r0, [r7, #12]
+ 906 0008 B960     		str	r1, [r7, #8]
+ 907 000a 1346     		mov	r3, r2
+ 908 000c FB80     		strh	r3, [r7, #6]	@ movhi
+ 681:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   struct udp_pcb *ipcb;
+ 682:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** 
+ 683:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   if (pcb->local_port == 0) {
+ 909              		.loc 1 683 0
+ 910 000e FB68     		ldr	r3, [r7, #12]
+ 911 0010 5B8A     		ldrh	r3, [r3, #18]
+ 912 0012 002B     		cmp	r3, #0
+ 913 0014 0FD1     		bne	.L56
+ 914              	.LBB2:
+ 684:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     err_t err = udp_bind(pcb, &pcb->local_ip, pcb->local_port);
+ 915              		.loc 1 684 0
+ 916 0016 FA68     		ldr	r2, [r7, #12]
+ 917 0018 FB68     		ldr	r3, [r7, #12]
+ 918 001a 5B8A     		ldrh	r3, [r3, #18]
+ 919 001c F868     		ldr	r0, [r7, #12]
+ 920 001e 1146     		mov	r1, r2
+ 921 0020 1A46     		mov	r2, r3
+ 922 0022 FFF7FEFF 		bl	udp_bind
+ 923 0026 0346     		mov	r3, r0
+ 924 0028 FB74     		strb	r3, [r7, #19]
+ 685:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     if (err != ERR_OK)
+ 925              		.loc 1 685 0
+ 926 002a 97F91330 		ldrsb	r3, [r7, #19]
+ 927 002e 002B     		cmp	r3, #0
+ 928 0030 01D0     		beq	.L56
+ 686:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       return err;
+ 929              		.loc 1 686 0
+ 930 0032 FB7C     		ldrb	r3, [r7, #19]	@ zero_extendqisi2
+ 931 0034 36E0     		b	.L57
+ 932              	.L56:
+ 933              	.LBE2:
+ 687:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   }
+ 688:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** 
+ 689:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   ip_addr_set(&pcb->remote_ip, ipaddr);
+ 934              		.loc 1 689 0
+ 935 0036 BB68     		ldr	r3, [r7, #8]
+ 936 0038 002B     		cmp	r3, #0
+ 937 003a 02D0     		beq	.L58
+ 938              		.loc 1 689 0 is_stmt 0 discriminator 1
+ 939 003c BB68     		ldr	r3, [r7, #8]
+ 940 003e 1B68     		ldr	r3, [r3, #0]	@ unaligned
+ 941 0040 01E0     		b	.L59
+ 942              	.L58:
+ 943              		.loc 1 689 0 discriminator 2
+ 944 0042 4FF00003 		mov	r3, #0
+ 945              	.L59:
+ 946              		.loc 1 689 0 discriminator 3
+ 947 0046 FA68     		ldr	r2, [r7, #12]
+ 948 0048 5360     		str	r3, [r2, #4]
+ 690:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   pcb->remote_port = port;
+ 949              		.loc 1 690 0 is_stmt 1 discriminator 3
+ 950 004a FB68     		ldr	r3, [r7, #12]
+ 951 004c FA88     		ldrh	r2, [r7, #6]	@ movhi
+ 952 004e 9A82     		strh	r2, [r3, #20]	@ movhi
+ 691:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   pcb->flags |= UDP_FLAGS_CONNECTED;
+ 953              		.loc 1 691 0 discriminator 3
+ 954 0050 FB68     		ldr	r3, [r7, #12]
+ 955 0052 1B7C     		ldrb	r3, [r3, #16]	@ zero_extendqisi2
+ 956 0054 43F00403 		orr	r3, r3, #4
+ 957 0058 DAB2     		uxtb	r2, r3
+ 958 005a FB68     		ldr	r3, [r7, #12]
+ 959 005c 1A74     		strb	r2, [r3, #16]
+ 692:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** /** TODO: this functionality belongs in upper layers */
+ 693:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** #ifdef LWIP_UDP_TODO
+ 694:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   /* Nail down local IP for netconn_addr()/getsockname() */
+ 695:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   if (ip_addr_isany(&pcb->local_ip) && !ip_addr_isany(&pcb->remote_ip)) {
+ 696:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     struct netif *netif;
+ 697:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** 
+ 698:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     if ((netif = ip_route(&(pcb->remote_ip))) == NULL) {
+ 699:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       LWIP_DEBUGF(UDP_DEBUG, ("udp_connect: No route to 0x%lx\n", pcb->remote_ip.addr));
+ 700:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       UDP_STATS_INC(udp.rterr);
+ 701:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       return ERR_RTE;
+ 702:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     }
+ 703:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     /** TODO: this will bind the udp pcb locally, to the interface which
+ 704:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****         is used to route output packets to the remote address. However, we
+ 705:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****         might want to accept incoming packets on any interface! */
+ 706:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     pcb->local_ip = netif->ip_addr;
+ 707:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   } else if (ip_addr_isany(&pcb->remote_ip)) {
+ 708:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     pcb->local_ip.addr = 0;
+ 709:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   }
+ 710:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** #endif
+ 711:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   LWIP_DEBUGF(UDP_DEBUG | LWIP_DBG_TRACE | LWIP_DBG_STATE,
+ 712:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****               ("udp_connect: connected to %"U16_F".%"U16_F".%"U16_F".%"U16_F",port %"U16_F"\n",
+ 713:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****                (u16_t)((ntohl(pcb->remote_ip.addr) >> 24) & 0xff),
+ 714:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****                (u16_t)((ntohl(pcb->remote_ip.addr) >> 16) & 0xff),
+ 715:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****                (u16_t)((ntohl(pcb->remote_ip.addr) >> 8) & 0xff),
+ 716:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****                (u16_t)(ntohl(pcb->remote_ip.addr) & 0xff), pcb->remote_port));
+ 717:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** 
+ 718:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   /* Insert UDP PCB into the list of active UDP PCBs. */
+ 719:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   for (ipcb = udp_pcbs; ipcb != NULL; ipcb = ipcb->next) {
+ 960              		.loc 1 719 0 discriminator 3
+ 961 005e 40F20003 		movw	r3, #:lower16:udp_pcbs
+ 962 0062 C0F20003 		movt	r3, #:upper16:udp_pcbs
+ 963 0066 1B68     		ldr	r3, [r3, #0]
+ 964 0068 7B61     		str	r3, [r7, #20]
+ 965 006a 09E0     		b	.L60
+ 966              	.L62:
+ 720:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     if (pcb == ipcb) {
+ 967              		.loc 1 720 0
+ 968 006c FA68     		ldr	r2, [r7, #12]
+ 969 006e 7B69     		ldr	r3, [r7, #20]
+ 970 0070 9A42     		cmp	r2, r3
+ 971 0072 02D1     		bne	.L61
+ 721:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       /* already on the list, just return */
+ 722:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       return ERR_OK;
+ 972              		.loc 1 722 0
+ 973 0074 4FF00003 		mov	r3, #0
+ 974 0078 14E0     		b	.L57
+ 975              	.L61:
+ 719:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   for (ipcb = udp_pcbs; ipcb != NULL; ipcb = ipcb->next) {
+ 976              		.loc 1 719 0
+ 977 007a 7B69     		ldr	r3, [r7, #20]
+ 978 007c DB68     		ldr	r3, [r3, #12]
+ 979 007e 7B61     		str	r3, [r7, #20]
+ 980              	.L60:
+ 719:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   for (ipcb = udp_pcbs; ipcb != NULL; ipcb = ipcb->next) {
+ 981              		.loc 1 719 0 is_stmt 0 discriminator 1
+ 982 0080 7B69     		ldr	r3, [r7, #20]
+ 983 0082 002B     		cmp	r3, #0
+ 984 0084 F2D1     		bne	.L62
+ 723:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     }
+ 724:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   }
+ 725:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   /* PCB not yet on the list, add PCB now */
+ 726:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   pcb->next = udp_pcbs;
+ 985              		.loc 1 726 0 is_stmt 1
+ 986 0086 40F20003 		movw	r3, #:lower16:udp_pcbs
+ 987 008a C0F20003 		movt	r3, #:upper16:udp_pcbs
+ 988 008e 1A68     		ldr	r2, [r3, #0]
+ 989 0090 FB68     		ldr	r3, [r7, #12]
+ 990 0092 DA60     		str	r2, [r3, #12]
+ 727:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   udp_pcbs = pcb;
+ 991              		.loc 1 727 0
+ 992 0094 40F20003 		movw	r3, #:lower16:udp_pcbs
+ 993 0098 C0F20003 		movt	r3, #:upper16:udp_pcbs
+ 994 009c FA68     		ldr	r2, [r7, #12]
+ 995 009e 1A60     		str	r2, [r3, #0]
+ 728:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   return ERR_OK;
+ 996              		.loc 1 728 0
+ 997 00a0 4FF00003 		mov	r3, #0
+ 998              	.L57:
+ 999 00a4 5BB2     		sxtb	r3, r3
+ 729:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** }
+ 1000              		.loc 1 729 0
+ 1001 00a6 1846     		mov	r0, r3
+ 1002 00a8 07F11807 		add	r7, r7, #24
+ 1003 00ac BD46     		mov	sp, r7
+ 1004 00ae 80BD     		pop	{r7, pc}
+ 1005              		.cfi_endproc
+ 1006              	.LFE5:
+ 1008              		.section	.text.udp_disconnect,"ax",%progbits
+ 1009              		.align	2
+ 1010              		.global	udp_disconnect
+ 1011              		.thumb
+ 1012              		.thumb_func
+ 1014              	udp_disconnect:
+ 1015              	.LFB6:
+ 730:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** 
+ 731:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** /**
+ 732:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * Disconnect a UDP PCB
+ 733:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  *
+ 734:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * @param pcb the udp pcb to disconnect.
+ 735:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  */
+ 736:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** void
+ 737:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** udp_disconnect(struct udp_pcb *pcb)
+ 738:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** {
+ 1016              		.loc 1 738 0
+ 1017              		.cfi_startproc
+ 1018              		@ args = 0, pretend = 0, frame = 8
+ 1019              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1020              		@ link register save eliminated.
+ 1021 0000 80B4     		push	{r7}
+ 1022              	.LCFI18:
+ 1023              		.cfi_def_cfa_offset 4
+ 1024              		.cfi_offset 7, -4
+ 1025 0002 83B0     		sub	sp, sp, #12
+ 1026              	.LCFI19:
+ 1027              		.cfi_def_cfa_offset 16
+ 1028 0004 00AF     		add	r7, sp, #0
+ 1029              	.LCFI20:
+ 1030              		.cfi_def_cfa_register 7
+ 1031 0006 7860     		str	r0, [r7, #4]
+ 739:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   /* reset remote address association */
+ 740:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   ip_addr_set(&pcb->remote_ip, IP_ADDR_ANY);
+ 1032              		.loc 1 740 0
+ 1033 0008 40F20003 		movw	r3, #:lower16:ip_addr_any
+ 1034 000c C0F20003 		movt	r3, #:upper16:ip_addr_any
+ 1035 0010 1A68     		ldr	r2, [r3, #0]	@ unaligned
+ 1036 0012 7B68     		ldr	r3, [r7, #4]
+ 1037 0014 5A60     		str	r2, [r3, #4]
+ 741:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   pcb->remote_port = 0;
+ 1038              		.loc 1 741 0
+ 1039 0016 7B68     		ldr	r3, [r7, #4]
+ 1040 0018 4FF00002 		mov	r2, #0
+ 1041 001c 9A82     		strh	r2, [r3, #20]	@ movhi
+ 742:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   /* mark PCB as unconnected */
+ 743:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   pcb->flags &= ~UDP_FLAGS_CONNECTED;
+ 1042              		.loc 1 743 0
+ 1043 001e 7B68     		ldr	r3, [r7, #4]
+ 1044 0020 1B7C     		ldrb	r3, [r3, #16]	@ zero_extendqisi2
+ 1045 0022 23F00403 		bic	r3, r3, #4
+ 1046 0026 DAB2     		uxtb	r2, r3
+ 1047 0028 7B68     		ldr	r3, [r7, #4]
+ 1048 002a 1A74     		strb	r2, [r3, #16]
+ 744:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** }
+ 1049              		.loc 1 744 0
+ 1050 002c 07F10C07 		add	r7, r7, #12
+ 1051 0030 BD46     		mov	sp, r7
+ 1052 0032 80BC     		pop	{r7}
+ 1053 0034 7047     		bx	lr
+ 1054              		.cfi_endproc
+ 1055              	.LFE6:
+ 1057 0036 00BF     		.section	.text.udp_recv,"ax",%progbits
+ 1058              		.align	2
+ 1059              		.global	udp_recv
+ 1060              		.thumb
+ 1061              		.thumb_func
+ 1063              	udp_recv:
+ 1064              	.LFB7:
+ 745:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** 
+ 746:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** /**
+ 747:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * Set a receive callback for a UDP PCB
+ 748:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  *
+ 749:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * This callback will be called when receiving a datagram for the pcb.
+ 750:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  *
+ 751:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * @param pcb the pcb for wich to set the recv callback
+ 752:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * @param recv function pointer of the callback function
+ 753:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * @param recv_arg additional argument to pass to the callback function
+ 754:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  */
+ 755:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** void
+ 756:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** udp_recv(struct udp_pcb *pcb,
+ 757:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****          void (* recv)(void *arg, struct udp_pcb *upcb, struct pbuf *p,
+ 758:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****                        struct ip_addr *addr, u16_t port),
+ 759:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****          void *recv_arg)
+ 760:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** {
+ 1065              		.loc 1 760 0
+ 1066              		.cfi_startproc
+ 1067              		@ args = 0, pretend = 0, frame = 16
+ 1068              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1069              		@ link register save eliminated.
+ 1070 0000 80B4     		push	{r7}
+ 1071              	.LCFI21:
+ 1072              		.cfi_def_cfa_offset 4
+ 1073              		.cfi_offset 7, -4
+ 1074 0002 85B0     		sub	sp, sp, #20
+ 1075              	.LCFI22:
+ 1076              		.cfi_def_cfa_offset 24
+ 1077 0004 00AF     		add	r7, sp, #0
+ 1078              	.LCFI23:
+ 1079              		.cfi_def_cfa_register 7
+ 1080 0006 F860     		str	r0, [r7, #12]
+ 1081 0008 B960     		str	r1, [r7, #8]
+ 1082 000a 7A60     		str	r2, [r7, #4]
+ 761:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   /* remember recv() callback and user data */
+ 762:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   pcb->recv = recv;
+ 1083              		.loc 1 762 0
+ 1084 000c FB68     		ldr	r3, [r7, #12]
+ 1085 000e BA68     		ldr	r2, [r7, #8]
+ 1086 0010 DA61     		str	r2, [r3, #28]
+ 763:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   pcb->recv_arg = recv_arg;
+ 1087              		.loc 1 763 0
+ 1088 0012 FB68     		ldr	r3, [r7, #12]
+ 1089 0014 7A68     		ldr	r2, [r7, #4]
+ 1090 0016 1A62     		str	r2, [r3, #32]
+ 764:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** }
+ 1091              		.loc 1 764 0
+ 1092 0018 07F11407 		add	r7, r7, #20
+ 1093 001c BD46     		mov	sp, r7
+ 1094 001e 80BC     		pop	{r7}
+ 1095 0020 7047     		bx	lr
+ 1096              		.cfi_endproc
+ 1097              	.LFE7:
+ 1099 0022 00BF     		.section	.text.udp_remove,"ax",%progbits
+ 1100              		.align	2
+ 1101              		.global	udp_remove
+ 1102              		.thumb
+ 1103              		.thumb_func
+ 1105              	udp_remove:
+ 1106              	.LFB8:
+ 765:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** 
+ 766:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** /**
+ 767:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * Remove an UDP PCB.
+ 768:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  *
+ 769:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * @param pcb UDP PCB to be removed. The PCB is removed from the list of
+ 770:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * UDP PCB's and the data structure is freed from memory.
+ 771:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  *
+ 772:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * @see udp_new()
+ 773:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  */
+ 774:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** void
+ 775:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** udp_remove(struct udp_pcb *pcb)
+ 776:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** {
+ 1107              		.loc 1 776 0
+ 1108              		.cfi_startproc
+ 1109              		@ args = 0, pretend = 0, frame = 16
+ 1110              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1111 0000 80B5     		push	{r7, lr}
+ 1112              	.LCFI24:
+ 1113              		.cfi_def_cfa_offset 8
+ 1114              		.cfi_offset 7, -8
+ 1115              		.cfi_offset 14, -4
+ 1116 0002 84B0     		sub	sp, sp, #16
+ 1117              	.LCFI25:
+ 1118              		.cfi_def_cfa_offset 24
+ 1119 0004 00AF     		add	r7, sp, #0
+ 1120              	.LCFI26:
+ 1121              		.cfi_def_cfa_register 7
+ 1122 0006 7860     		str	r0, [r7, #4]
+ 777:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   struct udp_pcb *pcb2;
+ 778:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** 
+ 779:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   snmp_delete_udpidx_tree(pcb);
+ 780:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   /* pcb to be removed is first in list? */
+ 781:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   if (udp_pcbs == pcb) {
+ 1123              		.loc 1 781 0
+ 1124 0008 40F20003 		movw	r3, #:lower16:udp_pcbs
+ 1125 000c C0F20003 		movt	r3, #:upper16:udp_pcbs
+ 1126 0010 1A68     		ldr	r2, [r3, #0]
+ 1127 0012 7B68     		ldr	r3, [r7, #4]
+ 1128 0014 9A42     		cmp	r2, r3
+ 1129 0016 0BD1     		bne	.L66
+ 782:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     /* make list start at 2nd pcb */
+ 783:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     udp_pcbs = udp_pcbs->next;
+ 1130              		.loc 1 783 0
+ 1131 0018 40F20003 		movw	r3, #:lower16:udp_pcbs
+ 1132 001c C0F20003 		movt	r3, #:upper16:udp_pcbs
+ 1133 0020 1B68     		ldr	r3, [r3, #0]
+ 1134 0022 DA68     		ldr	r2, [r3, #12]
+ 1135 0024 40F20003 		movw	r3, #:lower16:udp_pcbs
+ 1136 0028 C0F20003 		movt	r3, #:upper16:udp_pcbs
+ 1137 002c 1A60     		str	r2, [r3, #0]
+ 1138 002e 19E0     		b	.L67
+ 1139              	.L66:
+ 784:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     /* pcb not 1st in list */
+ 785:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   } else
+ 786:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     for (pcb2 = udp_pcbs; pcb2 != NULL; pcb2 = pcb2->next) {
+ 1140              		.loc 1 786 0
+ 1141 0030 40F20003 		movw	r3, #:lower16:udp_pcbs
+ 1142 0034 C0F20003 		movt	r3, #:upper16:udp_pcbs
+ 1143 0038 1B68     		ldr	r3, [r3, #0]
+ 1144 003a FB60     		str	r3, [r7, #12]
+ 1145 003c 0FE0     		b	.L68
+ 1146              	.L70:
+ 787:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       /* find pcb in udp_pcbs list */
+ 788:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       if (pcb2->next != NULL && pcb2->next == pcb) {
+ 1147              		.loc 1 788 0
+ 1148 003e FB68     		ldr	r3, [r7, #12]
+ 1149 0040 DB68     		ldr	r3, [r3, #12]
+ 1150 0042 002B     		cmp	r3, #0
+ 1151 0044 08D0     		beq	.L69
+ 1152              		.loc 1 788 0 is_stmt 0 discriminator 1
+ 1153 0046 FB68     		ldr	r3, [r7, #12]
+ 1154 0048 DA68     		ldr	r2, [r3, #12]
+ 1155 004a 7B68     		ldr	r3, [r7, #4]
+ 1156 004c 9A42     		cmp	r2, r3
+ 1157 004e 03D1     		bne	.L69
+ 789:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****         /* remove pcb from list */
+ 790:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****         pcb2->next = pcb->next;
+ 1158              		.loc 1 790 0 is_stmt 1
+ 1159 0050 7B68     		ldr	r3, [r7, #4]
+ 1160 0052 DA68     		ldr	r2, [r3, #12]
+ 1161 0054 FB68     		ldr	r3, [r7, #12]
+ 1162 0056 DA60     		str	r2, [r3, #12]
+ 1163              	.L69:
+ 786:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     for (pcb2 = udp_pcbs; pcb2 != NULL; pcb2 = pcb2->next) {
+ 1164              		.loc 1 786 0
+ 1165 0058 FB68     		ldr	r3, [r7, #12]
+ 1166 005a DB68     		ldr	r3, [r3, #12]
+ 1167 005c FB60     		str	r3, [r7, #12]
+ 1168              	.L68:
+ 786:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     for (pcb2 = udp_pcbs; pcb2 != NULL; pcb2 = pcb2->next) {
+ 1169              		.loc 1 786 0 is_stmt 0 discriminator 1
+ 1170 005e FB68     		ldr	r3, [r7, #12]
+ 1171 0060 002B     		cmp	r3, #0
+ 1172 0062 ECD1     		bne	.L70
+ 1173              	.L67:
+ 791:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****       }
+ 792:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     }
+ 793:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   memp_free(MEMP_UDP_PCB, pcb);
+ 1174              		.loc 1 793 0 is_stmt 1
+ 1175 0064 7868     		ldr	r0, [r7, #4]
+ 1176 0066 FFF7FEFF 		bl	mem_free
+ 794:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** }
+ 1177              		.loc 1 794 0
+ 1178 006a 07F11007 		add	r7, r7, #16
+ 1179 006e BD46     		mov	sp, r7
+ 1180 0070 80BD     		pop	{r7, pc}
+ 1181              		.cfi_endproc
+ 1182              	.LFE8:
+ 1184 0072 00BF     		.section	.text.udp_new,"ax",%progbits
+ 1185              		.align	2
+ 1186              		.global	udp_new
+ 1187              		.thumb
+ 1188              		.thumb_func
+ 1190              	udp_new:
+ 1191              	.LFB9:
+ 795:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** 
+ 796:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** /**
+ 797:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * Create a UDP PCB.
+ 798:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  *
+ 799:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * @return The UDP PCB which was created. NULL if the PCB data structure
+ 800:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * could not be allocated.
+ 801:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  *
+ 802:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  * @see udp_remove()
+ 803:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****  */
+ 804:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** struct udp_pcb *
+ 805:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** udp_new(void)
+ 806:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** {
+ 1192              		.loc 1 806 0
+ 1193              		.cfi_startproc
+ 1194              		@ args = 0, pretend = 0, frame = 8
+ 1195              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1196 0000 80B5     		push	{r7, lr}
+ 1197              	.LCFI27:
+ 1198              		.cfi_def_cfa_offset 8
+ 1199              		.cfi_offset 7, -8
+ 1200              		.cfi_offset 14, -4
+ 1201 0002 82B0     		sub	sp, sp, #8
+ 1202              	.LCFI28:
+ 1203              		.cfi_def_cfa_offset 16
+ 1204 0004 00AF     		add	r7, sp, #0
+ 1205              	.LCFI29:
+ 1206              		.cfi_def_cfa_register 7
+ 807:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   struct udp_pcb *pcb;
+ 808:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   pcb = memp_malloc(MEMP_UDP_PCB);
+ 1207              		.loc 1 808 0
+ 1208 0006 40F20003 		movw	r3, #:lower16:memp_sizes
+ 1209 000a C0F20003 		movt	r3, #:upper16:memp_sizes
+ 1210 000e 5B88     		ldrh	r3, [r3, #2]
+ 1211 0010 1846     		mov	r0, r3
+ 1212 0012 FFF7FEFF 		bl	mem_malloc
+ 1213 0016 7860     		str	r0, [r7, #4]
+ 809:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   /* could allocate UDP PCB? */
+ 810:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   if (pcb != NULL) {
+ 1214              		.loc 1 810 0
+ 1215 0018 7B68     		ldr	r3, [r7, #4]
+ 1216 001a 002B     		cmp	r3, #0
+ 1217 001c 0AD0     		beq	.L72
+ 811:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     /* UDP Lite: by initializing to all zeroes, chksum_len is set to 0
+ 812:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****      * which means checksum is generated over the whole datagram per default
+ 813:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****      * (recommended as default by RFC 3828). */
+ 814:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     /* initialize PCB to all zeroes */
+ 815:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     memset(pcb, 0, sizeof(struct udp_pcb));
+ 1218              		.loc 1 815 0
+ 1219 001e 7868     		ldr	r0, [r7, #4]
+ 1220 0020 4FF00001 		mov	r1, #0
+ 1221 0024 4FF02402 		mov	r2, #36
+ 1222 0028 FFF7FEFF 		bl	memset
+ 816:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****     pcb->ttl = UDP_TTL;
+ 1223              		.loc 1 816 0
+ 1224 002c 7B68     		ldr	r3, [r7, #4]
+ 1225 002e 4FF0FF02 		mov	r2, #255
+ 1226 0032 DA72     		strb	r2, [r3, #11]
+ 1227              	.L72:
+ 817:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   }
+ 818:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c ****   return pcb;
+ 1228              		.loc 1 818 0
+ 1229 0034 7B68     		ldr	r3, [r7, #4]
+ 819:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.c **** }
+ 1230              		.loc 1 819 0
+ 1231 0036 1846     		mov	r0, r3
+ 1232 0038 07F10807 		add	r7, r7, #8
+ 1233 003c BD46     		mov	sp, r7
+ 1234 003e 80BD     		pop	{r7, pc}
+ 1235              		.cfi_endproc
+ 1236              	.LFE9:
+ 1238              		.text
+ 1239              	.Letext0:
+ 1240              		.file 2 "C:\\DAVE3_workspace\\ws3.1.10\\XMC4500_RK_HTTPserver\\XMC4500_RK_HTTPserver\\Dave\\Genera
+ 1241              		.file 3 "C:\\DAVE3_workspace\\ws3.1.10\\XMC4500_RK_HTTPserver\\XMC4500_RK_HTTPserver\\Dave\\Genera
+ 1242              		.file 4 "C:\\DAVE3_workspace\\ws3.1.10\\XMC4500_RK_HTTPserver\\XMC4500_RK_HTTPserver\\Dave\\Genera
+ 1243              		.file 5 "C:\\DAVE3_workspace\\ws3.1.10\\XMC4500_RK_HTTPserver\\XMC4500_RK_HTTPserver\\Dave\\Genera
+ 1244              		.file 6 "C:\\DAVE3_workspace\\ws3.1.10\\XMC4500_RK_HTTPserver\\XMC4500_RK_HTTPserver\\Dave\\Genera
+ 1245              		.file 7 "C:\\DAVE3_workspace\\ws3.1.10\\XMC4500_RK_HTTPserver\\XMC4500_RK_HTTPserver\\Dave\\Genera
+ 1246              		.file 8 "C:\\DAVE3_workspace\\ws3.1.10\\XMC4500_RK_HTTPserver\\XMC4500_RK_HTTPserver\\Dave\\Genera
+ 1247              		.file 9 "C:\\DAVE3_workspace\\ws3.1.10\\XMC4500_RK_HTTPserver\\XMC4500_RK_HTTPserver\\Dave\\Genera
+ 1248              		.file 10 "C:\\DAVE3_workspace\\ws3.1.10\\XMC4500_RK_HTTPserver\\XMC4500_RK_HTTPserver\\Dave\\Gener
+DEFINED SYMBOLS
+                            *ABS*:00000000 udp.c
+                            *COM*:00000004 udp_pcbs
+C:\Users\Mihai\AppData\Local\Temp\ccB43Lje.s:21     .text.udp_input:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccB43Lje.s:26     .text.udp_input:00000000 udp_input
+C:\Users\Mihai\AppData\Local\Temp\ccB43Lje.s:404    .text.udp_send:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccB43Lje.s:409    .text.udp_send:00000000 udp_send
+C:\Users\Mihai\AppData\Local\Temp\ccB43Lje.s:451    .text.udp_sendto:00000000 udp_sendto
+C:\Users\Mihai\AppData\Local\Temp\ccB43Lje.s:446    .text.udp_sendto:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccB43Lje.s:530    .text.udp_sendto_if:00000000 udp_sendto_if
+C:\Users\Mihai\AppData\Local\Temp\ccB43Lje.s:525    .text.udp_sendto_if:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccB43Lje.s:730    .text.udp_bind:00000000 udp_bind
+C:\Users\Mihai\AppData\Local\Temp\ccB43Lje.s:725    .text.udp_bind:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccB43Lje.s:883    .text.udp_connect:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccB43Lje.s:888    .text.udp_connect:00000000 udp_connect
+C:\Users\Mihai\AppData\Local\Temp\ccB43Lje.s:1009   .text.udp_disconnect:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccB43Lje.s:1014   .text.udp_disconnect:00000000 udp_disconnect
+C:\Users\Mihai\AppData\Local\Temp\ccB43Lje.s:1058   .text.udp_recv:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccB43Lje.s:1063   .text.udp_recv:00000000 udp_recv
+C:\Users\Mihai\AppData\Local\Temp\ccB43Lje.s:1100   .text.udp_remove:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccB43Lje.s:1105   .text.udp_remove:00000000 udp_remove
+C:\Users\Mihai\AppData\Local\Temp\ccB43Lje.s:1185   .text.udp_new:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccB43Lje.s:1190   .text.udp_new:00000000 udp_new
+                     .debug_frame:00000010 $d
+                           .group:00000000 wm4.1.1791a5ae2e936ca1033c1c44be394cc7
+                           .group:00000000 wm4.ETH004_Conf.h.56.564c3f309c32b3c742fc91049cf66940
+                           .group:00000000 wm4.lwipopts.h.73.a7a63bda1e8216abd1d90275eaaa0027
+                           .group:00000000 wm4.arch.h.33.6fa4aa86d33d1490ae882caef7316405
+                           .group:00000000 wm4.cpu.h.33.b213c7fd77614ebc3691cef18ad2ff22
+                           .group:00000000 wm4.cc.h.66.ec134211c658dcc89de4610e4e7bab46
+                           .group:00000000 wm4.arch.h.47.5153c52bfb94ee3b37299920afab6afd
+                           .group:00000000 wm4.debug.h.43.557ecd6c90cc70b375bb8a29118be47b
+                           .group:00000000 wm4.opt.h.94.d36882acafebb8726bce646fc8b2397b
+                           .group:00000000 wm4.err.h.52.37c5d17538f8e8347a9c84196701e92d
+                           .group:00000000 wm4.pbuf.h.43.e9a1ad12b97478787a109e22d5306820
+                           .group:00000000 wm4.inet.h.46.b516065779826845d16d49f513869a2b
+                           .group:00000000 wm4.ip_addr.h.79.9a0ce887ca8c88c22ad7686bcb5105df
+                           .group:00000000 wm4.netif.h.77.eb641fb35cae7e4880920e0acf78586f
+                           .group:00000000 wm4.def.h.33.f5df81959e69d85e6b3a0a040438efaf
+                           .group:00000000 wm4.ip.h.48.ad46847692d4d729760949b27e48a442
+                           .group:00000000 wm4.udp.h.48.1a8dde095cd0a13580afaba1443e5a3f
+                           .group:00000000 wm4.memp_std.h.15.aec196dc1c3fb1142dd450db0c167cbf
+                           .group:00000000 wm4.mem.h.96.20770766e6c9e6c42af6bfa95ef5c63f
+                           .group:00000000 wm4.memp.h.86.dbc4cb1b8d6b9ea113f04174f716e4c0
+                           .group:00000000 wm4.icmp.h.44.450dbf91f594cc26ad19d086cdc83713
+                           .group:00000000 wm4.stats.h.147.58ec5b890fad5bbc2a7711ad8105f087
+                           .group:00000000 wm4.snmp.h.231.ffb5dc2779dd945785c887dfa42d86eb
+                           .group:00000000 wm4.perf.h.33.85c55671e1b7570634f49777a207ad9f
+                           .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
+                           .group:00000000 wm4.features.h.22.b72b3baab2bb2eab3661375590100b6b
+                           .group:00000000 wm4.config.h.193.5fb8ef056cdff92dec3dee9552839d8c
+                           .group:00000000 wm4._ansi.h.23.7aefdac4826acebbfc9f3822a0aeb14c
+                           .group:00000000 wm4._default_types.h.6.5e12cd604db8ce00b62bb2f02708eaf3
+                           .group:00000000 wm4.lock.h.2.9bc98482741e5e2a9450b12934a684ea
+                           .group:00000000 wm4.stddef.h.349.31f4c5baff3fa2689010b32028da9c47
+                           .group:00000000 wm4.reent.h.16.9e42f0e588b85e70b2bf6572af57ce64
+                           .group:00000000 wm4.stddef.h.187.9e651b6b8b16e149c1353259404973ea
+                           .group:00000000 wm4.string.h.86.d5c872ff52e2712c985b588a0ef39f3c
+
+UNDEFINED SYMBOLS
+ntohs
+pbuf_header
+pbuf_free
+ip_addr_isbroadcast
+ntohl
+icmp_dest_unreach
+ip_route
+pbuf_alloc
+pbuf_chain
+htons
+ip_output_if
+ip_addr_any
+mem_free
+memp_sizes
+mem_malloc
+memset

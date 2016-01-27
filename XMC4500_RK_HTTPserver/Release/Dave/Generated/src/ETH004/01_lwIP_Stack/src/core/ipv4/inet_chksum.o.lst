@@ -1,0 +1,181 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"inet_chksum.c"
+  16              		.section	.text.lwip_standard_chksum,"ax",%progbits
+  17              		.align	1
+  18              		.thumb
+  19              		.thumb_func
+  21              	lwip_standard_chksum:
+  22              		@ args = 0, pretend = 0, frame = 0
+  23              		@ frame_needed = 0, uses_anonymous_args = 0
+  24 0000 30B5     		push	{r4, r5, lr}
+  25 0002 0246     		mov	r2, r0
+  26 0004 0023     		movs	r3, #0
+  27              	.L2:
+  28 0006 0C18     		adds	r4, r1, r0
+  29 0008 A41A     		subs	r4, r4, r2
+  30 000a A4B2     		uxth	r4, r4
+  31 000c 012C     		cmp	r4, #1
+  32 000e 06D9     		bls	.L13
+  33              	.L3:
+  34 0010 1578     		ldrb	r5, [r2, #0]	@ zero_extendqisi2
+  35 0012 5478     		ldrb	r4, [r2, #1]	@ zero_extendqisi2
+  36 0014 44EA0524 		orr	r4, r4, r5, lsl #8
+  37 0018 0232     		adds	r2, r2, #2
+  38 001a 1B19     		adds	r3, r3, r4
+  39 001c F3E7     		b	.L2
+  40              	.L13:
+  41 001e 4A08     		lsrs	r2, r1, #1
+  42 0020 C907     		lsls	r1, r1, #31
+  43 0022 44BF     		itt	mi
+  44 0024 10F81220 		ldrbmi	r2, [r0, r2, lsl #1]	@ zero_extendqisi2
+  45 0028 03EB0223 		addmi	r3, r3, r2, lsl #8
+  46 002c 98B2     		uxth	r0, r3
+  47 002e 00EB1341 		add	r1, r0, r3, lsr #16
+  48 0032 0B0C     		lsrs	r3, r1, #16
+  49 0034 18BF     		it	ne
+  50 0036 13FA81F1 		uxtahne	r1, r3, r1
+  51 003a 88B2     		uxth	r0, r1
+  52 003c BDE83040 		pop	{r4, r5, lr}
+  53 0040 FFF7FEBF 		b	htons
+  55              		.section	.text.inet_chksum_pseudo,"ax",%progbits
+  56              		.align	1
+  57              		.global	inet_chksum_pseudo
+  58              		.thumb
+  59              		.thumb_func
+  61              	inet_chksum_pseudo:
+  62              		@ args = 4, pretend = 0, frame = 0
+  63              		@ frame_needed = 0, uses_anonymous_args = 0
+  64 0000 2DE9F843 		push	{r3, r4, r5, r6, r7, r8, r9, lr}
+  65 0004 0026     		movs	r6, #0
+  66 0006 0F46     		mov	r7, r1
+  67 0008 9046     		mov	r8, r2
+  68 000a 9946     		mov	r9, r3
+  69 000c 0546     		mov	r5, r0
+  70 000e 3446     		mov	r4, r6
+  71              	.L15:
+  72 0010 A5B1     		cbz	r5, .L25
+  73              	.L17:
+  74 0012 6989     		ldrh	r1, [r5, #10]
+  75 0014 6868     		ldr	r0, [r5, #4]
+  76 0016 FFF7FEFF 		bl	lwip_standard_chksum
+  77 001a 6989     		ldrh	r1, [r5, #10]
+  78 001c 0419     		adds	r4, r0, r4
+  79 001e A3B2     		uxth	r3, r4
+  80 0020 C807     		lsls	r0, r1, #31
+  81 0022 03EB1444 		add	r4, r3, r4, lsr #16
+  82 0026 07D5     		bpl	.L16
+  83 0028 C6F10106 		rsb	r6, r6, #1
+  84 002c 2206     		lsls	r2, r4, #24
+  85 002e C4F30720 		ubfx	r0, r4, #8, #8
+  86 0032 F6B2     		uxtb	r6, r6
+  87 0034 40EA1244 		orr	r4, r0, r2, lsr #16
+  88              	.L16:
+  89 0038 2D68     		ldr	r5, [r5, #0]
+  90 003a E9E7     		b	.L15
+  91              	.L25:
+  92 003c 26B1     		cbz	r6, .L18
+  93 003e 2306     		lsls	r3, r4, #24
+  94 0040 C4F30724 		ubfx	r4, r4, #8, #8
+  95 0044 44EA1344 		orr	r4, r4, r3, lsr #16
+  96              	.L18:
+  97 0048 3968     		ldr	r1, [r7, #0]	@ unaligned
+  98 004a D8F80020 		ldr	r2, [r8, #0]	@ unaligned
+  99 004e 88B2     		uxth	r0, r1
+ 100 0050 00EB1143 		add	r3, r0, r1, lsr #16
+ 101 0054 13FA82F1 		uxtah	r1, r3, r2
+ 102 0058 01EB1242 		add	r2, r1, r2, lsr #16
+ 103 005c 4846     		mov	r0, r9
+ 104 005e 1419     		adds	r4, r2, r4
+ 105 0060 FFF7FEFF 		bl	htons
+ 106 0064 2418     		adds	r4, r4, r0
+ 107 0066 BDF82000 		ldrh	r0, [sp, #32]
+ 108 006a FFF7FEFF 		bl	htons
+ 109 006e 2018     		adds	r0, r4, r0
+ 110 0070 83B2     		uxth	r3, r0
+ 111 0072 03EB1041 		add	r1, r3, r0, lsr #16
+ 112 0076 8AB2     		uxth	r2, r1
+ 113 0078 02EB1144 		add	r4, r2, r1, lsr #16
+ 114 007c E043     		mvns	r0, r4
+ 115 007e 80B2     		uxth	r0, r0
+ 116 0080 BDE8F883 		pop	{r3, r4, r5, r6, r7, r8, r9, pc}
+ 118              		.section	.text.inet_chksum,"ax",%progbits
+ 119              		.align	1
+ 120              		.global	inet_chksum
+ 121              		.thumb
+ 122              		.thumb_func
+ 124              	inet_chksum:
+ 125              		@ args = 0, pretend = 0, frame = 0
+ 126              		@ frame_needed = 0, uses_anonymous_args = 0
+ 127 0000 08B5     		push	{r3, lr}
+ 128 0002 FFF7FEFF 		bl	lwip_standard_chksum
+ 129 0006 C043     		mvns	r0, r0
+ 130 0008 80B2     		uxth	r0, r0
+ 131 000a 08BD     		pop	{r3, pc}
+ 133              		.section	.text.inet_chksum_pbuf,"ax",%progbits
+ 134              		.align	1
+ 135              		.global	inet_chksum_pbuf
+ 136              		.thumb
+ 137              		.thumb_func
+ 139              	inet_chksum_pbuf:
+ 140              		@ args = 0, pretend = 0, frame = 0
+ 141              		@ frame_needed = 0, uses_anonymous_args = 0
+ 142 0000 70B5     		push	{r4, r5, r6, lr}
+ 143 0002 0026     		movs	r6, #0
+ 144 0004 0546     		mov	r5, r0
+ 145 0006 3446     		mov	r4, r6
+ 146              	.L28:
+ 147 0008 A5B1     		cbz	r5, .L38
+ 148              	.L30:
+ 149 000a 6989     		ldrh	r1, [r5, #10]
+ 150 000c 6868     		ldr	r0, [r5, #4]
+ 151 000e FFF7FEFF 		bl	lwip_standard_chksum
+ 152 0012 6B89     		ldrh	r3, [r5, #10]
+ 153 0014 0119     		adds	r1, r0, r4
+ 154 0016 8AB2     		uxth	r2, r1
+ 155 0018 DB07     		lsls	r3, r3, #31
+ 156 001a 02EB1144 		add	r4, r2, r1, lsr #16
+ 157 001e 07D5     		bpl	.L29
+ 158 0020 2006     		lsls	r0, r4, #24
+ 159 0022 C6F10106 		rsb	r6, r6, #1
+ 160 0026 C4F30724 		ubfx	r4, r4, #8, #8
+ 161 002a F6B2     		uxtb	r6, r6
+ 162 002c 44EA1044 		orr	r4, r4, r0, lsr #16
+ 163              	.L29:
+ 164 0030 2D68     		ldr	r5, [r5, #0]
+ 165 0032 E9E7     		b	.L28
+ 166              	.L38:
+ 167 0034 26B1     		cbz	r6, .L31
+ 168 0036 2306     		lsls	r3, r4, #24
+ 169 0038 C4F30724 		ubfx	r4, r4, #8, #8
+ 170 003c 44EA1344 		orr	r4, r4, r3, lsr #16
+ 171              	.L31:
+ 172 0040 E043     		mvns	r0, r4
+ 173 0042 80B2     		uxth	r0, r0
+ 174 0044 70BD     		pop	{r4, r5, r6, pc}
+ 176              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 inet_chksum.c
+C:\Users\Mihai\AppData\Local\Temp\ccoHmmqg.s:17     .text.lwip_standard_chksum:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccoHmmqg.s:21     .text.lwip_standard_chksum:00000000 lwip_standard_chksum
+C:\Users\Mihai\AppData\Local\Temp\ccoHmmqg.s:56     .text.inet_chksum_pseudo:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccoHmmqg.s:61     .text.inet_chksum_pseudo:00000000 inet_chksum_pseudo
+C:\Users\Mihai\AppData\Local\Temp\ccoHmmqg.s:119    .text.inet_chksum:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccoHmmqg.s:124    .text.inet_chksum:00000000 inet_chksum
+C:\Users\Mihai\AppData\Local\Temp\ccoHmmqg.s:134    .text.inet_chksum_pbuf:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccoHmmqg.s:139    .text.inet_chksum_pbuf:00000000 inet_chksum_pbuf
+
+UNDEFINED SYMBOLS
+htons

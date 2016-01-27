@@ -1,0 +1,274 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"EthernetPHY.c"
+  16              		.section	.text.PHY_lWriteReg.constprop.0,"ax",%progbits
+  17              		.align	1
+  18              		.thumb
+  19              		.thumb_func
+  21              	PHY_lWriteReg.constprop.0:
+  22              		@ args = 0, pretend = 0, frame = 0
+  23              		@ frame_needed = 0, uses_anonymous_args = 0
+  24 0000 0C4B     		ldr	r3, .L11
+  25 0002 8001     		lsls	r0, r0, #6
+  26 0004 00F4F862 		and	r2, r0, #1984
+  27 0008 10B5     		push	{r4, lr}
+  28 000a 5961     		str	r1, [r3, #20]
+  29 000c 42F00301 		orr	r1, r2, #3
+  30 0010 1961     		str	r1, [r3, #16]
+  31 0012 4FF47A74 		mov	r4, #1000
+  32              	.L4:
+  33 0016 074B     		ldr	r3, .L11
+  34 0018 1869     		ldr	r0, [r3, #16]
+  35 001a 10F00100 		ands	r0, r0, #1
+  36 001e 07D0     		beq	.L2
+  37 0020 054A     		ldr	r2, .L11+4
+  38 0022 1168     		ldr	r1, [r2, #0]
+  39 0024 09B1     		cbz	r1, .L3
+  40 0026 0A20     		movs	r0, #10
+  41 0028 8847     		blx	r1
+  42              	.L3:
+  43 002a 013C     		subs	r4, r4, #1
+  44 002c F3D1     		bne	.L4
+  45 002e 0320     		movs	r0, #3
+  46              	.L2:
+  47 0030 10BD     		pop	{r4, pc}
+  48              	.L12:
+  49 0032 00BF     		.align	2
+  50              	.L11:
+  51 0034 00C00050 		.word	1342226432
+  52 0038 00000000 		.word	PHYtimerCallback
+  54              		.section	.text.PHY_lReadReg.constprop.1,"ax",%progbits
+  55              		.align	1
+  56              		.thumb
+  57              		.thumb_func
+  59              	PHY_lReadReg.constprop.1:
+  60              		@ args = 0, pretend = 0, frame = 0
+  61              		@ frame_needed = 0, uses_anonymous_args = 0
+  62 0000 8001     		lsls	r0, r0, #6
+  63 0002 38B5     		push	{r3, r4, r5, lr}
+  64 0004 00F4F862 		and	r2, r0, #1984
+  65 0008 0B4B     		ldr	r3, .L23
+  66 000a 0D46     		mov	r5, r1
+  67 000c 42F00101 		orr	r1, r2, #1
+  68 0010 1961     		str	r1, [r3, #16]
+  69 0012 4FF47A74 		mov	r4, #1000
+  70              	.L16:
+  71 0016 084A     		ldr	r2, .L23
+  72 0018 1069     		ldr	r0, [r2, #16]
+  73 001a 10F00100 		ands	r0, r0, #1
+  74 001e 08D0     		beq	.L14
+  75 0020 0649     		ldr	r1, .L23+4
+  76 0022 0B68     		ldr	r3, [r1, #0]
+  77 0024 0BB1     		cbz	r3, .L15
+  78 0026 0A20     		movs	r0, #10
+  79 0028 9847     		blx	r3
+  80              	.L15:
+  81 002a 013C     		subs	r4, r4, #1
+  82 002c F3D1     		bne	.L16
+  83 002e 0220     		movs	r0, #2
+  84 0030 38BD     		pop	{r3, r4, r5, pc}
+  85              	.L14:
+  86 0032 5269     		ldr	r2, [r2, #20]
+  87 0034 2A80     		strh	r2, [r5, #0]	@ movhi
+  88 0036 38BD     		pop	{r3, r4, r5, pc}
+  89              	.L24:
+  90              		.align	2
+  91              	.L23:
+  92 0038 00C00050 		.word	1342226432
+  93 003c 00000000 		.word	PHYtimerCallback
+  95              		.section	.text.PHY_IsLinkUP,"ax",%progbits
+  96              		.align	1
+  97              		.global	PHY_IsLinkUP
+  98              		.thumb
+  99              		.thumb_func
+ 101              	PHY_IsLinkUP:
+ 102              		@ args = 0, pretend = 0, frame = 8
+ 103              		@ frame_needed = 0, uses_anonymous_args = 0
+ 104 0000 07B5     		push	{r0, r1, r2, lr}
+ 105 0002 0023     		movs	r3, #0
+ 106 0004 0120     		movs	r0, #1
+ 107 0006 01A9     		add	r1, sp, #4
+ 108 0008 ADF80430 		strh	r3, [sp, #4]	@ movhi
+ 109 000c ADF80630 		strh	r3, [sp, #6]	@ movhi
+ 110 0010 FFF7FEFF 		bl	PHY_lReadReg.constprop.1
+ 111 0014 08B1     		cbz	r0, .L26
+ 112              	.L28:
+ 113 0016 0020     		movs	r0, #0
+ 114 0018 0AE0     		b	.L27
+ 115              	.L26:
+ 116 001a 0120     		movs	r0, #1
+ 117 001c 0DF10601 		add	r1, sp, #6
+ 118 0020 FFF7FEFF 		bl	PHY_lReadReg.constprop.1
+ 119 0024 0028     		cmp	r0, #0
+ 120 0026 F6D1     		bne	.L28
+ 121 0028 BDF80600 		ldrh	r0, [sp, #6]
+ 122 002c C0F38000 		ubfx	r0, r0, #2, #1
+ 123              	.L27:
+ 124 0030 0EBD     		pop	{r1, r2, r3, pc}
+ 126              		.section	.text.PHY_InitializeDevice,"ax",%progbits
+ 127              		.align	1
+ 128              		.global	PHY_InitializeDevice
+ 129              		.thumb
+ 130              		.thumb_func
+ 132              	PHY_InitializeDevice:
+ 133              		@ args = 0, pretend = 0, frame = 8
+ 134              		@ frame_needed = 0, uses_anonymous_args = 0
+ 135 0000 73B5     		push	{r0, r1, r4, r5, r6, lr}
+ 136 0002 0020     		movs	r0, #0
+ 137 0004 4FF40041 		mov	r1, #32768
+ 138 0008 ADF80600 		strh	r0, [sp, #6]	@ movhi
+ 139 000c FFF7FEFF 		bl	PHY_lWriteReg.constprop.0
+ 140 0010 0446     		mov	r4, r0
+ 141 0012 0028     		cmp	r0, #0
+ 142 0014 6DD1     		bne	.L32
+ 143 0016 384B     		ldr	r3, .L54
+ 144 0018 1968     		ldr	r1, [r3, #0]
+ 145 001a 09B1     		cbz	r1, .L31
+ 146 001c 1E20     		movs	r0, #30
+ 147 001e 8847     		blx	r1
+ 148              	.L31:
+ 149 0020 0020     		movs	r0, #0
+ 150 0022 0DF10601 		add	r1, sp, #6
+ 151 0026 FFF7FEFF 		bl	PHY_lReadReg.constprop.1
+ 152 002a 0446     		mov	r4, r0
+ 153 002c 0028     		cmp	r0, #0
+ 154 002e 60D1     		bne	.L32
+ 155 0030 BDF90600 		ldrsh	r0, [sp, #6]
+ 156 0034 0028     		cmp	r0, #0
+ 157 0036 07DB     		blt	.L42
+ 158 0038 0220     		movs	r0, #2
+ 159 003a 0DF10601 		add	r1, sp, #6
+ 160 003e FFF7FEFF 		bl	PHY_lReadReg.constprop.1
+ 161 0042 0446     		mov	r4, r0
+ 162 0044 0028     		cmp	r0, #0
+ 163 0046 54D1     		bne	.L32
+ 164              	.L42:
+ 165 0048 02AD     		add	r5, sp, #8
+ 166 004a 0420     		movs	r0, #4
+ 167 004c 25F8044D 		strh	r4, [r5, #-4]!	@ movhi
+ 168 0050 2946     		mov	r1, r5
+ 169 0052 FFF7FEFF 		bl	PHY_lReadReg.constprop.1
+ 170 0056 0446     		mov	r4, r0
+ 171 0058 0028     		cmp	r0, #0
+ 172 005a 4AD1     		bne	.L32
+ 173 005c BDF80420 		ldrh	r2, [sp, #4]
+ 174 0060 42F44064 		orr	r4, r2, #3072
+ 175 0064 A1B2     		uxth	r1, r4
+ 176 0066 0420     		movs	r0, #4
+ 177 0068 FFF7FEFF 		bl	PHY_lWriteReg.constprop.0
+ 178 006c 0446     		mov	r4, r0
+ 179 006e 0028     		cmp	r0, #0
+ 180 0070 3FD1     		bne	.L32
+ 181 0072 2946     		mov	r1, r5
+ 182 0074 FFF7FEFF 		bl	PHY_lReadReg.constprop.1
+ 183 0078 0446     		mov	r4, r0
+ 184 007a 0028     		cmp	r0, #0
+ 185 007c 39D1     		bne	.L32
+ 186 007e BDF80430 		ldrh	r3, [sp, #4]
+ 187 0082 43F48051 		orr	r1, r3, #4096
+ 188 0086 89B2     		uxth	r1, r1
+ 189 0088 FFF7FEFF 		bl	PHY_lWriteReg.constprop.0
+ 190 008c 0446     		mov	r4, r0
+ 191 008e 80BB     		cbnz	r0, .L32
+ 192 0090 194D     		ldr	r5, .L54
+ 193 0092 2E68     		ldr	r6, [r5, #0]
+ 194 0094 0EB1     		cbz	r6, .L48
+ 195 0096 1E20     		movs	r0, #30
+ 196 0098 B047     		blx	r6
+ 197              	.L48:
+ 198 009a 0026     		movs	r6, #0
+ 199 009c ADF80660 		strh	r6, [sp, #6]	@ movhi
+ 200 00a0 6425     		movs	r5, #100
+ 201              	.L37:
+ 202 00a2 0120     		movs	r0, #1
+ 203 00a4 0DF10601 		add	r1, sp, #6
+ 204 00a8 FFF7FEFF 		bl	PHY_lReadReg.constprop.1
+ 205 00ac 58B9     		cbnz	r0, .L35
+ 206 00ae BDF80600 		ldrh	r0, [sp, #6]
+ 207 00b2 00F02002 		and	r2, r0, #32
+ 208 00b6 93B2     		uxth	r3, r2
+ 209 00b8 0BB9     		cbnz	r3, .L39
+ 210 00ba 013D     		subs	r5, r5, #1
+ 211 00bc 00E0     		b	.L36
+ 212              	.L39:
+ 213 00be 0126     		movs	r6, #1
+ 214              	.L36:
+ 215 00c0 002D     		cmp	r5, #0
+ 216 00c2 EED1     		bne	.L37
+ 217 00c4 01E0     		b	.L53
+ 218              	.L35:
+ 219 00c6 002E     		cmp	r6, #0
+ 220 00c8 E7D0     		beq	.L48
+ 221              	.L53:
+ 222 00ca BDF80410 		ldrh	r1, [sp, #4]
+ 223 00ce 01F02000 		and	r0, r1, #32
+ 224 00d2 82B2     		uxth	r2, r0
+ 225 00d4 5AB9     		cbnz	r2, .L43
+ 226 00d6 0520     		movs	r0, #5
+ 227 00d8 01A9     		add	r1, sp, #4
+ 228 00da FFF7FEFF 		bl	PHY_lReadReg.constprop.1
+ 229 00de 0446     		mov	r4, r0
+ 230 00e0 38B9     		cbnz	r0, .L32
+ 231 00e2 0620     		movs	r0, #6
+ 232 00e4 01A9     		add	r1, sp, #4
+ 233 00e6 FFF7FEFF 		bl	PHY_lReadReg.constprop.1
+ 234 00ea 0446     		mov	r4, r0
+ 235 00ec 08B9     		cbnz	r0, .L32
+ 236              	.L43:
+ 237 00ee FFF7FEFF 		bl	PHY_IsLinkUP
+ 238              	.L32:
+ 239 00f2 2046     		mov	r0, r4
+ 240 00f4 7CBD     		pop	{r2, r3, r4, r5, r6, pc}
+ 241              	.L55:
+ 242 00f6 00BF     		.align	2
+ 243              	.L54:
+ 244 00f8 00000000 		.word	PHYtimerCallback
+ 246              		.section	.text.PHY_RegisterTimerCallback,"ax",%progbits
+ 247              		.align	1
+ 248              		.global	PHY_RegisterTimerCallback
+ 249              		.thumb
+ 250              		.thumb_func
+ 252              	PHY_RegisterTimerCallback:
+ 253              		@ args = 0, pretend = 0, frame = 0
+ 254              		@ frame_needed = 0, uses_anonymous_args = 0
+ 255              		@ link register save eliminated.
+ 256 0000 014B     		ldr	r3, .L57
+ 257 0002 1860     		str	r0, [r3, #0]
+ 258 0004 7047     		bx	lr
+ 259              	.L58:
+ 260 0006 00BF     		.align	2
+ 261              	.L57:
+ 262 0008 00000000 		.word	PHYtimerCallback
+ 264              		.comm	PHYtimerCallback,4,4
+ 265              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 EthernetPHY.c
+C:\Users\Mihai\AppData\Local\Temp\ccwoB3ZI.s:17     .text.PHY_lWriteReg.constprop.0:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccwoB3ZI.s:21     .text.PHY_lWriteReg.constprop.0:00000000 PHY_lWriteReg.constprop.0
+C:\Users\Mihai\AppData\Local\Temp\ccwoB3ZI.s:51     .text.PHY_lWriteReg.constprop.0:00000034 $d
+                            *COM*:00000004 PHYtimerCallback
+C:\Users\Mihai\AppData\Local\Temp\ccwoB3ZI.s:55     .text.PHY_lReadReg.constprop.1:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccwoB3ZI.s:59     .text.PHY_lReadReg.constprop.1:00000000 PHY_lReadReg.constprop.1
+C:\Users\Mihai\AppData\Local\Temp\ccwoB3ZI.s:92     .text.PHY_lReadReg.constprop.1:00000038 $d
+C:\Users\Mihai\AppData\Local\Temp\ccwoB3ZI.s:96     .text.PHY_IsLinkUP:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccwoB3ZI.s:101    .text.PHY_IsLinkUP:00000000 PHY_IsLinkUP
+C:\Users\Mihai\AppData\Local\Temp\ccwoB3ZI.s:127    .text.PHY_InitializeDevice:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccwoB3ZI.s:132    .text.PHY_InitializeDevice:00000000 PHY_InitializeDevice
+C:\Users\Mihai\AppData\Local\Temp\ccwoB3ZI.s:244    .text.PHY_InitializeDevice:000000f8 $d
+C:\Users\Mihai\AppData\Local\Temp\ccwoB3ZI.s:247    .text.PHY_RegisterTimerCallback:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccwoB3ZI.s:252    .text.PHY_RegisterTimerCallback:00000000 PHY_RegisterTimerCallback
+C:\Users\Mihai\AppData\Local\Temp\ccwoB3ZI.s:262    .text.PHY_RegisterTimerCallback:00000008 $d
+
+NO UNDEFINED SYMBOLS

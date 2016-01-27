@@ -1,0 +1,24 @@
+----------------------------------------------------------
+
+  Connection Failed Report from
+  Basic UDE Target Interface, Version: 1.10.7
+  created: 03/18/13, 13:39:58
+
+----------------------------------------------------------
+
+Windows version:
+  Win7 (Service Pack 1)
+  Admin: yes
+
+UDE version:
+  Release:  4.00.02
+  Build:    2525
+  Path:     C:\Program Files\pls\UDE 4.0
+
+Target configuration file:
+  C:\_My Document\PLS UDE 4.0\Targets\xmc4500_starterkit_swd.cfg
+
+Error messages:
+  CortexJtagIntf: Can't connect target !
+  CortexJtagIntf: Can't determine the default communication device !
+Current selection is ambiguous !

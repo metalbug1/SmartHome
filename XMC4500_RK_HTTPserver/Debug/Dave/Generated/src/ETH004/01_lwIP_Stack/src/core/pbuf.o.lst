@@ -1,0 +1,2642 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"pbuf.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.pbuf_alloc,"ax",%progbits
+  20              		.align	2
+  21              		.global	pbuf_alloc
+  22              		.thumb
+  23              		.thumb_func
+  25              	pbuf_alloc:
+  26              	.LFB0:
+  27              		.file 1 "../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c"
+   1:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** /**
+   2:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * @file
+   3:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * Packet buffer management
+   4:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  *
+   5:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * Packets are built from the pbuf data structure. It supports dynamic
+   6:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * memory allocation for packet contents or can reference externally
+   7:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * managed packet contents both in RAM and ROM. Quick allocation for
+   8:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * incoming packets is provided through pools with fixed sized pbufs.
+   9:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  *
+  10:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * A packet may span over multiple pbufs, chained as a singly linked
+  11:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * list. This is called a "pbuf chain".
+  12:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  *
+  13:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * Multiple packets may be queued, also using this singly linked list.
+  14:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * This is called a "packet queue".
+  15:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * 
+  16:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * So, a packet queue consists of one or more pbuf chains, each of
+  17:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * which consist of one or more pbufs. CURRENTLY, PACKET QUEUES ARE
+  18:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * NOT SUPPORTED!!! Use helper structs to queue multiple packets.
+  19:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * 
+  20:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * The differences between a pbuf chain and a packet queue are very
+  21:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * precise but subtle. 
+  22:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  *
+  23:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * The last pbuf of a packet has a ->tot_len field that equals the
+  24:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * ->len field. It can be found by traversing the list. If the last
+  25:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * pbuf of a packet has a ->next field other than NULL, more packets
+  26:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * are on the queue.
+  27:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  *
+  28:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * Therefore, looping through a pbuf of a single packet, has an
+  29:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * loop end condition (tot_len == p->len), NOT (next == NULL).
+  30:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  */
+  31:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** 
+  32:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** /*
+  33:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * Copyright (c) 2001-2004 Swedish Institute of Computer Science.
+  34:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * All rights reserved.
+  35:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  *
+  36:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * Redistribution and use in source and binary forms, with or without modification,
+  37:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * are permitted provided that the following conditions are met:
+  38:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  *
+  39:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * 1. Redistributions of source code must retain the above copyright notice,
+  40:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  *    this list of conditions and the following disclaimer.
+  41:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * 2. Redistributions in binary form must reproduce the above copyright notice,
+  42:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  *    this list of conditions and the following disclaimer in the documentation
+  43:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  *    and/or other materials provided with the distribution.
+  44:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * 3. The name of the author may not be used to endorse or promote products
+  45:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  *    derived from this software without specific prior written permission.
+  46:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  *
+  47:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR IMPLIED
+  48:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+  49:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT
+  50:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+  51:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT
+  52:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+  53:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+  54:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING
+  55:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+  56:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * OF SUCH DAMAGE.
+  57:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  *
+  58:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * This file is part of the lwIP TCP/IP stack.
+  59:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  *
+  60:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * Author: Adam Dunkels <adam@sics.se>
+  61:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  *
+  62:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  */
+  63:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** 
+  64:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** #include "lwip/opt.h"
+  65:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** 
+  66:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** #include "lwip/stats.h"
+  67:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** #include "lwip/def.h"
+  68:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** #include "lwip/mem.h"
+  69:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** #include "lwip/memp.h"
+  70:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** #include "lwip/pbuf.h"
+  71:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** #include "lwip/sys.h"
+  72:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** #include "arch/perf.h"
+  73:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** #if TCP_QUEUE_OOSEQ
+  74:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** #include "lwip/tcp.h"
+  75:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** #endif
+  76:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** 
+  77:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** #include <string.h>
+  78:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** 
+  79:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** #define SIZEOF_STRUCT_PBUF        LWIP_MEM_ALIGN_SIZE(sizeof(struct pbuf))
+  80:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** /* Since the pool is created in memp, PBUF_POOL_BUFSIZE will be automatically
+  81:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****    aligned there. Therefore, PBUF_POOL_BUFSIZE_ALIGNED can be used here. */
+  82:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** #define PBUF_POOL_BUFSIZE_ALIGNED LWIP_MEM_ALIGN_SIZE(PBUF_POOL_BUFSIZE)
+  83:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** 
+  84:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** #if !TCP_QUEUE_OOSEQ || NO_SYS
+  85:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** #define PBUF_POOL_IS_EMPTY()
+  86:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** #else /* !TCP_QUEUE_OOSEQ || NO_SYS */
+  87:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** /** Define this to 0 to prevent freeing ooseq pbufs when the PBUF_POOL is empty */
+  88:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** #ifndef PBUF_POOL_FREE_OOSEQ
+  89:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** #define PBUF_POOL_FREE_OOSEQ 1
+  90:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** #endif /* PBUF_POOL_FREE_OOSEQ */
+  91:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** 
+  92:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** #if PBUF_POOL_FREE_OOSEQ
+  93:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** #include "lwip/tcpip.h"
+  94:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** #define PBUF_POOL_IS_EMPTY() pbuf_pool_is_empty()
+  95:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** static u8_t pbuf_free_ooseq_queued;
+  96:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** /**
+  97:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * Attempt to reclaim some memory from queued out-of-sequence TCP segments
+  98:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * if we run out of pool pbufs. It's better to give priority to new packets
+  99:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * if we're running out.
+ 100:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  *
+ 101:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * This must be done in the correct thread context therefore this function
+ 102:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * can only be used with NO_SYS=0 and through tcpip_callback.
+ 103:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  */
+ 104:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** static void
+ 105:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** pbuf_free_ooseq(void* arg)
+ 106:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** {
+ 107:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   struct tcp_pcb* pcb;
+ 108:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   SYS_ARCH_DECL_PROTECT(old_level);
+ 109:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   LWIP_UNUSED_ARG(arg);
+ 110:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** 
+ 111:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   SYS_ARCH_PROTECT(old_level);
+ 112:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   pbuf_free_ooseq_queued = 0;
+ 113:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   SYS_ARCH_UNPROTECT(old_level);
+ 114:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** 
+ 115:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   for (pcb = tcp_active_pcbs; NULL != pcb; pcb = pcb->next) {
+ 116:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     if (NULL != pcb->ooseq) {
+ 117:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       /** Free the ooseq pbufs of one PCB only */
+ 118:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       LWIP_DEBUGF(PBUF_DEBUG | LWIP_DBG_TRACE, ("pbuf_free_ooseq: freeing out-of-sequence pbufs\n")
+ 119:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       tcp_segs_free(pcb->ooseq);
+ 120:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       pcb->ooseq = NULL;
+ 121:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       return;
+ 122:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     }
+ 123:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   }
+ 124:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** }
+ 125:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** 
+ 126:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** /** Queue a call to pbuf_free_ooseq if not already queued. */
+ 127:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** static void
+ 128:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** pbuf_pool_is_empty(void)
+ 129:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** {
+ 130:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   u8_t queued;
+ 131:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   SYS_ARCH_DECL_PROTECT(old_level);
+ 132:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** 
+ 133:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   SYS_ARCH_PROTECT(old_level);
+ 134:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   queued = pbuf_free_ooseq_queued;
+ 135:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   pbuf_free_ooseq_queued = 1;
+ 136:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   SYS_ARCH_UNPROTECT(old_level);
+ 137:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** 
+ 138:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   if(!queued) {
+ 139:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     /* queue a call to pbuf_free_ooseq if not already queued */
+ 140:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     if(tcpip_callback_with_block(pbuf_free_ooseq, NULL, 0) != ERR_OK) {
+ 141:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       SYS_ARCH_PROTECT(old_level);
+ 142:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       pbuf_free_ooseq_queued = 0;
+ 143:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       SYS_ARCH_UNPROTECT(old_level);
+ 144:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     }
+ 145:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   }
+ 146:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** }
+ 147:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** #endif /* PBUF_POOL_FREE_OOSEQ */
+ 148:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** #endif /* !TCP_QUEUE_OOSEQ || NO_SYS */
+ 149:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** 
+ 150:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** /**
+ 151:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * Allocates a pbuf of the given type (possibly a chain for PBUF_POOL type).
+ 152:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  *
+ 153:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * The actual memory allocated for the pbuf is determined by the
+ 154:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * layer at which the pbuf is allocated and the requested size
+ 155:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * (from the size parameter).
+ 156:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  *
+ 157:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * @param layer flag to define header size
+ 158:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * @param length size of the pbuf's payload
+ 159:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * @param type this parameter decides how and where the pbuf
+ 160:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * should be allocated as follows:
+ 161:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  *
+ 162:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * - PBUF_RAM: buffer memory for pbuf is allocated as one large
+ 163:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  *             chunk. This includes protocol headers as well.
+ 164:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * - PBUF_ROM: no buffer memory is allocated for the pbuf, even for
+ 165:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  *             protocol headers. Additional headers must be prepended
+ 166:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  *             by allocating another pbuf and chain in to the front of
+ 167:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  *             the ROM pbuf. It is assumed that the memory used is really
+ 168:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  *             similar to ROM in that it is immutable and will not be
+ 169:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  *             changed. Memory which is dynamic should generally not
+ 170:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  *             be attached to PBUF_ROM pbufs. Use PBUF_REF instead.
+ 171:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * - PBUF_REF: no buffer memory is allocated for the pbuf, even for
+ 172:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  *             protocol headers. It is assumed that the pbuf is only
+ 173:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  *             being used in a single thread. If the pbuf gets queued,
+ 174:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  *             then pbuf_take should be called to copy the buffer.
+ 175:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * - PBUF_POOL: the pbuf is allocated as a pbuf chain, with pbufs from
+ 176:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  *              the pbuf pool that is allocated during pbuf_init().
+ 177:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  *
+ 178:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * @return the allocated pbuf. If multiple pbufs where allocated, this
+ 179:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * is the first pbuf of a pbuf chain.
+ 180:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  */
+ 181:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** struct pbuf *
+ 182:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** pbuf_alloc(pbuf_layer layer, u16_t length, pbuf_type type)
+ 183:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** {
+  28              		.loc 1 183 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 32
+  31              		@ frame_needed = 1, uses_anonymous_args = 0
+  32 0000 80B5     		push	{r7, lr}
+  33              	.LCFI0:
+  34              		.cfi_def_cfa_offset 8
+  35              		.cfi_offset 7, -8
+  36              		.cfi_offset 14, -4
+  37 0002 88B0     		sub	sp, sp, #32
+  38              	.LCFI1:
+  39              		.cfi_def_cfa_offset 40
+  40 0004 00AF     		add	r7, sp, #0
+  41              	.LCFI2:
+  42              		.cfi_def_cfa_register 7
+  43 0006 1346     		mov	r3, r2
+  44 0008 0246     		mov	r2, r0
+  45 000a FA71     		strb	r2, [r7, #7]
+  46 000c 0A46     		mov	r2, r1	@ movhi
+  47 000e BA80     		strh	r2, [r7, #4]	@ movhi
+  48 0010 BB71     		strb	r3, [r7, #6]
+ 184:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   struct pbuf *p, *q, *r;
+ 185:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   u16_t offset;
+ 186:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   s32_t rem_len; /* remaining length */
+ 187:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   LWIP_DEBUGF(PBUF_DEBUG | LWIP_DBG_TRACE, ("pbuf_alloc(length=%"U16_F")\n", length));
+ 188:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** 
+ 189:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   /* determine header offset */
+ 190:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   offset = 0;
+  49              		.loc 1 190 0
+  50 0012 4FF00003 		mov	r3, #0
+  51 0016 FB82     		strh	r3, [r7, #22]	@ movhi
+ 191:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   switch (layer) {
+  52              		.loc 1 191 0
+  53 0018 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+  54 001a 032B     		cmp	r3, #3
+  55 001c 17D8     		bhi	.L2
+  56 001e 01A2     		adr	r2, .L7
+  57 0020 52F823F0 		ldr	pc, [r2, r3, lsl #2]
+  58              		.align	2
+  59              	.L7:
+  60 0024 35000000 		.word	.L3+1
+  61 0028 3D000000 		.word	.L4+1
+  62 002c 45000000 		.word	.L5+1
+  63 0030 55000000 		.word	.L24+1
+  64              	.L3:
+ 192:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   case PBUF_TRANSPORT:
+ 193:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     /* add room for transport (often TCP) layer header */
+ 194:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     offset += PBUF_TRANSPORT_HLEN;
+  65              		.loc 1 194 0
+  66 0034 FB8A     		ldrh	r3, [r7, #22]	@ movhi
+  67 0036 03F11403 		add	r3, r3, #20
+  68 003a FB82     		strh	r3, [r7, #22]	@ movhi
+  69              	.L4:
+ 195:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     /* FALLTHROUGH */
+ 196:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   case PBUF_IP:
+ 197:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     /* add room for IP layer header */
+ 198:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     offset += PBUF_IP_HLEN;
+  70              		.loc 1 198 0
+  71 003c FB8A     		ldrh	r3, [r7, #22]	@ movhi
+  72 003e 03F11403 		add	r3, r3, #20
+  73 0042 FB82     		strh	r3, [r7, #22]	@ movhi
+  74              	.L5:
+ 199:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     /* FALLTHROUGH */
+ 200:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   case PBUF_LINK:
+ 201:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     /* add room for link layer header */
+ 202:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     offset += PBUF_LINK_HLEN;
+  75              		.loc 1 202 0
+  76 0044 FB8A     		ldrh	r3, [r7, #22]	@ movhi
+  77 0046 03F10E03 		add	r3, r3, #14
+  78 004a FB82     		strh	r3, [r7, #22]	@ movhi
+ 203:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     break;
+  79              		.loc 1 203 0
+  80 004c 03E0     		b	.L8
+  81              	.L2:
+ 204:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   case PBUF_RAW:
+ 205:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     break;
+ 206:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   default:
+ 207:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     LWIP_ASSERT("pbuf_alloc: bad pbuf layer", 0);
+ 208:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     return NULL;
+  82              		.loc 1 208 0
+  83 004e 4FF00003 		mov	r3, #0
+  84 0052 F8E0     		b	.L9
+  85              	.L24:
+ 205:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     break;
+  86              		.loc 1 205 0
+  87 0054 00BF     		nop
+  88              	.L8:
+ 209:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   }
+ 210:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** 
+ 211:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   switch (type) {
+  89              		.loc 1 211 0
+  90 0056 BB79     		ldrb	r3, [r7, #6]	@ zero_extendqisi2
+  91 0058 032B     		cmp	r3, #3
+  92 005a 00F2E880 		bhi	.L10
+  93 005e 01A2     		adr	r2, .L14
+  94 0060 52F823F0 		ldr	pc, [r2, r3, lsl #2]
+  95              		.align	2
+  96              	.L14:
+  97 0064 81010000 		.word	.L11+1
+  98 0068 EB010000 		.word	.L12+1
+  99 006c EB010000 		.word	.L12+1
+ 100 0070 75000000 		.word	.L13+1
+ 101              	.L13:
+ 212:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   case PBUF_POOL:
+ 213:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     /* allocate head of pbuf chain into p */
+ 214:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     p = memp_malloc(MEMP_PBUF_POOL);
+ 102              		.loc 1 214 0
+ 103 0074 40F20003 		movw	r3, #:lower16:memp_sizes
+ 104 0078 C0F20003 		movt	r3, #:upper16:memp_sizes
+ 105 007c 5B8A     		ldrh	r3, [r3, #18]
+ 106 007e 1846     		mov	r0, r3
+ 107 0080 FFF7FEFF 		bl	mem_malloc
+ 108 0084 F861     		str	r0, [r7, #28]
+ 215:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     LWIP_DEBUGF(PBUF_DEBUG | LWIP_DBG_TRACE, ("pbuf_alloc: allocated pbuf %p\n", (void *)p));
+ 216:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     if (p == NULL) {
+ 109              		.loc 1 216 0
+ 110 0086 FB69     		ldr	r3, [r7, #28]
+ 111 0088 002B     		cmp	r3, #0
+ 112 008a 02D1     		bne	.L15
+ 217:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       PBUF_POOL_IS_EMPTY();
+ 218:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       return NULL;
+ 113              		.loc 1 218 0
+ 114 008c 4FF00003 		mov	r3, #0
+ 115 0090 D9E0     		b	.L9
+ 116              	.L15:
+ 219:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     }
+ 220:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     p->type = type;
+ 117              		.loc 1 220 0
+ 118 0092 FB69     		ldr	r3, [r7, #28]
+ 119 0094 BA79     		ldrb	r2, [r7, #6]
+ 120 0096 1A73     		strb	r2, [r3, #12]
+ 221:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     p->next = NULL;
+ 121              		.loc 1 221 0
+ 122 0098 FB69     		ldr	r3, [r7, #28]
+ 123 009a 4FF00002 		mov	r2, #0
+ 124 009e 1A60     		str	r2, [r3, #0]
+ 222:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** 
+ 223:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     /* make the payload pointer point 'offset' bytes into pbuf data memory */
+ 224:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     p->payload = LWIP_MEM_ALIGN((void *)((u8_t *)p + (SIZEOF_STRUCT_PBUF + offset)));
+ 125              		.loc 1 224 0
+ 126 00a0 FB8A     		ldrh	r3, [r7, #22]
+ 127 00a2 03F11003 		add	r3, r3, #16
+ 128 00a6 FA69     		ldr	r2, [r7, #28]
+ 129 00a8 D318     		adds	r3, r2, r3
+ 130 00aa 03F10303 		add	r3, r3, #3
+ 131 00ae 23F00303 		bic	r3, r3, #3
+ 132 00b2 1A46     		mov	r2, r3
+ 133 00b4 FB69     		ldr	r3, [r7, #28]
+ 134 00b6 5A60     		str	r2, [r3, #4]
+ 225:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     LWIP_ASSERT("pbuf_alloc: pbuf p->payload properly aligned",
+ 226:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****             ((mem_ptr_t)p->payload % MEM_ALIGNMENT) == 0);
+ 227:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     /* the total length of the pbuf chain is the requested size */
+ 228:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     p->tot_len = length;
+ 135              		.loc 1 228 0
+ 136 00b8 FB69     		ldr	r3, [r7, #28]
+ 137 00ba BA88     		ldrh	r2, [r7, #4]	@ movhi
+ 138 00bc 1A81     		strh	r2, [r3, #8]	@ movhi
+ 229:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     /* set the length of the first pbuf in the chain */
+ 230:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     p->len = LWIP_MIN(length, PBUF_POOL_BUFSIZE_ALIGNED - LWIP_MEM_ALIGN_SIZE(offset));
+ 139              		.loc 1 230 0
+ 140 00be FB8A     		ldrh	r3, [r7, #22]
+ 141 00c0 03F10303 		add	r3, r3, #3
+ 142 00c4 23F00303 		bic	r3, r3, #3
+ 143 00c8 C3F5BB63 		rsb	r3, r3, #1496
+ 144 00cc 03F10403 		add	r3, r3, #4
+ 145 00d0 BA88     		ldrh	r2, [r7, #4]
+ 146 00d2 9342     		cmp	r3, r2
+ 147 00d4 A8BF     		it	ge
+ 148 00d6 1346     		movge	r3, r2
+ 149 00d8 9AB2     		uxth	r2, r3
+ 150 00da FB69     		ldr	r3, [r7, #28]
+ 151 00dc 5A81     		strh	r2, [r3, #10]	@ movhi
+ 231:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     LWIP_ASSERT("check p->payload + p->len does not overflow pbuf",
+ 232:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****                 ((u8_t*)p->payload + p->len <=
+ 233:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****                  (u8_t*)p + SIZEOF_STRUCT_PBUF + PBUF_POOL_BUFSIZE_ALIGNED));
+ 234:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     LWIP_ASSERT("PBUF_POOL_BUFSIZE must be bigger than MEM_ALIGNMENT",
+ 235:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       (PBUF_POOL_BUFSIZE_ALIGNED - LWIP_MEM_ALIGN_SIZE(offset)) > 0 );
+ 236:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     /* set reference count (needed here in case we fail) */
+ 237:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     p->ref = 1;
+ 152              		.loc 1 237 0
+ 153 00de FB69     		ldr	r3, [r7, #28]
+ 154 00e0 4FF00102 		mov	r2, #1
+ 155 00e4 DA81     		strh	r2, [r3, #14]	@ movhi
+ 238:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** 
+ 239:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     /* now allocate the tail of the pbuf chain */
+ 240:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** 
+ 241:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     /* remember first pbuf for linkage in next iteration */
+ 242:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     r = p;
+ 156              		.loc 1 242 0
+ 157 00e6 FB69     		ldr	r3, [r7, #28]
+ 158 00e8 BB61     		str	r3, [r7, #24]
+ 243:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     /* remaining length to be allocated */
+ 244:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     rem_len = length - p->len;
+ 159              		.loc 1 244 0
+ 160 00ea BA88     		ldrh	r2, [r7, #4]
+ 161 00ec FB69     		ldr	r3, [r7, #28]
+ 162 00ee 5B89     		ldrh	r3, [r3, #10]
+ 163 00f0 D31A     		subs	r3, r2, r3
+ 164 00f2 3B61     		str	r3, [r7, #16]
+ 245:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     /* any remaining pbufs to be allocated? */
+ 246:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     while (rem_len > 0) {
+ 165              		.loc 1 246 0
+ 166 00f4 40E0     		b	.L16
+ 167              	.L20:
+ 247:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       q = memp_malloc(MEMP_PBUF_POOL);
+ 168              		.loc 1 247 0
+ 169 00f6 40F20003 		movw	r3, #:lower16:memp_sizes
+ 170 00fa C0F20003 		movt	r3, #:upper16:memp_sizes
+ 171 00fe 5B8A     		ldrh	r3, [r3, #18]
+ 172 0100 1846     		mov	r0, r3
+ 173 0102 FFF7FEFF 		bl	mem_malloc
+ 174 0106 F860     		str	r0, [r7, #12]
+ 248:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       if (q == NULL) {
+ 175              		.loc 1 248 0
+ 176 0108 FB68     		ldr	r3, [r7, #12]
+ 177 010a 002B     		cmp	r3, #0
+ 178 010c 05D1     		bne	.L17
+ 249:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****         PBUF_POOL_IS_EMPTY();
+ 250:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****         /* free chain so far allocated */
+ 251:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****         pbuf_free(p);
+ 179              		.loc 1 251 0
+ 180 010e F869     		ldr	r0, [r7, #28]
+ 181 0110 FFF7FEFF 		bl	pbuf_free
+ 252:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****         /* bail out unsuccesfully */
+ 253:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****         return NULL;
+ 182              		.loc 1 253 0
+ 183 0114 4FF00003 		mov	r3, #0
+ 184 0118 95E0     		b	.L9
+ 185              	.L17:
+ 254:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       }
+ 255:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       q->type = type;
+ 186              		.loc 1 255 0
+ 187 011a FB68     		ldr	r3, [r7, #12]
+ 188 011c BA79     		ldrb	r2, [r7, #6]
+ 189 011e 1A73     		strb	r2, [r3, #12]
+ 256:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       q->flags = 0;
+ 190              		.loc 1 256 0
+ 191 0120 FB68     		ldr	r3, [r7, #12]
+ 192 0122 4FF00002 		mov	r2, #0
+ 193 0126 5A73     		strb	r2, [r3, #13]
+ 257:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       q->next = NULL;
+ 194              		.loc 1 257 0
+ 195 0128 FB68     		ldr	r3, [r7, #12]
+ 196 012a 4FF00002 		mov	r2, #0
+ 197 012e 1A60     		str	r2, [r3, #0]
+ 258:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       /* make previous pbuf point to this pbuf */
+ 259:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       r->next = q;
+ 198              		.loc 1 259 0
+ 199 0130 BB69     		ldr	r3, [r7, #24]
+ 200 0132 FA68     		ldr	r2, [r7, #12]
+ 201 0134 1A60     		str	r2, [r3, #0]
+ 260:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       /* set total length of this pbuf and next in chain */
+ 261:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       LWIP_ASSERT("rem_len < max_u16_t", rem_len < 0xffff);
+ 262:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       q->tot_len = (u16_t)rem_len;
+ 202              		.loc 1 262 0
+ 203 0136 3B69     		ldr	r3, [r7, #16]
+ 204 0138 9AB2     		uxth	r2, r3
+ 205 013a FB68     		ldr	r3, [r7, #12]
+ 206 013c 1A81     		strh	r2, [r3, #8]	@ movhi
+ 263:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       /* this pbuf length is pool size, unless smaller sized tail */
+ 264:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       q->len = LWIP_MIN((u16_t)rem_len, PBUF_POOL_BUFSIZE_ALIGNED);
+ 207              		.loc 1 264 0
+ 208 013e 3B69     		ldr	r3, [r7, #16]
+ 209 0140 9AB2     		uxth	r2, r3
+ 210 0142 40F2DB53 		movw	r3, #1499
+ 211 0146 9A42     		cmp	r2, r3
+ 212 0148 02D8     		bhi	.L18
+ 213              		.loc 1 264 0 is_stmt 0 discriminator 1
+ 214 014a 3B69     		ldr	r3, [r7, #16]
+ 215 014c 9BB2     		uxth	r3, r3
+ 216 014e 01E0     		b	.L19
+ 217              	.L18:
+ 218              		.loc 1 264 0 discriminator 2
+ 219 0150 40F2DC53 		movw	r3, #1500
+ 220              	.L19:
+ 221              		.loc 1 264 0 discriminator 3
+ 222 0154 FA68     		ldr	r2, [r7, #12]
+ 223 0156 5381     		strh	r3, [r2, #10]	@ movhi
+ 265:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       q->payload = (void *)((u8_t *)q + SIZEOF_STRUCT_PBUF);
+ 224              		.loc 1 265 0 is_stmt 1 discriminator 3
+ 225 0158 FB68     		ldr	r3, [r7, #12]
+ 226 015a 03F11002 		add	r2, r3, #16
+ 227 015e FB68     		ldr	r3, [r7, #12]
+ 228 0160 5A60     		str	r2, [r3, #4]
+ 266:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       LWIP_ASSERT("pbuf_alloc: pbuf q->payload properly aligned",
+ 267:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****               ((mem_ptr_t)q->payload % MEM_ALIGNMENT) == 0);
+ 268:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       LWIP_ASSERT("check p->payload + p->len does not overflow pbuf",
+ 269:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****                   ((u8_t*)p->payload + p->len <=
+ 270:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****                    (u8_t*)p + SIZEOF_STRUCT_PBUF + PBUF_POOL_BUFSIZE_ALIGNED));
+ 271:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       q->ref = 1;
+ 229              		.loc 1 271 0 discriminator 3
+ 230 0162 FB68     		ldr	r3, [r7, #12]
+ 231 0164 4FF00102 		mov	r2, #1
+ 232 0168 DA81     		strh	r2, [r3, #14]	@ movhi
+ 272:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       /* calculate remaining length to be allocated */
+ 273:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       rem_len -= q->len;
+ 233              		.loc 1 273 0 discriminator 3
+ 234 016a FB68     		ldr	r3, [r7, #12]
+ 235 016c 5B89     		ldrh	r3, [r3, #10]
+ 236 016e 3A69     		ldr	r2, [r7, #16]
+ 237 0170 D31A     		subs	r3, r2, r3
+ 238 0172 3B61     		str	r3, [r7, #16]
+ 274:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       /* remember this pbuf for linkage in next iteration */
+ 275:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       r = q;
+ 239              		.loc 1 275 0 discriminator 3
+ 240 0174 FB68     		ldr	r3, [r7, #12]
+ 241 0176 BB61     		str	r3, [r7, #24]
+ 242              	.L16:
+ 246:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     while (rem_len > 0) {
+ 243              		.loc 1 246 0 discriminator 1
+ 244 0178 3B69     		ldr	r3, [r7, #16]
+ 245 017a 002B     		cmp	r3, #0
+ 246 017c BBDC     		bgt	.L20
+ 276:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     }
+ 277:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     /* end of chain */
+ 278:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     /*r->next = NULL;*/
+ 279:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** 
+ 280:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     break;
+ 247              		.loc 1 280 0
+ 248 017e 59E0     		b	.L21
+ 249              	.L11:
+ 281:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   case PBUF_RAM:
+ 282:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     /* If pbuf is to be allocated in RAM, allocate memory for it. */
+ 283:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     p = (struct pbuf*)mem_malloc(LWIP_MEM_ALIGN_SIZE(SIZEOF_STRUCT_PBUF + offset) + LWIP_MEM_ALIGN_
+ 250              		.loc 1 283 0
+ 251 0180 FB8A     		ldrh	r3, [r7, #22]	@ movhi
+ 252 0182 03F11303 		add	r3, r3, #19
+ 253 0186 9BB2     		uxth	r3, r3
+ 254 0188 23F00303 		bic	r3, r3, #3
+ 255 018c 9AB2     		uxth	r2, r3
+ 256 018e BB88     		ldrh	r3, [r7, #4]	@ movhi
+ 257 0190 03F10303 		add	r3, r3, #3
+ 258 0194 9BB2     		uxth	r3, r3
+ 259 0196 23F00303 		bic	r3, r3, #3
+ 260 019a 9BB2     		uxth	r3, r3
+ 261 019c D318     		adds	r3, r2, r3
+ 262 019e 9BB2     		uxth	r3, r3
+ 263 01a0 1846     		mov	r0, r3
+ 264 01a2 FFF7FEFF 		bl	mem_malloc
+ 265 01a6 F861     		str	r0, [r7, #28]
+ 284:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     if (p == NULL) {
+ 266              		.loc 1 284 0
+ 267 01a8 FB69     		ldr	r3, [r7, #28]
+ 268 01aa 002B     		cmp	r3, #0
+ 269 01ac 02D1     		bne	.L22
+ 285:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       return NULL;
+ 270              		.loc 1 285 0
+ 271 01ae 4FF00003 		mov	r3, #0
+ 272 01b2 48E0     		b	.L9
+ 273              	.L22:
+ 286:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     }
+ 287:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     /* Set up internal structure of the pbuf. */
+ 288:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     p->payload = LWIP_MEM_ALIGN((void *)((u8_t *)p + SIZEOF_STRUCT_PBUF + offset));
+ 274              		.loc 1 288 0
+ 275 01b4 FB8A     		ldrh	r3, [r7, #22]
+ 276 01b6 03F11003 		add	r3, r3, #16
+ 277 01ba FA69     		ldr	r2, [r7, #28]
+ 278 01bc D318     		adds	r3, r2, r3
+ 279 01be 03F10303 		add	r3, r3, #3
+ 280 01c2 23F00303 		bic	r3, r3, #3
+ 281 01c6 1A46     		mov	r2, r3
+ 282 01c8 FB69     		ldr	r3, [r7, #28]
+ 283 01ca 5A60     		str	r2, [r3, #4]
+ 289:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     p->len = p->tot_len = length;
+ 284              		.loc 1 289 0
+ 285 01cc FB69     		ldr	r3, [r7, #28]
+ 286 01ce BA88     		ldrh	r2, [r7, #4]	@ movhi
+ 287 01d0 1A81     		strh	r2, [r3, #8]	@ movhi
+ 288 01d2 FB69     		ldr	r3, [r7, #28]
+ 289 01d4 1A89     		ldrh	r2, [r3, #8]
+ 290 01d6 FB69     		ldr	r3, [r7, #28]
+ 291 01d8 5A81     		strh	r2, [r3, #10]	@ movhi
+ 290:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     p->next = NULL;
+ 292              		.loc 1 290 0
+ 293 01da FB69     		ldr	r3, [r7, #28]
+ 294 01dc 4FF00002 		mov	r2, #0
+ 295 01e0 1A60     		str	r2, [r3, #0]
+ 291:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     p->type = type;
+ 296              		.loc 1 291 0
+ 297 01e2 FB69     		ldr	r3, [r7, #28]
+ 298 01e4 BA79     		ldrb	r2, [r7, #6]
+ 299 01e6 1A73     		strb	r2, [r3, #12]
+ 292:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** 
+ 293:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     LWIP_ASSERT("pbuf_alloc: pbuf->payload properly aligned",
+ 294:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****            ((mem_ptr_t)p->payload % MEM_ALIGNMENT) == 0);
+ 295:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     break;
+ 300              		.loc 1 295 0
+ 301 01e8 24E0     		b	.L21
+ 302              	.L12:
+ 296:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   /* pbuf references existing (non-volatile static constant) ROM payload? */
+ 297:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   case PBUF_ROM:
+ 298:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   /* pbuf references existing (externally allocated) RAM payload? */
+ 299:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   case PBUF_REF:
+ 300:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     /* only allocate memory for the pbuf structure */
+ 301:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     p = memp_malloc(MEMP_PBUF);
+ 303              		.loc 1 301 0
+ 304 01ea 40F20003 		movw	r3, #:lower16:memp_sizes
+ 305 01ee C0F20003 		movt	r3, #:upper16:memp_sizes
+ 306 01f2 1B8A     		ldrh	r3, [r3, #16]
+ 307 01f4 1846     		mov	r0, r3
+ 308 01f6 FFF7FEFF 		bl	mem_malloc
+ 309 01fa F861     		str	r0, [r7, #28]
+ 302:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     if (p == NULL) {
+ 310              		.loc 1 302 0
+ 311 01fc FB69     		ldr	r3, [r7, #28]
+ 312 01fe 002B     		cmp	r3, #0
+ 313 0200 02D1     		bne	.L23
+ 303:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       LWIP_DEBUGF(PBUF_DEBUG | LWIP_DBG_LEVEL_SERIOUS,
+ 304:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****                   ("pbuf_alloc: Could not allocate MEMP_PBUF for PBUF_%s.\n",
+ 305:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****                   (type == PBUF_ROM) ? "ROM" : "REF"));
+ 306:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       return NULL;
+ 314              		.loc 1 306 0
+ 315 0202 4FF00003 		mov	r3, #0
+ 316 0206 1EE0     		b	.L9
+ 317              	.L23:
+ 307:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     }
+ 308:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     /* caller must set this field properly, afterwards */
+ 309:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     p->payload = NULL;
+ 318              		.loc 1 309 0
+ 319 0208 FB69     		ldr	r3, [r7, #28]
+ 320 020a 4FF00002 		mov	r2, #0
+ 321 020e 5A60     		str	r2, [r3, #4]
+ 310:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     p->len = p->tot_len = length;
+ 322              		.loc 1 310 0
+ 323 0210 FB69     		ldr	r3, [r7, #28]
+ 324 0212 BA88     		ldrh	r2, [r7, #4]	@ movhi
+ 325 0214 1A81     		strh	r2, [r3, #8]	@ movhi
+ 326 0216 FB69     		ldr	r3, [r7, #28]
+ 327 0218 1A89     		ldrh	r2, [r3, #8]
+ 328 021a FB69     		ldr	r3, [r7, #28]
+ 329 021c 5A81     		strh	r2, [r3, #10]	@ movhi
+ 311:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     p->next = NULL;
+ 330              		.loc 1 311 0
+ 331 021e FB69     		ldr	r3, [r7, #28]
+ 332 0220 4FF00002 		mov	r2, #0
+ 333 0224 1A60     		str	r2, [r3, #0]
+ 312:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     p->type = type;
+ 334              		.loc 1 312 0
+ 335 0226 FB69     		ldr	r3, [r7, #28]
+ 336 0228 BA79     		ldrb	r2, [r7, #6]
+ 337 022a 1A73     		strb	r2, [r3, #12]
+ 313:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     break;
+ 338              		.loc 1 313 0
+ 339 022c 02E0     		b	.L21
+ 340              	.L10:
+ 314:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   default:
+ 315:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     LWIP_ASSERT("pbuf_alloc: erroneous type", 0);
+ 316:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     return NULL;
+ 341              		.loc 1 316 0
+ 342 022e 4FF00003 		mov	r3, #0
+ 343 0232 08E0     		b	.L9
+ 344              	.L21:
+ 317:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   }
+ 318:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   /* set reference count */
+ 319:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   p->ref = 1;
+ 345              		.loc 1 319 0
+ 346 0234 FB69     		ldr	r3, [r7, #28]
+ 347 0236 4FF00102 		mov	r2, #1
+ 348 023a DA81     		strh	r2, [r3, #14]	@ movhi
+ 320:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   /* set flags */
+ 321:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   p->flags = 0;
+ 349              		.loc 1 321 0
+ 350 023c FB69     		ldr	r3, [r7, #28]
+ 351 023e 4FF00002 		mov	r2, #0
+ 352 0242 5A73     		strb	r2, [r3, #13]
+ 322:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   LWIP_DEBUGF(PBUF_DEBUG | LWIP_DBG_TRACE, ("pbuf_alloc(length=%"U16_F") == %p\n", length, (void *)
+ 323:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   return p;
+ 353              		.loc 1 323 0
+ 354 0244 FB69     		ldr	r3, [r7, #28]
+ 355              	.L9:
+ 324:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** }
+ 356              		.loc 1 324 0
+ 357 0246 1846     		mov	r0, r3
+ 358 0248 07F12007 		add	r7, r7, #32
+ 359 024c BD46     		mov	sp, r7
+ 360 024e 80BD     		pop	{r7, pc}
+ 361              		.cfi_endproc
+ 362              	.LFE0:
+ 364              		.section	.text.pbuf_realloc,"ax",%progbits
+ 365              		.align	2
+ 366              		.global	pbuf_realloc
+ 367              		.thumb
+ 368              		.thumb_func
+ 370              	pbuf_realloc:
+ 371              	.LFB1:
+ 325:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** 
+ 326:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** 
+ 327:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** /**
+ 328:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * Shrink a pbuf chain to a desired length.
+ 329:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  *
+ 330:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * @param p pbuf to shrink.
+ 331:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * @param new_len desired new length of pbuf chain
+ 332:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  *
+ 333:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * Depending on the desired length, the first few pbufs in a chain might
+ 334:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * be skipped and left unchanged. The new last pbuf in the chain will be
+ 335:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * resized, and any remaining pbufs will be freed.
+ 336:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  *
+ 337:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * @note If the pbuf is ROM/REF, only the ->tot_len and ->len fields are adjusted.
+ 338:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * @note May not be called on a packet queue.
+ 339:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  *
+ 340:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * @note Despite its name, pbuf_realloc cannot grow the size of a pbuf (chain).
+ 341:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  */
+ 342:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** void
+ 343:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** pbuf_realloc(struct pbuf *p, u16_t new_len)
+ 344:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** {
+ 372              		.loc 1 344 0
+ 373              		.cfi_startproc
+ 374              		@ args = 0, pretend = 0, frame = 24
+ 375              		@ frame_needed = 1, uses_anonymous_args = 0
+ 376 0000 80B5     		push	{r7, lr}
+ 377              	.LCFI3:
+ 378              		.cfi_def_cfa_offset 8
+ 379              		.cfi_offset 7, -8
+ 380              		.cfi_offset 14, -4
+ 381 0002 86B0     		sub	sp, sp, #24
+ 382              	.LCFI4:
+ 383              		.cfi_def_cfa_offset 32
+ 384 0004 00AF     		add	r7, sp, #0
+ 385              	.LCFI5:
+ 386              		.cfi_def_cfa_register 7
+ 387 0006 7860     		str	r0, [r7, #4]
+ 388 0008 0B46     		mov	r3, r1
+ 389 000a 7B80     		strh	r3, [r7, #2]	@ movhi
+ 345:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   struct pbuf *q;
+ 346:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   u16_t rem_len; /* remaining length */
+ 347:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   s32_t grow;
+ 348:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** 
+ 349:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   LWIP_ASSERT("pbuf_realloc: p != NULL", p != NULL);
+ 350:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   LWIP_ASSERT("pbuf_realloc: sane p->type", p->type == PBUF_POOL ||
+ 390              		.loc 1 350 0
+ 391 000c 7B68     		ldr	r3, [r7, #4]
+ 392 000e 1B7B     		ldrb	r3, [r3, #12]	@ zero_extendqisi2
+ 393 0010 032B     		cmp	r3, #3
+ 394 0012 06D0     		beq	.L26
+ 395              		.loc 1 350 0 is_stmt 0 discriminator 1
+ 396 0014 7B68     		ldr	r3, [r7, #4]
+ 397 0016 1B7B     		ldrb	r3, [r3, #12]	@ zero_extendqisi2
+ 398 0018 012B     		cmp	r3, #1
+ 399 001a 02D0     		beq	.L26
+ 400              		.loc 1 350 0 discriminator 2
+ 401 001c 7B68     		ldr	r3, [r7, #4]
+ 402 001e 1B7B     		ldrb	r3, [r3, #12]	@ zero_extendqisi2
+ 403 0020 002B     		cmp	r3, #0
+ 404              	.L26:
+ 351:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****               p->type == PBUF_ROM ||
+ 352:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****               p->type == PBUF_RAM ||
+ 353:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****               p->type == PBUF_REF);
+ 354:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** 
+ 355:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   /* desired length larger than current length? */
+ 356:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   if (new_len >= p->tot_len) {
+ 405              		.loc 1 356 0 is_stmt 1
+ 406 0022 7B68     		ldr	r3, [r7, #4]
+ 407 0024 1B89     		ldrh	r3, [r3, #8]
+ 408 0026 7A88     		ldrh	r2, [r7, #2]
+ 409 0028 9A42     		cmp	r2, r3
+ 410 002a 4AD2     		bcs	.L33
+ 411              	.L27:
+ 357:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     /* enlarging not yet supported */
+ 358:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     return;
+ 359:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   }
+ 360:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** 
+ 361:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   /* the pbuf chain grows by (new_len - p->tot_len) bytes
+ 362:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****    * (which may be negative in case of shrinking) */
+ 363:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   grow = new_len - p->tot_len;
+ 412              		.loc 1 363 0
+ 413 002c 7A88     		ldrh	r2, [r7, #2]
+ 414 002e 7B68     		ldr	r3, [r7, #4]
+ 415 0030 1B89     		ldrh	r3, [r3, #8]
+ 416 0032 D31A     		subs	r3, r2, r3
+ 417 0034 FB60     		str	r3, [r7, #12]
+ 364:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** 
+ 365:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   /* first, step over any pbufs that should remain in the chain */
+ 366:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   rem_len = new_len;
+ 418              		.loc 1 366 0
+ 419 0036 7B88     		ldrh	r3, [r7, #2]	@ movhi
+ 420 0038 7B82     		strh	r3, [r7, #18]	@ movhi
+ 367:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   q = p;
+ 421              		.loc 1 367 0
+ 422 003a 7B68     		ldr	r3, [r7, #4]
+ 423 003c 7B61     		str	r3, [r7, #20]
+ 368:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   /* should this pbuf be kept? */
+ 369:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   while (rem_len > q->len) {
+ 424              		.loc 1 369 0
+ 425 003e 0FE0     		b	.L29
+ 426              	.L30:
+ 370:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     /* decrease remaining length by pbuf length */
+ 371:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     rem_len -= q->len;
+ 427              		.loc 1 371 0
+ 428 0040 7B69     		ldr	r3, [r7, #20]
+ 429 0042 5B89     		ldrh	r3, [r3, #10]
+ 430 0044 7A8A     		ldrh	r2, [r7, #18]	@ movhi
+ 431 0046 D31A     		subs	r3, r2, r3
+ 432 0048 7B82     		strh	r3, [r7, #18]	@ movhi
+ 372:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     /* decrease total length indicator */
+ 373:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     LWIP_ASSERT("grow < max_u16_t", grow < 0xffff);
+ 374:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     q->tot_len += (u16_t)grow;
+ 433              		.loc 1 374 0
+ 434 004a 7B69     		ldr	r3, [r7, #20]
+ 435 004c 1A89     		ldrh	r2, [r3, #8]
+ 436 004e FB68     		ldr	r3, [r7, #12]
+ 437 0050 9BB2     		uxth	r3, r3
+ 438 0052 D318     		adds	r3, r2, r3
+ 439 0054 9AB2     		uxth	r2, r3
+ 440 0056 7B69     		ldr	r3, [r7, #20]
+ 441 0058 1A81     		strh	r2, [r3, #8]	@ movhi
+ 375:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     /* proceed to next pbuf in chain */
+ 376:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     q = q->next;
+ 442              		.loc 1 376 0
+ 443 005a 7B69     		ldr	r3, [r7, #20]
+ 444 005c 1B68     		ldr	r3, [r3, #0]
+ 445 005e 7B61     		str	r3, [r7, #20]
+ 446              	.L29:
+ 369:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   while (rem_len > q->len) {
+ 447              		.loc 1 369 0 discriminator 1
+ 448 0060 7B69     		ldr	r3, [r7, #20]
+ 449 0062 5B89     		ldrh	r3, [r3, #10]
+ 450 0064 7A8A     		ldrh	r2, [r7, #18]
+ 451 0066 9A42     		cmp	r2, r3
+ 452 0068 EAD8     		bhi	.L30
+ 377:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     LWIP_ASSERT("pbuf_realloc: q != NULL", q != NULL);
+ 378:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   }
+ 379:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   /* we have now reached the new last pbuf (in q) */
+ 380:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   /* rem_len == desired length for pbuf q */
+ 381:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** 
+ 382:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   /* shrink allocated memory for PBUF_RAM */
+ 383:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   /* (other types merely adjust their length fields */
+ 384:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   if ((q->type == PBUF_RAM) && (rem_len != q->len)) {
+ 453              		.loc 1 384 0
+ 454 006a 7B69     		ldr	r3, [r7, #20]
+ 455 006c 1B7B     		ldrb	r3, [r3, #12]	@ zero_extendqisi2
+ 456 006e 002B     		cmp	r3, #0
+ 457 0070 12D1     		bne	.L31
+ 458              		.loc 1 384 0 is_stmt 0 discriminator 1
+ 459 0072 7B69     		ldr	r3, [r7, #20]
+ 460 0074 5B89     		ldrh	r3, [r3, #10]
+ 461 0076 7A8A     		ldrh	r2, [r7, #18]
+ 462 0078 9A42     		cmp	r2, r3
+ 463 007a 0DD0     		beq	.L31
+ 385:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     /* reallocate and adjust the length of the pbuf that will be split */
+ 386:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     q = mem_realloc(q, (u8_t *)q->payload - (u8_t *)q + rem_len);
+ 464              		.loc 1 386 0 is_stmt 1
+ 465 007c 7B69     		ldr	r3, [r7, #20]
+ 466 007e 5B68     		ldr	r3, [r3, #4]
+ 467 0080 1A46     		mov	r2, r3
+ 468 0082 7B69     		ldr	r3, [r7, #20]
+ 469 0084 D31A     		subs	r3, r2, r3
+ 470 0086 9AB2     		uxth	r2, r3
+ 471 0088 7B8A     		ldrh	r3, [r7, #18]	@ movhi
+ 472 008a D318     		adds	r3, r2, r3
+ 473 008c 9BB2     		uxth	r3, r3
+ 474 008e 7869     		ldr	r0, [r7, #20]
+ 475 0090 1946     		mov	r1, r3
+ 476 0092 FFF7FEFF 		bl	mem_realloc
+ 477 0096 7861     		str	r0, [r7, #20]
+ 478              	.L31:
+ 387:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     LWIP_ASSERT("mem_realloc give q == NULL", q != NULL);
+ 388:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   }
+ 389:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   /* adjust length fields for new last pbuf */
+ 390:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   q->len = rem_len;
+ 479              		.loc 1 390 0
+ 480 0098 7B69     		ldr	r3, [r7, #20]
+ 481 009a 7A8A     		ldrh	r2, [r7, #18]	@ movhi
+ 482 009c 5A81     		strh	r2, [r3, #10]	@ movhi
+ 391:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   q->tot_len = q->len;
+ 483              		.loc 1 391 0
+ 484 009e 7B69     		ldr	r3, [r7, #20]
+ 485 00a0 5A89     		ldrh	r2, [r3, #10]
+ 486 00a2 7B69     		ldr	r3, [r7, #20]
+ 487 00a4 1A81     		strh	r2, [r3, #8]	@ movhi
+ 392:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** 
+ 393:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   /* any remaining pbufs in chain? */
+ 394:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   if (q->next != NULL) {
+ 488              		.loc 1 394 0
+ 489 00a6 7B69     		ldr	r3, [r7, #20]
+ 490 00a8 1B68     		ldr	r3, [r3, #0]
+ 491 00aa 002B     		cmp	r3, #0
+ 492 00ac 04D0     		beq	.L32
+ 395:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     /* free remaining pbufs in chain */
+ 396:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     pbuf_free(q->next);
+ 493              		.loc 1 396 0
+ 494 00ae 7B69     		ldr	r3, [r7, #20]
+ 495 00b0 1B68     		ldr	r3, [r3, #0]
+ 496 00b2 1846     		mov	r0, r3
+ 497 00b4 FFF7FEFF 		bl	pbuf_free
+ 498              	.L32:
+ 397:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   }
+ 398:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   /* q is last packet in chain */
+ 399:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   q->next = NULL;
+ 499              		.loc 1 399 0
+ 500 00b8 7B69     		ldr	r3, [r7, #20]
+ 501 00ba 4FF00002 		mov	r2, #0
+ 502 00be 1A60     		str	r2, [r3, #0]
+ 503 00c0 00E0     		b	.L25
+ 504              	.L33:
+ 358:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     return;
+ 505              		.loc 1 358 0
+ 506 00c2 00BF     		nop
+ 507              	.L25:
+ 400:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** 
+ 401:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** }
+ 508              		.loc 1 401 0
+ 509 00c4 07F11807 		add	r7, r7, #24
+ 510 00c8 BD46     		mov	sp, r7
+ 511 00ca 80BD     		pop	{r7, pc}
+ 512              		.cfi_endproc
+ 513              	.LFE1:
+ 515              		.section	.text.pbuf_header,"ax",%progbits
+ 516              		.align	2
+ 517              		.global	pbuf_header
+ 518              		.thumb
+ 519              		.thumb_func
+ 521              	pbuf_header:
+ 522              	.LFB2:
+ 402:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** 
+ 403:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** /**
+ 404:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * Adjusts the payload pointer to hide or reveal headers in the payload.
+ 405:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  *
+ 406:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * Adjusts the ->payload pointer so that space for a header
+ 407:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * (dis)appears in the pbuf payload.
+ 408:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  *
+ 409:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * The ->payload, ->tot_len and ->len fields are adjusted.
+ 410:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  *
+ 411:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * @param p pbuf to change the header size.
+ 412:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * @param header_size_increment Number of bytes to increment header size which
+ 413:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * increases the size of the pbuf. New space is on the front.
+ 414:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * (Using a negative value decreases the header size.)
+ 415:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * If hdr_size_inc is 0, this function does nothing and returns succesful.
+ 416:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  *
+ 417:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * PBUF_ROM and PBUF_REF type buffers cannot have their sizes increased, so
+ 418:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * the call will fail. A check is made that the increase in header size does
+ 419:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * not move the payload pointer in front of the start of the buffer.
+ 420:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * @return non-zero on failure, zero on success.
+ 421:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  *
+ 422:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  */
+ 423:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** u8_t
+ 424:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** pbuf_header(struct pbuf *p, s16_t header_size_increment)
+ 425:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** {
+ 523              		.loc 1 425 0
+ 524              		.cfi_startproc
+ 525              		@ args = 0, pretend = 0, frame = 16
+ 526              		@ frame_needed = 1, uses_anonymous_args = 0
+ 527              		@ link register save eliminated.
+ 528 0000 80B4     		push	{r7}
+ 529              	.LCFI6:
+ 530              		.cfi_def_cfa_offset 4
+ 531              		.cfi_offset 7, -4
+ 532 0002 85B0     		sub	sp, sp, #20
+ 533              	.LCFI7:
+ 534              		.cfi_def_cfa_offset 24
+ 535 0004 00AF     		add	r7, sp, #0
+ 536              	.LCFI8:
+ 537              		.cfi_def_cfa_register 7
+ 538 0006 7860     		str	r0, [r7, #4]
+ 539 0008 0B46     		mov	r3, r1
+ 540 000a 7B80     		strh	r3, [r7, #2]	@ movhi
+ 426:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   u16_t type;
+ 427:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   void *payload;
+ 428:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   u16_t increment_magnitude;
+ 429:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** 
+ 430:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   LWIP_ASSERT("p != NULL", p != NULL);
+ 431:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   if ((header_size_increment == 0) || (p == NULL))
+ 541              		.loc 1 431 0
+ 542 000c B7F90230 		ldrsh	r3, [r7, #2]
+ 543 0010 002B     		cmp	r3, #0
+ 544 0012 02D0     		beq	.L35
+ 545              		.loc 1 431 0 is_stmt 0 discriminator 1
+ 546 0014 7B68     		ldr	r3, [r7, #4]
+ 547 0016 002B     		cmp	r3, #0
+ 548 0018 02D1     		bne	.L36
+ 549              	.L35:
+ 432:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     return 0;
+ 550              		.loc 1 432 0 is_stmt 1
+ 551 001a 4FF00003 		mov	r3, #0
+ 552 001e 62E0     		b	.L37
+ 553              	.L36:
+ 433:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  
+ 434:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   if (header_size_increment < 0){
+ 554              		.loc 1 434 0
+ 555 0020 B7F90230 		ldrsh	r3, [r7, #2]
+ 556 0024 002B     		cmp	r3, #0
+ 557 0026 0BDA     		bge	.L38
+ 435:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     increment_magnitude = -header_size_increment;
+ 558              		.loc 1 435 0
+ 559 0028 7B88     		ldrh	r3, [r7, #2]
+ 560 002a C3F10003 		rsb	r3, r3, #0
+ 561 002e FB81     		strh	r3, [r7, #14]	@ movhi
+ 436:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     /* Check that we aren't going to move off the end of the pbuf */
+ 437:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     LWIP_ERROR("increment_magnitude <= p->len", (increment_magnitude <= p->len), return 1;);
+ 562              		.loc 1 437 0
+ 563 0030 7B68     		ldr	r3, [r7, #4]
+ 564 0032 5B89     		ldrh	r3, [r3, #10]
+ 565 0034 FA89     		ldrh	r2, [r7, #14]
+ 566 0036 9A42     		cmp	r2, r3
+ 567 0038 04D9     		bls	.L39
+ 568              		.loc 1 437 0 is_stmt 0 discriminator 3
+ 569 003a 4FF00103 		mov	r3, #1
+ 570 003e 52E0     		b	.L37
+ 571              	.L38:
+ 438:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   } else {
+ 439:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     increment_magnitude = header_size_increment;
+ 572              		.loc 1 439 0 is_stmt 1
+ 573 0040 7B88     		ldrh	r3, [r7, #2]	@ movhi
+ 574 0042 FB81     		strh	r3, [r7, #14]	@ movhi
+ 575              	.L39:
+ 440:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** #if 0
+ 441:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     /* Can't assert these as some callers speculatively call
+ 442:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****          pbuf_header() to see if it's OK.  Will return 1 below instead. */
+ 443:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     /* Check that we've got the correct type of pbuf to work with */
+ 444:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     LWIP_ASSERT("p->type == PBUF_RAM || p->type == PBUF_POOL", 
+ 445:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****                 p->type == PBUF_RAM || p->type == PBUF_POOL);
+ 446:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     /* Check that we aren't going to move off the beginning of the pbuf */
+ 447:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     LWIP_ASSERT("p->payload - increment_magnitude >= p + SIZEOF_STRUCT_PBUF",
+ 448:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****                 (u8_t *)p->payload - increment_magnitude >= (u8_t *)p + SIZEOF_STRUCT_PBUF);
+ 449:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** #endif
+ 450:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   }
+ 451:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** 
+ 452:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   type = p->type;
+ 576              		.loc 1 452 0
+ 577 0044 7B68     		ldr	r3, [r7, #4]
+ 578 0046 1B7B     		ldrb	r3, [r3, #12]	@ zero_extendqisi2
+ 579 0048 BB81     		strh	r3, [r7, #12]	@ movhi
+ 453:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   /* remember current payload pointer */
+ 454:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   payload = p->payload;
+ 580              		.loc 1 454 0
+ 581 004a 7B68     		ldr	r3, [r7, #4]
+ 582 004c 5B68     		ldr	r3, [r3, #4]
+ 583 004e BB60     		str	r3, [r7, #8]
+ 455:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** 
+ 456:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   /* pbuf types containing payloads? */
+ 457:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   if (type == PBUF_RAM || type == PBUF_POOL) {
+ 584              		.loc 1 457 0
+ 585 0050 BB89     		ldrh	r3, [r7, #12]
+ 586 0052 002B     		cmp	r3, #0
+ 587 0054 02D0     		beq	.L40
+ 588              		.loc 1 457 0 is_stmt 0 discriminator 1
+ 589 0056 BB89     		ldrh	r3, [r7, #12]
+ 590 0058 032B     		cmp	r3, #3
+ 591 005a 15D1     		bne	.L41
+ 592              	.L40:
+ 458:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     /* set new payload pointer */
+ 459:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     p->payload = (u8_t *)p->payload - header_size_increment;
+ 593              		.loc 1 459 0 is_stmt 1
+ 594 005c 7B68     		ldr	r3, [r7, #4]
+ 595 005e 5A68     		ldr	r2, [r3, #4]
+ 596 0060 B7F90230 		ldrsh	r3, [r7, #2]
+ 597 0064 C3F10003 		rsb	r3, r3, #0
+ 598 0068 D218     		adds	r2, r2, r3
+ 599 006a 7B68     		ldr	r3, [r7, #4]
+ 600 006c 5A60     		str	r2, [r3, #4]
+ 460:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     /* boundary check fails? */
+ 461:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     if ((u8_t *)p->payload < (u8_t *)p + SIZEOF_STRUCT_PBUF) {
+ 601              		.loc 1 461 0
+ 602 006e 7B68     		ldr	r3, [r7, #4]
+ 603 0070 5A68     		ldr	r2, [r3, #4]
+ 604 0072 7B68     		ldr	r3, [r7, #4]
+ 605 0074 03F11003 		add	r3, r3, #16
+ 606 0078 9A42     		cmp	r2, r3
+ 607 007a 24D2     		bcs	.L43
+ 462:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       LWIP_DEBUGF( PBUF_DEBUG | LWIP_DBG_LEVEL_SERIOUS,
+ 463:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****         ("pbuf_header: failed as %p < %p (not enough space for new header size)\n",
+ 464:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****         (void *)p->payload, (void *)(p + 1)));
+ 465:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       /* restore old payload pointer */
+ 466:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       p->payload = payload;
+ 608              		.loc 1 466 0
+ 609 007c 7B68     		ldr	r3, [r7, #4]
+ 610 007e BA68     		ldr	r2, [r7, #8]
+ 611 0080 5A60     		str	r2, [r3, #4]
+ 467:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       /* bail out unsuccesfully */
+ 468:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       return 1;
+ 612              		.loc 1 468 0
+ 613 0082 4FF00103 		mov	r3, #1
+ 614 0086 2EE0     		b	.L37
+ 615              	.L41:
+ 469:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     }
+ 470:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   /* pbuf types refering to external payloads? */
+ 471:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   } else if (type == PBUF_REF || type == PBUF_ROM) {
+ 616              		.loc 1 471 0
+ 617 0088 BB89     		ldrh	r3, [r7, #12]
+ 618 008a 022B     		cmp	r3, #2
+ 619 008c 02D0     		beq	.L44
+ 620              		.loc 1 471 0 is_stmt 0 discriminator 1
+ 621 008e BB89     		ldrh	r3, [r7, #12]
+ 622 0090 012B     		cmp	r3, #1
+ 623 0092 15D1     		bne	.L45
+ 624              	.L44:
+ 472:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     /* hide a header in the payload? */
+ 473:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     if ((header_size_increment < 0) && (increment_magnitude <= p->len)) {
+ 625              		.loc 1 473 0 is_stmt 1
+ 626 0094 B7F90230 		ldrsh	r3, [r7, #2]
+ 627 0098 002B     		cmp	r3, #0
+ 628 009a 0EDA     		bge	.L46
+ 629              		.loc 1 473 0 is_stmt 0 discriminator 1
+ 630 009c 7B68     		ldr	r3, [r7, #4]
+ 631 009e 5B89     		ldrh	r3, [r3, #10]
+ 632 00a0 FA89     		ldrh	r2, [r7, #14]
+ 633 00a2 9A42     		cmp	r2, r3
+ 634 00a4 09D8     		bhi	.L46
+ 474:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       /* increase payload pointer */
+ 475:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       p->payload = (u8_t *)p->payload - header_size_increment;
+ 635              		.loc 1 475 0 is_stmt 1
+ 636 00a6 7B68     		ldr	r3, [r7, #4]
+ 637 00a8 5A68     		ldr	r2, [r3, #4]
+ 638 00aa B7F90230 		ldrsh	r3, [r7, #2]
+ 639 00ae C3F10003 		rsb	r3, r3, #0
+ 640 00b2 D218     		adds	r2, r2, r3
+ 641 00b4 7B68     		ldr	r3, [r7, #4]
+ 642 00b6 5A60     		str	r2, [r3, #4]
+ 473:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     if ((header_size_increment < 0) && (increment_magnitude <= p->len)) {
+ 643              		.loc 1 473 0
+ 644 00b8 05E0     		b	.L43
+ 645              	.L46:
+ 476:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     } else {
+ 477:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       /* cannot expand payload to front (yet!)
+ 478:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****        * bail out unsuccesfully */
+ 479:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       return 1;
+ 646              		.loc 1 479 0
+ 647 00ba 4FF00103 		mov	r3, #1
+ 648 00be 12E0     		b	.L37
+ 649              	.L45:
+ 480:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     }
+ 481:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   }
+ 482:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   else {
+ 483:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     /* Unknown type */
+ 484:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     LWIP_ASSERT("bad pbuf type", 0);
+ 485:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     return 1;
+ 650              		.loc 1 485 0
+ 651 00c0 4FF00103 		mov	r3, #1
+ 652 00c4 0FE0     		b	.L37
+ 653              	.L43:
+ 486:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   }
+ 487:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   /* modify pbuf length fields */
+ 488:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   p->len += header_size_increment;
+ 654              		.loc 1 488 0
+ 655 00c6 7B68     		ldr	r3, [r7, #4]
+ 656 00c8 5A89     		ldrh	r2, [r3, #10]
+ 657 00ca 7B88     		ldrh	r3, [r7, #2]
+ 658 00cc D318     		adds	r3, r2, r3
+ 659 00ce 9AB2     		uxth	r2, r3
+ 660 00d0 7B68     		ldr	r3, [r7, #4]
+ 661 00d2 5A81     		strh	r2, [r3, #10]	@ movhi
+ 489:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   p->tot_len += header_size_increment;
+ 662              		.loc 1 489 0
+ 663 00d4 7B68     		ldr	r3, [r7, #4]
+ 664 00d6 1A89     		ldrh	r2, [r3, #8]
+ 665 00d8 7B88     		ldrh	r3, [r7, #2]
+ 666 00da D318     		adds	r3, r2, r3
+ 667 00dc 9AB2     		uxth	r2, r3
+ 668 00de 7B68     		ldr	r3, [r7, #4]
+ 669 00e0 1A81     		strh	r2, [r3, #8]	@ movhi
+ 490:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** 
+ 491:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   LWIP_DEBUGF(PBUF_DEBUG | LWIP_DBG_TRACE, ("pbuf_header: old %p new %p (%"S16_F")\n",
+ 492:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     (void *)payload, (void *)p->payload, header_size_increment));
+ 493:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** 
+ 494:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   return 0;
+ 670              		.loc 1 494 0
+ 671 00e2 4FF00003 		mov	r3, #0
+ 672              	.L37:
+ 495:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** }
+ 673              		.loc 1 495 0
+ 674 00e6 1846     		mov	r0, r3
+ 675 00e8 07F11407 		add	r7, r7, #20
+ 676 00ec BD46     		mov	sp, r7
+ 677 00ee 80BC     		pop	{r7}
+ 678 00f0 7047     		bx	lr
+ 679              		.cfi_endproc
+ 680              	.LFE2:
+ 682 00f2 00BF     		.section	.text.pbuf_free,"ax",%progbits
+ 683              		.align	2
+ 684              		.global	pbuf_free
+ 685              		.thumb
+ 686              		.thumb_func
+ 688              	pbuf_free:
+ 689              	.LFB3:
+ 496:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** 
+ 497:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** /**
+ 498:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * Dereference a pbuf chain or queue and deallocate any no-longer-used
+ 499:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * pbufs at the head of this chain or queue.
+ 500:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  *
+ 501:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * Decrements the pbuf reference count. If it reaches zero, the pbuf is
+ 502:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * deallocated.
+ 503:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  *
+ 504:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * For a pbuf chain, this is repeated for each pbuf in the chain,
+ 505:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * up to the first pbuf which has a non-zero reference count after
+ 506:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * decrementing. So, when all reference counts are one, the whole
+ 507:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * chain is free'd.
+ 508:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  *
+ 509:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * @param p The pbuf (chain) to be dereferenced.
+ 510:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  *
+ 511:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * @return the number of pbufs that were de-allocated
+ 512:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * from the head of the chain.
+ 513:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  *
+ 514:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * @note MUST NOT be called on a packet queue (Not verified to work yet).
+ 515:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * @note the reference counter of a pbuf equals the number of pointers
+ 516:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * that refer to the pbuf (or into the pbuf).
+ 517:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  *
+ 518:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * @internal examples:
+ 519:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  *
+ 520:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * Assuming existing chains a->b->c with the following reference
+ 521:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * counts, calling pbuf_free(a) results in:
+ 522:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * 
+ 523:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * 1->2->3 becomes ...1->3
+ 524:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * 3->3->3 becomes 2->3->3
+ 525:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * 1->1->2 becomes ......1
+ 526:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * 2->1->1 becomes 1->1->1
+ 527:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * 1->1->1 becomes .......
+ 528:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  *
+ 529:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  */
+ 530:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** u8_t
+ 531:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** pbuf_free(struct pbuf *p)
+ 532:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** {
+ 690              		.loc 1 532 0
+ 691              		.cfi_startproc
+ 692              		@ args = 0, pretend = 0, frame = 24
+ 693              		@ frame_needed = 1, uses_anonymous_args = 0
+ 694 0000 80B5     		push	{r7, lr}
+ 695              	.LCFI9:
+ 696              		.cfi_def_cfa_offset 8
+ 697              		.cfi_offset 7, -8
+ 698              		.cfi_offset 14, -4
+ 699 0002 86B0     		sub	sp, sp, #24
+ 700              	.LCFI10:
+ 701              		.cfi_def_cfa_offset 32
+ 702 0004 00AF     		add	r7, sp, #0
+ 703              	.LCFI11:
+ 704              		.cfi_def_cfa_register 7
+ 705 0006 7860     		str	r0, [r7, #4]
+ 533:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   u16_t type;
+ 534:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   struct pbuf *q;
+ 535:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   u8_t count;
+ 536:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** 
+ 537:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   if (p == NULL) {
+ 706              		.loc 1 537 0
+ 707 0008 7B68     		ldr	r3, [r7, #4]
+ 708 000a 002B     		cmp	r3, #0
+ 709 000c 02D1     		bne	.L48
+ 538:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     LWIP_ASSERT("p != NULL", p != NULL);
+ 539:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     /* if assertions are disabled, proceed with debug output */
+ 540:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     LWIP_DEBUGF(PBUF_DEBUG | LWIP_DBG_LEVEL_SERIOUS,
+ 541:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       ("pbuf_free(p == NULL) was called.\n"));
+ 542:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     return 0;
+ 710              		.loc 1 542 0
+ 711 000e 4FF00003 		mov	r3, #0
+ 712 0012 43E0     		b	.L49
+ 713              	.L48:
+ 543:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   }
+ 544:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   LWIP_DEBUGF(PBUF_DEBUG | LWIP_DBG_TRACE, ("pbuf_free(%p)\n", (void *)p));
+ 545:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** 
+ 546:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   PERF_START;
+ 547:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** 
+ 548:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   LWIP_ASSERT("pbuf_free: sane type",
+ 714              		.loc 1 548 0
+ 715 0014 7B68     		ldr	r3, [r7, #4]
+ 716 0016 1B7B     		ldrb	r3, [r3, #12]	@ zero_extendqisi2
+ 717 0018 002B     		cmp	r3, #0
+ 718 001a 06D0     		beq	.L50
+ 719              		.loc 1 548 0 is_stmt 0 discriminator 1
+ 720 001c 7B68     		ldr	r3, [r7, #4]
+ 721 001e 1B7B     		ldrb	r3, [r3, #12]	@ zero_extendqisi2
+ 722 0020 012B     		cmp	r3, #1
+ 723 0022 02D0     		beq	.L50
+ 724              		.loc 1 548 0 discriminator 2
+ 725 0024 7B68     		ldr	r3, [r7, #4]
+ 726 0026 1B7B     		ldrb	r3, [r3, #12]	@ zero_extendqisi2
+ 727 0028 022B     		cmp	r3, #2
+ 728              	.L50:
+ 549:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     p->type == PBUF_RAM || p->type == PBUF_ROM ||
+ 550:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     p->type == PBUF_REF || p->type == PBUF_POOL);
+ 551:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** 
+ 552:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   count = 0;
+ 729              		.loc 1 552 0 is_stmt 1
+ 730 002a 4FF00003 		mov	r3, #0
+ 731 002e FB75     		strb	r3, [r7, #23]
+ 553:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   /* de-allocate all consecutive pbufs from the head of the chain that
+ 554:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****    * obtain a zero reference count after decrementing*/
+ 555:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   while (p != NULL) {
+ 732              		.loc 1 555 0
+ 733 0030 30E0     		b	.L51
+ 734              	.L57:
+ 735              	.LBB2:
+ 556:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     u16_t ref;
+ 557:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     SYS_ARCH_DECL_PROTECT(old_level);
+ 558:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     /* Since decrementing ref cannot be guaranteed to be a single machine operation
+ 559:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****      * we must protect it. We put the new ref into a local variable to prevent
+ 560:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****      * further protection. */
+ 561:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     SYS_ARCH_PROTECT(old_level);
+ 562:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     /* all pbufs in a chain are referenced at least once */
+ 563:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     LWIP_ASSERT("pbuf_free: p->ref > 0", p->ref > 0);
+ 564:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     /* decrease reference count (number of pointers to pbuf) */
+ 565:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     ref = --(p->ref);
+ 736              		.loc 1 565 0
+ 737 0032 7B68     		ldr	r3, [r7, #4]
+ 738 0034 DB89     		ldrh	r3, [r3, #14]
+ 739 0036 03F1FF33 		add	r3, r3, #-1
+ 740 003a 9AB2     		uxth	r2, r3
+ 741 003c 7B68     		ldr	r3, [r7, #4]
+ 742 003e DA81     		strh	r2, [r3, #14]	@ movhi
+ 743 0040 7B68     		ldr	r3, [r7, #4]
+ 744 0042 DB89     		ldrh	r3, [r3, #14]	@ movhi
+ 745 0044 BB82     		strh	r3, [r7, #20]	@ movhi
+ 566:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     SYS_ARCH_UNPROTECT(old_level);
+ 567:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     /* this pbuf is no longer referenced to? */
+ 568:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     if (ref == 0) {
+ 746              		.loc 1 568 0
+ 747 0046 BB8A     		ldrh	r3, [r7, #20]
+ 748 0048 002B     		cmp	r3, #0
+ 749 004a 20D1     		bne	.L52
+ 569:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       /* remember next pbuf in chain for next iteration */
+ 570:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       q = p->next;
+ 750              		.loc 1 570 0
+ 751 004c 7B68     		ldr	r3, [r7, #4]
+ 752 004e 1B68     		ldr	r3, [r3, #0]
+ 753 0050 3B61     		str	r3, [r7, #16]
+ 571:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       LWIP_DEBUGF( PBUF_DEBUG | LWIP_DBG_TRACE, ("pbuf_free: deallocating %p\n", (void *)p));
+ 572:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       type = p->type;
+ 754              		.loc 1 572 0
+ 755 0052 7B68     		ldr	r3, [r7, #4]
+ 756 0054 1B7B     		ldrb	r3, [r3, #12]	@ zero_extendqisi2
+ 757 0056 FB81     		strh	r3, [r7, #14]	@ movhi
+ 573:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       /* is this a pbuf from the pool? */
+ 574:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       if (type == PBUF_POOL) {
+ 758              		.loc 1 574 0
+ 759 0058 FB89     		ldrh	r3, [r7, #14]
+ 760 005a 032B     		cmp	r3, #3
+ 761 005c 03D1     		bne	.L53
+ 575:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****         memp_free(MEMP_PBUF_POOL, p);
+ 762              		.loc 1 575 0
+ 763 005e 7868     		ldr	r0, [r7, #4]
+ 764 0060 FFF7FEFF 		bl	mem_free
+ 765 0064 0CE0     		b	.L54
+ 766              	.L53:
+ 576:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       /* is this a ROM or RAM referencing pbuf? */
+ 577:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       } else if (type == PBUF_ROM || type == PBUF_REF) {
+ 767              		.loc 1 577 0
+ 768 0066 FB89     		ldrh	r3, [r7, #14]
+ 769 0068 012B     		cmp	r3, #1
+ 770 006a 02D0     		beq	.L55
+ 771              		.loc 1 577 0 is_stmt 0 discriminator 1
+ 772 006c FB89     		ldrh	r3, [r7, #14]
+ 773 006e 022B     		cmp	r3, #2
+ 774 0070 03D1     		bne	.L56
+ 775              	.L55:
+ 578:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****         memp_free(MEMP_PBUF, p);
+ 776              		.loc 1 578 0 is_stmt 1
+ 777 0072 7868     		ldr	r0, [r7, #4]
+ 778 0074 FFF7FEFF 		bl	mem_free
+ 779 0078 02E0     		b	.L54
+ 780              	.L56:
+ 579:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       /* type == PBUF_RAM */
+ 580:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       } else {
+ 581:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****         mem_free(p);
+ 781              		.loc 1 581 0
+ 782 007a 7868     		ldr	r0, [r7, #4]
+ 783 007c FFF7FEFF 		bl	mem_free
+ 784              	.L54:
+ 582:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       }
+ 583:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       count++;
+ 785              		.loc 1 583 0
+ 786 0080 FB7D     		ldrb	r3, [r7, #23]
+ 787 0082 03F10103 		add	r3, r3, #1
+ 788 0086 FB75     		strb	r3, [r7, #23]
+ 584:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       /* proceed to next pbuf */
+ 585:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       p = q;
+ 789              		.loc 1 585 0
+ 790 0088 3B69     		ldr	r3, [r7, #16]
+ 791 008a 7B60     		str	r3, [r7, #4]
+ 792 008c 02E0     		b	.L51
+ 793              	.L52:
+ 586:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     /* p->ref > 0, this pbuf is still referenced to */
+ 587:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     /* (and so the remaining pbufs in chain as well) */
+ 588:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     } else {
+ 589:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       LWIP_DEBUGF( PBUF_DEBUG | LWIP_DBG_TRACE, ("pbuf_free: %p has ref %"U16_F", ending here.\n", 
+ 590:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       /* stop walking through the chain */
+ 591:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       p = NULL;
+ 794              		.loc 1 591 0
+ 795 008e 4FF00003 		mov	r3, #0
+ 796 0092 7B60     		str	r3, [r7, #4]
+ 797              	.L51:
+ 798              	.LBE2:
+ 555:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   while (p != NULL) {
+ 799              		.loc 1 555 0 discriminator 1
+ 800 0094 7B68     		ldr	r3, [r7, #4]
+ 801 0096 002B     		cmp	r3, #0
+ 802 0098 CBD1     		bne	.L57
+ 592:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     }
+ 593:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   }
+ 594:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   PERF_STOP("pbuf_free");
+ 595:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   /* return number of de-allocated pbufs */
+ 596:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   return count;
+ 803              		.loc 1 596 0
+ 804 009a FB7D     		ldrb	r3, [r7, #23]	@ zero_extendqisi2
+ 805              	.L49:
+ 597:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** }
+ 806              		.loc 1 597 0
+ 807 009c 1846     		mov	r0, r3
+ 808 009e 07F11807 		add	r7, r7, #24
+ 809 00a2 BD46     		mov	sp, r7
+ 810 00a4 80BD     		pop	{r7, pc}
+ 811              		.cfi_endproc
+ 812              	.LFE3:
+ 814 00a6 00BF     		.section	.text.pbuf_clen,"ax",%progbits
+ 815              		.align	2
+ 816              		.global	pbuf_clen
+ 817              		.thumb
+ 818              		.thumb_func
+ 820              	pbuf_clen:
+ 821              	.LFB4:
+ 598:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** 
+ 599:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** /**
+ 600:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * Count number of pbufs in a chain
+ 601:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  *
+ 602:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * @param p first pbuf of chain
+ 603:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * @return the number of pbufs in a chain
+ 604:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  */
+ 605:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** 
+ 606:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** u8_t
+ 607:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** pbuf_clen(struct pbuf *p)
+ 608:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** {
+ 822              		.loc 1 608 0
+ 823              		.cfi_startproc
+ 824              		@ args = 0, pretend = 0, frame = 16
+ 825              		@ frame_needed = 1, uses_anonymous_args = 0
+ 826              		@ link register save eliminated.
+ 827 0000 80B4     		push	{r7}
+ 828              	.LCFI12:
+ 829              		.cfi_def_cfa_offset 4
+ 830              		.cfi_offset 7, -4
+ 831 0002 85B0     		sub	sp, sp, #20
+ 832              	.LCFI13:
+ 833              		.cfi_def_cfa_offset 24
+ 834 0004 00AF     		add	r7, sp, #0
+ 835              	.LCFI14:
+ 836              		.cfi_def_cfa_register 7
+ 837 0006 7860     		str	r0, [r7, #4]
+ 609:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   u8_t len;
+ 610:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** 
+ 611:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   len = 0;
+ 838              		.loc 1 611 0
+ 839 0008 4FF00003 		mov	r3, #0
+ 840 000c FB73     		strb	r3, [r7, #15]
+ 612:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   while (p != NULL) {
+ 841              		.loc 1 612 0
+ 842 000e 06E0     		b	.L59
+ 843              	.L60:
+ 613:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     ++len;
+ 844              		.loc 1 613 0
+ 845 0010 FB7B     		ldrb	r3, [r7, #15]
+ 846 0012 03F10103 		add	r3, r3, #1
+ 847 0016 FB73     		strb	r3, [r7, #15]
+ 614:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     p = p->next;
+ 848              		.loc 1 614 0
+ 849 0018 7B68     		ldr	r3, [r7, #4]
+ 850 001a 1B68     		ldr	r3, [r3, #0]
+ 851 001c 7B60     		str	r3, [r7, #4]
+ 852              	.L59:
+ 612:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   while (p != NULL) {
+ 853              		.loc 1 612 0 discriminator 1
+ 854 001e 7B68     		ldr	r3, [r7, #4]
+ 855 0020 002B     		cmp	r3, #0
+ 856 0022 F5D1     		bne	.L60
+ 615:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   }
+ 616:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   return len;
+ 857              		.loc 1 616 0
+ 858 0024 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 617:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** }
+ 859              		.loc 1 617 0
+ 860 0026 1846     		mov	r0, r3
+ 861 0028 07F11407 		add	r7, r7, #20
+ 862 002c BD46     		mov	sp, r7
+ 863 002e 80BC     		pop	{r7}
+ 864 0030 7047     		bx	lr
+ 865              		.cfi_endproc
+ 866              	.LFE4:
+ 868 0032 00BF     		.section	.text.pbuf_ref,"ax",%progbits
+ 869              		.align	2
+ 870              		.global	pbuf_ref
+ 871              		.thumb
+ 872              		.thumb_func
+ 874              	pbuf_ref:
+ 875              	.LFB5:
+ 618:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** 
+ 619:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** /**
+ 620:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * Increment the reference count of the pbuf.
+ 621:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  *
+ 622:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * @param p pbuf to increase reference counter of
+ 623:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  *
+ 624:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  */
+ 625:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** void
+ 626:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** pbuf_ref(struct pbuf *p)
+ 627:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** {
+ 876              		.loc 1 627 0
+ 877              		.cfi_startproc
+ 878              		@ args = 0, pretend = 0, frame = 8
+ 879              		@ frame_needed = 1, uses_anonymous_args = 0
+ 880              		@ link register save eliminated.
+ 881 0000 80B4     		push	{r7}
+ 882              	.LCFI15:
+ 883              		.cfi_def_cfa_offset 4
+ 884              		.cfi_offset 7, -4
+ 885 0002 83B0     		sub	sp, sp, #12
+ 886              	.LCFI16:
+ 887              		.cfi_def_cfa_offset 16
+ 888 0004 00AF     		add	r7, sp, #0
+ 889              	.LCFI17:
+ 890              		.cfi_def_cfa_register 7
+ 891 0006 7860     		str	r0, [r7, #4]
+ 628:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   SYS_ARCH_DECL_PROTECT(old_level);
+ 629:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   /* pbuf given? */
+ 630:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   if (p != NULL) {
+ 892              		.loc 1 630 0
+ 893 0008 7B68     		ldr	r3, [r7, #4]
+ 894 000a 002B     		cmp	r3, #0
+ 895 000c 06D0     		beq	.L62
+ 631:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     SYS_ARCH_PROTECT(old_level);
+ 632:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     ++(p->ref);
+ 896              		.loc 1 632 0
+ 897 000e 7B68     		ldr	r3, [r7, #4]
+ 898 0010 DB89     		ldrh	r3, [r3, #14]
+ 899 0012 03F10103 		add	r3, r3, #1
+ 900 0016 9AB2     		uxth	r2, r3
+ 901 0018 7B68     		ldr	r3, [r7, #4]
+ 902 001a DA81     		strh	r2, [r3, #14]	@ movhi
+ 903              	.L62:
+ 633:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     SYS_ARCH_UNPROTECT(old_level);
+ 634:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   }
+ 635:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** }
+ 904              		.loc 1 635 0
+ 905 001c 07F10C07 		add	r7, r7, #12
+ 906 0020 BD46     		mov	sp, r7
+ 907 0022 80BC     		pop	{r7}
+ 908 0024 7047     		bx	lr
+ 909              		.cfi_endproc
+ 910              	.LFE5:
+ 912 0026 00BF     		.section	.text.pbuf_cat,"ax",%progbits
+ 913              		.align	2
+ 914              		.global	pbuf_cat
+ 915              		.thumb
+ 916              		.thumb_func
+ 918              	pbuf_cat:
+ 919              	.LFB6:
+ 636:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** 
+ 637:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** /**
+ 638:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * Concatenate two pbufs (each may be a pbuf chain) and take over
+ 639:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * the caller's reference of the tail pbuf.
+ 640:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * 
+ 641:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * @note The caller MAY NOT reference the tail pbuf afterwards.
+ 642:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * Use pbuf_chain() for that purpose.
+ 643:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * 
+ 644:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * @see pbuf_chain()
+ 645:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  */
+ 646:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** 
+ 647:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** void
+ 648:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** pbuf_cat(struct pbuf *h, struct pbuf *t)
+ 649:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** {
+ 920              		.loc 1 649 0
+ 921              		.cfi_startproc
+ 922              		@ args = 0, pretend = 0, frame = 16
+ 923              		@ frame_needed = 1, uses_anonymous_args = 0
+ 924              		@ link register save eliminated.
+ 925 0000 80B4     		push	{r7}
+ 926              	.LCFI18:
+ 927              		.cfi_def_cfa_offset 4
+ 928              		.cfi_offset 7, -4
+ 929 0002 85B0     		sub	sp, sp, #20
+ 930              	.LCFI19:
+ 931              		.cfi_def_cfa_offset 24
+ 932 0004 00AF     		add	r7, sp, #0
+ 933              	.LCFI20:
+ 934              		.cfi_def_cfa_register 7
+ 935 0006 7860     		str	r0, [r7, #4]
+ 936 0008 3960     		str	r1, [r7, #0]
+ 650:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   struct pbuf *p;
+ 651:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** 
+ 652:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   LWIP_ERROR("(h != NULL) && (t != NULL) (programmer violates API)",
+ 937              		.loc 1 652 0
+ 938 000a 7B68     		ldr	r3, [r7, #4]
+ 939 000c 002B     		cmp	r3, #0
+ 940 000e 1FD0     		beq	.L64
+ 941              		.loc 1 652 0 is_stmt 0 discriminator 2
+ 942 0010 3B68     		ldr	r3, [r7, #0]
+ 943 0012 002B     		cmp	r3, #0
+ 944 0014 1CD0     		beq	.L64
+ 945              	.L66:
+ 653:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****              ((h != NULL) && (t != NULL)), return;);
+ 654:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** 
+ 655:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   /* proceed to last pbuf of chain */
+ 656:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   for (p = h; p->next != NULL; p = p->next) {
+ 946              		.loc 1 656 0 is_stmt 1
+ 947 0016 7B68     		ldr	r3, [r7, #4]
+ 948 0018 FB60     		str	r3, [r7, #12]
+ 949 001a 0AE0     		b	.L68
+ 950              	.L69:
+ 657:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     /* add total length of second chain to all totals of first chain */
+ 658:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     p->tot_len += t->tot_len;
+ 951              		.loc 1 658 0 discriminator 2
+ 952 001c FB68     		ldr	r3, [r7, #12]
+ 953 001e 1A89     		ldrh	r2, [r3, #8]
+ 954 0020 3B68     		ldr	r3, [r7, #0]
+ 955 0022 1B89     		ldrh	r3, [r3, #8]
+ 956 0024 D318     		adds	r3, r2, r3
+ 957 0026 9AB2     		uxth	r2, r3
+ 958 0028 FB68     		ldr	r3, [r7, #12]
+ 959 002a 1A81     		strh	r2, [r3, #8]	@ movhi
+ 656:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   for (p = h; p->next != NULL; p = p->next) {
+ 960              		.loc 1 656 0 discriminator 2
+ 961 002c FB68     		ldr	r3, [r7, #12]
+ 962 002e 1B68     		ldr	r3, [r3, #0]
+ 963 0030 FB60     		str	r3, [r7, #12]
+ 964              	.L68:
+ 656:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   for (p = h; p->next != NULL; p = p->next) {
+ 965              		.loc 1 656 0 is_stmt 0 discriminator 1
+ 966 0032 FB68     		ldr	r3, [r7, #12]
+ 967 0034 1B68     		ldr	r3, [r3, #0]
+ 968 0036 002B     		cmp	r3, #0
+ 969 0038 F0D1     		bne	.L69
+ 659:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   }
+ 660:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   /* { p is last pbuf of first h chain, p->next == NULL } */
+ 661:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   LWIP_ASSERT("p->tot_len == p->len (of last pbuf in chain)", p->tot_len == p->len);
+ 662:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   LWIP_ASSERT("p->next == NULL", p->next == NULL);
+ 663:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   /* add total length of second chain to last pbuf total of first chain */
+ 664:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   p->tot_len += t->tot_len;
+ 970              		.loc 1 664 0 is_stmt 1
+ 971 003a FB68     		ldr	r3, [r7, #12]
+ 972 003c 1A89     		ldrh	r2, [r3, #8]
+ 973 003e 3B68     		ldr	r3, [r7, #0]
+ 974 0040 1B89     		ldrh	r3, [r3, #8]
+ 975 0042 D318     		adds	r3, r2, r3
+ 976 0044 9AB2     		uxth	r2, r3
+ 977 0046 FB68     		ldr	r3, [r7, #12]
+ 978 0048 1A81     		strh	r2, [r3, #8]	@ movhi
+ 665:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   /* chain last pbuf of head (p) with first of tail (t) */
+ 666:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   p->next = t;
+ 979              		.loc 1 666 0
+ 980 004a FB68     		ldr	r3, [r7, #12]
+ 981 004c 3A68     		ldr	r2, [r7, #0]
+ 982 004e 1A60     		str	r2, [r3, #0]
+ 983              	.L64:
+ 667:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   /* p->next now references t, but the caller will drop its reference to t,
+ 668:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****    * so netto there is no change to the reference count of t.
+ 669:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****    */
+ 670:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** }
+ 984              		.loc 1 670 0
+ 985 0050 07F11407 		add	r7, r7, #20
+ 986 0054 BD46     		mov	sp, r7
+ 987 0056 80BC     		pop	{r7}
+ 988 0058 7047     		bx	lr
+ 989              		.cfi_endproc
+ 990              	.LFE6:
+ 992 005a 00BF     		.section	.text.pbuf_chain,"ax",%progbits
+ 993              		.align	2
+ 994              		.global	pbuf_chain
+ 995              		.thumb
+ 996              		.thumb_func
+ 998              	pbuf_chain:
+ 999              	.LFB7:
+ 671:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** 
+ 672:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** /**
+ 673:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * Chain two pbufs (or pbuf chains) together.
+ 674:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * 
+ 675:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * The caller MUST call pbuf_free(t) once it has stopped
+ 676:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * using it. Use pbuf_cat() instead if you no longer use t.
+ 677:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * 
+ 678:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * @param h head pbuf (chain)
+ 679:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * @param t tail pbuf (chain)
+ 680:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * @note The pbufs MUST belong to the same packet.
+ 681:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * @note MAY NOT be called on a packet queue.
+ 682:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  *
+ 683:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * The ->tot_len fields of all pbufs of the head chain are adjusted.
+ 684:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * The ->next field of the last pbuf of the head chain is adjusted.
+ 685:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * The ->ref field of the first pbuf of the tail chain is adjusted.
+ 686:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  *
+ 687:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  */
+ 688:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** void
+ 689:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** pbuf_chain(struct pbuf *h, struct pbuf *t)
+ 690:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** {
+ 1000              		.loc 1 690 0
+ 1001              		.cfi_startproc
+ 1002              		@ args = 0, pretend = 0, frame = 8
+ 1003              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1004 0000 80B5     		push	{r7, lr}
+ 1005              	.LCFI21:
+ 1006              		.cfi_def_cfa_offset 8
+ 1007              		.cfi_offset 7, -8
+ 1008              		.cfi_offset 14, -4
+ 1009 0002 82B0     		sub	sp, sp, #8
+ 1010              	.LCFI22:
+ 1011              		.cfi_def_cfa_offset 16
+ 1012 0004 00AF     		add	r7, sp, #0
+ 1013              	.LCFI23:
+ 1014              		.cfi_def_cfa_register 7
+ 1015 0006 7860     		str	r0, [r7, #4]
+ 1016 0008 3960     		str	r1, [r7, #0]
+ 691:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   pbuf_cat(h, t);
+ 1017              		.loc 1 691 0
+ 1018 000a 7868     		ldr	r0, [r7, #4]
+ 1019 000c 3968     		ldr	r1, [r7, #0]
+ 1020 000e FFF7FEFF 		bl	pbuf_cat
+ 692:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   /* t is now referenced by h */
+ 693:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   pbuf_ref(t);
+ 1021              		.loc 1 693 0
+ 1022 0012 3868     		ldr	r0, [r7, #0]
+ 1023 0014 FFF7FEFF 		bl	pbuf_ref
+ 694:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   LWIP_DEBUGF(PBUF_DEBUG | LWIP_DBG_TRACE, ("pbuf_chain: %p references %p\n", (void *)h, (void *)t)
+ 695:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** }
+ 1024              		.loc 1 695 0
+ 1025 0018 07F10807 		add	r7, r7, #8
+ 1026 001c BD46     		mov	sp, r7
+ 1027 001e 80BD     		pop	{r7, pc}
+ 1028              		.cfi_endproc
+ 1029              	.LFE7:
+ 1031              		.section	.text.pbuf_dechain,"ax",%progbits
+ 1032              		.align	2
+ 1033              		.global	pbuf_dechain
+ 1034              		.thumb
+ 1035              		.thumb_func
+ 1037              	pbuf_dechain:
+ 1038              	.LFB8:
+ 696:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** 
+ 697:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** /**
+ 698:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * Dechains the first pbuf from its succeeding pbufs in the chain.
+ 699:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  *
+ 700:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * Makes p->tot_len field equal to p->len.
+ 701:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * @param p pbuf to dechain
+ 702:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * @return remainder of the pbuf chain, or NULL if it was de-allocated.
+ 703:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * @note May not be called on a packet queue.
+ 704:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  */
+ 705:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** struct pbuf *
+ 706:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** pbuf_dechain(struct pbuf *p)
+ 707:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** {
+ 1039              		.loc 1 707 0
+ 1040              		.cfi_startproc
+ 1041              		@ args = 0, pretend = 0, frame = 16
+ 1042              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1043 0000 80B5     		push	{r7, lr}
+ 1044              	.LCFI24:
+ 1045              		.cfi_def_cfa_offset 8
+ 1046              		.cfi_offset 7, -8
+ 1047              		.cfi_offset 14, -4
+ 1048 0002 84B0     		sub	sp, sp, #16
+ 1049              	.LCFI25:
+ 1050              		.cfi_def_cfa_offset 24
+ 1051 0004 00AF     		add	r7, sp, #0
+ 1052              	.LCFI26:
+ 1053              		.cfi_def_cfa_register 7
+ 1054 0006 7860     		str	r0, [r7, #4]
+ 708:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   struct pbuf *q;
+ 709:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   u8_t tail_gone = 1;
+ 1055              		.loc 1 709 0
+ 1056 0008 4FF00103 		mov	r3, #1
+ 1057 000c FB73     		strb	r3, [r7, #15]
+ 710:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   /* tail */
+ 711:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   q = p->next;
+ 1058              		.loc 1 711 0
+ 1059 000e 7B68     		ldr	r3, [r7, #4]
+ 1060 0010 1B68     		ldr	r3, [r3, #0]
+ 1061 0012 BB60     		str	r3, [r7, #8]
+ 712:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   /* pbuf has successor in chain? */
+ 713:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   if (q != NULL) {
+ 1062              		.loc 1 713 0
+ 1063 0014 BB68     		ldr	r3, [r7, #8]
+ 1064 0016 002B     		cmp	r3, #0
+ 1065 0018 14D0     		beq	.L72
+ 714:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     /* assert tot_len invariant: (p->tot_len == p->len + (p->next? p->next->tot_len: 0) */
+ 715:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     LWIP_ASSERT("p->tot_len == p->len + q->tot_len", q->tot_len == p->tot_len - p->len);
+ 716:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     /* enforce invariant if assertion is disabled */
+ 717:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     q->tot_len = p->tot_len - p->len;
+ 1066              		.loc 1 717 0
+ 1067 001a 7B68     		ldr	r3, [r7, #4]
+ 1068 001c 1A89     		ldrh	r2, [r3, #8]
+ 1069 001e 7B68     		ldr	r3, [r7, #4]
+ 1070 0020 5B89     		ldrh	r3, [r3, #10]
+ 1071 0022 D31A     		subs	r3, r2, r3
+ 1072 0024 9AB2     		uxth	r2, r3
+ 1073 0026 BB68     		ldr	r3, [r7, #8]
+ 1074 0028 1A81     		strh	r2, [r3, #8]	@ movhi
+ 718:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     /* decouple pbuf from remainder */
+ 719:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     p->next = NULL;
+ 1075              		.loc 1 719 0
+ 1076 002a 7B68     		ldr	r3, [r7, #4]
+ 1077 002c 4FF00002 		mov	r2, #0
+ 1078 0030 1A60     		str	r2, [r3, #0]
+ 720:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     /* total length of pbuf p is its own length only */
+ 721:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     p->tot_len = p->len;
+ 1079              		.loc 1 721 0
+ 1080 0032 7B68     		ldr	r3, [r7, #4]
+ 1081 0034 5A89     		ldrh	r2, [r3, #10]
+ 1082 0036 7B68     		ldr	r3, [r7, #4]
+ 1083 0038 1A81     		strh	r2, [r3, #8]	@ movhi
+ 722:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     /* q is no longer referenced by p, free it */
+ 723:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     LWIP_DEBUGF(PBUF_DEBUG | LWIP_DBG_TRACE, ("pbuf_dechain: unreferencing %p\n", (void *)q));
+ 724:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     tail_gone = pbuf_free(q);
+ 1084              		.loc 1 724 0
+ 1085 003a B868     		ldr	r0, [r7, #8]
+ 1086 003c FFF7FEFF 		bl	pbuf_free
+ 1087 0040 0346     		mov	r3, r0
+ 1088 0042 FB73     		strb	r3, [r7, #15]
+ 1089              	.L72:
+ 725:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     if (tail_gone > 0) {
+ 726:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       LWIP_DEBUGF(PBUF_DEBUG | LWIP_DBG_TRACE,
+ 727:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****                   ("pbuf_dechain: deallocated %p (as it is no longer referenced)\n", (void *)q));
+ 728:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     }
+ 729:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     /* return remaining tail or NULL if deallocated */
+ 730:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   }
+ 731:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   /* assert tot_len invariant: (p->tot_len == p->len + (p->next? p->next->tot_len: 0) */
+ 732:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   LWIP_ASSERT("p->tot_len == p->len", p->tot_len == p->len);
+ 733:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   return ((tail_gone > 0) ? NULL : q);
+ 1090              		.loc 1 733 0
+ 1091 0044 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 1092 0046 002B     		cmp	r3, #0
+ 1093 0048 01D1     		bne	.L73
+ 1094              		.loc 1 733 0 is_stmt 0 discriminator 1
+ 1095 004a BB68     		ldr	r3, [r7, #8]
+ 1096 004c 01E0     		b	.L74
+ 1097              	.L73:
+ 1098              		.loc 1 733 0 discriminator 2
+ 1099 004e 4FF00003 		mov	r3, #0
+ 1100              	.L74:
+ 734:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** }
+ 1101              		.loc 1 734 0 is_stmt 1 discriminator 3
+ 1102 0052 1846     		mov	r0, r3
+ 1103 0054 07F11007 		add	r7, r7, #16
+ 1104 0058 BD46     		mov	sp, r7
+ 1105 005a 80BD     		pop	{r7, pc}
+ 1106              		.cfi_endproc
+ 1107              	.LFE8:
+ 1109              		.section	.text.pbuf_copy,"ax",%progbits
+ 1110              		.align	2
+ 1111              		.global	pbuf_copy
+ 1112              		.thumb
+ 1113              		.thumb_func
+ 1115              	pbuf_copy:
+ 1116              	.LFB9:
+ 735:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** 
+ 736:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** /**
+ 737:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  *
+ 738:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * Create PBUF_RAM copies of pbufs.
+ 739:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  *
+ 740:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * Used to queue packets on behalf of the lwIP stack, such as
+ 741:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * ARP based queueing.
+ 742:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  *
+ 743:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * @note You MUST explicitly use p = pbuf_take(p);
+ 744:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  *
+ 745:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * @note Only one packet is copied, no packet queue!
+ 746:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  *
+ 747:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * @param p_to pbuf destination of the copy
+ 748:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * @param p_from pbuf source of the copy
+ 749:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  *
+ 750:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * @return ERR_OK if pbuf was copied
+ 751:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  *         ERR_ARG if one of the pbufs is NULL or p_to is not big
+ 752:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  *                 enough to hold p_from
+ 753:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  */
+ 754:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** err_t
+ 755:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** pbuf_copy(struct pbuf *p_to, struct pbuf *p_from)
+ 756:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** {
+ 1117              		.loc 1 756 0
+ 1118              		.cfi_startproc
+ 1119              		@ args = 0, pretend = 0, frame = 16
+ 1120              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1121 0000 80B5     		push	{r7, lr}
+ 1122              	.LCFI27:
+ 1123              		.cfi_def_cfa_offset 8
+ 1124              		.cfi_offset 7, -8
+ 1125              		.cfi_offset 14, -4
+ 1126 0002 84B0     		sub	sp, sp, #16
+ 1127              	.LCFI28:
+ 1128              		.cfi_def_cfa_offset 24
+ 1129 0004 00AF     		add	r7, sp, #0
+ 1130              	.LCFI29:
+ 1131              		.cfi_def_cfa_register 7
+ 1132 0006 7860     		str	r0, [r7, #4]
+ 1133 0008 3960     		str	r1, [r7, #0]
+ 757:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   u16_t offset_to=0, offset_from=0, len;
+ 1134              		.loc 1 757 0
+ 1135 000a 4FF00003 		mov	r3, #0
+ 1136 000e FB81     		strh	r3, [r7, #14]	@ movhi
+ 1137 0010 4FF00003 		mov	r3, #0
+ 1138 0014 BB81     		strh	r3, [r7, #12]	@ movhi
+ 758:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** 
+ 759:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   LWIP_DEBUGF(PBUF_DEBUG | LWIP_DBG_TRACE, ("pbuf_copy(%p, %p)\n",
+ 760:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     (void*)p_to, (void*)p_from));
+ 761:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** 
+ 762:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   /* is the target big enough to hold the source? */
+ 763:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   LWIP_ERROR("pbuf_copy: target not big enough to hold source", ((p_to != NULL) &&
+ 1139              		.loc 1 763 0
+ 1140 0016 7B68     		ldr	r3, [r7, #4]
+ 1141 0018 002B     		cmp	r3, #0
+ 1142 001a 08D0     		beq	.L77
+ 1143              		.loc 1 763 0 is_stmt 0 discriminator 2
+ 1144 001c 3B68     		ldr	r3, [r7, #0]
+ 1145 001e 002B     		cmp	r3, #0
+ 1146 0020 05D0     		beq	.L77
+ 1147              		.loc 1 763 0 discriminator 3
+ 1148 0022 7B68     		ldr	r3, [r7, #4]
+ 1149 0024 1A89     		ldrh	r2, [r3, #8]
+ 1150 0026 3B68     		ldr	r3, [r7, #0]
+ 1151 0028 1B89     		ldrh	r3, [r3, #8]
+ 1152 002a 9A42     		cmp	r2, r3
+ 1153 002c 02D2     		bcs	.L78
+ 1154              	.L77:
+ 1155              		.loc 1 763 0 discriminator 5
+ 1156 002e 4FF0F603 		mov	r3, #246
+ 1157 0032 67E0     		b	.L79
+ 1158              	.L78:
+ 764:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****              (p_from != NULL) && (p_to->tot_len >= p_from->tot_len)), return ERR_ARG;);
+ 765:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** 
+ 766:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   /* iterate through pbuf chain */
+ 767:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   do
+ 768:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   {
+ 769:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     LWIP_ASSERT("p_to != NULL", p_to != NULL);
+ 770:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     /* copy one part of the original chain */
+ 771:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     if ((p_to->len - offset_to) >= (p_from->len - offset_from)) {
+ 1159              		.loc 1 771 0 is_stmt 1
+ 1160 0034 7B68     		ldr	r3, [r7, #4]
+ 1161 0036 5B89     		ldrh	r3, [r3, #10]
+ 1162 0038 1A46     		mov	r2, r3
+ 1163 003a FB89     		ldrh	r3, [r7, #14]
+ 1164 003c D21A     		subs	r2, r2, r3
+ 1165 003e 3B68     		ldr	r3, [r7, #0]
+ 1166 0040 5B89     		ldrh	r3, [r3, #10]
+ 1167 0042 1946     		mov	r1, r3
+ 1168 0044 BB89     		ldrh	r3, [r7, #12]
+ 1169 0046 CB1A     		subs	r3, r1, r3
+ 1170 0048 9A42     		cmp	r2, r3
+ 1171 004a 05DB     		blt	.L80
+ 772:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       /* complete current p_from fits into current p_to */
+ 773:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       len = p_from->len - offset_from;
+ 1172              		.loc 1 773 0
+ 1173 004c 3B68     		ldr	r3, [r7, #0]
+ 1174 004e 5A89     		ldrh	r2, [r3, #10]
+ 1175 0050 BB89     		ldrh	r3, [r7, #12]	@ movhi
+ 1176 0052 D31A     		subs	r3, r2, r3
+ 1177 0054 7B81     		strh	r3, [r7, #10]	@ movhi
+ 1178 0056 04E0     		b	.L81
+ 1179              	.L80:
+ 774:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     } else {
+ 775:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       /* current p_from does not fit into current p_to */
+ 776:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       len = p_to->len - offset_to;
+ 1180              		.loc 1 776 0
+ 1181 0058 7B68     		ldr	r3, [r7, #4]
+ 1182 005a 5A89     		ldrh	r2, [r3, #10]
+ 1183 005c FB89     		ldrh	r3, [r7, #14]	@ movhi
+ 1184 005e D31A     		subs	r3, r2, r3
+ 1185 0060 7B81     		strh	r3, [r7, #10]	@ movhi
+ 1186              	.L81:
+ 777:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     }
+ 778:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     MEMCPY((u8_t*)p_to->payload + offset_to, (u8_t*)p_from->payload + offset_from, len);
+ 1187              		.loc 1 778 0
+ 1188 0062 7B68     		ldr	r3, [r7, #4]
+ 1189 0064 5A68     		ldr	r2, [r3, #4]
+ 1190 0066 FB89     		ldrh	r3, [r7, #14]
+ 1191 0068 D118     		adds	r1, r2, r3
+ 1192 006a 3B68     		ldr	r3, [r7, #0]
+ 1193 006c 5A68     		ldr	r2, [r3, #4]
+ 1194 006e BB89     		ldrh	r3, [r7, #12]
+ 1195 0070 D218     		adds	r2, r2, r3
+ 1196 0072 7B89     		ldrh	r3, [r7, #10]
+ 1197 0074 0846     		mov	r0, r1
+ 1198 0076 1146     		mov	r1, r2
+ 1199 0078 1A46     		mov	r2, r3
+ 1200 007a FFF7FEFF 		bl	memcpy
+ 779:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     offset_to += len;
+ 1201              		.loc 1 779 0
+ 1202 007e FA89     		ldrh	r2, [r7, #14]	@ movhi
+ 1203 0080 7B89     		ldrh	r3, [r7, #10]	@ movhi
+ 1204 0082 D318     		adds	r3, r2, r3
+ 1205 0084 FB81     		strh	r3, [r7, #14]	@ movhi
+ 780:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     offset_from += len;
+ 1206              		.loc 1 780 0
+ 1207 0086 BA89     		ldrh	r2, [r7, #12]	@ movhi
+ 1208 0088 7B89     		ldrh	r3, [r7, #10]	@ movhi
+ 1209 008a D318     		adds	r3, r2, r3
+ 1210 008c BB81     		strh	r3, [r7, #12]	@ movhi
+ 781:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     LWIP_ASSERT("offset_to <= p_to->len", offset_to <= p_to->len);
+ 782:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     if (offset_to == p_to->len) {
+ 1211              		.loc 1 782 0
+ 1212 008e 7B68     		ldr	r3, [r7, #4]
+ 1213 0090 5B89     		ldrh	r3, [r3, #10]
+ 1214 0092 FA89     		ldrh	r2, [r7, #14]
+ 1215 0094 9A42     		cmp	r2, r3
+ 1216 0096 05D1     		bne	.L82
+ 783:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       /* on to next p_to (if any) */
+ 784:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       offset_to = 0;
+ 1217              		.loc 1 784 0
+ 1218 0098 4FF00003 		mov	r3, #0
+ 1219 009c FB81     		strh	r3, [r7, #14]	@ movhi
+ 785:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       p_to = p_to->next;
+ 1220              		.loc 1 785 0
+ 1221 009e 7B68     		ldr	r3, [r7, #4]
+ 1222 00a0 1B68     		ldr	r3, [r3, #0]
+ 1223 00a2 7B60     		str	r3, [r7, #4]
+ 1224              	.L82:
+ 786:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     }
+ 787:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     LWIP_ASSERT("offset_from <= p_from->len", offset_from <= p_from->len);
+ 788:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     if (offset_from >= p_from->len) {
+ 1225              		.loc 1 788 0
+ 1226 00a4 3B68     		ldr	r3, [r7, #0]
+ 1227 00a6 5B89     		ldrh	r3, [r3, #10]
+ 1228 00a8 BA89     		ldrh	r2, [r7, #12]
+ 1229 00aa 9A42     		cmp	r2, r3
+ 1230 00ac 05D3     		bcc	.L83
+ 789:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       /* on to next p_from (if any) */
+ 790:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       offset_from = 0;
+ 1231              		.loc 1 790 0
+ 1232 00ae 4FF00003 		mov	r3, #0
+ 1233 00b2 BB81     		strh	r3, [r7, #12]	@ movhi
+ 791:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       p_from = p_from->next;
+ 1234              		.loc 1 791 0
+ 1235 00b4 3B68     		ldr	r3, [r7, #0]
+ 1236 00b6 1B68     		ldr	r3, [r3, #0]
+ 1237 00b8 3B60     		str	r3, [r7, #0]
+ 1238              	.L83:
+ 792:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     }
+ 793:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** 
+ 794:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     if((p_from != NULL) && (p_from->len == p_from->tot_len)) {
+ 1239              		.loc 1 794 0
+ 1240 00ba 3B68     		ldr	r3, [r7, #0]
+ 1241 00bc 002B     		cmp	r3, #0
+ 1242 00be 0CD0     		beq	.L84
+ 1243              		.loc 1 794 0 is_stmt 0 discriminator 1
+ 1244 00c0 3B68     		ldr	r3, [r7, #0]
+ 1245 00c2 5A89     		ldrh	r2, [r3, #10]
+ 1246 00c4 3B68     		ldr	r3, [r7, #0]
+ 1247 00c6 1B89     		ldrh	r3, [r3, #8]
+ 1248 00c8 9A42     		cmp	r2, r3
+ 1249 00ca 06D1     		bne	.L84
+ 795:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       /* don't copy more than one packet! */
+ 796:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       LWIP_ERROR("pbuf_copy() does not allow packet queues!\n",
+ 1250              		.loc 1 796 0 is_stmt 1
+ 1251 00cc 3B68     		ldr	r3, [r7, #0]
+ 1252 00ce 1B68     		ldr	r3, [r3, #0]
+ 1253 00d0 002B     		cmp	r3, #0
+ 1254 00d2 02D0     		beq	.L84
+ 1255              		.loc 1 796 0 is_stmt 0 discriminator 3
+ 1256 00d4 4FF0F703 		mov	r3, #247
+ 1257 00d8 14E0     		b	.L79
+ 1258              	.L84:
+ 797:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****                  (p_from->next == NULL), return ERR_VAL;);
+ 798:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     }
+ 799:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     if((p_to != NULL) && (p_to->len == p_to->tot_len)) {
+ 1259              		.loc 1 799 0 is_stmt 1
+ 1260 00da 7B68     		ldr	r3, [r7, #4]
+ 1261 00dc 002B     		cmp	r3, #0
+ 1262 00de 0CD0     		beq	.L85
+ 1263              		.loc 1 799 0 is_stmt 0 discriminator 1
+ 1264 00e0 7B68     		ldr	r3, [r7, #4]
+ 1265 00e2 5A89     		ldrh	r2, [r3, #10]
+ 1266 00e4 7B68     		ldr	r3, [r7, #4]
+ 1267 00e6 1B89     		ldrh	r3, [r3, #8]
+ 1268 00e8 9A42     		cmp	r2, r3
+ 1269 00ea 06D1     		bne	.L85
+ 800:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       /* don't copy more than one packet! */
+ 801:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       LWIP_ERROR("pbuf_copy() does not allow packet queues!\n",
+ 1270              		.loc 1 801 0 is_stmt 1
+ 1271 00ec 7B68     		ldr	r3, [r7, #4]
+ 1272 00ee 1B68     		ldr	r3, [r3, #0]
+ 1273 00f0 002B     		cmp	r3, #0
+ 1274 00f2 02D0     		beq	.L85
+ 1275              		.loc 1 801 0 is_stmt 0 discriminator 3
+ 1276 00f4 4FF0F703 		mov	r3, #247
+ 1277 00f8 04E0     		b	.L79
+ 1278              	.L85:
+ 802:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****                   (p_to->next == NULL), return ERR_VAL;);
+ 803:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     }
+ 804:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   } while (p_from);
+ 1279              		.loc 1 804 0 is_stmt 1
+ 1280 00fa 3B68     		ldr	r3, [r7, #0]
+ 1281 00fc 002B     		cmp	r3, #0
+ 1282 00fe 99D1     		bne	.L78
+ 805:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   LWIP_DEBUGF(PBUF_DEBUG | LWIP_DBG_TRACE, ("pbuf_copy: end of chain reached.\n"));
+ 806:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   return ERR_OK;
+ 1283              		.loc 1 806 0
+ 1284 0100 4FF00003 		mov	r3, #0
+ 1285              	.L79:
+ 1286 0104 5BB2     		sxtb	r3, r3
+ 807:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** }
+ 1287              		.loc 1 807 0
+ 1288 0106 1846     		mov	r0, r3
+ 1289 0108 07F11007 		add	r7, r7, #16
+ 1290 010c BD46     		mov	sp, r7
+ 1291 010e 80BD     		pop	{r7, pc}
+ 1292              		.cfi_endproc
+ 1293              	.LFE9:
+ 1295              		.section	.text.pbuf_copy_partial,"ax",%progbits
+ 1296              		.align	2
+ 1297              		.global	pbuf_copy_partial
+ 1298              		.thumb
+ 1299              		.thumb_func
+ 1301              	pbuf_copy_partial:
+ 1302              	.LFB10:
+ 808:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** 
+ 809:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** /**
+ 810:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * Copy (part of) the contents of a packet buffer
+ 811:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * to an application supplied buffer.
+ 812:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  *
+ 813:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * @param buf the pbuf from which to copy data
+ 814:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * @param dataptr the application supplied buffer
+ 815:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * @param len length of data to copy (dataptr must be big enough). No more 
+ 816:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * than buf->tot_len will be copied, irrespective of len
+ 817:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * @param offset offset into the packet buffer from where to begin copying len bytes
+ 818:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * @return the number of bytes copied, or 0 on failure
+ 819:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  */
+ 820:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** u16_t
+ 821:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** pbuf_copy_partial(struct pbuf *buf, void *dataptr, u16_t len, u16_t offset)
+ 822:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** {
+ 1303              		.loc 1 822 0
+ 1304              		.cfi_startproc
+ 1305              		@ args = 0, pretend = 0, frame = 32
+ 1306              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1307 0000 80B5     		push	{r7, lr}
+ 1308              	.LCFI30:
+ 1309              		.cfi_def_cfa_offset 8
+ 1310              		.cfi_offset 7, -8
+ 1311              		.cfi_offset 14, -4
+ 1312 0002 88B0     		sub	sp, sp, #32
+ 1313              	.LCFI31:
+ 1314              		.cfi_def_cfa_offset 40
+ 1315 0004 00AF     		add	r7, sp, #0
+ 1316              	.LCFI32:
+ 1317              		.cfi_def_cfa_register 7
+ 1318 0006 F860     		str	r0, [r7, #12]
+ 1319 0008 B960     		str	r1, [r7, #8]
+ 1320 000a FA80     		strh	r2, [r7, #6]	@ movhi
+ 1321 000c BB80     		strh	r3, [r7, #4]	@ movhi
+ 823:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   struct pbuf *p;
+ 824:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   u16_t left;
+ 825:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   u16_t buf_copy_len;
+ 826:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   u16_t copied_total = 0;
+ 1322              		.loc 1 826 0
+ 1323 000e 4FF00003 		mov	r3, #0
+ 1324 0012 FB82     		strh	r3, [r7, #22]	@ movhi
+ 827:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** 
+ 828:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   LWIP_ERROR("pbuf_copy_partial: invalid buf", (buf != NULL), return 0;);
+ 1325              		.loc 1 828 0
+ 1326 0014 FB68     		ldr	r3, [r7, #12]
+ 1327 0016 002B     		cmp	r3, #0
+ 1328 0018 02D1     		bne	.L87
+ 1329              		.loc 1 828 0 is_stmt 0 discriminator 3
+ 1330 001a 4FF00003 		mov	r3, #0
+ 1331 001e 53E0     		b	.L88
+ 1332              	.L87:
+ 829:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   LWIP_ERROR("pbuf_copy_partial: invalid dataptr", (dataptr != NULL), return 0;);
+ 1333              		.loc 1 829 0 is_stmt 1
+ 1334 0020 BB68     		ldr	r3, [r7, #8]
+ 1335 0022 002B     		cmp	r3, #0
+ 1336 0024 02D1     		bne	.L89
+ 1337              		.loc 1 829 0 is_stmt 0 discriminator 3
+ 1338 0026 4FF00003 		mov	r3, #0
+ 1339 002a 4DE0     		b	.L88
+ 1340              	.L89:
+ 830:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** 
+ 831:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   left = 0;
+ 1341              		.loc 1 831 0 is_stmt 1
+ 1342 002c 4FF00003 		mov	r3, #0
+ 1343 0030 7B83     		strh	r3, [r7, #26]	@ movhi
+ 832:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** 
+ 833:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   if((buf == NULL) || (dataptr == NULL)) {
+ 1344              		.loc 1 833 0
+ 1345 0032 FB68     		ldr	r3, [r7, #12]
+ 1346 0034 002B     		cmp	r3, #0
+ 1347 0036 02D0     		beq	.L90
+ 1348              		.loc 1 833 0 is_stmt 0 discriminator 1
+ 1349 0038 BB68     		ldr	r3, [r7, #8]
+ 1350 003a 002B     		cmp	r3, #0
+ 1351 003c 02D1     		bne	.L91
+ 1352              	.L90:
+ 834:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     return 0;
+ 1353              		.loc 1 834 0 is_stmt 1
+ 1354 003e 4FF00003 		mov	r3, #0
+ 1355 0042 41E0     		b	.L88
+ 1356              	.L91:
+ 835:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   }
+ 836:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** 
+ 837:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   /* Note some systems use byte copy if dataptr or one of the pbuf payload pointers are unaligned. 
+ 838:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   for(p = buf; len != 0 && p != NULL; p = p->next) {
+ 1357              		.loc 1 838 0
+ 1358 0044 FB68     		ldr	r3, [r7, #12]
+ 1359 0046 FB61     		str	r3, [r7, #28]
+ 1360 0048 37E0     		b	.L92
+ 1361              	.L97:
+ 839:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     if ((offset != 0) && (offset >= p->len)) {
+ 1362              		.loc 1 839 0
+ 1363 004a BB88     		ldrh	r3, [r7, #4]
+ 1364 004c 002B     		cmp	r3, #0
+ 1365 004e 0AD0     		beq	.L93
+ 1366              		.loc 1 839 0 is_stmt 0 discriminator 1
+ 1367 0050 FB69     		ldr	r3, [r7, #28]
+ 1368 0052 5B89     		ldrh	r3, [r3, #10]
+ 1369 0054 BA88     		ldrh	r2, [r7, #4]
+ 1370 0056 9A42     		cmp	r2, r3
+ 1371 0058 05D3     		bcc	.L93
+ 840:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       /* don't copy from this buffer -> on to the next */
+ 841:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       offset -= p->len;
+ 1372              		.loc 1 841 0 is_stmt 1
+ 1373 005a FB69     		ldr	r3, [r7, #28]
+ 1374 005c 5B89     		ldrh	r3, [r3, #10]
+ 1375 005e BA88     		ldrh	r2, [r7, #4]	@ movhi
+ 1376 0060 D31A     		subs	r3, r2, r3
+ 1377 0062 BB80     		strh	r3, [r7, #4]	@ movhi
+ 1378 0064 26E0     		b	.L94
+ 1379              	.L93:
+ 842:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     } else {
+ 843:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       /* copy from this buffer. maybe only partially. */
+ 844:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       buf_copy_len = p->len - offset;
+ 1380              		.loc 1 844 0
+ 1381 0066 FB69     		ldr	r3, [r7, #28]
+ 1382 0068 5A89     		ldrh	r2, [r3, #10]
+ 1383 006a BB88     		ldrh	r3, [r7, #4]	@ movhi
+ 1384 006c D31A     		subs	r3, r2, r3
+ 1385 006e 3B83     		strh	r3, [r7, #24]	@ movhi
+ 845:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       if (buf_copy_len > len)
+ 1386              		.loc 1 845 0
+ 1387 0070 3A8B     		ldrh	r2, [r7, #24]
+ 1388 0072 FB88     		ldrh	r3, [r7, #6]
+ 1389 0074 9A42     		cmp	r2, r3
+ 1390 0076 01D9     		bls	.L95
+ 846:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****           buf_copy_len = len;
+ 1391              		.loc 1 846 0
+ 1392 0078 FB88     		ldrh	r3, [r7, #6]	@ movhi
+ 1393 007a 3B83     		strh	r3, [r7, #24]	@ movhi
+ 1394              	.L95:
+ 847:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       /* copy the necessary parts of the buffer */
+ 848:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       MEMCPY(&((char*)dataptr)[left], &((char*)p->payload)[offset], buf_copy_len);
+ 1395              		.loc 1 848 0
+ 1396 007c 7B8B     		ldrh	r3, [r7, #26]
+ 1397 007e BA68     		ldr	r2, [r7, #8]
+ 1398 0080 D118     		adds	r1, r2, r3
+ 1399 0082 FB69     		ldr	r3, [r7, #28]
+ 1400 0084 5A68     		ldr	r2, [r3, #4]
+ 1401 0086 BB88     		ldrh	r3, [r7, #4]
+ 1402 0088 D218     		adds	r2, r2, r3
+ 1403 008a 3B8B     		ldrh	r3, [r7, #24]
+ 1404 008c 0846     		mov	r0, r1
+ 1405 008e 1146     		mov	r1, r2
+ 1406 0090 1A46     		mov	r2, r3
+ 1407 0092 FFF7FEFF 		bl	memcpy
+ 849:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       copied_total += buf_copy_len;
+ 1408              		.loc 1 849 0
+ 1409 0096 FA8A     		ldrh	r2, [r7, #22]	@ movhi
+ 1410 0098 3B8B     		ldrh	r3, [r7, #24]	@ movhi
+ 1411 009a D318     		adds	r3, r2, r3
+ 1412 009c FB82     		strh	r3, [r7, #22]	@ movhi
+ 850:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       left += buf_copy_len;
+ 1413              		.loc 1 850 0
+ 1414 009e 7A8B     		ldrh	r2, [r7, #26]	@ movhi
+ 1415 00a0 3B8B     		ldrh	r3, [r7, #24]	@ movhi
+ 1416 00a2 D318     		adds	r3, r2, r3
+ 1417 00a4 7B83     		strh	r3, [r7, #26]	@ movhi
+ 851:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       len -= buf_copy_len;
+ 1418              		.loc 1 851 0
+ 1419 00a6 FA88     		ldrh	r2, [r7, #6]	@ movhi
+ 1420 00a8 3B8B     		ldrh	r3, [r7, #24]	@ movhi
+ 1421 00aa D31A     		subs	r3, r2, r3
+ 1422 00ac FB80     		strh	r3, [r7, #6]	@ movhi
+ 852:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       offset = 0;
+ 1423              		.loc 1 852 0
+ 1424 00ae 4FF00003 		mov	r3, #0
+ 1425 00b2 BB80     		strh	r3, [r7, #4]	@ movhi
+ 1426              	.L94:
+ 838:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   for(p = buf; len != 0 && p != NULL; p = p->next) {
+ 1427              		.loc 1 838 0
+ 1428 00b4 FB69     		ldr	r3, [r7, #28]
+ 1429 00b6 1B68     		ldr	r3, [r3, #0]
+ 1430 00b8 FB61     		str	r3, [r7, #28]
+ 1431              	.L92:
+ 838:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   for(p = buf; len != 0 && p != NULL; p = p->next) {
+ 1432              		.loc 1 838 0 is_stmt 0 discriminator 1
+ 1433 00ba FB88     		ldrh	r3, [r7, #6]
+ 1434 00bc 002B     		cmp	r3, #0
+ 1435 00be 02D0     		beq	.L96
+ 838:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   for(p = buf; len != 0 && p != NULL; p = p->next) {
+ 1436              		.loc 1 838 0 discriminator 2
+ 1437 00c0 FB69     		ldr	r3, [r7, #28]
+ 1438 00c2 002B     		cmp	r3, #0
+ 1439 00c4 C1D1     		bne	.L97
+ 1440              	.L96:
+ 853:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     }
+ 854:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   }
+ 855:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   return copied_total;
+ 1441              		.loc 1 855 0 is_stmt 1
+ 1442 00c6 FB8A     		ldrh	r3, [r7, #22]
+ 1443              	.L88:
+ 856:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** }
+ 1444              		.loc 1 856 0
+ 1445 00c8 1846     		mov	r0, r3
+ 1446 00ca 07F12007 		add	r7, r7, #32
+ 1447 00ce BD46     		mov	sp, r7
+ 1448 00d0 80BD     		pop	{r7, pc}
+ 1449              		.cfi_endproc
+ 1450              	.LFE10:
+ 1452 00d2 00BF     		.section	.text.pbuf_take,"ax",%progbits
+ 1453              		.align	2
+ 1454              		.global	pbuf_take
+ 1455              		.thumb
+ 1456              		.thumb_func
+ 1458              	pbuf_take:
+ 1459              	.LFB11:
+ 857:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** 
+ 858:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** /**
+ 859:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * Copy application supplied data into a pbuf.
+ 860:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * This function can only be used to copy the equivalent of buf->tot_len data.
+ 861:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  *
+ 862:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * @param buf pbuf to fill with data
+ 863:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * @param dataptr application supplied data buffer
+ 864:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * @param len length of the application supplied data buffer
+ 865:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  *
+ 866:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * @return ERR_OK if successful, ERR_MEM if the pbuf is not big enough
+ 867:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  */
+ 868:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** err_t
+ 869:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** pbuf_take(struct pbuf *buf, const void *dataptr, u16_t len)
+ 870:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** {
+ 1460              		.loc 1 870 0
+ 1461              		.cfi_startproc
+ 1462              		@ args = 0, pretend = 0, frame = 32
+ 1463              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1464 0000 80B5     		push	{r7, lr}
+ 1465              	.LCFI33:
+ 1466              		.cfi_def_cfa_offset 8
+ 1467              		.cfi_offset 7, -8
+ 1468              		.cfi_offset 14, -4
+ 1469 0002 88B0     		sub	sp, sp, #32
+ 1470              	.LCFI34:
+ 1471              		.cfi_def_cfa_offset 40
+ 1472 0004 00AF     		add	r7, sp, #0
+ 1473              	.LCFI35:
+ 1474              		.cfi_def_cfa_register 7
+ 1475 0006 F860     		str	r0, [r7, #12]
+ 1476 0008 B960     		str	r1, [r7, #8]
+ 1477 000a 1346     		mov	r3, r2
+ 1478 000c FB80     		strh	r3, [r7, #6]	@ movhi
+ 871:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   struct pbuf *p;
+ 872:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   u16_t buf_copy_len;
+ 873:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   u16_t total_copy_len = len;
+ 1479              		.loc 1 873 0
+ 1480 000e FB88     		ldrh	r3, [r7, #6]	@ movhi
+ 1481 0010 3B83     		strh	r3, [r7, #24]	@ movhi
+ 874:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   u16_t copied_total = 0;
+ 1482              		.loc 1 874 0
+ 1483 0012 4FF00003 		mov	r3, #0
+ 1484 0016 FB82     		strh	r3, [r7, #22]	@ movhi
+ 875:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** 
+ 876:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   LWIP_ERROR("pbuf_take: invalid buf", (buf != NULL), return 0;);
+ 1485              		.loc 1 876 0
+ 1486 0018 FB68     		ldr	r3, [r7, #12]
+ 1487 001a 002B     		cmp	r3, #0
+ 1488 001c 02D1     		bne	.L99
+ 1489              		.loc 1 876 0 is_stmt 0 discriminator 3
+ 1490 001e 4FF00003 		mov	r3, #0
+ 1491 0022 3BE0     		b	.L100
+ 1492              	.L99:
+ 877:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   LWIP_ERROR("pbuf_take: invalid dataptr", (dataptr != NULL), return 0;);
+ 1493              		.loc 1 877 0 is_stmt 1
+ 1494 0024 BB68     		ldr	r3, [r7, #8]
+ 1495 0026 002B     		cmp	r3, #0
+ 1496 0028 02D1     		bne	.L101
+ 1497              		.loc 1 877 0 is_stmt 0 discriminator 3
+ 1498 002a 4FF00003 		mov	r3, #0
+ 1499 002e 35E0     		b	.L100
+ 1500              	.L101:
+ 878:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** 
+ 879:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   if ((buf == NULL) || (dataptr == NULL) || (buf->tot_len < len)) {
+ 1501              		.loc 1 879 0 is_stmt 1
+ 1502 0030 FB68     		ldr	r3, [r7, #12]
+ 1503 0032 002B     		cmp	r3, #0
+ 1504 0034 07D0     		beq	.L102
+ 1505              		.loc 1 879 0 is_stmt 0 discriminator 1
+ 1506 0036 BB68     		ldr	r3, [r7, #8]
+ 1507 0038 002B     		cmp	r3, #0
+ 1508 003a 04D0     		beq	.L102
+ 1509 003c FB68     		ldr	r3, [r7, #12]
+ 1510 003e 1B89     		ldrh	r3, [r3, #8]
+ 1511 0040 FA88     		ldrh	r2, [r7, #6]
+ 1512 0042 9A42     		cmp	r2, r3
+ 1513 0044 02D9     		bls	.L103
+ 1514              	.L102:
+ 880:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     return ERR_ARG;
+ 1515              		.loc 1 880 0 is_stmt 1
+ 1516 0046 4FF0F603 		mov	r3, #246
+ 1517 004a 27E0     		b	.L100
+ 1518              	.L103:
+ 881:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   }
+ 882:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** 
+ 883:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   /* Note some systems use byte copy if dataptr or one of the pbuf payload pointers are unaligned. 
+ 884:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   for(p = buf; total_copy_len != 0; p = p->next) {
+ 1519              		.loc 1 884 0
+ 1520 004c FB68     		ldr	r3, [r7, #12]
+ 1521 004e FB61     		str	r3, [r7, #28]
+ 1522 0050 1FE0     		b	.L104
+ 1523              	.L106:
+ 885:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     LWIP_ASSERT("pbuf_take: invalid pbuf", p != NULL);
+ 886:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     buf_copy_len = total_copy_len;
+ 1524              		.loc 1 886 0
+ 1525 0052 3B8B     		ldrh	r3, [r7, #24]	@ movhi
+ 1526 0054 7B83     		strh	r3, [r7, #26]	@ movhi
+ 887:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     if (buf_copy_len > p->len) {
+ 1527              		.loc 1 887 0
+ 1528 0056 FB69     		ldr	r3, [r7, #28]
+ 1529 0058 5B89     		ldrh	r3, [r3, #10]
+ 1530 005a 7A8B     		ldrh	r2, [r7, #26]
+ 1531 005c 9A42     		cmp	r2, r3
+ 1532 005e 02D9     		bls	.L105
+ 888:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       /* this pbuf cannot hold all remaining data */
+ 889:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****       buf_copy_len = p->len;
+ 1533              		.loc 1 889 0
+ 1534 0060 FB69     		ldr	r3, [r7, #28]
+ 1535 0062 5B89     		ldrh	r3, [r3, #10]	@ movhi
+ 1536 0064 7B83     		strh	r3, [r7, #26]	@ movhi
+ 1537              	.L105:
+ 890:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     }
+ 891:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     /* copy the necessary parts of the buffer */
+ 892:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     MEMCPY(p->payload, &((char*)dataptr)[copied_total], buf_copy_len);
+ 1538              		.loc 1 892 0
+ 1539 0066 FB69     		ldr	r3, [r7, #28]
+ 1540 0068 5968     		ldr	r1, [r3, #4]
+ 1541 006a FB8A     		ldrh	r3, [r7, #22]
+ 1542 006c BA68     		ldr	r2, [r7, #8]
+ 1543 006e D218     		adds	r2, r2, r3
+ 1544 0070 7B8B     		ldrh	r3, [r7, #26]
+ 1545 0072 0846     		mov	r0, r1
+ 1546 0074 1146     		mov	r1, r2
+ 1547 0076 1A46     		mov	r2, r3
+ 1548 0078 FFF7FEFF 		bl	memcpy
+ 893:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     total_copy_len -= buf_copy_len;
+ 1549              		.loc 1 893 0
+ 1550 007c 3A8B     		ldrh	r2, [r7, #24]	@ movhi
+ 1551 007e 7B8B     		ldrh	r3, [r7, #26]	@ movhi
+ 1552 0080 D31A     		subs	r3, r2, r3
+ 1553 0082 3B83     		strh	r3, [r7, #24]	@ movhi
+ 894:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     copied_total += buf_copy_len;
+ 1554              		.loc 1 894 0
+ 1555 0084 FA8A     		ldrh	r2, [r7, #22]	@ movhi
+ 1556 0086 7B8B     		ldrh	r3, [r7, #26]	@ movhi
+ 1557 0088 D318     		adds	r3, r2, r3
+ 1558 008a FB82     		strh	r3, [r7, #22]	@ movhi
+ 884:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   for(p = buf; total_copy_len != 0; p = p->next) {
+ 1559              		.loc 1 884 0
+ 1560 008c FB69     		ldr	r3, [r7, #28]
+ 1561 008e 1B68     		ldr	r3, [r3, #0]
+ 1562 0090 FB61     		str	r3, [r7, #28]
+ 1563              	.L104:
+ 884:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   for(p = buf; total_copy_len != 0; p = p->next) {
+ 1564              		.loc 1 884 0 is_stmt 0 discriminator 1
+ 1565 0092 3B8B     		ldrh	r3, [r7, #24]
+ 1566 0094 002B     		cmp	r3, #0
+ 1567 0096 DCD1     		bne	.L106
+ 895:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   }
+ 896:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   LWIP_ASSERT("did not copy all data", total_copy_len == 0 && copied_total == len);
+ 897:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   return ERR_OK;
+ 1568              		.loc 1 897 0 is_stmt 1
+ 1569 0098 4FF00003 		mov	r3, #0
+ 1570              	.L100:
+ 1571 009c 5BB2     		sxtb	r3, r3
+ 898:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** }
+ 1572              		.loc 1 898 0
+ 1573 009e 1846     		mov	r0, r3
+ 1574 00a0 07F12007 		add	r7, r7, #32
+ 1575 00a4 BD46     		mov	sp, r7
+ 1576 00a6 80BD     		pop	{r7, pc}
+ 1577              		.cfi_endproc
+ 1578              	.LFE11:
+ 1580              		.section	.text.pbuf_coalesce,"ax",%progbits
+ 1581              		.align	2
+ 1582              		.global	pbuf_coalesce
+ 1583              		.thumb
+ 1584              		.thumb_func
+ 1586              	pbuf_coalesce:
+ 1587              	.LFB12:
+ 899:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** 
+ 900:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** /**
+ 901:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * Creates a single pbuf out of a queue of pbufs.
+ 902:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  *
+ 903:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * @remark: The source pbuf 'p' is not freed by this function because that can
+ 904:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  *          be illegal in some places!
+ 905:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  *
+ 906:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * @param p the source pbuf
+ 907:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * @param layer pbuf_layer of the new pbuf
+ 908:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  *
+ 909:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  * @return a new, single pbuf (p->next is NULL)
+ 910:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  *         or the old pbuf if allocation fails
+ 911:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****  */
+ 912:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** struct pbuf*
+ 913:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** pbuf_coalesce(struct pbuf *p, pbuf_layer layer)
+ 914:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** {
+ 1588              		.loc 1 914 0
+ 1589              		.cfi_startproc
+ 1590              		@ args = 0, pretend = 0, frame = 16
+ 1591              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1592 0000 80B5     		push	{r7, lr}
+ 1593              	.LCFI36:
+ 1594              		.cfi_def_cfa_offset 8
+ 1595              		.cfi_offset 7, -8
+ 1596              		.cfi_offset 14, -4
+ 1597 0002 84B0     		sub	sp, sp, #16
+ 1598              	.LCFI37:
+ 1599              		.cfi_def_cfa_offset 24
+ 1600 0004 00AF     		add	r7, sp, #0
+ 1601              	.LCFI38:
+ 1602              		.cfi_def_cfa_register 7
+ 1603 0006 7860     		str	r0, [r7, #4]
+ 1604 0008 0B46     		mov	r3, r1
+ 1605 000a FB70     		strb	r3, [r7, #3]
+ 915:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   struct pbuf *q;
+ 916:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   err_t err;
+ 917:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   if (p->next == NULL) {
+ 1606              		.loc 1 917 0
+ 1607 000c 7B68     		ldr	r3, [r7, #4]
+ 1608 000e 1B68     		ldr	r3, [r3, #0]
+ 1609 0010 002B     		cmp	r3, #0
+ 1610 0012 01D1     		bne	.L108
+ 918:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     return p;
+ 1611              		.loc 1 918 0
+ 1612 0014 7B68     		ldr	r3, [r7, #4]
+ 1613 0016 18E0     		b	.L109
+ 1614              	.L108:
+ 919:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   }
+ 920:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   q = pbuf_alloc(layer, p->tot_len, PBUF_RAM);
+ 1615              		.loc 1 920 0
+ 1616 0018 7B68     		ldr	r3, [r7, #4]
+ 1617 001a 1B89     		ldrh	r3, [r3, #8]
+ 1618 001c FA78     		ldrb	r2, [r7, #3]	@ zero_extendqisi2
+ 1619 001e 1046     		mov	r0, r2
+ 1620 0020 1946     		mov	r1, r3
+ 1621 0022 4FF00002 		mov	r2, #0
+ 1622 0026 FFF7FEFF 		bl	pbuf_alloc
+ 1623 002a F860     		str	r0, [r7, #12]
+ 921:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   if (q == NULL) {
+ 1624              		.loc 1 921 0
+ 1625 002c FB68     		ldr	r3, [r7, #12]
+ 1626 002e 002B     		cmp	r3, #0
+ 1627 0030 01D1     		bne	.L110
+ 922:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     /* @todo: what do we do now? */
+ 923:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****     return p;
+ 1628              		.loc 1 923 0
+ 1629 0032 7B68     		ldr	r3, [r7, #4]
+ 1630 0034 09E0     		b	.L109
+ 1631              	.L110:
+ 924:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   }
+ 925:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   err = pbuf_copy(q, p);
+ 1632              		.loc 1 925 0
+ 1633 0036 F868     		ldr	r0, [r7, #12]
+ 1634 0038 7968     		ldr	r1, [r7, #4]
+ 1635 003a FFF7FEFF 		bl	pbuf_copy
+ 1636 003e 0346     		mov	r3, r0
+ 1637 0040 FB72     		strb	r3, [r7, #11]
+ 926:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   LWIP_ASSERT("pbuf_copy failed", err == ERR_OK);
+ 927:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   pbuf_free(p);
+ 1638              		.loc 1 927 0
+ 1639 0042 7868     		ldr	r0, [r7, #4]
+ 1640 0044 FFF7FEFF 		bl	pbuf_free
+ 928:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c ****   return q;
+ 1641              		.loc 1 928 0
+ 1642 0048 FB68     		ldr	r3, [r7, #12]
+ 1643              	.L109:
+ 929:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.c **** }
+ 1644              		.loc 1 929 0
+ 1645 004a 1846     		mov	r0, r3
+ 1646 004c 07F11007 		add	r7, r7, #16
+ 1647 0050 BD46     		mov	sp, r7
+ 1648 0052 80BD     		pop	{r7, pc}
+ 1649              		.cfi_endproc
+ 1650              	.LFE12:
+ 1652              		.text
+ 1653              	.Letext0:
+ 1654              		.file 2 "C:\\DAVE3_workspace\\ws3.1.10\\XMC4500_RK_HTTPserver\\XMC4500_RK_HTTPserver\\Dave\\Genera
+ 1655              		.file 3 "C:\\DAVE3_workspace\\ws3.1.10\\XMC4500_RK_HTTPserver\\XMC4500_RK_HTTPserver\\Dave\\Genera
+ 1656              		.file 4 "C:\\DAVE3_workspace\\ws3.1.10\\XMC4500_RK_HTTPserver\\XMC4500_RK_HTTPserver\\Dave\\Genera
+ 1657              		.file 5 "C:\\DAVE3_workspace\\ws3.1.10\\XMC4500_RK_HTTPserver\\XMC4500_RK_HTTPserver\\Dave\\Genera
+DEFINED SYMBOLS
+                            *ABS*:00000000 pbuf.c
+C:\Users\Mihai\AppData\Local\Temp\ccV5VzGG.s:20     .text.pbuf_alloc:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccV5VzGG.s:25     .text.pbuf_alloc:00000000 pbuf_alloc
+C:\Users\Mihai\AppData\Local\Temp\ccV5VzGG.s:60     .text.pbuf_alloc:00000024 $d
+C:\Users\Mihai\AppData\Local\Temp\ccV5VzGG.s:66     .text.pbuf_alloc:00000034 $t
+C:\Users\Mihai\AppData\Local\Temp\ccV5VzGG.s:97     .text.pbuf_alloc:00000064 $d
+C:\Users\Mihai\AppData\Local\Temp\ccV5VzGG.s:103    .text.pbuf_alloc:00000074 $t
+C:\Users\Mihai\AppData\Local\Temp\ccV5VzGG.s:688    .text.pbuf_free:00000000 pbuf_free
+C:\Users\Mihai\AppData\Local\Temp\ccV5VzGG.s:365    .text.pbuf_realloc:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccV5VzGG.s:370    .text.pbuf_realloc:00000000 pbuf_realloc
+C:\Users\Mihai\AppData\Local\Temp\ccV5VzGG.s:516    .text.pbuf_header:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccV5VzGG.s:521    .text.pbuf_header:00000000 pbuf_header
+C:\Users\Mihai\AppData\Local\Temp\ccV5VzGG.s:683    .text.pbuf_free:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccV5VzGG.s:815    .text.pbuf_clen:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccV5VzGG.s:820    .text.pbuf_clen:00000000 pbuf_clen
+C:\Users\Mihai\AppData\Local\Temp\ccV5VzGG.s:869    .text.pbuf_ref:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccV5VzGG.s:874    .text.pbuf_ref:00000000 pbuf_ref
+C:\Users\Mihai\AppData\Local\Temp\ccV5VzGG.s:913    .text.pbuf_cat:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccV5VzGG.s:918    .text.pbuf_cat:00000000 pbuf_cat
+C:\Users\Mihai\AppData\Local\Temp\ccV5VzGG.s:993    .text.pbuf_chain:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccV5VzGG.s:998    .text.pbuf_chain:00000000 pbuf_chain
+C:\Users\Mihai\AppData\Local\Temp\ccV5VzGG.s:1032   .text.pbuf_dechain:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccV5VzGG.s:1037   .text.pbuf_dechain:00000000 pbuf_dechain
+C:\Users\Mihai\AppData\Local\Temp\ccV5VzGG.s:1110   .text.pbuf_copy:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccV5VzGG.s:1115   .text.pbuf_copy:00000000 pbuf_copy
+C:\Users\Mihai\AppData\Local\Temp\ccV5VzGG.s:1296   .text.pbuf_copy_partial:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccV5VzGG.s:1301   .text.pbuf_copy_partial:00000000 pbuf_copy_partial
+C:\Users\Mihai\AppData\Local\Temp\ccV5VzGG.s:1453   .text.pbuf_take:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccV5VzGG.s:1458   .text.pbuf_take:00000000 pbuf_take
+C:\Users\Mihai\AppData\Local\Temp\ccV5VzGG.s:1581   .text.pbuf_coalesce:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccV5VzGG.s:1586   .text.pbuf_coalesce:00000000 pbuf_coalesce
+                     .debug_frame:00000010 $d
+                           .group:00000000 wm4.1.1791a5ae2e936ca1033c1c44be394cc7
+                           .group:00000000 wm4.ETH004_Conf.h.56.564c3f309c32b3c742fc91049cf66940
+                           .group:00000000 wm4.lwipopts.h.73.a7a63bda1e8216abd1d90275eaaa0027
+                           .group:00000000 wm4.arch.h.33.6fa4aa86d33d1490ae882caef7316405
+                           .group:00000000 wm4.cpu.h.33.b213c7fd77614ebc3691cef18ad2ff22
+                           .group:00000000 wm4.cc.h.66.ec134211c658dcc89de4610e4e7bab46
+                           .group:00000000 wm4.arch.h.47.5153c52bfb94ee3b37299920afab6afd
+                           .group:00000000 wm4.debug.h.43.557ecd6c90cc70b375bb8a29118be47b
+                           .group:00000000 wm4.opt.h.94.d36882acafebb8726bce646fc8b2397b
+                           .group:00000000 wm4.mem.h.96.20770766e6c9e6c42af6bfa95ef5c63f
+                           .group:00000000 wm4.memp_std.h.15.aec196dc1c3fb1142dd450db0c167cbf
+                           .group:00000000 wm4.memp.h.86.dbc4cb1b8d6b9ea113f04174f716e4c0
+                           .group:00000000 wm4.stats.h.147.58ec5b890fad5bbc2a7711ad8105f087
+                           .group:00000000 wm4.def.h.33.d779a3244e06cea9e944e5db86767de8
+                           .group:00000000 wm4.err.h.52.37c5d17538f8e8347a9c84196701e92d
+                           .group:00000000 wm4.pbuf.h.43.e9a1ad12b97478787a109e22d5306820
+                           .group:00000000 wm4.sys.h.65.4a0cd87b9e0d8bb4cd6b30e939b2ca7e
+                           .group:00000000 wm4.perf.h.33.85c55671e1b7570634f49777a207ad9f
+                           .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
+                           .group:00000000 wm4.features.h.22.b72b3baab2bb2eab3661375590100b6b
+                           .group:00000000 wm4.config.h.193.5fb8ef056cdff92dec3dee9552839d8c
+                           .group:00000000 wm4._ansi.h.23.7aefdac4826acebbfc9f3822a0aeb14c
+                           .group:00000000 wm4._default_types.h.6.5e12cd604db8ce00b62bb2f02708eaf3
+                           .group:00000000 wm4.lock.h.2.9bc98482741e5e2a9450b12934a684ea
+                           .group:00000000 wm4.stddef.h.349.31f4c5baff3fa2689010b32028da9c47
+                           .group:00000000 wm4.reent.h.16.9e42f0e588b85e70b2bf6572af57ce64
+                           .group:00000000 wm4.stddef.h.187.9e651b6b8b16e149c1353259404973ea
+                           .group:00000000 wm4.string.h.86.d5c872ff52e2712c985b588a0ef39f3c
+
+UNDEFINED SYMBOLS
+memp_sizes
+mem_malloc
+mem_realloc
+mem_free
+memcpy

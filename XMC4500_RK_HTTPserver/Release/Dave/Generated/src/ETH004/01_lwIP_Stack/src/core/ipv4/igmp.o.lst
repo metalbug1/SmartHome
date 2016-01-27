@@ -1,0 +1,820 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"igmp.c"
+  16              		.section	.text.igmp_init,"ax",%progbits
+  17              		.align	1
+  18              		.global	igmp_init
+  19              		.thumb
+  20              		.thumb_func
+  22              	igmp_init:
+  23              		@ args = 0, pretend = 0, frame = 0
+  24              		@ frame_needed = 0, uses_anonymous_args = 0
+  25 0000 10B5     		push	{r4, lr}
+  26 0002 0548     		ldr	r0, .L2
+  27 0004 054C     		ldr	r4, .L2+4
+  28 0006 FFF7FEFF 		bl	htonl
+  29 000a 2060     		str	r0, [r4, #0]	@ unaligned
+  30 000c 0448     		ldr	r0, .L2+8
+  31 000e FFF7FEFF 		bl	htonl
+  32 0012 6060     		str	r0, [r4, #4]	@ unaligned
+  33 0014 10BD     		pop	{r4, pc}
+  34              	.L3:
+  35 0016 00BF     		.align	2
+  36              	.L2:
+  37 0018 010000E0 		.word	-536870911
+  38 001c 00000000 		.word	.LANCHOR0
+  39 0020 020000E0 		.word	-536870910
+  41              		.section	.text.igmp_stop,"ax",%progbits
+  42              		.align	1
+  43              		.global	igmp_stop
+  44              		.thumb
+  45              		.thumb_func
+  47              	igmp_stop:
+  48              		@ args = 0, pretend = 0, frame = 0
+  49              		@ frame_needed = 0, uses_anonymous_args = 0
+  50 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+  51 0002 104B     		ldr	r3, .L20
+  52 0004 9C68     		ldr	r4, [r3, #8]
+  53 0006 0646     		mov	r6, r0
+  54 0008 0025     		movs	r5, #0
+  55              	.L5:
+  56 000a C4B1     		cbz	r4, .L19
+  57              	.L10:
+  58 000c 6068     		ldr	r0, [r4, #4]
+  59 000e 2768     		ldr	r7, [r4, #0]
+  60 0010 B042     		cmp	r0, r6
+  61 0012 11D1     		bne	.L11
+  62 0014 0B49     		ldr	r1, .L20
+  63 0016 8A68     		ldr	r2, [r1, #8]
+  64 0018 9442     		cmp	r4, r2
+  65 001a 08BF     		it	eq
+  66 001c 8F60     		streq	r7, [r1, #8]
+  67 001e 05B1     		cbz	r5, .L8
+  68 0020 2F60     		str	r7, [r5, #0]
+  69              	.L8:
+  70 0022 336B     		ldr	r3, [r6, #48]
+  71 0024 23B1     		cbz	r3, .L9
+  72 0026 3046     		mov	r0, r6
+  73 0028 04F10801 		add	r1, r4, #8
+  74 002c 0022     		movs	r2, #0
+  75 002e 9847     		blx	r3
+  76              	.L9:
+  77 0030 2046     		mov	r0, r4
+  78 0032 FFF7FEFF 		bl	mem_free
+  79 0036 00E0     		b	.L6
+  80              	.L11:
+  81 0038 2546     		mov	r5, r4
+  82              	.L6:
+  83 003a 3C46     		mov	r4, r7
+  84 003c E5E7     		b	.L5
+  85              	.L19:
+  86 003e 2046     		mov	r0, r4
+  87 0040 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+  88              	.L21:
+  89 0042 00BF     		.align	2
+  90              	.L20:
+  91 0044 00000000 		.word	.LANCHOR0
+  93              		.section	.text.igmp_lookfor_group,"ax",%progbits
+  94              		.align	1
+  95              		.global	igmp_lookfor_group
+  96              		.thumb
+  97              		.thumb_func
+  99              	igmp_lookfor_group:
+ 100              		@ args = 0, pretend = 0, frame = 0
+ 101              		@ frame_needed = 0, uses_anonymous_args = 0
+ 102 0000 10B5     		push	{r4, lr}
+ 103 0002 074B     		ldr	r3, .L27
+ 104 0004 9B68     		ldr	r3, [r3, #8]
+ 105              	.L23:
+ 106 0006 43B1     		cbz	r3, .L25
+ 107              	.L26:
+ 108 0008 5A68     		ldr	r2, [r3, #4]
+ 109 000a 8242     		cmp	r2, r0
+ 110 000c 03D1     		bne	.L24
+ 111 000e 0C68     		ldr	r4, [r1, #0]	@ unaligned
+ 112 0010 9A68     		ldr	r2, [r3, #8]
+ 113 0012 A242     		cmp	r2, r4
+ 114 0014 01D0     		beq	.L25
+ 115              	.L24:
+ 116 0016 1B68     		ldr	r3, [r3, #0]
+ 117 0018 F5E7     		b	.L23
+ 118              	.L25:
+ 119 001a 1846     		mov	r0, r3
+ 120 001c 10BD     		pop	{r4, pc}
+ 121              	.L28:
+ 122 001e 00BF     		.align	2
+ 123              	.L27:
+ 124 0020 00000000 		.word	.LANCHOR0
+ 126              		.section	.text.igmp_lookup_group,"ax",%progbits
+ 127              		.align	1
+ 128              		.global	igmp_lookup_group
+ 129              		.thumb
+ 130              		.thumb_func
+ 132              	igmp_lookup_group:
+ 133              		@ args = 0, pretend = 0, frame = 0
+ 134              		@ frame_needed = 0, uses_anonymous_args = 0
+ 135 0000 38B5     		push	{r3, r4, r5, lr}
+ 136 0002 0546     		mov	r5, r0
+ 137 0004 0C46     		mov	r4, r1
+ 138 0006 FFF7FEFF 		bl	igmp_lookfor_group
+ 139 000a A0B9     		cbnz	r0, .L30
+ 140 000c 0A4B     		ldr	r3, .L37
+ 141 000e D889     		ldrh	r0, [r3, #14]
+ 142 0010 FFF7FEFF 		bl	mem_malloc
+ 143 0014 78B1     		cbz	r0, .L30
+ 144 0016 4560     		str	r5, [r0, #4]
+ 145 0018 0021     		movs	r1, #0
+ 146 001a 0CB1     		cbz	r4, .L33
+ 147 001c 2268     		ldr	r2, [r4, #0]	@ unaligned
+ 148 001e 00E0     		b	.L32
+ 149              	.L33:
+ 150 0020 0A46     		mov	r2, r1
+ 151              	.L32:
+ 152 0022 C181     		strh	r1, [r0, #14]	@ movhi
+ 153 0024 0173     		strb	r1, [r0, #12]
+ 154 0026 0174     		strb	r1, [r0, #16]
+ 155 0028 0449     		ldr	r1, .L37+4
+ 156 002a 8260     		str	r2, [r0, #8]
+ 157 002c 8A68     		ldr	r2, [r1, #8]
+ 158 002e 8860     		str	r0, [r1, #8]
+ 159 0030 0023     		movs	r3, #0
+ 160 0032 4373     		strb	r3, [r0, #13]
+ 161 0034 0260     		str	r2, [r0, #0]
+ 162              	.L30:
+ 163 0036 38BD     		pop	{r3, r4, r5, pc}
+ 164              	.L38:
+ 165              		.align	2
+ 166              	.L37:
+ 167 0038 00000000 		.word	memp_sizes
+ 168 003c 00000000 		.word	.LANCHOR0
+ 170              		.section	.text.igmp_start,"ax",%progbits
+ 171              		.align	1
+ 172              		.global	igmp_start
+ 173              		.thumb
+ 174              		.thumb_func
+ 176              	igmp_start:
+ 177              		@ args = 0, pretend = 0, frame = 0
+ 178              		@ frame_needed = 0, uses_anonymous_args = 0
+ 179 0000 10B5     		push	{r4, lr}
+ 180 0002 0B49     		ldr	r1, .L43
+ 181 0004 0446     		mov	r4, r0
+ 182 0006 FFF7FEFF 		bl	igmp_lookup_group
+ 183 000a 60B1     		cbz	r0, .L41
+ 184 000c 017C     		ldrb	r1, [r0, #16]	@ zero_extendqisi2
+ 185 000e 0222     		movs	r2, #2
+ 186 0010 4B1C     		adds	r3, r1, #1
+ 187 0012 4273     		strb	r2, [r0, #13]
+ 188 0014 0374     		strb	r3, [r0, #16]
+ 189 0016 236B     		ldr	r3, [r4, #48]
+ 190 0018 3BB1     		cbz	r3, .L42
+ 191 001a 2046     		mov	r0, r4
+ 192 001c 0449     		ldr	r1, .L43
+ 193 001e 0122     		movs	r2, #1
+ 194 0020 9847     		blx	r3
+ 195 0022 0020     		movs	r0, #0
+ 196 0024 02E0     		b	.L40
+ 197              	.L41:
+ 198 0026 FF20     		movs	r0, #255
+ 199 0028 00E0     		b	.L40
+ 200              	.L42:
+ 201 002a 1846     		mov	r0, r3
+ 202              	.L40:
+ 203 002c 40B2     		sxtb	r0, r0
+ 204 002e 10BD     		pop	{r4, pc}
+ 205              	.L44:
+ 206              		.align	2
+ 207              	.L43:
+ 208 0030 00000000 		.word	.LANCHOR0
+ 210              		.section	.text.igmp_remove_group,"ax",%progbits
+ 211              		.align	1
+ 212              		.global	igmp_remove_group
+ 213              		.thumb
+ 214              		.thumb_func
+ 216              	igmp_remove_group:
+ 217              		@ args = 0, pretend = 0, frame = 0
+ 218              		@ frame_needed = 0, uses_anonymous_args = 0
+ 219 0000 0A4A     		ldr	r2, .L54
+ 220 0002 9368     		ldr	r3, [r2, #8]
+ 221 0004 8342     		cmp	r3, r0
+ 222 0006 10B5     		push	{r4, lr}
+ 223 0008 03D1     		bne	.L51
+ 224 000a 0168     		ldr	r1, [r0, #0]
+ 225 000c 9160     		str	r1, [r2, #8]
+ 226 000e 06E0     		b	.L52
+ 227              	.L50:
+ 228 0010 0B46     		mov	r3, r1
+ 229              	.L51:
+ 230 0012 33B1     		cbz	r3, .L53
+ 231              	.L49:
+ 232 0014 1968     		ldr	r1, [r3, #0]
+ 233 0016 8142     		cmp	r1, r0
+ 234 0018 FAD1     		bne	.L50
+ 235 001a 0468     		ldr	r4, [r0, #0]
+ 236 001c 1C60     		str	r4, [r3, #0]
+ 237              	.L52:
+ 238 001e 0024     		movs	r4, #0
+ 239 0020 00E0     		b	.L47
+ 240              	.L53:
+ 241 0022 F624     		movs	r4, #246
+ 242              	.L47:
+ 243 0024 FFF7FEFF 		bl	mem_free
+ 244 0028 60B2     		sxtb	r0, r4
+ 245 002a 10BD     		pop	{r4, pc}
+ 246              	.L55:
+ 247              		.align	2
+ 248              	.L54:
+ 249 002c 00000000 		.word	.LANCHOR0
+ 251              		.section	.text.igmp_start_timer,"ax",%progbits
+ 252              		.align	1
+ 253              		.global	igmp_start_timer
+ 254              		.thumb
+ 255              		.thumb_func
+ 257              	igmp_start_timer:
+ 258              		@ args = 0, pretend = 0, frame = 0
+ 259              		@ frame_needed = 0, uses_anonymous_args = 0
+ 260              		@ link register save eliminated.
+ 261 0000 C181     		strh	r1, [r0, #14]	@ movhi
+ 262 0002 7047     		bx	lr
+ 264              		.section	.text.igmp_stop_timer,"ax",%progbits
+ 265              		.align	1
+ 266              		.global	igmp_stop_timer
+ 267              		.thumb
+ 268              		.thumb_func
+ 270              	igmp_stop_timer:
+ 271              		@ args = 0, pretend = 0, frame = 0
+ 272              		@ frame_needed = 0, uses_anonymous_args = 0
+ 273              		@ link register save eliminated.
+ 274 0000 0023     		movs	r3, #0
+ 275 0002 C381     		strh	r3, [r0, #14]	@ movhi
+ 276 0004 7047     		bx	lr
+ 278              		.section	.text.igmp_delaying_member,"ax",%progbits
+ 279              		.align	1
+ 280              		.global	igmp_delaying_member
+ 281              		.thumb
+ 282              		.thumb_func
+ 284              	igmp_delaying_member:
+ 285              		@ args = 0, pretend = 0, frame = 0
+ 286              		@ frame_needed = 0, uses_anonymous_args = 0
+ 287              		@ link register save eliminated.
+ 288 0000 437B     		ldrb	r3, [r0, #13]	@ zero_extendqisi2
+ 289 0002 022B     		cmp	r3, #2
+ 290 0004 04D0     		beq	.L59
+ 291 0006 012B     		cmp	r3, #1
+ 292 0008 06D1     		bne	.L58
+ 293 000a C289     		ldrh	r2, [r0, #14]
+ 294 000c 8A42     		cmp	r2, r1
+ 295 000e 03D2     		bcs	.L58
+ 296              	.L59:
+ 297 0010 4908     		lsrs	r1, r1, #1
+ 298 0012 0123     		movs	r3, #1
+ 299 0014 C181     		strh	r1, [r0, #14]	@ movhi
+ 300 0016 4373     		strb	r3, [r0, #13]
+ 301              	.L58:
+ 302 0018 7047     		bx	lr
+ 304              		.section	.text.igmp_input,"ax",%progbits
+ 305              		.align	1
+ 306              		.global	igmp_input
+ 307              		.thumb
+ 308              		.thumb_func
+ 310              	igmp_input:
+ 311              		@ args = 0, pretend = 0, frame = 0
+ 312              		@ frame_needed = 0, uses_anonymous_args = 0
+ 313 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 314 0004 4368     		ldr	r3, [r0, #4]
+ 315 0006 0546     		mov	r5, r0
+ 316 0008 1888     		ldrh	r0, [r3, #0]	@ unaligned
+ 317 000a 0F46     		mov	r7, r1
+ 318 000c 9046     		mov	r8, r2
+ 319 000e FFF7FEFF 		bl	ntohs
+ 320 0012 C0F30320 		ubfx	r0, r0, #8, #4
+ 321 0016 8100     		lsls	r1, r0, #2
+ 322 0018 4942     		negs	r1, r1
+ 323 001a 2846     		mov	r0, r5
+ 324 001c FFF7FEFF 		bl	pbuf_header
+ 325 0020 0028     		cmp	r0, #0
+ 326 0022 48D1     		bne	.L67
+ 327 0024 6989     		ldrh	r1, [r5, #10]
+ 328 0026 0729     		cmp	r1, #7
+ 329 0028 45D9     		bls	.L67
+ 330              	.L66:
+ 331 002a 6C68     		ldr	r4, [r5, #4]
+ 332 002c 2046     		mov	r0, r4
+ 333 002e FFF7FEFF 		bl	inet_chksum
+ 334 0032 0646     		mov	r6, r0
+ 335 0034 0028     		cmp	r0, #0
+ 336 0036 3ED1     		bne	.L67
+ 337 0038 3846     		mov	r0, r7
+ 338 003a 4146     		mov	r1, r8
+ 339 003c FFF7FEFF 		bl	igmp_lookfor_group
+ 340 0040 0346     		mov	r3, r0
+ 341 0042 0028     		cmp	r0, #0
+ 342 0044 37D0     		beq	.L67
+ 343 0046 2278     		ldrb	r2, [r4, #0]	@ zero_extendqisi2
+ 344 0048 112A     		cmp	r2, #17
+ 345 004a 02D0     		beq	.L68
+ 346 004c 162A     		cmp	r2, #22
+ 347 004e 32D1     		bne	.L67
+ 348 0050 2AE0     		b	.L86
+ 349              	.L68:
+ 350 0052 1B48     		ldr	r0, .L87
+ 351 0054 D8F80010 		ldr	r1, [r8, #0]	@ unaligned
+ 352 0058 0268     		ldr	r2, [r0, #0]	@ unaligned
+ 353 005a 9142     		cmp	r1, r2
+ 354 005c 15D1     		bne	.L70
+ 355 005e 6668     		ldr	r6, [r4, #4]	@ unaligned
+ 356 0060 9EB9     		cbnz	r6, .L70
+ 357 0062 6678     		ldrb	r6, [r4, #1]	@ zero_extendqisi2
+ 358 0064 0EB9     		cbnz	r6, .L71
+ 359 0066 0A21     		movs	r1, #10
+ 360 0068 6170     		strb	r1, [r4, #1]
+ 361              	.L71:
+ 362 006a 8668     		ldr	r6, [r0, #8]
+ 363              	.L72:
+ 364 006c 1EB3     		cbz	r6, .L67
+ 365              	.L74:
+ 366 006e 7268     		ldr	r2, [r6, #4]
+ 367 0070 BA42     		cmp	r2, r7
+ 368 0072 08D1     		bne	.L73
+ 369 0074 1248     		ldr	r0, .L87
+ 370 0076 B368     		ldr	r3, [r6, #8]
+ 371 0078 0168     		ldr	r1, [r0, #0]	@ unaligned
+ 372 007a 8B42     		cmp	r3, r1
+ 373 007c 03D0     		beq	.L73
+ 374 007e 3046     		mov	r0, r6
+ 375 0080 6178     		ldrb	r1, [r4, #1]	@ zero_extendqisi2
+ 376 0082 FFF7FEFF 		bl	igmp_delaying_member
+ 377              	.L73:
+ 378 0086 3668     		ldr	r6, [r6, #0]
+ 379 0088 F0E7     		b	.L72
+ 380              	.L70:
+ 381 008a 9868     		ldr	r0, [r3, #8]
+ 382 008c 98B1     		cbz	r0, .L67
+ 383 008e 9142     		cmp	r1, r2
+ 384 0090 05D1     		bne	.L76
+ 385 0092 3846     		mov	r0, r7
+ 386 0094 211D     		adds	r1, r4, #4
+ 387 0096 FFF7FEFF 		bl	igmp_lookfor_group
+ 388 009a 0346     		mov	r3, r0
+ 389 009c 58B1     		cbz	r0, .L67
+ 390              	.L76:
+ 391 009e 1846     		mov	r0, r3
+ 392 00a0 6178     		ldrb	r1, [r4, #1]	@ zero_extendqisi2
+ 393 00a2 FFF7FEFF 		bl	igmp_delaying_member
+ 394 00a6 06E0     		b	.L67
+ 395              	.L86:
+ 396 00a8 407B     		ldrb	r0, [r0, #13]	@ zero_extendqisi2
+ 397 00aa 0128     		cmp	r0, #1
+ 398 00ac 03D1     		bne	.L67
+ 399 00ae 0221     		movs	r1, #2
+ 400 00b0 DE81     		strh	r6, [r3, #14]	@ movhi
+ 401 00b2 5973     		strb	r1, [r3, #13]
+ 402 00b4 1E73     		strb	r6, [r3, #12]
+ 403              	.L67:
+ 404 00b6 2846     		mov	r0, r5
+ 405 00b8 BDE8F041 		pop	{r4, r5, r6, r7, r8, lr}
+ 406 00bc FFF7FEBF 		b	pbuf_free
+ 407              	.L88:
+ 408              		.align	2
+ 409              	.L87:
+ 410 00c0 00000000 		.word	.LANCHOR0
+ 412              		.section	.text.igmp_report_groups,"ax",%progbits
+ 413              		.align	1
+ 414              		.global	igmp_report_groups
+ 415              		.thumb
+ 416              		.thumb_func
+ 418              	igmp_report_groups:
+ 419              		@ args = 0, pretend = 0, frame = 0
+ 420              		@ frame_needed = 0, uses_anonymous_args = 0
+ 421 0000 38B5     		push	{r3, r4, r5, lr}
+ 422 0002 074B     		ldr	r3, .L94
+ 423 0004 9C68     		ldr	r4, [r3, #8]
+ 424 0006 0546     		mov	r5, r0
+ 425              	.L90:
+ 426 0008 44B1     		cbz	r4, .L93
+ 427              	.L92:
+ 428 000a 6068     		ldr	r0, [r4, #4]
+ 429 000c A842     		cmp	r0, r5
+ 430 000e 03D1     		bne	.L91
+ 431 0010 2046     		mov	r0, r4
+ 432 0012 0521     		movs	r1, #5
+ 433 0014 FFF7FEFF 		bl	igmp_delaying_member
+ 434              	.L91:
+ 435 0018 2468     		ldr	r4, [r4, #0]
+ 436 001a F5E7     		b	.L90
+ 437              	.L93:
+ 438 001c 38BD     		pop	{r3, r4, r5, pc}
+ 439              	.L95:
+ 440 001e 00BF     		.align	2
+ 441              	.L94:
+ 442 0020 00000000 		.word	.LANCHOR0
+ 444              		.section	.text.igmp_ip_output_if,"ax",%progbits
+ 445              		.align	1
+ 446              		.global	igmp_ip_output_if
+ 447              		.thumb
+ 448              		.thumb_func
+ 450              	igmp_ip_output_if:
+ 451              		@ args = 8, pretend = 0, frame = 8
+ 452              		@ frame_needed = 0, uses_anonymous_args = 0
+ 453 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 454 0004 0546     		mov	r5, r0
+ 455 0006 88B0     		sub	sp, sp, #32
+ 456 0008 49F20440 		movw	r0, #37892
+ 457 000c 8846     		mov	r8, r1
+ 458 000e 1E46     		mov	r6, r3
+ 459 0010 1746     		mov	r7, r2
+ 460 0012 FFF7FEFF 		bl	htons
+ 461 0016 0024     		movs	r4, #0
+ 462 0018 9DF83830 		ldrb	r3, [sp, #56]	@ zero_extendqisi2
+ 463 001c ADF81E40 		strh	r4, [sp, #30]	@ movhi
+ 464 0020 0094     		str	r4, [sp, #0]
+ 465 0022 0F9C     		ldr	r4, [sp, #60]
+ 466 0024 ADF81C00 		strh	r0, [sp, #28]	@ movhi
+ 467 0028 0421     		movs	r1, #4
+ 468 002a 07A8     		add	r0, sp, #28
+ 469 002c 0193     		str	r3, [sp, #4]
+ 470 002e 0390     		str	r0, [sp, #12]
+ 471 0030 0491     		str	r1, [sp, #16]
+ 472 0032 0294     		str	r4, [sp, #8]
+ 473 0034 2846     		mov	r0, r5
+ 474 0036 4146     		mov	r1, r8
+ 475 0038 3A46     		mov	r2, r7
+ 476 003a 3346     		mov	r3, r6
+ 477 003c FFF7FEFF 		bl	ip_output_if_opt
+ 478 0040 08B0     		add	sp, sp, #32
+ 479 0042 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 481              		.section	.text.igmp_send,"ax",%progbits
+ 482              		.align	1
+ 483              		.global	igmp_send
+ 484              		.thumb
+ 485              		.thumb_func
+ 487              	igmp_send:
+ 488              		@ args = 0, pretend = 0, frame = 8
+ 489              		@ frame_needed = 0, uses_anonymous_args = 0
+ 490 0000 2DE9FF41 		push	{r0, r1, r2, r3, r4, r5, r6, r7, r8, lr}
+ 491 0004 0546     		mov	r5, r0
+ 492 0006 0020     		movs	r0, #0
+ 493 0008 0F46     		mov	r7, r1
+ 494 000a 0246     		mov	r2, r0
+ 495 000c 0821     		movs	r1, #8
+ 496 000e 0390     		str	r0, [sp, #12]
+ 497 0010 FFF7FEFF 		bl	pbuf_alloc
+ 498 0014 0646     		mov	r6, r0
+ 499 0016 0028     		cmp	r0, #0
+ 500 0018 32D0     		beq	.L97
+ 501 001a 6B68     		ldr	r3, [r5, #4]
+ 502 001c 4468     		ldr	r4, [r0, #4]
+ 503 001e 1A1D     		adds	r2, r3, #4
+ 504 0020 14BF     		ite	ne
+ 505 0022 5B68     		ldrne	r3, [r3, #4]
+ 506 0024 1346     		moveq	r3, r2
+ 507 0026 162F     		cmp	r7, #22
+ 508 0028 0393     		str	r3, [sp, #12]
+ 509 002a 06D1     		bne	.L100
+ 510 002c A868     		ldr	r0, [r5, #8]
+ 511 002e 0121     		movs	r1, #1
+ 512 0030 6060     		str	r0, [r4, #4]	@ unaligned
+ 513 0032 05F10808 		add	r8, r5, #8
+ 514 0036 2973     		strb	r1, [r5, #12]
+ 515 0038 07E0     		b	.L101
+ 516              	.L100:
+ 517 003a 172F     		cmp	r7, #23
+ 518 003c 03BF     		ittte	eq
+ 519 003e AB68     		ldreq	r3, [r5, #8]
+ 520 0040 DFF84080 		ldreq	r8, .L108
+ 521 0044 6360     		streq	r3, [r4, #4]	@ unaligned
+ 522 0046 4FF00008 		movne	r8, #0
+ 523              	.L101:
+ 524 004a A7F11603 		sub	r3, r7, #22
+ 525 004e 012B     		cmp	r3, #1
+ 526 0050 13D8     		bhi	.L102
+ 527 0052 0022     		movs	r2, #0
+ 528 0054 6270     		strb	r2, [r4, #1]
+ 529 0056 A270     		strb	r2, [r4, #2]
+ 530 0058 E270     		strb	r2, [r4, #3]
+ 531 005a 0821     		movs	r1, #8
+ 532 005c 2770     		strb	r7, [r4, #0]
+ 533 005e 2046     		mov	r0, r4
+ 534 0060 FFF7FEFF 		bl	inet_chksum
+ 535 0064 6080     		strh	r0, [r4, #2]	@ unaligned
+ 536 0066 6968     		ldr	r1, [r5, #4]
+ 537 0068 0220     		movs	r0, #2
+ 538 006a 0090     		str	r0, [sp, #0]
+ 539 006c 0191     		str	r1, [sp, #4]
+ 540 006e 3046     		mov	r0, r6
+ 541 0070 03A9     		add	r1, sp, #12
+ 542 0072 4246     		mov	r2, r8
+ 543 0074 0123     		movs	r3, #1
+ 544 0076 FFF7FEFF 		bl	igmp_ip_output_if
+ 545              	.L102:
+ 546 007a 3046     		mov	r0, r6
+ 547 007c FFF7FEFF 		bl	pbuf_free
+ 548              	.L97:
+ 549 0080 BDE8FF81 		pop	{r0, r1, r2, r3, r4, r5, r6, r7, r8, pc}
+ 550              	.L109:
+ 551              		.align	2
+ 552              	.L108:
+ 553 0084 04000000 		.word	.LANCHOR0+4
+ 555              		.section	.text.igmp_timeout,"ax",%progbits
+ 556              		.align	1
+ 557              		.global	igmp_timeout
+ 558              		.thumb
+ 559              		.thumb_func
+ 561              	igmp_timeout:
+ 562              		@ args = 0, pretend = 0, frame = 0
+ 563              		@ frame_needed = 0, uses_anonymous_args = 0
+ 564              		@ link register save eliminated.
+ 565 0000 437B     		ldrb	r3, [r0, #13]	@ zero_extendqisi2
+ 566 0002 012B     		cmp	r3, #1
+ 567 0004 02D1     		bne	.L110
+ 568 0006 1621     		movs	r1, #22
+ 569 0008 FFF7FEBF 		b	igmp_send
+ 570              	.L110:
+ 571 000c 7047     		bx	lr
+ 573              		.section	.text.igmp_tmr,"ax",%progbits
+ 574              		.align	1
+ 575              		.global	igmp_tmr
+ 576              		.thumb
+ 577              		.thumb_func
+ 579              	igmp_tmr:
+ 580              		@ args = 0, pretend = 0, frame = 0
+ 581              		@ frame_needed = 0, uses_anonymous_args = 0
+ 582 0000 074B     		ldr	r3, .L119
+ 583 0002 10B5     		push	{r4, lr}
+ 584 0004 9C68     		ldr	r4, [r3, #8]
+ 585              	.L113:
+ 586 0006 54B1     		cbz	r4, .L118
+ 587              	.L117:
+ 588 0008 E089     		ldrh	r0, [r4, #14]
+ 589 000a 30B1     		cbz	r0, .L115
+ 590 000c 411E     		subs	r1, r0, #1
+ 591 000e 8AB2     		uxth	r2, r1
+ 592 0010 E281     		strh	r2, [r4, #14]	@ movhi
+ 593 0012 12B9     		cbnz	r2, .L115
+ 594 0014 2046     		mov	r0, r4
+ 595 0016 FFF7FEFF 		bl	igmp_timeout
+ 596              	.L115:
+ 597 001a 2468     		ldr	r4, [r4, #0]
+ 598 001c F3E7     		b	.L113
+ 599              	.L118:
+ 600 001e 10BD     		pop	{r4, pc}
+ 601              	.L120:
+ 602              		.align	2
+ 603              	.L119:
+ 604 0020 00000000 		.word	.LANCHOR0
+ 606              		.section	.text.igmp_leavegroup,"ax",%progbits
+ 607              		.align	1
+ 608              		.global	igmp_leavegroup
+ 609              		.thumb
+ 610              		.thumb_func
+ 612              	igmp_leavegroup:
+ 613              		@ args = 0, pretend = 0, frame = 0
+ 614              		@ frame_needed = 0, uses_anonymous_args = 0
+ 615 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 616 0004 8046     		mov	r8, r0
+ 617 0006 4FF07040 		mov	r0, #-268435456
+ 618 000a 0C68     		ldr	r4, [r1, #0]	@ unaligned
+ 619 000c 0E46     		mov	r6, r1
+ 620 000e FFF7FEFF 		bl	ntohl
+ 621 0012 0440     		ands	r4, r4, r0
+ 622 0014 4FF06040 		mov	r0, #-536870912
+ 623 0018 FFF7FEFF 		bl	ntohl
+ 624 001c 8442     		cmp	r4, r0
+ 625 001e 34D1     		bne	.L131
+ 626 0020 1C4B     		ldr	r3, .L151
+ 627 0022 3268     		ldr	r2, [r6, #0]	@ unaligned
+ 628 0024 1868     		ldr	r0, [r3, #0]	@ unaligned
+ 629 0026 8242     		cmp	r2, r0
+ 630 0028 2FD0     		beq	.L131
+ 631 002a 1B49     		ldr	r1, .L151+4
+ 632 002c 0C68     		ldr	r4, [r1, #0]
+ 633 002e F725     		movs	r5, #247
+ 634              	.L123:
+ 635 0030 64B3     		cbz	r4, .L122
+ 636              	.L129:
+ 637 0032 94F82920 		ldrb	r2, [r4, #41]	@ zero_extendqisi2
+ 638 0036 02F04003 		and	r3, r2, #64
+ 639 003a D8B2     		uxtb	r0, r3
+ 640 003c 18B3     		cbz	r0, .L124
+ 641 003e B8F1000F 		cmp	r8, #0
+ 642 0042 05D0     		beq	.L125
+ 643 0044 D8F80010 		ldr	r1, [r8, #0]	@ unaligned
+ 644 0048 11B1     		cbz	r1, .L125
+ 645 004a 6268     		ldr	r2, [r4, #4]
+ 646 004c 8A42     		cmp	r2, r1
+ 647 004e 1AD1     		bne	.L124
+ 648              	.L125:
+ 649 0050 2046     		mov	r0, r4
+ 650 0052 3146     		mov	r1, r6
+ 651 0054 FFF7FEFF 		bl	igmp_lookfor_group
+ 652 0058 0746     		mov	r7, r0
+ 653 005a A0B1     		cbz	r0, .L124
+ 654 005c 057C     		ldrb	r5, [r0, #16]	@ zero_extendqisi2
+ 655 005e 012D     		cmp	r5, #1
+ 656 0060 0ED8     		bhi	.L126
+ 657 0062 017B     		ldrb	r1, [r0, #12]	@ zero_extendqisi2
+ 658 0064 11B1     		cbz	r1, .L127
+ 659 0066 1721     		movs	r1, #23
+ 660 0068 FFF7FEFF 		bl	igmp_send
+ 661              	.L127:
+ 662 006c 256B     		ldr	r5, [r4, #48]
+ 663 006e 1DB1     		cbz	r5, .L128
+ 664 0070 2046     		mov	r0, r4
+ 665 0072 3146     		mov	r1, r6
+ 666 0074 0022     		movs	r2, #0
+ 667 0076 A847     		blx	r5
+ 668              	.L128:
+ 669 0078 3846     		mov	r0, r7
+ 670 007a FFF7FEFF 		bl	igmp_remove_group
+ 671 007e 01E0     		b	.L150
+ 672              	.L126:
+ 673 0080 6B1E     		subs	r3, r5, #1
+ 674 0082 0374     		strb	r3, [r0, #16]
+ 675              	.L150:
+ 676 0084 0025     		movs	r5, #0
+ 677              	.L124:
+ 678 0086 2468     		ldr	r4, [r4, #0]
+ 679 0088 D2E7     		b	.L123
+ 680              	.L131:
+ 681 008a F725     		movs	r5, #247
+ 682              	.L122:
+ 683 008c 68B2     		sxtb	r0, r5
+ 684 008e BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 685              	.L152:
+ 686 0092 00BF     		.align	2
+ 687              	.L151:
+ 688 0094 00000000 		.word	.LANCHOR0
+ 689 0098 00000000 		.word	netif_list
+ 691              		.section	.text.igmp_joingroup,"ax",%progbits
+ 692              		.align	1
+ 693              		.global	igmp_joingroup
+ 694              		.thumb
+ 695              		.thumb_func
+ 697              	igmp_joingroup:
+ 698              		@ args = 0, pretend = 0, frame = 0
+ 699              		@ frame_needed = 0, uses_anonymous_args = 0
+ 700 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 701 0002 0746     		mov	r7, r0
+ 702 0004 4FF07040 		mov	r0, #-268435456
+ 703 0008 0C68     		ldr	r4, [r1, #0]	@ unaligned
+ 704 000a 0E46     		mov	r6, r1
+ 705 000c FFF7FEFF 		bl	ntohl
+ 706 0010 0440     		ands	r4, r4, r0
+ 707 0012 4FF06040 		mov	r0, #-536870912
+ 708 0016 FFF7FEFF 		bl	ntohl
+ 709 001a 8442     		cmp	r4, r0
+ 710 001c 32D1     		bne	.L162
+ 711 001e 1C4B     		ldr	r3, .L176
+ 712 0020 3268     		ldr	r2, [r6, #0]	@ unaligned
+ 713 0022 1868     		ldr	r0, [r3, #0]	@ unaligned
+ 714 0024 8242     		cmp	r2, r0
+ 715 0026 2DD0     		beq	.L162
+ 716 0028 1A49     		ldr	r1, .L176+4
+ 717 002a 0C68     		ldr	r4, [r1, #0]
+ 718 002c F720     		movs	r0, #247
+ 719              	.L155:
+ 720 002e 64B3     		cbz	r4, .L154
+ 721              	.L160:
+ 722 0030 94F82920 		ldrb	r2, [r4, #41]	@ zero_extendqisi2
+ 723 0034 02F04003 		and	r3, r2, #64
+ 724 0038 D9B2     		uxtb	r1, r3
+ 725 003a 09B3     		cbz	r1, .L156
+ 726 003c 27B1     		cbz	r7, .L157
+ 727 003e 3A68     		ldr	r2, [r7, #0]	@ unaligned
+ 728 0040 12B1     		cbz	r2, .L157
+ 729 0042 6368     		ldr	r3, [r4, #4]
+ 730 0044 9342     		cmp	r3, r2
+ 731 0046 1BD1     		bne	.L156
+ 732              	.L157:
+ 733 0048 2046     		mov	r0, r4
+ 734 004a 3146     		mov	r1, r6
+ 735 004c FFF7FEFF 		bl	igmp_lookup_group
+ 736 0050 0546     		mov	r5, r0
+ 737 0052 C8B1     		cbz	r0, .L163
+ 738 0054 417B     		ldrb	r1, [r0, #13]	@ zero_extendqisi2
+ 739 0056 79B9     		cbnz	r1, .L158
+ 740 0058 027C     		ldrb	r2, [r0, #16]	@ zero_extendqisi2
+ 741 005a 2AB9     		cbnz	r2, .L159
+ 742 005c 236B     		ldr	r3, [r4, #48]
+ 743 005e 1BB1     		cbz	r3, .L159
+ 744 0060 2046     		mov	r0, r4
+ 745 0062 3146     		mov	r1, r6
+ 746 0064 0122     		movs	r2, #1
+ 747 0066 9847     		blx	r3
+ 748              	.L159:
+ 749 0068 2846     		mov	r0, r5
+ 750 006a 1621     		movs	r1, #22
+ 751 006c FFF7FEFF 		bl	igmp_send
+ 752 0070 0520     		movs	r0, #5
+ 753 0072 0121     		movs	r1, #1
+ 754 0074 E881     		strh	r0, [r5, #14]	@ movhi
+ 755 0076 6973     		strb	r1, [r5, #13]
+ 756              	.L158:
+ 757 0078 2A7C     		ldrb	r2, [r5, #16]	@ zero_extendqisi2
+ 758 007a 531C     		adds	r3, r2, #1
+ 759 007c 2B74     		strb	r3, [r5, #16]
+ 760 007e 0020     		movs	r0, #0
+ 761              	.L156:
+ 762 0080 2468     		ldr	r4, [r4, #0]
+ 763 0082 D4E7     		b	.L155
+ 764              	.L162:
+ 765 0084 F720     		movs	r0, #247
+ 766 0086 00E0     		b	.L154
+ 767              	.L163:
+ 768 0088 FF20     		movs	r0, #255
+ 769              	.L154:
+ 770 008a 40B2     		sxtb	r0, r0
+ 771 008c F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 772              	.L177:
+ 773 008e 00BF     		.align	2
+ 774              	.L176:
+ 775 0090 00000000 		.word	.LANCHOR0
+ 776 0094 00000000 		.word	netif_list
+ 778              		.bss
+ 779              		.align	2
+ 780              		.set	.LANCHOR0,. + 0
+ 783              	allsystems:
+ 784 0000 00000000 		.space	4
+ 787              	allrouters:
+ 788 0004 00000000 		.space	4
+ 791              	igmp_group_list:
+ 792 0008 00000000 		.space	4
+ 793              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 igmp.c
+C:\Users\Mihai\AppData\Local\Temp\cc6nmvNK.s:17     .text.igmp_init:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc6nmvNK.s:22     .text.igmp_init:00000000 igmp_init
+C:\Users\Mihai\AppData\Local\Temp\cc6nmvNK.s:37     .text.igmp_init:00000018 $d
+C:\Users\Mihai\AppData\Local\Temp\cc6nmvNK.s:42     .text.igmp_stop:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc6nmvNK.s:47     .text.igmp_stop:00000000 igmp_stop
+C:\Users\Mihai\AppData\Local\Temp\cc6nmvNK.s:91     .text.igmp_stop:00000044 $d
+C:\Users\Mihai\AppData\Local\Temp\cc6nmvNK.s:94     .text.igmp_lookfor_group:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc6nmvNK.s:99     .text.igmp_lookfor_group:00000000 igmp_lookfor_group
+C:\Users\Mihai\AppData\Local\Temp\cc6nmvNK.s:124    .text.igmp_lookfor_group:00000020 $d
+C:\Users\Mihai\AppData\Local\Temp\cc6nmvNK.s:127    .text.igmp_lookup_group:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc6nmvNK.s:132    .text.igmp_lookup_group:00000000 igmp_lookup_group
+C:\Users\Mihai\AppData\Local\Temp\cc6nmvNK.s:167    .text.igmp_lookup_group:00000038 $d
+C:\Users\Mihai\AppData\Local\Temp\cc6nmvNK.s:171    .text.igmp_start:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc6nmvNK.s:176    .text.igmp_start:00000000 igmp_start
+C:\Users\Mihai\AppData\Local\Temp\cc6nmvNK.s:208    .text.igmp_start:00000030 $d
+C:\Users\Mihai\AppData\Local\Temp\cc6nmvNK.s:211    .text.igmp_remove_group:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc6nmvNK.s:216    .text.igmp_remove_group:00000000 igmp_remove_group
+C:\Users\Mihai\AppData\Local\Temp\cc6nmvNK.s:249    .text.igmp_remove_group:0000002c $d
+C:\Users\Mihai\AppData\Local\Temp\cc6nmvNK.s:252    .text.igmp_start_timer:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc6nmvNK.s:257    .text.igmp_start_timer:00000000 igmp_start_timer
+C:\Users\Mihai\AppData\Local\Temp\cc6nmvNK.s:265    .text.igmp_stop_timer:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc6nmvNK.s:270    .text.igmp_stop_timer:00000000 igmp_stop_timer
+C:\Users\Mihai\AppData\Local\Temp\cc6nmvNK.s:279    .text.igmp_delaying_member:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc6nmvNK.s:284    .text.igmp_delaying_member:00000000 igmp_delaying_member
+C:\Users\Mihai\AppData\Local\Temp\cc6nmvNK.s:305    .text.igmp_input:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc6nmvNK.s:310    .text.igmp_input:00000000 igmp_input
+C:\Users\Mihai\AppData\Local\Temp\cc6nmvNK.s:410    .text.igmp_input:000000c0 $d
+C:\Users\Mihai\AppData\Local\Temp\cc6nmvNK.s:413    .text.igmp_report_groups:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc6nmvNK.s:418    .text.igmp_report_groups:00000000 igmp_report_groups
+C:\Users\Mihai\AppData\Local\Temp\cc6nmvNK.s:442    .text.igmp_report_groups:00000020 $d
+C:\Users\Mihai\AppData\Local\Temp\cc6nmvNK.s:445    .text.igmp_ip_output_if:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc6nmvNK.s:450    .text.igmp_ip_output_if:00000000 igmp_ip_output_if
+C:\Users\Mihai\AppData\Local\Temp\cc6nmvNK.s:482    .text.igmp_send:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc6nmvNK.s:487    .text.igmp_send:00000000 igmp_send
+C:\Users\Mihai\AppData\Local\Temp\cc6nmvNK.s:553    .text.igmp_send:00000084 $d
+C:\Users\Mihai\AppData\Local\Temp\cc6nmvNK.s:556    .text.igmp_timeout:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc6nmvNK.s:561    .text.igmp_timeout:00000000 igmp_timeout
+C:\Users\Mihai\AppData\Local\Temp\cc6nmvNK.s:574    .text.igmp_tmr:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc6nmvNK.s:579    .text.igmp_tmr:00000000 igmp_tmr
+C:\Users\Mihai\AppData\Local\Temp\cc6nmvNK.s:604    .text.igmp_tmr:00000020 $d
+C:\Users\Mihai\AppData\Local\Temp\cc6nmvNK.s:607    .text.igmp_leavegroup:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc6nmvNK.s:612    .text.igmp_leavegroup:00000000 igmp_leavegroup
+C:\Users\Mihai\AppData\Local\Temp\cc6nmvNK.s:688    .text.igmp_leavegroup:00000094 $d
+C:\Users\Mihai\AppData\Local\Temp\cc6nmvNK.s:692    .text.igmp_joingroup:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc6nmvNK.s:697    .text.igmp_joingroup:00000000 igmp_joingroup
+C:\Users\Mihai\AppData\Local\Temp\cc6nmvNK.s:775    .text.igmp_joingroup:00000090 $d
+C:\Users\Mihai\AppData\Local\Temp\cc6nmvNK.s:779    .bss:00000000 $d
+C:\Users\Mihai\AppData\Local\Temp\cc6nmvNK.s:783    .bss:00000000 allsystems
+C:\Users\Mihai\AppData\Local\Temp\cc6nmvNK.s:787    .bss:00000004 allrouters
+C:\Users\Mihai\AppData\Local\Temp\cc6nmvNK.s:791    .bss:00000008 igmp_group_list
+
+UNDEFINED SYMBOLS
+htonl
+mem_free
+mem_malloc
+memp_sizes
+ntohs
+pbuf_header
+inet_chksum
+pbuf_free
+htons
+ip_output_if_opt
+pbuf_alloc
+ntohl
+netif_list

@@ -1,0 +1,290 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"Main.c"
+  16              		.global	__aeabi_i2d
+  17              		.global	__aeabi_dmul
+  18              		.global	__aeabi_d2uiz
+  19              		.section	.text.SSI_ADC_Handler,"ax",%progbits
+  20              		.align	1
+  21              		.global	SSI_ADC_Handler
+  22              		.thumb
+  23              		.thumb_func
+  25              	SSI_ADC_Handler:
+  26              		@ args = 0, pretend = 0, frame = 8
+  27              		@ frame_needed = 0, uses_anonymous_args = 0
+  28 0000 73B5     		push	{r0, r1, r4, r5, r6, lr}
+  29 0002 0023     		movs	r3, #0
+  30 0004 0C46     		mov	r4, r1
+  31 0006 ADF80630 		strh	r3, [sp, #6]	@ movhi
+  32 000a 0028     		cmp	r0, #0
+  33 000c 39D1     		bne	.L3
+  34 000e 0DF10601 		add	r1, sp, #6
+  35 0012 1F48     		ldr	r0, .L5+8
+  36 0014 FFF7FEFF 		bl	ADCCH001_GetResult
+  37 0018 BDF80600 		ldrh	r0, [sp, #6]
+  38 001c FFF7FEFF 		bl	__aeabi_i2d
+  39 0020 19A3     		adr	r3, .L5
+  40 0022 D3E90023 		ldrd	r2, [r3]
+  41 0026 FFF7FEFF 		bl	__aeabi_dmul
+  42 002a FFF7FEFF 		bl	__aeabi_d2uiz
+  43 002e 4FF47A71 		mov	r1, #1000
+  44 0032 80B2     		uxth	r0, r0
+  45 0034 174A     		ldr	r2, .L5+12
+  46 0036 B0FBF1F6 		udiv	r6, r0, r1
+  47 003a F1B2     		uxtb	r1, r6
+  48 003c 5643     		muls	r6, r2, r6
+  49 003e 8519     		adds	r5, r0, r6
+  50 0040 6423     		movs	r3, #100
+  51 0042 95FBF3F2 		sdiv	r2, r5, r3
+  52 0046 D5B2     		uxtb	r5, r2
+  53 0048 6FF06302 		mvn	r2, #99
+  54 004c 6A43     		muls	r2, r5, r2
+  55 004e 9619     		adds	r6, r2, r6
+  56 0050 8319     		adds	r3, r0, r6
+  57 0052 0A26     		movs	r6, #10
+  58 0054 93FBF6F3 		sdiv	r3, r3, r6
+  59 0058 DBB2     		uxtb	r3, r3
+  60 005a 3035     		adds	r5, r5, #48
+  61 005c 6570     		strb	r5, [r4, #1]
+  62 005e 03F13005 		add	r5, r3, #48
+  63 0062 A570     		strb	r5, [r4, #2]
+  64 0064 3030     		adds	r0, r0, #48
+  65 0066 1825     		movs	r5, #24
+  66 0068 05FB0100 		mla	r0, r5, r1, r0
+  67 006c 01F13006 		add	r6, r1, #48
+  68 0070 8218     		adds	r2, r0, r2
+  69 0072 6FF00901 		mvn	r1, #9
+  70 0076 01FB0323 		mla	r3, r1, r3, r2
+  71 007a 2670     		strb	r6, [r4, #0]
+  72 007c E370     		strb	r3, [r4, #3]
+  73 007e 0420     		movs	r0, #4
+  74 0080 00E0     		b	.L2
+  75              	.L3:
+  76 0082 1846     		mov	r0, r3
+  77              	.L2:
+  78 0084 7CBD     		pop	{r2, r3, r4, r5, r6, pc}
+  79              	.L6:
+  80 0086 00BF     		.align	3
+  81              	.L5:
+  82 0088 9A999999 		.word	-1717986918
+  83 008c 9999E93F 		.word	1072273817
+  84 0090 00000000 		.word	ADCCH001_Handle0
+  85 0094 18FCFFFF 		.word	-1000
+  87              		.section	.text.CGI_led_handler,"ax",%progbits
+  88              		.align	1
+  89              		.global	CGI_led_handler
+  90              		.thumb
+  91              		.thumb_func
+  93              	CGI_led_handler:
+  94              		@ args = 0, pretend = 0, frame = 0
+  95              		@ frame_needed = 0, uses_anonymous_args = 0
+  96 0000 2DE9F047 		push	{r4, r5, r6, r7, r8, r9, sl, lr}
+  97 0004 9046     		mov	r8, r2
+  98 0006 9946     		mov	r9, r3
+  99 0008 68BB     		cbnz	r0, .L16
+ 100 000a 184D     		ldr	r5, .L18
+ 101 000c 6B78     		ldrb	r3, [r5, #1]	@ zero_extendqisi2
+ 102 000e 6C68     		ldr	r4, [r5, #4]
+ 103 0010 4FF00116 		mov	r6, #65537
+ 104 0014 06FA03F6 		lsl	r6, r6, r3
+ 105 0018 4FEA810A 		lsl	sl, r1, #2
+ 106 001c 0546     		mov	r5, r0
+ 107              	.L9:
+ 108 001e 5545     		cmp	r5, sl
+ 109 0020 21D0     		beq	.L16
+ 110              	.L14:
+ 111 0022 58F80500 		ldr	r0, [r8, r5]
+ 112 0026 1249     		ldr	r1, .L18+4
+ 113 0028 FFF7FEFF 		bl	strcmp
+ 114 002c C8B9     		cbnz	r0, .L10
+ 115 002e 59F80570 		ldr	r7, [r9, r5]
+ 116 0032 1049     		ldr	r1, .L18+8
+ 117 0034 3846     		mov	r0, r7
+ 118 0036 FFF7FEFF 		bl	strcmp
+ 119 003a 70B1     		cbz	r0, .L17
+ 120              	.L11:
+ 121 003c 3846     		mov	r0, r7
+ 122 003e 0E49     		ldr	r1, .L18+12
+ 123 0040 FFF7FEFF 		bl	strcmp
+ 124 0044 48B1     		cbz	r0, .L17
+ 125              	.L12:
+ 126 0046 3846     		mov	r0, r7
+ 127 0048 0C49     		ldr	r1, .L18+16
+ 128 004a FFF7FEFF 		bl	strcmp
+ 129 004e 20B1     		cbz	r0, .L17
+ 130              	.L13:
+ 131 0050 3846     		mov	r0, r7
+ 132 0052 0B49     		ldr	r1, .L18+20
+ 133 0054 FFF7FEFF 		bl	strcmp
+ 134 0058 18B9     		cbnz	r0, .L10
+ 135              	.L17:
+ 136 005a 6068     		ldr	r0, [r4, #4]
+ 137 005c 46EA0001 		orr	r1, r6, r0
+ 138 0060 6160     		str	r1, [r4, #4]
+ 139              	.L10:
+ 140 0062 0435     		adds	r5, r5, #4
+ 141 0064 DBE7     		b	.L9
+ 142              	.L16:
+ 143 0066 0748     		ldr	r0, .L18+24
+ 144 0068 BDE8F087 		pop	{r4, r5, r6, r7, r8, r9, sl, pc}
+ 145              	.L19:
+ 146              		.align	2
+ 147              	.L18:
+ 148 006c 00000000 		.word	IO004_Handle0
+ 149 0070 09000000 		.word	.LC1
+ 150 0074 0D000000 		.word	.LC2
+ 151 0078 0F000000 		.word	.LC3
+ 152 007c 11000000 		.word	.LC4
+ 153 0080 13000000 		.word	.LC5
+ 154 0084 00000000 		.word	.LC0
+ 156              		.section	.text.http_CGI_init,"ax",%progbits
+ 157              		.align	1
+ 158              		.global	http_CGI_init
+ 159              		.thumb
+ 160              		.thumb_func
+ 162              	http_CGI_init:
+ 163              		@ args = 0, pretend = 0, frame = 0
+ 164              		@ frame_needed = 0, uses_anonymous_args = 0
+ 165              		@ link register save eliminated.
+ 166 0000 044A     		ldr	r2, .L21
+ 167 0002 054B     		ldr	r3, .L21+4
+ 168 0004 92E80300 		ldmia	r2, {r0, r1}
+ 169 0008 83E80300 		stmia	r3, {r0, r1}
+ 170 000c 1846     		mov	r0, r3
+ 171 000e 0121     		movs	r1, #1
+ 172 0010 FFF7FEBF 		b	http_set_cgi_handlers
+ 173              	.L22:
+ 174              		.align	2
+ 175              	.L21:
+ 176 0014 00000000 		.word	.LANCHOR0
+ 177 0018 00000000 		.word	CGI_TAB
+ 179              		.section	.text.http_SSI_init,"ax",%progbits
+ 180              		.align	1
+ 181              		.global	http_SSI_init
+ 182              		.thumb
+ 183              		.thumb_func
+ 185              	http_SSI_init:
+ 186              		@ args = 0, pretend = 0, frame = 0
+ 187              		@ frame_needed = 0, uses_anonymous_args = 0
+ 188              		@ link register save eliminated.
+ 189 0000 024B     		ldr	r3, .L24
+ 190 0002 0348     		ldr	r0, .L24+4
+ 191 0004 1968     		ldr	r1, [r3, #0]
+ 192 0006 0122     		movs	r2, #1
+ 193 0008 FFF7FEBF 		b	http_set_ssi_handler
+ 194              	.L25:
+ 195              		.align	2
+ 196              	.L24:
+ 197 000c 00000000 		.word	.LANCHOR1
+ 198 0010 00000000 		.word	SSI_ADC_Handler
+ 200              		.section	.text.startup.main,"ax",%progbits
+ 201              		.align	1
+ 202              		.global	main
+ 203              		.thumb
+ 204              		.thumb_func
+ 206              	main:
+ 207              		@ Volatile: function does not return.
+ 208              		@ args = 0, pretend = 0, frame = 0
+ 209              		@ frame_needed = 0, uses_anonymous_args = 0
+ 210 0000 08B5     		push	{r3, lr}
+ 211 0002 FFF7FEFF 		bl	DAVE_Init
+ 212 0006 0548     		ldr	r0, .L28
+ 213 0008 FFF7FEFF 		bl	ADC002_InitializeQueue
+ 214 000c FFF7FEFF 		bl	lwIPStack_init
+ 215 0010 FFF7FEFF 		bl	http_CGI_init
+ 216 0014 FFF7FEFF 		bl	http_SSI_init
+ 217              	.L27:
+ 218 0018 FEE7     		b	.L27
+ 219              	.L29:
+ 220 001a 00BF     		.align	2
+ 221              	.L28:
+ 222 001c 00000000 		.word	ADC002_Handle0
+ 224              		.global	TAGS
+ 225              		.global	TAGCHAR
+ 226              		.comm	CGI_TAB,8,4
+ 227              		.global	LED_CGI
+ 228              		.section	.rodata
+ 229              		.align	2
+ 230              		.set	.LANCHOR0,. + 0
+ 233              	LED_CGI:
+ 234 0000 17000000 		.word	.LC7
+ 235 0004 00000000 		.word	CGI_led_handler
+ 236              		.section	.rodata.str1.1,"aMS",%progbits,1
+ 237              	.LC0:
+ 238 0000 2F4C4544 		.ascii	"/LED.htm\000"
+ 238      2E68746D 
+ 238      00
+ 239              	.LC1:
+ 240 0009 6C656400 		.ascii	"led\000"
+ 241              	.LC2:
+ 242 000d 3100     		.ascii	"1\000"
+ 243              	.LC3:
+ 244 000f 3200     		.ascii	"2\000"
+ 245              	.LC4:
+ 246 0011 3300     		.ascii	"3\000"
+ 247              	.LC5:
+ 248 0013 3400     		.ascii	"4\000"
+ 249              	.LC6:
+ 250 0015 7400     		.ascii	"t\000"
+ 251              	.LC7:
+ 252 0017 2F6C6564 		.ascii	"/leds.cgi\000"
+ 252      732E6367 
+ 252      6900
+ 253              		.data
+ 254              		.align	2
+ 255              		.set	.LANCHOR1,. + 0
+ 258              	TAGS:
+ 259 0000 00000000 		.word	TAGCHAR
+ 262              	TAGCHAR:
+ 263 0004 15000000 		.word	.LC6
+ 264              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 Main.c
+C:\Users\Mihai\AppData\Local\Temp\ccIuSimb.s:20     .text.SSI_ADC_Handler:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccIuSimb.s:25     .text.SSI_ADC_Handler:00000000 SSI_ADC_Handler
+C:\Users\Mihai\AppData\Local\Temp\ccIuSimb.s:82     .text.SSI_ADC_Handler:00000088 $d
+C:\Users\Mihai\AppData\Local\Temp\ccIuSimb.s:88     .text.CGI_led_handler:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccIuSimb.s:93     .text.CGI_led_handler:00000000 CGI_led_handler
+C:\Users\Mihai\AppData\Local\Temp\ccIuSimb.s:148    .text.CGI_led_handler:0000006c $d
+C:\Users\Mihai\AppData\Local\Temp\ccIuSimb.s:157    .text.http_CGI_init:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccIuSimb.s:162    .text.http_CGI_init:00000000 http_CGI_init
+C:\Users\Mihai\AppData\Local\Temp\ccIuSimb.s:176    .text.http_CGI_init:00000014 $d
+                            *COM*:00000008 CGI_TAB
+C:\Users\Mihai\AppData\Local\Temp\ccIuSimb.s:180    .text.http_SSI_init:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccIuSimb.s:185    .text.http_SSI_init:00000000 http_SSI_init
+C:\Users\Mihai\AppData\Local\Temp\ccIuSimb.s:197    .text.http_SSI_init:0000000c $d
+C:\Users\Mihai\AppData\Local\Temp\ccIuSimb.s:201    .text.startup.main:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccIuSimb.s:206    .text.startup.main:00000000 main
+C:\Users\Mihai\AppData\Local\Temp\ccIuSimb.s:222    .text.startup.main:0000001c $d
+C:\Users\Mihai\AppData\Local\Temp\ccIuSimb.s:258    .data:00000000 TAGS
+C:\Users\Mihai\AppData\Local\Temp\ccIuSimb.s:262    .data:00000004 TAGCHAR
+C:\Users\Mihai\AppData\Local\Temp\ccIuSimb.s:233    .rodata:00000000 LED_CGI
+C:\Users\Mihai\AppData\Local\Temp\ccIuSimb.s:229    .rodata:00000000 $d
+C:\Users\Mihai\AppData\Local\Temp\ccIuSimb.s:254    .data:00000000 $d
+
+UNDEFINED SYMBOLS
+__aeabi_i2d
+__aeabi_dmul
+__aeabi_d2uiz
+ADCCH001_GetResult
+ADCCH001_Handle0
+strcmp
+IO004_Handle0
+http_set_cgi_handlers
+http_set_ssi_handler
+DAVE_Init
+ADC002_InitializeQueue
+lwIPStack_init
+ADC002_Handle0

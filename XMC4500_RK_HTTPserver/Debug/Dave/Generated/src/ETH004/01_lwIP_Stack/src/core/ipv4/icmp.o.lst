@@ -1,0 +1,964 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"icmp.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.icmp_input,"ax",%progbits
+  20              		.align	2
+  21              		.global	icmp_input
+  22              		.thumb
+  23              		.thumb_func
+  25              	icmp_input:
+  26              	.LFB0:
+  27              		.file 1 "../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c"
+   1:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** /**
+   2:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  * @file
+   3:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  * ICMP - Internet Control Message Protocol
+   4:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  *
+   5:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  */
+   6:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** 
+   7:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** /*
+   8:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  * Copyright (c) 2001-2004 Swedish Institute of Computer Science.
+   9:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  * All rights reserved.
+  10:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  *
+  11:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  * Redistribution and use in source and binary forms, with or without modification,
+  12:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  * are permitted provided that the following conditions are met:
+  13:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  *
+  14:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  * 1. Redistributions of source code must retain the above copyright notice,
+  15:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  *    this list of conditions and the following disclaimer.
+  16:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  * 2. Redistributions in binary form must reproduce the above copyright notice,
+  17:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  *    this list of conditions and the following disclaimer in the documentation
+  18:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  *    and/or other materials provided with the distribution.
+  19:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  * 3. The name of the author may not be used to endorse or promote products
+  20:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  *    derived from this software without specific prior written permission.
+  21:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  *
+  22:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR IMPLIED
+  23:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+  24:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT
+  25:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  * SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+  26:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT
+  27:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  * OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+  28:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+  29:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING
+  30:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  * IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+  31:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  * OF SUCH DAMAGE.
+  32:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  *
+  33:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  * This file is part of the lwIP TCP/IP stack.
+  34:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  *
+  35:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  * Author: Adam Dunkels <adam@sics.se>
+  36:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  *
+  37:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  */
+  38:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** 
+  39:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** /* =========================================================================== *
+  40:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  * Copyright (c) 2011, Infineon Technologies AG                                *
+  41:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  * All rights reserved.                                                        *
+  42:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  *                                                                             *
+  43:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  * Redistribution and use in source and binary forms, with or without          *
+  44:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  * modification, are permitted provided that the following conditions are met: *
+  45:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  * Redistributions of source code must retain the above copyright notice, this *
+  46:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  * list of conditions and the following disclaimer. Redistributions in binary  *
+  47:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  * form must reproduce the above copyright notice, this list of conditions and *
+  48:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  * the following disclaimer in the documentation and/or other materials        *
+  49:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  * provided with the distribution. Neither the name of the copyright holders   *
+  50:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  * nor the names of its contributors may be used to endorse or promote         *
+  51:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  * products derived from this software without specific prior written          *
+  52:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  * permission.                                                                 *
+  53:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  *                                                                             *
+  54:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" *
+  55:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,       *
+  56:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR      *
+  57:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR           *
+  58:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,       *
+  59:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,         *
+  60:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; *
+  61:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,    *
+  62:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR     *
+  63:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF      *
+  64:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.                                  *
+  65:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  * To improve the quality of the software, users are encouraged to share       *
+  66:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  * modifications, enhancements or bug fixes with                               *
+  67:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  * Infineon Technologies AG (dave@infineon.com).                               *
+  68:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  *                                                                             *
+  69:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  * ==========================================================================  *
+  70:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  * ********************************************************************************
+  71:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** **                                                                            **
+  72:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** **                                                                            **
+  73:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** ** PLATFORM : Infineon XMC4000 Series                                         **
+  74:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** **                                                                            **
+  75:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** ** COMPILER : Compiler Independent                                            **
+  76:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** **                                                                            **
+  77:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** ** AUTHOR : App Developer                                                     **
+  78:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** **                                                                            **
+  79:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** ** MAY BE CHANGED BY USER [Yes/No]: Yes                                       **
+  80:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** **                                                                            **
+  81:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** ** MODIFICATION DATE : Dec 29, 2011                                           **
+  82:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** **                                                                            **
+  83:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** *******************************************************************************/
+  84:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** 
+  85:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** /*******************************************************************************
+  86:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** **                       Author(s) Identity                                   **
+  87:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** ********************************************************************************
+  88:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** **                                                                            **
+  89:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** ** Initials     Name                                                          **
+  90:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** ** ---------------------------------------------------------------------------**
+  91:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** ** JN          App Developer                                                  **
+  92:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** *******************************************************************************/
+  93:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** /* Some ICMP messages should be passed to the transport protocols. This
+  94:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****    is not implemented. */
+  95:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** 
+  96:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** #include "lwip/opt.h"
+  97:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** 
+  98:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** #if LWIP_ICMP /* don't build if not configured for use in lwipopts.h */
+  99:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** 
+ 100:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** #include "lwip/icmp.h"
+ 101:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** #include "lwip/inet.h"
+ 102:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** #include "lwip/inet_chksum.h"
+ 103:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** #include "lwip/ip.h"
+ 104:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** #include "lwip/def.h"
+ 105:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** #include "lwip/stats.h"
+ 106:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** #include "lwip/snmp.h"
+ 107:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** 
+ 108:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** #include <string.h>
+ 109:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** 
+ 110:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** /** Small optimization: set to 0 if incoming PBUF_POOL pbuf always can be
+ 111:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  * used to modify and send a response packet (and to 1 if this is not the case,
+ 112:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  * e.g. when link header is stripped of when receiving) */
+ 113:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** #ifndef LWIP_ICMP_ECHO_CHECK_INPUT_PBUF_LEN
+ 114:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** #define LWIP_ICMP_ECHO_CHECK_INPUT_PBUF_LEN 1
+ 115:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** #endif /* LWIP_ICMP_ECHO_CHECK_INPUT_PBUF_LEN */
+ 116:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** 
+ 117:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** /* The amount of data from the original packet to return in a dest-unreachable */
+ 118:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** #define ICMP_DEST_UNREACH_DATASIZE 8
+ 119:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** 
+ 120:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** static void icmp_send_response(struct pbuf *p, u8_t type, u8_t code);
+ 121:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** 
+ 122:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** /**
+ 123:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  * Processes ICMP input packets, called from ip_input().
+ 124:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  *
+ 125:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  * Currently only processes icmp echo requests and sends
+ 126:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  * out the echo response.
+ 127:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  *
+ 128:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  * @param p the icmp echo request packet, p->payload pointing to the ip header
+ 129:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  * @param inp the netif on which this packet was received
+ 130:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  */
+ 131:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** void
+ 132:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** icmp_input(struct pbuf *p, struct netif *inp)
+ 133:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** {
+  28              		.loc 1 133 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 32
+  31              		@ frame_needed = 1, uses_anonymous_args = 0
+  32 0000 80B5     		push	{r7, lr}
+  33              	.LCFI0:
+  34              		.cfi_def_cfa_offset 8
+  35              		.cfi_offset 7, -8
+  36              		.cfi_offset 14, -4
+  37 0002 8CB0     		sub	sp, sp, #48
+  38              	.LCFI1:
+  39              		.cfi_def_cfa_offset 56
+  40 0004 04AF     		add	r7, sp, #16
+  41              	.LCFI2:
+  42              		.cfi_def_cfa 7, 40
+  43 0006 7860     		str	r0, [r7, #4]
+  44 0008 3960     		str	r1, [r7, #0]
+ 134:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****   u8_t type;
+ 135:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** #ifdef LWIP_DEBUG
+ 136:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****   u8_t code;
+ 137:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** #endif /* LWIP_DEBUG */
+ 138:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****   struct icmp_echo_hdr *iecho;
+ 139:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****   struct ip_hdr *iphdr;
+ 140:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****   struct ip_addr tmpaddr;
+ 141:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****   s16_t hlen;
+ 142:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** 
+ 143:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****   ICMP_STATS_INC(icmp.recv);
+ 144:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****   snmp_inc_icmpinmsgs();
+ 145:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** 
+ 146:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** 
+ 147:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****   iphdr = p->payload;
+  45              		.loc 1 147 0
+  46 000a 7B68     		ldr	r3, [r7, #4]
+  47 000c 5B68     		ldr	r3, [r3, #4]
+  48 000e FB61     		str	r3, [r7, #28]
+ 148:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****   hlen = IPH_HL(iphdr) * 4;
+  49              		.loc 1 148 0
+  50 0010 FB69     		ldr	r3, [r7, #28]
+  51 0012 1B88     		ldrh	r3, [r3, #0]	@ unaligned
+  52 0014 9BB2     		uxth	r3, r3
+  53 0016 1846     		mov	r0, r3
+  54 0018 FFF7FEFF 		bl	ntohs
+  55 001c 0346     		mov	r3, r0
+  56 001e 4FEA1323 		lsr	r3, r3, #8
+  57 0022 9BB2     		uxth	r3, r3
+  58 0024 03F00F03 		and	r3, r3, #15
+  59 0028 9BB2     		uxth	r3, r3
+  60 002a 4FEA8303 		lsl	r3, r3, #2
+  61 002e 9BB2     		uxth	r3, r3
+  62 0030 7B83     		strh	r3, [r7, #26]	@ movhi
+ 149:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****   if (pbuf_header(p, -hlen) || (p->tot_len < sizeof(u16_t)*2)) {
+  63              		.loc 1 149 0
+  64 0032 7B8B     		ldrh	r3, [r7, #26]
+  65 0034 C3F10003 		rsb	r3, r3, #0
+  66 0038 9BB2     		uxth	r3, r3
+  67 003a 9BB2     		uxth	r3, r3
+  68 003c 1BB2     		sxth	r3, r3
+  69 003e 7868     		ldr	r0, [r7, #4]
+  70 0040 1946     		mov	r1, r3
+  71 0042 FFF7FEFF 		bl	pbuf_header
+  72 0046 0346     		mov	r3, r0
+  73 0048 002B     		cmp	r3, #0
+  74 004a 40F0BB80 		bne	.L2
+  75              		.loc 1 149 0 is_stmt 0 discriminator 1
+  76 004e 7B68     		ldr	r3, [r7, #4]
+  77 0050 1B89     		ldrh	r3, [r3, #8]
+  78 0052 032B     		cmp	r3, #3
+  79 0054 40F2B680 		bls	.L2
+ 150:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****     LWIP_DEBUGF(ICMP_DEBUG, ("icmp_input: short ICMP (%"U16_F" bytes) received\n", p->tot_len));
+ 151:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****     goto lenerr;
+ 152:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****   }
+ 153:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** 
+ 154:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****   type = *((u8_t *)p->payload);
+  80              		.loc 1 154 0 is_stmt 1
+  81 0058 7B68     		ldr	r3, [r7, #4]
+  82 005a 5B68     		ldr	r3, [r3, #4]
+  83 005c 1B78     		ldrb	r3, [r3, #0]
+  84 005e 7B76     		strb	r3, [r7, #25]
+ 155:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** #ifdef LWIP_DEBUG
+ 156:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****   code = *(((u8_t *)p->payload)+1);
+ 157:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** #endif /* LWIP_DEBUG */
+ 158:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****   switch (type) {
+  85              		.loc 1 158 0
+  86 0060 7B7E     		ldrb	r3, [r7, #25]	@ zero_extendqisi2
+  87 0062 082B     		cmp	r3, #8
+  88 0064 40F0A980 		bne	.L3
+  89              	.L4:
+ 159:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****   case ICMP_ECHO:
+ 160:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** #if !LWIP_MULTICAST_PING || !LWIP_BROADCAST_PING
+ 161:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****     {
+ 162:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****       int accepted = 1;
+ 163:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** #if !LWIP_MULTICAST_PING
+ 164:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****       /* multicast destination address? */
+ 165:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****       if (ip_addr_ismulticast(&iphdr->dest)) {
+ 166:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****         accepted = 0;
+ 167:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****       }
+ 168:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** #endif /* LWIP_MULTICAST_PING */
+ 169:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** #if !LWIP_BROADCAST_PING
+ 170:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****       /* broadcast destination address? */
+ 171:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****       if (ip_addr_isbroadcast(&iphdr->dest, inp)) {
+ 172:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****         accepted = 0;
+ 173:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****       }
+ 174:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** #endif /* LWIP_BROADCAST_PING */
+ 175:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****       /* broadcast or multicast destination address not acceptd? */
+ 176:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****       if (!accepted) {
+ 177:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****         LWIP_DEBUGF(ICMP_DEBUG, ("icmp_input: Not echoing to multicast or broadcast pings\n"));
+ 178:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****         ICMP_STATS_INC(icmp.err);
+ 179:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****         pbuf_free(p);
+ 180:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****         return;
+ 181:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****       }
+ 182:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****     }
+ 183:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** #endif /* !LWIP_MULTICAST_PING || !LWIP_BROADCAST_PING */
+ 184:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****     LWIP_DEBUGF(ICMP_DEBUG, ("icmp_input: ping\n"));
+ 185:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****     if (p->tot_len < sizeof(struct icmp_echo_hdr)) {
+  90              		.loc 1 185 0
+  91 0068 7B68     		ldr	r3, [r7, #4]
+  92 006a 1B89     		ldrh	r3, [r3, #8]
+  93 006c 072B     		cmp	r3, #7
+  94 006e 40F2A880 		bls	.L17
+  95              	.L5:
+ 186:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****       LWIP_DEBUGF(ICMP_DEBUG, ("icmp_input: bad ICMP echo received\n"));
+ 187:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****       goto lenerr;
+ 188:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****     }
+ 189:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****     if (inet_chksum_pbuf(p) != 0) {
+  96              		.loc 1 189 0
+  97 0072 7868     		ldr	r0, [r7, #4]
+  98 0074 FFF7FEFF 		bl	inet_chksum_pbuf
+  99 0078 0346     		mov	r3, r0
+ 100 007a 002B     		cmp	r3, #0
+ 101 007c 03D0     		beq	.L6
+ 190:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****       LWIP_DEBUGF(ICMP_DEBUG, ("icmp_input: checksum failed for received ICMP echo\n"));
+ 191:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****       pbuf_free(p);
+ 102              		.loc 1 191 0
+ 103 007e 7868     		ldr	r0, [r7, #4]
+ 104 0080 FFF7FEFF 		bl	pbuf_free
+ 105 0084 AEE0     		b	.L1
+ 106              	.L6:
+ 192:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****       ICMP_STATS_INC(icmp.chkerr);
+ 193:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****       snmp_inc_icmpinerrors();
+ 194:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****       return;
+ 195:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****     }
+ 196:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** #if LWIP_ICMP_ECHO_CHECK_INPUT_PBUF_LEN
+ 197:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****     if (pbuf_header(p, (PBUF_IP_HLEN + PBUF_LINK_HLEN))) {
+ 107              		.loc 1 197 0
+ 108 0086 7868     		ldr	r0, [r7, #4]
+ 109 0088 4FF02201 		mov	r1, #34
+ 110 008c FFF7FEFF 		bl	pbuf_header
+ 111 0090 0346     		mov	r3, r0
+ 112 0092 002B     		cmp	r3, #0
+ 113 0094 34D0     		beq	.L8
+ 114              	.LBB2:
+ 198:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****       /* p is not big enough to contain link headers
+ 199:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****        * allocate a new one and copy p into it
+ 200:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****        */
+ 201:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****       struct pbuf *r;
+ 202:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****       /* switch p->payload to ip header */
+ 203:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****       if (pbuf_header(p, hlen)) {
+ 115              		.loc 1 203 0
+ 116 0096 B7F91A30 		ldrsh	r3, [r7, #26]
+ 117 009a 7868     		ldr	r0, [r7, #4]
+ 118 009c 1946     		mov	r1, r3
+ 119 009e FFF7FEFF 		bl	pbuf_header
+ 120 00a2 0346     		mov	r3, r0
+ 121 00a4 002B     		cmp	r3, #0
+ 122 00a6 40F09180 		bne	.L18
+ 123              	.L9:
+ 204:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****         LWIP_ASSERT("icmp_input: moving p->payload to ip header failed\n", 0);
+ 205:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****         goto memerr;
+ 206:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****       }
+ 207:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****       /* allocate new packet buffer with space for link headers */
+ 208:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****       r = pbuf_alloc(PBUF_LINK, p->tot_len, PBUF_RAM);
+ 124              		.loc 1 208 0
+ 125 00aa 7B68     		ldr	r3, [r7, #4]
+ 126 00ac 1B89     		ldrh	r3, [r3, #8]
+ 127 00ae 4FF00200 		mov	r0, #2
+ 128 00b2 1946     		mov	r1, r3
+ 129 00b4 4FF00002 		mov	r2, #0
+ 130 00b8 FFF7FEFF 		bl	pbuf_alloc
+ 131 00bc 7861     		str	r0, [r7, #20]
+ 209:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****       if (r == NULL) {
+ 132              		.loc 1 209 0
+ 133 00be 7B69     		ldr	r3, [r7, #20]
+ 134 00c0 002B     		cmp	r3, #0
+ 135 00c2 00F08580 		beq	.L19
+ 136              	.L11:
+ 210:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****         LWIP_DEBUGF(ICMP_DEBUG, ("icmp_input: allocating new pbuf failed\n"));
+ 211:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****         goto memerr;
+ 212:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****       }
+ 213:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****       LWIP_ASSERT("check that first pbuf can hold struct the ICMP header",
+ 214:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****                   (r->len >= hlen + sizeof(struct icmp_echo_hdr)));
+ 215:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****       /* copy the whole packet including ip header */
+ 216:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****       if (pbuf_copy(r, p) != ERR_OK) {
+ 137              		.loc 1 216 0
+ 138 00c6 7869     		ldr	r0, [r7, #20]
+ 139 00c8 7968     		ldr	r1, [r7, #4]
+ 140 00ca FFF7FEFF 		bl	pbuf_copy
+ 141 00ce 0346     		mov	r3, r0
+ 142 00d0 002B     		cmp	r3, #0
+ 143 00d2 7FD1     		bne	.L20
+ 144              	.L12:
+ 217:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****         LWIP_ASSERT("icmp_input: copying to new pbuf failed\n", 0);
+ 218:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****         goto memerr;
+ 219:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****       }
+ 220:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****       iphdr = r->payload;
+ 145              		.loc 1 220 0
+ 146 00d4 7B69     		ldr	r3, [r7, #20]
+ 147 00d6 5B68     		ldr	r3, [r3, #4]
+ 148 00d8 FB61     		str	r3, [r7, #28]
+ 221:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****       /* switch r->payload back to icmp header */
+ 222:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****       if (pbuf_header(r, -hlen)) {
+ 149              		.loc 1 222 0
+ 150 00da 7B8B     		ldrh	r3, [r7, #26]
+ 151 00dc C3F10003 		rsb	r3, r3, #0
+ 152 00e0 9BB2     		uxth	r3, r3
+ 153 00e2 9BB2     		uxth	r3, r3
+ 154 00e4 1BB2     		sxth	r3, r3
+ 155 00e6 7869     		ldr	r0, [r7, #20]
+ 156 00e8 1946     		mov	r1, r3
+ 157 00ea FFF7FEFF 		bl	pbuf_header
+ 158 00ee 0346     		mov	r3, r0
+ 159 00f0 002B     		cmp	r3, #0
+ 160 00f2 71D1     		bne	.L21
+ 161              	.L13:
+ 223:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****         LWIP_ASSERT("icmp_input: restoring original p->payload failed\n", 0);
+ 224:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****         goto memerr;
+ 225:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****       }
+ 226:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****       /* free the original p */
+ 227:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****       pbuf_free(p);
+ 162              		.loc 1 227 0
+ 163 00f4 7868     		ldr	r0, [r7, #4]
+ 164 00f6 FFF7FEFF 		bl	pbuf_free
+ 228:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****       /* we now have an identical copy of p that has room for link headers */
+ 229:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****       p = r;
+ 165              		.loc 1 229 0
+ 166 00fa 7B69     		ldr	r3, [r7, #20]
+ 167 00fc 7B60     		str	r3, [r7, #4]
+ 168 00fe 07E0     		b	.L14
+ 169              	.L8:
+ 170              	.LBE2:
+ 230:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****     } else {
+ 231:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****       /* restore p->payload to point to icmp header */
+ 232:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****       if (pbuf_header(p, -(s16_t)(PBUF_IP_HLEN + PBUF_LINK_HLEN))) {
+ 171              		.loc 1 232 0
+ 172 0100 7868     		ldr	r0, [r7, #4]
+ 173 0102 6FF02101 		mvn	r1, #33
+ 174 0106 FFF7FEFF 		bl	pbuf_header
+ 175 010a 0346     		mov	r3, r0
+ 176 010c 002B     		cmp	r3, #0
+ 177 010e 65D1     		bne	.L22
+ 178              	.L14:
+ 233:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****         LWIP_ASSERT("icmp_input: restoring original p->payload failed\n", 0);
+ 234:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****         goto memerr;
+ 235:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****       }
+ 236:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****     }
+ 237:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** #endif /* LWIP_ICMP_ECHO_CHECK_INPUT_PBUF_LEN */
+ 238:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****     /* At this point, all checks are OK. */
+ 239:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****     /* We generate an answer by switching the dest and src ip addresses,
+ 240:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****      * setting the icmp type to ECHO_RESPONSE and updating the checksum. */
+ 241:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****     iecho = p->payload;
+ 179              		.loc 1 241 0
+ 180 0110 7B68     		ldr	r3, [r7, #4]
+ 181 0112 5B68     		ldr	r3, [r3, #4]
+ 182 0114 3B61     		str	r3, [r7, #16]
+ 242:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****     tmpaddr.addr = iphdr->src.addr;
+ 183              		.loc 1 242 0
+ 184 0116 FB69     		ldr	r3, [r7, #28]
+ 185 0118 DB68     		ldr	r3, [r3, #12]	@ unaligned
+ 186 011a BB60     		str	r3, [r7, #8]
+ 243:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****     iphdr->src.addr = iphdr->dest.addr;
+ 187              		.loc 1 243 0
+ 188 011c FB69     		ldr	r3, [r7, #28]
+ 189 011e 1A69     		ldr	r2, [r3, #16]	@ unaligned
+ 190 0120 FB69     		ldr	r3, [r7, #28]
+ 191 0122 DA60     		str	r2, [r3, #12]	@ unaligned
+ 244:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** 
+ 245:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****     // to set source correctly in case a multicast/broadcast ping is received
+ 246:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** #if (LWIP_MULTICAST_PING || LWIP_BROADCAST_PING)
+ 247:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****     iphdr->src.addr = inp->ip_addr.addr;
+ 192              		.loc 1 247 0
+ 193 0124 3B68     		ldr	r3, [r7, #0]
+ 194 0126 5A68     		ldr	r2, [r3, #4]
+ 195 0128 FB69     		ldr	r3, [r7, #28]
+ 196 012a DA60     		str	r2, [r3, #12]	@ unaligned
+ 248:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** #endif
+ 249:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** 
+ 250:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****     iphdr->dest.addr = tmpaddr.addr;
+ 197              		.loc 1 250 0
+ 198 012c BA68     		ldr	r2, [r7, #8]
+ 199 012e FB69     		ldr	r3, [r7, #28]
+ 200 0130 1A61     		str	r2, [r3, #16]	@ unaligned
+ 251:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****     ICMPH_TYPE_SET(iecho, ICMP_ER);
+ 201              		.loc 1 251 0
+ 202 0132 3B69     		ldr	r3, [r7, #16]
+ 203 0134 4FF00002 		mov	r2, #0
+ 204 0138 1A70     		strb	r2, [r3, #0]
+ 252:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  #if CHECKSUM_GEN_ICMP	//Wipro: added to support checksum offloading for ICMP
+ 253:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****     /* adjust the checksum */
+ 254:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****     if (iecho->chksum >= htons(0xffff - (ICMP_ECHO << 8))) {
+ 255:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****       iecho->chksum += htons(ICMP_ECHO << 8) + 1;
+ 256:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****     } else {
+ 257:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****       iecho->chksum += htons(ICMP_ECHO << 8);
+ 258:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****     }
+ 259:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  #else
+ 260:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** 	   iecho->chksum = 0;
+ 205              		.loc 1 260 0
+ 206 013a 3B69     		ldr	r3, [r7, #16]
+ 207 013c 4FF00002 		mov	r2, #0
+ 208 0140 9A70     		strb	r2, [r3, #2]
+ 209 0142 4FF00002 		mov	r2, #0
+ 210 0146 DA70     		strb	r2, [r3, #3]
+ 261:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  #endif
+ 262:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** 
+ 263:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****     /* Set the correct TTL and recalculate the header checksum. */
+ 264:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****     IPH_TTL_SET(iphdr, ICMP_TTL);
+ 211              		.loc 1 264 0
+ 212 0148 FB69     		ldr	r3, [r7, #28]
+ 213 014a 1B89     		ldrh	r3, [r3, #8]	@ unaligned
+ 214 014c 9BB2     		uxth	r3, r3
+ 215 014e 1846     		mov	r0, r3
+ 216 0150 FFF7FEFF 		bl	ntohs
+ 217 0154 0346     		mov	r3, r0
+ 218 0156 9BB2     		uxth	r3, r3
+ 219 0158 63F0FF03 		orn	r3, r3, #255
+ 220 015c 9BB2     		uxth	r3, r3
+ 221 015e 9BB2     		uxth	r3, r3
+ 222 0160 1846     		mov	r0, r3
+ 223 0162 FFF7FEFF 		bl	htons
+ 224 0166 0346     		mov	r3, r0
+ 225 0168 1A46     		mov	r2, r3
+ 226 016a FB69     		ldr	r3, [r7, #28]
+ 227 016c 1A81     		strh	r2, [r3, #8]	@ unaligned
+ 265:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****     IPH_CHKSUM_SET(iphdr, 0);
+ 228              		.loc 1 265 0
+ 229 016e FB69     		ldr	r3, [r7, #28]
+ 230 0170 4FF00002 		mov	r2, #0
+ 231 0174 9A72     		strb	r2, [r3, #10]
+ 232 0176 4FF00002 		mov	r2, #0
+ 233 017a DA72     		strb	r2, [r3, #11]
+ 266:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** 
+ 267:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** #if CHECKSUM_GEN_IP
+ 268:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****     IPH_CHKSUM_SET(iphdr, inet_chksum(iphdr, IP_HLEN));
+ 269:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** #endif /* CHECKSUM_GEN_IP */
+ 270:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** 
+ 271:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****     ICMP_STATS_INC(icmp.xmit);
+ 272:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****     /* increase number of messages attempted to send */
+ 273:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****     snmp_inc_icmpoutmsgs();
+ 274:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****     /* increase number of echo replies attempted to send */
+ 275:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****     snmp_inc_icmpoutechoreps();
+ 276:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** 
+ 277:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****     if(pbuf_header(p, hlen)) {
+ 234              		.loc 1 277 0
+ 235 017c B7F91A30 		ldrsh	r3, [r7, #26]
+ 236 0180 7868     		ldr	r0, [r7, #4]
+ 237 0182 1946     		mov	r1, r3
+ 238 0184 FFF7FEFF 		bl	pbuf_header
+ 239 0188 0346     		mov	r3, r0
+ 240 018a 002B     		cmp	r3, #0
+ 241 018c 14D1     		bne	.L23
+ 242              	.LBB3:
+ 278:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****       LWIP_ASSERT("Can't move over header in packet", 0);
+ 279:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****     } else {
+ 280:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****       err_t ret;
+ 281:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****       ret = ip_output_if(p, &(iphdr->src), IP_HDRINCL,
+ 243              		.loc 1 281 0
+ 244 018e FB69     		ldr	r3, [r7, #28]
+ 245 0190 03F10C03 		add	r3, r3, #12
+ 246 0194 4FF00002 		mov	r2, #0
+ 247 0198 0092     		str	r2, [sp, #0]
+ 248 019a 4FF00102 		mov	r2, #1
+ 249 019e 0192     		str	r2, [sp, #4]
+ 250 01a0 3A68     		ldr	r2, [r7, #0]
+ 251 01a2 0292     		str	r2, [sp, #8]
+ 252 01a4 7868     		ldr	r0, [r7, #4]
+ 253 01a6 1946     		mov	r1, r3
+ 254 01a8 4FF00002 		mov	r2, #0
+ 255 01ac 4FF0FF03 		mov	r3, #255
+ 256 01b0 FFF7FEFF 		bl	ip_output_if
+ 257 01b4 0346     		mov	r3, r0
+ 258 01b6 FB73     		strb	r3, [r7, #15]
+ 259              	.L23:
+ 260              	.LBE3:
+ 282:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****                    ICMP_TTL, 0, IP_PROTO_ICMP, inp);
+ 283:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****       if (ret != ERR_OK) {
+ 284:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****         LWIP_DEBUGF(ICMP_DEBUG, ("icmp_input: ip_output_if returned an error: %c.\n", ret));
+ 285:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****       }
+ 286:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****     }
+ 287:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****     break;
+ 261              		.loc 1 287 0
+ 262 01b8 00BF     		nop
+ 263              	.L3:
+ 288:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****   default:
+ 289:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****     LWIP_DEBUGF(ICMP_DEBUG, ("icmp_input: ICMP type %"S16_F" code %"S16_F" not supported.\n", 
+ 290:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****                 (s16_t)type, (s16_t)code));
+ 291:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****     ICMP_STATS_INC(icmp.proterr);
+ 292:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****     ICMP_STATS_INC(icmp.drop);
+ 293:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****   }
+ 294:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****   pbuf_free(p);
+ 264              		.loc 1 294 0
+ 265 01ba 7868     		ldr	r0, [r7, #4]
+ 266 01bc FFF7FEFF 		bl	pbuf_free
+ 267 01c0 10E0     		b	.L1
+ 268              	.L17:
+ 187:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****       goto lenerr;
+ 269              		.loc 1 187 0
+ 270 01c2 00BF     		nop
+ 271              	.L2:
+ 295:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****   return;
+ 296:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** lenerr:
+ 297:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****   pbuf_free(p);
+ 272              		.loc 1 297 0
+ 273 01c4 7868     		ldr	r0, [r7, #4]
+ 274 01c6 FFF7FEFF 		bl	pbuf_free
+ 275 01ca 0BE0     		b	.L1
+ 276              	.L18:
+ 277              	.LBB4:
+ 205:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****         goto memerr;
+ 278              		.loc 1 205 0
+ 279 01cc 00BF     		nop
+ 280 01ce 06E0     		b	.L10
+ 281              	.L19:
+ 211:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****         goto memerr;
+ 282              		.loc 1 211 0
+ 283 01d0 00BF     		nop
+ 284 01d2 04E0     		b	.L10
+ 285              	.L20:
+ 218:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****         goto memerr;
+ 286              		.loc 1 218 0
+ 287 01d4 00BF     		nop
+ 288 01d6 02E0     		b	.L10
+ 289              	.L21:
+ 224:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****         goto memerr;
+ 290              		.loc 1 224 0
+ 291 01d8 00BF     		nop
+ 292 01da 00E0     		b	.L10
+ 293              	.L22:
+ 294              	.LBE4:
+ 234:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****         goto memerr;
+ 295              		.loc 1 234 0
+ 296 01dc 00BF     		nop
+ 297              	.L10:
+ 298:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****   ICMP_STATS_INC(icmp.lenerr);
+ 299:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****   snmp_inc_icmpinerrors();
+ 300:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****   return;
+ 301:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** #if LWIP_ICMP_ECHO_CHECK_INPUT_PBUF_LEN
+ 302:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** memerr:
+ 303:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****   pbuf_free(p);
+ 298              		.loc 1 303 0
+ 299 01de 7868     		ldr	r0, [r7, #4]
+ 300 01e0 FFF7FEFF 		bl	pbuf_free
+ 301              	.L1:
+ 304:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****   ICMP_STATS_INC(icmp.err);
+ 305:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****   snmp_inc_icmpinerrors();
+ 306:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****   return;
+ 307:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** #endif /* LWIP_ICMP_ECHO_CHECK_INPUT_PBUF_LEN */
+ 308:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** }
+ 302              		.loc 1 308 0
+ 303 01e4 07F12007 		add	r7, r7, #32
+ 304 01e8 BD46     		mov	sp, r7
+ 305 01ea 80BD     		pop	{r7, pc}
+ 306              		.cfi_endproc
+ 307              	.LFE0:
+ 309              		.section	.text.icmp_dest_unreach,"ax",%progbits
+ 310              		.align	2
+ 311              		.global	icmp_dest_unreach
+ 312              		.thumb
+ 313              		.thumb_func
+ 315              	icmp_dest_unreach:
+ 316              	.LFB1:
+ 309:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** 
+ 310:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** /**
+ 311:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  * Send an icmp 'destination unreachable' packet, called from ip_input() if
+ 312:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  * the transport layer protocol is unknown and from udp_input() if the local
+ 313:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  * port is not bound.
+ 314:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  *
+ 315:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  * @param p the input packet for which the 'unreachable' should be sent,
+ 316:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  *          p->payload pointing to the IP header
+ 317:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  * @param t type of the 'unreachable' packet
+ 318:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  */
+ 319:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** void
+ 320:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** icmp_dest_unreach(struct pbuf *p, enum icmp_dur_type t)
+ 321:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** {
+ 317              		.loc 1 321 0
+ 318              		.cfi_startproc
+ 319              		@ args = 0, pretend = 0, frame = 8
+ 320              		@ frame_needed = 1, uses_anonymous_args = 0
+ 321 0000 80B5     		push	{r7, lr}
+ 322              	.LCFI3:
+ 323              		.cfi_def_cfa_offset 8
+ 324              		.cfi_offset 7, -8
+ 325              		.cfi_offset 14, -4
+ 326 0002 82B0     		sub	sp, sp, #8
+ 327              	.LCFI4:
+ 328              		.cfi_def_cfa_offset 16
+ 329 0004 00AF     		add	r7, sp, #0
+ 330              	.LCFI5:
+ 331              		.cfi_def_cfa_register 7
+ 332 0006 7860     		str	r0, [r7, #4]
+ 333 0008 0B46     		mov	r3, r1
+ 334 000a FB70     		strb	r3, [r7, #3]
+ 322:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****   icmp_send_response(p, ICMP_DUR, t);
+ 335              		.loc 1 322 0
+ 336 000c FB78     		ldrb	r3, [r7, #3]	@ zero_extendqisi2
+ 337 000e 7868     		ldr	r0, [r7, #4]
+ 338 0010 4FF00301 		mov	r1, #3
+ 339 0014 1A46     		mov	r2, r3
+ 340 0016 FFF7FEFF 		bl	icmp_send_response
+ 323:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** }
+ 341              		.loc 1 323 0
+ 342 001a 07F10807 		add	r7, r7, #8
+ 343 001e BD46     		mov	sp, r7
+ 344 0020 80BD     		pop	{r7, pc}
+ 345              		.cfi_endproc
+ 346              	.LFE1:
+ 348 0022 00BF     		.section	.text.icmp_time_exceeded,"ax",%progbits
+ 349              		.align	2
+ 350              		.global	icmp_time_exceeded
+ 351              		.thumb
+ 352              		.thumb_func
+ 354              	icmp_time_exceeded:
+ 355              	.LFB2:
+ 324:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** 
+ 325:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** #if IP_FORWARD || IP_REASSEMBLY
+ 326:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** /**
+ 327:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  * Send a 'time exceeded' packet, called from ip_forward() if TTL is 0.
+ 328:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  *
+ 329:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  * @param p the input packet for which the 'time exceeded' should be sent,
+ 330:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  *          p->payload pointing to the IP header
+ 331:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  * @param t type of the 'time exceeded' packet
+ 332:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  */
+ 333:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** void
+ 334:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** icmp_time_exceeded(struct pbuf *p, enum icmp_te_type t)
+ 335:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** {
+ 356              		.loc 1 335 0
+ 357              		.cfi_startproc
+ 358              		@ args = 0, pretend = 0, frame = 8
+ 359              		@ frame_needed = 1, uses_anonymous_args = 0
+ 360 0000 80B5     		push	{r7, lr}
+ 361              	.LCFI6:
+ 362              		.cfi_def_cfa_offset 8
+ 363              		.cfi_offset 7, -8
+ 364              		.cfi_offset 14, -4
+ 365 0002 82B0     		sub	sp, sp, #8
+ 366              	.LCFI7:
+ 367              		.cfi_def_cfa_offset 16
+ 368 0004 00AF     		add	r7, sp, #0
+ 369              	.LCFI8:
+ 370              		.cfi_def_cfa_register 7
+ 371 0006 7860     		str	r0, [r7, #4]
+ 372 0008 0B46     		mov	r3, r1
+ 373 000a FB70     		strb	r3, [r7, #3]
+ 336:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****   icmp_send_response(p, ICMP_TE, t);
+ 374              		.loc 1 336 0
+ 375 000c FB78     		ldrb	r3, [r7, #3]	@ zero_extendqisi2
+ 376 000e 7868     		ldr	r0, [r7, #4]
+ 377 0010 4FF00B01 		mov	r1, #11
+ 378 0014 1A46     		mov	r2, r3
+ 379 0016 FFF7FEFF 		bl	icmp_send_response
+ 337:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** }
+ 380              		.loc 1 337 0
+ 381 001a 07F10807 		add	r7, r7, #8
+ 382 001e BD46     		mov	sp, r7
+ 383 0020 80BD     		pop	{r7, pc}
+ 384              		.cfi_endproc
+ 385              	.LFE2:
+ 387 0022 00BF     		.section	.text.icmp_send_response,"ax",%progbits
+ 388              		.align	2
+ 389              		.thumb
+ 390              		.thumb_func
+ 392              	icmp_send_response:
+ 393              	.LFB3:
+ 338:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** 
+ 339:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** #endif /* IP_FORWARD || IP_REASSEMBLY */
+ 340:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** 
+ 341:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** /**
+ 342:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  * Send an icmp packet in response to an incoming packet.
+ 343:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  *
+ 344:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  * @param p the input packet for which the 'unreachable' should be sent,
+ 345:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  *          p->payload pointing to the IP header
+ 346:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  * @param type Type of the ICMP header
+ 347:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  * @param code Code of the ICMP header
+ 348:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****  */
+ 349:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** static void
+ 350:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** icmp_send_response(struct pbuf *p, u8_t type, u8_t code)
+ 351:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** {
+ 394              		.loc 1 351 0
+ 395              		.cfi_startproc
+ 396              		@ args = 0, pretend = 0, frame = 24
+ 397              		@ frame_needed = 1, uses_anonymous_args = 0
+ 398 0000 80B5     		push	{r7, lr}
+ 399              	.LCFI9:
+ 400              		.cfi_def_cfa_offset 8
+ 401              		.cfi_offset 7, -8
+ 402              		.cfi_offset 14, -4
+ 403 0002 88B0     		sub	sp, sp, #32
+ 404              	.LCFI10:
+ 405              		.cfi_def_cfa_offset 40
+ 406 0004 02AF     		add	r7, sp, #8
+ 407              	.LCFI11:
+ 408              		.cfi_def_cfa 7, 32
+ 409 0006 7860     		str	r0, [r7, #4]
+ 410 0008 1346     		mov	r3, r2
+ 411 000a 0A46     		mov	r2, r1
+ 412 000c FA70     		strb	r2, [r7, #3]
+ 413 000e BB70     		strb	r3, [r7, #2]
+ 352:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****   struct pbuf *q;
+ 353:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****   struct ip_hdr *iphdr;
+ 354:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****   /* we can use the echo header here */
+ 355:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****   struct icmp_echo_hdr *icmphdr;
+ 356:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** 
+ 357:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****   /* ICMP header + IP header + 8 bytes of data */
+ 358:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****   q = pbuf_alloc(PBUF_IP, sizeof(struct icmp_echo_hdr) + IP_HLEN + ICMP_DEST_UNREACH_DATASIZE,
+ 414              		.loc 1 358 0
+ 415 0010 4FF00100 		mov	r0, #1
+ 416 0014 4FF02401 		mov	r1, #36
+ 417 0018 4FF00002 		mov	r2, #0
+ 418 001c FFF7FEFF 		bl	pbuf_alloc
+ 419 0020 7861     		str	r0, [r7, #20]
+ 359:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****                  PBUF_RAM);
+ 360:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****   if (q == NULL) {
+ 420              		.loc 1 360 0
+ 421 0022 7B69     		ldr	r3, [r7, #20]
+ 422 0024 002B     		cmp	r3, #0
+ 423 0026 4BD0     		beq	.L29
+ 424              	.L27:
+ 361:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****     LWIP_DEBUGF(ICMP_DEBUG, ("icmp_time_exceeded: failed to allocate pbuf for ICMP packet.\n"));
+ 362:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****     return;
+ 363:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****   }
+ 364:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****   LWIP_ASSERT("check that first pbuf can hold icmp message",
+ 365:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****              (q->len >= (sizeof(struct icmp_echo_hdr) + IP_HLEN + ICMP_DEST_UNREACH_DATASIZE)));
+ 366:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** 
+ 367:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****   iphdr = p->payload;
+ 425              		.loc 1 367 0
+ 426 0028 7B68     		ldr	r3, [r7, #4]
+ 427 002a 5B68     		ldr	r3, [r3, #4]
+ 428 002c 3B61     		str	r3, [r7, #16]
+ 368:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****   LWIP_DEBUGF(ICMP_DEBUG, ("icmp_time_exceeded from "));
+ 369:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****   ip_addr_debug_print(ICMP_DEBUG, &(iphdr->src));
+ 370:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****   LWIP_DEBUGF(ICMP_DEBUG, (" to "));
+ 371:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****   ip_addr_debug_print(ICMP_DEBUG, &(iphdr->dest));
+ 372:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****   LWIP_DEBUGF(ICMP_DEBUG, ("\n"));
+ 373:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** 
+ 374:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****   icmphdr = q->payload;
+ 429              		.loc 1 374 0
+ 430 002e 7B69     		ldr	r3, [r7, #20]
+ 431 0030 5B68     		ldr	r3, [r3, #4]
+ 432 0032 FB60     		str	r3, [r7, #12]
+ 375:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****   icmphdr->type = type;
+ 433              		.loc 1 375 0
+ 434 0034 FB68     		ldr	r3, [r7, #12]
+ 435 0036 FA78     		ldrb	r2, [r7, #3]
+ 436 0038 1A70     		strb	r2, [r3, #0]
+ 376:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****   icmphdr->code = code;
+ 437              		.loc 1 376 0
+ 438 003a FB68     		ldr	r3, [r7, #12]
+ 439 003c BA78     		ldrb	r2, [r7, #2]
+ 440 003e 5A70     		strb	r2, [r3, #1]
+ 377:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****   icmphdr->id = 0;
+ 441              		.loc 1 377 0
+ 442 0040 FB68     		ldr	r3, [r7, #12]
+ 443 0042 4FF00002 		mov	r2, #0
+ 444 0046 1A71     		strb	r2, [r3, #4]
+ 445 0048 4FF00002 		mov	r2, #0
+ 446 004c 5A71     		strb	r2, [r3, #5]
+ 378:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****   icmphdr->seqno = 0;
+ 447              		.loc 1 378 0
+ 448 004e FB68     		ldr	r3, [r7, #12]
+ 449 0050 4FF00002 		mov	r2, #0
+ 450 0054 9A71     		strb	r2, [r3, #6]
+ 451 0056 4FF00002 		mov	r2, #0
+ 452 005a DA71     		strb	r2, [r3, #7]
+ 379:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** 
+ 380:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****   /* copy fields from original packet */
+ 381:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****   SMEMCPY((u8_t *)q->payload + sizeof(struct icmp_echo_hdr), (u8_t *)p->payload,
+ 453              		.loc 1 381 0
+ 454 005c 7B69     		ldr	r3, [r7, #20]
+ 455 005e 5B68     		ldr	r3, [r3, #4]
+ 456 0060 03F10802 		add	r2, r3, #8
+ 457 0064 7B68     		ldr	r3, [r7, #4]
+ 458 0066 5B68     		ldr	r3, [r3, #4]
+ 459 0068 1046     		mov	r0, r2
+ 460 006a 1946     		mov	r1, r3
+ 461 006c 4FF01C02 		mov	r2, #28
+ 462 0070 FFF7FEFF 		bl	memcpy
+ 382:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****           IP_HLEN + ICMP_DEST_UNREACH_DATASIZE);
+ 383:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** 
+ 384:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****   /* calculate checksum */
+ 385:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****   icmphdr->chksum = 0;
+ 463              		.loc 1 385 0
+ 464 0074 FB68     		ldr	r3, [r7, #12]
+ 465 0076 4FF00002 		mov	r2, #0
+ 466 007a 9A70     		strb	r2, [r3, #2]
+ 467 007c 4FF00002 		mov	r2, #0
+ 468 0080 DA70     		strb	r2, [r3, #3]
+ 386:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****   icmphdr->chksum = inet_chksum(icmphdr, q->len);
+ 469              		.loc 1 386 0
+ 470 0082 7B69     		ldr	r3, [r7, #20]
+ 471 0084 5B89     		ldrh	r3, [r3, #10]
+ 472 0086 F868     		ldr	r0, [r7, #12]
+ 473 0088 1946     		mov	r1, r3
+ 474 008a FFF7FEFF 		bl	inet_chksum
+ 475 008e 0346     		mov	r3, r0
+ 476 0090 1A46     		mov	r2, r3
+ 477 0092 FB68     		ldr	r3, [r7, #12]
+ 478 0094 5A80     		strh	r2, [r3, #2]	@ unaligned
+ 387:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****   ICMP_STATS_INC(icmp.xmit);
+ 388:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****   /* increase number of messages attempted to send */
+ 389:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****   snmp_inc_icmpoutmsgs();
+ 390:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****   /* increase number of destination unreachable messages attempted to send */
+ 391:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****   snmp_inc_icmpouttimeexcds();
+ 392:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****   ip_output(q, NULL, &(iphdr->src), ICMP_TTL, 0, IP_PROTO_ICMP);
+ 479              		.loc 1 392 0
+ 480 0096 3B69     		ldr	r3, [r7, #16]
+ 481 0098 03F10C03 		add	r3, r3, #12
+ 482 009c 4FF00002 		mov	r2, #0
+ 483 00a0 0092     		str	r2, [sp, #0]
+ 484 00a2 4FF00102 		mov	r2, #1
+ 485 00a6 0192     		str	r2, [sp, #4]
+ 486 00a8 7869     		ldr	r0, [r7, #20]
+ 487 00aa 4FF00001 		mov	r1, #0
+ 488 00ae 1A46     		mov	r2, r3
+ 489 00b0 4FF0FF03 		mov	r3, #255
+ 490 00b4 FFF7FEFF 		bl	ip_output
+ 393:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****   pbuf_free(q);
+ 491              		.loc 1 393 0
+ 492 00b8 7869     		ldr	r0, [r7, #20]
+ 493 00ba FFF7FEFF 		bl	pbuf_free
+ 494 00be 00E0     		b	.L26
+ 495              	.L29:
+ 362:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c ****     return;
+ 496              		.loc 1 362 0
+ 497 00c0 00BF     		nop
+ 498              	.L26:
+ 394:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.c **** }
+ 499              		.loc 1 394 0
+ 500 00c2 07F11807 		add	r7, r7, #24
+ 501 00c6 BD46     		mov	sp, r7
+ 502 00c8 80BD     		pop	{r7, pc}
+ 503              		.cfi_endproc
+ 504              	.LFE3:
+ 506 00ca 00BF     		.text
+ 507              	.Letext0:
+ 508              		.file 2 "C:\\DAVE3_workspace\\ws3.1.10\\XMC4500_RK_HTTPserver\\XMC4500_RK_HTTPserver\\Dave\\Genera
+ 509              		.file 3 "C:\\DAVE3_workspace\\ws3.1.10\\XMC4500_RK_HTTPserver\\XMC4500_RK_HTTPserver\\Dave\\Genera
+ 510              		.file 4 "C:\\DAVE3_workspace\\ws3.1.10\\XMC4500_RK_HTTPserver\\XMC4500_RK_HTTPserver\\Dave\\Genera
+ 511              		.file 5 "C:\\DAVE3_workspace\\ws3.1.10\\XMC4500_RK_HTTPserver\\XMC4500_RK_HTTPserver\\Dave\\Genera
+ 512              		.file 6 "C:\\DAVE3_workspace\\ws3.1.10\\XMC4500_RK_HTTPserver\\XMC4500_RK_HTTPserver\\Dave\\Genera
+ 513              		.file 7 "C:\\DAVE3_workspace\\ws3.1.10\\XMC4500_RK_HTTPserver\\XMC4500_RK_HTTPserver\\Dave\\Genera
+ 514              		.file 8 "C:\\DAVE3_workspace\\ws3.1.10\\XMC4500_RK_HTTPserver\\XMC4500_RK_HTTPserver\\Dave\\Genera
+DEFINED SYMBOLS
+                            *ABS*:00000000 icmp.c
+C:\Users\Mihai\AppData\Local\Temp\ccO9y3uE.s:20     .text.icmp_input:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccO9y3uE.s:25     .text.icmp_input:00000000 icmp_input
+C:\Users\Mihai\AppData\Local\Temp\ccO9y3uE.s:310    .text.icmp_dest_unreach:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccO9y3uE.s:315    .text.icmp_dest_unreach:00000000 icmp_dest_unreach
+C:\Users\Mihai\AppData\Local\Temp\ccO9y3uE.s:392    .text.icmp_send_response:00000000 icmp_send_response
+C:\Users\Mihai\AppData\Local\Temp\ccO9y3uE.s:349    .text.icmp_time_exceeded:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccO9y3uE.s:354    .text.icmp_time_exceeded:00000000 icmp_time_exceeded
+C:\Users\Mihai\AppData\Local\Temp\ccO9y3uE.s:388    .text.icmp_send_response:00000000 $t
+                     .debug_frame:00000010 $d
+                           .group:00000000 wm4.1.1791a5ae2e936ca1033c1c44be394cc7
+                           .group:00000000 wm4.ETH004_Conf.h.56.564c3f309c32b3c742fc91049cf66940
+                           .group:00000000 wm4.lwipopts.h.73.a7a63bda1e8216abd1d90275eaaa0027
+                           .group:00000000 wm4.arch.h.33.6fa4aa86d33d1490ae882caef7316405
+                           .group:00000000 wm4.cpu.h.33.b213c7fd77614ebc3691cef18ad2ff22
+                           .group:00000000 wm4.cc.h.66.ec134211c658dcc89de4610e4e7bab46
+                           .group:00000000 wm4.arch.h.47.5153c52bfb94ee3b37299920afab6afd
+                           .group:00000000 wm4.debug.h.43.557ecd6c90cc70b375bb8a29118be47b
+                           .group:00000000 wm4.opt.h.94.d36882acafebb8726bce646fc8b2397b
+                           .group:00000000 wm4.err.h.52.37c5d17538f8e8347a9c84196701e92d
+                           .group:00000000 wm4.pbuf.h.43.e9a1ad12b97478787a109e22d5306820
+                           .group:00000000 wm4.inet.h.46.b516065779826845d16d49f513869a2b
+                           .group:00000000 wm4.ip_addr.h.79.9a0ce887ca8c88c22ad7686bcb5105df
+                           .group:00000000 wm4.netif.h.53.c13431a64f0e73a26710e71455725e84
+                           .group:00000000 wm4.icmp.h.44.450dbf91f594cc26ad19d086cdc83713
+                           .group:00000000 wm4.def.h.33.f5df81959e69d85e6b3a0a040438efaf
+                           .group:00000000 wm4.ip.h.48.ad46847692d4d729760949b27e48a442
+                           .group:00000000 wm4.mem.h.96.20770766e6c9e6c42af6bfa95ef5c63f
+                           .group:00000000 wm4.memp_std.h.15.aec196dc1c3fb1142dd450db0c167cbf
+                           .group:00000000 wm4.memp.h.86.dbc4cb1b8d6b9ea113f04174f716e4c0
+                           .group:00000000 wm4.stats.h.147.58ec5b890fad5bbc2a7711ad8105f087
+                           .group:00000000 wm4.udp.h.48.1a8dde095cd0a13580afaba1443e5a3f
+                           .group:00000000 wm4.snmp.h.231.ffb5dc2779dd945785c887dfa42d86eb
+                           .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
+                           .group:00000000 wm4.features.h.22.b72b3baab2bb2eab3661375590100b6b
+                           .group:00000000 wm4.config.h.193.5fb8ef056cdff92dec3dee9552839d8c
+                           .group:00000000 wm4._ansi.h.23.7aefdac4826acebbfc9f3822a0aeb14c
+                           .group:00000000 wm4._default_types.h.6.5e12cd604db8ce00b62bb2f02708eaf3
+                           .group:00000000 wm4.lock.h.2.9bc98482741e5e2a9450b12934a684ea
+                           .group:00000000 wm4.stddef.h.349.31f4c5baff3fa2689010b32028da9c47
+                           .group:00000000 wm4.reent.h.16.9e42f0e588b85e70b2bf6572af57ce64
+                           .group:00000000 wm4.stddef.h.187.9e651b6b8b16e149c1353259404973ea
+                           .group:00000000 wm4.string.h.86.d5c872ff52e2712c985b588a0ef39f3c
+
+UNDEFINED SYMBOLS
+ntohs
+pbuf_header
+inet_chksum_pbuf
+pbuf_free
+pbuf_alloc
+pbuf_copy
+htons
+ip_output_if
+memcpy
+inet_chksum
+ip_output

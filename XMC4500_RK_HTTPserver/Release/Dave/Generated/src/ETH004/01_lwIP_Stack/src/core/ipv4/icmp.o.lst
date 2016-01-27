@@ -1,0 +1,229 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"icmp.c"
+  16              		.section	.text.icmp_send_response,"ax",%progbits
+  17              		.align	1
+  18              		.thumb
+  19              		.thumb_func
+  21              	icmp_send_response:
+  22              		@ args = 0, pretend = 0, frame = 0
+  23              		@ frame_needed = 0, uses_anonymous_args = 0
+  24 0000 2DE9F743 		push	{r0, r1, r2, r4, r5, r6, r7, r8, r9, lr}
+  25 0004 0646     		mov	r6, r0
+  26 0006 8946     		mov	r9, r1
+  27 0008 9046     		mov	r8, r2
+  28 000a 0120     		movs	r0, #1
+  29 000c 2421     		movs	r1, #36
+  30 000e 0022     		movs	r2, #0
+  31 0010 FFF7FEFF 		bl	pbuf_alloc
+  32 0014 0546     		mov	r5, r0
+  33 0016 0028     		cmp	r0, #0
+  34 0018 2DD0     		beq	.L1
+  35 001a 4468     		ldr	r4, [r0, #4]
+  36 001c 7768     		ldr	r7, [r6, #4]
+  37 001e 84F80090 		strb	r9, [r4, #0]
+  38 0022 0023     		movs	r3, #0
+  39 0024 84F80180 		strb	r8, [r4, #1]
+  40 0028 2371     		strb	r3, [r4, #4]
+  41 002a 6371     		strb	r3, [r4, #5]
+  42 002c A371     		strb	r3, [r4, #6]
+  43 002e E371     		strb	r3, [r4, #7]
+  44 0030 4168     		ldr	r1, [r0, #4]
+  45 0032 7668     		ldr	r6, [r6, #4]
+  46 0034 0831     		adds	r1, r1, #8
+  47 0036 06F11C02 		add	r2, r6, #28
+  48              	.L3:
+  49 003a 56F8040B 		ldr	r0, [r6], #4	@ unaligned
+  50 003e 9642     		cmp	r6, r2
+  51 0040 41F8040B 		str	r0, [r1], #4	@ unaligned
+  52 0044 F9D1     		bne	.L3
+  53 0046 0026     		movs	r6, #0
+  54 0048 A670     		strb	r6, [r4, #2]
+  55 004a E670     		strb	r6, [r4, #3]
+  56 004c 6989     		ldrh	r1, [r5, #10]
+  57 004e 2046     		mov	r0, r4
+  58 0050 FFF7FEFF 		bl	inet_chksum
+  59 0054 0123     		movs	r3, #1
+  60 0056 6080     		strh	r0, [r4, #2]	@ unaligned
+  61 0058 3146     		mov	r1, r6
+  62 005a 0193     		str	r3, [sp, #4]
+  63 005c 0096     		str	r6, [sp, #0]
+  64 005e 2846     		mov	r0, r5
+  65 0060 07F10C02 		add	r2, r7, #12
+  66 0064 FF23     		movs	r3, #255
+  67 0066 FFF7FEFF 		bl	ip_output
+  68 006a 2846     		mov	r0, r5
+  69 006c 03B0     		add	sp, sp, #12
+  70 006e BDE8F043 		pop	{r4, r5, r6, r7, r8, r9, lr}
+  71 0072 FFF7FEBF 		b	pbuf_free
+  72              	.L1:
+  73 0076 03B0     		add	sp, sp, #12
+  74 0078 BDE8F083 		pop	{r4, r5, r6, r7, r8, r9, pc}
+  76              		.section	.text.icmp_input,"ax",%progbits
+  77              		.align	1
+  78              		.global	icmp_input
+  79              		.thumb
+  80              		.thumb_func
+  82              	icmp_input:
+  83              		@ args = 0, pretend = 0, frame = 0
+  84              		@ frame_needed = 0, uses_anonymous_args = 0
+  85 0000 2DE9F043 		push	{r4, r5, r6, r7, r8, r9, lr}
+  86 0004 4568     		ldr	r5, [r0, #4]
+  87 0006 85B0     		sub	sp, sp, #20
+  88 0008 0446     		mov	r4, r0
+  89 000a 2888     		ldrh	r0, [r5, #0]	@ unaligned
+  90 000c 0F46     		mov	r7, r1
+  91 000e FFF7FEFF 		bl	ntohs
+  92 0012 C0F30320 		ubfx	r0, r0, #8, #4
+  93 0016 4FEA8008 		lsl	r8, r0, #2
+  94 001a C8F10009 		rsb	r9, r8, #0
+  95 001e 2046     		mov	r0, r4
+  96 0020 4946     		mov	r1, r9
+  97 0022 FFF7FEFF 		bl	pbuf_header
+  98 0026 0028     		cmp	r0, #0
+  99 0028 5CD1     		bne	.L12
+ 100 002a 2389     		ldrh	r3, [r4, #8]
+ 101 002c 032B     		cmp	r3, #3
+ 102 002e 59D9     		bls	.L12
+ 103 0030 6268     		ldr	r2, [r4, #4]
+ 104 0032 1178     		ldrb	r1, [r2, #0]	@ zero_extendqisi2
+ 105 0034 0829     		cmp	r1, #8
+ 106 0036 55D1     		bne	.L12
+ 107 0038 072B     		cmp	r3, #7
+ 108 003a 53D9     		bls	.L12
+ 109 003c 2046     		mov	r0, r4
+ 110 003e FFF7FEFF 		bl	inet_chksum_pbuf
+ 111 0042 0028     		cmp	r0, #0
+ 112 0044 4ED1     		bne	.L12
+ 113              	.L10:
+ 114 0046 2046     		mov	r0, r4
+ 115 0048 2221     		movs	r1, #34
+ 116 004a 1FFA88F8 		uxth	r8, r8
+ 117 004e FFF7FEFF 		bl	pbuf_header
+ 118 0052 E8B1     		cbz	r0, .L11
+ 119 0054 2046     		mov	r0, r4
+ 120 0056 4146     		mov	r1, r8
+ 121 0058 FFF7FEFF 		bl	pbuf_header
+ 122 005c 0246     		mov	r2, r0
+ 123 005e 0028     		cmp	r0, #0
+ 124 0060 40D1     		bne	.L12
+ 125 0062 0220     		movs	r0, #2
+ 126 0064 2189     		ldrh	r1, [r4, #8]
+ 127 0066 FFF7FEFF 		bl	pbuf_alloc
+ 128 006a 0646     		mov	r6, r0
+ 129 006c 0028     		cmp	r0, #0
+ 130 006e 39D0     		beq	.L12
+ 131 0070 2146     		mov	r1, r4
+ 132 0072 FFF7FEFF 		bl	pbuf_copy
+ 133 0076 0028     		cmp	r0, #0
+ 134 0078 34D1     		bne	.L12
+ 135 007a 3046     		mov	r0, r6
+ 136 007c 4946     		mov	r1, r9
+ 137 007e 7568     		ldr	r5, [r6, #4]
+ 138 0080 FFF7FEFF 		bl	pbuf_header
+ 139 0084 70BB     		cbnz	r0, .L12
+ 140 0086 2046     		mov	r0, r4
+ 141 0088 FFF7FEFF 		bl	pbuf_free
+ 142 008c 3446     		mov	r4, r6
+ 143 008e 05E0     		b	.L13
+ 144              	.L11:
+ 145 0090 2046     		mov	r0, r4
+ 146 0092 6FF02101 		mvn	r1, #33
+ 147 0096 FFF7FEFF 		bl	pbuf_header
+ 148 009a 18BB     		cbnz	r0, .L12
+ 149              	.L13:
+ 150 009c EE68     		ldr	r6, [r5, #12]	@ unaligned
+ 151 009e 7B68     		ldr	r3, [r7, #4]
+ 152 00a0 6068     		ldr	r0, [r4, #4]
+ 153 00a2 2E61     		str	r6, [r5, #16]	@ unaligned
+ 154 00a4 0026     		movs	r6, #0
+ 155 00a6 EB60     		str	r3, [r5, #12]	@ unaligned
+ 156 00a8 0670     		strb	r6, [r0, #0]
+ 157 00aa 8670     		strb	r6, [r0, #2]
+ 158 00ac C670     		strb	r6, [r0, #3]
+ 159 00ae 2889     		ldrh	r0, [r5, #8]	@ unaligned
+ 160 00b0 FFF7FEFF 		bl	ntohs
+ 161 00b4 60F0FF02 		orn	r2, r0, #255
+ 162 00b8 90B2     		uxth	r0, r2
+ 163 00ba FFF7FEFF 		bl	htons
+ 164 00be AE72     		strb	r6, [r5, #10]
+ 165 00c0 2881     		strh	r0, [r5, #8]	@ unaligned
+ 166 00c2 EE72     		strb	r6, [r5, #11]
+ 167 00c4 2046     		mov	r0, r4
+ 168 00c6 4146     		mov	r1, r8
+ 169 00c8 FFF7FEFF 		bl	pbuf_header
+ 170 00cc 0246     		mov	r2, r0
+ 171 00ce 48B9     		cbnz	r0, .L12
+ 172 00d0 0121     		movs	r1, #1
+ 173 00d2 0090     		str	r0, [sp, #0]
+ 174 00d4 0191     		str	r1, [sp, #4]
+ 175 00d6 0297     		str	r7, [sp, #8]
+ 176 00d8 2046     		mov	r0, r4
+ 177 00da 05F10C01 		add	r1, r5, #12
+ 178 00de FF23     		movs	r3, #255
+ 179 00e0 FFF7FEFF 		bl	ip_output_if
+ 180              	.L7:
+ 181              	.L12:
+ 182 00e4 2046     		mov	r0, r4
+ 183 00e6 05B0     		add	sp, sp, #20
+ 184 00e8 BDE8F043 		pop	{r4, r5, r6, r7, r8, r9, lr}
+ 185 00ec FFF7FEBF 		b	pbuf_free
+ 187              		.section	.text.icmp_dest_unreach,"ax",%progbits
+ 188              		.align	1
+ 189              		.global	icmp_dest_unreach
+ 190              		.thumb
+ 191              		.thumb_func
+ 193              	icmp_dest_unreach:
+ 194              		@ args = 0, pretend = 0, frame = 0
+ 195              		@ frame_needed = 0, uses_anonymous_args = 0
+ 196              		@ link register save eliminated.
+ 197 0000 0A46     		mov	r2, r1
+ 198 0002 0321     		movs	r1, #3
+ 199 0004 FFF7FEBF 		b	icmp_send_response
+ 201              		.section	.text.icmp_time_exceeded,"ax",%progbits
+ 202              		.align	1
+ 203              		.global	icmp_time_exceeded
+ 204              		.thumb
+ 205              		.thumb_func
+ 207              	icmp_time_exceeded:
+ 208              		@ args = 0, pretend = 0, frame = 0
+ 209              		@ frame_needed = 0, uses_anonymous_args = 0
+ 210              		@ link register save eliminated.
+ 211 0000 0A46     		mov	r2, r1
+ 212 0002 0B21     		movs	r1, #11
+ 213 0004 FFF7FEBF 		b	icmp_send_response
+ 215              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 icmp.c
+C:\Users\Mihai\AppData\Local\Temp\ccEbdjnp.s:17     .text.icmp_send_response:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccEbdjnp.s:21     .text.icmp_send_response:00000000 icmp_send_response
+C:\Users\Mihai\AppData\Local\Temp\ccEbdjnp.s:77     .text.icmp_input:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccEbdjnp.s:82     .text.icmp_input:00000000 icmp_input
+C:\Users\Mihai\AppData\Local\Temp\ccEbdjnp.s:188    .text.icmp_dest_unreach:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccEbdjnp.s:193    .text.icmp_dest_unreach:00000000 icmp_dest_unreach
+C:\Users\Mihai\AppData\Local\Temp\ccEbdjnp.s:202    .text.icmp_time_exceeded:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccEbdjnp.s:207    .text.icmp_time_exceeded:00000000 icmp_time_exceeded
+
+UNDEFINED SYMBOLS
+pbuf_alloc
+inet_chksum
+ip_output
+pbuf_free
+ntohs
+pbuf_header
+inet_chksum_pbuf
+pbuf_copy
+htons
+ip_output_if

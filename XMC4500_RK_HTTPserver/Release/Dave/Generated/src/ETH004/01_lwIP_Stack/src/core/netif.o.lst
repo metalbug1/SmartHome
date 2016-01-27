@@ -1,0 +1,376 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"netif.c"
+  16              		.section	.text.netif_remove,"ax",%progbits
+  17              		.align	1
+  18              		.global	netif_remove
+  19              		.thumb
+  20              		.thumb_func
+  22              	netif_remove:
+  23              		@ args = 0, pretend = 0, frame = 0
+  24              		@ frame_needed = 0, uses_anonymous_args = 0
+  25 0000 10B5     		push	{r4, lr}
+  26 0002 0446     		mov	r4, r0
+  27 0004 E8B1     		cbz	r0, .L1
+  28 0006 90F82930 		ldrb	r3, [r0, #41]	@ zero_extendqisi2
+  29 000a 03F04001 		and	r1, r3, #64
+  30 000e CAB2     		uxtb	r2, r1
+  31 0010 0AB1     		cbz	r2, .L4
+  32 0012 FFF7FEFF 		bl	igmp_stop
+  33              	.L4:
+  34 0016 0B48     		ldr	r0, .L17
+  35 0018 0368     		ldr	r3, [r0, #0]
+  36 001a A342     		cmp	r3, r4
+  37 001c 03D1     		bne	.L13
+  38 001e 2168     		ldr	r1, [r4, #0]
+  39 0020 0160     		str	r1, [r0, #0]
+  40 0022 08E0     		b	.L6
+  41              	.L10:
+  42 0024 0B46     		mov	r3, r1
+  43              	.L13:
+  44 0026 2BB1     		cbz	r3, .L16
+  45              	.L8:
+  46 0028 1968     		ldr	r1, [r3, #0]
+  47 002a A142     		cmp	r1, r4
+  48 002c FAD1     		bne	.L10
+  49 002e 2268     		ldr	r2, [r4, #0]
+  50 0030 1A60     		str	r2, [r3, #0]
+  51 0032 00E0     		b	.L6
+  52              	.L16:
+  53 0034 10BD     		pop	{r4, pc}
+  54              	.L6:
+  55 0036 0448     		ldr	r0, .L17+4
+  56 0038 0368     		ldr	r3, [r0, #0]
+  57 003a A342     		cmp	r3, r4
+  58 003c 01D1     		bne	.L1
+  59 003e 0022     		movs	r2, #0
+  60 0040 0260     		str	r2, [r0, #0]
+  61              	.L1:
+  62 0042 10BD     		pop	{r4, pc}
+  63              	.L18:
+  64              		.align	2
+  65              	.L17:
+  66 0044 00000000 		.word	netif_list
+  67 0048 00000000 		.word	netif_default
+  69              		.section	.text.netif_find,"ax",%progbits
+  70              		.align	1
+  71              		.global	netif_find
+  72              		.thumb
+  73              		.thumb_func
+  75              	netif_find:
+  76              		@ args = 0, pretend = 0, frame = 0
+  77              		@ frame_needed = 0, uses_anonymous_args = 0
+  78 0000 10B5     		push	{r4, lr}
+  79 0002 A0B1     		cbz	r0, .L24
+  80 0004 8278     		ldrb	r2, [r0, #2]	@ zero_extendqisi2
+  81 0006 0B4B     		ldr	r3, .L25
+  82 0008 303A     		subs	r2, r2, #48
+  83 000a D2B2     		uxtb	r2, r2
+  84              	.L22:
+  85 000c 1B68     		ldr	r3, [r3, #0]
+  86 000e 7BB1     		cbz	r3, .L20
+  87              	.L23:
+  88 0010 93F82C10 		ldrb	r1, [r3, #44]	@ zero_extendqisi2
+  89 0014 9142     		cmp	r1, r2
+  90 0016 F9D1     		bne	.L22
+  91 0018 0478     		ldrb	r4, [r0, #0]	@ zero_extendqisi2
+  92 001a 93F82A10 		ldrb	r1, [r3, #42]	@ zero_extendqisi2
+  93 001e 8C42     		cmp	r4, r1
+  94 0020 F4D1     		bne	.L22
+  95 0022 4478     		ldrb	r4, [r0, #1]	@ zero_extendqisi2
+  96 0024 93F82B10 		ldrb	r1, [r3, #43]	@ zero_extendqisi2
+  97 0028 8C42     		cmp	r4, r1
+  98 002a EFD1     		bne	.L22
+  99 002c 00E0     		b	.L20
+ 100              	.L24:
+ 101 002e 0346     		mov	r3, r0
+ 102              	.L20:
+ 103 0030 1846     		mov	r0, r3
+ 104 0032 10BD     		pop	{r4, pc}
+ 105              	.L26:
+ 106              		.align	2
+ 107              	.L25:
+ 108 0034 00000000 		.word	netif_list
+ 110              		.section	.text.netif_set_ipaddr,"ax",%progbits
+ 111              		.align	1
+ 112              		.global	netif_set_ipaddr
+ 113              		.thumb
+ 114              		.thumb_func
+ 116              	netif_set_ipaddr:
+ 117              		@ args = 0, pretend = 0, frame = 0
+ 118              		@ frame_needed = 0, uses_anonymous_args = 0
+ 119 0000 70B5     		push	{r4, r5, r6, lr}
+ 120 0002 4368     		ldr	r3, [r0, #4]
+ 121 0004 0A68     		ldr	r2, [r1, #0]	@ unaligned
+ 122 0006 9A42     		cmp	r2, r3
+ 123 0008 0446     		mov	r4, r0
+ 124 000a 0D46     		mov	r5, r1
+ 125 000c 02D1     		bne	.L28
+ 126              	.L36:
+ 127 000e 2A68     		ldr	r2, [r5, #0]	@ unaligned
+ 128 0010 6260     		str	r2, [r4, #4]
+ 129 0012 70BD     		pop	{r4, r5, r6, pc}
+ 130              	.L28:
+ 131 0014 0C48     		ldr	r0, .L43
+ 132 0016 0068     		ldr	r0, [r0, #0]
+ 133              	.L41:
+ 134 0018 48B1     		cbz	r0, .L42
+ 135              	.L32:
+ 136 001a 0668     		ldr	r6, [r0, #0]
+ 137 001c 6268     		ldr	r2, [r4, #4]
+ 138 001e 9642     		cmp	r6, r2
+ 139 0020 C668     		ldr	r6, [r0, #12]
+ 140 0022 02D1     		bne	.L30
+ 141 0024 0121     		movs	r1, #1
+ 142 0026 FFF7FEFF 		bl	tcp_abandon
+ 143              	.L30:
+ 144 002a 3046     		mov	r0, r6
+ 145 002c F4E7     		b	.L41
+ 146              	.L42:
+ 147 002e 0749     		ldr	r1, .L43+4
+ 148 0030 0B68     		ldr	r3, [r1, #0]
+ 149              	.L33:
+ 150 0032 002B     		cmp	r3, #0
+ 151 0034 EBD0     		beq	.L36
+ 152              	.L35:
+ 153 0036 1868     		ldr	r0, [r3, #0]
+ 154 0038 20B1     		cbz	r0, .L34
+ 155 003a 6168     		ldr	r1, [r4, #4]
+ 156 003c 8842     		cmp	r0, r1
+ 157 003e 04BF     		itt	eq
+ 158 0040 2868     		ldreq	r0, [r5, #0]	@ unaligned
+ 159 0042 1860     		streq	r0, [r3, #0]
+ 160              	.L34:
+ 161 0044 DB68     		ldr	r3, [r3, #12]
+ 162 0046 F4E7     		b	.L33
+ 163              	.L44:
+ 164              		.align	2
+ 165              	.L43:
+ 166 0048 00000000 		.word	tcp_active_pcbs
+ 167 004c 00000000 		.word	tcp_listen_pcbs
+ 169              		.section	.text.netif_set_addr,"ax",%progbits
+ 170              		.align	1
+ 171              		.global	netif_set_addr
+ 172              		.thumb
+ 173              		.thumb_func
+ 175              	netif_set_addr:
+ 176              		@ args = 0, pretend = 0, frame = 0
+ 177              		@ frame_needed = 0, uses_anonymous_args = 0
+ 178 0000 70B5     		push	{r4, r5, r6, lr}
+ 179 0002 1446     		mov	r4, r2
+ 180 0004 0646     		mov	r6, r0
+ 181 0006 1D46     		mov	r5, r3
+ 182 0008 FFF7FEFF 		bl	netif_set_ipaddr
+ 183 000c 04B1     		cbz	r4, .L46
+ 184 000e 2468     		ldr	r4, [r4, #0]	@ unaligned
+ 185              	.L46:
+ 186 0010 B460     		str	r4, [r6, #8]
+ 187 0012 05B1     		cbz	r5, .L47
+ 188 0014 2D68     		ldr	r5, [r5, #0]	@ unaligned
+ 189              	.L47:
+ 190 0016 F560     		str	r5, [r6, #12]
+ 191 0018 70BD     		pop	{r4, r5, r6, pc}
+ 193              		.section	.text.netif_add,"ax",%progbits
+ 194              		.align	1
+ 195              		.global	netif_add
+ 196              		.thumb
+ 197              		.thumb_func
+ 199              	netif_add:
+ 200              		@ args = 12, pretend = 0, frame = 0
+ 201              		@ frame_needed = 0, uses_anonymous_args = 0
+ 202 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 203 0002 069E     		ldr	r6, [sp, #24]
+ 204 0004 C661     		str	r6, [r0, #28]
+ 205 0006 164E     		ldr	r6, .L53
+ 206 0008 3778     		ldrb	r7, [r6, #0]	@ zero_extendqisi2
+ 207 000a 80F82C70 		strb	r7, [r0, #44]
+ 208 000e 0137     		adds	r7, r7, #1
+ 209 0010 3770     		strb	r7, [r6, #0]
+ 210 0012 089E     		ldr	r6, [sp, #32]
+ 211 0014 0025     		movs	r5, #0
+ 212 0016 0446     		mov	r4, r0
+ 213 0018 4560     		str	r5, [r0, #4]
+ 214 001a 8560     		str	r5, [r0, #8]
+ 215 001c C560     		str	r5, [r0, #12]
+ 216 001e 80F82950 		strb	r5, [r0, #41]
+ 217 0022 0563     		str	r5, [r0, #48]
+ 218 0024 0661     		str	r6, [r0, #16]
+ 219 0026 FFF7FEFF 		bl	netif_set_addr
+ 220 002a 2046     		mov	r0, r4
+ 221 002c 079B     		ldr	r3, [sp, #28]
+ 222 002e 9847     		blx	r3
+ 223 0030 98B9     		cbnz	r0, .L52
+ 224 0032 0C48     		ldr	r0, .L53+4
+ 225 0034 94F82910 		ldrb	r1, [r4, #41]	@ zero_extendqisi2
+ 226 0038 0268     		ldr	r2, [r0, #0]
+ 227 003a 41F04003 		orr	r3, r1, #64
+ 228 003e 2260     		str	r2, [r4, #0]
+ 229 0040 84F82930 		strb	r3, [r4, #41]
+ 230 0044 0460     		str	r4, [r0, #0]
+ 231 0046 2046     		mov	r0, r4
+ 232 0048 FFF7FEFF 		bl	igmp_start
+ 233 004c 94F82900 		ldrb	r0, [r4, #41]	@ zero_extendqisi2
+ 234 0050 40F00202 		orr	r2, r0, #2
+ 235 0054 84F82920 		strb	r2, [r4, #41]
+ 236 0058 00E0     		b	.L51
+ 237              	.L52:
+ 238 005a 2C46     		mov	r4, r5
+ 239              	.L51:
+ 240 005c 2046     		mov	r0, r4
+ 241 005e F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 242              	.L54:
+ 243              		.align	2
+ 244              	.L53:
+ 245 0060 00000000 		.word	.LANCHOR0
+ 246 0064 00000000 		.word	netif_list
+ 248              		.section	.text.netif_set_gw,"ax",%progbits
+ 249              		.align	1
+ 250              		.global	netif_set_gw
+ 251              		.thumb
+ 252              		.thumb_func
+ 254              	netif_set_gw:
+ 255              		@ args = 0, pretend = 0, frame = 0
+ 256              		@ frame_needed = 0, uses_anonymous_args = 0
+ 257              		@ link register save eliminated.
+ 258 0000 01B1     		cbz	r1, .L56
+ 259 0002 0968     		ldr	r1, [r1, #0]	@ unaligned
+ 260              	.L56:
+ 261 0004 C160     		str	r1, [r0, #12]
+ 262 0006 7047     		bx	lr
+ 264              		.section	.text.netif_set_netmask,"ax",%progbits
+ 265              		.align	1
+ 266              		.global	netif_set_netmask
+ 267              		.thumb
+ 268              		.thumb_func
+ 270              	netif_set_netmask:
+ 271              		@ args = 0, pretend = 0, frame = 0
+ 272              		@ frame_needed = 0, uses_anonymous_args = 0
+ 273              		@ link register save eliminated.
+ 274 0000 01B1     		cbz	r1, .L59
+ 275 0002 0968     		ldr	r1, [r1, #0]	@ unaligned
+ 276              	.L59:
+ 277 0004 8160     		str	r1, [r0, #8]
+ 278 0006 7047     		bx	lr
+ 280              		.section	.text.netif_set_default,"ax",%progbits
+ 281              		.align	1
+ 282              		.global	netif_set_default
+ 283              		.thumb
+ 284              		.thumb_func
+ 286              	netif_set_default:
+ 287              		@ args = 0, pretend = 0, frame = 0
+ 288              		@ frame_needed = 0, uses_anonymous_args = 0
+ 289              		@ link register save eliminated.
+ 290 0000 014B     		ldr	r3, .L62
+ 291 0002 1860     		str	r0, [r3, #0]
+ 292 0004 7047     		bx	lr
+ 293              	.L63:
+ 294 0006 00BF     		.align	2
+ 295              	.L62:
+ 296 0008 00000000 		.word	netif_default
+ 298              		.section	.text.netif_set_up,"ax",%progbits
+ 299              		.align	1
+ 300              		.global	netif_set_up
+ 301              		.thumb
+ 302              		.thumb_func
+ 304              	netif_set_up:
+ 305              		@ args = 0, pretend = 0, frame = 0
+ 306              		@ frame_needed = 0, uses_anonymous_args = 0
+ 307              		@ link register save eliminated.
+ 308 0000 90F82930 		ldrb	r3, [r0, #41]	@ zero_extendqisi2
+ 309 0004 D907     		lsls	r1, r3, #31
+ 310 0006 09D4     		bmi	.L64
+ 311 0008 03F04002 		and	r2, r3, #64
+ 312 000c 43F00101 		orr	r1, r3, #1
+ 313 0010 D3B2     		uxtb	r3, r2
+ 314 0012 80F82910 		strb	r1, [r0, #41]
+ 315 0016 0BB1     		cbz	r3, .L64
+ 316 0018 FFF7FEBF 		b	igmp_report_groups
+ 317              	.L64:
+ 318 001c 7047     		bx	lr
+ 320              		.section	.text.netif_set_down,"ax",%progbits
+ 321              		.align	1
+ 322              		.global	netif_set_down
+ 323              		.thumb
+ 324              		.thumb_func
+ 326              	netif_set_down:
+ 327              		@ args = 0, pretend = 0, frame = 0
+ 328              		@ frame_needed = 0, uses_anonymous_args = 0
+ 329              		@ link register save eliminated.
+ 330 0000 90F82930 		ldrb	r3, [r0, #41]	@ zero_extendqisi2
+ 331 0004 DA07     		lsls	r2, r3, #31
+ 332 0006 44BF     		itt	mi
+ 333 0008 23F00103 		bicmi	r3, r3, #1
+ 334 000c 80F82930 		strbmi	r3, [r0, #41]
+ 335 0010 7047     		bx	lr
+ 337              		.section	.text.netif_is_up,"ax",%progbits
+ 338              		.align	1
+ 339              		.global	netif_is_up
+ 340              		.thumb
+ 341              		.thumb_func
+ 343              	netif_is_up:
+ 344              		@ args = 0, pretend = 0, frame = 0
+ 345              		@ frame_needed = 0, uses_anonymous_args = 0
+ 346              		@ link register save eliminated.
+ 347 0000 90F82900 		ldrb	r0, [r0, #41]	@ zero_extendqisi2
+ 348 0004 00F00100 		and	r0, r0, #1
+ 349 0008 7047     		bx	lr
+ 351              		.comm	netif_default,4,4
+ 352              		.comm	netif_list,4,4
+ 353              		.bss
+ 354              		.set	.LANCHOR0,. + 0
+ 357              	netifnum.4794:
+ 358 0000 00       		.space	1
+ 359              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 netif.c
+C:\Users\Mihai\AppData\Local\Temp\cc2CWe4j.s:17     .text.netif_remove:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc2CWe4j.s:22     .text.netif_remove:00000000 netif_remove
+C:\Users\Mihai\AppData\Local\Temp\cc2CWe4j.s:66     .text.netif_remove:00000044 $d
+                            *COM*:00000004 netif_list
+                            *COM*:00000004 netif_default
+C:\Users\Mihai\AppData\Local\Temp\cc2CWe4j.s:70     .text.netif_find:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc2CWe4j.s:75     .text.netif_find:00000000 netif_find
+C:\Users\Mihai\AppData\Local\Temp\cc2CWe4j.s:108    .text.netif_find:00000034 $d
+C:\Users\Mihai\AppData\Local\Temp\cc2CWe4j.s:111    .text.netif_set_ipaddr:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc2CWe4j.s:116    .text.netif_set_ipaddr:00000000 netif_set_ipaddr
+C:\Users\Mihai\AppData\Local\Temp\cc2CWe4j.s:166    .text.netif_set_ipaddr:00000048 $d
+C:\Users\Mihai\AppData\Local\Temp\cc2CWe4j.s:170    .text.netif_set_addr:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc2CWe4j.s:175    .text.netif_set_addr:00000000 netif_set_addr
+C:\Users\Mihai\AppData\Local\Temp\cc2CWe4j.s:194    .text.netif_add:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc2CWe4j.s:199    .text.netif_add:00000000 netif_add
+C:\Users\Mihai\AppData\Local\Temp\cc2CWe4j.s:245    .text.netif_add:00000060 $d
+C:\Users\Mihai\AppData\Local\Temp\cc2CWe4j.s:249    .text.netif_set_gw:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc2CWe4j.s:254    .text.netif_set_gw:00000000 netif_set_gw
+C:\Users\Mihai\AppData\Local\Temp\cc2CWe4j.s:265    .text.netif_set_netmask:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc2CWe4j.s:270    .text.netif_set_netmask:00000000 netif_set_netmask
+C:\Users\Mihai\AppData\Local\Temp\cc2CWe4j.s:281    .text.netif_set_default:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc2CWe4j.s:286    .text.netif_set_default:00000000 netif_set_default
+C:\Users\Mihai\AppData\Local\Temp\cc2CWe4j.s:296    .text.netif_set_default:00000008 $d
+C:\Users\Mihai\AppData\Local\Temp\cc2CWe4j.s:299    .text.netif_set_up:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc2CWe4j.s:304    .text.netif_set_up:00000000 netif_set_up
+C:\Users\Mihai\AppData\Local\Temp\cc2CWe4j.s:321    .text.netif_set_down:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc2CWe4j.s:326    .text.netif_set_down:00000000 netif_set_down
+C:\Users\Mihai\AppData\Local\Temp\cc2CWe4j.s:338    .text.netif_is_up:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc2CWe4j.s:343    .text.netif_is_up:00000000 netif_is_up
+C:\Users\Mihai\AppData\Local\Temp\cc2CWe4j.s:357    .bss:00000000 netifnum.4794
+C:\Users\Mihai\AppData\Local\Temp\cc2CWe4j.s:358    .bss:00000000 $d
+
+UNDEFINED SYMBOLS
+igmp_stop
+tcp_abandon
+tcp_active_pcbs
+tcp_listen_pcbs
+igmp_start
+igmp_report_groups

@@ -1,0 +1,353 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"CLK001.c"
+  16              		.section	.text.Delay,"ax",%progbits
+  17              		.align	1
+  18              		.thumb
+  19              		.thumb_func
+  21              	Delay:
+  22              		@ args = 0, pretend = 0, frame = 0
+  23              		@ frame_needed = 0, uses_anonymous_args = 0
+  24              		@ link register save eliminated.
+  25 0000 0023     		movs	r3, #0
+  26              	.L2:
+  27 0002 8342     		cmp	r3, r0
+  28 0004 05D0     		beq	.L5
+  29              	.L3:
+  30              	@ 327 "C:\DAVE-3.1.10\eclipse\/../CMSIS/Include/core_cmInstr.h" 1
+  31 0006 00BF     		nop
+  32              	@ 0 "" 2
+  33              	@ 327 "C:\DAVE-3.1.10\eclipse\/../CMSIS/Include/core_cmInstr.h" 1
+  34 0008 00BF     		nop
+  35              	@ 0 "" 2
+  36              	@ 327 "C:\DAVE-3.1.10\eclipse\/../CMSIS/Include/core_cmInstr.h" 1
+  37 000a 00BF     		nop
+  38              	@ 0 "" 2
+  39              	@ 327 "C:\DAVE-3.1.10\eclipse\/../CMSIS/Include/core_cmInstr.h" 1
+  40 000c 00BF     		nop
+  41              	@ 0 "" 2
+  42              		.thumb
+  43 000e 0133     		adds	r3, r3, #1
+  44 0010 F7E7     		b	.L2
+  45              	.L5:
+  46 0012 7047     		bx	lr
+  48              		.section	.text.CLK001_Init,"ax",%progbits
+  49              		.align	1
+  50              		.global	CLK001_Init
+  51              		.thumb
+  52              		.thumb_func
+  54              	CLK001_Init:
+  55              		@ args = 0, pretend = 0, frame = 0
+  56              		@ frame_needed = 0, uses_anonymous_args = 0
+  57 0000 914B     		ldr	r3, .L70
+  58 0002 9248     		ldr	r0, .L70+4
+  59 0004 5A68     		ldr	r2, [r3, #4]
+  60 0006 1040     		ands	r0, r0, r2
+  61 0008 10B5     		push	{r4, lr}
+  62 000a 0028     		cmp	r0, #0
+  63 000c 00F09280 		beq	.L8
+  64              	.L7:
+  65 0010 8F49     		ldr	r1, .L70+8
+  66 0012 0C68     		ldr	r4, [r1, #0]
+  67 0014 E207     		lsls	r2, r4, #31
+  68 0016 03D4     		bmi	.L31
+  69              	.L30:
+  70 0018 4B68     		ldr	r3, [r1, #4]
+  71 001a 43F00102 		orr	r2, r3, #1
+  72 001e 4A60     		str	r2, [r1, #4]
+  73              	.L31:
+  74 0020 8C48     		ldr	r0, .L70+12
+  75 0022 0168     		ldr	r1, [r0, #0]
+  76 0024 8905     		lsls	r1, r1, #22
+  77 0026 03D5     		bpl	.L9
+  78 0028 8468     		ldr	r4, [r0, #8]
+  79 002a 44F40073 		orr	r3, r4, #512
+  80 002e 8360     		str	r3, [r0, #8]
+  81              	.L9:
+  82 0030 854C     		ldr	r4, .L70
+  83 0032 6268     		ldr	r2, [r4, #4]
+  84 0034 22F48010 		bic	r0, r2, #1048576
+  85 0038 6060     		str	r0, [r4, #4]
+  86 003a 6420     		movs	r0, #100
+  87 003c FFF7FEFF 		bl	Delay
+  88 0040 6168     		ldr	r1, [r4, #4]
+  89 0042 41F40023 		orr	r3, r1, #524288
+  90 0046 6420     		movs	r0, #100
+  91 0048 6360     		str	r3, [r4, #4]
+  92 004a FFF7FEFF 		bl	Delay
+  93 004e 6268     		ldr	r2, [r4, #4]
+  94 0050 814B     		ldr	r3, .L70+16
+  95 0052 22F48030 		bic	r0, r2, #65536
+  96 0056 20F00201 		bic	r1, r0, #2
+  97 005a 6160     		str	r1, [r4, #4]
+  98 005c 5A68     		ldr	r2, [r3, #4]
+  99 005e 12F0300F 		tst	r2, #48
+ 100 0062 1DD0     		beq	.L10
+ 101 0064 5868     		ldr	r0, [r3, #4]
+ 102 0066 20F03001 		bic	r1, r0, #48
+ 103 006a 5960     		str	r1, [r3, #4]
+ 104 006c 5A68     		ldr	r2, [r3, #4]
+ 105 006e 42F44030 		orr	r0, r2, #196608
+ 106 0072 5860     		str	r0, [r3, #4]
+ 107 0074 E368     		ldr	r3, [r4, #12]
+ 108 0076 23F00101 		bic	r1, r3, #1
+ 109 007a E160     		str	r1, [r4, #12]
+ 110 007c 6268     		ldr	r2, [r4, #4]
+ 111 007e 22F40030 		bic	r0, r2, #131072
+ 112 0082 6060     		str	r0, [r4, #4]
+ 113 0084 44F25064 		movw	r4, #18000
+ 114              	.L12:
+ 115 0088 0A20     		movs	r0, #10
+ 116 008a FFF7FEFF 		bl	Delay
+ 117 008e 6E4B     		ldr	r3, .L70
+ 118 0090 1968     		ldr	r1, [r3, #0]
+ 119 0092 01F46072 		and	r2, r1, #896
+ 120 0096 B2F5607F 		cmp	r2, #896
+ 121 009a 40F0C980 		bne	.L67
+ 122              	.L11:
+ 123 009e 1B68     		ldr	r3, [r3, #0]
+ 124              	.L10:
+ 125 00a0 6948     		ldr	r0, .L70
+ 126 00a2 0368     		ldr	r3, [r0, #0]
+ 127 00a4 5A07     		lsls	r2, r3, #29
+ 128 00a6 29D4     		bmi	.L14
+ 129 00a8 4168     		ldr	r1, [r0, #4]
+ 130 00aa 41F00102 		orr	r2, r1, #1
+ 131 00ae 4260     		str	r2, [r0, #4]
+ 132 00b0 4468     		ldr	r4, [r0, #4]
+ 133 00b2 6A49     		ldr	r1, .L70+20
+ 134 00b4 44F01003 		orr	r3, r4, #16
+ 135 00b8 4360     		str	r3, [r0, #4]
+ 136 00ba 8160     		str	r1, [r0, #8]
+ 137 00bc 4268     		ldr	r2, [r0, #4]
+ 138 00be 42F04004 		orr	r4, r2, #64
+ 139 00c2 4460     		str	r4, [r0, #4]
+ 140 00c4 4368     		ldr	r3, [r0, #4]
+ 141 00c6 23F01001 		bic	r1, r3, #16
+ 142 00ca 4160     		str	r1, [r0, #4]
+ 143 00cc 4268     		ldr	r2, [r0, #4]
+ 144 00ce 42F48024 		orr	r4, r2, #262144
+ 145 00d2 4460     		str	r4, [r0, #4]
+ 146 00d4 44F25064 		movw	r4, #18000
+ 147              	.L16:
+ 148 00d8 0A20     		movs	r0, #10
+ 149 00da FFF7FEFF 		bl	Delay
+ 150 00de 5A48     		ldr	r0, .L70
+ 151 00e0 0368     		ldr	r3, [r0, #0]
+ 152 00e2 13F0040F 		tst	r3, #4
+ 153 00e6 0146     		mov	r1, r0
+ 154 00e8 00F0A680 		beq	.L68
+ 155              	.L15:
+ 156 00ec 0A68     		ldr	r2, [r1, #0]
+ 157 00ee 5648     		ldr	r0, .L70
+ 158 00f0 5407     		lsls	r4, r2, #29
+ 159 00f2 03D5     		bpl	.L14
+ 160 00f4 4368     		ldr	r3, [r0, #4]
+ 161 00f6 23F00101 		bic	r1, r3, #1
+ 162 00fa 4160     		str	r1, [r0, #4]
+ 163              	.L14:
+ 164 00fc 584C     		ldr	r4, .L70+24
+ 165 00fe E068     		ldr	r0, [r4, #12]
+ 166 0100 40F48032 		orr	r2, r0, #65536
+ 167 0104 E260     		str	r2, [r4, #12]
+ 168 0106 504C     		ldr	r4, .L70
+ 169 0108 6368     		ldr	r3, [r4, #4]
+ 170 010a 23F04001 		bic	r1, r3, #64
+ 171 010e 6160     		str	r1, [r4, #4]
+ 172 0110 6420     		movs	r0, #100
+ 173 0112 FFF7FEFF 		bl	Delay
+ 174 0116 5348     		ldr	r0, .L70+28
+ 175 0118 A060     		str	r0, [r4, #8]
+ 176 011a 6420     		movs	r0, #100
+ 177 011c FFF7FEFF 		bl	Delay
+ 178 0120 514A     		ldr	r2, .L70+32
+ 179 0122 9620     		movs	r0, #150
+ 180 0124 A260     		str	r2, [r4, #8]
+ 181 0126 FFF7FEFF 		bl	Delay
+ 182 012a 504B     		ldr	r3, .L70+36
+ 183 012c 5048     		ldr	r0, .L70+40
+ 184 012e A360     		str	r3, [r4, #8]
+ 185 0130 0521     		movs	r1, #5
+ 186 0132 C160     		str	r1, [r0, #12]
+ 187              	.L8:
+ 188 0134 444B     		ldr	r3, .L70
+ 189 0136 454A     		ldr	r2, .L70+4
+ 190 0138 5969     		ldr	r1, [r3, #20]
+ 191 013a 0A40     		ands	r2, r2, r1
+ 192 013c 002A     		cmp	r2, #0
+ 193 013e 4FD0     		beq	.L19
+ 194              	.L18:
+ 195 0140 5869     		ldr	r0, [r3, #20]
+ 196 0142 20F48031 		bic	r1, r0, #65536
+ 197 0146 21F00202 		bic	r2, r1, #2
+ 198 014a 4348     		ldr	r0, .L70+16
+ 199 014c 5A61     		str	r2, [r3, #20]
+ 200 014e 4168     		ldr	r1, [r0, #4]
+ 201 0150 11F0300F 		tst	r1, #48
+ 202 0154 23D0     		beq	.L33
+ 203              	.L32:
+ 204 0156 5C68     		ldr	r4, [r3, #4]
+ 205 0158 3C4A     		ldr	r2, .L70+4
+ 206 015a 2240     		ands	r2, r2, r4
+ 207 015c 2AB1     		cbz	r2, .L20
+ 208 015e 5868     		ldr	r0, [r3, #4]
+ 209 0160 20F48031 		bic	r1, r0, #65536
+ 210 0164 21F00204 		bic	r4, r1, #2
+ 211 0168 5C60     		str	r4, [r3, #4]
+ 212              	.L20:
+ 213 016a 3B4B     		ldr	r3, .L70+16
+ 214 016c 5A68     		ldr	r2, [r3, #4]
+ 215 016e 22F03000 		bic	r0, r2, #48
+ 216 0172 5860     		str	r0, [r3, #4]
+ 217 0174 5968     		ldr	r1, [r3, #4]
+ 218 0176 41F44034 		orr	r4, r1, #196608
+ 219 017a 5C60     		str	r4, [r3, #4]
+ 220 017c 5A69     		ldr	r2, [r3, #20]
+ 221 017e 22F40030 		bic	r0, r2, #131072
+ 222 0182 5861     		str	r0, [r3, #20]
+ 223 0184 44F25064 		movw	r4, #18000
+ 224              	.L22:
+ 225 0188 0A20     		movs	r0, #10
+ 226 018a FFF7FEFF 		bl	Delay
+ 227 018e 2E4B     		ldr	r3, .L70
+ 228 0190 1968     		ldr	r1, [r3, #0]
+ 229 0192 01F46072 		and	r2, r1, #896
+ 230 0196 B2F5607F 		cmp	r2, #896
+ 231 019a 51D1     		bne	.L69
+ 232              	.L21:
+ 233 019c 1B68     		ldr	r3, [r3, #0]
+ 234              	.L33:
+ 235 019e 2A4B     		ldr	r3, .L70
+ 236 01a0 5869     		ldr	r0, [r3, #20]
+ 237 01a2 40F00101 		orr	r1, r0, #1
+ 238 01a6 5961     		str	r1, [r3, #20]
+ 239 01a8 5A69     		ldr	r2, [r3, #20]
+ 240 01aa 3249     		ldr	r1, .L70+44
+ 241 01ac 42F01000 		orr	r0, r2, #16
+ 242 01b0 2B4A     		ldr	r2, .L70+24
+ 243 01b2 5861     		str	r0, [r3, #20]
+ 244 01b4 0320     		movs	r0, #3
+ 245 01b6 5961     		str	r1, [r3, #20]
+ 246 01b8 9061     		str	r0, [r2, #24]
+ 247 01ba 5969     		ldr	r1, [r3, #20]
+ 248 01bc 41F04000 		orr	r0, r1, #64
+ 249 01c0 5861     		str	r0, [r3, #20]
+ 250 01c2 5969     		ldr	r1, [r3, #20]
+ 251 01c4 21F01000 		bic	r0, r1, #16
+ 252 01c8 5861     		str	r0, [r3, #20]
+ 253 01ca 5969     		ldr	r1, [r3, #20]
+ 254 01cc 41F48020 		orr	r0, r1, #262144
+ 255 01d0 5861     		str	r0, [r3, #20]
+ 256              	.L23:
+ 257 01d2 1969     		ldr	r1, [r3, #16]
+ 258 01d4 4807     		lsls	r0, r1, #29
+ 259 01d6 FCD5     		bpl	.L23
+ 260 01d8 5368     		ldr	r3, [r2, #4]
+ 261 01da 43F00100 		orr	r0, r3, #1
+ 262 01de 5060     		str	r0, [r2, #4]
+ 263              	.L19:
+ 264 01e0 1F49     		ldr	r1, .L70+24
+ 265 01e2 4A68     		ldr	r2, [r1, #4]
+ 266 01e4 42F00203 		orr	r3, r2, #2
+ 267 01e8 4B60     		str	r3, [r1, #4]
+ 268 01ea A1F58063 		sub	r3, r1, #1024
+ 269 01ee 1868     		ldr	r0, [r3, #0]
+ 270 01f0 C107     		lsls	r1, r0, #31
+ 271 01f2 08D5     		bpl	.L24
+ 272              	.L28:
+ 273 01f4 174B     		ldr	r3, .L70+12
+ 274 01f6 1868     		ldr	r0, [r3, #0]
+ 275 01f8 8205     		lsls	r2, r0, #22
+ 276 01fa 0AD5     		bpl	.L26
+ 277              	.L25:
+ 278 01fc 9968     		ldr	r1, [r3, #8]
+ 279 01fe 41F40072 		orr	r2, r1, #512
+ 280 0202 9A60     		str	r2, [r3, #8]
+ 281 0204 05E0     		b	.L26
+ 282              	.L24:
+ 283 0206 0121     		movs	r1, #1
+ 284 0208 5960     		str	r1, [r3, #4]
+ 285              	.L27:
+ 286 020a 1A68     		ldr	r2, [r3, #0]
+ 287 020c D007     		lsls	r0, r2, #31
+ 288 020e FCD5     		bpl	.L27
+ 289 0210 F0E7     		b	.L28
+ 290              	.L26:
+ 291 0212 194B     		ldr	r3, .L70+48
+ 292 0214 D868     		ldr	r0, [r3, #12]
+ 293 0216 D860     		str	r0, [r3, #12]
+ 294              	.L29:
+ 295 0218 184B     		ldr	r3, .L70+52
+ 296 021a 5968     		ldr	r1, [r3, #4]
+ 297 021c 0903     		lsls	r1, r1, #12
+ 298 021e FBD5     		bpl	.L29
+ 299 0220 DA68     		ldr	r2, [r3, #12]
+ 300 0222 42F40020 		orr	r0, r2, #524288
+ 301 0226 D860     		str	r0, [r3, #12]
+ 302 0228 BDE81040 		pop	{r4, lr}
+ 303 022c FFF7FEBF 		b	SystemCoreClockUpdate
+ 304              	.L67:
+ 305 0230 013C     		subs	r4, r4, #1
+ 306 0232 7FF429AF 		bne	.L12
+ 307 0236 32E7     		b	.L11
+ 308              	.L68:
+ 309 0238 013C     		subs	r4, r4, #1
+ 310 023a 7FF44DAF 		bne	.L16
+ 311 023e 55E7     		b	.L15
+ 312              	.L69:
+ 313 0240 013C     		subs	r4, r4, #1
+ 314 0242 A1D1     		bne	.L22
+ 315 0244 AAE7     		b	.L21
+ 316              	.L71:
+ 317 0246 00BF     		.align	2
+ 318              	.L70:
+ 319 0248 10470050 		.word	1342195472
+ 320 024c 02000100 		.word	65538
+ 321 0250 00420050 		.word	1342194176
+ 322 0254 00440050 		.word	1342194688
+ 323 0258 00470050 		.word	1342195456
+ 324 025c 00271300 		.word	1255168
+ 325 0260 00460050 		.word	1342195200
+ 326 0264 00270700 		.word	468736
+ 327 0268 00270400 		.word	272128
+ 328 026c 00270300 		.word	206592
+ 329 0270 60410050 		.word	1342194016
+ 330 0274 003F0001 		.word	16793344
+ 331 0278 00430050 		.word	1342194432
+ 332 027c 74400050 		.word	1342193780
+ 334              		.section	.text.AllowPLLInitByStartup,"ax",%progbits
+ 335              		.align	1
+ 336              		.global	AllowPLLInitByStartup
+ 337              		.thumb
+ 338              		.thumb_func
+ 340              	AllowPLLInitByStartup:
+ 341              		@ args = 0, pretend = 0, frame = 0
+ 342              		@ frame_needed = 0, uses_anonymous_args = 0
+ 343              		@ link register save eliminated.
+ 344 0000 0020     		movs	r0, #0
+ 345 0002 7047     		bx	lr
+ 347              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 CLK001.c
+C:\Users\Mihai\AppData\Local\Temp\ccyYjtu1.s:17     .text.Delay:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccyYjtu1.s:21     .text.Delay:00000000 Delay
+C:\Users\Mihai\AppData\Local\Temp\ccyYjtu1.s:49     .text.CLK001_Init:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccyYjtu1.s:54     .text.CLK001_Init:00000000 CLK001_Init
+C:\Users\Mihai\AppData\Local\Temp\ccyYjtu1.s:319    .text.CLK001_Init:00000248 $d
+C:\Users\Mihai\AppData\Local\Temp\ccyYjtu1.s:335    .text.AllowPLLInitByStartup:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccyYjtu1.s:340    .text.AllowPLLInitByStartup:00000000 AllowPLLInitByStartup
+
+UNDEFINED SYMBOLS
+SystemCoreClockUpdate

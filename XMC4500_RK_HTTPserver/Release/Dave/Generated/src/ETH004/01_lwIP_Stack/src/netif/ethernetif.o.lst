@@ -1,0 +1,188 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"ethernetif.c"
+  16              		.section	.text.low_level_output,"ax",%progbits
+  17              		.align	1
+  18              		.thumb
+  19              		.thumb_func
+  21              	low_level_output:
+  22              		@ args = 0, pretend = 0, frame = 8
+  23              		@ frame_needed = 0, uses_anonymous_args = 0
+  24 0000 73B5     		push	{r0, r1, r4, r5, r6, lr}
+  25 0002 0E89     		ldrh	r6, [r1, #8]
+  26 0004 01A8     		add	r0, sp, #4
+  27 0006 0C46     		mov	r4, r1
+  28 0008 FFF7FEFF 		bl	Eth_GetTxBuffer
+  29 000c 40F2DC53 		movw	r3, #1500
+  30 0010 9E42     		cmp	r6, r3
+  31 0012 019D     		ldr	r5, [sp, #4]
+  32 0014 0DD8     		bhi	.L2
+  33              	.L3:
+  34 0016 2846     		mov	r0, r5
+  35 0018 6168     		ldr	r1, [r4, #4]
+  36 001a 6289     		ldrh	r2, [r4, #10]
+  37 001c FFF7FEFF 		bl	memcpy
+  38 0020 6089     		ldrh	r0, [r4, #10]
+  39 0022 2468     		ldr	r4, [r4, #0]
+  40 0024 2D18     		adds	r5, r5, r0
+  41 0026 002C     		cmp	r4, #0
+  42 0028 F5D1     		bne	.L3
+  43 002a 0198     		ldr	r0, [sp, #4]
+  44 002c 3146     		mov	r1, r6
+  45 002e FFF7FEFF 		bl	Eth_TransmitFrames
+  46              	.L2:
+  47 0032 0020     		movs	r0, #0
+  48 0034 7CBD     		pop	{r2, r3, r4, r5, r6, pc}
+  50              		.section	.text.lwip_Input,"ax",%progbits
+  51              		.align	1
+  52              		.global	lwip_Input
+  53              		.thumb
+  54              		.thumb_func
+  56              	lwip_Input:
+  57              		@ args = 0, pretend = 0, frame = 0
+  58              		@ frame_needed = 0, uses_anonymous_args = 0
+  59 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+  60 0002 0746     		mov	r7, r0
+  61 0004 0320     		movs	r0, #3
+  62 0006 89B2     		uxth	r1, r1
+  63 0008 0246     		mov	r2, r0
+  64 000a FFF7FEFF 		bl	pbuf_alloc
+  65 000e 0446     		mov	r4, r0
+  66 0010 0028     		cmp	r0, #0
+  67 0012 20D0     		beq	.L6
+  68 0014 0546     		mov	r5, r0
+  69 0016 0026     		movs	r6, #0
+  70              	.L7:
+  71 0018 6868     		ldr	r0, [r5, #4]
+  72 001a 6A89     		ldrh	r2, [r5, #10]
+  73 001c B919     		adds	r1, r7, r6
+  74 001e FFF7FEFF 		bl	memcpy
+  75 0022 6B89     		ldrh	r3, [r5, #10]
+  76 0024 2D68     		ldr	r5, [r5, #0]
+  77 0026 F618     		adds	r6, r6, r3
+  78 0028 002D     		cmp	r5, #0
+  79 002a F5D1     		bne	.L7
+  80 002c 6068     		ldr	r0, [r4, #4]
+  81 002e 8089     		ldrh	r0, [r0, #12]	@ unaligned
+  82 0030 FFF7FEFF 		bl	htons
+  83 0034 B0F5006F 		cmp	r0, #2048
+  84 0038 03D0     		beq	.L10
+  85 003a 40F60601 		movw	r1, #2054
+  86 003e 8842     		cmp	r0, r1
+  87 0040 04D1     		bne	.L20
+  88              	.L10:
+  89 0042 0549     		ldr	r1, .L21
+  90 0044 2046     		mov	r0, r4
+  91 0046 0A69     		ldr	r2, [r1, #16]
+  92 0048 9047     		blx	r2
+  93 004a 20B1     		cbz	r0, .L6
+  94              	.L20:
+  95 004c 2046     		mov	r0, r4
+  96 004e BDE8F840 		pop	{r3, r4, r5, r6, r7, lr}
+  97 0052 FFF7FEBF 		b	pbuf_free
+  98              	.L6:
+  99 0056 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 100              	.L22:
+ 101              		.align	2
+ 102              	.L21:
+ 103 0058 00000000 		.word	netif
+ 105              		.section	.text.ethernetif_init,"ax",%progbits
+ 106              		.align	1
+ 107              		.global	ethernetif_init
+ 108              		.thumb
+ 109              		.thumb_func
+ 111              	ethernetif_init:
+ 112              		@ args = 0, pretend = 0, frame = 16
+ 113              		@ frame_needed = 0, uses_anonymous_args = 0
+ 114 0000 1FB5     		push	{r0, r1, r2, r3, r4, lr}
+ 115 0002 0446     		mov	r4, r0
+ 116 0004 0420     		movs	r0, #4
+ 117 0006 FFF7FEFF 		bl	mem_malloc
+ 118 000a 08B3     		cbz	r0, .L25
+ 119 000c 6523     		movs	r3, #101
+ 120 000e 84F82A30 		strb	r3, [r4, #42]
+ 121 0012 6E21     		movs	r1, #110
+ 122 0014 104A     		ldr	r2, .L26
+ 123 0016 114B     		ldr	r3, .L26+4
+ 124 0018 84F82B10 		strb	r1, [r4, #43]
+ 125 001c 04F12301 		add	r1, r4, #35
+ 126 0020 E061     		str	r0, [r4, #28]
+ 127 0022 6261     		str	r2, [r4, #20]
+ 128 0024 A361     		str	r3, [r4, #24]
+ 129 0026 3222     		movs	r2, #50
+ 130 0028 0160     		str	r1, [r0, #0]
+ 131 002a 40F2DC53 		movw	r3, #1500
+ 132 002e 0620     		movs	r0, #6
+ 133 0030 84F82920 		strb	r2, [r4, #41]
+ 134 0034 2384     		strh	r3, [r4, #32]	@ movhi
+ 135 0036 84F82200 		strb	r0, [r4, #34]
+ 136 003a 0291     		str	r1, [sp, #8]
+ 137 003c FFF7FEFF 		bl	Eth_InitNetworkInterface
+ 138 0040 FFF7FEFF 		bl	Eth_OpenNetworkInterface
+ 139 0044 01A9     		add	r1, sp, #4
+ 140 0046 0820     		movs	r0, #8
+ 141 0048 FFF7FEFF 		bl	Eth_PerformIoctl
+ 142 004c 0021     		movs	r1, #0
+ 143 004e 00E0     		b	.L24
+ 144              	.L25:
+ 145 0050 FF21     		movs	r1, #255
+ 146              	.L24:
+ 147 0052 48B2     		sxtb	r0, r1
+ 148 0054 04B0     		add	sp, sp, #16
+ 149 0056 10BD     		pop	{r4, pc}
+ 150              	.L27:
+ 151              		.align	2
+ 152              	.L26:
+ 153 0058 00000000 		.word	etharp_output
+ 154 005c 00000000 		.word	low_level_output
+ 156              		.section	.text.Eth_Received_Data_Handler,"ax",%progbits
+ 157              		.align	1
+ 158              		.global	Eth_Received_Data_Handler
+ 159              		.thumb
+ 160              		.thumb_func
+ 162              	Eth_Received_Data_Handler:
+ 163              		@ args = 0, pretend = 0, frame = 0
+ 164              		@ frame_needed = 0, uses_anonymous_args = 0
+ 165              		@ link register save eliminated.
+ 166 0000 FFF7FEBF 		b	lwip_Input
+ 168              		.comm	MACaddr,6,1
+ 169              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 ethernetif.c
+C:\Users\Mihai\AppData\Local\Temp\ccfLr7ZI.s:17     .text.low_level_output:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccfLr7ZI.s:21     .text.low_level_output:00000000 low_level_output
+C:\Users\Mihai\AppData\Local\Temp\ccfLr7ZI.s:51     .text.lwip_Input:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccfLr7ZI.s:56     .text.lwip_Input:00000000 lwip_Input
+C:\Users\Mihai\AppData\Local\Temp\ccfLr7ZI.s:103    .text.lwip_Input:00000058 $d
+C:\Users\Mihai\AppData\Local\Temp\ccfLr7ZI.s:106    .text.ethernetif_init:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccfLr7ZI.s:111    .text.ethernetif_init:00000000 ethernetif_init
+C:\Users\Mihai\AppData\Local\Temp\ccfLr7ZI.s:153    .text.ethernetif_init:00000058 $d
+C:\Users\Mihai\AppData\Local\Temp\ccfLr7ZI.s:157    .text.Eth_Received_Data_Handler:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccfLr7ZI.s:162    .text.Eth_Received_Data_Handler:00000000 Eth_Received_Data_Handler
+                            *COM*:00000006 MACaddr
+
+UNDEFINED SYMBOLS
+Eth_GetTxBuffer
+memcpy
+Eth_TransmitFrames
+pbuf_alloc
+htons
+pbuf_free
+netif
+mem_malloc
+Eth_InitNetworkInterface
+Eth_OpenNetworkInterface
+Eth_PerformIoctl
+etharp_output

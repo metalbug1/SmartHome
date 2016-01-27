@@ -1,0 +1,1689 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"ip.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.comm	current_netif,4,4
+  20              		.comm	current_header,4,4
+  21              		.section	.text.ip_route,"ax",%progbits
+  22              		.align	2
+  23              		.global	ip_route
+  24              		.thumb
+  25              		.thumb_func
+  27              	ip_route:
+  28              	.LFB0:
+  29              		.file 1 "../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c"
+   1:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** /**
+   2:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  * @file
+   3:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  * This is the IPv4 layer implementation for incoming and outgoing IP traffic.
+   4:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  * 
+   5:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  * @see ip_frag.c
+   6:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  *
+   7:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  */
+   8:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** 
+   9:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** /*
+  10:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  * Copyright (c) 2001-2004 Swedish Institute of Computer Science.
+  11:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  * All rights reserved.
+  12:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  *
+  13:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  * Redistribution and use in source and binary forms, with or without modification,
+  14:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  * are permitted provided that the following conditions are met:
+  15:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  *
+  16:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  * 1. Redistributions of source code must retain the above copyright notice,
+  17:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  *    this list of conditions and the following disclaimer.
+  18:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  * 2. Redistributions in binary form must reproduce the above copyright notice,
+  19:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  *    this list of conditions and the following disclaimer in the documentation
+  20:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  *    and/or other materials provided with the distribution.
+  21:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  * 3. The name of the author may not be used to endorse or promote products
+  22:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  *    derived from this software without specific prior written permission.
+  23:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  *
+  24:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR IMPLIED
+  25:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+  26:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT
+  27:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  * SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+  28:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT
+  29:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  * OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+  30:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+  31:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING
+  32:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  * IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+  33:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  * OF SUCH DAMAGE.
+  34:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  *
+  35:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  * This file is part of the lwIP TCP/IP stack.
+  36:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  *
+  37:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  * Author: Adam Dunkels <adam@sics.se>
+  38:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  *
+  39:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  */
+  40:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** 
+  41:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** #include "lwip/opt.h"
+  42:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** #include "lwip/ip.h"
+  43:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** #include "lwip/def.h"
+  44:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** #include "lwip/mem.h"
+  45:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** #include "lwip/ip_frag.h"
+  46:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** #include "lwip/inet.h"
+  47:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** #include "lwip/inet_chksum.h"
+  48:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** #include "lwip/netif.h"
+  49:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** #include "lwip/icmp.h"
+  50:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** #include "lwip/igmp.h"
+  51:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** #include "lwip/raw.h"
+  52:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** #include "lwip/udp.h"
+  53:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** #include "lwip/tcp.h"
+  54:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** #include "lwip/snmp.h"
+  55:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** #include "lwip/dhcp.h"
+  56:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** #include "lwip/stats.h"
+  57:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** #include "arch/perf.h"
+  58:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** 
+  59:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** #include <string.h>
+  60:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** 
+  61:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** /**
+  62:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  * The interface that provided the packet for the current callback
+  63:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  * invocation.
+  64:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  */
+  65:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** struct netif *current_netif;
+  66:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** 
+  67:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** /**
+  68:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  * Header of the input packet currently being processed.
+  69:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  */
+  70:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** const struct ip_hdr *current_header;
+  71:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** 
+  72:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** /**
+  73:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  * Finds the appropriate network interface for a given IP address. It
+  74:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  * searches the list of network interfaces linearly. A match is found
+  75:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  * if the masked IP address of the network interface equals the masked
+  76:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  * IP address given to the function.
+  77:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  *
+  78:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  * @param dest the destination IP address for which to find the route
+  79:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  * @return the netif on which to send to reach dest
+  80:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  */
+  81:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** struct netif *
+  82:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** ip_route(struct ip_addr *dest)
+  83:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** {
+  30              		.loc 1 83 0
+  31              		.cfi_startproc
+  32              		@ args = 0, pretend = 0, frame = 16
+  33              		@ frame_needed = 1, uses_anonymous_args = 0
+  34 0000 80B5     		push	{r7, lr}
+  35              	.LCFI0:
+  36              		.cfi_def_cfa_offset 8
+  37              		.cfi_offset 7, -8
+  38              		.cfi_offset 14, -4
+  39 0002 84B0     		sub	sp, sp, #16
+  40              	.LCFI1:
+  41              		.cfi_def_cfa_offset 24
+  42 0004 00AF     		add	r7, sp, #0
+  43              	.LCFI2:
+  44              		.cfi_def_cfa_register 7
+  45 0006 7860     		str	r0, [r7, #4]
+  84:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   struct netif *netif;
+  85:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** 
+  86:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   /* iterate through netifs */
+  87:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   for(netif = netif_list; netif != NULL; netif = netif->next) {
+  46              		.loc 1 87 0
+  47 0008 40F20003 		movw	r3, #:lower16:netif_list
+  48 000c C0F20003 		movt	r3, #:upper16:netif_list
+  49 0010 1B68     		ldr	r3, [r3, #0]
+  50 0012 FB60     		str	r3, [r7, #12]
+  51 0014 14E0     		b	.L2
+  52              	.L5:
+  88:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     /* network mask matches? */
+  89:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     if (netif_is_up(netif)) {
+  53              		.loc 1 89 0
+  54 0016 F868     		ldr	r0, [r7, #12]
+  55 0018 FFF7FEFF 		bl	netif_is_up
+  56 001c 0346     		mov	r3, r0
+  57 001e 002B     		cmp	r3, #0
+  58 0020 0BD0     		beq	.L3
+  90:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****       if (ip_addr_netcmp(dest, &(netif->ip_addr), &(netif->netmask))) {
+  59              		.loc 1 90 0
+  60 0022 7B68     		ldr	r3, [r7, #4]
+  61 0024 1A68     		ldr	r2, [r3, #0]	@ unaligned
+  62 0026 FB68     		ldr	r3, [r7, #12]
+  63 0028 5B68     		ldr	r3, [r3, #4]
+  64 002a 5A40     		eors	r2, r2, r3
+  65 002c FB68     		ldr	r3, [r7, #12]
+  66 002e 9B68     		ldr	r3, [r3, #8]
+  67 0030 1340     		ands	r3, r3, r2
+  68 0032 002B     		cmp	r3, #0
+  69 0034 01D1     		bne	.L3
+  91:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****         /* return netif on which to forward IP packet */
+  92:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****         return netif;
+  70              		.loc 1 92 0
+  71 0036 FB68     		ldr	r3, [r7, #12]
+  72 0038 1FE0     		b	.L4
+  73              	.L3:
+  87:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   for(netif = netif_list; netif != NULL; netif = netif->next) {
+  74              		.loc 1 87 0
+  75 003a FB68     		ldr	r3, [r7, #12]
+  76 003c 1B68     		ldr	r3, [r3, #0]
+  77 003e FB60     		str	r3, [r7, #12]
+  78              	.L2:
+  87:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   for(netif = netif_list; netif != NULL; netif = netif->next) {
+  79              		.loc 1 87 0 is_stmt 0 discriminator 1
+  80 0040 FB68     		ldr	r3, [r7, #12]
+  81 0042 002B     		cmp	r3, #0
+  82 0044 E7D1     		bne	.L5
+  93:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****       }
+  94:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     }
+  95:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   }
+  96:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   if ((netif_default == NULL) || (!netif_is_up(netif_default))) {
+  83              		.loc 1 96 0 is_stmt 1
+  84 0046 40F20003 		movw	r3, #:lower16:netif_default
+  85 004a C0F20003 		movt	r3, #:upper16:netif_default
+  86 004e 1B68     		ldr	r3, [r3, #0]
+  87 0050 002B     		cmp	r3, #0
+  88 0052 0AD0     		beq	.L6
+  89              		.loc 1 96 0 is_stmt 0 discriminator 1
+  90 0054 40F20003 		movw	r3, #:lower16:netif_default
+  91 0058 C0F20003 		movt	r3, #:upper16:netif_default
+  92 005c 1B68     		ldr	r3, [r3, #0]
+  93 005e 1846     		mov	r0, r3
+  94 0060 FFF7FEFF 		bl	netif_is_up
+  95 0064 0346     		mov	r3, r0
+  96 0066 002B     		cmp	r3, #0
+  97 0068 02D1     		bne	.L7
+  98              	.L6:
+  97:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     LWIP_DEBUGF(IP_DEBUG | LWIP_DBG_LEVEL_SERIOUS, ("ip_route: No route to 0x%"X32_F"\n", dest->add
+  98:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     IP_STATS_INC(ip.rterr);
+  99:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     snmp_inc_ipoutnoroutes();
+ 100:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     return NULL;
+  99              		.loc 1 100 0 is_stmt 1
+ 100 006a 4FF00003 		mov	r3, #0
+ 101 006e 04E0     		b	.L4
+ 102              	.L7:
+ 101:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   }
+ 102:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   /* no matching netif found, use default netif */
+ 103:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   return netif_default;
+ 103              		.loc 1 103 0
+ 104 0070 40F20003 		movw	r3, #:lower16:netif_default
+ 105 0074 C0F20003 		movt	r3, #:upper16:netif_default
+ 106 0078 1B68     		ldr	r3, [r3, #0]
+ 107              	.L4:
+ 104:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** }
+ 108              		.loc 1 104 0
+ 109 007a 1846     		mov	r0, r3
+ 110 007c 07F11007 		add	r7, r7, #16
+ 111 0080 BD46     		mov	sp, r7
+ 112 0082 80BD     		pop	{r7, pc}
+ 113              		.cfi_endproc
+ 114              	.LFE0:
+ 116              		.section	.text.ip_input,"ax",%progbits
+ 117              		.align	2
+ 118              		.global	ip_input
+ 119              		.thumb
+ 120              		.thumb_func
+ 122              	ip_input:
+ 123              	.LFB1:
+ 105:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** 
+ 106:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** #if IP_FORWARD
+ 107:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** /**
+ 108:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  * Forwards an IP packet. It finds an appropriate route for the
+ 109:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  * packet, decrements the TTL value of the packet, adjusts the
+ 110:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  * checksum and outputs the packet on the appropriate interface.
+ 111:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  *
+ 112:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  * @param p the packet to forward (p->payload points to IP header)
+ 113:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  * @param iphdr the IP header of the input packet
+ 114:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  * @param inp the netif on which this packet was received
+ 115:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  * @return the netif on which the packet was sent (NULL if it wasn't sent)
+ 116:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  */
+ 117:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** static struct netif *
+ 118:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** ip_forward(struct pbuf *p, struct ip_hdr *iphdr, struct netif *inp)
+ 119:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** {
+ 120:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   struct netif *netif;
+ 121:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** 
+ 122:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   PERF_START;
+ 123:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   /* Find network interface where to forward this IP packet to. */
+ 124:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   netif = ip_route((struct ip_addr *)&(iphdr->dest));
+ 125:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   if (netif == NULL) {
+ 126:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     LWIP_DEBUGF(IP_DEBUG, ("ip_forward: no forwarding route for 0x%"X32_F" found\n",
+ 127:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****                       iphdr->dest.addr));
+ 128:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     snmp_inc_ipoutnoroutes();
+ 129:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     return (struct netif *)NULL;
+ 130:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   }
+ 131:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   /* Do not forward packets onto the same network interface on which
+ 132:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****    * they arrived. */
+ 133:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   if (netif == inp) {
+ 134:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     LWIP_DEBUGF(IP_DEBUG, ("ip_forward: not bouncing packets back on incoming interface.\n"));
+ 135:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     snmp_inc_ipoutnoroutes();
+ 136:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     return (struct netif *)NULL;
+ 137:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   }
+ 138:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** 
+ 139:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   /* decrement TTL */
+ 140:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   IPH_TTL_SET(iphdr, IPH_TTL(iphdr) - 1);
+ 141:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   /* send ICMP if TTL == 0 */
+ 142:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   if (IPH_TTL(iphdr) == 0) {
+ 143:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     snmp_inc_ipinhdrerrors();
+ 144:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** #if LWIP_ICMP
+ 145:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     /* Don't send ICMP messages in response to ICMP messages */
+ 146:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     if (IPH_PROTO(iphdr) != IP_PROTO_ICMP) {
+ 147:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****       icmp_time_exceeded(p, ICMP_TE_TTL);
+ 148:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     }
+ 149:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** #endif /* LWIP_ICMP */
+ 150:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     return (struct netif *)NULL;
+ 151:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   }
+ 152:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** 
+ 153:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   /* Incrementally update the IP checksum. */
+ 154:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   if (IPH_CHKSUM(iphdr) >= htons(0xffff - 0x100)) {
+ 155:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     IPH_CHKSUM_SET(iphdr, IPH_CHKSUM(iphdr) + htons(0x100) + 1);
+ 156:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   } else {
+ 157:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     IPH_CHKSUM_SET(iphdr, IPH_CHKSUM(iphdr) + htons(0x100));
+ 158:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   }
+ 159:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** 
+ 160:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   LWIP_DEBUGF(IP_DEBUG, ("ip_forward: forwarding packet to 0x%"X32_F"\n",
+ 161:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****                     iphdr->dest.addr));
+ 162:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** 
+ 163:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   IP_STATS_INC(ip.fw);
+ 164:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   IP_STATS_INC(ip.xmit);
+ 165:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   snmp_inc_ipforwdatagrams();
+ 166:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** 
+ 167:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   PERF_STOP("ip_forward");
+ 168:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   /* transmit pbuf on chosen interface */
+ 169:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   netif->output(netif, p, (struct ip_addr *)&(iphdr->dest));
+ 170:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   return netif;
+ 171:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** }
+ 172:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** #endif /* IP_FORWARD */
+ 173:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** 
+ 174:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** /**
+ 175:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  * This function is called by the network interface device driver when
+ 176:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  * an IP packet is received. The function does the basic checks of the
+ 177:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  * IP header such as packet size being at least larger than the header
+ 178:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  * size etc. If the packet was not destined for us, the packet is
+ 179:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  * forwarded (using ip_forward). The IP checksum is always checked.
+ 180:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  *
+ 181:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  * Finally, the packet is sent to the upper layer protocol input function.
+ 182:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  * 
+ 183:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  * @param p the received IP packet (p->payload points to IP header)
+ 184:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  * @param inp the netif on which this packet was received
+ 185:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  * @return ERR_OK if the packet was processed (could return ERR_* if it wasn't
+ 186:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  *         processed, but currently always returns ERR_OK)
+ 187:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  */
+ 188:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** err_t
+ 189:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** ip_input(struct pbuf *p, struct netif *inp)
+ 190:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** {
+ 124              		.loc 1 190 0
+ 125              		.cfi_startproc
+ 126              		@ args = 0, pretend = 0, frame = 24
+ 127              		@ frame_needed = 1, uses_anonymous_args = 0
+ 128 0000 90B5     		push	{r4, r7, lr}
+ 129              	.LCFI3:
+ 130              		.cfi_def_cfa_offset 12
+ 131              		.cfi_offset 4, -12
+ 132              		.cfi_offset 7, -8
+ 133              		.cfi_offset 14, -4
+ 134 0002 87B0     		sub	sp, sp, #28
+ 135              	.LCFI4:
+ 136              		.cfi_def_cfa_offset 40
+ 137 0004 00AF     		add	r7, sp, #0
+ 138              	.LCFI5:
+ 139              		.cfi_def_cfa_register 7
+ 140 0006 7860     		str	r0, [r7, #4]
+ 141 0008 3960     		str	r1, [r7, #0]
+ 191:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   struct ip_hdr *iphdr;
+ 192:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   struct netif *netif;
+ 193:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   u16_t iphdr_hlen;
+ 194:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   u16_t iphdr_len;
+ 195:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** #if LWIP_DHCP
+ 196:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   int check_ip_src=1;
+ 197:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** #endif /* LWIP_DHCP */
+ 198:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** 
+ 199:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   IP_STATS_INC(ip.recv);
+ 200:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   snmp_inc_ipinreceives();
+ 201:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** 
+ 202:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   /* identify the IP header */
+ 203:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   iphdr = p->payload;
+ 142              		.loc 1 203 0
+ 143 000a 7B68     		ldr	r3, [r7, #4]
+ 144 000c 5B68     		ldr	r3, [r3, #4]
+ 145 000e 7B61     		str	r3, [r7, #20]
+ 204:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   if (IPH_V(iphdr) != 4) {
+ 146              		.loc 1 204 0
+ 147 0010 7B69     		ldr	r3, [r7, #20]
+ 148 0012 1B88     		ldrh	r3, [r3, #0]	@ unaligned
+ 149 0014 9BB2     		uxth	r3, r3
+ 150 0016 1846     		mov	r0, r3
+ 151 0018 FFF7FEFF 		bl	ntohs
+ 152 001c 0346     		mov	r3, r0
+ 153 001e 4FEA1333 		lsr	r3, r3, #12
+ 154 0022 9BB2     		uxth	r3, r3
+ 155 0024 042B     		cmp	r3, #4
+ 156 0026 05D0     		beq	.L9
+ 205:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     LWIP_DEBUGF(IP_DEBUG | LWIP_DBG_LEVEL_WARNING, ("IP packet dropped due to bad version number %"
+ 206:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     ip_debug_print(p);
+ 207:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     pbuf_free(p);
+ 157              		.loc 1 207 0
+ 158 0028 7868     		ldr	r0, [r7, #4]
+ 159 002a FFF7FEFF 		bl	pbuf_free
+ 208:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     IP_STATS_INC(ip.err);
+ 209:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     IP_STATS_INC(ip.drop);
+ 210:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     snmp_inc_ipinhdrerrors();
+ 211:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     return ERR_OK;
+ 160              		.loc 1 211 0
+ 161 002e 4FF00003 		mov	r3, #0
+ 162 0032 63E1     		b	.L10
+ 163              	.L9:
+ 212:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   }
+ 213:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** 
+ 214:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   /* obtain IP header length in number of 32-bit words */
+ 215:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   iphdr_hlen = IPH_HL(iphdr);
+ 164              		.loc 1 215 0
+ 165 0034 7B69     		ldr	r3, [r7, #20]
+ 166 0036 1B88     		ldrh	r3, [r3, #0]	@ unaligned
+ 167 0038 9BB2     		uxth	r3, r3
+ 168 003a 1846     		mov	r0, r3
+ 169 003c FFF7FEFF 		bl	ntohs
+ 170 0040 0346     		mov	r3, r0
+ 171 0042 4FEA1323 		lsr	r3, r3, #8
+ 172 0046 9BB2     		uxth	r3, r3
+ 173 0048 03F00F03 		and	r3, r3, #15
+ 174 004c 7B81     		strh	r3, [r7, #10]	@ movhi
+ 216:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   /* calculate IP header length in bytes */
+ 217:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   iphdr_hlen *= 4;
+ 175              		.loc 1 217 0
+ 176 004e 7B89     		ldrh	r3, [r7, #10]	@ movhi
+ 177 0050 4FEA8303 		lsl	r3, r3, #2
+ 178 0054 7B81     		strh	r3, [r7, #10]	@ movhi
+ 218:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   /* obtain ip length in bytes */
+ 219:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   iphdr_len = ntohs(IPH_LEN(iphdr));
+ 179              		.loc 1 219 0
+ 180 0056 7B69     		ldr	r3, [r7, #20]
+ 181 0058 5B88     		ldrh	r3, [r3, #2]	@ unaligned
+ 182 005a 9BB2     		uxth	r3, r3
+ 183 005c 1846     		mov	r0, r3
+ 184 005e FFF7FEFF 		bl	ntohs
+ 185 0062 0346     		mov	r3, r0
+ 186 0064 3B81     		strh	r3, [r7, #8]	@ movhi
+ 220:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** 
+ 221:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   /* header length exceeds first pbuf length, or ip length exceeds total pbuf length? */
+ 222:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   if ((iphdr_hlen > p->len) || (iphdr_len > p->tot_len)) {
+ 187              		.loc 1 222 0
+ 188 0066 7B68     		ldr	r3, [r7, #4]
+ 189 0068 5B89     		ldrh	r3, [r3, #10]
+ 190 006a 7A89     		ldrh	r2, [r7, #10]
+ 191 006c 9A42     		cmp	r2, r3
+ 192 006e 04D8     		bhi	.L11
+ 193              		.loc 1 222 0 is_stmt 0 discriminator 1
+ 194 0070 7B68     		ldr	r3, [r7, #4]
+ 195 0072 1B89     		ldrh	r3, [r3, #8]
+ 196 0074 3A89     		ldrh	r2, [r7, #8]
+ 197 0076 9A42     		cmp	r2, r3
+ 198 0078 05D9     		bls	.L12
+ 199              	.L11:
+ 223:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     if (iphdr_hlen > p->len) {
+ 224:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****       LWIP_DEBUGF(IP_DEBUG | LWIP_DBG_LEVEL_SERIOUS,
+ 225:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****         ("IP header (len %"U16_F") does not fit in first pbuf (len %"U16_F"), IP packet dropped.\n"
+ 226:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****         iphdr_hlen, p->len));
+ 227:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     }
+ 228:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     if (iphdr_len > p->tot_len) {
+ 229:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****       LWIP_DEBUGF(IP_DEBUG | LWIP_DBG_LEVEL_SERIOUS,
+ 230:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****         ("IP (len %"U16_F") is longer than pbuf (len %"U16_F"), IP packet dropped.\n",
+ 231:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****         iphdr_len, p->tot_len));
+ 232:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     }
+ 233:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     /* free (drop) packet pbufs */
+ 234:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     pbuf_free(p);
+ 200              		.loc 1 234 0 is_stmt 1
+ 201 007a 7868     		ldr	r0, [r7, #4]
+ 202 007c FFF7FEFF 		bl	pbuf_free
+ 235:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     IP_STATS_INC(ip.lenerr);
+ 236:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     IP_STATS_INC(ip.drop);
+ 237:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     snmp_inc_ipindiscards();
+ 238:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     return ERR_OK;
+ 203              		.loc 1 238 0
+ 204 0080 4FF00003 		mov	r3, #0
+ 205 0084 3AE1     		b	.L10
+ 206              	.L12:
+ 239:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   }
+ 240:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** 
+ 241:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   /* verify checksum */
+ 242:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** #if CHECKSUM_CHECK_IP
+ 243:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   if (inet_chksum(iphdr, iphdr_hlen) != 0) {
+ 244:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** 
+ 245:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     LWIP_DEBUGF(IP_DEBUG | LWIP_DBG_LEVEL_SERIOUS,
+ 246:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****       ("Checksum (0x%"X16_F") failed, IP packet dropped.\n", inet_chksum(iphdr, iphdr_hlen)));
+ 247:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     ip_debug_print(p);
+ 248:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     pbuf_free(p);
+ 249:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     IP_STATS_INC(ip.chkerr);
+ 250:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     IP_STATS_INC(ip.drop);
+ 251:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     snmp_inc_ipinhdrerrors();
+ 252:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     return ERR_OK;
+ 253:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   }
+ 254:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** #endif
+ 255:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** 
+ 256:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   /* Trim pbuf. This should have been done at the netif layer,
+ 257:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****    * but we'll do it anyway just to be sure that its done. */
+ 258:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   pbuf_realloc(p, iphdr_len);
+ 207              		.loc 1 258 0
+ 208 0086 3B89     		ldrh	r3, [r7, #8]
+ 209 0088 7868     		ldr	r0, [r7, #4]
+ 210 008a 1946     		mov	r1, r3
+ 211 008c FFF7FEFF 		bl	pbuf_realloc
+ 259:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** 
+ 260:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   /* match packet against an interface, i.e. is this packet for us? */
+ 261:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** #if LWIP_IGMP
+ 262:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   if (ip_addr_ismulticast(&(iphdr->dest))) {
+ 212              		.loc 1 262 0
+ 213 0090 7B69     		ldr	r3, [r7, #20]
+ 214 0092 1C69     		ldr	r4, [r3, #16]	@ unaligned
+ 215 0094 4FF07040 		mov	r0, #-268435456
+ 216 0098 FFF7FEFF 		bl	ntohl
+ 217 009c 0346     		mov	r3, r0
+ 218 009e 1C40     		ands	r4, r4, r3
+ 219 00a0 4FF06040 		mov	r0, #-536870912
+ 220 00a4 FFF7FEFF 		bl	ntohl
+ 221 00a8 0346     		mov	r3, r0
+ 222 00aa 9C42     		cmp	r4, r3
+ 223 00ac 17D1     		bne	.L13
+ 263:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     if ((inp->flags & NETIF_FLAG_IGMP) && (igmp_lookfor_group(inp, &(iphdr->dest)))) {
+ 224              		.loc 1 263 0
+ 225 00ae 3B68     		ldr	r3, [r7, #0]
+ 226 00b0 93F82930 		ldrb	r3, [r3, #41]	@ zero_extendqisi2
+ 227 00b4 03F04003 		and	r3, r3, #64
+ 228 00b8 002B     		cmp	r3, #0
+ 229 00ba 0CD0     		beq	.L14
+ 230              		.loc 1 263 0 is_stmt 0 discriminator 1
+ 231 00bc 7B69     		ldr	r3, [r7, #20]
+ 232 00be 03F11003 		add	r3, r3, #16
+ 233 00c2 3868     		ldr	r0, [r7, #0]
+ 234 00c4 1946     		mov	r1, r3
+ 235 00c6 FFF7FEFF 		bl	igmp_lookfor_group
+ 236 00ca 0346     		mov	r3, r0
+ 237 00cc 002B     		cmp	r3, #0
+ 238 00ce 02D0     		beq	.L14
+ 264:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****       netif = inp;
+ 239              		.loc 1 264 0 is_stmt 1
+ 240 00d0 3B68     		ldr	r3, [r7, #0]
+ 241 00d2 3B61     		str	r3, [r7, #16]
+ 242 00d4 41E0     		b	.L16
+ 243              	.L14:
+ 265:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     } else {
+ 266:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****       netif = NULL;
+ 244              		.loc 1 266 0
+ 245 00d6 4FF00003 		mov	r3, #0
+ 246 00da 3B61     		str	r3, [r7, #16]
+ 247 00dc 3DE0     		b	.L16
+ 248              	.L13:
+ 249              	.LBB2:
+ 267:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     }
+ 268:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   } else
+ 269:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** #endif /* LWIP_IGMP */
+ 270:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   {
+ 271:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     /* start trying with inp. if that's not acceptable, start walking the
+ 272:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****        list of configured netifs.
+ 273:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****        'first' is used as a boolean to mark whether we started walking the list */
+ 274:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     int first = 1;
+ 250              		.loc 1 274 0
+ 251 00de 4FF00103 		mov	r3, #1
+ 252 00e2 FB60     		str	r3, [r7, #12]
+ 275:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     netif = inp;
+ 253              		.loc 1 275 0
+ 254 00e4 3B68     		ldr	r3, [r7, #0]
+ 255 00e6 3B61     		str	r3, [r7, #16]
+ 256              	.L21:
+ 276:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     do {
+ 277:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****       LWIP_DEBUGF(IP_DEBUG, ("ip_input: iphdr->dest 0x%"X32_F" netif->ip_addr 0x%"X32_F" (0x%"X32_F
+ 278:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****           iphdr->dest.addr, netif->ip_addr.addr,
+ 279:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****           iphdr->dest.addr & netif->netmask.addr,
+ 280:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****           netif->ip_addr.addr & netif->netmask.addr,
+ 281:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****           iphdr->dest.addr & ~(netif->netmask.addr)));
+ 282:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** 
+ 283:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****       /* interface is up and configured? */
+ 284:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****       if ((netif_is_up(netif)) && (!ip_addr_isany(&(netif->ip_addr)))) {
+ 257              		.loc 1 284 0
+ 258 00e8 3869     		ldr	r0, [r7, #16]
+ 259 00ea FFF7FEFF 		bl	netif_is_up
+ 260 00ee 0346     		mov	r3, r0
+ 261 00f0 002B     		cmp	r3, #0
+ 262 00f2 18D0     		beq	.L17
+ 263              		.loc 1 284 0 is_stmt 0 discriminator 1
+ 264 00f4 3B69     		ldr	r3, [r7, #16]
+ 265 00f6 03F10403 		add	r3, r3, #4
+ 266 00fa 002B     		cmp	r3, #0
+ 267 00fc 13D0     		beq	.L17
+ 268 00fe 3B69     		ldr	r3, [r7, #16]
+ 269 0100 5B68     		ldr	r3, [r3, #4]
+ 270 0102 002B     		cmp	r3, #0
+ 271 0104 0FD0     		beq	.L17
+ 285:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****         /* unicast to this interface address? */
+ 286:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****         if (ip_addr_cmp(&(iphdr->dest), &(netif->ip_addr)) ||
+ 272              		.loc 1 286 0 is_stmt 1
+ 273 0106 7B69     		ldr	r3, [r7, #20]
+ 274 0108 1A69     		ldr	r2, [r3, #16]	@ unaligned
+ 275 010a 3B69     		ldr	r3, [r7, #16]
+ 276 010c 5B68     		ldr	r3, [r3, #4]
+ 277 010e 9A42     		cmp	r2, r3
+ 278 0110 23D0     		beq	.L16
+ 287:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****             /* or broadcast on this interface network address? */
+ 288:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****             ip_addr_isbroadcast(&(iphdr->dest), netif)) {
+ 279              		.loc 1 288 0 discriminator 1
+ 280 0112 7B69     		ldr	r3, [r7, #20]
+ 281 0114 03F11003 		add	r3, r3, #16
+ 282 0118 1846     		mov	r0, r3
+ 283 011a 3969     		ldr	r1, [r7, #16]
+ 284 011c FFF7FEFF 		bl	ip_addr_isbroadcast
+ 285 0120 0346     		mov	r3, r0
+ 286:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****         if (ip_addr_cmp(&(iphdr->dest), &(netif->ip_addr)) ||
+ 286              		.loc 1 286 0 discriminator 1
+ 287 0122 002B     		cmp	r3, #0
+ 288 0124 19D1     		bne	.L16
+ 289              	.L17:
+ 289:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****           LWIP_DEBUGF(IP_DEBUG, ("ip_input: packet accepted on interface %c%c\n",
+ 290:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****               netif->name[0], netif->name[1]));
+ 291:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****           /* break out of for loop */
+ 292:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****           break;
+ 293:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****         }
+ 294:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****       }
+ 295:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****       if (first) {
+ 290              		.loc 1 295 0
+ 291 0126 FB68     		ldr	r3, [r7, #12]
+ 292 0128 002B     		cmp	r3, #0
+ 293 012a 09D0     		beq	.L18
+ 296:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****         first = 0;
+ 294              		.loc 1 296 0
+ 295 012c 4FF00003 		mov	r3, #0
+ 296 0130 FB60     		str	r3, [r7, #12]
+ 297:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****         netif = netif_list;
+ 297              		.loc 1 297 0
+ 298 0132 40F20003 		movw	r3, #:lower16:netif_list
+ 299 0136 C0F20003 		movt	r3, #:upper16:netif_list
+ 300 013a 1B68     		ldr	r3, [r3, #0]
+ 301 013c 3B61     		str	r3, [r7, #16]
+ 302 013e 02E0     		b	.L19
+ 303              	.L18:
+ 298:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****       } else {
+ 299:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****         netif = netif->next;
+ 304              		.loc 1 299 0
+ 305 0140 3B69     		ldr	r3, [r7, #16]
+ 306 0142 1B68     		ldr	r3, [r3, #0]
+ 307 0144 3B61     		str	r3, [r7, #16]
+ 308              	.L19:
+ 300:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****       }
+ 301:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****       if (netif == inp) {
+ 309              		.loc 1 301 0
+ 310 0146 3A69     		ldr	r2, [r7, #16]
+ 311 0148 3B68     		ldr	r3, [r7, #0]
+ 312 014a 9A42     		cmp	r2, r3
+ 313 014c 02D1     		bne	.L20
+ 302:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****         netif = netif->next;
+ 314              		.loc 1 302 0
+ 315 014e 3B69     		ldr	r3, [r7, #16]
+ 316 0150 1B68     		ldr	r3, [r3, #0]
+ 317 0152 3B61     		str	r3, [r7, #16]
+ 318              	.L20:
+ 303:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****       }
+ 304:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     } while(netif != NULL);
+ 319              		.loc 1 304 0
+ 320 0154 3B69     		ldr	r3, [r7, #16]
+ 321 0156 002B     		cmp	r3, #0
+ 322 0158 C6D1     		bne	.L21
+ 323              	.L16:
+ 324              	.LBE2:
+ 305:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   }
+ 306:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** 
+ 307:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** #if LWIP_DHCP
+ 308:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   /* Pass DHCP messages regardless of destination address. DHCP traffic is addressed
+ 309:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****    * using link layer addressing (such as Ethernet MAC) so we must not filter on IP.
+ 310:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****    * According to RFC 1542 section 3.1.1, referred by RFC 2131).
+ 311:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****    */
+ 312:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   if (netif == NULL) {
+ 313:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     /* remote port is DHCP server? */
+ 314:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     if (IPH_PROTO(iphdr) == IP_PROTO_UDP) {
+ 315:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****       LWIP_DEBUGF(IP_DEBUG | LWIP_DBG_TRACE, ("ip_input: UDP packet to DHCP client port %"U16_F"\n"
+ 316:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****         ntohs(((struct udp_hdr *)((u8_t *)iphdr + iphdr_hlen))->dest)));
+ 317:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****       if (ntohs(((struct udp_hdr *)((u8_t *)iphdr + iphdr_hlen))->dest) == DHCP_CLIENT_PORT) {
+ 318:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****         LWIP_DEBUGF(IP_DEBUG | LWIP_DBG_TRACE, ("ip_input: DHCP packet accepted.\n"));
+ 319:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****         netif = inp;
+ 320:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****         check_ip_src = 0;
+ 321:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****       }
+ 322:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     }
+ 323:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   }
+ 324:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** #endif /* LWIP_DHCP */
+ 325:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** 
+ 326:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   /* broadcast or multicast packet source address? Compliant with RFC 1122: 3.2.1.3 */
+ 327:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** #if LWIP_DHCP
+ 328:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   /* DHCP servers need 0.0.0.0 to be allowed as source address (RFC 1.1.2.2: 3.2.1.3/a) */
+ 329:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   if (check_ip_src && (iphdr->src.addr != 0))
+ 330:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** #endif /* LWIP_DHCP */
+ 331:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   {  if ((ip_addr_isbroadcast(&(iphdr->src), inp)) ||
+ 325              		.loc 1 331 0
+ 326 015a 7B69     		ldr	r3, [r7, #20]
+ 327 015c 03F10C03 		add	r3, r3, #12
+ 328 0160 1846     		mov	r0, r3
+ 329 0162 3968     		ldr	r1, [r7, #0]
+ 330 0164 FFF7FEFF 		bl	ip_addr_isbroadcast
+ 331 0168 0346     		mov	r3, r0
+ 332 016a 002B     		cmp	r3, #0
+ 333 016c 0ED1     		bne	.L22
+ 332:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****          (ip_addr_ismulticast(&(iphdr->src)))) {
+ 334              		.loc 1 332 0 discriminator 1
+ 335 016e 7B69     		ldr	r3, [r7, #20]
+ 336 0170 DC68     		ldr	r4, [r3, #12]	@ unaligned
+ 337 0172 4FF07040 		mov	r0, #-268435456
+ 338 0176 FFF7FEFF 		bl	ntohl
+ 339 017a 0346     		mov	r3, r0
+ 340 017c 1C40     		ands	r4, r4, r3
+ 341 017e 4FF06040 		mov	r0, #-536870912
+ 342 0182 FFF7FEFF 		bl	ntohl
+ 343 0186 0346     		mov	r3, r0
+ 331:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   {  if ((ip_addr_isbroadcast(&(iphdr->src), inp)) ||
+ 344              		.loc 1 331 0 discriminator 1
+ 345 0188 9C42     		cmp	r4, r3
+ 346 018a 05D1     		bne	.L23
+ 347              	.L22:
+ 333:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****       /* packet source is not valid */
+ 334:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****       LWIP_DEBUGF(IP_DEBUG | LWIP_DBG_TRACE | LWIP_DBG_LEVEL_WARNING, ("ip_input: packet source is 
+ 335:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****       /* free (drop) packet pbufs */
+ 336:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****       pbuf_free(p);
+ 348              		.loc 1 336 0
+ 349 018c 7868     		ldr	r0, [r7, #4]
+ 350 018e FFF7FEFF 		bl	pbuf_free
+ 337:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****       IP_STATS_INC(ip.drop);
+ 338:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****       snmp_inc_ipinaddrerrors();
+ 339:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****       snmp_inc_ipindiscards();
+ 340:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****       return ERR_OK;
+ 351              		.loc 1 340 0
+ 352 0192 4FF00003 		mov	r3, #0
+ 353 0196 B1E0     		b	.L10
+ 354              	.L23:
+ 341:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     }
+ 342:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   }
+ 343:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** 
+ 344:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   /* packet not for us? */
+ 345:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   if (netif == NULL) {
+ 355              		.loc 1 345 0
+ 356 0198 3B69     		ldr	r3, [r7, #16]
+ 357 019a 002B     		cmp	r3, #0
+ 358 019c 05D1     		bne	.L24
+ 346:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     /* packet not for us, route or discard */
+ 347:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     LWIP_DEBUGF(IP_DEBUG | LWIP_DBG_TRACE, ("ip_input: packet not for us.\n"));
+ 348:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** #if IP_FORWARD
+ 349:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     /* non-broadcast packet? */
+ 350:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     if (!ip_addr_isbroadcast(&(iphdr->dest), inp)) {
+ 351:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****       /* try to forward IP packet on (other) interfaces */
+ 352:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****       ip_forward(p, iphdr, inp);
+ 353:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     } else
+ 354:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** #endif /* IP_FORWARD */
+ 355:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     {
+ 356:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****       snmp_inc_ipinaddrerrors();
+ 357:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****       snmp_inc_ipindiscards();
+ 358:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     }
+ 359:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     pbuf_free(p);
+ 359              		.loc 1 359 0
+ 360 019e 7868     		ldr	r0, [r7, #4]
+ 361 01a0 FFF7FEFF 		bl	pbuf_free
+ 360:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     return ERR_OK;
+ 362              		.loc 1 360 0
+ 363 01a4 4FF00003 		mov	r3, #0
+ 364 01a8 A8E0     		b	.L10
+ 365              	.L24:
+ 361:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   }
+ 362:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   /* packet consists of multiple fragments? */
+ 363:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   if ((IPH_OFFSET(iphdr) & htons(IP_OFFMASK | IP_MF)) != 0) {
+ 366              		.loc 1 363 0
+ 367 01aa 7B69     		ldr	r3, [r7, #20]
+ 368 01ac DB88     		ldrh	r3, [r3, #6]	@ unaligned
+ 369 01ae 9CB2     		uxth	r4, r3
+ 370 01b0 43F6FF70 		movw	r0, #16383
+ 371 01b4 FFF7FEFF 		bl	htons
+ 372 01b8 0346     		mov	r3, r0
+ 373 01ba 2340     		ands	r3, r3, r4
+ 374 01bc 9BB2     		uxth	r3, r3
+ 375 01be 002B     		cmp	r3, #0
+ 376 01c0 0CD0     		beq	.L25
+ 364:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** #if IP_REASSEMBLY /* packet fragment reassembly code present? */
+ 365:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     LWIP_DEBUGF(IP_DEBUG, ("IP packet is a fragment (id=0x%04"X16_F" tot_len=%"U16_F" len=%"U16_F" 
+ 366:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****       ntohs(IPH_ID(iphdr)), p->tot_len, ntohs(IPH_LEN(iphdr)), !!(IPH_OFFSET(iphdr) & htons(IP_MF))
+ 367:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     /* reassemble the packet*/
+ 368:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     p = ip_reass(p);
+ 377              		.loc 1 368 0
+ 378 01c2 7868     		ldr	r0, [r7, #4]
+ 379 01c4 FFF7FEFF 		bl	ip_reass
+ 380 01c8 7860     		str	r0, [r7, #4]
+ 369:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     /* packet not fully reassembled yet? */
+ 370:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     if (p == NULL) {
+ 381              		.loc 1 370 0
+ 382 01ca 7B68     		ldr	r3, [r7, #4]
+ 383 01cc 002B     		cmp	r3, #0
+ 384 01ce 02D1     		bne	.L26
+ 371:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****       return ERR_OK;
+ 385              		.loc 1 371 0
+ 386 01d0 4FF00003 		mov	r3, #0
+ 387 01d4 92E0     		b	.L10
+ 388              	.L26:
+ 372:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     }
+ 373:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     iphdr = p->payload;
+ 389              		.loc 1 373 0
+ 390 01d6 7B68     		ldr	r3, [r7, #4]
+ 391 01d8 5B68     		ldr	r3, [r3, #4]
+ 392 01da 7B61     		str	r3, [r7, #20]
+ 393              	.L25:
+ 374:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** #else /* IP_REASSEMBLY == 0, no packet fragment reassembly code present */
+ 375:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     pbuf_free(p);
+ 376:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     LWIP_DEBUGF(IP_DEBUG | LWIP_DBG_LEVEL_SERIOUS, ("IP packet dropped since it was fragmented (0x%
+ 377:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****       ntohs(IPH_OFFSET(iphdr))));
+ 378:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     IP_STATS_INC(ip.opterr);
+ 379:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     IP_STATS_INC(ip.drop);
+ 380:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     /* unsupported protocol feature */
+ 381:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     snmp_inc_ipinunknownprotos();
+ 382:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     return ERR_OK;
+ 383:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** #endif /* IP_REASSEMBLY */
+ 384:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   }
+ 385:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** 
+ 386:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** #if IP_OPTIONS_ALLOWED == 0 /* no support for IP options in the IP header? */
+ 387:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** 
+ 388:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** #if LWIP_IGMP
+ 389:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   /* there is an extra "router alert" option in IGMP messages which we allow for but do not police 
+ 390:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   if((iphdr_hlen > IP_HLEN) &&  (IPH_PROTO(iphdr) != IP_PROTO_IGMP)) {
+ 391:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** #else
+ 392:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   if (iphdr_hlen > IP_HLEN) {
+ 393:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** #endif /* LWIP_IGMP */
+ 394:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     LWIP_DEBUGF(IP_DEBUG | LWIP_DBG_LEVEL_SERIOUS, ("IP packet dropped since there were IP options 
+ 395:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     pbuf_free(p);
+ 396:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     IP_STATS_INC(ip.opterr);
+ 397:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     IP_STATS_INC(ip.drop);
+ 398:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     /* unsupported protocol feature */
+ 399:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     snmp_inc_ipinunknownprotos();
+ 400:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     return ERR_OK;
+ 401:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   }
+ 402:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** #endif /* IP_OPTIONS_ALLOWED == 0 */
+ 403:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** 
+ 404:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   /* send to upper layers */
+ 405:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   LWIP_DEBUGF(IP_DEBUG, ("ip_input: \n"));
+ 406:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   ip_debug_print(p);
+ 407:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   LWIP_DEBUGF(IP_DEBUG, ("ip_input: p->len %"U16_F" p->tot_len %"U16_F"\n", p->len, p->tot_len));
+ 408:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** 
+ 409:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   current_netif = inp;
+ 394              		.loc 1 409 0
+ 395 01dc 40F20003 		movw	r3, #:lower16:current_netif
+ 396 01e0 C0F20003 		movt	r3, #:upper16:current_netif
+ 397 01e4 3A68     		ldr	r2, [r7, #0]
+ 398 01e6 1A60     		str	r2, [r3, #0]
+ 410:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   current_header = iphdr;
+ 399              		.loc 1 410 0
+ 400 01e8 40F20003 		movw	r3, #:lower16:current_header
+ 401 01ec C0F20003 		movt	r3, #:upper16:current_header
+ 402 01f0 7A69     		ldr	r2, [r7, #20]
+ 403 01f2 1A60     		str	r2, [r3, #0]
+ 411:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** 
+ 412:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** #if LWIP_RAW
+ 413:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   /* raw input did not eat the packet? */
+ 414:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   if (raw_input(p, inp) == 0)
+ 404              		.loc 1 414 0
+ 405 01f4 7868     		ldr	r0, [r7, #4]
+ 406 01f6 3968     		ldr	r1, [r7, #0]
+ 407 01f8 FFF7FEFF 		bl	raw_input
+ 408 01fc 0346     		mov	r3, r0
+ 409 01fe 002B     		cmp	r3, #0
+ 410 0200 6CD1     		bne	.L27
+ 415:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** #endif /* LWIP_RAW */
+ 416:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   {
+ 417:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** 
+ 418:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     switch (IPH_PROTO(iphdr)) {
+ 411              		.loc 1 418 0
+ 412 0202 7B69     		ldr	r3, [r7, #20]
+ 413 0204 1B89     		ldrh	r3, [r3, #8]	@ unaligned
+ 414 0206 9BB2     		uxth	r3, r3
+ 415 0208 1846     		mov	r0, r3
+ 416 020a FFF7FEFF 		bl	ntohs
+ 417 020e 0346     		mov	r3, r0
+ 418 0210 DBB2     		uxtb	r3, r3
+ 419 0212 03F1FF33 		add	r3, r3, #-1
+ 420 0216 102B     		cmp	r3, #16
+ 421 0218 3CD8     		bhi	.L28
+ 422 021a 01A2     		adr	r2, .L33
+ 423 021c 52F823F0 		ldr	pc, [r2, r3, lsl #2]
+ 424              		.align	2
+ 425              	.L33:
+ 426 0220 79020000 		.word	.L29+1
+ 427 0224 83020000 		.word	.L30+1
+ 428 0228 95020000 		.word	.L28+1
+ 429 022c 95020000 		.word	.L28+1
+ 430 0230 95020000 		.word	.L28+1
+ 431 0234 6F020000 		.word	.L31+1
+ 432 0238 95020000 		.word	.L28+1
+ 433 023c 95020000 		.word	.L28+1
+ 434 0240 95020000 		.word	.L28+1
+ 435 0244 95020000 		.word	.L28+1
+ 436 0248 95020000 		.word	.L28+1
+ 437 024c 95020000 		.word	.L28+1
+ 438 0250 95020000 		.word	.L28+1
+ 439 0254 95020000 		.word	.L28+1
+ 440 0258 95020000 		.word	.L28+1
+ 441 025c 95020000 		.word	.L28+1
+ 442 0260 65020000 		.word	.L32+1
+ 443              	.L32:
+ 419:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** #if LWIP_UDP
+ 420:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     case IP_PROTO_UDP:
+ 421:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** #if LWIP_UDPLITE
+ 422:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     case IP_PROTO_UDPLITE:
+ 423:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** #endif /* LWIP_UDPLITE */
+ 424:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****       snmp_inc_ipindelivers();
+ 425:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****       udp_input(p, inp);
+ 444              		.loc 1 425 0
+ 445 0264 7868     		ldr	r0, [r7, #4]
+ 446 0266 3968     		ldr	r1, [r7, #0]
+ 447 0268 FFF7FEFF 		bl	udp_input
+ 426:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****       break;
+ 448              		.loc 1 426 0
+ 449 026c 36E0     		b	.L27
+ 450              	.L31:
+ 427:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** #endif /* LWIP_UDP */
+ 428:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** #if LWIP_TCP
+ 429:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     case IP_PROTO_TCP:
+ 430:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****       snmp_inc_ipindelivers();
+ 431:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****       tcp_input(p, inp);
+ 451              		.loc 1 431 0
+ 452 026e 7868     		ldr	r0, [r7, #4]
+ 453 0270 3968     		ldr	r1, [r7, #0]
+ 454 0272 FFF7FEFF 		bl	tcp_input
+ 432:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****       break;
+ 455              		.loc 1 432 0
+ 456 0276 31E0     		b	.L27
+ 457              	.L29:
+ 433:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** #endif /* LWIP_TCP */
+ 434:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** #if LWIP_ICMP
+ 435:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     case IP_PROTO_ICMP:
+ 436:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****       snmp_inc_ipindelivers();
+ 437:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****       icmp_input(p, inp);
+ 458              		.loc 1 437 0
+ 459 0278 7868     		ldr	r0, [r7, #4]
+ 460 027a 3968     		ldr	r1, [r7, #0]
+ 461 027c FFF7FEFF 		bl	icmp_input
+ 438:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****       break;
+ 462              		.loc 1 438 0
+ 463 0280 2CE0     		b	.L27
+ 464              	.L30:
+ 439:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** #endif /* LWIP_ICMP */
+ 440:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** #if LWIP_IGMP
+ 441:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     case IP_PROTO_IGMP:
+ 442:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****       igmp_input(p,inp,&(iphdr->dest));
+ 465              		.loc 1 442 0
+ 466 0282 7B69     		ldr	r3, [r7, #20]
+ 467 0284 03F11003 		add	r3, r3, #16
+ 468 0288 7868     		ldr	r0, [r7, #4]
+ 469 028a 3968     		ldr	r1, [r7, #0]
+ 470 028c 1A46     		mov	r2, r3
+ 471 028e FFF7FEFF 		bl	igmp_input
+ 443:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****       break;
+ 472              		.loc 1 443 0
+ 473 0292 23E0     		b	.L27
+ 474              	.L28:
+ 444:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** #endif /* LWIP_IGMP */
+ 445:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     default:
+ 446:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** #if LWIP_ICMP
+ 447:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****       /* send ICMP destination protocol unreachable unless is was a broadcast */
+ 448:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****       if (!ip_addr_isbroadcast(&(iphdr->dest), inp) &&
+ 475              		.loc 1 448 0
+ 476 0294 7B69     		ldr	r3, [r7, #20]
+ 477 0296 03F11003 		add	r3, r3, #16
+ 478 029a 1846     		mov	r0, r3
+ 479 029c 3968     		ldr	r1, [r7, #0]
+ 480 029e FFF7FEFF 		bl	ip_addr_isbroadcast
+ 481 02a2 0346     		mov	r3, r0
+ 482 02a4 002B     		cmp	r3, #0
+ 483 02a6 16D1     		bne	.L34
+ 449:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****           !ip_addr_ismulticast(&(iphdr->dest))) {
+ 484              		.loc 1 449 0 discriminator 1
+ 485 02a8 7B69     		ldr	r3, [r7, #20]
+ 486 02aa 1C69     		ldr	r4, [r3, #16]	@ unaligned
+ 487 02ac 4FF07040 		mov	r0, #-268435456
+ 488 02b0 FFF7FEFF 		bl	ntohl
+ 489 02b4 0346     		mov	r3, r0
+ 490 02b6 1C40     		ands	r4, r4, r3
+ 491 02b8 4FF06040 		mov	r0, #-536870912
+ 492 02bc FFF7FEFF 		bl	ntohl
+ 493 02c0 0346     		mov	r3, r0
+ 448:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****       if (!ip_addr_isbroadcast(&(iphdr->dest), inp) &&
+ 494              		.loc 1 448 0 discriminator 1
+ 495 02c2 9C42     		cmp	r4, r3
+ 496 02c4 07D0     		beq	.L34
+ 450:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****         p->payload = iphdr;
+ 497              		.loc 1 450 0
+ 498 02c6 7B68     		ldr	r3, [r7, #4]
+ 499 02c8 7A69     		ldr	r2, [r7, #20]
+ 500 02ca 5A60     		str	r2, [r3, #4]
+ 451:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****         icmp_dest_unreach(p, ICMP_DUR_PROTO);
+ 501              		.loc 1 451 0
+ 502 02cc 7868     		ldr	r0, [r7, #4]
+ 503 02ce 4FF00201 		mov	r1, #2
+ 504 02d2 FFF7FEFF 		bl	icmp_dest_unreach
+ 505              	.L34:
+ 452:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****       }
+ 453:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** #endif /* LWIP_ICMP */
+ 454:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****       pbuf_free(p);
+ 506              		.loc 1 454 0
+ 507 02d6 7868     		ldr	r0, [r7, #4]
+ 508 02d8 FFF7FEFF 		bl	pbuf_free
+ 509              	.L27:
+ 455:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** 
+ 456:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****       LWIP_DEBUGF(IP_DEBUG | LWIP_DBG_LEVEL_SERIOUS, ("Unsupported transport protocol %"U16_F"\n", 
+ 457:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** 
+ 458:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****       IP_STATS_INC(ip.proterr);
+ 459:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****       IP_STATS_INC(ip.drop);
+ 460:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****       snmp_inc_ipinunknownprotos();
+ 461:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     }
+ 462:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   }
+ 463:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** 
+ 464:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   current_netif = NULL;
+ 510              		.loc 1 464 0
+ 511 02dc 40F20003 		movw	r3, #:lower16:current_netif
+ 512 02e0 C0F20003 		movt	r3, #:upper16:current_netif
+ 513 02e4 4FF00002 		mov	r2, #0
+ 514 02e8 1A60     		str	r2, [r3, #0]
+ 465:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   current_header = NULL;
+ 515              		.loc 1 465 0
+ 516 02ea 40F20003 		movw	r3, #:lower16:current_header
+ 517 02ee C0F20003 		movt	r3, #:upper16:current_header
+ 518 02f2 4FF00002 		mov	r2, #0
+ 519 02f6 1A60     		str	r2, [r3, #0]
+ 466:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** 
+ 467:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   return ERR_OK;
+ 520              		.loc 1 467 0
+ 521 02f8 4FF00003 		mov	r3, #0
+ 522              	.L10:
+ 523 02fc 5BB2     		sxtb	r3, r3
+ 468:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** }
+ 524              		.loc 1 468 0
+ 525 02fe 1846     		mov	r0, r3
+ 526 0300 07F11C07 		add	r7, r7, #28
+ 527 0304 BD46     		mov	sp, r7
+ 528 0306 90BD     		pop	{r4, r7, pc}
+ 529              		.cfi_endproc
+ 530              	.LFE1:
+ 532              		.section	.text.ip_output_if,"ax",%progbits
+ 533              		.align	2
+ 534              		.global	ip_output_if
+ 535              		.thumb
+ 536              		.thumb_func
+ 538              	ip_output_if:
+ 539              	.LFB2:
+ 469:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** 
+ 470:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** /**
+ 471:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  * Sends an IP packet on a network interface. This function constructs
+ 472:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  * the IP header and calculates the IP header checksum. If the source
+ 473:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  * IP address is NULL, the IP address of the outgoing network
+ 474:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  * interface is filled in as source address.
+ 475:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  * If the destination IP address is IP_HDRINCL, p is assumed to already
+ 476:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  * include an IP header and p->payload points to it instead of the data.
+ 477:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  *
+ 478:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  * @param p the packet to send (p->payload points to the data, e.g. next
+ 479:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****             protocol header; if dest == IP_HDRINCL, p already includes an IP
+ 480:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****             header and p->payload points to that IP header)
+ 481:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  * @param src the source IP address to send from (if src == IP_ADDR_ANY, the
+ 482:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  *         IP  address of the netif used to send is used as source address)
+ 483:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  * @param dest the destination IP address to send the packet to
+ 484:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  * @param ttl the TTL value to be set in the IP header
+ 485:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  * @param tos the TOS value to be set in the IP header
+ 486:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  * @param proto the PROTOCOL to be set in the IP header
+ 487:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  * @param netif the netif on which to send this packet
+ 488:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  * @return ERR_OK if the packet was sent OK
+ 489:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  *         ERR_BUF if p doesn't have enough space for IP/LINK headers
+ 490:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  *         returns errors returned by netif->output
+ 491:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  *
+ 492:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  * @note ip_id: RFC791 "some host may be able to simply use
+ 493:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  *  unique identifiers independent of destination"
+ 494:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  */
+ 495:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** err_t
+ 496:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** ip_output_if(struct pbuf *p, struct ip_addr *src, struct ip_addr *dest,
+ 497:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****              u8_t ttl, u8_t tos,
+ 498:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****              u8_t proto, struct netif *netif)
+ 499:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** {
+ 540              		.loc 1 499 0
+ 541              		.cfi_startproc
+ 542              		@ args = 12, pretend = 0, frame = 16
+ 543              		@ frame_needed = 1, uses_anonymous_args = 0
+ 544 0000 80B5     		push	{r7, lr}
+ 545              	.LCFI6:
+ 546              		.cfi_def_cfa_offset 8
+ 547              		.cfi_offset 7, -8
+ 548              		.cfi_offset 14, -4
+ 549 0002 8AB0     		sub	sp, sp, #40
+ 550              	.LCFI7:
+ 551              		.cfi_def_cfa_offset 48
+ 552 0004 06AF     		add	r7, sp, #24
+ 553              	.LCFI8:
+ 554              		.cfi_def_cfa 7, 24
+ 555 0006 F860     		str	r0, [r7, #12]
+ 556 0008 B960     		str	r1, [r7, #8]
+ 557 000a 7A60     		str	r2, [r7, #4]
+ 558 000c FB70     		strb	r3, [r7, #3]
+ 500:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** #if IP_OPTIONS_SEND
+ 501:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   return ip_output_if_opt(p, src, dest, ttl, tos, proto, netif, NULL, 0);
+ 559              		.loc 1 501 0
+ 560 000e FB78     		ldrb	r3, [r7, #3]	@ zero_extendqisi2
+ 561 0010 3A7E     		ldrb	r2, [r7, #24]	@ zero_extendqisi2
+ 562 0012 0092     		str	r2, [sp, #0]
+ 563 0014 3A7F     		ldrb	r2, [r7, #28]	@ zero_extendqisi2
+ 564 0016 0192     		str	r2, [sp, #4]
+ 565 0018 3A6A     		ldr	r2, [r7, #32]
+ 566 001a 0292     		str	r2, [sp, #8]
+ 567 001c 4FF00002 		mov	r2, #0
+ 568 0020 0392     		str	r2, [sp, #12]
+ 569 0022 4FF00002 		mov	r2, #0
+ 570 0026 0492     		str	r2, [sp, #16]
+ 571 0028 F868     		ldr	r0, [r7, #12]
+ 572 002a B968     		ldr	r1, [r7, #8]
+ 573 002c 7A68     		ldr	r2, [r7, #4]
+ 574 002e FFF7FEFF 		bl	ip_output_if_opt
+ 575 0032 0346     		mov	r3, r0
+ 502:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** }
+ 576              		.loc 1 502 0
+ 577 0034 1846     		mov	r0, r3
+ 578 0036 07F11007 		add	r7, r7, #16
+ 579 003a BD46     		mov	sp, r7
+ 580 003c 80BD     		pop	{r7, pc}
+ 581              		.cfi_endproc
+ 582              	.LFE2:
+ 584 003e 00BF     		.section	.text.ip_output_if_opt,"ax",%progbits
+ 585              		.align	2
+ 586              		.global	ip_output_if_opt
+ 587              		.thumb
+ 588              		.thumb_func
+ 590              	ip_output_if_opt:
+ 591              	.LFB3:
+ 503:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** 
+ 504:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** /**
+ 505:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  * Same as ip_output_if() but with the possibility to include IP options:
+ 506:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  *
+ 507:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  * @ param ip_options pointer to the IP options, copied into the IP header
+ 508:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  * @ param optlen length of ip_options
+ 509:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  */
+ 510:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** err_t ip_output_if_opt(struct pbuf *p, struct ip_addr *src, struct ip_addr *dest,
+ 511:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****        u8_t ttl, u8_t tos, u8_t proto, struct netif *netif, void *ip_options,
+ 512:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****        u16_t optlen)
+ 513:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** {
+ 592              		.loc 1 513 0
+ 593              		.cfi_startproc
+ 594              		@ args = 20, pretend = 0, frame = 24
+ 595              		@ frame_needed = 1, uses_anonymous_args = 0
+ 596 0000 90B5     		push	{r4, r7, lr}
+ 597              	.LCFI9:
+ 598              		.cfi_def_cfa_offset 12
+ 599              		.cfi_offset 4, -12
+ 600              		.cfi_offset 7, -8
+ 601              		.cfi_offset 14, -4
+ 602 0002 87B0     		sub	sp, sp, #28
+ 603              	.LCFI10:
+ 604              		.cfi_def_cfa_offset 40
+ 605 0004 00AF     		add	r7, sp, #0
+ 606              	.LCFI11:
+ 607              		.cfi_def_cfa_register 7
+ 608 0006 F860     		str	r0, [r7, #12]
+ 609 0008 B960     		str	r1, [r7, #8]
+ 610 000a 7A60     		str	r2, [r7, #4]
+ 611 000c FB70     		strb	r3, [r7, #3]
+ 514:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** #endif /* IP_OPTIONS_SEND */
+ 515:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   struct ip_hdr *iphdr;
+ 516:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   static u16_t ip_id = 0;
+ 517:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** 
+ 518:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   snmp_inc_ipoutrequests();
+ 519:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** 
+ 520:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   /* Should the IP header be generated or is it already included in p? */
+ 521:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   if (dest != IP_HDRINCL) {
+ 612              		.loc 1 521 0
+ 613 000e 7B68     		ldr	r3, [r7, #4]
+ 614 0010 002B     		cmp	r3, #0
+ 615 0012 00F0EA80 		beq	.L38
+ 616              	.LBB3:
+ 522:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     u16_t ip_hlen = IP_HLEN;
+ 617              		.loc 1 522 0
+ 618 0016 4FF01403 		mov	r3, #20
+ 619 001a FB82     		strh	r3, [r7, #22]	@ movhi
+ 523:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** #if IP_OPTIONS_SEND
+ 524:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     u16_t optlen_aligned = 0;
+ 620              		.loc 1 524 0
+ 621 001c 4FF00003 		mov	r3, #0
+ 622 0020 BB82     		strh	r3, [r7, #20]	@ movhi
+ 525:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     if (optlen != 0) {
+ 623              		.loc 1 525 0
+ 624 0022 3B8F     		ldrh	r3, [r7, #56]
+ 625 0024 002B     		cmp	r3, #0
+ 626 0026 2FD0     		beq	.L39
+ 526:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****       /* round up to a multiple of 4 */
+ 527:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****       optlen_aligned = ((optlen + 3) & ~3);
+ 627              		.loc 1 527 0
+ 628 0028 3B8F     		ldrh	r3, [r7, #56]	@ movhi
+ 629 002a 03F10303 		add	r3, r3, #3
+ 630 002e 9BB2     		uxth	r3, r3
+ 631 0030 23F00303 		bic	r3, r3, #3
+ 632 0034 BB82     		strh	r3, [r7, #20]	@ movhi
+ 528:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****       ip_hlen += optlen_aligned;
+ 633              		.loc 1 528 0
+ 634 0036 FA8A     		ldrh	r2, [r7, #22]	@ movhi
+ 635 0038 BB8A     		ldrh	r3, [r7, #20]	@ movhi
+ 636 003a D318     		adds	r3, r2, r3
+ 637 003c FB82     		strh	r3, [r7, #22]	@ movhi
+ 529:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****       /* First write in the IP options */
+ 530:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****       if (pbuf_header(p, optlen_aligned)) {
+ 638              		.loc 1 530 0
+ 639 003e BB8A     		ldrh	r3, [r7, #20]
+ 640 0040 1BB2     		sxth	r3, r3
+ 641 0042 F868     		ldr	r0, [r7, #12]
+ 642 0044 1946     		mov	r1, r3
+ 643 0046 FFF7FEFF 		bl	pbuf_header
+ 644 004a 0346     		mov	r3, r0
+ 645 004c 002B     		cmp	r3, #0
+ 646 004e 02D0     		beq	.L40
+ 531:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****         LWIP_DEBUGF(IP_DEBUG | LWIP_DBG_LEVEL_SERIOUS, ("ip_output_if_opt: not enough room for IP o
+ 532:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****         IP_STATS_INC(ip.err);
+ 533:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****         snmp_inc_ipoutdiscards();
+ 534:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****         return ERR_BUF;
+ 647              		.loc 1 534 0
+ 648 0050 4FF0FE03 		mov	r3, #254
+ 649 0054 E8E0     		b	.L41
+ 650              	.L40:
+ 535:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****       }
+ 536:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****       MEMCPY(p->payload, ip_options, optlen);
+ 651              		.loc 1 536 0
+ 652 0056 FB68     		ldr	r3, [r7, #12]
+ 653 0058 5A68     		ldr	r2, [r3, #4]
+ 654 005a 3B8F     		ldrh	r3, [r7, #56]
+ 655 005c 1046     		mov	r0, r2
+ 656 005e 796B     		ldr	r1, [r7, #52]
+ 657 0060 1A46     		mov	r2, r3
+ 658 0062 FFF7FEFF 		bl	memcpy
+ 537:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****       if (optlen < optlen_aligned) {
+ 659              		.loc 1 537 0
+ 660 0066 3A8F     		ldrh	r2, [r7, #56]
+ 661 0068 BB8A     		ldrh	r3, [r7, #20]
+ 662 006a 9A42     		cmp	r2, r3
+ 663 006c 0CD2     		bcs	.L39
+ 538:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****         /* zero the remaining bytes */
+ 539:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****         memset(((char*)p->payload) + optlen, 0, optlen_aligned - optlen);
+ 664              		.loc 1 539 0
+ 665 006e FB68     		ldr	r3, [r7, #12]
+ 666 0070 5A68     		ldr	r2, [r3, #4]
+ 667 0072 3B8F     		ldrh	r3, [r7, #56]
+ 668 0074 D218     		adds	r2, r2, r3
+ 669 0076 B98A     		ldrh	r1, [r7, #20]
+ 670 0078 3B8F     		ldrh	r3, [r7, #56]
+ 671 007a CB1A     		subs	r3, r1, r3
+ 672 007c 1046     		mov	r0, r2
+ 673 007e 4FF00001 		mov	r1, #0
+ 674 0082 1A46     		mov	r2, r3
+ 675 0084 FFF7FEFF 		bl	memset
+ 676              	.L39:
+ 540:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****       }
+ 541:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     }
+ 542:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** #endif /* IP_OPTIONS_SEND */
+ 543:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     /* generate IP header */
+ 544:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     if (pbuf_header(p, IP_HLEN)) {
+ 677              		.loc 1 544 0
+ 678 0088 F868     		ldr	r0, [r7, #12]
+ 679 008a 4FF01401 		mov	r1, #20
+ 680 008e FFF7FEFF 		bl	pbuf_header
+ 681 0092 0346     		mov	r3, r0
+ 682 0094 002B     		cmp	r3, #0
+ 683 0096 02D0     		beq	.L42
+ 545:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****       LWIP_DEBUGF(IP_DEBUG | LWIP_DBG_LEVEL_SERIOUS, ("ip_output: not enough room for IP header in 
+ 546:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** 
+ 547:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****       IP_STATS_INC(ip.err);
+ 548:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****       snmp_inc_ipoutdiscards();
+ 549:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****       return ERR_BUF;
+ 684              		.loc 1 549 0
+ 685 0098 4FF0FE03 		mov	r3, #254
+ 686 009c C4E0     		b	.L41
+ 687              	.L42:
+ 550:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     }
+ 551:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** 
+ 552:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     iphdr = p->payload;
+ 688              		.loc 1 552 0
+ 689 009e FB68     		ldr	r3, [r7, #12]
+ 690 00a0 5B68     		ldr	r3, [r3, #4]
+ 691 00a2 3B61     		str	r3, [r7, #16]
+ 553:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     LWIP_ASSERT("check that first pbuf can hold struct ip_hdr",
+ 554:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****                (p->len >= sizeof(struct ip_hdr)));
+ 555:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** 
+ 556:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     IPH_TTL_SET(iphdr, ttl);
+ 692              		.loc 1 556 0
+ 693 00a4 3B69     		ldr	r3, [r7, #16]
+ 694 00a6 1B89     		ldrh	r3, [r3, #8]	@ unaligned
+ 695 00a8 9BB2     		uxth	r3, r3
+ 696 00aa 1846     		mov	r0, r3
+ 697 00ac FFF7FEFF 		bl	ntohs
+ 698 00b0 0346     		mov	r3, r0
+ 699 00b2 9BB2     		uxth	r3, r3
+ 700 00b4 DBB2     		uxtb	r3, r3
+ 701 00b6 9AB2     		uxth	r2, r3
+ 702 00b8 FB78     		ldrb	r3, [r7, #3]	@ zero_extendqisi2
+ 703 00ba 4FEA0323 		lsl	r3, r3, #8
+ 704 00be 9BB2     		uxth	r3, r3
+ 705 00c0 1343     		orrs	r3, r3, r2
+ 706 00c2 9BB2     		uxth	r3, r3
+ 707 00c4 9BB2     		uxth	r3, r3
+ 708 00c6 1846     		mov	r0, r3
+ 709 00c8 FFF7FEFF 		bl	htons
+ 710 00cc 0346     		mov	r3, r0
+ 711 00ce 1A46     		mov	r2, r3
+ 712 00d0 3B69     		ldr	r3, [r7, #16]
+ 713 00d2 1A81     		strh	r2, [r3, #8]	@ unaligned
+ 557:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     IPH_PROTO_SET(iphdr, proto);
+ 714              		.loc 1 557 0
+ 715 00d4 97F82C30 		ldrb	r3, [r7, #44]	@ zero_extendqisi2
+ 716 00d8 9CB2     		uxth	r4, r3
+ 717 00da 3B69     		ldr	r3, [r7, #16]
+ 718 00dc 1B89     		ldrh	r3, [r3, #8]	@ unaligned
+ 719 00de 9BB2     		uxth	r3, r3
+ 720 00e0 1846     		mov	r0, r3
+ 721 00e2 FFF7FEFF 		bl	ntohs
+ 722 00e6 0346     		mov	r3, r0
+ 723 00e8 4FEA1323 		lsr	r3, r3, #8
+ 724 00ec 9BB2     		uxth	r3, r3
+ 725 00ee 4FEA0323 		lsl	r3, r3, #8
+ 726 00f2 9BB2     		uxth	r3, r3
+ 727 00f4 2246     		mov	r2, r4	@ movhi
+ 728 00f6 1343     		orrs	r3, r3, r2
+ 729 00f8 9BB2     		uxth	r3, r3
+ 730 00fa 9BB2     		uxth	r3, r3
+ 731 00fc 1846     		mov	r0, r3
+ 732 00fe FFF7FEFF 		bl	htons
+ 733 0102 0346     		mov	r3, r0
+ 734 0104 1A46     		mov	r2, r3
+ 735 0106 3B69     		ldr	r3, [r7, #16]
+ 736 0108 1A81     		strh	r2, [r3, #8]	@ unaligned
+ 558:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** 
+ 559:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     ip_addr_set(&(iphdr->dest), dest);
+ 737              		.loc 1 559 0
+ 738 010a 7B68     		ldr	r3, [r7, #4]
+ 739 010c 002B     		cmp	r3, #0
+ 740 010e 02D0     		beq	.L43
+ 741              		.loc 1 559 0 is_stmt 0 discriminator 1
+ 742 0110 7B68     		ldr	r3, [r7, #4]
+ 743 0112 1B68     		ldr	r3, [r3, #0]	@ unaligned
+ 744 0114 01E0     		b	.L44
+ 745              	.L43:
+ 746              		.loc 1 559 0 discriminator 2
+ 747 0116 4FF00003 		mov	r3, #0
+ 748              	.L44:
+ 749              		.loc 1 559 0 discriminator 3
+ 750 011a 3A69     		ldr	r2, [r7, #16]
+ 751 011c 1361     		str	r3, [r2, #16]	@ unaligned
+ 560:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** 
+ 561:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     IPH_VHLTOS_SET(iphdr, 4, ip_hlen / 4, tos);
+ 752              		.loc 1 561 0 is_stmt 1 discriminator 3
+ 753 011e FB8A     		ldrh	r3, [r7, #22]
+ 754 0120 4FEA9303 		lsr	r3, r3, #2
+ 755 0124 9BB2     		uxth	r3, r3
+ 756 0126 4FEA0323 		lsl	r3, r3, #8
+ 757 012a 9BB2     		uxth	r3, r3
+ 758 012c 43F48043 		orr	r3, r3, #16384
+ 759 0130 9AB2     		uxth	r2, r3
+ 760 0132 97F82830 		ldrb	r3, [r7, #40]	@ zero_extendqisi2
+ 761 0136 9BB2     		uxth	r3, r3
+ 762 0138 1343     		orrs	r3, r3, r2
+ 763 013a 9BB2     		uxth	r3, r3
+ 764 013c 9BB2     		uxth	r3, r3
+ 765 013e 1846     		mov	r0, r3
+ 766 0140 FFF7FEFF 		bl	htons
+ 767 0144 0346     		mov	r3, r0
+ 768 0146 1A46     		mov	r2, r3
+ 769 0148 3B69     		ldr	r3, [r7, #16]
+ 770 014a 1A80     		strh	r2, [r3, #0]	@ unaligned
+ 562:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     IPH_LEN_SET(iphdr, htons(p->tot_len));
+ 771              		.loc 1 562 0 discriminator 3
+ 772 014c FB68     		ldr	r3, [r7, #12]
+ 773 014e 1B89     		ldrh	r3, [r3, #8]
+ 774 0150 1846     		mov	r0, r3
+ 775 0152 FFF7FEFF 		bl	htons
+ 776 0156 0346     		mov	r3, r0
+ 777 0158 1A46     		mov	r2, r3
+ 778 015a 3B69     		ldr	r3, [r7, #16]
+ 779 015c 5A80     		strh	r2, [r3, #2]	@ unaligned
+ 563:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     IPH_OFFSET_SET(iphdr, 0);
+ 780              		.loc 1 563 0 discriminator 3
+ 781 015e 3B69     		ldr	r3, [r7, #16]
+ 782 0160 4FF00002 		mov	r2, #0
+ 783 0164 9A71     		strb	r2, [r3, #6]
+ 784 0166 4FF00002 		mov	r2, #0
+ 785 016a DA71     		strb	r2, [r3, #7]
+ 564:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     IPH_ID_SET(iphdr, htons(ip_id));
+ 786              		.loc 1 564 0 discriminator 3
+ 787 016c 40F20003 		movw	r3, #:lower16:ip_id.5191
+ 788 0170 C0F20003 		movt	r3, #:upper16:ip_id.5191
+ 789 0174 1B88     		ldrh	r3, [r3, #0]
+ 790 0176 1846     		mov	r0, r3
+ 791 0178 FFF7FEFF 		bl	htons
+ 792 017c 0346     		mov	r3, r0
+ 793 017e 1A46     		mov	r2, r3
+ 794 0180 3B69     		ldr	r3, [r7, #16]
+ 795 0182 9A80     		strh	r2, [r3, #4]	@ unaligned
+ 565:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     ++ip_id;
+ 796              		.loc 1 565 0 discriminator 3
+ 797 0184 40F20003 		movw	r3, #:lower16:ip_id.5191
+ 798 0188 C0F20003 		movt	r3, #:upper16:ip_id.5191
+ 799 018c 1B88     		ldrh	r3, [r3, #0]
+ 800 018e 03F10103 		add	r3, r3, #1
+ 801 0192 9AB2     		uxth	r2, r3
+ 802 0194 40F20003 		movw	r3, #:lower16:ip_id.5191
+ 803 0198 C0F20003 		movt	r3, #:upper16:ip_id.5191
+ 804 019c 1A80     		strh	r2, [r3, #0]	@ movhi
+ 566:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** 
+ 567:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     if (ip_addr_isany(src)) {
+ 805              		.loc 1 567 0 discriminator 3
+ 806 019e BB68     		ldr	r3, [r7, #8]
+ 807 01a0 002B     		cmp	r3, #0
+ 808 01a2 03D0     		beq	.L45
+ 809              		.loc 1 567 0 is_stmt 0 discriminator 1
+ 810 01a4 BB68     		ldr	r3, [r7, #8]
+ 811 01a6 1B68     		ldr	r3, [r3, #0]	@ unaligned
+ 812 01a8 002B     		cmp	r3, #0
+ 813 01aa 0CD1     		bne	.L46
+ 814              	.L45:
+ 568:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****       ip_addr_set(&(iphdr->src), &(netif->ip_addr));
+ 815              		.loc 1 568 0 is_stmt 1
+ 816 01ac 3B6B     		ldr	r3, [r7, #48]
+ 817 01ae 03F10403 		add	r3, r3, #4
+ 818 01b2 002B     		cmp	r3, #0
+ 819 01b4 02D0     		beq	.L47
+ 820              		.loc 1 568 0 is_stmt 0 discriminator 1
+ 821 01b6 3B6B     		ldr	r3, [r7, #48]
+ 822 01b8 5B68     		ldr	r3, [r3, #4]
+ 823 01ba 01E0     		b	.L48
+ 824              	.L47:
+ 825              		.loc 1 568 0 discriminator 2
+ 826 01bc 4FF00003 		mov	r3, #0
+ 827              	.L48:
+ 828              		.loc 1 568 0 discriminator 3
+ 829 01c0 3A69     		ldr	r2, [r7, #16]
+ 830 01c2 D360     		str	r3, [r2, #12]	@ unaligned
+ 831 01c4 09E0     		b	.L49
+ 832              	.L46:
+ 569:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     } else {
+ 570:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****       ip_addr_set(&(iphdr->src), src);
+ 833              		.loc 1 570 0 is_stmt 1
+ 834 01c6 BB68     		ldr	r3, [r7, #8]
+ 835 01c8 002B     		cmp	r3, #0
+ 836 01ca 02D0     		beq	.L50
+ 837              		.loc 1 570 0 is_stmt 0 discriminator 1
+ 838 01cc BB68     		ldr	r3, [r7, #8]
+ 839 01ce 1B68     		ldr	r3, [r3, #0]	@ unaligned
+ 840 01d0 01E0     		b	.L51
+ 841              	.L50:
+ 842              		.loc 1 570 0 discriminator 2
+ 843 01d2 4FF00003 		mov	r3, #0
+ 844              	.L51:
+ 845              		.loc 1 570 0 discriminator 3
+ 846 01d6 3A69     		ldr	r2, [r7, #16]
+ 847 01d8 D360     		str	r3, [r2, #12]	@ unaligned
+ 848              	.L49:
+ 571:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     }
+ 572:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** 
+ 573:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     IPH_CHKSUM_SET(iphdr, 0);
+ 849              		.loc 1 573 0 is_stmt 1
+ 850 01da 3B69     		ldr	r3, [r7, #16]
+ 851 01dc 4FF00002 		mov	r2, #0
+ 852 01e0 9A72     		strb	r2, [r3, #10]
+ 853 01e2 4FF00002 		mov	r2, #0
+ 854 01e6 DA72     		strb	r2, [r3, #11]
+ 855 01e8 06E0     		b	.L52
+ 856              	.L38:
+ 857              	.LBE3:
+ 574:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** #if CHECKSUM_GEN_IP
+ 575:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     IPH_CHKSUM_SET(iphdr, inet_chksum(iphdr, ip_hlen));
+ 576:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** #endif
+ 577:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   } else {
+ 578:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     /* IP header already included in p */
+ 579:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     iphdr = p->payload;
+ 858              		.loc 1 579 0
+ 859 01ea FB68     		ldr	r3, [r7, #12]
+ 860 01ec 5B68     		ldr	r3, [r3, #4]
+ 861 01ee 3B61     		str	r3, [r7, #16]
+ 580:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     dest = &(iphdr->dest);
+ 862              		.loc 1 580 0
+ 863 01f0 3B69     		ldr	r3, [r7, #16]
+ 864 01f2 03F11003 		add	r3, r3, #16
+ 865 01f6 7B60     		str	r3, [r7, #4]
+ 866              	.L52:
+ 581:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   }
+ 582:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** 
+ 583:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   IP_STATS_INC(ip.xmit);
+ 584:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** 
+ 585:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   LWIP_DEBUGF(IP_DEBUG, ("ip_output_if: %c%c%"U16_F"\n", netif->name[0], netif->name[1], netif->num
+ 586:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   ip_debug_print(p);
+ 587:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** 
+ 588:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** #if ENABLE_LOOPBACK
+ 589:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   if (ip_addr_cmp(dest, &netif->ip_addr)) {
+ 590:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     /* Packet to self, enqueue it for loopback */
+ 591:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     LWIP_DEBUGF(IP_DEBUG, ("netif_loop_output()"));
+ 592:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     return netif_loop_output(netif, p, dest);
+ 593:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   }
+ 594:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** #endif /* ENABLE_LOOPBACK */
+ 595:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** #if IP_FRAG
+ 596:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   /* don't fragment if interface has mtu set to 0 [loopif] */
+ 597:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   if (netif->mtu && (p->tot_len > netif->mtu)) {
+ 867              		.loc 1 597 0
+ 868 01f8 3B6B     		ldr	r3, [r7, #48]
+ 869 01fa 1B8C     		ldrh	r3, [r3, #32]
+ 870 01fc 002B     		cmp	r3, #0
+ 871 01fe 0CD0     		beq	.L53
+ 872              		.loc 1 597 0 is_stmt 0 discriminator 1
+ 873 0200 FB68     		ldr	r3, [r7, #12]
+ 874 0202 1A89     		ldrh	r2, [r3, #8]
+ 875 0204 3B6B     		ldr	r3, [r7, #48]
+ 876 0206 1B8C     		ldrh	r3, [r3, #32]
+ 877 0208 9A42     		cmp	r2, r3
+ 878 020a 06D9     		bls	.L53
+ 598:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     return ip_frag(p,netif,dest);
+ 879              		.loc 1 598 0 is_stmt 1
+ 880 020c F868     		ldr	r0, [r7, #12]
+ 881 020e 396B     		ldr	r1, [r7, #48]
+ 882 0210 7A68     		ldr	r2, [r7, #4]
+ 883 0212 FFF7FEFF 		bl	ip_frag
+ 884 0216 0346     		mov	r3, r0
+ 885 0218 06E0     		b	.L41
+ 886              	.L53:
+ 599:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   }
+ 600:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** #endif
+ 601:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** 
+ 602:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   LWIP_DEBUGF(IP_DEBUG, ("netif->output()"));
+ 603:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   return netif->output(netif, p, dest);
+ 887              		.loc 1 603 0
+ 888 021a 3B6B     		ldr	r3, [r7, #48]
+ 889 021c 5B69     		ldr	r3, [r3, #20]
+ 890 021e 386B     		ldr	r0, [r7, #48]
+ 891 0220 F968     		ldr	r1, [r7, #12]
+ 892 0222 7A68     		ldr	r2, [r7, #4]
+ 893 0224 9847     		blx	r3
+ 894 0226 0346     		mov	r3, r0
+ 895              	.L41:
+ 896 0228 5BB2     		sxtb	r3, r3
+ 604:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** }
+ 897              		.loc 1 604 0
+ 898 022a 1846     		mov	r0, r3
+ 899 022c 07F11C07 		add	r7, r7, #28
+ 900 0230 BD46     		mov	sp, r7
+ 901 0232 90BD     		pop	{r4, r7, pc}
+ 902              		.cfi_endproc
+ 903              	.LFE3:
+ 905              		.section	.text.ip_output,"ax",%progbits
+ 906              		.align	2
+ 907              		.global	ip_output
+ 908              		.thumb
+ 909              		.thumb_func
+ 911              	ip_output:
+ 912              	.LFB4:
+ 605:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** 
+ 606:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** /**
+ 607:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  * Simple interface to ip_output_if. It finds the outgoing network
+ 608:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  * interface and calls upon ip_output_if to do the actual work.
+ 609:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  *
+ 610:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  * @param p the packet to send (p->payload points to the data, e.g. next
+ 611:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****             protocol header; if dest == IP_HDRINCL, p already includes an IP
+ 612:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****             header and p->payload points to that IP header)
+ 613:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  * @param src the source IP address to send from (if src == IP_ADDR_ANY, the
+ 614:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  *         IP  address of the netif used to send is used as source address)
+ 615:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  * @param dest the destination IP address to send the packet to
+ 616:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  * @param ttl the TTL value to be set in the IP header
+ 617:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  * @param tos the TOS value to be set in the IP header
+ 618:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  * @param proto the PROTOCOL to be set in the IP header
+ 619:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  *
+ 620:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  * @return ERR_RTE if no route is found
+ 621:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  *         see ip_output_if() for more return values
+ 622:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****  */
+ 623:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** err_t
+ 624:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** ip_output(struct pbuf *p, struct ip_addr *src, struct ip_addr *dest,
+ 625:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****           u8_t ttl, u8_t tos, u8_t proto)
+ 626:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** {
+ 913              		.loc 1 626 0
+ 914              		.cfi_startproc
+ 915              		@ args = 8, pretend = 0, frame = 24
+ 916              		@ frame_needed = 1, uses_anonymous_args = 0
+ 917 0000 80B5     		push	{r7, lr}
+ 918              	.LCFI12:
+ 919              		.cfi_def_cfa_offset 8
+ 920              		.cfi_offset 7, -8
+ 921              		.cfi_offset 14, -4
+ 922 0002 8AB0     		sub	sp, sp, #40
+ 923              	.LCFI13:
+ 924              		.cfi_def_cfa_offset 48
+ 925 0004 04AF     		add	r7, sp, #16
+ 926              	.LCFI14:
+ 927              		.cfi_def_cfa 7, 32
+ 928 0006 F860     		str	r0, [r7, #12]
+ 929 0008 B960     		str	r1, [r7, #8]
+ 930 000a 7A60     		str	r2, [r7, #4]
+ 931 000c FB70     		strb	r3, [r7, #3]
+ 627:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   struct netif *netif;
+ 628:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** 
+ 629:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   if ((netif = ip_route(dest)) == NULL) {
+ 932              		.loc 1 629 0
+ 933 000e 7868     		ldr	r0, [r7, #4]
+ 934 0010 FFF7FEFF 		bl	ip_route
+ 935 0014 7861     		str	r0, [r7, #20]
+ 936 0016 7B69     		ldr	r3, [r7, #20]
+ 937 0018 002B     		cmp	r3, #0
+ 938 001a 02D1     		bne	.L55
+ 630:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     LWIP_DEBUGF(IP_DEBUG, ("ip_output: No route to 0x%"X32_F"\n", dest->addr));
+ 631:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     IP_STATS_INC(ip.rterr);
+ 632:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****     return ERR_RTE;
+ 939              		.loc 1 632 0
+ 940 001c 4FF0FC03 		mov	r3, #252
+ 941 0020 0EE0     		b	.L56
+ 942              	.L55:
+ 633:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   }
+ 634:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** 
+ 635:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c ****   return ip_output_if(p, src, dest, ttl, tos, proto, netif);
+ 943              		.loc 1 635 0
+ 944 0022 FB78     		ldrb	r3, [r7, #3]	@ zero_extendqisi2
+ 945 0024 97F82020 		ldrb	r2, [r7, #32]	@ zero_extendqisi2
+ 946 0028 0092     		str	r2, [sp, #0]
+ 947 002a 97F82420 		ldrb	r2, [r7, #36]	@ zero_extendqisi2
+ 948 002e 0192     		str	r2, [sp, #4]
+ 949 0030 7A69     		ldr	r2, [r7, #20]
+ 950 0032 0292     		str	r2, [sp, #8]
+ 951 0034 F868     		ldr	r0, [r7, #12]
+ 952 0036 B968     		ldr	r1, [r7, #8]
+ 953 0038 7A68     		ldr	r2, [r7, #4]
+ 954 003a FFF7FEFF 		bl	ip_output_if
+ 955 003e 0346     		mov	r3, r0
+ 956              	.L56:
+ 957 0040 5BB2     		sxtb	r3, r3
+ 636:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.c **** }
+ 958              		.loc 1 636 0
+ 959 0042 1846     		mov	r0, r3
+ 960 0044 07F11807 		add	r7, r7, #24
+ 961 0048 BD46     		mov	sp, r7
+ 962 004a 80BD     		pop	{r7, pc}
+ 963              		.cfi_endproc
+ 964              	.LFE4:
+ 966              		.bss
+ 967              		.align	1
+ 968              	ip_id.5191:
+ 969 0000 0000     		.space	2
+ 970              		.text
+ 971              	.Letext0:
+ 972              		.file 2 "C:\\DAVE3_workspace\\ws3.1.10\\XMC4500_RK_HTTPserver\\XMC4500_RK_HTTPserver\\Dave\\Genera
+ 973              		.file 3 "C:\\DAVE3_workspace\\ws3.1.10\\XMC4500_RK_HTTPserver\\XMC4500_RK_HTTPserver\\Dave\\Genera
+ 974              		.file 4 "C:\\DAVE3_workspace\\ws3.1.10\\XMC4500_RK_HTTPserver\\XMC4500_RK_HTTPserver\\Dave\\Genera
+ 975              		.file 5 "C:\\DAVE3_workspace\\ws3.1.10\\XMC4500_RK_HTTPserver\\XMC4500_RK_HTTPserver\\Dave\\Genera
+ 976              		.file 6 "C:\\DAVE3_workspace\\ws3.1.10\\XMC4500_RK_HTTPserver\\XMC4500_RK_HTTPserver\\Dave\\Genera
+ 977              		.file 7 "C:\\DAVE3_workspace\\ws3.1.10\\XMC4500_RK_HTTPserver\\XMC4500_RK_HTTPserver\\Dave\\Genera
+ 978              		.file 8 "C:\\DAVE3_workspace\\ws3.1.10\\XMC4500_RK_HTTPserver\\XMC4500_RK_HTTPserver\\Dave\\Genera
+ 979              		.file 9 "C:\\DAVE3_workspace\\ws3.1.10\\XMC4500_RK_HTTPserver\\XMC4500_RK_HTTPserver\\Dave\\Genera
+DEFINED SYMBOLS
+                            *ABS*:00000000 ip.c
+                            *COM*:00000004 current_netif
+                            *COM*:00000004 current_header
+C:\Users\Mihai\AppData\Local\Temp\cctKPJeH.s:22     .text.ip_route:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cctKPJeH.s:27     .text.ip_route:00000000 ip_route
+C:\Users\Mihai\AppData\Local\Temp\cctKPJeH.s:117    .text.ip_input:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cctKPJeH.s:122    .text.ip_input:00000000 ip_input
+C:\Users\Mihai\AppData\Local\Temp\cctKPJeH.s:426    .text.ip_input:00000220 $d
+C:\Users\Mihai\AppData\Local\Temp\cctKPJeH.s:445    .text.ip_input:00000264 $t
+C:\Users\Mihai\AppData\Local\Temp\cctKPJeH.s:533    .text.ip_output_if:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cctKPJeH.s:538    .text.ip_output_if:00000000 ip_output_if
+C:\Users\Mihai\AppData\Local\Temp\cctKPJeH.s:590    .text.ip_output_if_opt:00000000 ip_output_if_opt
+C:\Users\Mihai\AppData\Local\Temp\cctKPJeH.s:585    .text.ip_output_if_opt:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cctKPJeH.s:968    .bss:00000000 ip_id.5191
+C:\Users\Mihai\AppData\Local\Temp\cctKPJeH.s:906    .text.ip_output:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cctKPJeH.s:911    .text.ip_output:00000000 ip_output
+C:\Users\Mihai\AppData\Local\Temp\cctKPJeH.s:967    .bss:00000000 $d
+                     .debug_frame:00000010 $d
+                           .group:00000000 wm4.1.1791a5ae2e936ca1033c1c44be394cc7
+                           .group:00000000 wm4.ETH004_Conf.h.56.564c3f309c32b3c742fc91049cf66940
+                           .group:00000000 wm4.lwipopts.h.73.a7a63bda1e8216abd1d90275eaaa0027
+                           .group:00000000 wm4.arch.h.33.6fa4aa86d33d1490ae882caef7316405
+                           .group:00000000 wm4.cpu.h.33.b213c7fd77614ebc3691cef18ad2ff22
+                           .group:00000000 wm4.cc.h.66.ec134211c658dcc89de4610e4e7bab46
+                           .group:00000000 wm4.arch.h.47.5153c52bfb94ee3b37299920afab6afd
+                           .group:00000000 wm4.debug.h.43.557ecd6c90cc70b375bb8a29118be47b
+                           .group:00000000 wm4.opt.h.94.d36882acafebb8726bce646fc8b2397b
+                           .group:00000000 wm4.def.h.33.d779a3244e06cea9e944e5db86767de8
+                           .group:00000000 wm4.err.h.52.37c5d17538f8e8347a9c84196701e92d
+                           .group:00000000 wm4.pbuf.h.43.e9a1ad12b97478787a109e22d5306820
+                           .group:00000000 wm4.inet.h.46.a1c378d398e089f18dd6ade9b427826c
+                           .group:00000000 wm4.ip_addr.h.79.9a0ce887ca8c88c22ad7686bcb5105df
+                           .group:00000000 wm4.netif.h.53.c13431a64f0e73a26710e71455725e84
+                           .group:00000000 wm4.ip.h.48.ad46847692d4d729760949b27e48a442
+                           .group:00000000 wm4.mem.h.96.20770766e6c9e6c42af6bfa95ef5c63f
+                           .group:00000000 wm4.icmp.h.44.450dbf91f594cc26ad19d086cdc83713
+                           .group:00000000 wm4.igmp.h.52.4b87c73c5052131fa24f56c9d0dd53d2
+                           .group:00000000 wm4.udp.h.48.1a8dde095cd0a13580afaba1443e5a3f
+                           .group:00000000 wm4.sys.h.65.4a0cd87b9e0d8bb4cd6b30e939b2ca7e
+                           .group:00000000 wm4.tcp.h.55.5c30b9432fa60afaa85cbdd225b0c683
+                           .group:00000000 wm4.snmp.h.231.ffb5dc2779dd945785c887dfa42d86eb
+                           .group:00000000 wm4.memp_std.h.15.aec196dc1c3fb1142dd450db0c167cbf
+                           .group:00000000 wm4.memp.h.86.dbc4cb1b8d6b9ea113f04174f716e4c0
+                           .group:00000000 wm4.stats.h.147.58ec5b890fad5bbc2a7711ad8105f087
+                           .group:00000000 wm4.perf.h.33.85c55671e1b7570634f49777a207ad9f
+                           .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
+                           .group:00000000 wm4.features.h.22.b72b3baab2bb2eab3661375590100b6b
+                           .group:00000000 wm4.config.h.193.5fb8ef056cdff92dec3dee9552839d8c
+                           .group:00000000 wm4._ansi.h.23.7aefdac4826acebbfc9f3822a0aeb14c
+                           .group:00000000 wm4._default_types.h.6.5e12cd604db8ce00b62bb2f02708eaf3
+                           .group:00000000 wm4.lock.h.2.9bc98482741e5e2a9450b12934a684ea
+                           .group:00000000 wm4.stddef.h.349.31f4c5baff3fa2689010b32028da9c47
+                           .group:00000000 wm4.reent.h.16.9e42f0e588b85e70b2bf6572af57ce64
+                           .group:00000000 wm4.stddef.h.187.9e651b6b8b16e149c1353259404973ea
+                           .group:00000000 wm4.string.h.86.d5c872ff52e2712c985b588a0ef39f3c
+
+UNDEFINED SYMBOLS
+netif_list
+netif_is_up
+netif_default
+ntohs
+pbuf_free
+pbuf_realloc
+ntohl
+igmp_lookfor_group
+ip_addr_isbroadcast
+htons
+ip_reass
+raw_input
+udp_input
+tcp_input
+icmp_input
+igmp_input
+icmp_dest_unreach
+pbuf_header
+memcpy
+memset
+ip_frag

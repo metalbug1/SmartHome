@@ -1,0 +1,1568 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"EthernetPHY.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.comm	PHYtimerCallback,4,4
+  20              		.section	.text.PHY_InitializeDevice,"ax",%progbits
+  21              		.align	2
+  22              		.global	PHY_InitializeDevice
+  23              		.thumb
+  24              		.thumb_func
+  26              	PHY_InitializeDevice:
+  27              	.LFB112:
+  28              		.file 1 "../Dave/Generated/src/ETH002/EthernetPHY.c"
+   1:../Dave/Generated/src/ETH002/EthernetPHY.c **** 
+   2:../Dave/Generated/src/ETH002/EthernetPHY.c **** /*CODE_BLOCK_BEGIN[EthernetPHY.c]*/
+   3:../Dave/Generated/src/ETH002/EthernetPHY.c **** /*******************************************************************************
+   4:../Dave/Generated/src/ETH002/EthernetPHY.c ****  Copyright (c) 2011, Infineon Technologies AG                                 **
+   5:../Dave/Generated/src/ETH002/EthernetPHY.c ****  All rights reserved.                                                         **
+   6:../Dave/Generated/src/ETH002/EthernetPHY.c ****                                                                               **
+   7:../Dave/Generated/src/ETH002/EthernetPHY.c ****  Redistribution and use in source and binary forms, with or without           **
+   8:../Dave/Generated/src/ETH002/EthernetPHY.c ****  modification,are permitted provided that the following conditions are met:   **
+   9:../Dave/Generated/src/ETH002/EthernetPHY.c ****                                                                               **
+  10:../Dave/Generated/src/ETH002/EthernetPHY.c ****  *Redistributions of source code must retain the above copyright notice,      **
+  11:../Dave/Generated/src/ETH002/EthernetPHY.c ****  this list of conditions and the following disclaimer.                        **
+  12:../Dave/Generated/src/ETH002/EthernetPHY.c ****  *Redistributions in binary form must reproduce the above copyright notice,   **
+  13:../Dave/Generated/src/ETH002/EthernetPHY.c ****  this list of conditions and the following disclaimer in the documentation    **
+  14:../Dave/Generated/src/ETH002/EthernetPHY.c ****  and/or other materials provided with the distribution.                       **
+  15:../Dave/Generated/src/ETH002/EthernetPHY.c ****  *Neither the name of the copyright holders nor the names of its contributors **
+  16:../Dave/Generated/src/ETH002/EthernetPHY.c ****  may be used to endorse or promote products derived from this software without**
+  17:../Dave/Generated/src/ETH002/EthernetPHY.c ****  specific prior written permission.                                           **
+  18:../Dave/Generated/src/ETH002/EthernetPHY.c ****                                                                               **
+  19:../Dave/Generated/src/ETH002/EthernetPHY.c ****  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"  **
+  20:../Dave/Generated/src/ETH002/EthernetPHY.c ****  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE    **
+  21:../Dave/Generated/src/ETH002/EthernetPHY.c ****  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE   **
+  22:../Dave/Generated/src/ETH002/EthernetPHY.c ****  ARE  DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE   **
+  23:../Dave/Generated/src/ETH002/EthernetPHY.c ****  LIABLE  FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR         **
+  24:../Dave/Generated/src/ETH002/EthernetPHY.c ****  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF         **
+  25:../Dave/Generated/src/ETH002/EthernetPHY.c ****  SUBSTITUTE GOODS OR  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS    **
+  26:../Dave/Generated/src/ETH002/EthernetPHY.c ****  INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN      **
+  27:../Dave/Generated/src/ETH002/EthernetPHY.c ****  CONTRACT, STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)       **
+  28:../Dave/Generated/src/ETH002/EthernetPHY.c ****  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE   **
+  29:../Dave/Generated/src/ETH002/EthernetPHY.c ****  POSSIBILITY OF SUCH DAMAGE.                                                  **
+  30:../Dave/Generated/src/ETH002/EthernetPHY.c ****                                                                               **
+  31:../Dave/Generated/src/ETH002/EthernetPHY.c ****  To improve the quality of the software, users are encouraged to share        **
+  32:../Dave/Generated/src/ETH002/EthernetPHY.c ****  modifications, enhancements or bug fixes with Infineon Technologies AG       **
+  33:../Dave/Generated/src/ETH002/EthernetPHY.c ****  dave@infineon.com).                                                          **
+  34:../Dave/Generated/src/ETH002/EthernetPHY.c ****                                                                               **
+  35:../Dave/Generated/src/ETH002/EthernetPHY.c **** ********************************************************************************
+  36:../Dave/Generated/src/ETH002/EthernetPHY.c **** **                                                                            **
+  37:../Dave/Generated/src/ETH002/EthernetPHY.c **** **                                                                            **
+  38:../Dave/Generated/src/ETH002/EthernetPHY.c **** ** PLATFORM : Infineon XMC4000 Series                                         **
+  39:../Dave/Generated/src/ETH002/EthernetPHY.c **** **                                                                            **
+  40:../Dave/Generated/src/ETH002/EthernetPHY.c **** ** COMPILER : Compiler Independent                                            **
+  41:../Dave/Generated/src/ETH002/EthernetPHY.c **** **                                                                            **
+  42:../Dave/Generated/src/ETH002/EthernetPHY.c **** ** AUTHOR   : App Developer                                                   **
+  43:../Dave/Generated/src/ETH002/EthernetPHY.c **** **                                                                            **
+  44:../Dave/Generated/src/ETH002/EthernetPHY.c **** ** MAY BE CHANGED BY USER [yes/no]: Yes                                       **
+  45:../Dave/Generated/src/ETH002/EthernetPHY.c **** **                                                                            **
+  46:../Dave/Generated/src/ETH002/EthernetPHY.c **** ** MODIFICATION DATE : Dec 12, 2012                                           **
+  47:../Dave/Generated/src/ETH002/EthernetPHY.c **** **                                                                            **
+  48:../Dave/Generated/src/ETH002/EthernetPHY.c **** *******************************************************************************/
+  49:../Dave/Generated/src/ETH002/EthernetPHY.c **** /*******************************************************************************
+  50:../Dave/Generated/src/ETH002/EthernetPHY.c **** **                       Author(s) Identity                                   **
+  51:../Dave/Generated/src/ETH002/EthernetPHY.c **** ********************************************************************************
+  52:../Dave/Generated/src/ETH002/EthernetPHY.c **** **                                                                            **
+  53:../Dave/Generated/src/ETH002/EthernetPHY.c **** ** Initials     Name                                                          **
+  54:../Dave/Generated/src/ETH002/EthernetPHY.c **** ** -------------------------------------------------------------------------- **
+  55:../Dave/Generated/src/ETH002/EthernetPHY.c **** ** RS           App Developer                                                 **
+  56:../Dave/Generated/src/ETH002/EthernetPHY.c **** **                                                                            **
+  57:../Dave/Generated/src/ETH002/EthernetPHY.c **** *******************************************************************************/
+  58:../Dave/Generated/src/ETH002/EthernetPHY.c **** /**
+  59:../Dave/Generated/src/ETH002/EthernetPHY.c ****  * @file EthernetPHY.c
+  60:../Dave/Generated/src/ETH002/EthernetPHY.c ****  *
+  61:../Dave/Generated/src/ETH002/EthernetPHY.c ****  * @brief  This file contains Ethernet PHY Function definitions.
+  62:../Dave/Generated/src/ETH002/EthernetPHY.c ****  *
+  63:../Dave/Generated/src/ETH002/EthernetPHY.c ****  * Revision History
+  64:../Dave/Generated/src/ETH002/EthernetPHY.c ****  * 12 Dec 2012  v1.0.12    Base line from version v1.0.10
+  65:../Dave/Generated/src/ETH002/EthernetPHY.c ****  *                         dbg002 related macros are added
+  66:../Dave/Generated/src/ETH002/EthernetPHY.c ****  */
+  67:../Dave/Generated/src/ETH002/EthernetPHY.c **** 
+  68:../Dave/Generated/src/ETH002/EthernetPHY.c **** /*******************************************************************************
+  69:../Dave/Generated/src/ETH002/EthernetPHY.c ****  ** INCLUDE FILES                                                             **
+  70:../Dave/Generated/src/ETH002/EthernetPHY.c ****  ******************************************************************************/
+  71:../Dave/Generated/src/ETH002/EthernetPHY.c **** /** Inclusion of header file */
+  72:../Dave/Generated/src/ETH002/EthernetPHY.c **** #include <DAVE3.h>
+  73:../Dave/Generated/src/ETH002/EthernetPHY.c **** /*****************************************************************************
+  74:../Dave/Generated/src/ETH002/EthernetPHY.c ****               DUMMY DEFINTIONS OF DEBUG LOG MACROS
+  75:../Dave/Generated/src/ETH002/EthernetPHY.c **** *****************************************************************************/
+  76:../Dave/Generated/src/ETH002/EthernetPHY.c **** /*These definitions are included here to avoid compilation errors,
+  77:../Dave/Generated/src/ETH002/EthernetPHY.c ****  since the DBG002 app is not part of the project. All the macros are defined
+  78:../Dave/Generated/src/ETH002/EthernetPHY.c ****  as empty*/ 
+  79:../Dave/Generated/src/ETH002/EthernetPHY.c **** #ifndef _DBG002_H_
+  80:../Dave/Generated/src/ETH002/EthernetPHY.c **** 
+  81:../Dave/Generated/src/ETH002/EthernetPHY.c **** #define DBG002_RegisterCallBack(A,B,C)
+  82:../Dave/Generated/src/ETH002/EthernetPHY.c **** #define DBG002_I(e) 
+  83:../Dave/Generated/src/ETH002/EthernetPHY.c **** #define DBG002_IG(e,g) 
+  84:../Dave/Generated/src/ETH002/EthernetPHY.c **** #define DBG002_IH(e,h) 
+  85:../Dave/Generated/src/ETH002/EthernetPHY.c **** #define DBG002_IP(e,p) 
+  86:../Dave/Generated/src/ETH002/EthernetPHY.c **** #define DBG002_IGH(e,g,h) 
+  87:../Dave/Generated/src/ETH002/EthernetPHY.c **** #define DBG002_IGP(e,g,p) 
+  88:../Dave/Generated/src/ETH002/EthernetPHY.c **** #define DBG002_IHP(e,h,p) 
+  89:../Dave/Generated/src/ETH002/EthernetPHY.c **** #define DBG002_IGHP(e,g,h,p) 
+  90:../Dave/Generated/src/ETH002/EthernetPHY.c **** #define DBG002_N(e) 
+  91:../Dave/Generated/src/ETH002/EthernetPHY.c **** #define DBG002_NG(e,g) 
+  92:../Dave/Generated/src/ETH002/EthernetPHY.c **** #define DBG002_NH(e,h) 
+  93:../Dave/Generated/src/ETH002/EthernetPHY.c **** #define DBG002_NP(e,p) 
+  94:../Dave/Generated/src/ETH002/EthernetPHY.c **** #define DBG002_NGH(e,g,h) 
+  95:../Dave/Generated/src/ETH002/EthernetPHY.c **** #define DBG002_NGP(e,g,p) 
+  96:../Dave/Generated/src/ETH002/EthernetPHY.c **** #define DBG002_NHP(e,h,p) 
+  97:../Dave/Generated/src/ETH002/EthernetPHY.c **** #define DBG002_NGHP(e,g,h,p) 
+  98:../Dave/Generated/src/ETH002/EthernetPHY.c **** #define DBG002_ID(e) 
+  99:../Dave/Generated/src/ETH002/EthernetPHY.c **** #define DBG002_IS(e) 
+ 100:../Dave/Generated/src/ETH002/EthernetPHY.c **** #define DBG002_ISG(e,g) 
+ 101:../Dave/Generated/src/ETH002/EthernetPHY.c **** #define DBG002_SAFETY_CRITICAL(groupid,messageid,length,value)
+ 102:../Dave/Generated/src/ETH002/EthernetPHY.c **** #define DBG002_CRITICAL(groupid,messageid,length,value)
+ 103:../Dave/Generated/src/ETH002/EthernetPHY.c **** #define DBG002_ERROR(groupid,messageid,length,value)
+ 104:../Dave/Generated/src/ETH002/EthernetPHY.c **** #define DBG002_WARNING(groupid,messageid,length,value)
+ 105:../Dave/Generated/src/ETH002/EthernetPHY.c **** #define DBG002_INFO(groupid,messageid,length,value)
+ 106:../Dave/Generated/src/ETH002/EthernetPHY.c **** #define DBG002_TRACE(groupid,messageid,length,value)
+ 107:../Dave/Generated/src/ETH002/EthernetPHY.c **** #define DBG002_FUNCTION_ENTRY(GID, Status) 
+ 108:../Dave/Generated/src/ETH002/EthernetPHY.c **** #define DBG002_FUNCTION_EXIT(GID, Status) 
+ 109:../Dave/Generated/src/ETH002/EthernetPHY.c **** 
+ 110:../Dave/Generated/src/ETH002/EthernetPHY.c **** #endif/* End of defintions of dummy Debug Log macros*/
+ 111:../Dave/Generated/src/ETH002/EthernetPHY.c **** /*******************************************************************************
+ 112:../Dave/Generated/src/ETH002/EthernetPHY.c **** **                      Private Macro Definitions                             **
+ 113:../Dave/Generated/src/ETH002/EthernetPHY.c **** *******************************************************************************/
+ 114:../Dave/Generated/src/ETH002/EthernetPHY.c **** /* BUSY_WAIT_LOOP_COUNT max count */
+ 115:../Dave/Generated/src/ETH002/EthernetPHY.c **** #define BUSY_WAIT_LOOP_COUNT        1000U
+ 116:../Dave/Generated/src/ETH002/EthernetPHY.c **** #define CHECK_AUTO_NEGO_TIME_COUNT  100U
+ 117:../Dave/Generated/src/ETH002/EthernetPHY.c **** /* Reset delay currently ~30ms */
+ 118:../Dave/Generated/src/ETH002/EthernetPHY.c **** #define RESET_COMPLETE_WAIT_PERIOD  30U
+ 119:../Dave/Generated/src/ETH002/EthernetPHY.c **** #define PHY_REG_OPERATION_WAIT_TIME 10U
+ 120:../Dave/Generated/src/ETH002/EthernetPHY.c **** #define APP_GID                     DBG002_GID_ETH002
+ 121:../Dave/Generated/src/ETH002/EthernetPHY.c **** /**
+ 122:../Dave/Generated/src/ETH002/EthernetPHY.c ****  * @ingroup EthernetPHY_privateparam
+ 123:../Dave/Generated/src/ETH002/EthernetPHY.c ****  * @{
+ 124:../Dave/Generated/src/ETH002/EthernetPHY.c ****  */
+ 125:../Dave/Generated/src/ETH002/EthernetPHY.c **** /*******************************************************************************
+ 126:../Dave/Generated/src/ETH002/EthernetPHY.c **** **                      Private Type Definitions                              **
+ 127:../Dave/Generated/src/ETH002/EthernetPHY.c **** *******************************************************************************/
+ 128:../Dave/Generated/src/ETH002/EthernetPHY.c **** 
+ 129:../Dave/Generated/src/ETH002/EthernetPHY.c **** /*******************************************************************************
+ 130:../Dave/Generated/src/ETH002/EthernetPHY.c **** **                 Private Function Declarations:
+ 131:../Dave/Generated/src/ETH002/EthernetPHY.c **** *******************************************************************************/
+ 132:../Dave/Generated/src/ETH002/EthernetPHY.c **** static uint32_t PHY_lWriteReg(uint32_t PhyBase,uint32_t RegOffset,uint16_t Data);
+ 133:../Dave/Generated/src/ETH002/EthernetPHY.c **** static uint32_t PHY_lReadReg(uint32_t PhyBase,uint32_t RegOffset,uint16_t *RegData);
+ 134:../Dave/Generated/src/ETH002/EthernetPHY.c **** static status_t PHY_lResetPHY(void);
+ 135:../Dave/Generated/src/ETH002/EthernetPHY.c **** 
+ 136:../Dave/Generated/src/ETH002/EthernetPHY.c **** #if AUTO_NEGO
+ 137:../Dave/Generated/src/ETH002/EthernetPHY.c **** 
+ 138:../Dave/Generated/src/ETH002/EthernetPHY.c **** static status_t PHY_lPerformLinkNegotiation(void);
+ 139:../Dave/Generated/src/ETH002/EthernetPHY.c **** 
+ 140:../Dave/Generated/src/ETH002/EthernetPHY.c **** static BOOLType PHY_lIsAutoNegoComplete(void);
+ 141:../Dave/Generated/src/ETH002/EthernetPHY.c **** 
+ 142:../Dave/Generated/src/ETH002/EthernetPHY.c **** #endif
+ 143:../Dave/Generated/src/ETH002/EthernetPHY.c **** /**
+ 144:../Dave/Generated/src/ETH002/EthernetPHY.c ****  * @}
+ 145:../Dave/Generated/src/ETH002/EthernetPHY.c ****  */
+ 146:../Dave/Generated/src/ETH002/EthernetPHY.c **** /*******************************************************************************
+ 147:../Dave/Generated/src/ETH002/EthernetPHY.c **** **                      Global Constant Definitions                           **
+ 148:../Dave/Generated/src/ETH002/EthernetPHY.c **** *******************************************************************************/
+ 149:../Dave/Generated/src/ETH002/EthernetPHY.c **** 
+ 150:../Dave/Generated/src/ETH002/EthernetPHY.c **** /*******************************************************************************
+ 151:../Dave/Generated/src/ETH002/EthernetPHY.c **** **                      Global Variable Definitions                           **
+ 152:../Dave/Generated/src/ETH002/EthernetPHY.c **** *******************************************************************************/
+ 153:../Dave/Generated/src/ETH002/EthernetPHY.c **** PHYTimerCallbackType PHYtimerCallback;
+ 154:../Dave/Generated/src/ETH002/EthernetPHY.c **** /*******************************************************************************
+ 155:../Dave/Generated/src/ETH002/EthernetPHY.c **** **                      Private Constant Definitions                          **
+ 156:../Dave/Generated/src/ETH002/EthernetPHY.c **** *******************************************************************************/
+ 157:../Dave/Generated/src/ETH002/EthernetPHY.c **** 
+ 158:../Dave/Generated/src/ETH002/EthernetPHY.c **** /*******************************************************************************
+ 159:../Dave/Generated/src/ETH002/EthernetPHY.c **** **                 Function like macro definitions                            **
+ 160:../Dave/Generated/src/ETH002/EthernetPHY.c **** *******************************************************************************/
+ 161:../Dave/Generated/src/ETH002/EthernetPHY.c **** 
+ 162:../Dave/Generated/src/ETH002/EthernetPHY.c **** /*******************************************************************************
+ 163:../Dave/Generated/src/ETH002/EthernetPHY.c **** **                      Public Function Definitions                           **
+ 164:../Dave/Generated/src/ETH002/EthernetPHY.c **** *******************************************************************************/
+ 165:../Dave/Generated/src/ETH002/EthernetPHY.c **** /**
+ 166:../Dave/Generated/src/ETH002/EthernetPHY.c ****  * @addtogroup EthernetPHY_apidoc
+ 167:../Dave/Generated/src/ETH002/EthernetPHY.c ****  * @{
+ 168:../Dave/Generated/src/ETH002/EthernetPHY.c ****  */
+ 169:../Dave/Generated/src/ETH002/EthernetPHY.c **** 
+ 170:../Dave/Generated/src/ETH002/EthernetPHY.c **** /**
+ 171:../Dave/Generated/src/ETH002/EthernetPHY.c ****  *
+ 172:../Dave/Generated/src/ETH002/EthernetPHY.c ****  * This function initializes Ethernet PHY
+ 173:../Dave/Generated/src/ETH002/EthernetPHY.c ****  */
+ 174:../Dave/Generated/src/ETH002/EthernetPHY.c **** status_t  PHY_InitializeDevice (void)
+ 175:../Dave/Generated/src/ETH002/EthernetPHY.c **** {
+  29              		.loc 1 175 0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 8
+  32              		@ frame_needed = 1, uses_anonymous_args = 0
+  33 0000 80B5     		push	{r7, lr}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 8
+  36              		.cfi_offset 7, -8
+  37              		.cfi_offset 14, -4
+  38 0002 82B0     		sub	sp, sp, #8
+  39              	.LCFI1:
+  40              		.cfi_def_cfa_offset 16
+  41 0004 00AF     		add	r7, sp, #0
+  42              	.LCFI2:
+  43              		.cfi_def_cfa_register 7
+ 176:../Dave/Generated/src/ETH002/EthernetPHY.c ****   /* <<<DD_ETHPHY_API_1>>> */
+ 177:../Dave/Generated/src/ETH002/EthernetPHY.c ****   uint16_t RegData = 0; /* Initialize to 0 */
+  44              		.loc 1 177 0
+  45 0006 4FF00003 		mov	r3, #0
+  46 000a 7B80     		strh	r3, [r7, #2]	@ movhi
+ 178:../Dave/Generated/src/ETH002/EthernetPHY.c ****   status_t Status = (uint32_t)PHY_INIT_ERROR;
+  47              		.loc 1 178 0
+  48 000c 4FF00103 		mov	r3, #1
+  49 0010 7B60     		str	r3, [r7, #4]
+ 179:../Dave/Generated/src/ETH002/EthernetPHY.c ****   BOOLType IsLinkUp = FALSE;
+  50              		.loc 1 179 0
+  51 0012 4FF00003 		mov	r3, #0
+  52 0016 7B70     		strb	r3, [r7, #1]
+ 180:../Dave/Generated/src/ETH002/EthernetPHY.c **** 
+ 181:../Dave/Generated/src/ETH002/EthernetPHY.c ****   DBG002_FUNCTION_ENTRY(APP_GID,ETH002_FUNCTION_ENTRY);
+ 182:../Dave/Generated/src/ETH002/EthernetPHY.c ****   do
+ 183:../Dave/Generated/src/ETH002/EthernetPHY.c ****   {
+ 184:../Dave/Generated/src/ETH002/EthernetPHY.c ****     Status = PHY_lResetPHY();
+  53              		.loc 1 184 0
+  54 0018 FFF7FEFF 		bl	PHY_lResetPHY
+  55 001c 7860     		str	r0, [r7, #4]
+ 185:../Dave/Generated/src/ETH002/EthernetPHY.c ****     if (Status != DAVEApp_SUCCESS)
+  56              		.loc 1 185 0
+  57 001e 7B68     		ldr	r3, [r7, #4]
+  58 0020 002B     		cmp	r3, #0
+  59 0022 0DD1     		bne	.L6
+  60              	.L2:
+ 186:../Dave/Generated/src/ETH002/EthernetPHY.c ****     {
+ 187:../Dave/Generated/src/ETH002/EthernetPHY.c ****       DBG002_ERROR(APP_GID, PHY_INIT_ERROR, 0, NULL);
+ 188:../Dave/Generated/src/ETH002/EthernetPHY.c ****       break;
+ 189:../Dave/Generated/src/ETH002/EthernetPHY.c ****     }
+ 190:../Dave/Generated/src/ETH002/EthernetPHY.c **** #if AUTO_NEGO
+ 191:../Dave/Generated/src/ETH002/EthernetPHY.c ****     Status = PHY_lPerformLinkNegotiation();
+  61              		.loc 1 191 0
+  62 0024 FFF7FEFF 		bl	PHY_lPerformLinkNegotiation
+  63 0028 7860     		str	r0, [r7, #4]
+ 192:../Dave/Generated/src/ETH002/EthernetPHY.c ****     if (Status != DAVEApp_SUCCESS)
+  64              		.loc 1 192 0
+  65 002a 7B68     		ldr	r3, [r7, #4]
+  66 002c 002B     		cmp	r3, #0
+  67 002e 09D1     		bne	.L7
+  68              	.L4:
+ 193:../Dave/Generated/src/ETH002/EthernetPHY.c ****     {
+ 194:../Dave/Generated/src/ETH002/EthernetPHY.c ****       DBG002_ERROR(APP_GID, PHY_INIT_ERROR, 0, NULL);
+ 195:../Dave/Generated/src/ETH002/EthernetPHY.c ****       break;
+ 196:../Dave/Generated/src/ETH002/EthernetPHY.c ****     }
+ 197:../Dave/Generated/src/ETH002/EthernetPHY.c **** #endif
+ 198:../Dave/Generated/src/ETH002/EthernetPHY.c **** 
+ 199:../Dave/Generated/src/ETH002/EthernetPHY.c **** #if (AUTO_NEGO != 1)
+ 200:../Dave/Generated/src/ETH002/EthernetPHY.c **** 
+ 201:../Dave/Generated/src/ETH002/EthernetPHY.c **** #ifdef SPEED_100
+ 202:../Dave/Generated/src/ETH002/EthernetPHY.c ****     /* <<<DD_ETHPHY_API_1_1>>> */
+ 203:../Dave/Generated/src/ETH002/EthernetPHY.c ****     Status = PHY_lWriteReg (PHY_BASE_ADDRESS,
+ 204:../Dave/Generated/src/ETH002/EthernetPHY.c ****                            BASIC_MODE_CONTROL_REG,
+ 205:../Dave/Generated/src/ETH002/EthernetPHY.c ****                            RegData | Mii_SPEED_100);
+ 206:../Dave/Generated/src/ETH002/EthernetPHY.c **** #else
+ 207:../Dave/Generated/src/ETH002/EthernetPHY.c **** 	Status = PHY_lReadReg (PHY_BASE_ADDRESS,
+ 208:../Dave/Generated/src/ETH002/EthernetPHY.c **** 	                          (uint32_t)BASIC_MODE_CONTROL_REG,
+ 209:../Dave/Generated/src/ETH002/EthernetPHY.c **** 	                          &RegData);
+ 210:../Dave/Generated/src/ETH002/EthernetPHY.c **** 	                          
+ 211:../Dave/Generated/src/ETH002/EthernetPHY.c **** 	RegData &= ~Mii_SPEED_100; /* reset the bit 100Mbit setting */ 
+ 212:../Dave/Generated/src/ETH002/EthernetPHY.c **** 
+ 213:../Dave/Generated/src/ETH002/EthernetPHY.c ****   Status = PHY_lWriteReg (PHY_BASE_ADDRESS,
+ 214:../Dave/Generated/src/ETH002/EthernetPHY.c ****                            BASIC_MODE_CONTROL_REG,
+ 215:../Dave/Generated/src/ETH002/EthernetPHY.c ****                            RegData);
+ 216:../Dave/Generated/src/ETH002/EthernetPHY.c **** #endif
+ 217:../Dave/Generated/src/ETH002/EthernetPHY.c ****     if (Status != DAVEApp_SUCCESS)
+ 218:../Dave/Generated/src/ETH002/EthernetPHY.c ****     {
+ 219:../Dave/Generated/src/ETH002/EthernetPHY.c ****       DBG002_ERROR(APP_GID, PHY_SPEED_SET_ERROR, 0, NULL);
+ 220:../Dave/Generated/src/ETH002/EthernetPHY.c ****       break;
+ 221:../Dave/Generated/src/ETH002/EthernetPHY.c ****     }
+ 222:../Dave/Generated/src/ETH002/EthernetPHY.c **** 
+ 223:../Dave/Generated/src/ETH002/EthernetPHY.c ****     /* Note: this MACRO should be set from GUI */
+ 224:../Dave/Generated/src/ETH002/EthernetPHY.c **** #ifdef HALF_DUPLEX
+ 225:../Dave/Generated/src/ETH002/EthernetPHY.c ****     /* <<<DD_ETHPHY_API_1_2>>> */
+ 226:../Dave/Generated/src/ETH002/EthernetPHY.c ****     /* if not set to Master configuration in case of Half duplex mode set
+ 227:../Dave/Generated/src/ETH002/EthernetPHY.c ****      * it manually as Master
+ 228:../Dave/Generated/src/ETH002/EthernetPHY.c ****      */
+ 229:../Dave/Generated/src/ETH002/EthernetPHY.c ****     Status = PHY_lWriteReg (PHY_BASE_ADDRESS,
+ 230:../Dave/Generated/src/ETH002/EthernetPHY.c ****                            BASIC_MODE_CONTROL_REG,
+ 231:../Dave/Generated/src/ETH002/EthernetPHY.c ****                            RegData | Mii_MANUAL_MASTER_CONFIG);
+ 232:../Dave/Generated/src/ETH002/EthernetPHY.c **** 
+ 233:../Dave/Generated/src/ETH002/EthernetPHY.c **** #else
+ 234:../Dave/Generated/src/ETH002/EthernetPHY.c ****     /* Set to Full Duplex Mode */
+ 235:../Dave/Generated/src/ETH002/EthernetPHY.c ****     Status = PHY_lWriteReg (PHY_BASE_ADDRESS,
+ 236:../Dave/Generated/src/ETH002/EthernetPHY.c ****                            BASIC_MODE_CONTROL_REG,
+ 237:../Dave/Generated/src/ETH002/EthernetPHY.c ****                            RegData | Mii_DUPLEX );
+ 238:../Dave/Generated/src/ETH002/EthernetPHY.c **** #endif
+ 239:../Dave/Generated/src/ETH002/EthernetPHY.c ****     if(Status != DAVEApp_SUCCESS)
+ 240:../Dave/Generated/src/ETH002/EthernetPHY.c ****     {
+ 241:../Dave/Generated/src/ETH002/EthernetPHY.c ****       DBG002_ERROR(APP_GID, PHY_MODE_SET_ERROR, 0, NULL);
+ 242:../Dave/Generated/src/ETH002/EthernetPHY.c ****       break;
+ 243:../Dave/Generated/src/ETH002/EthernetPHY.c ****     }
+ 244:../Dave/Generated/src/ETH002/EthernetPHY.c **** #endif /*!AUTO_NEGO */
+ 245:../Dave/Generated/src/ETH002/EthernetPHY.c **** 
+ 246:../Dave/Generated/src/ETH002/EthernetPHY.c **** #ifdef PHY_National_DP83848C
+ 247:../Dave/Generated/src/ETH002/EthernetPHY.c **** /* set PHY to RMII mode */
+ 248:../Dave/Generated/src/ETH002/EthernetPHY.c **** 		Status = PHY_lReadReg (PHY_BASE_ADDRESS,
+ 249:../Dave/Generated/src/ETH002/EthernetPHY.c **** 		                          (uint32_t)RMII_AND_BYPASS_REG,
+ 250:../Dave/Generated/src/ETH002/EthernetPHY.c **** 		                          &RegData);
+ 251:../Dave/Generated/src/ETH002/EthernetPHY.c **** 		
+ 252:../Dave/Generated/src/ETH002/EthernetPHY.c **** 		Status = PHY_lWriteReg (PHY_BASE_ADDRESS,
+ 253:../Dave/Generated/src/ETH002/EthernetPHY.c **** 		                           RMII_AND_BYPASS_REG,
+ 254:../Dave/Generated/src/ETH002/EthernetPHY.c **** 		                           RegData | 0x20 );
+ 255:../Dave/Generated/src/ETH002/EthernetPHY.c ****                           
+ 256:../Dave/Generated/src/ETH002/EthernetPHY.c **** 
+ 257:../Dave/Generated/src/ETH002/EthernetPHY.c **** #endif
+ 258:../Dave/Generated/src/ETH002/EthernetPHY.c **** 
+ 259:../Dave/Generated/src/ETH002/EthernetPHY.c ****     /* check for LINK is up... */
+ 260:../Dave/Generated/src/ETH002/EthernetPHY.c ****     IsLinkUp = PHY_IsLinkUP();
+  69              		.loc 1 260 0
+  70 0030 FFF7FEFF 		bl	PHY_IsLinkUP
+  71 0034 0346     		mov	r3, r0
+  72 0036 7B70     		strb	r3, [r7, #1]
+ 261:../Dave/Generated/src/ETH002/EthernetPHY.c ****     if (TRUE == IsLinkUp)
+ 262:../Dave/Generated/src/ETH002/EthernetPHY.c ****     {
+ 263:../Dave/Generated/src/ETH002/EthernetPHY.c ****       DBG002_INFO(APP_GID, PHY_LINK_UP, 0, NULL);
+ 264:../Dave/Generated/src/ETH002/EthernetPHY.c ****     }
+ 265:../Dave/Generated/src/ETH002/EthernetPHY.c ****     else
+ 266:../Dave/Generated/src/ETH002/EthernetPHY.c ****     {
+ 267:../Dave/Generated/src/ETH002/EthernetPHY.c ****       DBG002_INFO(APP_GID, PHY_LINK_DOWN, 0, NULL);
+ 268:../Dave/Generated/src/ETH002/EthernetPHY.c ****     }
+ 269:../Dave/Generated/src/ETH002/EthernetPHY.c **** 
+ 270:../Dave/Generated/src/ETH002/EthernetPHY.c **** 
+ 271:../Dave/Generated/src/ETH002/EthernetPHY.c ****     /* PHY Initialization is successful */
+ 272:../Dave/Generated/src/ETH002/EthernetPHY.c ****     DBG002_INFO(APP_GID, PHY_INIT_SUCCSS, 0, NULL);
+ 273:../Dave/Generated/src/ETH002/EthernetPHY.c ****     Status = DAVEApp_SUCCESS;
+  73              		.loc 1 273 0
+  74 0038 4FF00003 		mov	r3, #0
+  75 003c 7B60     		str	r3, [r7, #4]
+  76 003e 02E0     		b	.L3
+  77              	.L6:
+ 188:../Dave/Generated/src/ETH002/EthernetPHY.c ****       break;
+  78              		.loc 1 188 0
+  79 0040 00BF     		nop
+  80 0042 00E0     		b	.L3
+  81              	.L7:
+ 195:../Dave/Generated/src/ETH002/EthernetPHY.c ****       break;
+  82              		.loc 1 195 0
+  83 0044 00BF     		nop
+  84              	.L3:
+ 274:../Dave/Generated/src/ETH002/EthernetPHY.c ****   }while(0);
+ 275:../Dave/Generated/src/ETH002/EthernetPHY.c **** 
+ 276:../Dave/Generated/src/ETH002/EthernetPHY.c ****   DBG002_FUNCTION_EXIT(APP_GID,ETH002_FUNCTION_EXIT);
+ 277:../Dave/Generated/src/ETH002/EthernetPHY.c ****   return Status;
+  85              		.loc 1 277 0
+  86 0046 7B68     		ldr	r3, [r7, #4]
+ 278:../Dave/Generated/src/ETH002/EthernetPHY.c **** }
+  87              		.loc 1 278 0
+  88 0048 1846     		mov	r0, r3
+  89 004a 07F10807 		add	r7, r7, #8
+  90 004e BD46     		mov	sp, r7
+  91 0050 80BD     		pop	{r7, pc}
+  92              		.cfi_endproc
+  93              	.LFE112:
+  95 0052 00BF     		.section	.text.PHY_IsLinkUP,"ax",%progbits
+  96              		.align	2
+  97              		.global	PHY_IsLinkUP
+  98              		.thumb
+  99              		.thumb_func
+ 101              	PHY_IsLinkUP:
+ 102              	.LFB113:
+ 279:../Dave/Generated/src/ETH002/EthernetPHY.c **** 
+ 280:../Dave/Generated/src/ETH002/EthernetPHY.c **** /**
+ 281:../Dave/Generated/src/ETH002/EthernetPHY.c ****  * The function returns Link status of Ethernet PHY
+ 282:../Dave/Generated/src/ETH002/EthernetPHY.c ****  *
+ 283:../Dave/Generated/src/ETH002/EthernetPHY.c ****  * @return: True if Link is UP, False otherwise
+ 284:../Dave/Generated/src/ETH002/EthernetPHY.c ****  */
+ 285:../Dave/Generated/src/ETH002/EthernetPHY.c **** BOOLType PHY_IsLinkUP (void)
+ 286:../Dave/Generated/src/ETH002/EthernetPHY.c **** {
+ 103              		.loc 1 286 0
+ 104              		.cfi_startproc
+ 105              		@ args = 0, pretend = 0, frame = 16
+ 106              		@ frame_needed = 1, uses_anonymous_args = 0
+ 107 0000 80B5     		push	{r7, lr}
+ 108              	.LCFI3:
+ 109              		.cfi_def_cfa_offset 8
+ 110              		.cfi_offset 7, -8
+ 111              		.cfi_offset 14, -4
+ 112 0002 84B0     		sub	sp, sp, #16
+ 113              	.LCFI4:
+ 114              		.cfi_def_cfa_offset 24
+ 115 0004 00AF     		add	r7, sp, #0
+ 116              	.LCFI5:
+ 117              		.cfi_def_cfa_register 7
+ 287:../Dave/Generated/src/ETH002/EthernetPHY.c ****   /* <<<DD_ETHPHY_API_2>>> */
+ 288:../Dave/Generated/src/ETH002/EthernetPHY.c ****   BOOLType IsLinkUP = FALSE;
+ 118              		.loc 1 288 0
+ 119 0006 4FF00003 		mov	r3, #0
+ 120 000a FB73     		strb	r3, [r7, #15]
+ 289:../Dave/Generated/src/ETH002/EthernetPHY.c ****   uint16_t RegData = (uint16_t)0U;  /* Initialize to 0 */
+ 121              		.loc 1 289 0
+ 122 000c 4FF00003 		mov	r3, #0
+ 123 0010 FB80     		strh	r3, [r7, #6]	@ movhi
+ 290:../Dave/Generated/src/ETH002/EthernetPHY.c ****   uint16_t RegData1 = (uint16_t)0U; /* Initialize to 0 */
+ 124              		.loc 1 290 0
+ 125 0012 4FF00003 		mov	r3, #0
+ 126 0016 BB80     		strh	r3, [r7, #4]	@ movhi
+ 291:../Dave/Generated/src/ETH002/EthernetPHY.c ****   status_t Status = (status_t)DAVEApp_SUCCESS;
+ 127              		.loc 1 291 0
+ 128 0018 4FF00003 		mov	r3, #0
+ 129 001c BB60     		str	r3, [r7, #8]
+ 292:../Dave/Generated/src/ETH002/EthernetPHY.c **** 
+ 293:../Dave/Generated/src/ETH002/EthernetPHY.c ****   DBG002_FUNCTION_ENTRY(APP_GID,ETH002_FUNCTION_ENTRY);
+ 294:../Dave/Generated/src/ETH002/EthernetPHY.c ****   Status = (status_t)PHY_lReadReg((uint32_t)PHY_BASE_ADDRESS,
+ 130              		.loc 1 294 0
+ 131 001e 07F10603 		add	r3, r7, #6
+ 132 0022 4FF00000 		mov	r0, #0
+ 133 0026 4FF00101 		mov	r1, #1
+ 134 002a 1A46     		mov	r2, r3
+ 135 002c FFF7FEFF 		bl	PHY_lReadReg
+ 136 0030 B860     		str	r0, [r7, #8]
+ 295:../Dave/Generated/src/ETH002/EthernetPHY.c ****                          (uint32_t)BASIC_MODE_STATUS_REG,
+ 296:../Dave/Generated/src/ETH002/EthernetPHY.c ****                          &RegData);
+ 297:../Dave/Generated/src/ETH002/EthernetPHY.c ****   if (Status != (status_t)DAVEApp_SUCCESS)
+ 137              		.loc 1 297 0
+ 138 0032 BB68     		ldr	r3, [r7, #8]
+ 139 0034 002B     		cmp	r3, #0
+ 140 0036 14D1     		bne	.L9
+ 298:../Dave/Generated/src/ETH002/EthernetPHY.c ****   {
+ 299:../Dave/Generated/src/ETH002/EthernetPHY.c **** 	DBG002_ERROR(APP_GID, PHY_READ_ERROR, 0, NULL);
+ 300:../Dave/Generated/src/ETH002/EthernetPHY.c ****   }
+ 301:../Dave/Generated/src/ETH002/EthernetPHY.c ****   else
+ 302:../Dave/Generated/src/ETH002/EthernetPHY.c ****   {
+ 303:../Dave/Generated/src/ETH002/EthernetPHY.c ****     Status =  (status_t)PHY_lReadReg((uint32_t)PHY_BASE_ADDRESS,
+ 141              		.loc 1 303 0
+ 142 0038 07F10403 		add	r3, r7, #4
+ 143 003c 4FF00000 		mov	r0, #0
+ 144 0040 4FF00101 		mov	r1, #1
+ 145 0044 1A46     		mov	r2, r3
+ 146 0046 FFF7FEFF 		bl	PHY_lReadReg
+ 147 004a B860     		str	r0, [r7, #8]
+ 304:../Dave/Generated/src/ETH002/EthernetPHY.c ****                          (uint32_t)BASIC_MODE_STATUS_REG,
+ 305:../Dave/Generated/src/ETH002/EthernetPHY.c ****                          &RegData1);
+ 306:../Dave/Generated/src/ETH002/EthernetPHY.c ****     if (Status != (status_t)DAVEApp_SUCCESS)
+ 148              		.loc 1 306 0
+ 149 004c BB68     		ldr	r3, [r7, #8]
+ 150 004e 002B     		cmp	r3, #0
+ 151 0050 07D1     		bne	.L9
+ 307:../Dave/Generated/src/ETH002/EthernetPHY.c ****     {
+ 308:../Dave/Generated/src/ETH002/EthernetPHY.c ****       DBG002_ERROR(APP_GID, PHY_READ_ERROR, 0, NULL);
+ 309:../Dave/Generated/src/ETH002/EthernetPHY.c ****     }
+ 310:../Dave/Generated/src/ETH002/EthernetPHY.c ****     else if (RegData1 & (uint16_t)Mii_LINK_STATUS)
+ 152              		.loc 1 310 0
+ 153 0052 BB88     		ldrh	r3, [r7, #4]
+ 154 0054 03F00403 		and	r3, r3, #4
+ 155 0058 002B     		cmp	r3, #0
+ 156 005a 02D0     		beq	.L9
+ 311:../Dave/Generated/src/ETH002/EthernetPHY.c ****     {
+ 312:../Dave/Generated/src/ETH002/EthernetPHY.c ****       DBG002_INFO(APP_GID, PHY_LINK_UP, 0, NULL);
+ 313:../Dave/Generated/src/ETH002/EthernetPHY.c ****       IsLinkUP = TRUE;
+ 157              		.loc 1 313 0
+ 158 005c 4FF00103 		mov	r3, #1
+ 159 0060 FB73     		strb	r3, [r7, #15]
+ 160              	.L9:
+ 314:../Dave/Generated/src/ETH002/EthernetPHY.c ****     }
+ 315:../Dave/Generated/src/ETH002/EthernetPHY.c ****     else
+ 316:../Dave/Generated/src/ETH002/EthernetPHY.c ****     {
+ 317:../Dave/Generated/src/ETH002/EthernetPHY.c ****       DBG002_INFO(APP_GID, PHY_LINK_DOWN, 0, NULL);
+ 318:../Dave/Generated/src/ETH002/EthernetPHY.c ****     }
+ 319:../Dave/Generated/src/ETH002/EthernetPHY.c ****   }
+ 320:../Dave/Generated/src/ETH002/EthernetPHY.c ****   DBG002_FUNCTION_EXIT(APP_GID,ETH002_FUNCTION_EXIT);
+ 321:../Dave/Generated/src/ETH002/EthernetPHY.c ****   return IsLinkUP;
+ 161              		.loc 1 321 0
+ 162 0062 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 322:../Dave/Generated/src/ETH002/EthernetPHY.c **** }
+ 163              		.loc 1 322 0
+ 164 0064 1846     		mov	r0, r3
+ 165 0066 07F11007 		add	r7, r7, #16
+ 166 006a BD46     		mov	sp, r7
+ 167 006c 80BD     		pop	{r7, pc}
+ 168              		.cfi_endproc
+ 169              	.LFE113:
+ 171 006e 00BF     		.section	.text.PHY_lReadReg,"ax",%progbits
+ 172              		.align	2
+ 173              		.thumb
+ 174              		.thumb_func
+ 176              	PHY_lReadReg:
+ 177              	.LFB114:
+ 323:../Dave/Generated/src/ETH002/EthernetPHY.c **** 
+ 324:../Dave/Generated/src/ETH002/EthernetPHY.c **** /**
+ 325:../Dave/Generated/src/ETH002/EthernetPHY.c ****  * @}
+ 326:../Dave/Generated/src/ETH002/EthernetPHY.c ****  */
+ 327:../Dave/Generated/src/ETH002/EthernetPHY.c **** 
+ 328:../Dave/Generated/src/ETH002/EthernetPHY.c **** /*******************************************************************************
+ 329:../Dave/Generated/src/ETH002/EthernetPHY.c **** **                      Private Function Definitions                          **
+ 330:../Dave/Generated/src/ETH002/EthernetPHY.c **** *******************************************************************************/
+ 331:../Dave/Generated/src/ETH002/EthernetPHY.c **** 
+ 332:../Dave/Generated/src/ETH002/EthernetPHY.c **** /**
+ 333:../Dave/Generated/src/ETH002/EthernetPHY.c ****  * @addtogroup EthernetPHY_privatefunc
+ 334:../Dave/Generated/src/ETH002/EthernetPHY.c ****  * @{
+ 335:../Dave/Generated/src/ETH002/EthernetPHY.c ****  */
+ 336:../Dave/Generated/src/ETH002/EthernetPHY.c **** 
+ 337:../Dave/Generated/src/ETH002/EthernetPHY.c **** /**
+ 338:../Dave/Generated/src/ETH002/EthernetPHY.c ****   * @brief Function to read the Phy register. The access to phy register
+ 339:../Dave/Generated/src/ETH002/EthernetPHY.c ****   * is a slow process as the data is moved accross MDI/MDO interface
+ 340:../Dave/Generated/src/ETH002/EthernetPHY.c ****   *
+ 341:../Dave/Generated/src/ETH002/EthernetPHY.c ****   * @param[in] PhyBase register is the index of one of supported 32 PHY devices.
+ 342:../Dave/Generated/src/ETH002/EthernetPHY.c ****   * @param[in] RegOffset Register offset is the index of one of the 32 phy register.
+ 343:../Dave/Generated/src/ETH002/EthernetPHY.c ****   * @param[out] RegData  data read from the respective phy register (only valid
+ 344:../Dave/Generated/src/ETH002/EthernetPHY.c ****   *             iff return value is 0).
+ 345:../Dave/Generated/src/ETH002/EthernetPHY.c ****   *
+ 346:../Dave/Generated/src/ETH002/EthernetPHY.c ****   * @return Returns 0 on success else return the error status.
+ 347:../Dave/Generated/src/ETH002/EthernetPHY.c ****   */
+ 348:../Dave/Generated/src/ETH002/EthernetPHY.c **** 
+ 349:../Dave/Generated/src/ETH002/EthernetPHY.c **** static uint32_t PHY_lReadReg
+ 350:../Dave/Generated/src/ETH002/EthernetPHY.c **** (
+ 351:../Dave/Generated/src/ETH002/EthernetPHY.c ****   uint32_t PhyBase,
+ 352:../Dave/Generated/src/ETH002/EthernetPHY.c ****   uint32_t RegOffset,
+ 353:../Dave/Generated/src/ETH002/EthernetPHY.c ****   uint16_t *RegData
+ 354:../Dave/Generated/src/ETH002/EthernetPHY.c **** )
+ 355:../Dave/Generated/src/ETH002/EthernetPHY.c **** {
+ 178              		.loc 1 355 0
+ 179              		.cfi_startproc
+ 180              		@ args = 0, pretend = 0, frame = 32
+ 181              		@ frame_needed = 1, uses_anonymous_args = 0
+ 182 0000 80B5     		push	{r7, lr}
+ 183              	.LCFI6:
+ 184              		.cfi_def_cfa_offset 8
+ 185              		.cfi_offset 7, -8
+ 186              		.cfi_offset 14, -4
+ 187 0002 88B0     		sub	sp, sp, #32
+ 188              	.LCFI7:
+ 189              		.cfi_def_cfa_offset 40
+ 190 0004 00AF     		add	r7, sp, #0
+ 191              	.LCFI8:
+ 192              		.cfi_def_cfa_register 7
+ 193 0006 F860     		str	r0, [r7, #12]
+ 194 0008 B960     		str	r1, [r7, #8]
+ 195 000a 7A60     		str	r2, [r7, #4]
+ 356:../Dave/Generated/src/ETH002/EthernetPHY.c ****   ETH_GLOBAL_TypeDef *GMACRegs = (ETH_GLOBAL_TypeDef *) ETH0_BASE;
+ 196              		.loc 1 356 0
+ 197 000c 4FF44043 		mov	r3, #49152
+ 198 0010 C5F20003 		movt	r3, 20480
+ 199 0014 7B61     		str	r3, [r7, #20]
+ 357:../Dave/Generated/src/ETH002/EthernetPHY.c ****   uint32_t Address;
+ 358:../Dave/Generated/src/ETH002/EthernetPHY.c ****   uint32_t LoopVariable;
+ 359:../Dave/Generated/src/ETH002/EthernetPHY.c ****   status_t Status = (uint32_t)PHY_READ_ERROR;
+ 200              		.loc 1 359 0
+ 201 0016 4FF00203 		mov	r3, #2
+ 202 001a BB61     		str	r3, [r7, #24]
+ 360:../Dave/Generated/src/ETH002/EthernetPHY.c **** 
+ 361:../Dave/Generated/src/ETH002/EthernetPHY.c ****   DBG002_FUNCTION_ENTRY(APP_GID,ETH002_FUNCTION_ENTRY);
+ 362:../Dave/Generated/src/ETH002/EthernetPHY.c **** 
+ 363:../Dave/Generated/src/ETH002/EthernetPHY.c ****   Address = ((PhyBase << (uint32_t)GmiiDevShift) & (uint32_t)GmiiDevMask) |
+ 203              		.loc 1 363 0
+ 204 001c FB68     		ldr	r3, [r7, #12]
+ 205 001e 4FEAC323 		lsl	r3, r3, #11
+ 206 0022 4FEA0343 		lsl	r3, r3, #16
+ 207 0026 4FEA1343 		lsr	r3, r3, #16
+ 364:../Dave/Generated/src/ETH002/EthernetPHY.c ****         ((RegOffset << (uint32_t)GmiiRegShift) & (uint32_t)GmiiRegMask);
+ 208              		.loc 1 364 0
+ 209 002a BA68     		ldr	r2, [r7, #8]
+ 210 002c 4FEA8212 		lsl	r2, r2, #6
+ 211 0030 02F4F862 		and	r2, r2, #1984
+ 363:../Dave/Generated/src/ETH002/EthernetPHY.c ****   Address = ((PhyBase << (uint32_t)GmiiDevShift) & (uint32_t)GmiiDevMask) |
+ 212              		.loc 1 363 0
+ 213 0034 1343     		orrs	r3, r3, r2
+ 214 0036 3B61     		str	r3, [r7, #16]
+ 365:../Dave/Generated/src/ETH002/EthernetPHY.c **** 
+ 366:../Dave/Generated/src/ETH002/EthernetPHY.c ****   Address = Address | (uint32_t)GmiiBusy; /* Gmii busy bit */
+ 215              		.loc 1 366 0
+ 216 0038 3B69     		ldr	r3, [r7, #16]
+ 217 003a 43F00103 		orr	r3, r3, #1
+ 218 003e 3B61     		str	r3, [r7, #16]
+ 367:../Dave/Generated/src/ETH002/EthernetPHY.c ****   /* write the Addressess from where the data to be read in GmiiGmiiAddr
+ 368:../Dave/Generated/src/ETH002/EthernetPHY.c ****    * register of synopGMAC ip
+ 369:../Dave/Generated/src/ETH002/EthernetPHY.c ****    */
+ 370:../Dave/Generated/src/ETH002/EthernetPHY.c ****   GMACRegs->GMII_ADDRESS = Address;
+ 219              		.loc 1 370 0
+ 220 0040 7B69     		ldr	r3, [r7, #20]
+ 221 0042 3A69     		ldr	r2, [r7, #16]
+ 222 0044 1A61     		str	r2, [r3, #16]
+ 371:../Dave/Generated/src/ETH002/EthernetPHY.c **** 
+ 372:../Dave/Generated/src/ETH002/EthernetPHY.c ****   for(LoopVariable = (uint32_t)0U; LoopVariable < (uint32_t)BUSY_WAIT_LOOP_COUNT; LoopVariable++)
+ 223              		.loc 1 372 0
+ 224 0046 4FF00003 		mov	r3, #0
+ 225 004a FB61     		str	r3, [r7, #28]
+ 226 004c 18E0     		b	.L12
+ 227              	.L16:
+ 373:../Dave/Generated/src/ETH002/EthernetPHY.c ****   {
+ 374:../Dave/Generated/src/ETH002/EthernetPHY.c ****     /* Wait till the busy bit gets cleared with in a certain amount of time */
+ 375:../Dave/Generated/src/ETH002/EthernetPHY.c ****     if ((GMACRegs->GMII_ADDRESS & (uint32_t)GmiiBusy) != (uint32_t)1U)
+ 228              		.loc 1 375 0
+ 229 004e 7B69     		ldr	r3, [r7, #20]
+ 230 0050 1B69     		ldr	r3, [r3, #16]
+ 231 0052 03F00103 		and	r3, r3, #1
+ 232 0056 002B     		cmp	r3, #0
+ 233 0058 18D0     		beq	.L19
+ 234              	.L13:
+ 376:../Dave/Generated/src/ETH002/EthernetPHY.c ****     {
+ 377:../Dave/Generated/src/ETH002/EthernetPHY.c ****       break;
+ 378:../Dave/Generated/src/ETH002/EthernetPHY.c ****     }
+ 379:../Dave/Generated/src/ETH002/EthernetPHY.c **** 
+ 380:../Dave/Generated/src/ETH002/EthernetPHY.c **** 	if(NULL != PHYtimerCallback)
+ 235              		.loc 1 380 0
+ 236 005a 40F20003 		movw	r3, #:lower16:PHYtimerCallback
+ 237 005e C0F20003 		movt	r3, #:upper16:PHYtimerCallback
+ 238 0062 1B68     		ldr	r3, [r3, #0]
+ 239 0064 002B     		cmp	r3, #0
+ 240 0066 07D0     		beq	.L15
+ 381:../Dave/Generated/src/ETH002/EthernetPHY.c **** 	{
+ 382:../Dave/Generated/src/ETH002/EthernetPHY.c **** 		PHYtimerCallback(PHY_REG_OPERATION_WAIT_TIME);
+ 241              		.loc 1 382 0
+ 242 0068 40F20003 		movw	r3, #:lower16:PHYtimerCallback
+ 243 006c C0F20003 		movt	r3, #:upper16:PHYtimerCallback
+ 244 0070 1B68     		ldr	r3, [r3, #0]
+ 245 0072 4FF00A00 		mov	r0, #10
+ 246 0076 9847     		blx	r3
+ 247              	.L15:
+ 372:../Dave/Generated/src/ETH002/EthernetPHY.c ****   for(LoopVariable = (uint32_t)0U; LoopVariable < (uint32_t)BUSY_WAIT_LOOP_COUNT; LoopVariable++)
+ 248              		.loc 1 372 0
+ 249 0078 FB69     		ldr	r3, [r7, #28]
+ 250 007a 03F10103 		add	r3, r3, #1
+ 251 007e FB61     		str	r3, [r7, #28]
+ 252              	.L12:
+ 372:../Dave/Generated/src/ETH002/EthernetPHY.c ****   for(LoopVariable = (uint32_t)0U; LoopVariable < (uint32_t)BUSY_WAIT_LOOP_COUNT; LoopVariable++)
+ 253              		.loc 1 372 0 is_stmt 0 discriminator 1
+ 254 0080 FA69     		ldr	r2, [r7, #28]
+ 255 0082 40F2E733 		movw	r3, #999
+ 256 0086 9A42     		cmp	r2, r3
+ 257 0088 E1D9     		bls	.L16
+ 258 008a 00E0     		b	.L14
+ 259              	.L19:
+ 377:../Dave/Generated/src/ETH002/EthernetPHY.c ****       break;
+ 260              		.loc 1 377 0 is_stmt 1
+ 261 008c 00BF     		nop
+ 262              	.L14:
+ 383:../Dave/Generated/src/ETH002/EthernetPHY.c **** 	}
+ 384:../Dave/Generated/src/ETH002/EthernetPHY.c **** 
+ 385:../Dave/Generated/src/ETH002/EthernetPHY.c ****   }
+ 386:../Dave/Generated/src/ETH002/EthernetPHY.c **** 
+ 387:../Dave/Generated/src/ETH002/EthernetPHY.c ****   if(LoopVariable < (uint32_t)BUSY_WAIT_LOOP_COUNT)
+ 263              		.loc 1 387 0
+ 264 008e FA69     		ldr	r2, [r7, #28]
+ 265 0090 40F2E733 		movw	r3, #999
+ 266 0094 9A42     		cmp	r2, r3
+ 267 0096 07D8     		bhi	.L17
+ 388:../Dave/Generated/src/ETH002/EthernetPHY.c ****   {
+ 389:../Dave/Generated/src/ETH002/EthernetPHY.c ****     *RegData =   (uint16_t)((uint32_t)GMACRegs->GMII_DATA & (uint32_t)0xFFFFU);
+ 268              		.loc 1 389 0
+ 269 0098 7B69     		ldr	r3, [r7, #20]
+ 270 009a 5B69     		ldr	r3, [r3, #20]
+ 271 009c 9AB2     		uxth	r2, r3
+ 272 009e 7B68     		ldr	r3, [r7, #4]
+ 273 00a0 1A80     		strh	r2, [r3, #0]	@ movhi
+ 390:../Dave/Generated/src/ETH002/EthernetPHY.c ****      Status = (status_t)DAVEApp_SUCCESS;
+ 274              		.loc 1 390 0
+ 275 00a2 4FF00003 		mov	r3, #0
+ 276 00a6 BB61     		str	r3, [r7, #24]
+ 277              	.L17:
+ 391:../Dave/Generated/src/ETH002/EthernetPHY.c ****   }
+ 392:../Dave/Generated/src/ETH002/EthernetPHY.c ****   else
+ 393:../Dave/Generated/src/ETH002/EthernetPHY.c ****   {
+ 394:../Dave/Generated/src/ETH002/EthernetPHY.c ****     DBG002_ERROR(APP_GID, PHY_READ_ERROR, 0, NULL);
+ 395:../Dave/Generated/src/ETH002/EthernetPHY.c ****   }
+ 396:../Dave/Generated/src/ETH002/EthernetPHY.c ****   DBG002_FUNCTION_EXIT(APP_GID,ETH002_FUNCTION_EXIT);
+ 397:../Dave/Generated/src/ETH002/EthernetPHY.c ****   return Status;
+ 278              		.loc 1 397 0
+ 279 00a8 BB69     		ldr	r3, [r7, #24]
+ 398:../Dave/Generated/src/ETH002/EthernetPHY.c **** }
+ 280              		.loc 1 398 0
+ 281 00aa 1846     		mov	r0, r3
+ 282 00ac 07F12007 		add	r7, r7, #32
+ 283 00b0 BD46     		mov	sp, r7
+ 284 00b2 80BD     		pop	{r7, pc}
+ 285              		.cfi_endproc
+ 286              	.LFE114:
+ 288              		.section	.text.PHY_lWriteReg,"ax",%progbits
+ 289              		.align	2
+ 290              		.thumb
+ 291              		.thumb_func
+ 293              	PHY_lWriteReg:
+ 294              	.LFB115:
+ 399:../Dave/Generated/src/ETH002/EthernetPHY.c **** 
+ 400:../Dave/Generated/src/ETH002/EthernetPHY.c **** /**
+ 401:../Dave/Generated/src/ETH002/EthernetPHY.c ****   * @brief Function to write to the Phy register. The access to phy register
+ 402:../Dave/Generated/src/ETH002/EthernetPHY.c ****   * is a slow process as the data is moved accross MDI/MDO interface
+ 403:../Dave/Generated/src/ETH002/EthernetPHY.c ****   *
+ 404:../Dave/Generated/src/ETH002/EthernetPHY.c ****   * @param[in] PhyBase register is the index of one of supported 32 PHY devices.
+ 405:../Dave/Generated/src/ETH002/EthernetPHY.c ****   * @param[in] RegOffset is the index of one of the 32 phy register.
+ 406:../Dave/Generated/src/ETH002/EthernetPHY.c ****   * @param[in] Data to be written to the respective phy register.
+ 407:../Dave/Generated/src/ETH002/EthernetPHY.c ****   *
+ 408:../Dave/Generated/src/ETH002/EthernetPHY.c ****   * @return Returns DAVEApp_SUCCESS on success else return the error status.
+ 409:../Dave/Generated/src/ETH002/EthernetPHY.c ****   */
+ 410:../Dave/Generated/src/ETH002/EthernetPHY.c **** static uint32_t PHY_lWriteReg
+ 411:../Dave/Generated/src/ETH002/EthernetPHY.c **** (
+ 412:../Dave/Generated/src/ETH002/EthernetPHY.c ****   uint32_t PhyBase,
+ 413:../Dave/Generated/src/ETH002/EthernetPHY.c ****   uint32_t RegOffset,
+ 414:../Dave/Generated/src/ETH002/EthernetPHY.c ****   uint16_t Data
+ 415:../Dave/Generated/src/ETH002/EthernetPHY.c **** )
+ 416:../Dave/Generated/src/ETH002/EthernetPHY.c **** {
+ 295              		.loc 1 416 0
+ 296              		.cfi_startproc
+ 297              		@ args = 0, pretend = 0, frame = 32
+ 298              		@ frame_needed = 1, uses_anonymous_args = 0
+ 299 0000 80B5     		push	{r7, lr}
+ 300              	.LCFI9:
+ 301              		.cfi_def_cfa_offset 8
+ 302              		.cfi_offset 7, -8
+ 303              		.cfi_offset 14, -4
+ 304 0002 88B0     		sub	sp, sp, #32
+ 305              	.LCFI10:
+ 306              		.cfi_def_cfa_offset 40
+ 307 0004 00AF     		add	r7, sp, #0
+ 308              	.LCFI11:
+ 309              		.cfi_def_cfa_register 7
+ 310 0006 F860     		str	r0, [r7, #12]
+ 311 0008 B960     		str	r1, [r7, #8]
+ 312 000a 1346     		mov	r3, r2
+ 313 000c FB80     		strh	r3, [r7, #6]	@ movhi
+ 417:../Dave/Generated/src/ETH002/EthernetPHY.c ****   ETH_GLOBAL_TypeDef *GMACRegs = (ETH_GLOBAL_TypeDef *) ETH0_BASE;
+ 314              		.loc 1 417 0
+ 315 000e 4FF44043 		mov	r3, #49152
+ 316 0012 C5F20003 		movt	r3, 20480
+ 317 0016 7B61     		str	r3, [r7, #20]
+ 418:../Dave/Generated/src/ETH002/EthernetPHY.c ****   uint32_t Address;
+ 419:../Dave/Generated/src/ETH002/EthernetPHY.c ****   uint32_t LoopVariable;
+ 420:../Dave/Generated/src/ETH002/EthernetPHY.c ****   status_t Status = (uint32_t)PHY_WRITE_ERROR;
+ 318              		.loc 1 420 0
+ 319 0018 4FF00303 		mov	r3, #3
+ 320 001c BB61     		str	r3, [r7, #24]
+ 421:../Dave/Generated/src/ETH002/EthernetPHY.c **** 
+ 422:../Dave/Generated/src/ETH002/EthernetPHY.c ****   DBG002_FUNCTION_ENTRY(APP_GID,ETH002_FUNCTION_ENTRY);
+ 423:../Dave/Generated/src/ETH002/EthernetPHY.c **** 
+ 424:../Dave/Generated/src/ETH002/EthernetPHY.c ****   /* write the data in to GmacGmiiData register of synopGMAC IP */
+ 425:../Dave/Generated/src/ETH002/EthernetPHY.c ****   GMACRegs->GMII_DATA = Data;
+ 321              		.loc 1 425 0
+ 322 001e FA88     		ldrh	r2, [r7, #6]
+ 323 0020 7B69     		ldr	r3, [r7, #20]
+ 324 0022 5A61     		str	r2, [r3, #20]
+ 426:../Dave/Generated/src/ETH002/EthernetPHY.c **** 
+ 427:../Dave/Generated/src/ETH002/EthernetPHY.c ****   Address = ((PhyBase << (uint32_t)GmiiDevShift) & (uint32_t)GmiiDevMask) |
+ 325              		.loc 1 427 0
+ 326 0024 FB68     		ldr	r3, [r7, #12]
+ 327 0026 4FEAC323 		lsl	r3, r3, #11
+ 328 002a 4FEA0343 		lsl	r3, r3, #16
+ 329 002e 4FEA1343 		lsr	r3, r3, #16
+ 428:../Dave/Generated/src/ETH002/EthernetPHY.c ****         ((RegOffset << (uint32_t)GmiiRegShift) & (uint32_t)GmiiRegMask) | (uint32_t)GmiiWrite;
+ 330              		.loc 1 428 0
+ 331 0032 BA68     		ldr	r2, [r7, #8]
+ 332 0034 4FEA8212 		lsl	r2, r2, #6
+ 333 0038 02F4F862 		and	r2, r2, #1984
+ 427:../Dave/Generated/src/ETH002/EthernetPHY.c ****   Address = ((PhyBase << (uint32_t)GmiiDevShift) & (uint32_t)GmiiDevMask) |
+ 334              		.loc 1 427 0
+ 335 003c 1343     		orrs	r3, r3, r2
+ 336 003e 43F00203 		orr	r3, r3, #2
+ 337 0042 3B61     		str	r3, [r7, #16]
+ 429:../Dave/Generated/src/ETH002/EthernetPHY.c **** 
+ 430:../Dave/Generated/src/ETH002/EthernetPHY.c ****   /* set Gmii clk to 20-35 Mhz and Gmii busy bit */
+ 431:../Dave/Generated/src/ETH002/EthernetPHY.c ****   Address = Address | (uint32_t)GmiiBusy;
+ 338              		.loc 1 431 0
+ 339 0044 3B69     		ldr	r3, [r7, #16]
+ 340 0046 43F00103 		orr	r3, r3, #1
+ 341 004a 3B61     		str	r3, [r7, #16]
+ 432:../Dave/Generated/src/ETH002/EthernetPHY.c **** 
+ 433:../Dave/Generated/src/ETH002/EthernetPHY.c ****   GMACRegs->GMII_ADDRESS = Address;
+ 342              		.loc 1 433 0
+ 343 004c 7B69     		ldr	r3, [r7, #20]
+ 344 004e 3A69     		ldr	r2, [r7, #16]
+ 345 0050 1A61     		str	r2, [r3, #16]
+ 434:../Dave/Generated/src/ETH002/EthernetPHY.c **** 
+ 435:../Dave/Generated/src/ETH002/EthernetPHY.c ****   for(LoopVariable = (uint32_t)0U; LoopVariable < (uint32_t)BUSY_WAIT_LOOP_COUNT; LoopVariable++)
+ 346              		.loc 1 435 0
+ 347 0052 4FF00003 		mov	r3, #0
+ 348 0056 FB61     		str	r3, [r7, #28]
+ 349 0058 18E0     		b	.L21
+ 350              	.L25:
+ 436:../Dave/Generated/src/ETH002/EthernetPHY.c ****   {
+ 437:../Dave/Generated/src/ETH002/EthernetPHY.c ****     if ((GMACRegs->GMII_ADDRESS & (uint32_t)GmiiBusy) != (uint32_t)1U)
+ 351              		.loc 1 437 0
+ 352 005a 7B69     		ldr	r3, [r7, #20]
+ 353 005c 1B69     		ldr	r3, [r3, #16]
+ 354 005e 03F00103 		and	r3, r3, #1
+ 355 0062 002B     		cmp	r3, #0
+ 356 0064 18D0     		beq	.L28
+ 357              	.L22:
+ 438:../Dave/Generated/src/ETH002/EthernetPHY.c ****     {
+ 439:../Dave/Generated/src/ETH002/EthernetPHY.c ****       break;
+ 440:../Dave/Generated/src/ETH002/EthernetPHY.c ****     }
+ 441:../Dave/Generated/src/ETH002/EthernetPHY.c **** 	if(NULL != PHYtimerCallback)
+ 358              		.loc 1 441 0
+ 359 0066 40F20003 		movw	r3, #:lower16:PHYtimerCallback
+ 360 006a C0F20003 		movt	r3, #:upper16:PHYtimerCallback
+ 361 006e 1B68     		ldr	r3, [r3, #0]
+ 362 0070 002B     		cmp	r3, #0
+ 363 0072 07D0     		beq	.L24
+ 442:../Dave/Generated/src/ETH002/EthernetPHY.c **** 	{
+ 443:../Dave/Generated/src/ETH002/EthernetPHY.c **** 		PHYtimerCallback(PHY_REG_OPERATION_WAIT_TIME);
+ 364              		.loc 1 443 0
+ 365 0074 40F20003 		movw	r3, #:lower16:PHYtimerCallback
+ 366 0078 C0F20003 		movt	r3, #:upper16:PHYtimerCallback
+ 367 007c 1B68     		ldr	r3, [r3, #0]
+ 368 007e 4FF00A00 		mov	r0, #10
+ 369 0082 9847     		blx	r3
+ 370              	.L24:
+ 435:../Dave/Generated/src/ETH002/EthernetPHY.c ****   for(LoopVariable = (uint32_t)0U; LoopVariable < (uint32_t)BUSY_WAIT_LOOP_COUNT; LoopVariable++)
+ 371              		.loc 1 435 0
+ 372 0084 FB69     		ldr	r3, [r7, #28]
+ 373 0086 03F10103 		add	r3, r3, #1
+ 374 008a FB61     		str	r3, [r7, #28]
+ 375              	.L21:
+ 435:../Dave/Generated/src/ETH002/EthernetPHY.c ****   for(LoopVariable = (uint32_t)0U; LoopVariable < (uint32_t)BUSY_WAIT_LOOP_COUNT; LoopVariable++)
+ 376              		.loc 1 435 0 is_stmt 0 discriminator 1
+ 377 008c FA69     		ldr	r2, [r7, #28]
+ 378 008e 40F2E733 		movw	r3, #999
+ 379 0092 9A42     		cmp	r2, r3
+ 380 0094 E1D9     		bls	.L25
+ 381 0096 00E0     		b	.L23
+ 382              	.L28:
+ 439:../Dave/Generated/src/ETH002/EthernetPHY.c ****       break;
+ 383              		.loc 1 439 0 is_stmt 1
+ 384 0098 00BF     		nop
+ 385              	.L23:
+ 444:../Dave/Generated/src/ETH002/EthernetPHY.c **** 	}
+ 445:../Dave/Generated/src/ETH002/EthernetPHY.c ****   }
+ 446:../Dave/Generated/src/ETH002/EthernetPHY.c **** 
+ 447:../Dave/Generated/src/ETH002/EthernetPHY.c ****   if(LoopVariable < (uint32_t)BUSY_WAIT_LOOP_COUNT)
+ 386              		.loc 1 447 0
+ 387 009a FA69     		ldr	r2, [r7, #28]
+ 388 009c 40F2E733 		movw	r3, #999
+ 389 00a0 9A42     		cmp	r2, r3
+ 390 00a2 02D8     		bhi	.L26
+ 448:../Dave/Generated/src/ETH002/EthernetPHY.c ****   {
+ 449:../Dave/Generated/src/ETH002/EthernetPHY.c ****     Status = (status_t)DAVEApp_SUCCESS;
+ 391              		.loc 1 449 0
+ 392 00a4 4FF00003 		mov	r3, #0
+ 393 00a8 BB61     		str	r3, [r7, #24]
+ 394              	.L26:
+ 450:../Dave/Generated/src/ETH002/EthernetPHY.c ****   }
+ 451:../Dave/Generated/src/ETH002/EthernetPHY.c ****   else
+ 452:../Dave/Generated/src/ETH002/EthernetPHY.c ****   {
+ 453:../Dave/Generated/src/ETH002/EthernetPHY.c **** 	  DBG002_ERROR(APP_GID, PHY_BUSY_BIT_NOT_CLEARED, 0, NULL);
+ 454:../Dave/Generated/src/ETH002/EthernetPHY.c ****   }
+ 455:../Dave/Generated/src/ETH002/EthernetPHY.c **** 
+ 456:../Dave/Generated/src/ETH002/EthernetPHY.c ****   DBG002_FUNCTION_EXIT(APP_GID,ETH002_FUNCTION_EXIT);
+ 457:../Dave/Generated/src/ETH002/EthernetPHY.c ****   return Status;
+ 395              		.loc 1 457 0
+ 396 00aa BB69     		ldr	r3, [r7, #24]
+ 458:../Dave/Generated/src/ETH002/EthernetPHY.c **** }
+ 397              		.loc 1 458 0
+ 398 00ac 1846     		mov	r0, r3
+ 399 00ae 07F12007 		add	r7, r7, #32
+ 400 00b2 BD46     		mov	sp, r7
+ 401 00b4 80BD     		pop	{r7, pc}
+ 402              		.cfi_endproc
+ 403              	.LFE115:
+ 405 00b6 00BF     		.section	.text.PHY_lResetPHY,"ax",%progbits
+ 406              		.align	2
+ 407              		.thumb
+ 408              		.thumb_func
+ 410              	PHY_lResetPHY:
+ 411              	.LFB116:
+ 459:../Dave/Generated/src/ETH002/EthernetPHY.c **** /**
+ 460:../Dave/Generated/src/ETH002/EthernetPHY.c **** * @brief Function to reset the Phy and disable interrupts. 
+ 461:../Dave/Generated/src/ETH002/EthernetPHY.c **** *
+ 462:../Dave/Generated/src/ETH002/EthernetPHY.c **** * @param[in] void
+ 463:../Dave/Generated/src/ETH002/EthernetPHY.c **** *
+ 464:../Dave/Generated/src/ETH002/EthernetPHY.c **** * @return Returns DAVEApp_SUCCESS on success else return the error status.
+ 465:../Dave/Generated/src/ETH002/EthernetPHY.c **** */
+ 466:../Dave/Generated/src/ETH002/EthernetPHY.c **** static status_t PHY_lResetPHY(void)
+ 467:../Dave/Generated/src/ETH002/EthernetPHY.c **** {
+ 412              		.loc 1 467 0
+ 413              		.cfi_startproc
+ 414              		@ args = 0, pretend = 0, frame = 8
+ 415              		@ frame_needed = 1, uses_anonymous_args = 0
+ 416 0000 80B5     		push	{r7, lr}
+ 417              	.LCFI12:
+ 418              		.cfi_def_cfa_offset 8
+ 419              		.cfi_offset 7, -8
+ 420              		.cfi_offset 14, -4
+ 421 0002 82B0     		sub	sp, sp, #8
+ 422              	.LCFI13:
+ 423              		.cfi_def_cfa_offset 16
+ 424 0004 00AF     		add	r7, sp, #0
+ 425              	.LCFI14:
+ 426              		.cfi_def_cfa_register 7
+ 468:../Dave/Generated/src/ETH002/EthernetPHY.c ****   status_t  Status = (uint32_t)PHY_RESET_ERROR;
+ 427              		.loc 1 468 0
+ 428 0006 4FF00403 		mov	r3, #4
+ 429 000a 7B60     		str	r3, [r7, #4]
+ 469:../Dave/Generated/src/ETH002/EthernetPHY.c ****   uint16_t RegData =  (uint16_t)0; /* Initialize to 0 */
+ 430              		.loc 1 469 0
+ 431 000c 4FF00003 		mov	r3, #0
+ 432 0010 7B80     		strh	r3, [r7, #2]	@ movhi
+ 470:../Dave/Generated/src/ETH002/EthernetPHY.c ****   
+ 471:../Dave/Generated/src/ETH002/EthernetPHY.c ****   /* Reset Ethernet PHY */
+ 472:../Dave/Generated/src/ETH002/EthernetPHY.c ****   Status = PHY_lWriteReg ((uint32_t)PHY_BASE_ADDRESS,
+ 433              		.loc 1 472 0
+ 434 0012 7B88     		ldrh	r3, [r7, #2]
+ 435 0014 6FEA4343 		mvn	r3, r3, lsl #17
+ 436 0018 6FEA5343 		mvn	r3, r3, lsr #17
+ 437 001c 9BB2     		uxth	r3, r3
+ 438 001e 4FF00000 		mov	r0, #0
+ 439 0022 4FF00001 		mov	r1, #0
+ 440 0026 1A46     		mov	r2, r3
+ 441 0028 FFF7FEFF 		bl	PHY_lWriteReg
+ 442 002c 7860     		str	r0, [r7, #4]
+ 473:../Dave/Generated/src/ETH002/EthernetPHY.c ****             (uint32_t)BASIC_MODE_CONTROL_REG,
+ 474:../Dave/Generated/src/ETH002/EthernetPHY.c ****             (uint16_t)(RegData | (uint32_t)Mii_RESET));
+ 475:../Dave/Generated/src/ETH002/EthernetPHY.c ****   if (Status != (status_t)DAVEApp_SUCCESS)
+ 443              		.loc 1 475 0
+ 444 002e 7B68     		ldr	r3, [r7, #4]
+ 445 0030 002B     		cmp	r3, #0
+ 446 0032 2CD1     		bne	.L30
+ 476:../Dave/Generated/src/ETH002/EthernetPHY.c ****   {
+ 477:../Dave/Generated/src/ETH002/EthernetPHY.c ****     DBG002_ERROR(APP_GID, PHY_RESET_ERROR, 0, NULL);
+ 478:../Dave/Generated/src/ETH002/EthernetPHY.c ****   }
+ 479:../Dave/Generated/src/ETH002/EthernetPHY.c ****   /* Wait for for reset to complete, actually 30 milliseconds @120Mhz CPU clock */
+ 480:../Dave/Generated/src/ETH002/EthernetPHY.c ****   else
+ 481:../Dave/Generated/src/ETH002/EthernetPHY.c ****   {
+ 482:../Dave/Generated/src/ETH002/EthernetPHY.c ****     if(NULL != PHYtimerCallback)
+ 447              		.loc 1 482 0
+ 448 0034 40F20003 		movw	r3, #:lower16:PHYtimerCallback
+ 449 0038 C0F20003 		movt	r3, #:upper16:PHYtimerCallback
+ 450 003c 1B68     		ldr	r3, [r3, #0]
+ 451 003e 002B     		cmp	r3, #0
+ 452 0040 07D0     		beq	.L31
+ 483:../Dave/Generated/src/ETH002/EthernetPHY.c ****     {
+ 484:../Dave/Generated/src/ETH002/EthernetPHY.c ****     	PHYtimerCallback(RESET_COMPLETE_WAIT_PERIOD);
+ 453              		.loc 1 484 0
+ 454 0042 40F20003 		movw	r3, #:lower16:PHYtimerCallback
+ 455 0046 C0F20003 		movt	r3, #:upper16:PHYtimerCallback
+ 456 004a 1B68     		ldr	r3, [r3, #0]
+ 457 004c 4FF01E00 		mov	r0, #30
+ 458 0050 9847     		blx	r3
+ 459              	.L31:
+ 485:../Dave/Generated/src/ETH002/EthernetPHY.c ****     }
+ 486:../Dave/Generated/src/ETH002/EthernetPHY.c ****     /* Check if Ethernet PHY Reset is complete */
+ 487:../Dave/Generated/src/ETH002/EthernetPHY.c ****     Status = PHY_lReadReg ((uint32_t)PHY_BASE_ADDRESS,
+ 460              		.loc 1 487 0
+ 461 0052 07F10203 		add	r3, r7, #2
+ 462 0056 4FF00000 		mov	r0, #0
+ 463 005a 4FF00001 		mov	r1, #0
+ 464 005e 1A46     		mov	r2, r3
+ 465 0060 FFF7FEFF 		bl	PHY_lReadReg
+ 466 0064 7860     		str	r0, [r7, #4]
+ 488:../Dave/Generated/src/ETH002/EthernetPHY.c ****                           (uint32_t)BASIC_MODE_CONTROL_REG,
+ 489:../Dave/Generated/src/ETH002/EthernetPHY.c ****                           &RegData);
+ 490:../Dave/Generated/src/ETH002/EthernetPHY.c ****     if (Status != (status_t)DAVEApp_SUCCESS)
+ 467              		.loc 1 490 0
+ 468 0066 7B68     		ldr	r3, [r7, #4]
+ 469 0068 002B     		cmp	r3, #0
+ 470 006a 10D1     		bne	.L30
+ 491:../Dave/Generated/src/ETH002/EthernetPHY.c ****     {
+ 492:../Dave/Generated/src/ETH002/EthernetPHY.c ****       DBG002_ERROR(APP_GID, PHY_READ_ERROR, 0, NULL);
+ 493:../Dave/Generated/src/ETH002/EthernetPHY.c ****     }
+ 494:../Dave/Generated/src/ETH002/EthernetPHY.c ****     else
+ 495:../Dave/Generated/src/ETH002/EthernetPHY.c ****     {
+ 496:../Dave/Generated/src/ETH002/EthernetPHY.c ****       if ((RegData & (uint32_t)Mii_RESET) == (uint32_t)Mii_RESET)
+ 471              		.loc 1 496 0
+ 472 006c 7B88     		ldrh	r3, [r7, #2]
+ 473 006e 9BB2     		uxth	r3, r3
+ 474 0070 1BB2     		sxth	r3, r3
+ 475 0072 002B     		cmp	r3, #0
+ 476 0074 0BDB     		blt	.L30
+ 497:../Dave/Generated/src/ETH002/EthernetPHY.c ****       {
+ 498:../Dave/Generated/src/ETH002/EthernetPHY.c ****         /* Ethernet Reset is not complete */
+ 499:../Dave/Generated/src/ETH002/EthernetPHY.c ****         DBG002_ERROR(APP_GID, PHY_RESET_ERROR, 0, NULL);
+ 500:../Dave/Generated/src/ETH002/EthernetPHY.c ****       }
+ 501:../Dave/Generated/src/ETH002/EthernetPHY.c ****       else
+ 502:../Dave/Generated/src/ETH002/EthernetPHY.c ****       {
+ 503:../Dave/Generated/src/ETH002/EthernetPHY.c ****         /* Read PHY ID to check if the correct PHY is used */
+ 504:../Dave/Generated/src/ETH002/EthernetPHY.c ****         Status = PHY_lReadReg ((uint32_t)PHY_BASE_ADDRESS,
+ 477              		.loc 1 504 0
+ 478 0076 07F10203 		add	r3, r7, #2
+ 479 007a 4FF00000 		mov	r0, #0
+ 480 007e 4FF00201 		mov	r1, #2
+ 481 0082 1A46     		mov	r2, r3
+ 482 0084 FFF7FEFF 		bl	PHY_lReadReg
+ 483 0088 7860     		str	r0, [r7, #4]
+ 505:../Dave/Generated/src/ETH002/EthernetPHY.c ****                           (uint32_t)PHY_ID_REG_1,
+ 506:../Dave/Generated/src/ETH002/EthernetPHY.c ****                           &RegData);
+ 507:../Dave/Generated/src/ETH002/EthernetPHY.c ****         if (Status != (status_t)DAVEApp_SUCCESS)
+ 484              		.loc 1 507 0
+ 485 008a 7B68     		ldr	r3, [r7, #4]
+ 486 008c 002B     		cmp	r3, #0
+ 487              	.L30:
+ 508:../Dave/Generated/src/ETH002/EthernetPHY.c ****         {
+ 509:../Dave/Generated/src/ETH002/EthernetPHY.c ****           DBG002_ERROR(APP_GID, PHY_READ_ERROR, 0, NULL);
+ 510:../Dave/Generated/src/ETH002/EthernetPHY.c ****         }
+ 511:../Dave/Generated/src/ETH002/EthernetPHY.c ****         else if (RegData != (uint16_t)PHY_ID1_REGISTER)
+ 512:../Dave/Generated/src/ETH002/EthernetPHY.c ****         {
+ 513:../Dave/Generated/src/ETH002/EthernetPHY.c ****           /* Wrong PHY connected */
+ 514:../Dave/Generated/src/ETH002/EthernetPHY.c ****           DBG002_ERROR(APP_GID, PHY_RESET_ERROR, 0, NULL);
+ 515:../Dave/Generated/src/ETH002/EthernetPHY.c ****         }
+ 516:../Dave/Generated/src/ETH002/EthernetPHY.c ****         else
+ 517:../Dave/Generated/src/ETH002/EthernetPHY.c ****         {
+ 518:../Dave/Generated/src/ETH002/EthernetPHY.c **** 
+ 519:../Dave/Generated/src/ETH002/EthernetPHY.c **** #ifdef PHY_National_DP83848C
+ 520:../Dave/Generated/src/ETH002/EthernetPHY.c **** 
+ 521:../Dave/Generated/src/ETH002/EthernetPHY.c ****           /* Read interrupt control register */
+ 522:../Dave/Generated/src/ETH002/EthernetPHY.c ****           Status = PHY_lReadReg ((uint32_t)PHY_BASE_ADDRESS,
+ 523:../Dave/Generated/src/ETH002/EthernetPHY.c ****                           (uint32_t)MII_INTERRUPT_CONTROL_REG,
+ 524:../Dave/Generated/src/ETH002/EthernetPHY.c ****                           &RegData);
+ 525:../Dave/Generated/src/ETH002/EthernetPHY.c ****           if (Status != (status_t)DAVEApp_SUCCESS)
+ 526:../Dave/Generated/src/ETH002/EthernetPHY.c ****           {
+ 527:../Dave/Generated/src/ETH002/EthernetPHY.c ****             DBG002_ERROR(APP_GID, PHY_READ_ERROR, 0, NULL);
+ 528:../Dave/Generated/src/ETH002/EthernetPHY.c ****           }
+ 529:../Dave/Generated/src/ETH002/EthernetPHY.c ****           else
+ 530:../Dave/Generated/src/ETH002/EthernetPHY.c ****           {
+ 531:../Dave/Generated/src/ETH002/EthernetPHY.c ****             /* Disable all PHY interrupts */
+ 532:../Dave/Generated/src/ETH002/EthernetPHY.c ****             Status = PHY_lWriteReg ((uint32_t)PHY_BASE_ADDRESS,
+ 533:../Dave/Generated/src/ETH002/EthernetPHY.c ****                            (uint32_t)MII_INTERRUPT_CONTROL_REG,
+ 534:../Dave/Generated/src/ETH002/EthernetPHY.c ****                            (uint16_t)(RegData | (uint32_t)Mii_INTR_DISABLE));
+ 535:../Dave/Generated/src/ETH002/EthernetPHY.c ****             if (Status != (status_t)DAVEApp_SUCCESS)
+ 536:../Dave/Generated/src/ETH002/EthernetPHY.c ****             {
+ 537:../Dave/Generated/src/ETH002/EthernetPHY.c ****               DBG002_ERROR(APP_GID, PHY_DISABLE_INTR_ERROR, 0, NULL);
+ 538:../Dave/Generated/src/ETH002/EthernetPHY.c ****             }
+ 539:../Dave/Generated/src/ETH002/EthernetPHY.c ****           }
+ 540:../Dave/Generated/src/ETH002/EthernetPHY.c **** #endif
+ 541:../Dave/Generated/src/ETH002/EthernetPHY.c ****         }
+ 542:../Dave/Generated/src/ETH002/EthernetPHY.c ****       }
+ 543:../Dave/Generated/src/ETH002/EthernetPHY.c ****     }
+ 544:../Dave/Generated/src/ETH002/EthernetPHY.c ****   }
+ 545:../Dave/Generated/src/ETH002/EthernetPHY.c ****   return Status;
+ 488              		.loc 1 545 0
+ 489 008e 7B68     		ldr	r3, [r7, #4]
+ 546:../Dave/Generated/src/ETH002/EthernetPHY.c **** }
+ 490              		.loc 1 546 0
+ 491 0090 1846     		mov	r0, r3
+ 492 0092 07F10807 		add	r7, r7, #8
+ 493 0096 BD46     		mov	sp, r7
+ 494 0098 80BD     		pop	{r7, pc}
+ 495              		.cfi_endproc
+ 496              	.LFE116:
+ 498 009a 00BF     		.section	.text.PHY_lPerformLinkNegotiation,"ax",%progbits
+ 499              		.align	2
+ 500              		.thumb
+ 501              		.thumb_func
+ 503              	PHY_lPerformLinkNegotiation:
+ 504              	.LFB117:
+ 547:../Dave/Generated/src/ETH002/EthernetPHY.c **** 
+ 548:../Dave/Generated/src/ETH002/EthernetPHY.c **** #if AUTO_NEGO
+ 549:../Dave/Generated/src/ETH002/EthernetPHY.c **** /**
+ 550:../Dave/Generated/src/ETH002/EthernetPHY.c **** * @brief Function to perform link negotiation. 
+ 551:../Dave/Generated/src/ETH002/EthernetPHY.c **** *
+ 552:../Dave/Generated/src/ETH002/EthernetPHY.c **** * @param[in] void
+ 553:../Dave/Generated/src/ETH002/EthernetPHY.c **** *
+ 554:../Dave/Generated/src/ETH002/EthernetPHY.c **** * @return Returns DAVEApp_SUCCESS on success else return the error status.
+ 555:../Dave/Generated/src/ETH002/EthernetPHY.c **** */
+ 556:../Dave/Generated/src/ETH002/EthernetPHY.c **** static status_t PHY_lPerformLinkNegotiation(void)
+ 557:../Dave/Generated/src/ETH002/EthernetPHY.c **** {
+ 505              		.loc 1 557 0
+ 506              		.cfi_startproc
+ 507              		@ args = 0, pretend = 0, frame = 8
+ 508              		@ frame_needed = 1, uses_anonymous_args = 0
+ 509 0000 80B5     		push	{r7, lr}
+ 510              	.LCFI15:
+ 511              		.cfi_def_cfa_offset 8
+ 512              		.cfi_offset 7, -8
+ 513              		.cfi_offset 14, -4
+ 514 0002 82B0     		sub	sp, sp, #8
+ 515              	.LCFI16:
+ 516              		.cfi_def_cfa_offset 16
+ 517 0004 00AF     		add	r7, sp, #0
+ 518              	.LCFI17:
+ 519              		.cfi_def_cfa_register 7
+ 558:../Dave/Generated/src/ETH002/EthernetPHY.c ****   status_t Status = (uint32_t)PHY_READ_ERROR;
+ 520              		.loc 1 558 0
+ 521 0006 4FF00203 		mov	r3, #2
+ 522 000a 7B60     		str	r3, [r7, #4]
+ 559:../Dave/Generated/src/ETH002/EthernetPHY.c ****   uint16_t RegData = (uint16_t)0; /* Initialize to 0 */
+ 523              		.loc 1 559 0
+ 524 000c 4FF00003 		mov	r3, #0
+ 525 0010 7B80     		strh	r3, [r7, #2]	@ movhi
+ 560:../Dave/Generated/src/ETH002/EthernetPHY.c **** 
+ 561:../Dave/Generated/src/ETH002/EthernetPHY.c ****   Status = PHY_lReadReg ((uint32_t)PHY_BASE_ADDRESS,
+ 526              		.loc 1 561 0
+ 527 0012 07F10203 		add	r3, r7, #2
+ 528 0016 4FF00000 		mov	r0, #0
+ 529 001a 4FF00401 		mov	r1, #4
+ 530 001e 1A46     		mov	r2, r3
+ 531 0020 FFF7FEFF 		bl	PHY_lReadReg
+ 532 0024 7860     		str	r0, [r7, #4]
+ 562:../Dave/Generated/src/ETH002/EthernetPHY.c ****                           (uint32_t)AN_ADV_REG,
+ 563:../Dave/Generated/src/ETH002/EthernetPHY.c ****                           &RegData);
+ 564:../Dave/Generated/src/ETH002/EthernetPHY.c ****   if (Status != (status_t)DAVEApp_SUCCESS)
+ 533              		.loc 1 564 0
+ 534 0026 7B68     		ldr	r3, [r7, #4]
+ 535 0028 002B     		cmp	r3, #0
+ 536 002a 5ED1     		bne	.L34
+ 565:../Dave/Generated/src/ETH002/EthernetPHY.c ****   {
+ 566:../Dave/Generated/src/ETH002/EthernetPHY.c ****     DBG002_ERROR(APP_GID, PHY_READ_ERROR, 0, NULL);
+ 567:../Dave/Generated/src/ETH002/EthernetPHY.c ****   }
+ 568:../Dave/Generated/src/ETH002/EthernetPHY.c ****   else
+ 569:../Dave/Generated/src/ETH002/EthernetPHY.c ****   {
+ 570:../Dave/Generated/src/ETH002/EthernetPHY.c **** 	  Status = PHY_lWriteReg ((uint32_t)PHY_BASE_ADDRESS,
+ 537              		.loc 1 570 0
+ 538 002c 7B88     		ldrh	r3, [r7, #2]
+ 539 002e 43F44063 		orr	r3, r3, #3072
+ 540 0032 9BB2     		uxth	r3, r3
+ 541 0034 4FF00000 		mov	r0, #0
+ 542 0038 4FF00401 		mov	r1, #4
+ 543 003c 1A46     		mov	r2, r3
+ 544 003e FFF7FEFF 		bl	PHY_lWriteReg
+ 545 0042 7860     		str	r0, [r7, #4]
+ 571:../Dave/Generated/src/ETH002/EthernetPHY.c ****               (uint32_t)AN_ADV_REG,
+ 572:../Dave/Generated/src/ETH002/EthernetPHY.c ****               (uint16_t)(RegData | (uint32_t)0xC00));
+ 573:../Dave/Generated/src/ETH002/EthernetPHY.c ****     if (Status != (status_t)DAVEApp_SUCCESS)
+ 546              		.loc 1 573 0
+ 547 0044 7B68     		ldr	r3, [r7, #4]
+ 548 0046 002B     		cmp	r3, #0
+ 549 0048 4FD1     		bne	.L34
+ 574:../Dave/Generated/src/ETH002/EthernetPHY.c ****     {
+ 575:../Dave/Generated/src/ETH002/EthernetPHY.c ****       DBG002_ERROR(APP_GID, PHY_RESET_ERROR, 0, NULL);
+ 576:../Dave/Generated/src/ETH002/EthernetPHY.c ****     }
+ 577:../Dave/Generated/src/ETH002/EthernetPHY.c ****     else
+ 578:../Dave/Generated/src/ETH002/EthernetPHY.c ****     {
+ 579:../Dave/Generated/src/ETH002/EthernetPHY.c ****       Status = PHY_lReadReg ((uint32_t)PHY_BASE_ADDRESS,
+ 550              		.loc 1 579 0
+ 551 004a 07F10203 		add	r3, r7, #2
+ 552 004e 4FF00000 		mov	r0, #0
+ 553 0052 4FF00001 		mov	r1, #0
+ 554 0056 1A46     		mov	r2, r3
+ 555 0058 FFF7FEFF 		bl	PHY_lReadReg
+ 556 005c 7860     		str	r0, [r7, #4]
+ 580:../Dave/Generated/src/ETH002/EthernetPHY.c ****                           (uint32_t)BASIC_MODE_CONTROL_REG,
+ 581:../Dave/Generated/src/ETH002/EthernetPHY.c ****                           &RegData);
+ 582:../Dave/Generated/src/ETH002/EthernetPHY.c ****       if (Status != (status_t)DAVEApp_SUCCESS)
+ 557              		.loc 1 582 0
+ 558 005e 7B68     		ldr	r3, [r7, #4]
+ 559 0060 002B     		cmp	r3, #0
+ 560 0062 42D1     		bne	.L34
+ 583:../Dave/Generated/src/ETH002/EthernetPHY.c ****       {
+ 584:../Dave/Generated/src/ETH002/EthernetPHY.c ****         DBG002_ERROR(APP_GID, PHY_READ_ERROR, 0, NULL);
+ 585:../Dave/Generated/src/ETH002/EthernetPHY.c ****       }
+ 586:../Dave/Generated/src/ETH002/EthernetPHY.c ****       else
+ 587:../Dave/Generated/src/ETH002/EthernetPHY.c ****       {
+ 588:../Dave/Generated/src/ETH002/EthernetPHY.c ****         Status = PHY_lWriteReg ((uint32_t)PHY_BASE_ADDRESS,
+ 561              		.loc 1 588 0
+ 562 0064 7B88     		ldrh	r3, [r7, #2]
+ 563 0066 43F48053 		orr	r3, r3, #4096
+ 564 006a 9BB2     		uxth	r3, r3
+ 565 006c 4FF00000 		mov	r0, #0
+ 566 0070 4FF00001 		mov	r1, #0
+ 567 0074 1A46     		mov	r2, r3
+ 568 0076 FFF7FEFF 		bl	PHY_lWriteReg
+ 569 007a 7860     		str	r0, [r7, #4]
+ 589:../Dave/Generated/src/ETH002/EthernetPHY.c ****               (uint32_t)BASIC_MODE_CONTROL_REG,
+ 590:../Dave/Generated/src/ETH002/EthernetPHY.c ****               (uint16_t)(RegData | (uint32_t)Mii_AUTONEGO));
+ 591:../Dave/Generated/src/ETH002/EthernetPHY.c ****         if (Status != (status_t)DAVEApp_SUCCESS)
+ 570              		.loc 1 591 0
+ 571 007c 7B68     		ldr	r3, [r7, #4]
+ 572 007e 002B     		cmp	r3, #0
+ 573 0080 33D1     		bne	.L34
+ 592:../Dave/Generated/src/ETH002/EthernetPHY.c ****         {
+ 593:../Dave/Generated/src/ETH002/EthernetPHY.c ****           DBG002_ERROR(APP_GID, PHY_RESET_ERROR, 0, NULL);
+ 594:../Dave/Generated/src/ETH002/EthernetPHY.c ****         }
+ 595:../Dave/Generated/src/ETH002/EthernetPHY.c ****         else
+ 596:../Dave/Generated/src/ETH002/EthernetPHY.c ****         {
+ 597:../Dave/Generated/src/ETH002/EthernetPHY.c **** 	        if(NULL != PHYtimerCallback)
+ 574              		.loc 1 597 0
+ 575 0082 40F20003 		movw	r3, #:lower16:PHYtimerCallback
+ 576 0086 C0F20003 		movt	r3, #:upper16:PHYtimerCallback
+ 577 008a 1B68     		ldr	r3, [r3, #0]
+ 578 008c 002B     		cmp	r3, #0
+ 579 008e 07D0     		beq	.L35
+ 598:../Dave/Generated/src/ETH002/EthernetPHY.c **** 	        {
+ 599:../Dave/Generated/src/ETH002/EthernetPHY.c **** 	          PHYtimerCallback(RESET_COMPLETE_WAIT_PERIOD);
+ 580              		.loc 1 599 0
+ 581 0090 40F20003 		movw	r3, #:lower16:PHYtimerCallback
+ 582 0094 C0F20003 		movt	r3, #:upper16:PHYtimerCallback
+ 583 0098 1B68     		ldr	r3, [r3, #0]
+ 584 009a 4FF01E00 		mov	r0, #30
+ 585 009e 9847     		blx	r3
+ 586              	.L35:
+ 600:../Dave/Generated/src/ETH002/EthernetPHY.c **** 	        }
+ 601:../Dave/Generated/src/ETH002/EthernetPHY.c ****           do
+ 602:../Dave/Generated/src/ETH002/EthernetPHY.c ****           {
+ 603:../Dave/Generated/src/ETH002/EthernetPHY.c ****           }while(PHY_lIsAutoNegoComplete() != TRUE);
+ 587              		.loc 1 603 0 discriminator 1
+ 588 00a0 FFF7FEFF 		bl	PHY_lIsAutoNegoComplete
+ 589 00a4 0346     		mov	r3, r0
+ 590 00a6 012B     		cmp	r3, #1
+ 591 00a8 FAD1     		bne	.L35
+ 604:../Dave/Generated/src/ETH002/EthernetPHY.c ****           if(((uint32_t)RegData & (uint32_t)Mii_AUTO_NEGO_COMPLETE) != (uint32_t)0)
+ 592              		.loc 1 604 0
+ 593 00aa 7B88     		ldrh	r3, [r7, #2]
+ 594 00ac 03F02003 		and	r3, r3, #32
+ 595 00b0 002B     		cmp	r3, #0
+ 596 00b2 03D0     		beq	.L36
+ 605:../Dave/Generated/src/ETH002/EthernetPHY.c ****           {
+ 606:../Dave/Generated/src/ETH002/EthernetPHY.c ****             DBG002_INFO(APP_GID, PHY_AUTO_NEGO_COMPLETE, 0, NULL);
+ 607:../Dave/Generated/src/ETH002/EthernetPHY.c ****             Status = (status_t)DAVEApp_SUCCESS;
+ 597              		.loc 1 607 0
+ 598 00b4 4FF00003 		mov	r3, #0
+ 599 00b8 7B60     		str	r3, [r7, #4]
+ 600 00ba 16E0     		b	.L34
+ 601              	.L36:
+ 608:../Dave/Generated/src/ETH002/EthernetPHY.c ****           }
+ 609:../Dave/Generated/src/ETH002/EthernetPHY.c ****           else
+ 610:../Dave/Generated/src/ETH002/EthernetPHY.c ****           {
+ 611:../Dave/Generated/src/ETH002/EthernetPHY.c **** 	          Status = PHY_lReadReg ((uint32_t)PHY_BASE_ADDRESS,
+ 602              		.loc 1 611 0
+ 603 00bc 07F10203 		add	r3, r7, #2
+ 604 00c0 4FF00000 		mov	r0, #0
+ 605 00c4 4FF00501 		mov	r1, #5
+ 606 00c8 1A46     		mov	r2, r3
+ 607 00ca FFF7FEFF 		bl	PHY_lReadReg
+ 608 00ce 7860     		str	r0, [r7, #4]
+ 612:../Dave/Generated/src/ETH002/EthernetPHY.c ****                           (uint32_t)LNK_PART_ABl_REG,
+ 613:../Dave/Generated/src/ETH002/EthernetPHY.c ****                           &RegData);
+ 614:../Dave/Generated/src/ETH002/EthernetPHY.c ****             if (Status != (status_t)DAVEApp_SUCCESS)
+ 609              		.loc 1 614 0
+ 610 00d0 7B68     		ldr	r3, [r7, #4]
+ 611 00d2 002B     		cmp	r3, #0
+ 612 00d4 09D1     		bne	.L34
+ 615:../Dave/Generated/src/ETH002/EthernetPHY.c ****             {
+ 616:../Dave/Generated/src/ETH002/EthernetPHY.c ****               DBG002_ERROR(APP_GID, PHY_READ_ERROR, 0, NULL);
+ 617:../Dave/Generated/src/ETH002/EthernetPHY.c ****             }
+ 618:../Dave/Generated/src/ETH002/EthernetPHY.c ****             else
+ 619:../Dave/Generated/src/ETH002/EthernetPHY.c ****             {
+ 620:../Dave/Generated/src/ETH002/EthernetPHY.c **** 	            Status = PHY_lReadReg ((uint32_t)PHY_BASE_ADDRESS,
+ 613              		.loc 1 620 0
+ 614 00d6 07F10203 		add	r3, r7, #2
+ 615 00da 4FF00000 		mov	r0, #0
+ 616 00de 4FF00601 		mov	r1, #6
+ 617 00e2 1A46     		mov	r2, r3
+ 618 00e4 FFF7FEFF 		bl	PHY_lReadReg
+ 619 00e8 7860     		str	r0, [r7, #4]
+ 620              	.L34:
+ 621:../Dave/Generated/src/ETH002/EthernetPHY.c ****                           (uint32_t)AN_EXP_REG,
+ 622:../Dave/Generated/src/ETH002/EthernetPHY.c ****                           &RegData);
+ 623:../Dave/Generated/src/ETH002/EthernetPHY.c ****               if (Status != (status_t)DAVEApp_SUCCESS)
+ 624:../Dave/Generated/src/ETH002/EthernetPHY.c ****               {
+ 625:../Dave/Generated/src/ETH002/EthernetPHY.c ****                 DBG002_ERROR(APP_GID, PHY_READ_ERROR, 0, NULL);
+ 626:../Dave/Generated/src/ETH002/EthernetPHY.c ****               }
+ 627:../Dave/Generated/src/ETH002/EthernetPHY.c ****             }
+ 628:../Dave/Generated/src/ETH002/EthernetPHY.c ****           }
+ 629:../Dave/Generated/src/ETH002/EthernetPHY.c ****         }
+ 630:../Dave/Generated/src/ETH002/EthernetPHY.c ****       }
+ 631:../Dave/Generated/src/ETH002/EthernetPHY.c ****     }
+ 632:../Dave/Generated/src/ETH002/EthernetPHY.c ****   }
+ 633:../Dave/Generated/src/ETH002/EthernetPHY.c ****   return Status;
+ 621              		.loc 1 633 0
+ 622 00ea 7B68     		ldr	r3, [r7, #4]
+ 634:../Dave/Generated/src/ETH002/EthernetPHY.c **** }
+ 623              		.loc 1 634 0
+ 624 00ec 1846     		mov	r0, r3
+ 625 00ee 07F10807 		add	r7, r7, #8
+ 626 00f2 BD46     		mov	sp, r7
+ 627 00f4 80BD     		pop	{r7, pc}
+ 628              		.cfi_endproc
+ 629              	.LFE117:
+ 631 00f6 00BF     		.section	.text.PHY_lIsAutoNegoComplete,"ax",%progbits
+ 632              		.align	2
+ 633              		.thumb
+ 634              		.thumb_func
+ 636              	PHY_lIsAutoNegoComplete:
+ 637              	.LFB118:
+ 635:../Dave/Generated/src/ETH002/EthernetPHY.c **** 
+ 636:../Dave/Generated/src/ETH002/EthernetPHY.c **** /**
+ 637:../Dave/Generated/src/ETH002/EthernetPHY.c **** * @brief Function to check if link auto negotiation is complete.
+ 638:../Dave/Generated/src/ETH002/EthernetPHY.c **** *
+ 639:../Dave/Generated/src/ETH002/EthernetPHY.c **** * @param[in] void
+ 640:../Dave/Generated/src/ETH002/EthernetPHY.c **** *
+ 641:../Dave/Generated/src/ETH002/EthernetPHY.c **** * @return Returns TRUE is auto negotiation is complete, false otherwise.
+ 642:../Dave/Generated/src/ETH002/EthernetPHY.c **** */
+ 643:../Dave/Generated/src/ETH002/EthernetPHY.c **** static BOOLType PHY_lIsAutoNegoComplete(void)
+ 644:../Dave/Generated/src/ETH002/EthernetPHY.c **** {
+ 638              		.loc 1 644 0
+ 639              		.cfi_startproc
+ 640              		@ args = 0, pretend = 0, frame = 16
+ 641              		@ frame_needed = 1, uses_anonymous_args = 0
+ 642 0000 80B5     		push	{r7, lr}
+ 643              	.LCFI18:
+ 644              		.cfi_def_cfa_offset 8
+ 645              		.cfi_offset 7, -8
+ 646              		.cfi_offset 14, -4
+ 647 0002 84B0     		sub	sp, sp, #16
+ 648              	.LCFI19:
+ 649              		.cfi_def_cfa_offset 24
+ 650 0004 00AF     		add	r7, sp, #0
+ 651              	.LCFI20:
+ 652              		.cfi_def_cfa_register 7
+ 645:../Dave/Generated/src/ETH002/EthernetPHY.c ****   uint16_t RegData = (uint16_t)0; /* Initialize to 0 */
+ 653              		.loc 1 645 0
+ 654 0006 4FF00003 		mov	r3, #0
+ 655 000a 7B80     		strh	r3, [r7, #2]	@ movhi
+ 646:../Dave/Generated/src/ETH002/EthernetPHY.c ****   uint32_t LoopCount = (uint32_t)CHECK_AUTO_NEGO_TIME_COUNT;
+ 656              		.loc 1 646 0
+ 657 000c 4FF06403 		mov	r3, #100
+ 658 0010 FB60     		str	r3, [r7, #12]
+ 647:../Dave/Generated/src/ETH002/EthernetPHY.c ****   status_t Status = (uint32_t)PHY_INIT_ERROR;
+ 659              		.loc 1 647 0
+ 660 0012 4FF00103 		mov	r3, #1
+ 661 0016 7B60     		str	r3, [r7, #4]
+ 648:../Dave/Generated/src/ETH002/EthernetPHY.c ****   BOOLType IsAutoNegoComplete = FALSE;
+ 662              		.loc 1 648 0
+ 663 0018 4FF00003 		mov	r3, #0
+ 664 001c FB72     		strb	r3, [r7, #11]
+ 649:../Dave/Generated/src/ETH002/EthernetPHY.c **** 
+ 650:../Dave/Generated/src/ETH002/EthernetPHY.c ****   while(LoopCount != (uint32_t)0)
+ 665              		.loc 1 650 0
+ 666 001e 19E0     		b	.L39
+ 667              	.L43:
+ 651:../Dave/Generated/src/ETH002/EthernetPHY.c ****   {
+ 652:../Dave/Generated/src/ETH002/EthernetPHY.c ****     Status = PHY_lReadReg ((uint32_t)PHY_BASE_ADDRESS,
+ 668              		.loc 1 652 0
+ 669 0020 07F10203 		add	r3, r7, #2
+ 670 0024 4FF00000 		mov	r0, #0
+ 671 0028 4FF00101 		mov	r1, #1
+ 672 002c 1A46     		mov	r2, r3
+ 673 002e FFF7FEFF 		bl	PHY_lReadReg
+ 674 0032 7860     		str	r0, [r7, #4]
+ 653:../Dave/Generated/src/ETH002/EthernetPHY.c ****                       (uint32_t)BASIC_MODE_STATUS_REG,
+ 654:../Dave/Generated/src/ETH002/EthernetPHY.c ****                            &RegData);
+ 655:../Dave/Generated/src/ETH002/EthernetPHY.c ****     if(Status != (status_t)DAVEApp_SUCCESS)
+ 675              		.loc 1 655 0
+ 676 0034 7B68     		ldr	r3, [r7, #4]
+ 677 0036 002B     		cmp	r3, #0
+ 678 0038 10D1     		bne	.L46
+ 679              	.L40:
+ 656:../Dave/Generated/src/ETH002/EthernetPHY.c ****     {
+ 657:../Dave/Generated/src/ETH002/EthernetPHY.c ****       DBG002_ERROR(APP_GID, PHY_READ_ERROR, 0, NULL);
+ 658:../Dave/Generated/src/ETH002/EthernetPHY.c ****       break;
+ 659:../Dave/Generated/src/ETH002/EthernetPHY.c ****     }
+ 660:../Dave/Generated/src/ETH002/EthernetPHY.c ****     if(((uint32_t)RegData & (uint32_t)Mii_AUTO_NEGO_COMPLETE) != (uint32_t)0)
+ 680              		.loc 1 660 0
+ 681 003a 7B88     		ldrh	r3, [r7, #2]
+ 682 003c 03F02003 		and	r3, r3, #32
+ 683 0040 002B     		cmp	r3, #0
+ 684 0042 03D0     		beq	.L42
+ 661:../Dave/Generated/src/ETH002/EthernetPHY.c ****     {
+ 662:../Dave/Generated/src/ETH002/EthernetPHY.c ****       DBG002_INFO(APP_GID, PHY_AUTO_NEGO_COMPLETE, 0, NULL);
+ 663:../Dave/Generated/src/ETH002/EthernetPHY.c ****       IsAutoNegoComplete = TRUE;
+ 685              		.loc 1 663 0
+ 686 0044 4FF00103 		mov	r3, #1
+ 687 0048 FB72     		strb	r3, [r7, #11]
+ 688 004a 03E0     		b	.L39
+ 689              	.L42:
+ 664:../Dave/Generated/src/ETH002/EthernetPHY.c ****     }
+ 665:../Dave/Generated/src/ETH002/EthernetPHY.c ****     else
+ 666:../Dave/Generated/src/ETH002/EthernetPHY.c ****     {
+ 667:../Dave/Generated/src/ETH002/EthernetPHY.c ****       LoopCount--;
+ 690              		.loc 1 667 0
+ 691 004c FB68     		ldr	r3, [r7, #12]
+ 692 004e 03F1FF33 		add	r3, r3, #-1
+ 693 0052 FB60     		str	r3, [r7, #12]
+ 694              	.L39:
+ 650:../Dave/Generated/src/ETH002/EthernetPHY.c ****   while(LoopCount != (uint32_t)0)
+ 695              		.loc 1 650 0 discriminator 1
+ 696 0054 FB68     		ldr	r3, [r7, #12]
+ 697 0056 002B     		cmp	r3, #0
+ 698 0058 E2D1     		bne	.L43
+ 699 005a 00E0     		b	.L41
+ 700              	.L46:
+ 658:../Dave/Generated/src/ETH002/EthernetPHY.c ****       break;
+ 701              		.loc 1 658 0
+ 702 005c 00BF     		nop
+ 703              	.L41:
+ 668:../Dave/Generated/src/ETH002/EthernetPHY.c ****     }
+ 669:../Dave/Generated/src/ETH002/EthernetPHY.c ****   }
+ 670:../Dave/Generated/src/ETH002/EthernetPHY.c ****   if((uint32_t)0 == LoopCount)
+ 704              		.loc 1 670 0
+ 705 005e FB68     		ldr	r3, [r7, #12]
+ 706 0060 002B     		cmp	r3, #0
+ 707 0062 02D1     		bne	.L44
+ 671:../Dave/Generated/src/ETH002/EthernetPHY.c ****   {
+ 672:../Dave/Generated/src/ETH002/EthernetPHY.c ****   	 IsAutoNegoComplete = TRUE;
+ 708              		.loc 1 672 0
+ 709 0064 4FF00103 		mov	r3, #1
+ 710 0068 FB72     		strb	r3, [r7, #11]
+ 711              	.L44:
+ 673:../Dave/Generated/src/ETH002/EthernetPHY.c ****   }
+ 674:../Dave/Generated/src/ETH002/EthernetPHY.c ****   return IsAutoNegoComplete;
+ 712              		.loc 1 674 0
+ 713 006a FB7A     		ldrb	r3, [r7, #11]	@ zero_extendqisi2
+ 675:../Dave/Generated/src/ETH002/EthernetPHY.c **** }
+ 714              		.loc 1 675 0
+ 715 006c 1846     		mov	r0, r3
+ 716 006e 07F11007 		add	r7, r7, #16
+ 717 0072 BD46     		mov	sp, r7
+ 718 0074 80BD     		pop	{r7, pc}
+ 719              		.cfi_endproc
+ 720              	.LFE118:
+ 722 0076 00BF     		.section	.text.PHY_RegisterTimerCallback,"ax",%progbits
+ 723              		.align	2
+ 724              		.global	PHY_RegisterTimerCallback
+ 725              		.thumb
+ 726              		.thumb_func
+ 728              	PHY_RegisterTimerCallback:
+ 729              	.LFB119:
+ 676:../Dave/Generated/src/ETH002/EthernetPHY.c **** #endif
+ 677:../Dave/Generated/src/ETH002/EthernetPHY.c **** 
+ 678:../Dave/Generated/src/ETH002/EthernetPHY.c **** 
+ 679:../Dave/Generated/src/ETH002/EthernetPHY.c **** /**
+ 680:../Dave/Generated/src/ETH002/EthernetPHY.c ****  * This function is a timer call back function
+ 681:../Dave/Generated/src/ETH002/EthernetPHY.c ****  *
+ 682:../Dave/Generated/src/ETH002/EthernetPHY.c ****  */
+ 683:../Dave/Generated/src/ETH002/EthernetPHY.c **** void PHY_RegisterTimerCallback(PHYTimerCallbackType Callback)
+ 684:../Dave/Generated/src/ETH002/EthernetPHY.c **** {
+ 730              		.loc 1 684 0
+ 731              		.cfi_startproc
+ 732              		@ args = 0, pretend = 0, frame = 8
+ 733              		@ frame_needed = 1, uses_anonymous_args = 0
+ 734              		@ link register save eliminated.
+ 735 0000 80B4     		push	{r7}
+ 736              	.LCFI21:
+ 737              		.cfi_def_cfa_offset 4
+ 738              		.cfi_offset 7, -4
+ 739 0002 83B0     		sub	sp, sp, #12
+ 740              	.LCFI22:
+ 741              		.cfi_def_cfa_offset 16
+ 742 0004 00AF     		add	r7, sp, #0
+ 743              	.LCFI23:
+ 744              		.cfi_def_cfa_register 7
+ 745 0006 7860     		str	r0, [r7, #4]
+ 685:../Dave/Generated/src/ETH002/EthernetPHY.c **** 	PHYtimerCallback = Callback;
+ 746              		.loc 1 685 0
+ 747 0008 40F20003 		movw	r3, #:lower16:PHYtimerCallback
+ 748 000c C0F20003 		movt	r3, #:upper16:PHYtimerCallback
+ 749 0010 7A68     		ldr	r2, [r7, #4]
+ 750 0012 1A60     		str	r2, [r3, #0]
+ 686:../Dave/Generated/src/ETH002/EthernetPHY.c **** }
+ 751              		.loc 1 686 0
+ 752 0014 07F10C07 		add	r7, r7, #12
+ 753 0018 BD46     		mov	sp, r7
+ 754 001a 80BC     		pop	{r7}
+ 755 001c 7047     		bx	lr
+ 756              		.cfi_endproc
+ 757              	.LFE119:
+ 759 001e 00BF     		.text
+ 760              	.Letext0:
+ 761              		.file 2 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
+ 762              		.file 3 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Infineon/XMC4500_series/Include/XMC4500.h"
+ 763              		.file 4 "C:\\DAVE3_workspace\\ws3.1.10\\XMC4500_RK_HTTPserver\\XMC4500_RK_HTTPserver\\Dave\\Genera
+ 764              		.file 5 "C:\\DAVE3_workspace\\ws3.1.10\\XMC4500_RK_HTTPserver\\XMC4500_RK_HTTPserver\\Dave\\Genera
+ 765              		.file 6 "C:\\DAVE3_workspace\\ws3.1.10\\XMC4500_RK_HTTPserver\\XMC4500_RK_HTTPserver\\Dave\\Genera
+ 766              		.file 7 "C:\\DAVE3_workspace\\ws3.1.10\\XMC4500_RK_HTTPserver\\XMC4500_RK_HTTPserver\\Dave\\Genera
+ 767              		.file 8 "C:\\DAVE3_workspace\\ws3.1.10\\XMC4500_RK_HTTPserver\\XMC4500_RK_HTTPserver\\Dave\\Genera
+ 768              		.file 9 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Include/core_cm4.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 EthernetPHY.c
+                            *COM*:00000004 PHYtimerCallback
+C:\Users\Mihai\AppData\Local\Temp\cc5EHCHM.s:21     .text.PHY_InitializeDevice:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc5EHCHM.s:26     .text.PHY_InitializeDevice:00000000 PHY_InitializeDevice
+C:\Users\Mihai\AppData\Local\Temp\cc5EHCHM.s:410    .text.PHY_lResetPHY:00000000 PHY_lResetPHY
+C:\Users\Mihai\AppData\Local\Temp\cc5EHCHM.s:503    .text.PHY_lPerformLinkNegotiation:00000000 PHY_lPerformLinkNegotiation
+C:\Users\Mihai\AppData\Local\Temp\cc5EHCHM.s:101    .text.PHY_IsLinkUP:00000000 PHY_IsLinkUP
+C:\Users\Mihai\AppData\Local\Temp\cc5EHCHM.s:96     .text.PHY_IsLinkUP:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc5EHCHM.s:176    .text.PHY_lReadReg:00000000 PHY_lReadReg
+C:\Users\Mihai\AppData\Local\Temp\cc5EHCHM.s:172    .text.PHY_lReadReg:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc5EHCHM.s:289    .text.PHY_lWriteReg:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc5EHCHM.s:293    .text.PHY_lWriteReg:00000000 PHY_lWriteReg
+C:\Users\Mihai\AppData\Local\Temp\cc5EHCHM.s:406    .text.PHY_lResetPHY:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc5EHCHM.s:499    .text.PHY_lPerformLinkNegotiation:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc5EHCHM.s:636    .text.PHY_lIsAutoNegoComplete:00000000 PHY_lIsAutoNegoComplete
+C:\Users\Mihai\AppData\Local\Temp\cc5EHCHM.s:632    .text.PHY_lIsAutoNegoComplete:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc5EHCHM.s:723    .text.PHY_RegisterTimerCallback:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc5EHCHM.s:728    .text.PHY_RegisterTimerCallback:00000000 PHY_RegisterTimerCallback
+                     .debug_frame:00000010 $d
+                           .group:00000000 wm4.1.1791a5ae2e936ca1033c1c44be394cc7
+                           .group:00000000 wm4.XMC4500.h.45.215f4b8c79f46c7645c15373868d08c0
+                           .group:00000000 wm4.core_cm4.h.47.41af406cb4cda82c972f112a9cd0a024
+                           .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
+                           .group:00000000 wm4.features.h.22.b72b3baab2bb2eab3661375590100b6b
+                           .group:00000000 wm4.config.h.193.5fb8ef056cdff92dec3dee9552839d8c
+                           .group:00000000 wm4._ansi.h.23.7aefdac4826acebbfc9f3822a0aeb14c
+                           .group:00000000 wm4.stdint.h.20.54ad762faa59e3c05491630641c8d8bf
+                           .group:00000000 wm4.core_cmInstr.h.39.3d3d1b4a79aef37532666dc6ee87c6ac
+                           .group:00000000 wm4.core_cm4_simd.h.43.b5d1d38735af6366227b4256d330cf13
+                           .group:00000000 wm4.core_cm4.h.178.e5ef5ce66d198d7f00f9d0076e267c41
+                           .group:00000000 wm4.system_XMC4500.h.29.827f68baa362c84f2abae4ab67dde7c9
+                           .group:00000000 wm4.XMC4500.h.198.8e022f279ff353ed081df898dc7b9cf3
+                           .group:00000000 wm4.stddef.h.40.50cf36416e06376af8a9dca28536f2e4
+                           .group:00000000 wm4.types.h.55.0006b5fda1d606516f2dcaf4aca92b11
+                           .group:00000000 wm4.MULTIPLEXER.h.43.4aa654be3ec80895f631b5281bbb9105
+                           .group:00000000 wm4.CCU8PWMLIB.h.70.a5d6a5267902b8b4aea2a0224518259a
+                           .group:00000000 wm4.DBG001.h.116.d6d9e7459a0faa3905c97c1d2edb339d
+                           .group:00000000 wm4.SYSTM001.h.63.668098b2213d40a5bd0db5fbe813cf05
+                           .group:00000000 wm4.ETH002_Conf.h.56.5bd2b085b66f43d51abd69396be7f35f
+                           .group:00000000 wm4.EthernetPHY.h.54.7af1709186b21e62a5f1d4049da3988b
+                           .group:00000000 wm4.ETH001_Conf.h.71.1e151af1ba54dd023e1f942bdf922819
+                           .group:00000000 wm4.synopGMAC_plat.h.78.7a90e072b497857344aea4ba1e994097
+                           .group:00000000 wm4.synopGMAC_stack_interface.h.73.6be6aaee0ac6637432f4d0589044479b
+                           .group:00000000 wm4.SynopGMAC_Dev.h.72.7c89c07cf666d37f5c9b615720d5e111
+                           .group:00000000 wm4.synopGMAC_network_interface.h.73.4dd08316a11bc43c8c4a9da15277fb0f
+                           .group:00000000 wm4.stdlib.h.13.603ed7eb09a1561ab06840b7c0fcff58
+                           .group:00000000 wm4.stddef.h.161.e50ff8a9d5d1abbc15641da28ac571bf
+                           .group:00000000 wm4._default_types.h.6.5e12cd604db8ce00b62bb2f02708eaf3
+                           .group:00000000 wm4.lock.h.2.9bc98482741e5e2a9450b12934a684ea
+                           .group:00000000 wm4.stddef.h.161.c6104a0666cf681b6269ddc9b4f516d4
+                           .group:00000000 wm4.reent.h.16.9e42f0e588b85e70b2bf6572af57ce64
+                           .group:00000000 wm4.alloca.h.8.dfc0c703c47ec3e69746825b17d9e66d
+                           .group:00000000 wm4.stdlib.h.53.c69c7609933ff56d59c757cec2d13230
+                           .group:00000000 wm4.string.h.8.ef946ad0bc9ad5c970c365dcd1fc4b0a
+                           .group:00000000 wm4.string.h.86.d5c872ff52e2712c985b588a0ef39f3c
+                           .group:00000000 wm4.ETH004_Conf.h.56.564c3f309c32b3c742fc91049cf66940
+                           .group:00000000 wm4.lwipopts.h.73.a7a63bda1e8216abd1d90275eaaa0027
+                           .group:00000000 wm4.arch.h.33.6fa4aa86d33d1490ae882caef7316405
+                           .group:00000000 wm4.cpu.h.33.b213c7fd77614ebc3691cef18ad2ff22
+                           .group:00000000 wm4.cc.h.66.ec134211c658dcc89de4610e4e7bab46
+                           .group:00000000 wm4.arch.h.47.5153c52bfb94ee3b37299920afab6afd
+                           .group:00000000 wm4.debug.h.43.557ecd6c90cc70b375bb8a29118be47b
+                           .group:00000000 wm4.opt.h.94.d36882acafebb8726bce646fc8b2397b
+                           .group:00000000 wm4.err.h.52.37c5d17538f8e8347a9c84196701e92d
+                           .group:00000000 wm4.pbuf.h.43.e9a1ad12b97478787a109e22d5306820
+                           .group:00000000 wm4.inet.h.46.b516065779826845d16d49f513869a2b
+                           .group:00000000 wm4.ip_addr.h.79.9a0ce887ca8c88c22ad7686bcb5105df
+                           .group:00000000 wm4.sys.h.65.4a0cd87b9e0d8bb4cd6b30e939b2ca7e
+                           .group:00000000 wm4.mem.h.96.20770766e6c9e6c42af6bfa95ef5c63f
+                           .group:00000000 wm4.def.h.33.049f911dab26023a266ed46ced0ce4bc
+                           .group:00000000 wm4.netif.h.53.c13431a64f0e73a26710e71455725e84
+                           .group:00000000 wm4.ip.h.48.ad46847692d4d729760949b27e48a442
+                           .group:00000000 wm4.icmp.h.44.450dbf91f594cc26ad19d086cdc83713
+                           .group:00000000 wm4.tcp.h.55.5c30b9432fa60afaa85cbdd225b0c683
+                           .group:00000000 wm4.udp.h.48.1a8dde095cd0a13580afaba1443e5a3f
+                           .group:00000000 wm4.SDMMC003_Conf.h.50.e707c07613fb4e6f2eaec982a892429d
+                           .group:00000000 wm4.SDMMC003.h.85.b66055f6032a052f5173e3d123f9c61e
+                           .group:00000000 wm4.SDMMC001.h.50.3e2fedc7e5ace33db4121d5cc027e8a4
+                           .group:00000000 wm4.types.h.23.0d949686bbcadd1621462d4fa1f884f9
+                           .group:00000000 wm4.types.h.2.e9cec8c90ab35f77d9f499e06ae02400
+                           .group:00000000 wm4.types.h.80.1f2c84c0d57dd52dd9936095d9ac218e
+                           .group:00000000 wm4.time.h.16.a4579e68956d2601c6113814b546764b
+                           .group:00000000 wm4.diskio.h.7.93a3c8131d08770c060b04d2180fd09a
+                           .group:00000000 wm4.diskio.h.42.a863614abe78d56d18ed7cb292d0028d
+                           .group:00000000 wm4.ffconf.h.57.4ab321a2116d35ff7f28236ac31fad7c
+                           .group:00000000 wm4.ff.h.82.8f05a37d35a49dba2681a7f047fee4ee
+                           .group:00000000 wm4.lmm001_debuglog.h.40.8031299705ecf04ad726bd19baff976d
+                           .group:00000000 wm4.LMM001.h.42.c21fe9cbedc336738c3dc89405cad216
+                           .group:00000000 wm4.stdio.h.27.f2ac352bab34f31f9f478442827b2ba6
+                           .group:00000000 wm4.stdarg.h.34.3a23a216c0c293b3d2ea2e89281481e6
+                           .group:00000000 wm4.stdio.h.2.4aa87247282eca6c8f36f9de33d8df1a
+                           .group:00000000 wm4.stdio.h.63.dfdea6580b080784d08faace69b6ed76
+                           .group:00000000 wm4.time.h.2.9857e62ad6ac99431e29d58067232314
+                           .group:00000000 wm4.time.h.24.c499d4c1915694df17abb795fd34b719
+                           .group:00000000 wm4.time.h.124.10ced469f846269cafc58b59c853e1bb
+                           .group:00000000 wm4.errno.h.2.ba016d646105af6cad23be83630b6a3f
+                           .group:00000000 wm4.errno.h.9.65044c2b5d8494e43f5986ab0a1d770f
+                           .group:00000000 wm4.unistd.h.2.6ce1b91c4223f6078c1b210c7538c1d2
+                           .group:00000000 wm4.unistd.h.251.605bc560cdc6c3b07b599bb71ac4e425
+                           .group:00000000 wm4.malloc.h.4.62bd13b8107d5245f60bd92bb5994838
+                           .group:00000000 wm4.malloc.h.148.73b7de3bd065dafbd594b04197a9466e
+                           .group:00000000 wm4.reent.h.91.faac4d0ac97c0fcf23d10d0786197642
+                           .group:00000000 wm4.SLTHA003.h.100.69cb08672bc6ab3f052aa9d5bd6dc5ca
+                           .group:00000000 wm4._default_fcntl.h.6.d036cf640d0f9a06bcff1be55acd66be
+                           .group:00000000 wm4.stat.h.2.a761b02482a54847ff0d09dfcff24a5c
+                           .group:00000000 wm4.fcntl.h.9.9336f33d7f5028f694c75e6e224e0cf7
+                           .group:00000000 wm4.SLTHA001.h.97.d7e87c19a31e3244bdd5839e7cc42a61
+                           .group:00000000 wm4.WEBSERVER001_Conf.h.54.cd6d29aaa96a848cbc5321bab5d6cd90
+                           .group:00000000 wm4.ADCGROUP001.h.48.081c7f952eb4b6ea2df7d05180ee1663
+                           .group:00000000 wm4.IO001.h.49.1da965fb490206cf7cde64a90f6912e1
+                           .group:00000000 wm4.MOTORLIBS.h.59.b2e97de0df555dedfa51e24447b57ab8
+                           .group:00000000 wm4.uc_id.h.35.a6c4837fad81477ba31967683332b8cc
+                           .group:00000000 wm4.Usic.h.90.22743468abc46f16747d12430b219aaf
+                           .group:00000000 wm4.UART001_Conf.h.53.c5c972f6f634bc5116c171852aaab668
+                           .group:00000000 wm4.UART001.h.109.3e835815a7a59791d8bd39655f4d4cc9
+
+NO UNDEFINED SYMBOLS

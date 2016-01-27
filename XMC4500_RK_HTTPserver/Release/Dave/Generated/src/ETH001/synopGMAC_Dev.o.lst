@@ -1,0 +1,3346 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"synopGMAC_Dev.c"
+  16              		.section	.text.synopGMAC_set_tx_address,"ax",%progbits
+  17              		.align	1
+  18              		.global	synopGMAC_set_tx_address
+  19              		.thumb
+  20              		.thumb_func
+  22              	synopGMAC_set_tx_address:
+  23              		@ args = 0, pretend = 0, frame = 0
+  24              		@ frame_needed = 0, uses_anonymous_args = 0
+  25              		@ link register save eliminated.
+  26 0000 8369     		ldr	r3, [r0, #24]
+  27 0002 2820     		movs	r0, #40
+  28 0004 00FB0131 		mla	r1, r0, r1, r3
+  29 0008 0020     		movs	r0, #0
+  30 000a 8A60     		str	r2, [r1, #8]
+  31 000c 0A62     		str	r2, [r1, #32]
+  32 000e C860     		str	r0, [r1, #12]
+  33 0010 4862     		str	r0, [r1, #36]
+  34 0012 7047     		bx	lr
+  36              		.section	.text.synopGMAC_RegisterOneShotTimerCallback,"ax",%progbits
+  37              		.align	1
+  38              		.global	synopGMAC_RegisterOneShotTimerCallback
+  39              		.thumb
+  40              		.thumb_func
+  42              	synopGMAC_RegisterOneShotTimerCallback:
+  43              		@ args = 0, pretend = 0, frame = 0
+  44              		@ frame_needed = 0, uses_anonymous_args = 0
+  45              		@ link register save eliminated.
+  46 0000 014B     		ldr	r3, .L3
+  47 0002 1860     		str	r0, [r3, #0]
+  48 0004 7047     		bx	lr
+  49              	.L4:
+  50 0006 00BF     		.align	2
+  51              	.L3:
+  52 0008 00000000 		.word	.LANCHOR0
+  54              		.section	.text.synopGMAC_set_mdc_clk_div,"ax",%progbits
+  55              		.align	1
+  56              		.global	synopGMAC_set_mdc_clk_div
+  57              		.thumb
+  58              		.thumb_func
+  60              	synopGMAC_set_mdc_clk_div:
+  61              		@ args = 0, pretend = 0, frame = 0
+  62              		@ frame_needed = 0, uses_anonymous_args = 0
+  63 0000 38B5     		push	{r3, r4, r5, lr}
+  64 0002 0446     		mov	r4, r0
+  65 0004 0D46     		mov	r5, r1
+  66 0006 0068     		ldr	r0, [r0, #0]
+  67 0008 1021     		movs	r1, #16
+  68 000a FFF7FEFF 		bl	synopGMACReadReg
+  69 000e 20F03C02 		bic	r2, r0, #60
+  70 0012 1021     		movs	r1, #16
+  71 0014 2068     		ldr	r0, [r4, #0]
+  72 0016 2A43     		orrs	r2, r2, r5
+  73 0018 FFF7FEFF 		bl	synopGMACWriteReg
+  74 001c 0020     		movs	r0, #0
+  75 001e 38BD     		pop	{r3, r4, r5, pc}
+  77              		.section	.text.synopGMAC_get_mdc_clk_div,"ax",%progbits
+  78              		.align	1
+  79              		.global	synopGMAC_get_mdc_clk_div
+  80              		.thumb
+  81              		.thumb_func
+  83              	synopGMAC_get_mdc_clk_div:
+  84              		@ args = 0, pretend = 0, frame = 0
+  85              		@ frame_needed = 0, uses_anonymous_args = 0
+  86 0000 08B5     		push	{r3, lr}
+  87 0002 1021     		movs	r1, #16
+  88 0004 0068     		ldr	r0, [r0, #0]
+  89 0006 FFF7FEFF 		bl	synopGMACReadReg
+  90 000a 00F03C00 		and	r0, r0, #60
+  91 000e 08BD     		pop	{r3, pc}
+  93              		.section	.text.synopGMAC_read_version,"ax",%progbits
+  94              		.align	1
+  95              		.global	synopGMAC_read_version
+  96              		.thumb
+  97              		.thumb_func
+  99              	synopGMAC_read_version:
+ 100              		@ args = 0, pretend = 0, frame = 0
+ 101              		@ frame_needed = 0, uses_anonymous_args = 0
+ 102 0000 10B5     		push	{r4, lr}
+ 103 0002 2021     		movs	r1, #32
+ 104 0004 0446     		mov	r4, r0
+ 105 0006 0068     		ldr	r0, [r0, #0]
+ 106 0008 FFF7FEFF 		bl	synopGMACReadReg
+ 107 000c E060     		str	r0, [r4, #12]
+ 108 000e 0020     		movs	r0, #0
+ 109 0010 10BD     		pop	{r4, pc}
+ 111              		.section	.text.synopGMAC_rmii_100mbps_enable,"ax",%progbits
+ 112              		.align	1
+ 113              		.global	synopGMAC_rmii_100mbps_enable
+ 114              		.thumb
+ 115              		.thumb_func
+ 117              	synopGMAC_rmii_100mbps_enable:
+ 118              		@ args = 0, pretend = 0, frame = 0
+ 119              		@ frame_needed = 0, uses_anonymous_args = 0
+ 120              		@ link register save eliminated.
+ 121 0000 0068     		ldr	r0, [r0, #0]
+ 122 0002 0021     		movs	r1, #0
+ 123 0004 4FF48042 		mov	r2, #16384
+ 124 0008 FFF7FEBF 		b	synopGMACSetBits
+ 126              		.section	.text.synopGMAC_reset,"ax",%progbits
+ 127              		.align	1
+ 128              		.global	synopGMAC_reset
+ 129              		.thumb
+ 130              		.thumb_func
+ 132              	synopGMAC_reset:
+ 133              		@ args = 0, pretend = 0, frame = 0
+ 134              		@ frame_needed = 0, uses_anonymous_args = 0
+ 135 0000 10B5     		push	{r4, lr}
+ 136 0002 0021     		movs	r1, #0
+ 137 0004 0446     		mov	r4, r0
+ 138 0006 0122     		movs	r2, #1
+ 139 0008 4068     		ldr	r0, [r0, #4]
+ 140 000a FFF7FEFF 		bl	synopGMACWriteReg
+ 141 000e 064B     		ldr	r3, .L18
+ 142 0010 1968     		ldr	r1, [r3, #0]
+ 143 0012 09B1     		cbz	r1, .L14
+ 144 0014 0120     		movs	r0, #1
+ 145 0016 8847     		blx	r1
+ 146              	.L14:
+ 147 0018 0021     		movs	r1, #0
+ 148 001a 6068     		ldr	r0, [r4, #4]
+ 149 001c FFF7FEFF 		bl	synopGMACReadReg
+ 150 0020 10F00100 		ands	r0, r0, #1
+ 151 0024 F8D1     		bne	.L14
+ 152 0026 10BD     		pop	{r4, pc}
+ 153              	.L19:
+ 154              		.align	2
+ 155              	.L18:
+ 156 0028 00000000 		.word	.LANCHOR0
+ 158              		.section	.text.synopGMAC_dma_bus_mode_init,"ax",%progbits
+ 159              		.align	1
+ 160              		.global	synopGMAC_dma_bus_mode_init
+ 161              		.thumb
+ 162              		.thumb_func
+ 164              	synopGMAC_dma_bus_mode_init:
+ 165              		@ args = 0, pretend = 0, frame = 0
+ 166              		@ frame_needed = 0, uses_anonymous_args = 0
+ 167 0000 0A46     		mov	r2, r1
+ 168 0002 08B5     		push	{r3, lr}
+ 169 0004 4068     		ldr	r0, [r0, #4]
+ 170 0006 0021     		movs	r1, #0
+ 171 0008 FFF7FEFF 		bl	synopGMACWriteReg
+ 172 000c 0020     		movs	r0, #0
+ 173 000e 08BD     		pop	{r3, pc}
+ 175              		.section	.text.synopGMAC_dma_control_init,"ax",%progbits
+ 176              		.align	1
+ 177              		.global	synopGMAC_dma_control_init
+ 178              		.thumb
+ 179              		.thumb_func
+ 181              	synopGMAC_dma_control_init:
+ 182              		@ args = 0, pretend = 0, frame = 0
+ 183              		@ frame_needed = 0, uses_anonymous_args = 0
+ 184 0000 0A46     		mov	r2, r1
+ 185 0002 08B5     		push	{r3, lr}
+ 186 0004 4068     		ldr	r0, [r0, #4]
+ 187 0006 1821     		movs	r1, #24
+ 188 0008 FFF7FEFF 		bl	synopGMACWriteReg
+ 189 000c 0020     		movs	r0, #0
+ 190 000e 08BD     		pop	{r3, pc}
+ 192              		.section	.text.synopGMAC_wd_enable,"ax",%progbits
+ 193              		.align	1
+ 194              		.global	synopGMAC_wd_enable
+ 195              		.thumb
+ 196              		.thumb_func
+ 198              	synopGMAC_wd_enable:
+ 199              		@ args = 0, pretend = 0, frame = 0
+ 200              		@ frame_needed = 0, uses_anonymous_args = 0
+ 201              		@ link register save eliminated.
+ 202 0000 0068     		ldr	r0, [r0, #0]
+ 203 0002 0021     		movs	r1, #0
+ 204 0004 4FF40002 		mov	r2, #8388608
+ 205 0008 FFF7FEBF 		b	synopGMACClearBits
+ 207              		.section	.text.synopGMAC_wd_disable,"ax",%progbits
+ 208              		.align	1
+ 209              		.global	synopGMAC_wd_disable
+ 210              		.thumb
+ 211              		.thumb_func
+ 213              	synopGMAC_wd_disable:
+ 214              		@ args = 0, pretend = 0, frame = 0
+ 215              		@ frame_needed = 0, uses_anonymous_args = 0
+ 216              		@ link register save eliminated.
+ 217 0000 0068     		ldr	r0, [r0, #0]
+ 218 0002 0021     		movs	r1, #0
+ 219 0004 4FF40002 		mov	r2, #8388608
+ 220 0008 FFF7FEBF 		b	synopGMACSetBits
+ 222              		.section	.text.synopGMAC_jab_enable,"ax",%progbits
+ 223              		.align	1
+ 224              		.global	synopGMAC_jab_enable
+ 225              		.thumb
+ 226              		.thumb_func
+ 228              	synopGMAC_jab_enable:
+ 229              		@ args = 0, pretend = 0, frame = 0
+ 230              		@ frame_needed = 0, uses_anonymous_args = 0
+ 231              		@ link register save eliminated.
+ 232 0000 0068     		ldr	r0, [r0, #0]
+ 233 0002 0021     		movs	r1, #0
+ 234 0004 4FF48002 		mov	r2, #4194304
+ 235 0008 FFF7FEBF 		b	synopGMACSetBits
+ 237              		.section	.text.synopGMAC_jab_disable,"ax",%progbits
+ 238              		.align	1
+ 239              		.global	synopGMAC_jab_disable
+ 240              		.thumb
+ 241              		.thumb_func
+ 243              	synopGMAC_jab_disable:
+ 244              		@ args = 0, pretend = 0, frame = 0
+ 245              		@ frame_needed = 0, uses_anonymous_args = 0
+ 246              		@ link register save eliminated.
+ 247 0000 0068     		ldr	r0, [r0, #0]
+ 248 0002 0021     		movs	r1, #0
+ 249 0004 4FF48002 		mov	r2, #4194304
+ 250 0008 FFF7FEBF 		b	synopGMACClearBits
+ 252              		.section	.text.synopGMAC_frame_burst_enable,"ax",%progbits
+ 253              		.align	1
+ 254              		.global	synopGMAC_frame_burst_enable
+ 255              		.thumb
+ 256              		.thumb_func
+ 258              	synopGMAC_frame_burst_enable:
+ 259              		@ args = 0, pretend = 0, frame = 0
+ 260              		@ frame_needed = 0, uses_anonymous_args = 0
+ 261              		@ link register save eliminated.
+ 262 0000 0068     		ldr	r0, [r0, #0]
+ 263 0002 0021     		movs	r1, #0
+ 264 0004 4FF40012 		mov	r2, #2097152
+ 265 0008 FFF7FEBF 		b	synopGMACSetBits
+ 267              		.section	.text.synopGMAC_frame_burst_disable,"ax",%progbits
+ 268              		.align	1
+ 269              		.global	synopGMAC_frame_burst_disable
+ 270              		.thumb
+ 271              		.thumb_func
+ 273              	synopGMAC_frame_burst_disable:
+ 274              		@ args = 0, pretend = 0, frame = 0
+ 275              		@ frame_needed = 0, uses_anonymous_args = 0
+ 276              		@ link register save eliminated.
+ 277 0000 0068     		ldr	r0, [r0, #0]
+ 278 0002 0021     		movs	r1, #0
+ 279 0004 4FF40012 		mov	r2, #2097152
+ 280 0008 FFF7FEBF 		b	synopGMACClearBits
+ 282              		.section	.text.synopGMAC_jumbo_frame_enable,"ax",%progbits
+ 283              		.align	1
+ 284              		.global	synopGMAC_jumbo_frame_enable
+ 285              		.thumb
+ 286              		.thumb_func
+ 288              	synopGMAC_jumbo_frame_enable:
+ 289              		@ args = 0, pretend = 0, frame = 0
+ 290              		@ frame_needed = 0, uses_anonymous_args = 0
+ 291              		@ link register save eliminated.
+ 292 0000 0068     		ldr	r0, [r0, #0]
+ 293 0002 0021     		movs	r1, #0
+ 294 0004 4FF48012 		mov	r2, #1048576
+ 295 0008 FFF7FEBF 		b	synopGMACSetBits
+ 297              		.section	.text.synopGMAC_jumbo_frame_disable,"ax",%progbits
+ 298              		.align	1
+ 299              		.global	synopGMAC_jumbo_frame_disable
+ 300              		.thumb
+ 301              		.thumb_func
+ 303              	synopGMAC_jumbo_frame_disable:
+ 304              		@ args = 0, pretend = 0, frame = 0
+ 305              		@ frame_needed = 0, uses_anonymous_args = 0
+ 306              		@ link register save eliminated.
+ 307 0000 0068     		ldr	r0, [r0, #0]
+ 308 0002 0021     		movs	r1, #0
+ 309 0004 4FF48012 		mov	r2, #1048576
+ 310 0008 FFF7FEBF 		b	synopGMACClearBits
+ 312              		.section	.text.synopGMAC_disable_crs,"ax",%progbits
+ 313              		.align	1
+ 314              		.global	synopGMAC_disable_crs
+ 315              		.thumb
+ 316              		.thumb_func
+ 318              	synopGMAC_disable_crs:
+ 319              		@ args = 0, pretend = 0, frame = 0
+ 320              		@ frame_needed = 0, uses_anonymous_args = 0
+ 321              		@ link register save eliminated.
+ 322 0000 0068     		ldr	r0, [r0, #0]
+ 323 0002 0021     		movs	r1, #0
+ 324 0004 4FF48032 		mov	r2, #65536
+ 325 0008 FFF7FEBF 		b	synopGMACSetBits
+ 327              		.section	.text.synopGMAC_select_gmii,"ax",%progbits
+ 328              		.align	1
+ 329              		.global	synopGMAC_select_gmii
+ 330              		.thumb
+ 331              		.thumb_func
+ 333              	synopGMAC_select_gmii:
+ 334              		@ args = 0, pretend = 0, frame = 0
+ 335              		@ frame_needed = 0, uses_anonymous_args = 0
+ 336              		@ link register save eliminated.
+ 337 0000 0068     		ldr	r0, [r0, #0]
+ 338 0002 0021     		movs	r1, #0
+ 339 0004 4FF40042 		mov	r2, #32768
+ 340 0008 FFF7FEBF 		b	synopGMACClearBits
+ 342              		.section	.text.synopGMAC_select_mii,"ax",%progbits
+ 343              		.align	1
+ 344              		.global	synopGMAC_select_mii
+ 345              		.thumb
+ 346              		.thumb_func
+ 348              	synopGMAC_select_mii:
+ 349              		@ args = 0, pretend = 0, frame = 0
+ 350              		@ frame_needed = 0, uses_anonymous_args = 0
+ 351              		@ link register save eliminated.
+ 352 0000 0068     		ldr	r0, [r0, #0]
+ 353 0002 0021     		movs	r1, #0
+ 354 0004 4FF40042 		mov	r2, #32768
+ 355 0008 FFF7FEBF 		b	synopGMACSetBits
+ 357              		.section	.text.synopGMAC_rx_own_enable,"ax",%progbits
+ 358              		.align	1
+ 359              		.global	synopGMAC_rx_own_enable
+ 360              		.thumb
+ 361              		.thumb_func
+ 363              	synopGMAC_rx_own_enable:
+ 364              		@ args = 0, pretend = 0, frame = 0
+ 365              		@ frame_needed = 0, uses_anonymous_args = 0
+ 366              		@ link register save eliminated.
+ 367 0000 0068     		ldr	r0, [r0, #0]
+ 368 0002 0021     		movs	r1, #0
+ 369 0004 4FF40052 		mov	r2, #8192
+ 370 0008 FFF7FEBF 		b	synopGMACClearBits
+ 372              		.section	.text.synopGMAC_rx_own_disable,"ax",%progbits
+ 373              		.align	1
+ 374              		.global	synopGMAC_rx_own_disable
+ 375              		.thumb
+ 376              		.thumb_func
+ 378              	synopGMAC_rx_own_disable:
+ 379              		@ args = 0, pretend = 0, frame = 0
+ 380              		@ frame_needed = 0, uses_anonymous_args = 0
+ 381              		@ link register save eliminated.
+ 382 0000 0068     		ldr	r0, [r0, #0]
+ 383 0002 0021     		movs	r1, #0
+ 384 0004 4FF40052 		mov	r2, #8192
+ 385 0008 FFF7FEBF 		b	synopGMACSetBits
+ 387              		.section	.text.synopGMAC_loopback_on,"ax",%progbits
+ 388              		.align	1
+ 389              		.global	synopGMAC_loopback_on
+ 390              		.thumb
+ 391              		.thumb_func
+ 393              	synopGMAC_loopback_on:
+ 394              		@ args = 0, pretend = 0, frame = 0
+ 395              		@ frame_needed = 0, uses_anonymous_args = 0
+ 396              		@ link register save eliminated.
+ 397 0000 0068     		ldr	r0, [r0, #0]
+ 398 0002 0021     		movs	r1, #0
+ 399 0004 4FF48052 		mov	r2, #4096
+ 400 0008 FFF7FEBF 		b	synopGMACSetBits
+ 402              		.section	.text.synopGMAC_loopback_off,"ax",%progbits
+ 403              		.align	1
+ 404              		.global	synopGMAC_loopback_off
+ 405              		.thumb
+ 406              		.thumb_func
+ 408              	synopGMAC_loopback_off:
+ 409              		@ args = 0, pretend = 0, frame = 0
+ 410              		@ frame_needed = 0, uses_anonymous_args = 0
+ 411              		@ link register save eliminated.
+ 412 0000 0068     		ldr	r0, [r0, #0]
+ 413 0002 0021     		movs	r1, #0
+ 414 0004 4FF48052 		mov	r2, #4096
+ 415 0008 FFF7FEBF 		b	synopGMACClearBits
+ 417              		.section	.text.synopGMAC_set_full_duplex,"ax",%progbits
+ 418              		.align	1
+ 419              		.global	synopGMAC_set_full_duplex
+ 420              		.thumb
+ 421              		.thumb_func
+ 423              	synopGMAC_set_full_duplex:
+ 424              		@ args = 0, pretend = 0, frame = 0
+ 425              		@ frame_needed = 0, uses_anonymous_args = 0
+ 426              		@ link register save eliminated.
+ 427 0000 0068     		ldr	r0, [r0, #0]
+ 428 0002 0021     		movs	r1, #0
+ 429 0004 4FF40062 		mov	r2, #2048
+ 430 0008 FFF7FEBF 		b	synopGMACSetBits
+ 432              		.section	.text.synopGMAC_set_half_duplex,"ax",%progbits
+ 433              		.align	1
+ 434              		.global	synopGMAC_set_half_duplex
+ 435              		.thumb
+ 436              		.thumb_func
+ 438              	synopGMAC_set_half_duplex:
+ 439              		@ args = 0, pretend = 0, frame = 0
+ 440              		@ frame_needed = 0, uses_anonymous_args = 0
+ 441              		@ link register save eliminated.
+ 442 0000 0068     		ldr	r0, [r0, #0]
+ 443 0002 0021     		movs	r1, #0
+ 444 0004 4FF40062 		mov	r2, #2048
+ 445 0008 FFF7FEBF 		b	synopGMACClearBits
+ 447              		.section	.text.synopGMAC_retry_enable,"ax",%progbits
+ 448              		.align	1
+ 449              		.global	synopGMAC_retry_enable
+ 450              		.thumb
+ 451              		.thumb_func
+ 453              	synopGMAC_retry_enable:
+ 454              		@ args = 0, pretend = 0, frame = 0
+ 455              		@ frame_needed = 0, uses_anonymous_args = 0
+ 456              		@ link register save eliminated.
+ 457 0000 0068     		ldr	r0, [r0, #0]
+ 458 0002 0021     		movs	r1, #0
+ 459 0004 4FF40072 		mov	r2, #512
+ 460 0008 FFF7FEBF 		b	synopGMACClearBits
+ 462              		.section	.text.synopGMAC_retry_disable,"ax",%progbits
+ 463              		.align	1
+ 464              		.global	synopGMAC_retry_disable
+ 465              		.thumb
+ 466              		.thumb_func
+ 468              	synopGMAC_retry_disable:
+ 469              		@ args = 0, pretend = 0, frame = 0
+ 470              		@ frame_needed = 0, uses_anonymous_args = 0
+ 471              		@ link register save eliminated.
+ 472 0000 0068     		ldr	r0, [r0, #0]
+ 473 0002 0021     		movs	r1, #0
+ 474 0004 4FF40072 		mov	r2, #512
+ 475 0008 FFF7FEBF 		b	synopGMACSetBits
+ 477              		.section	.text.synopGMAC_pad_crc_strip_enable,"ax",%progbits
+ 478              		.align	1
+ 479              		.global	synopGMAC_pad_crc_strip_enable
+ 480              		.thumb
+ 481              		.thumb_func
+ 483              	synopGMAC_pad_crc_strip_enable:
+ 484              		@ args = 0, pretend = 0, frame = 0
+ 485              		@ frame_needed = 0, uses_anonymous_args = 0
+ 486              		@ link register save eliminated.
+ 487 0000 0068     		ldr	r0, [r0, #0]
+ 488 0002 0021     		movs	r1, #0
+ 489 0004 8022     		movs	r2, #128
+ 490 0006 FFF7FEBF 		b	synopGMACSetBits
+ 492              		.section	.text.synopGMAC_pad_crc_strip_disable,"ax",%progbits
+ 493              		.align	1
+ 494              		.global	synopGMAC_pad_crc_strip_disable
+ 495              		.thumb
+ 496              		.thumb_func
+ 498              	synopGMAC_pad_crc_strip_disable:
+ 499              		@ args = 0, pretend = 0, frame = 0
+ 500              		@ frame_needed = 0, uses_anonymous_args = 0
+ 501              		@ link register save eliminated.
+ 502 0000 0068     		ldr	r0, [r0, #0]
+ 503 0002 0021     		movs	r1, #0
+ 504 0004 8022     		movs	r2, #128
+ 505 0006 FFF7FEBF 		b	synopGMACClearBits
+ 507              		.section	.text.synopGMAC_back_off_limit,"ax",%progbits
+ 508              		.align	1
+ 509              		.global	synopGMAC_back_off_limit
+ 510              		.thumb
+ 511              		.thumb_func
+ 513              	synopGMAC_back_off_limit:
+ 514              		@ args = 0, pretend = 0, frame = 0
+ 515              		@ frame_needed = 0, uses_anonymous_args = 0
+ 516 0000 38B5     		push	{r3, r4, r5, lr}
+ 517 0002 0446     		mov	r4, r0
+ 518 0004 0D46     		mov	r5, r1
+ 519 0006 0068     		ldr	r0, [r0, #0]
+ 520 0008 0021     		movs	r1, #0
+ 521 000a FFF7FEFF 		bl	synopGMACReadReg
+ 522 000e 20F06002 		bic	r2, r0, #96
+ 523 0012 2068     		ldr	r0, [r4, #0]
+ 524 0014 0021     		movs	r1, #0
+ 525 0016 2A43     		orrs	r2, r2, r5
+ 526 0018 BDE83840 		pop	{r3, r4, r5, lr}
+ 527 001c FFF7FEBF 		b	synopGMACWriteReg
+ 529              		.section	.text.synopGMAC_deferral_check_enable,"ax",%progbits
+ 530              		.align	1
+ 531              		.global	synopGMAC_deferral_check_enable
+ 532              		.thumb
+ 533              		.thumb_func
+ 535              	synopGMAC_deferral_check_enable:
+ 536              		@ args = 0, pretend = 0, frame = 0
+ 537              		@ frame_needed = 0, uses_anonymous_args = 0
+ 538              		@ link register save eliminated.
+ 539 0000 0068     		ldr	r0, [r0, #0]
+ 540 0002 0021     		movs	r1, #0
+ 541 0004 1022     		movs	r2, #16
+ 542 0006 FFF7FEBF 		b	synopGMACSetBits
+ 544              		.section	.text.synopGMAC_deferral_check_disable,"ax",%progbits
+ 545              		.align	1
+ 546              		.global	synopGMAC_deferral_check_disable
+ 547              		.thumb
+ 548              		.thumb_func
+ 550              	synopGMAC_deferral_check_disable:
+ 551              		@ args = 0, pretend = 0, frame = 0
+ 552              		@ frame_needed = 0, uses_anonymous_args = 0
+ 553              		@ link register save eliminated.
+ 554 0000 0068     		ldr	r0, [r0, #0]
+ 555 0002 0021     		movs	r1, #0
+ 556 0004 1022     		movs	r2, #16
+ 557 0006 FFF7FEBF 		b	synopGMACClearBits
+ 559              		.section	.text.synopGMAC_rx_enable,"ax",%progbits
+ 560              		.align	1
+ 561              		.global	synopGMAC_rx_enable
+ 562              		.thumb
+ 563              		.thumb_func
+ 565              	synopGMAC_rx_enable:
+ 566              		@ args = 0, pretend = 0, frame = 0
+ 567              		@ frame_needed = 0, uses_anonymous_args = 0
+ 568              		@ link register save eliminated.
+ 569 0000 0068     		ldr	r0, [r0, #0]
+ 570 0002 0021     		movs	r1, #0
+ 571 0004 0422     		movs	r2, #4
+ 572 0006 FFF7FEBF 		b	synopGMACSetBits
+ 574              		.section	.text.synopGMAC_rx_disable,"ax",%progbits
+ 575              		.align	1
+ 576              		.global	synopGMAC_rx_disable
+ 577              		.thumb
+ 578              		.thumb_func
+ 580              	synopGMAC_rx_disable:
+ 581              		@ args = 0, pretend = 0, frame = 0
+ 582              		@ frame_needed = 0, uses_anonymous_args = 0
+ 583              		@ link register save eliminated.
+ 584 0000 0068     		ldr	r0, [r0, #0]
+ 585 0002 0021     		movs	r1, #0
+ 586 0004 0422     		movs	r2, #4
+ 587 0006 FFF7FEBF 		b	synopGMACClearBits
+ 589              		.section	.text.synopGMAC_tx_enable,"ax",%progbits
+ 590              		.align	1
+ 591              		.global	synopGMAC_tx_enable
+ 592              		.thumb
+ 593              		.thumb_func
+ 595              	synopGMAC_tx_enable:
+ 596              		@ args = 0, pretend = 0, frame = 0
+ 597              		@ frame_needed = 0, uses_anonymous_args = 0
+ 598              		@ link register save eliminated.
+ 599 0000 0068     		ldr	r0, [r0, #0]
+ 600 0002 0021     		movs	r1, #0
+ 601 0004 0822     		movs	r2, #8
+ 602 0006 FFF7FEBF 		b	synopGMACSetBits
+ 604              		.section	.text.synopGMAC_tx_disable,"ax",%progbits
+ 605              		.align	1
+ 606              		.global	synopGMAC_tx_disable
+ 607              		.thumb
+ 608              		.thumb_func
+ 610              	synopGMAC_tx_disable:
+ 611              		@ args = 0, pretend = 0, frame = 0
+ 612              		@ frame_needed = 0, uses_anonymous_args = 0
+ 613              		@ link register save eliminated.
+ 614 0000 0068     		ldr	r0, [r0, #0]
+ 615 0002 0021     		movs	r1, #0
+ 616 0004 0822     		movs	r2, #8
+ 617 0006 FFF7FEBF 		b	synopGMACClearBits
+ 619              		.section	.text.synopGMAC_frame_filter_enable,"ax",%progbits
+ 620              		.align	1
+ 621              		.global	synopGMAC_frame_filter_enable
+ 622              		.thumb
+ 623              		.thumb_func
+ 625              	synopGMAC_frame_filter_enable:
+ 626              		@ args = 0, pretend = 0, frame = 0
+ 627              		@ frame_needed = 0, uses_anonymous_args = 0
+ 628              		@ link register save eliminated.
+ 629 0000 0068     		ldr	r0, [r0, #0]
+ 630 0002 0421     		movs	r1, #4
+ 631 0004 4FF00042 		mov	r2, #-2147483648
+ 632 0008 FFF7FEBF 		b	synopGMACClearBits
+ 634              		.section	.text.synopGMAC_frame_filter_disable,"ax",%progbits
+ 635              		.align	1
+ 636              		.global	synopGMAC_frame_filter_disable
+ 637              		.thumb
+ 638              		.thumb_func
+ 640              	synopGMAC_frame_filter_disable:
+ 641              		@ args = 0, pretend = 0, frame = 0
+ 642              		@ frame_needed = 0, uses_anonymous_args = 0
+ 643              		@ link register save eliminated.
+ 644 0000 0068     		ldr	r0, [r0, #0]
+ 645 0002 0421     		movs	r1, #4
+ 646 0004 4FF00042 		mov	r2, #-2147483648
+ 647 0008 FFF7FEBF 		b	synopGMACSetBits
+ 649              		.section	.text.synopGMAC_write_hash_table_high,"ax",%progbits
+ 650              		.align	1
+ 651              		.global	synopGMAC_write_hash_table_high
+ 652              		.thumb
+ 653              		.thumb_func
+ 655              	synopGMAC_write_hash_table_high:
+ 656              		@ args = 0, pretend = 0, frame = 0
+ 657              		@ frame_needed = 0, uses_anonymous_args = 0
+ 658              		@ link register save eliminated.
+ 659 0000 0068     		ldr	r0, [r0, #0]
+ 660 0002 0A46     		mov	r2, r1
+ 661 0004 0821     		movs	r1, #8
+ 662 0006 FFF7FEBF 		b	synopGMACWriteReg
+ 664              		.section	.text.synopGMAC_write_hash_table_low,"ax",%progbits
+ 665              		.align	1
+ 666              		.global	synopGMAC_write_hash_table_low
+ 667              		.thumb
+ 668              		.thumb_func
+ 670              	synopGMAC_write_hash_table_low:
+ 671              		@ args = 0, pretend = 0, frame = 0
+ 672              		@ frame_needed = 0, uses_anonymous_args = 0
+ 673              		@ link register save eliminated.
+ 674 0000 0068     		ldr	r0, [r0, #0]
+ 675 0002 0A46     		mov	r2, r1
+ 676 0004 0C21     		movs	r1, #12
+ 677 0006 FFF7FEBF 		b	synopGMACWriteReg
+ 679              		.section	.text.synopGMAC_hash_perfect_filter_enable,"ax",%progbits
+ 680              		.align	1
+ 681              		.global	synopGMAC_hash_perfect_filter_enable
+ 682              		.thumb
+ 683              		.thumb_func
+ 685              	synopGMAC_hash_perfect_filter_enable:
+ 686              		@ args = 0, pretend = 0, frame = 0
+ 687              		@ frame_needed = 0, uses_anonymous_args = 0
+ 688              		@ link register save eliminated.
+ 689 0000 0068     		ldr	r0, [r0, #0]
+ 690 0002 0421     		movs	r1, #4
+ 691 0004 4FF48062 		mov	r2, #1024
+ 692 0008 FFF7FEBF 		b	synopGMACSetBits
+ 694              		.section	.text.synopGMAC_Hash_filter_only_enable,"ax",%progbits
+ 695              		.align	1
+ 696              		.global	synopGMAC_Hash_filter_only_enable
+ 697              		.thumb
+ 698              		.thumb_func
+ 700              	synopGMAC_Hash_filter_only_enable:
+ 701              		@ args = 0, pretend = 0, frame = 0
+ 702              		@ frame_needed = 0, uses_anonymous_args = 0
+ 703              		@ link register save eliminated.
+ 704 0000 0068     		ldr	r0, [r0, #0]
+ 705 0002 0421     		movs	r1, #4
+ 706 0004 4FF48062 		mov	r2, #1024
+ 707 0008 FFF7FEBF 		b	synopGMACSetBits
+ 709              		.section	.text.synopGMAC_src_addr_filter_enable,"ax",%progbits
+ 710              		.align	1
+ 711              		.global	synopGMAC_src_addr_filter_enable
+ 712              		.thumb
+ 713              		.thumb_func
+ 715              	synopGMAC_src_addr_filter_enable:
+ 716              		@ args = 0, pretend = 0, frame = 0
+ 717              		@ frame_needed = 0, uses_anonymous_args = 0
+ 718              		@ link register save eliminated.
+ 719 0000 0068     		ldr	r0, [r0, #0]
+ 720 0002 0421     		movs	r1, #4
+ 721 0004 4FF40072 		mov	r2, #512
+ 722 0008 FFF7FEBF 		b	synopGMACSetBits
+ 724              		.section	.text.synopGMAC_src_addr_filter_disable,"ax",%progbits
+ 725              		.align	1
+ 726              		.global	synopGMAC_src_addr_filter_disable
+ 727              		.thumb
+ 728              		.thumb_func
+ 730              	synopGMAC_src_addr_filter_disable:
+ 731              		@ args = 0, pretend = 0, frame = 0
+ 732              		@ frame_needed = 0, uses_anonymous_args = 0
+ 733              		@ link register save eliminated.
+ 734 0000 0068     		ldr	r0, [r0, #0]
+ 735 0002 0421     		movs	r1, #4
+ 736 0004 4FF40072 		mov	r2, #512
+ 737 0008 FFF7FEBF 		b	synopGMACClearBits
+ 739              		.section	.text.synopGMAC_dst_addr_filter_inverse,"ax",%progbits
+ 740              		.align	1
+ 741              		.global	synopGMAC_dst_addr_filter_inverse
+ 742              		.thumb
+ 743              		.thumb_func
+ 745              	synopGMAC_dst_addr_filter_inverse:
+ 746              		@ args = 0, pretend = 0, frame = 0
+ 747              		@ frame_needed = 0, uses_anonymous_args = 0
+ 748              		@ link register save eliminated.
+ 749 0000 0068     		ldr	r0, [r0, #0]
+ 750 0002 0421     		movs	r1, #4
+ 751 0004 0022     		movs	r2, #0
+ 752 0006 FFF7FEBF 		b	synopGMACSetBits
+ 754              		.section	.text.synopGMAC_dst_addr_filter_normal,"ax",%progbits
+ 755              		.align	1
+ 756              		.global	synopGMAC_dst_addr_filter_normal
+ 757              		.thumb
+ 758              		.thumb_func
+ 760              	synopGMAC_dst_addr_filter_normal:
+ 761              		@ args = 0, pretend = 0, frame = 0
+ 762              		@ frame_needed = 0, uses_anonymous_args = 0
+ 763              		@ link register save eliminated.
+ 764 0000 0068     		ldr	r0, [r0, #0]
+ 765 0002 0421     		movs	r1, #4
+ 766 0004 0022     		movs	r2, #0
+ 767 0006 FFF7FEBF 		b	synopGMACClearBits
+ 769              		.section	.text.synopGMAC_set_pass_control,"ax",%progbits
+ 770              		.align	1
+ 771              		.global	synopGMAC_set_pass_control
+ 772              		.thumb
+ 773              		.thumb_func
+ 775              	synopGMAC_set_pass_control:
+ 776              		@ args = 0, pretend = 0, frame = 0
+ 777              		@ frame_needed = 0, uses_anonymous_args = 0
+ 778 0000 38B5     		push	{r3, r4, r5, lr}
+ 779 0002 0446     		mov	r4, r0
+ 780 0004 0D46     		mov	r5, r1
+ 781 0006 0068     		ldr	r0, [r0, #0]
+ 782 0008 0421     		movs	r1, #4
+ 783 000a FFF7FEFF 		bl	synopGMACReadReg
+ 784 000e 20F0C002 		bic	r2, r0, #192
+ 785 0012 2068     		ldr	r0, [r4, #0]
+ 786 0014 0421     		movs	r1, #4
+ 787 0016 2A43     		orrs	r2, r2, r5
+ 788 0018 BDE83840 		pop	{r3, r4, r5, lr}
+ 789 001c FFF7FEBF 		b	synopGMACWriteReg
+ 791              		.section	.text.synopGMAC_broadcast_enable,"ax",%progbits
+ 792              		.align	1
+ 793              		.global	synopGMAC_broadcast_enable
+ 794              		.thumb
+ 795              		.thumb_func
+ 797              	synopGMAC_broadcast_enable:
+ 798              		@ args = 0, pretend = 0, frame = 0
+ 799              		@ frame_needed = 0, uses_anonymous_args = 0
+ 800              		@ link register save eliminated.
+ 801 0000 0068     		ldr	r0, [r0, #0]
+ 802 0002 0421     		movs	r1, #4
+ 803 0004 2022     		movs	r2, #32
+ 804 0006 FFF7FEBF 		b	synopGMACClearBits
+ 806              		.section	.text.synopGMAC_broadcast_disable,"ax",%progbits
+ 807              		.align	1
+ 808              		.global	synopGMAC_broadcast_disable
+ 809              		.thumb
+ 810              		.thumb_func
+ 812              	synopGMAC_broadcast_disable:
+ 813              		@ args = 0, pretend = 0, frame = 0
+ 814              		@ frame_needed = 0, uses_anonymous_args = 0
+ 815              		@ link register save eliminated.
+ 816 0000 0068     		ldr	r0, [r0, #0]
+ 817 0002 0421     		movs	r1, #4
+ 818 0004 2022     		movs	r2, #32
+ 819 0006 FFF7FEBF 		b	synopGMACSetBits
+ 821              		.section	.text.synopGMAC_multicast_enable,"ax",%progbits
+ 822              		.align	1
+ 823              		.global	synopGMAC_multicast_enable
+ 824              		.thumb
+ 825              		.thumb_func
+ 827              	synopGMAC_multicast_enable:
+ 828              		@ args = 0, pretend = 0, frame = 0
+ 829              		@ frame_needed = 0, uses_anonymous_args = 0
+ 830              		@ link register save eliminated.
+ 831 0000 0068     		ldr	r0, [r0, #0]
+ 832 0002 0421     		movs	r1, #4
+ 833 0004 1022     		movs	r2, #16
+ 834 0006 FFF7FEBF 		b	synopGMACSetBits
+ 836              		.section	.text.synopGMAC_multicast_disable,"ax",%progbits
+ 837              		.align	1
+ 838              		.global	synopGMAC_multicast_disable
+ 839              		.thumb
+ 840              		.thumb_func
+ 842              	synopGMAC_multicast_disable:
+ 843              		@ args = 0, pretend = 0, frame = 0
+ 844              		@ frame_needed = 0, uses_anonymous_args = 0
+ 845              		@ link register save eliminated.
+ 846 0000 0068     		ldr	r0, [r0, #0]
+ 847 0002 0421     		movs	r1, #4
+ 848 0004 1022     		movs	r2, #16
+ 849 0006 FFF7FEBF 		b	synopGMACClearBits
+ 851              		.section	.text.synopGMAC_multicast_hash_filter_enable,"ax",%progbits
+ 852              		.align	1
+ 853              		.global	synopGMAC_multicast_hash_filter_enable
+ 854              		.thumb
+ 855              		.thumb_func
+ 857              	synopGMAC_multicast_hash_filter_enable:
+ 858              		@ args = 0, pretend = 0, frame = 0
+ 859              		@ frame_needed = 0, uses_anonymous_args = 0
+ 860              		@ link register save eliminated.
+ 861 0000 0421     		movs	r1, #4
+ 862 0002 0068     		ldr	r0, [r0, #0]
+ 863 0004 0A46     		mov	r2, r1
+ 864 0006 FFF7FEBF 		b	synopGMACSetBits
+ 866              		.section	.text.synopGMAC_multicast_hash_filter_disable,"ax",%progbits
+ 867              		.align	1
+ 868              		.global	synopGMAC_multicast_hash_filter_disable
+ 869              		.thumb
+ 870              		.thumb_func
+ 872              	synopGMAC_multicast_hash_filter_disable:
+ 873              		@ args = 0, pretend = 0, frame = 0
+ 874              		@ frame_needed = 0, uses_anonymous_args = 0
+ 875              		@ link register save eliminated.
+ 876 0000 0421     		movs	r1, #4
+ 877 0002 0068     		ldr	r0, [r0, #0]
+ 878 0004 0A46     		mov	r2, r1
+ 879 0006 FFF7FEBF 		b	synopGMACClearBits
+ 881              		.section	.text.synopGMAC_promisc_enable,"ax",%progbits
+ 882              		.align	1
+ 883              		.global	synopGMAC_promisc_enable
+ 884              		.thumb
+ 885              		.thumb_func
+ 887              	synopGMAC_promisc_enable:
+ 888              		@ args = 0, pretend = 0, frame = 0
+ 889              		@ frame_needed = 0, uses_anonymous_args = 0
+ 890              		@ link register save eliminated.
+ 891 0000 0068     		ldr	r0, [r0, #0]
+ 892 0002 0421     		movs	r1, #4
+ 893 0004 0122     		movs	r2, #1
+ 894 0006 FFF7FEBF 		b	synopGMACSetBits
+ 896              		.section	.text.synopGMAC_promisc_disable,"ax",%progbits
+ 897              		.align	1
+ 898              		.global	synopGMAC_promisc_disable
+ 899              		.thumb
+ 900              		.thumb_func
+ 902              	synopGMAC_promisc_disable:
+ 903              		@ args = 0, pretend = 0, frame = 0
+ 904              		@ frame_needed = 0, uses_anonymous_args = 0
+ 905              		@ link register save eliminated.
+ 906 0000 0068     		ldr	r0, [r0, #0]
+ 907 0002 0421     		movs	r1, #4
+ 908 0004 0122     		movs	r2, #1
+ 909 0006 FFF7FEBF 		b	synopGMACClearBits
+ 911              		.section	.text.synopGMAC_unicast_hash_filter_enable,"ax",%progbits
+ 912              		.align	1
+ 913              		.global	synopGMAC_unicast_hash_filter_enable
+ 914              		.thumb
+ 915              		.thumb_func
+ 917              	synopGMAC_unicast_hash_filter_enable:
+ 918              		@ args = 0, pretend = 0, frame = 0
+ 919              		@ frame_needed = 0, uses_anonymous_args = 0
+ 920              		@ link register save eliminated.
+ 921 0000 0068     		ldr	r0, [r0, #0]
+ 922 0002 0421     		movs	r1, #4
+ 923 0004 0222     		movs	r2, #2
+ 924 0006 FFF7FEBF 		b	synopGMACSetBits
+ 926              		.section	.text.synopGMAC_unicast_hash_filter_disable,"ax",%progbits
+ 927              		.align	1
+ 928              		.global	synopGMAC_unicast_hash_filter_disable
+ 929              		.thumb
+ 930              		.thumb_func
+ 932              	synopGMAC_unicast_hash_filter_disable:
+ 933              		@ args = 0, pretend = 0, frame = 0
+ 934              		@ frame_needed = 0, uses_anonymous_args = 0
+ 935              		@ link register save eliminated.
+ 936 0000 0068     		ldr	r0, [r0, #0]
+ 937 0002 0421     		movs	r1, #4
+ 938 0004 0222     		movs	r2, #2
+ 939 0006 FFF7FEBF 		b	synopGMACClearBits
+ 941              		.section	.text.synopGMAC_unicast_pause_frame_detect_enable,"ax",%progbits
+ 942              		.align	1
+ 943              		.global	synopGMAC_unicast_pause_frame_detect_enable
+ 944              		.thumb
+ 945              		.thumb_func
+ 947              	synopGMAC_unicast_pause_frame_detect_enable:
+ 948              		@ args = 0, pretend = 0, frame = 0
+ 949              		@ frame_needed = 0, uses_anonymous_args = 0
+ 950              		@ link register save eliminated.
+ 951 0000 0068     		ldr	r0, [r0, #0]
+ 952 0002 1821     		movs	r1, #24
+ 953 0004 0822     		movs	r2, #8
+ 954 0006 FFF7FEBF 		b	synopGMACSetBits
+ 956              		.section	.text.synopGMAC_unicast_pause_frame_detect_disable,"ax",%progbits
+ 957              		.align	1
+ 958              		.global	synopGMAC_unicast_pause_frame_detect_disable
+ 959              		.thumb
+ 960              		.thumb_func
+ 962              	synopGMAC_unicast_pause_frame_detect_disable:
+ 963              		@ args = 0, pretend = 0, frame = 0
+ 964              		@ frame_needed = 0, uses_anonymous_args = 0
+ 965              		@ link register save eliminated.
+ 966 0000 0068     		ldr	r0, [r0, #0]
+ 967 0002 1821     		movs	r1, #24
+ 968 0004 0822     		movs	r2, #8
+ 969 0006 FFF7FEBF 		b	synopGMACClearBits
+ 971              		.section	.text.synopGMAC_rx_flow_control_enable,"ax",%progbits
+ 972              		.align	1
+ 973              		.global	synopGMAC_rx_flow_control_enable
+ 974              		.thumb
+ 975              		.thumb_func
+ 977              	synopGMAC_rx_flow_control_enable:
+ 978              		@ args = 0, pretend = 0, frame = 0
+ 979              		@ frame_needed = 0, uses_anonymous_args = 0
+ 980              		@ link register save eliminated.
+ 981 0000 0068     		ldr	r0, [r0, #0]
+ 982 0002 1821     		movs	r1, #24
+ 983 0004 0422     		movs	r2, #4
+ 984 0006 FFF7FEBF 		b	synopGMACSetBits
+ 986              		.section	.text.synopGMAC_rx_flow_control_disable,"ax",%progbits
+ 987              		.align	1
+ 988              		.global	synopGMAC_rx_flow_control_disable
+ 989              		.thumb
+ 990              		.thumb_func
+ 992              	synopGMAC_rx_flow_control_disable:
+ 993              		@ args = 0, pretend = 0, frame = 0
+ 994              		@ frame_needed = 0, uses_anonymous_args = 0
+ 995              		@ link register save eliminated.
+ 996 0000 0068     		ldr	r0, [r0, #0]
+ 997 0002 1821     		movs	r1, #24
+ 998 0004 0422     		movs	r2, #4
+ 999 0006 FFF7FEBF 		b	synopGMACClearBits
+ 1001              		.section	.text.synopGMAC_tx_flow_control_enable,"ax",%progbits
+ 1002              		.align	1
+ 1003              		.global	synopGMAC_tx_flow_control_enable
+ 1004              		.thumb
+ 1005              		.thumb_func
+ 1007              	synopGMAC_tx_flow_control_enable:
+ 1008              		@ args = 0, pretend = 0, frame = 0
+ 1009              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1010              		@ link register save eliminated.
+ 1011 0000 0068     		ldr	r0, [r0, #0]
+ 1012 0002 1821     		movs	r1, #24
+ 1013 0004 0222     		movs	r2, #2
+ 1014 0006 FFF7FEBF 		b	synopGMACSetBits
+ 1016              		.section	.text.synopGMAC_tx_flow_control_disable,"ax",%progbits
+ 1017              		.align	1
+ 1018              		.global	synopGMAC_tx_flow_control_disable
+ 1019              		.thumb
+ 1020              		.thumb_func
+ 1022              	synopGMAC_tx_flow_control_disable:
+ 1023              		@ args = 0, pretend = 0, frame = 0
+ 1024              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1025              		@ link register save eliminated.
+ 1026 0000 0068     		ldr	r0, [r0, #0]
+ 1027 0002 1821     		movs	r1, #24
+ 1028 0004 0222     		movs	r2, #2
+ 1029 0006 FFF7FEBF 		b	synopGMACClearBits
+ 1031              		.section	.text.synopGMAC_tx_activate_flow_control,"ax",%progbits
+ 1032              		.align	1
+ 1033              		.global	synopGMAC_tx_activate_flow_control
+ 1034              		.thumb
+ 1035              		.thumb_func
+ 1037              	synopGMAC_tx_activate_flow_control:
+ 1038              		@ args = 0, pretend = 0, frame = 0
+ 1039              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1040 0000 D0F8B030 		ldr	r3, [r0, #176]
+ 1041 0004 1821     		movs	r1, #24
+ 1042 0006 0122     		movs	r2, #1
+ 1043 0008 022B     		cmp	r3, #2
+ 1044 000a 10B5     		push	{r4, lr}
+ 1045 000c 0446     		mov	r4, r0
+ 1046 000e 0068     		ldr	r0, [r0, #0]
+ 1047 0010 05D1     		bne	.L78
+ 1048 0012 FFF7FEFF 		bl	synopGMACCheckBits
+ 1049 0016 30B9     		cbnz	r0, .L77
+ 1050 0018 2068     		ldr	r0, [r4, #0]
+ 1051 001a 1821     		movs	r1, #24
+ 1052 001c 0122     		movs	r2, #1
+ 1053              	.L78:
+ 1054 001e BDE81040 		pop	{r4, lr}
+ 1055 0022 FFF7FEBF 		b	synopGMACSetBits
+ 1056              	.L77:
+ 1057 0026 10BD     		pop	{r4, pc}
+ 1059              		.section	.text.synopGMAC_tx_deactivate_flow_control,"ax",%progbits
+ 1060              		.align	1
+ 1061              		.global	synopGMAC_tx_deactivate_flow_control
+ 1062              		.thumb
+ 1063              		.thumb_func
+ 1065              	synopGMAC_tx_deactivate_flow_control:
+ 1066              		@ args = 0, pretend = 0, frame = 0
+ 1067              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1068              		@ link register save eliminated.
+ 1069 0000 D0F8B020 		ldr	r2, [r0, #176]
+ 1070 0004 012A     		cmp	r2, #1
+ 1071 0006 03D1     		bne	.L80
+ 1072 0008 0068     		ldr	r0, [r0, #0]
+ 1073 000a 1821     		movs	r1, #24
+ 1074 000c FFF7FEBF 		b	synopGMACSetBits
+ 1075              	.L80:
+ 1076 0010 7047     		bx	lr
+ 1078              		.section	.text.synopGMAC_pause_control,"ax",%progbits
+ 1079              		.align	1
+ 1080              		.global	synopGMAC_pause_control
+ 1081              		.thumb
+ 1082              		.thumb_func
+ 1084              	synopGMAC_pause_control:
+ 1085              		@ args = 0, pretend = 0, frame = 0
+ 1086              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1087 0000 10B5     		push	{r4, lr}
+ 1088 0002 1821     		movs	r1, #24
+ 1089 0004 0446     		mov	r4, r0
+ 1090 0006 4068     		ldr	r0, [r0, #4]
+ 1091 0008 FFF7FEFF 		bl	synopGMACReadReg
+ 1092 000c 40F48002 		orr	r2, r0, #4194304
+ 1093 0010 1821     		movs	r1, #24
+ 1094 0012 6068     		ldr	r0, [r4, #4]
+ 1095 0014 42F44072 		orr	r2, r2, #768
+ 1096 0018 FFF7FEFF 		bl	synopGMACWriteReg
+ 1097 001c 1821     		movs	r1, #24
+ 1098 001e 2068     		ldr	r0, [r4, #0]
+ 1099 0020 FFF7FEFF 		bl	synopGMACReadReg
+ 1100 0024 0449     		ldr	r1, .L83
+ 1101 0026 40EA0102 		orr	r2, r0, r1
+ 1102 002a 2068     		ldr	r0, [r4, #0]
+ 1103 002c 1821     		movs	r1, #24
+ 1104 002e BDE81040 		pop	{r4, lr}
+ 1105 0032 FFF7FEBF 		b	synopGMACWriteReg
+ 1106              	.L84:
+ 1107 0036 00BF     		.align	2
+ 1108              	.L83:
+ 1109 0038 0600FFFF 		.word	-65530
+ 1111              		.section	.text.synopGMAC_mac_init,"ax",%progbits
+ 1112              		.align	1
+ 1113              		.global	synopGMAC_mac_init
+ 1114              		.thumb
+ 1115              		.thumb_func
+ 1117              	synopGMAC_mac_init:
+ 1118              		@ args = 0, pretend = 0, frame = 0
+ 1119              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1120 0000 D0F8AC30 		ldr	r3, [r0, #172]
+ 1121 0004 022B     		cmp	r3, #2
+ 1122 0006 10B5     		push	{r4, lr}
+ 1123 0008 0446     		mov	r4, r0
+ 1124 000a 4FD1     		bne	.L86
+ 1125 000c FFF7FEFF 		bl	synopGMAC_wd_enable
+ 1126 0010 2046     		mov	r0, r4
+ 1127 0012 FFF7FEFF 		bl	synopGMAC_jab_enable
+ 1128 0016 2046     		mov	r0, r4
+ 1129 0018 FFF7FEFF 		bl	synopGMAC_frame_burst_enable
+ 1130 001c 2046     		mov	r0, r4
+ 1131 001e FFF7FEFF 		bl	synopGMAC_jumbo_frame_disable
+ 1132 0022 2046     		mov	r0, r4
+ 1133 0024 FFF7FEFF 		bl	synopGMAC_rx_own_enable
+ 1134 0028 2046     		mov	r0, r4
+ 1135 002a FFF7FEFF 		bl	synopGMAC_loopback_off
+ 1136 002e 2046     		mov	r0, r4
+ 1137 0030 FFF7FEFF 		bl	synopGMAC_set_full_duplex
+ 1138 0034 2046     		mov	r0, r4
+ 1139 0036 FFF7FEFF 		bl	synopGMAC_retry_enable
+ 1140 003a 2046     		mov	r0, r4
+ 1141 003c FFF7FEFF 		bl	synopGMAC_pad_crc_strip_disable
+ 1142 0040 0021     		movs	r1, #0
+ 1143 0042 2046     		mov	r0, r4
+ 1144 0044 FFF7FEFF 		bl	synopGMAC_back_off_limit
+ 1145 0048 2046     		mov	r0, r4
+ 1146 004a FFF7FEFF 		bl	synopGMAC_deferral_check_disable
+ 1147 004e 2046     		mov	r0, r4
+ 1148 0050 FFF7FEFF 		bl	synopGMAC_tx_enable
+ 1149 0054 2046     		mov	r0, r4
+ 1150 0056 FFF7FEFF 		bl	synopGMAC_rx_enable
+ 1151 005a 2046     		mov	r0, r4
+ 1152 005c FFF7FEFF 		bl	synopGMAC_select_mii
+ 1153 0060 2046     		mov	r0, r4
+ 1154 0062 FFF7FEFF 		bl	synopGMAC_frame_filter_enable
+ 1155 0066 0021     		movs	r1, #0
+ 1156 0068 2046     		mov	r0, r4
+ 1157 006a FFF7FEFF 		bl	synopGMAC_set_pass_control
+ 1158 006e 2046     		mov	r0, r4
+ 1159 0070 FFF7FEFF 		bl	synopGMAC_broadcast_enable
+ 1160 0074 2046     		mov	r0, r4
+ 1161 0076 FFF7FEFF 		bl	synopGMAC_src_addr_filter_disable
+ 1162 007a 2046     		mov	r0, r4
+ 1163 007c FFF7FEFF 		bl	synopGMAC_multicast_disable
+ 1164 0080 2046     		mov	r0, r4
+ 1165 0082 FFF7FEFF 		bl	synopGMAC_dst_addr_filter_normal
+ 1166 0086 2046     		mov	r0, r4
+ 1167 0088 FFF7FEFF 		bl	synopGMAC_multicast_hash_filter_disable
+ 1168 008c 2046     		mov	r0, r4
+ 1169 008e FFF7FEFF 		bl	synopGMAC_promisc_disable
+ 1170 0092 2046     		mov	r0, r4
+ 1171 0094 FFF7FEFF 		bl	synopGMAC_unicast_hash_filter_disable
+ 1172 0098 2046     		mov	r0, r4
+ 1173 009a FFF7FEFF 		bl	synopGMAC_unicast_pause_frame_detect_disable
+ 1174 009e 2046     		mov	r0, r4
+ 1175 00a0 FFF7FEFF 		bl	synopGMAC_rx_flow_control_enable
+ 1176 00a4 2046     		mov	r0, r4
+ 1177 00a6 FFF7FEFF 		bl	synopGMAC_tx_flow_control_enable
+ 1178 00aa 4EE0     		b	.L87
+ 1179              	.L86:
+ 1180 00ac FFF7FEFF 		bl	synopGMAC_wd_enable
+ 1181 00b0 2046     		mov	r0, r4
+ 1182 00b2 FFF7FEFF 		bl	synopGMAC_jab_enable
+ 1183 00b6 2046     		mov	r0, r4
+ 1184 00b8 FFF7FEFF 		bl	synopGMAC_frame_burst_enable
+ 1185 00bc 2046     		mov	r0, r4
+ 1186 00be FFF7FEFF 		bl	synopGMAC_jumbo_frame_disable
+ 1187 00c2 2046     		mov	r0, r4
+ 1188 00c4 FFF7FEFF 		bl	synopGMAC_rx_own_enable
+ 1189 00c8 2046     		mov	r0, r4
+ 1190 00ca FFF7FEFF 		bl	synopGMAC_loopback_off
+ 1191 00ce 2046     		mov	r0, r4
+ 1192 00d0 FFF7FEFF 		bl	synopGMAC_set_half_duplex
+ 1193 00d4 2046     		mov	r0, r4
+ 1194 00d6 FFF7FEFF 		bl	synopGMAC_retry_enable
+ 1195 00da 2046     		mov	r0, r4
+ 1196 00dc FFF7FEFF 		bl	synopGMAC_pad_crc_strip_disable
+ 1197 00e0 0021     		movs	r1, #0
+ 1198 00e2 2046     		mov	r0, r4
+ 1199 00e4 FFF7FEFF 		bl	synopGMAC_back_off_limit
+ 1200 00e8 2046     		mov	r0, r4
+ 1201 00ea FFF7FEFF 		bl	synopGMAC_deferral_check_disable
+ 1202 00ee 2046     		mov	r0, r4
+ 1203 00f0 FFF7FEFF 		bl	synopGMAC_tx_enable
+ 1204 00f4 2046     		mov	r0, r4
+ 1205 00f6 FFF7FEFF 		bl	synopGMAC_rx_enable
+ 1206 00fa 2046     		mov	r0, r4
+ 1207 00fc FFF7FEFF 		bl	synopGMAC_select_mii
+ 1208 0100 2046     		mov	r0, r4
+ 1209 0102 FFF7FEFF 		bl	synopGMAC_frame_filter_disable
+ 1210 0106 0021     		movs	r1, #0
+ 1211 0108 2046     		mov	r0, r4
+ 1212 010a FFF7FEFF 		bl	synopGMAC_set_pass_control
+ 1213 010e 2046     		mov	r0, r4
+ 1214 0110 FFF7FEFF 		bl	synopGMAC_broadcast_enable
+ 1215 0114 2046     		mov	r0, r4
+ 1216 0116 FFF7FEFF 		bl	synopGMAC_src_addr_filter_disable
+ 1217 011a 2046     		mov	r0, r4
+ 1218 011c FFF7FEFF 		bl	synopGMAC_multicast_disable
+ 1219 0120 2046     		mov	r0, r4
+ 1220 0122 FFF7FEFF 		bl	synopGMAC_dst_addr_filter_normal
+ 1221 0126 2046     		mov	r0, r4
+ 1222 0128 FFF7FEFF 		bl	synopGMAC_multicast_hash_filter_disable
+ 1223 012c 2046     		mov	r0, r4
+ 1224 012e FFF7FEFF 		bl	synopGMAC_promisc_disable
+ 1225 0132 2046     		mov	r0, r4
+ 1226 0134 FFF7FEFF 		bl	synopGMAC_unicast_hash_filter_disable
+ 1227 0138 2046     		mov	r0, r4
+ 1228 013a FFF7FEFF 		bl	synopGMAC_unicast_pause_frame_detect_disable
+ 1229 013e 2046     		mov	r0, r4
+ 1230 0140 FFF7FEFF 		bl	synopGMAC_rx_flow_control_disable
+ 1231 0144 2046     		mov	r0, r4
+ 1232 0146 FFF7FEFF 		bl	synopGMAC_tx_flow_control_disable
+ 1233              	.L87:
+ 1234 014a 0020     		movs	r0, #0
+ 1235 014c 10BD     		pop	{r4, pc}
+ 1237              		.section	.text.synopGMAC_set_mac_addr,"ax",%progbits
+ 1238              		.align	1
+ 1239              		.global	synopGMAC_set_mac_addr
+ 1240              		.thumb
+ 1241              		.thumb_func
+ 1243              	synopGMAC_set_mac_addr:
+ 1244              		@ args = 0, pretend = 0, frame = 0
+ 1245              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1246 0000 70B5     		push	{r4, r5, r6, lr}
+ 1247 0002 1C46     		mov	r4, r3
+ 1248 0004 1646     		mov	r6, r2
+ 1249 0006 5A79     		ldrb	r2, [r3, #5]	@ zero_extendqisi2
+ 1250 0008 1B79     		ldrb	r3, [r3, #4]	@ zero_extendqisi2
+ 1251 000a 0546     		mov	r5, r0
+ 1252 000c 43EA0222 		orr	r2, r3, r2, lsl #8
+ 1253 0010 0068     		ldr	r0, [r0, #0]
+ 1254 0012 FFF7FEFF 		bl	synopGMACWriteReg
+ 1255 0016 A178     		ldrb	r1, [r4, #2]	@ zero_extendqisi2
+ 1256 0018 E078     		ldrb	r0, [r4, #3]	@ zero_extendqisi2
+ 1257 001a 0A04     		lsls	r2, r1, #16
+ 1258 001c 42EA0063 		orr	r3, r2, r0, lsl #24
+ 1259 0020 2078     		ldrb	r0, [r4, #0]	@ zero_extendqisi2
+ 1260 0022 6278     		ldrb	r2, [r4, #1]	@ zero_extendqisi2
+ 1261 0024 0343     		orrs	r3, r3, r0
+ 1262 0026 3146     		mov	r1, r6
+ 1263 0028 2868     		ldr	r0, [r5, #0]
+ 1264 002a 43EA0222 		orr	r2, r3, r2, lsl #8
+ 1265 002e FFF7FEFF 		bl	synopGMACWriteReg
+ 1266 0032 0020     		movs	r0, #0
+ 1267 0034 70BD     		pop	{r4, r5, r6, pc}
+ 1269              		.section	.text.synopGMAC_get_mac_addr,"ax",%progbits
+ 1270              		.align	1
+ 1271              		.global	synopGMAC_get_mac_addr
+ 1272              		.thumb
+ 1273              		.thumb_func
+ 1275              	synopGMAC_get_mac_addr:
+ 1276              		@ args = 0, pretend = 0, frame = 0
+ 1277              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1278 0000 70B5     		push	{r4, r5, r6, lr}
+ 1279 0002 0546     		mov	r5, r0
+ 1280 0004 0068     		ldr	r0, [r0, #0]
+ 1281 0006 1C46     		mov	r4, r3
+ 1282 0008 1646     		mov	r6, r2
+ 1283 000a FFF7FEFF 		bl	synopGMACReadReg
+ 1284 000e 030A     		lsrs	r3, r0, #8
+ 1285 0010 6371     		strb	r3, [r4, #5]
+ 1286 0012 2071     		strb	r0, [r4, #4]
+ 1287 0014 3146     		mov	r1, r6
+ 1288 0016 2868     		ldr	r0, [r5, #0]
+ 1289 0018 FFF7FEFF 		bl	synopGMACReadReg
+ 1290 001c 010E     		lsrs	r1, r0, #24
+ 1291 001e 020C     		lsrs	r2, r0, #16
+ 1292 0020 030A     		lsrs	r3, r0, #8
+ 1293 0022 2070     		strb	r0, [r4, #0]
+ 1294 0024 E170     		strb	r1, [r4, #3]
+ 1295 0026 A270     		strb	r2, [r4, #2]
+ 1296 0028 6370     		strb	r3, [r4, #1]
+ 1297 002a 0020     		movs	r0, #0
+ 1298 002c 70BD     		pop	{r4, r5, r6, pc}
+ 1300              		.section	.text.synopGMAC_attach,"ax",%progbits
+ 1301              		.align	1
+ 1302              		.global	synopGMAC_attach
+ 1303              		.thumb
+ 1304              		.thumb_func
+ 1306              	synopGMAC_attach:
+ 1307              		@ args = 0, pretend = 0, frame = 8
+ 1308              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1309 0000 2DE9F341 		push	{r0, r1, r4, r5, r6, r7, r8, lr}
+ 1310 0004 0D4D     		ldr	r5, .L91
+ 1311 0006 0446     		mov	r4, r0
+ 1312 0008 2868     		ldr	r0, [r5, #0]	@ unaligned
+ 1313 000a 9846     		mov	r8, r3
+ 1314 000c AB88     		ldrh	r3, [r5, #4]	@ unaligned
+ 1315 000e 0090     		str	r0, [sp, #0]	@ unaligned
+ 1316 0010 0F46     		mov	r7, r1
+ 1317 0012 1646     		mov	r6, r2
+ 1318 0014 0021     		movs	r1, #0
+ 1319 0016 C422     		movs	r2, #196
+ 1320 0018 2046     		mov	r0, r4
+ 1321 001a ADF80430 		strh	r3, [sp, #4]	@ unaligned
+ 1322 001e FFF7FEFF 		bl	memset
+ 1323 0022 2760     		str	r7, [r4, #0]
+ 1324 0024 6660     		str	r6, [r4, #4]
+ 1325 0026 C4F80880 		str	r8, [r4, #8]
+ 1326 002a 2046     		mov	r0, r4
+ 1327 002c 4021     		movs	r1, #64
+ 1328 002e 4422     		movs	r2, #68
+ 1329 0030 6B46     		mov	r3, sp
+ 1330 0032 FFF7FEFF 		bl	synopGMAC_set_mac_addr
+ 1331 0036 0020     		movs	r0, #0
+ 1332 0038 BDE8FC81 		pop	{r2, r3, r4, r5, r6, r7, r8, pc}
+ 1333              	.L92:
+ 1334              		.align	2
+ 1335              	.L91:
+ 1336 003c 00000000 		.word	.LANCHOR1
+ 1338              		.section	.text.synopGMAC_rx_desc_init_ring,"ax",%progbits
+ 1339              		.align	1
+ 1340              		.global	synopGMAC_rx_desc_init_ring
+ 1341              		.thumb
+ 1342              		.thumb_func
+ 1344              	synopGMAC_rx_desc_init_ring:
+ 1345              		@ args = 0, pretend = 0, frame = 0
+ 1346              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1347              		@ link register save eliminated.
+ 1348 0000 0023     		movs	r3, #0
+ 1349 0002 9942     		cmp	r1, r3
+ 1350 0004 14BF     		ite	ne
+ 1351 0006 4FF40041 		movne	r1, #32768
+ 1352 000a 1946     		moveq	r1, r3
+ 1353 000c 0360     		str	r3, [r0, #0]
+ 1354 000e 4160     		str	r1, [r0, #4]
+ 1355 0010 8360     		str	r3, [r0, #8]
+ 1356 0012 C360     		str	r3, [r0, #12]
+ 1357 0014 0362     		str	r3, [r0, #32]
+ 1358 0016 4362     		str	r3, [r0, #36]
+ 1359 0018 7047     		bx	lr
+ 1361              		.section	.text.synopGMAC_tx_desc_init_ring,"ax",%progbits
+ 1362              		.align	1
+ 1363              		.global	synopGMAC_tx_desc_init_ring
+ 1364              		.thumb
+ 1365              		.thumb_func
+ 1367              	synopGMAC_tx_desc_init_ring:
+ 1368              		@ args = 0, pretend = 0, frame = 0
+ 1369              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1370              		@ link register save eliminated.
+ 1371 0000 0029     		cmp	r1, #0
+ 1372 0002 14BF     		ite	ne
+ 1373 0004 4FF40011 		movne	r1, #2097152
+ 1374 0008 0021     		moveq	r1, #0
+ 1375 000a 0023     		movs	r3, #0
+ 1376 000c 0160     		str	r1, [r0, #0]
+ 1377 000e 4360     		str	r3, [r0, #4]
+ 1378 0010 7047     		bx	lr
+ 1380              		.section	.text.synopGMAC_rx_desc_init_chain,"ax",%progbits
+ 1381              		.align	1
+ 1382              		.global	synopGMAC_rx_desc_init_chain
+ 1383              		.thumb
+ 1384              		.thumb_func
+ 1386              	synopGMAC_rx_desc_init_chain:
+ 1387              		@ args = 0, pretend = 0, frame = 0
+ 1388              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1389              		@ link register save eliminated.
+ 1390 0000 0023     		movs	r3, #0
+ 1391 0002 4FF48042 		mov	r2, #16384
+ 1392 0006 0360     		str	r3, [r0, #0]
+ 1393 0008 4260     		str	r2, [r0, #4]
+ 1394 000a 8360     		str	r3, [r0, #8]
+ 1395 000c 0362     		str	r3, [r0, #32]
+ 1396 000e 7047     		bx	lr
+ 1398              		.section	.text.synopGMAC_tx_desc_init_chain,"ax",%progbits
+ 1399              		.align	1
+ 1400              		.global	synopGMAC_tx_desc_init_chain
+ 1401              		.thumb
+ 1402              		.thumb_func
+ 1404              	synopGMAC_tx_desc_init_chain:
+ 1405              		@ args = 0, pretend = 0, frame = 0
+ 1406              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1407              		@ link register save eliminated.
+ 1408 0000 4FF48012 		mov	r2, #1048576
+ 1409 0004 0023     		movs	r3, #0
+ 1410 0006 80E80C00 		stmia	r0, {r2, r3}
+ 1411 000a 7047     		bx	lr
+ 1413              		.section	.text.synopGMAC_init_tx_rx_desc_queue,"ax",%progbits
+ 1414              		.align	1
+ 1415              		.global	synopGMAC_init_tx_rx_desc_queue
+ 1416              		.thumb
+ 1417              		.thumb_func
+ 1419              	synopGMAC_init_tx_rx_desc_queue:
+ 1420              		@ args = 0, pretend = 0, frame = 0
+ 1421              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1422 0000 C26A     		ldr	r2, [r0, #44]
+ 1423 0002 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 1424 0004 0446     		mov	r4, r0
+ 1425 0006 551E     		subs	r5, r2, #1
+ 1426 0008 0023     		movs	r3, #0
+ 1427              	.L102:
+ 1428 000a 9342     		cmp	r3, r2
+ 1429 000c 0DD0     		beq	.L108
+ 1430              	.L104:
+ 1431 000e A069     		ldr	r0, [r4, #24]
+ 1432 0010 2821     		movs	r1, #40
+ 1433 0012 5943     		muls	r1, r3, r1
+ 1434 0014 4618     		adds	r6, r0, r1
+ 1435 0016 AB42     		cmp	r3, r5
+ 1436 0018 0CBF     		ite	eq
+ 1437 001a 4FF40017 		moveq	r7, #2097152
+ 1438 001e 0027     		movne	r7, #0
+ 1439 0020 4750     		str	r7, [r0, r1]
+ 1440 0022 0021     		movs	r1, #0
+ 1441 0024 7160     		str	r1, [r6, #4]
+ 1442 0026 0133     		adds	r3, r3, #1
+ 1443 0028 EFE7     		b	.L102
+ 1444              	.L108:
+ 1445 002a 0025     		movs	r5, #0
+ 1446              	.L105:
+ 1447 002c A16A     		ldr	r1, [r4, #40]
+ 1448 002e 8D42     		cmp	r5, r1
+ 1449 0030 0ED2     		bcs	.L109
+ 1450              	.L106:
+ 1451 0032 4A1E     		subs	r2, r1, #1
+ 1452 0034 E369     		ldr	r3, [r4, #28]
+ 1453 0036 2820     		movs	r0, #40
+ 1454 0038 B5EB020E 		subs	lr, r5, r2
+ 1455 003c DEF10001 		rsbs	r1, lr, #0
+ 1456 0040 00FB0530 		mla	r0, r0, r5, r3
+ 1457 0044 51EB0E01 		adcs	r1, r1, lr
+ 1458 0048 FFF7FEFF 		bl	synopGMAC_rx_desc_init_ring
+ 1459 004c 0135     		adds	r5, r5, #1
+ 1460 004e EDE7     		b	.L105
+ 1461              	.L109:
+ 1462 0050 0020     		movs	r0, #0
+ 1463 0052 6063     		str	r0, [r4, #52]
+ 1464 0054 2063     		str	r0, [r4, #48]
+ 1465 0056 E063     		str	r0, [r4, #60]
+ 1466 0058 A063     		str	r0, [r4, #56]
+ 1467 005a F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 1469              		.section	.text.synopGMAC_init_rx_desc_base,"ax",%progbits
+ 1470              		.align	1
+ 1471              		.global	synopGMAC_init_rx_desc_base
+ 1472              		.thumb
+ 1473              		.thumb_func
+ 1475              	synopGMAC_init_rx_desc_base:
+ 1476              		@ args = 0, pretend = 0, frame = 0
+ 1477              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1478              		@ link register save eliminated.
+ 1479 0000 0346     		mov	r3, r0
+ 1480 0002 4068     		ldr	r0, [r0, #4]
+ 1481 0004 5A69     		ldr	r2, [r3, #20]
+ 1482 0006 0C21     		movs	r1, #12
+ 1483 0008 FFF7FEBF 		b	synopGMACWriteReg
+ 1485              		.section	.text.synopGMAC_init_tx_desc_base,"ax",%progbits
+ 1486              		.align	1
+ 1487              		.global	synopGMAC_init_tx_desc_base
+ 1488              		.thumb
+ 1489              		.thumb_func
+ 1491              	synopGMAC_init_tx_desc_base:
+ 1492              		@ args = 0, pretend = 0, frame = 0
+ 1493              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1494              		@ link register save eliminated.
+ 1495 0000 0346     		mov	r3, r0
+ 1496 0002 4068     		ldr	r0, [r0, #4]
+ 1497 0004 1A69     		ldr	r2, [r3, #16]
+ 1498 0006 1021     		movs	r1, #16
+ 1499 0008 FFF7FEBF 		b	synopGMACWriteReg
+ 1501              		.section	.text.synopGMAC_set_owner_dma,"ax",%progbits
+ 1502              		.align	1
+ 1503              		.global	synopGMAC_set_owner_dma
+ 1504              		.thumb
+ 1505              		.thumb_func
+ 1507              	synopGMAC_set_owner_dma:
+ 1508              		@ args = 0, pretend = 0, frame = 0
+ 1509              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1510              		@ link register save eliminated.
+ 1511 0000 0368     		ldr	r3, [r0, #0]
+ 1512 0002 43F00041 		orr	r1, r3, #-2147483648
+ 1513 0006 0160     		str	r1, [r0, #0]
+ 1514 0008 7047     		bx	lr
+ 1516              		.section	.text.synopGMAC_set_desc_sof,"ax",%progbits
+ 1517              		.align	1
+ 1518              		.global	synopGMAC_set_desc_sof
+ 1519              		.thumb
+ 1520              		.thumb_func
+ 1522              	synopGMAC_set_desc_sof:
+ 1523              		@ args = 0, pretend = 0, frame = 0
+ 1524              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1525              		@ link register save eliminated.
+ 1526 0000 0368     		ldr	r3, [r0, #0]
+ 1527 0002 43F08051 		orr	r1, r3, #268435456
+ 1528 0006 0160     		str	r1, [r0, #0]
+ 1529 0008 7047     		bx	lr
+ 1531              		.section	.text.synopGMAC_set_desc_eof,"ax",%progbits
+ 1532              		.align	1
+ 1533              		.global	synopGMAC_set_desc_eof
+ 1534              		.thumb
+ 1535              		.thumb_func
+ 1537              	synopGMAC_set_desc_eof:
+ 1538              		@ args = 0, pretend = 0, frame = 0
+ 1539              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1540              		@ link register save eliminated.
+ 1541 0000 0368     		ldr	r3, [r0, #0]
+ 1542 0002 43F00051 		orr	r1, r3, #536870912
+ 1543 0006 0160     		str	r1, [r0, #0]
+ 1544 0008 7047     		bx	lr
+ 1546              		.section	.text.synopGMAC_is_sof_in_rx_desc,"ax",%progbits
+ 1547              		.align	1
+ 1548              		.global	synopGMAC_is_sof_in_rx_desc
+ 1549              		.thumb
+ 1550              		.thumb_func
+ 1552              	synopGMAC_is_sof_in_rx_desc:
+ 1553              		@ args = 0, pretend = 0, frame = 0
+ 1554              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1555              		@ link register save eliminated.
+ 1556 0000 0068     		ldr	r0, [r0, #0]
+ 1557 0002 C0F34020 		ubfx	r0, r0, #9, #1
+ 1558 0006 7047     		bx	lr
+ 1560              		.section	.text.synopGMAC_is_eof_in_rx_desc,"ax",%progbits
+ 1561              		.align	1
+ 1562              		.global	synopGMAC_is_eof_in_rx_desc
+ 1563              		.thumb
+ 1564              		.thumb_func
+ 1566              	synopGMAC_is_eof_in_rx_desc:
+ 1567              		@ args = 0, pretend = 0, frame = 0
+ 1568              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1569              		@ link register save eliminated.
+ 1570 0000 0068     		ldr	r0, [r0, #0]
+ 1571 0002 C0F30020 		ubfx	r0, r0, #8, #1
+ 1572 0006 7047     		bx	lr
+ 1574              		.section	.text.synopGMAC_is_da_filter_failed,"ax",%progbits
+ 1575              		.align	1
+ 1576              		.global	synopGMAC_is_da_filter_failed
+ 1577              		.thumb
+ 1578              		.thumb_func
+ 1580              	synopGMAC_is_da_filter_failed:
+ 1581              		@ args = 0, pretend = 0, frame = 0
+ 1582              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1583              		@ link register save eliminated.
+ 1584 0000 0068     		ldr	r0, [r0, #0]
+ 1585 0002 C0F38070 		ubfx	r0, r0, #30, #1
+ 1586 0006 7047     		bx	lr
+ 1588              		.section	.text.synopGMAC_is_sa_filter_failed,"ax",%progbits
+ 1589              		.align	1
+ 1590              		.global	synopGMAC_is_sa_filter_failed
+ 1591              		.thumb
+ 1592              		.thumb_func
+ 1594              	synopGMAC_is_sa_filter_failed:
+ 1595              		@ args = 0, pretend = 0, frame = 0
+ 1596              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1597              		@ link register save eliminated.
+ 1598 0000 0068     		ldr	r0, [r0, #0]
+ 1599 0002 C0F34030 		ubfx	r0, r0, #13, #1
+ 1600 0006 7047     		bx	lr
+ 1602              		.section	.text.synopGMAC_is_desc_owned_by_dma,"ax",%progbits
+ 1603              		.align	1
+ 1604              		.global	synopGMAC_is_desc_owned_by_dma
+ 1605              		.thumb
+ 1606              		.thumb_func
+ 1608              	synopGMAC_is_desc_owned_by_dma:
+ 1609              		@ args = 0, pretend = 0, frame = 0
+ 1610              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1611              		@ link register save eliminated.
+ 1612 0000 0068     		ldr	r0, [r0, #0]
+ 1613 0002 C00F     		lsrs	r0, r0, #31
+ 1614 0004 7047     		bx	lr
+ 1616              		.section	.text.synopGMAC_get_rx_desc_frame_length,"ax",%progbits
+ 1617              		.align	1
+ 1618              		.global	synopGMAC_get_rx_desc_frame_length
+ 1619              		.thumb
+ 1620              		.thumb_func
+ 1622              	synopGMAC_get_rx_desc_frame_length:
+ 1623              		@ args = 0, pretend = 0, frame = 0
+ 1624              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1625              		@ link register save eliminated.
+ 1626 0000 C0F30D40 		ubfx	r0, r0, #16, #14
+ 1627 0004 7047     		bx	lr
+ 1629              		.section	.text.synopGMAC_is_desc_valid,"ax",%progbits
+ 1630              		.align	1
+ 1631              		.global	synopGMAC_is_desc_valid
+ 1632              		.thumb
+ 1633              		.thumb_func
+ 1635              	synopGMAC_is_desc_valid:
+ 1636              		@ args = 0, pretend = 0, frame = 0
+ 1637              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1638              		@ link register save eliminated.
+ 1639 0000 80F40040 		eor	r0, r0, #32768
+ 1640 0004 C0F3C030 		ubfx	r0, r0, #15, #1
+ 1641 0008 7047     		bx	lr
+ 1643              		.section	.text.synopGMAC_is_desc_empty,"ax",%progbits
+ 1644              		.align	1
+ 1645              		.global	synopGMAC_is_desc_empty
+ 1646              		.thumb
+ 1647              		.thumb_func
+ 1649              	synopGMAC_is_desc_empty:
+ 1650              		@ args = 0, pretend = 0, frame = 0
+ 1651              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1652              		@ link register save eliminated.
+ 1653 0000 4368     		ldr	r3, [r0, #4]
+ 1654 0002 33F0E022 		bics	r2, r3, #-536813568
+ 1655 0006 14BF     		ite	ne
+ 1656 0008 0020     		movne	r0, #0
+ 1657 000a 0120     		moveq	r0, #1
+ 1658 000c 7047     		bx	lr
+ 1660              		.section	.text.synopGMAC_is_rx_desc_valid,"ax",%progbits
+ 1661              		.align	1
+ 1662              		.global	synopGMAC_is_rx_desc_valid
+ 1663              		.thumb
+ 1664              		.thumb_func
+ 1666              	synopGMAC_is_rx_desc_valid:
+ 1667              		@ args = 0, pretend = 0, frame = 0
+ 1668              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1669              		@ link register save eliminated.
+ 1670 0000 00F40340 		and	r0, r0, #33536
+ 1671 0004 B0F5407C 		subs	ip, r0, #768
+ 1672 0008 DCF10001 		rsbs	r1, ip, #0
+ 1673 000c 51EB0C00 		adcs	r0, r1, ip
+ 1674 0010 7047     		bx	lr
+ 1676              		.section	.text.synopGMAC_is_tx_aborted,"ax",%progbits
+ 1677              		.align	1
+ 1678              		.global	synopGMAC_is_tx_aborted
+ 1679              		.thumb
+ 1680              		.thumb_func
+ 1682              	synopGMAC_is_tx_aborted:
+ 1683              		@ args = 0, pretend = 0, frame = 0
+ 1684              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1685              		@ link register save eliminated.
+ 1686 0000 10F4407F 		tst	r0, #768
+ 1687 0004 0CBF     		ite	eq
+ 1688 0006 0020     		moveq	r0, #0
+ 1689 0008 0120     		movne	r0, #1
+ 1690 000a 7047     		bx	lr
+ 1692              		.section	.text.synopGMAC_is_tx_carrier_error,"ax",%progbits
+ 1693              		.align	1
+ 1694              		.global	synopGMAC_is_tx_carrier_error
+ 1695              		.thumb
+ 1696              		.thumb_func
+ 1698              	synopGMAC_is_tx_carrier_error:
+ 1699              		@ args = 0, pretend = 0, frame = 0
+ 1700              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1701              		@ link register save eliminated.
+ 1702 0000 10F4406F 		tst	r0, #3072
+ 1703 0004 0CBF     		ite	eq
+ 1704 0006 0020     		moveq	r0, #0
+ 1705 0008 0120     		movne	r0, #1
+ 1706 000a 7047     		bx	lr
+ 1708              		.section	.text.synopGMAC_get_tx_collision_count,"ax",%progbits
+ 1709              		.align	1
+ 1710              		.global	synopGMAC_get_tx_collision_count
+ 1711              		.thumb
+ 1712              		.thumb_func
+ 1714              	synopGMAC_get_tx_collision_count:
+ 1715              		@ args = 0, pretend = 0, frame = 0
+ 1716              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1717              		@ link register save eliminated.
+ 1718 0000 C0F3C300 		ubfx	r0, r0, #3, #4
+ 1719 0004 7047     		bx	lr
+ 1721              		.section	.text.synopGMAC_is_exc_tx_collisions,"ax",%progbits
+ 1722              		.align	1
+ 1723              		.global	synopGMAC_is_exc_tx_collisions
+ 1724              		.thumb
+ 1725              		.thumb_func
+ 1727              	synopGMAC_is_exc_tx_collisions:
+ 1728              		@ args = 0, pretend = 0, frame = 0
+ 1729              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1730              		@ link register save eliminated.
+ 1731 0000 C0F30020 		ubfx	r0, r0, #8, #1
+ 1732 0004 7047     		bx	lr
+ 1734              		.section	.text.synopGMAC_is_rx_frame_damaged,"ax",%progbits
+ 1735              		.align	1
+ 1736              		.global	synopGMAC_is_rx_frame_damaged
+ 1737              		.thumb
+ 1738              		.thumb_func
+ 1740              	synopGMAC_is_rx_frame_damaged:
+ 1741              		@ args = 0, pretend = 0, frame = 0
+ 1742              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1743              		@ link register save eliminated.
+ 1744 0000 10F4046F 		tst	r0, #2112
+ 1745 0004 0CBF     		ite	eq
+ 1746 0006 0020     		moveq	r0, #0
+ 1747 0008 0120     		movne	r0, #1
+ 1748 000a 7047     		bx	lr
+ 1750              		.section	.text.synopGMAC_is_rx_frame_collision,"ax",%progbits
+ 1751              		.align	1
+ 1752              		.global	synopGMAC_is_rx_frame_collision
+ 1753              		.thumb
+ 1754              		.thumb_func
+ 1756              	synopGMAC_is_rx_frame_collision:
+ 1757              		@ args = 0, pretend = 0, frame = 0
+ 1758              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1759              		@ link register save eliminated.
+ 1760 0000 C0F38010 		ubfx	r0, r0, #6, #1
+ 1761 0004 7047     		bx	lr
+ 1763              		.section	.text.synopGMAC_is_rx_crc,"ax",%progbits
+ 1764              		.align	1
+ 1765              		.global	synopGMAC_is_rx_crc
+ 1766              		.thumb
+ 1767              		.thumb_func
+ 1769              	synopGMAC_is_rx_crc:
+ 1770              		@ args = 0, pretend = 0, frame = 0
+ 1771              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1772              		@ link register save eliminated.
+ 1773 0000 C0F34000 		ubfx	r0, r0, #1, #1
+ 1774 0004 7047     		bx	lr
+ 1776              		.section	.text.synopGMAC_is_frame_dribbling_errors,"ax",%progbits
+ 1777              		.align	1
+ 1778              		.global	synopGMAC_is_frame_dribbling_errors
+ 1779              		.thumb
+ 1780              		.thumb_func
+ 1782              	synopGMAC_is_frame_dribbling_errors:
+ 1783              		@ args = 0, pretend = 0, frame = 0
+ 1784              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1785              		@ link register save eliminated.
+ 1786 0000 C0F38000 		ubfx	r0, r0, #2, #1
+ 1787 0004 7047     		bx	lr
+ 1789              		.section	.text.synopGMAC_is_rx_frame_length_errors,"ax",%progbits
+ 1790              		.align	1
+ 1791              		.global	synopGMAC_is_rx_frame_length_errors
+ 1792              		.thumb
+ 1793              		.thumb_func
+ 1795              	synopGMAC_is_rx_frame_length_errors:
+ 1796              		@ args = 0, pretend = 0, frame = 0
+ 1797              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1798              		@ link register save eliminated.
+ 1799 0000 C0F30030 		ubfx	r0, r0, #12, #1
+ 1800 0004 7047     		bx	lr
+ 1802              		.section	.text.synopGMAC_is_last_rx_desc,"ax",%progbits
+ 1803              		.align	1
+ 1804              		.global	synopGMAC_is_last_rx_desc
+ 1805              		.thumb
+ 1806              		.thumb_func
+ 1808              	synopGMAC_is_last_rx_desc:
+ 1809              		@ args = 0, pretend = 0, frame = 0
+ 1810              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1811              		@ link register save eliminated.
+ 1812 0000 4B68     		ldr	r3, [r1, #4]
+ 1813 0002 1A04     		lsls	r2, r3, #16
+ 1814 0004 06D4     		bmi	.L135
+ 1815 0006 C069     		ldr	r0, [r0, #28]
+ 1816 0008 496A     		ldr	r1, [r1, #36]
+ 1817 000a 421A     		subs	r2, r0, r1
+ 1818 000c 5342     		rsbs	r3, r2, #0
+ 1819 000e 53EB0200 		adcs	r0, r3, r2
+ 1820 0012 7047     		bx	lr
+ 1821              	.L135:
+ 1822 0014 0120     		movs	r0, #1
+ 1823 0016 7047     		bx	lr
+ 1825              		.section	.text.synopGMAC_is_last_tx_desc,"ax",%progbits
+ 1826              		.align	1
+ 1827              		.global	synopGMAC_is_last_tx_desc
+ 1828              		.thumb
+ 1829              		.thumb_func
+ 1831              	synopGMAC_is_last_tx_desc:
+ 1832              		@ args = 0, pretend = 0, frame = 0
+ 1833              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1834              		@ link register save eliminated.
+ 1835 0000 0B68     		ldr	r3, [r1, #0]
+ 1836 0002 9B02     		lsls	r3, r3, #10
+ 1837 0004 06D4     		bmi	.L138
+ 1838 0006 8069     		ldr	r0, [r0, #24]
+ 1839 0008 496A     		ldr	r1, [r1, #36]
+ 1840 000a 421A     		subs	r2, r0, r1
+ 1841 000c 5342     		rsbs	r3, r2, #0
+ 1842 000e 53EB0200 		adcs	r0, r3, r2
+ 1843 0012 7047     		bx	lr
+ 1844              	.L138:
+ 1845 0014 0120     		movs	r0, #1
+ 1846 0016 7047     		bx	lr
+ 1848              		.section	.text.synopGMAC_is_rx_desc_chained,"ax",%progbits
+ 1849              		.align	1
+ 1850              		.global	synopGMAC_is_rx_desc_chained
+ 1851              		.thumb
+ 1852              		.thumb_func
+ 1854              	synopGMAC_is_rx_desc_chained:
+ 1855              		@ args = 0, pretend = 0, frame = 0
+ 1856              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1857              		@ link register save eliminated.
+ 1858 0000 4068     		ldr	r0, [r0, #4]
+ 1859 0002 C0F38030 		ubfx	r0, r0, #14, #1
+ 1860 0006 7047     		bx	lr
+ 1862              		.section	.text.synopGMAC_is_tx_desc_chained,"ax",%progbits
+ 1863              		.align	1
+ 1864              		.global	synopGMAC_is_tx_desc_chained
+ 1865              		.thumb
+ 1866              		.thumb_func
+ 1868              	synopGMAC_is_tx_desc_chained:
+ 1869              		@ args = 0, pretend = 0, frame = 0
+ 1870              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1871              		@ link register save eliminated.
+ 1872 0000 0068     		ldr	r0, [r0, #0]
+ 1873 0002 C0F30050 		ubfx	r0, r0, #20, #1
+ 1874 0006 7047     		bx	lr
+ 1876              		.section	.text.synopGMAC_get_desc_data,"ax",%progbits
+ 1877              		.align	1
+ 1878              		.global	synopGMAC_get_desc_data
+ 1879              		.thumb
+ 1880              		.thumb_func
+ 1882              	synopGMAC_get_desc_data:
+ 1883              		@ args = 16, pretend = 0, frame = 0
+ 1884              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1885 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 1886 0002 059C     		ldr	r4, [sp, #20]
+ 1887 0004 069E     		ldr	r6, [sp, #24]
+ 1888 0006 079D     		ldr	r5, [sp, #28]
+ 1889 0008 09B1     		cbz	r1, .L142
+ 1890 000a 0768     		ldr	r7, [r0, #0]
+ 1891 000c 0F60     		str	r7, [r1, #0]
+ 1892              	.L142:
+ 1893 000e 0AB1     		cbz	r2, .L143
+ 1894 0010 8168     		ldr	r1, [r0, #8]
+ 1895 0012 1160     		str	r1, [r2, #0]
+ 1896              	.L143:
+ 1897 0014 1BB1     		cbz	r3, .L144
+ 1898 0016 4268     		ldr	r2, [r0, #4]
+ 1899 0018 D104     		lsls	r1, r2, #19
+ 1900 001a CA0C     		lsrs	r2, r1, #19
+ 1901 001c 1A60     		str	r2, [r3, #0]
+ 1902              	.L144:
+ 1903 001e 0CB1     		cbz	r4, .L145
+ 1904 0020 036A     		ldr	r3, [r0, #32]
+ 1905 0022 2360     		str	r3, [r4, #0]
+ 1906              	.L145:
+ 1907 0024 0EB1     		cbz	r6, .L146
+ 1908 0026 C168     		ldr	r1, [r0, #12]
+ 1909 0028 3160     		str	r1, [r6, #0]
+ 1910              	.L146:
+ 1911 002a 1DB1     		cbz	r5, .L147
+ 1912 002c 4268     		ldr	r2, [r0, #4]
+ 1913 002e C2F30C43 		ubfx	r3, r2, #16, #13
+ 1914 0032 2B60     		str	r3, [r5, #0]
+ 1915              	.L147:
+ 1916 0034 14B1     		cbz	r4, .L141
+ 1917 0036 406A     		ldr	r0, [r0, #36]
+ 1918 0038 0899     		ldr	r1, [sp, #32]
+ 1919 003a 0860     		str	r0, [r1, #0]
+ 1920              	.L141:
+ 1921 003c F0BD     		pop	{r4, r5, r6, r7, pc}
+ 1923              		.section	.text.synopGMAC_get_tx_qptr,"ax",%progbits
+ 1924              		.align	1
+ 1925              		.global	synopGMAC_get_tx_qptr
+ 1926              		.thumb
+ 1927              		.thumb_func
+ 1929              	synopGMAC_get_tx_qptr:
+ 1930              		@ args = 28, pretend = 0, frame = 0
+ 1931              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1932 0000 2DE9F84F 		push	{r3, r4, r5, r6, r7, r8, r9, sl, fp, lr}
+ 1933 0004 046C     		ldr	r4, [r0, #64]
+ 1934 0006 0A9E     		ldr	r6, [sp, #40]
+ 1935 0008 D4F800A0 		ldr	sl, [r4, #0]
+ 1936 000c DDF830B0 		ldr	fp, [sp, #48]
+ 1937 0010 DDF83890 		ldr	r9, [sp, #56]
+ 1938 0014 0F9F     		ldr	r7, [sp, #60]
+ 1939 0016 D0F83080 		ldr	r8, [r0, #48]
+ 1940 001a BAF1000F 		cmp	sl, #0
+ 1941 001e 9C46     		mov	ip, r3
+ 1942 0020 0546     		mov	r5, r0
+ 1943 0022 0B9B     		ldr	r3, [sp, #44]
+ 1944 0024 5FDB     		blt	.L189
+ 1945 0026 6068     		ldr	r0, [r4, #4]
+ 1946 0028 30F0E020 		bics	r0, r0, #-536813568
+ 1947 002c 5BD0     		beq	.L189
+ 1948 002e 286A     		ldr	r0, [r5, #32]
+ 1949 0030 0138     		subs	r0, r0, #1
+ 1950 0032 2862     		str	r0, [r5, #32]
+ 1951 0034 09B1     		cbz	r1, .L172
+ 1952 0036 C1F800A0 		str	sl, [r1, #0]
+ 1953              	.L172:
+ 1954 003a B9F1000F 		cmp	r9, #0
+ 1955 003e 02D0     		beq	.L173
+ 1956 0040 2169     		ldr	r1, [r4, #16]
+ 1957 0042 C9F80010 		str	r1, [r9, #0]
+ 1958              	.L173:
+ 1959 0046 0FB1     		cbz	r7, .L174
+ 1960 0048 E069     		ldr	r0, [r4, #28]
+ 1961 004a 3860     		str	r0, [r7, #0]
+ 1962              	.L174:
+ 1963 004c 1099     		ldr	r1, [sp, #64]
+ 1964 004e 09B1     		cbz	r1, .L175
+ 1965 0050 A069     		ldr	r0, [r4, #24]
+ 1966 0052 3860     		str	r0, [r7, #0]
+ 1967              	.L175:
+ 1968 0054 0AB1     		cbz	r2, .L176
+ 1969 0056 A168     		ldr	r1, [r4, #8]
+ 1970 0058 1160     		str	r1, [r2, #0]
+ 1971              	.L176:
+ 1972 005a BCF1000F 		cmp	ip, #0
+ 1973 005e 04D0     		beq	.L177
+ 1974 0060 6268     		ldr	r2, [r4, #4]
+ 1975 0062 D004     		lsls	r0, r2, #19
+ 1976 0064 C10C     		lsrs	r1, r0, #19
+ 1977 0066 CCF80010 		str	r1, [ip, #0]
+ 1978              	.L177:
+ 1979 006a 0EB1     		cbz	r6, .L178
+ 1980 006c 226A     		ldr	r2, [r4, #32]
+ 1981 006e 3260     		str	r2, [r6, #0]
+ 1982              	.L178:
+ 1983 0070 0BB1     		cbz	r3, .L179
+ 1984 0072 E068     		ldr	r0, [r4, #12]
+ 1985 0074 1860     		str	r0, [r3, #0]
+ 1986              	.L179:
+ 1987 0076 BBF1000F 		cmp	fp, #0
+ 1988 007a 04D0     		beq	.L180
+ 1989 007c 6368     		ldr	r3, [r4, #4]
+ 1990 007e C3F30C41 		ubfx	r1, r3, #16, #13
+ 1991 0082 CBF80010 		str	r1, [fp, #0]
+ 1992              	.L180:
+ 1993 0086 16B1     		cbz	r6, .L181
+ 1994 0088 626A     		ldr	r2, [r4, #36]
+ 1995 008a 0D98     		ldr	r0, [sp, #52]
+ 1996 008c 0260     		str	r2, [r0, #0]
+ 1997              	.L181:
+ 1998 008e 2846     		mov	r0, r5
+ 1999 0090 2146     		mov	r1, r4
+ 2000 0092 FFF7FEFF 		bl	synopGMAC_is_last_tx_desc
+ 2001 0096 10B9     		cbnz	r0, .L190
+ 2002 0098 08F10103 		add	r3, r8, #1
+ 2003 009c 00E0     		b	.L182
+ 2004              	.L190:
+ 2005 009e 0023     		movs	r3, #0
+ 2006              	.L182:
+ 2007 00a0 2168     		ldr	r1, [r4, #0]
+ 2008 00a2 2B63     		str	r3, [r5, #48]
+ 2009 00a4 CA02     		lsls	r2, r1, #11
+ 2010 00a6 05D5     		bpl	.L183
+ 2011 00a8 636A     		ldr	r3, [r4, #36]
+ 2012 00aa 4FF48011 		mov	r1, #1048576
+ 2013 00ae 2B64     		str	r3, [r5, #64]
+ 2014 00b0 2160     		str	r1, [r4, #0]
+ 2015 00b2 13E0     		b	.L222
+ 2016              	.L183:
+ 2017 00b4 2846     		mov	r0, r5
+ 2018 00b6 2146     		mov	r1, r4
+ 2019 00b8 FFF7FEFF 		bl	synopGMAC_is_last_tx_desc
+ 2020 00bc 08B1     		cbz	r0, .L185
+ 2021 00be AA69     		ldr	r2, [r5, #24]
+ 2022 00c0 01E0     		b	.L186
+ 2023              	.L185:
+ 2024 00c2 04F12802 		add	r2, r4, #40
+ 2025              	.L186:
+ 2026 00c6 2A64     		str	r2, [r5, #64]
+ 2027 00c8 2846     		mov	r0, r5
+ 2028 00ca 2146     		mov	r1, r4
+ 2029 00cc FFF7FEFF 		bl	synopGMAC_is_last_tx_desc
+ 2030 00d0 0028     		cmp	r0, #0
+ 2031 00d2 14BF     		ite	ne
+ 2032 00d4 4FF40010 		movne	r0, #2097152
+ 2033 00d8 0020     		moveq	r0, #0
+ 2034 00da 2060     		str	r0, [r4, #0]
+ 2035              	.L222:
+ 2036 00dc 0022     		movs	r2, #0
+ 2037 00de 6260     		str	r2, [r4, #4]
+ 2038 00e0 4046     		mov	r0, r8
+ 2039 00e2 BDE8F88F 		pop	{r3, r4, r5, r6, r7, r8, r9, sl, fp, pc}
+ 2040              	.L189:
+ 2041 00e6 4FF0FF30 		mov	r0, #-1
+ 2042 00ea BDE8F88F 		pop	{r3, r4, r5, r6, r7, r8, r9, sl, fp, pc}
+ 2044              		.section	.text.synopGMAC_set_tx_qptr,"ax",%progbits
+ 2045              		.align	1
+ 2046              		.global	synopGMAC_set_tx_qptr
+ 2047              		.thumb
+ 2048              		.thumb_func
+ 2050              	synopGMAC_set_tx_qptr:
+ 2051              		@ args = 16, pretend = 0, frame = 0
+ 2052              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2053 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 2054 0002 0546     		mov	r5, r0
+ 2055 0004 0998     		ldr	r0, [sp, #36]
+ 2056 0006 6C6C     		ldr	r4, [r5, #68]
+ 2057 0008 6E6B     		ldr	r6, [r5, #52]
+ 2058 000a 6368     		ldr	r3, [r4, #4]
+ 2059 000c 33F0E021 		bics	r1, r3, #-536813568
+ 2060 0010 4ED1     		bne	.L235
+ 2061 0012 296A     		ldr	r1, [r5, #32]
+ 2062 0014 4B1C     		adds	r3, r1, #1
+ 2063 0016 2B62     		str	r3, [r5, #32]
+ 2064 0018 2368     		ldr	r3, [r4, #0]
+ 2065 001a 6168     		ldr	r1, [r4, #4]
+ 2066 001c 13F4801F 		tst	r3, #1048576
+ 2067 0020 4FEAC242 		lsl	r2, r2, #19
+ 2068 0024 1BD0     		beq	.L225
+ 2069 0026 41EAD241 		orr	r1, r1, r2, lsr #19
+ 2070 002a 6160     		str	r1, [r4, #4]
+ 2071 002c 10B9     		cbnz	r0, .L226
+ 2072 002e 43F0E042 		orr	r2, r3, #1879048192
+ 2073 0032 03E0     		b	.L238
+ 2074              	.L226:
+ 2075 0034 43F0E143 		orr	r3, r3, #1887436800
+ 2076 0038 43F48002 		orr	r2, r3, #4194304
+ 2077              	.L238:
+ 2078 003c 2260     		str	r2, [r4, #0]
+ 2079 003e 2068     		ldr	r0, [r4, #0]
+ 2080 0040 40F00041 		orr	r1, r0, #-2147483648
+ 2081 0044 2160     		str	r1, [r4, #0]
+ 2082 0046 2846     		mov	r0, r5
+ 2083 0048 2146     		mov	r1, r4
+ 2084 004a FFF7FEFF 		bl	synopGMAC_is_last_tx_desc
+ 2085 004e 08B9     		cbnz	r0, .L236
+ 2086 0050 731C     		adds	r3, r6, #1
+ 2087 0052 00E0     		b	.L228
+ 2088              	.L236:
+ 2089 0054 0023     		movs	r3, #0
+ 2090              	.L228:
+ 2091 0056 626A     		ldr	r2, [r4, #36]
+ 2092 0058 6B63     		str	r3, [r5, #52]
+ 2093 005a 6A64     		str	r2, [r5, #68]
+ 2094 005c 26E0     		b	.L229
+ 2095              	.L225:
+ 2096 005e 079F     		ldr	r7, [sp, #28]
+ 2097 0060 41EAD242 		orr	r2, r1, r2, lsr #19
+ 2098 0064 1449     		ldr	r1, .L240
+ 2099 0066 3F04     		lsls	r7, r7, #16
+ 2100 0068 3940     		ands	r1, r1, r7
+ 2101 006a 0A43     		orrs	r2, r2, r1
+ 2102 006c 6260     		str	r2, [r4, #4]
+ 2103 006e 10B9     		cbnz	r0, .L230
+ 2104 0070 43F0E043 		orr	r3, r3, #1879048192
+ 2105 0074 03E0     		b	.L239
+ 2106              	.L230:
+ 2107 0076 43F0E140 		orr	r0, r3, #1887436800
+ 2108 007a 40F48003 		orr	r3, r0, #4194304
+ 2109              	.L239:
+ 2110 007e 2360     		str	r3, [r4, #0]
+ 2111 0080 2168     		ldr	r1, [r4, #0]
+ 2112 0082 41F00042 		orr	r2, r1, #-2147483648
+ 2113 0086 2260     		str	r2, [r4, #0]
+ 2114 0088 2846     		mov	r0, r5
+ 2115 008a 2146     		mov	r1, r4
+ 2116 008c FFF7FEFF 		bl	synopGMAC_is_last_tx_desc
+ 2117 0090 08B9     		cbnz	r0, .L237
+ 2118 0092 701C     		adds	r0, r6, #1
+ 2119 0094 00E0     		b	.L232
+ 2120              	.L237:
+ 2121 0096 0020     		movs	r0, #0
+ 2122              	.L232:
+ 2123 0098 6863     		str	r0, [r5, #52]
+ 2124 009a 2146     		mov	r1, r4
+ 2125 009c 2846     		mov	r0, r5
+ 2126 009e FFF7FEFF 		bl	synopGMAC_is_last_tx_desc
+ 2127 00a2 08B1     		cbz	r0, .L233
+ 2128 00a4 AC69     		ldr	r4, [r5, #24]
+ 2129 00a6 00E0     		b	.L234
+ 2130              	.L233:
+ 2131 00a8 2834     		adds	r4, r4, #40
+ 2132              	.L234:
+ 2133 00aa 6C64     		str	r4, [r5, #68]
+ 2134              	.L229:
+ 2135 00ac 3046     		mov	r0, r6
+ 2136 00ae F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 2137              	.L235:
+ 2138 00b0 4FF0FF30 		mov	r0, #-1
+ 2139 00b4 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 2140              	.L241:
+ 2141 00b6 00BF     		.align	2
+ 2142              	.L240:
+ 2143 00b8 0000FF1F 		.word	536805376
+ 2145              		.section	.text.synopGMAC_set_rx_qptr,"ax",%progbits
+ 2146              		.align	1
+ 2147              		.global	synopGMAC_set_rx_qptr
+ 2148              		.thumb
+ 2149              		.thumb_func
+ 2151              	synopGMAC_set_rx_qptr:
+ 2152              		@ args = 12, pretend = 0, frame = 0
+ 2153              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2154 0000 2DE9F843 		push	{r3, r4, r5, r6, r7, r8, r9, lr}
+ 2155 0004 C46C     		ldr	r4, [r0, #76]
+ 2156 0006 D0F83C90 		ldr	r9, [r0, #60]
+ 2157 000a 6668     		ldr	r6, [r4, #4]
+ 2158 000c 36F0E028 		bics	r8, r6, #-536813568
+ 2159 0010 0546     		mov	r5, r0
+ 2160 0012 4BD1     		bne	.L250
+ 2161 0014 16F48047 		ands	r7, r6, #16384
+ 2162 0018 4FEAC242 		lsl	r2, r2, #19
+ 2163 001c 46EAD246 		orr	r6, r6, r2, lsr #19
+ 2164 0020 19D0     		beq	.L244
+ 2165 0022 2362     		str	r3, [r4, #32]
+ 2166 0024 4FF00043 		mov	r3, #-2147483648
+ 2167 0028 A160     		str	r1, [r4, #8]
+ 2168 002a 6660     		str	r6, [r4, #4]
+ 2169 002c C4F81080 		str	r8, [r4, #16]
+ 2170 0030 C4F81480 		str	r8, [r4, #20]
+ 2171 0034 C4F81880 		str	r8, [r4, #24]
+ 2172 0038 C4F81C80 		str	r8, [r4, #28]
+ 2173 003c 2360     		str	r3, [r4, #0]
+ 2174 003e 2146     		mov	r1, r4
+ 2175 0040 FFF7FEFF 		bl	synopGMAC_is_last_rx_desc
+ 2176 0044 10B9     		cbnz	r0, .L251
+ 2177 0046 09F10100 		add	r0, r9, #1
+ 2178 004a 00E0     		b	.L245
+ 2179              	.L251:
+ 2180 004c 4046     		mov	r0, r8
+ 2181              	.L245:
+ 2182 004e 616A     		ldr	r1, [r4, #36]
+ 2183 0050 E863     		str	r0, [r5, #60]
+ 2184 0052 E964     		str	r1, [r5, #76]
+ 2185 0054 24E0     		b	.L246
+ 2186              	.L244:
+ 2187 0056 099A     		ldr	r2, [sp, #36]
+ 2188 0058 A160     		str	r1, [r4, #8]
+ 2189 005a 4FEA024E 		lsl	lr, r2, #16
+ 2190 005e 154A     		ldr	r2, .L253
+ 2191 0060 0A99     		ldr	r1, [sp, #40]
+ 2192 0062 2362     		str	r3, [r4, #32]
+ 2193 0064 0EEA0202 		and	r2, lr, r2
+ 2194 0068 3243     		orrs	r2, r2, r6
+ 2195 006a 089B     		ldr	r3, [sp, #32]
+ 2196 006c 6260     		str	r2, [r4, #4]
+ 2197 006e 4FF00042 		mov	r2, #-2147483648
+ 2198 0072 6162     		str	r1, [r4, #36]
+ 2199 0074 2761     		str	r7, [r4, #16]
+ 2200 0076 6761     		str	r7, [r4, #20]
+ 2201 0078 A761     		str	r7, [r4, #24]
+ 2202 007a E761     		str	r7, [r4, #28]
+ 2203 007c E360     		str	r3, [r4, #12]
+ 2204 007e 2260     		str	r2, [r4, #0]
+ 2205 0080 2146     		mov	r1, r4
+ 2206 0082 FFF7FEFF 		bl	synopGMAC_is_last_rx_desc
+ 2207 0086 08B9     		cbnz	r0, .L247
+ 2208 0088 09F10107 		add	r7, r9, #1
+ 2209              	.L247:
+ 2210 008c EF63     		str	r7, [r5, #60]
+ 2211 008e 2846     		mov	r0, r5
+ 2212 0090 2146     		mov	r1, r4
+ 2213 0092 FFF7FEFF 		bl	synopGMAC_is_last_rx_desc
+ 2214 0096 08B1     		cbz	r0, .L248
+ 2215 0098 EC69     		ldr	r4, [r5, #28]
+ 2216 009a 00E0     		b	.L249
+ 2217              	.L248:
+ 2218 009c 2834     		adds	r4, r4, #40
+ 2219              	.L249:
+ 2220 009e EC64     		str	r4, [r5, #76]
+ 2221              	.L246:
+ 2222 00a0 6A6A     		ldr	r2, [r5, #36]
+ 2223 00a2 531C     		adds	r3, r2, #1
+ 2224 00a4 6B62     		str	r3, [r5, #36]
+ 2225 00a6 4846     		mov	r0, r9
+ 2226 00a8 BDE8F883 		pop	{r3, r4, r5, r6, r7, r8, r9, pc}
+ 2227              	.L250:
+ 2228 00ac 4FF0FF30 		mov	r0, #-1
+ 2229 00b0 BDE8F883 		pop	{r3, r4, r5, r6, r7, r8, r9, pc}
+ 2230              	.L254:
+ 2231              		.align	2
+ 2232              	.L253:
+ 2233 00b4 0000FF1F 		.word	536805376
+ 2235              		.section	.text.synopGMAC_get_rx_qptr,"ax",%progbits
+ 2236              		.align	1
+ 2237              		.global	synopGMAC_get_rx_qptr
+ 2238              		.thumb
+ 2239              		.thumb_func
+ 2241              	synopGMAC_get_rx_qptr:
+ 2242              		@ args = 28, pretend = 0, frame = 0
+ 2243              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2244 0000 2DE9F84F 		push	{r3, r4, r5, r6, r7, r8, r9, sl, fp, lr}
+ 2245 0004 0446     		mov	r4, r0
+ 2246 0006 0846     		mov	r0, r1
+ 2247 0008 A16C     		ldr	r1, [r4, #72]
+ 2248 000a 0A9D     		ldr	r5, [sp, #40]
+ 2249 000c D1F800A0 		ldr	sl, [r1, #0]
+ 2250 0010 DDF82CB0 		ldr	fp, [sp, #44]
+ 2251 0014 DDF83890 		ldr	r9, [sp, #56]
+ 2252 0018 DDF83C80 		ldr	r8, [sp, #60]
+ 2253 001c DDF840C0 		ldr	ip, [sp, #64]
+ 2254 0020 A66B     		ldr	r6, [r4, #56]
+ 2255 0022 BAF1000F 		cmp	sl, #0
+ 2256 0026 41DB     		blt	.L269
+ 2257 0028 4F68     		ldr	r7, [r1, #4]
+ 2258 002a 37F0E027 		bics	r7, r7, #-536813568
+ 2259 002e 3DD0     		beq	.L269
+ 2260 0030 08B1     		cbz	r0, .L257
+ 2261 0032 C0F800A0 		str	sl, [r0, #0]
+ 2262              	.L257:
+ 2263 0036 B9F1000F 		cmp	r9, #0
+ 2264 003a 02D0     		beq	.L258
+ 2265 003c 0869     		ldr	r0, [r1, #16]
+ 2266 003e C9F80000 		str	r0, [r9, #0]
+ 2267              	.L258:
+ 2268 0042 B8F1000F 		cmp	r8, #0
+ 2269 0046 02D0     		beq	.L259
+ 2270 0048 C869     		ldr	r0, [r1, #28]
+ 2271 004a C8F80000 		str	r0, [r8, #0]
+ 2272              	.L259:
+ 2273 004e BCF1000F 		cmp	ip, #0
+ 2274 0052 02D0     		beq	.L260
+ 2275 0054 8869     		ldr	r0, [r1, #24]
+ 2276 0056 CCF80000 		str	r0, [ip, #0]
+ 2277              	.L260:
+ 2278 005a 1BB1     		cbz	r3, .L261
+ 2279 005c 4868     		ldr	r0, [r1, #4]
+ 2280 005e C004     		lsls	r0, r0, #19
+ 2281 0060 C00C     		lsrs	r0, r0, #19
+ 2282 0062 1860     		str	r0, [r3, #0]
+ 2283              	.L261:
+ 2284 0064 0AB1     		cbz	r2, .L262
+ 2285 0066 8B68     		ldr	r3, [r1, #8]
+ 2286 0068 1360     		str	r3, [r2, #0]
+ 2287              	.L262:
+ 2288 006a 0DB1     		cbz	r5, .L263
+ 2289 006c 0A6A     		ldr	r2, [r1, #32]
+ 2290 006e 2A60     		str	r2, [r5, #0]
+ 2291              	.L263:
+ 2292 0070 0C98     		ldr	r0, [sp, #48]
+ 2293 0072 18B1     		cbz	r0, .L264
+ 2294 0074 4B68     		ldr	r3, [r1, #4]
+ 2295 0076 C3F30C42 		ubfx	r2, r3, #16, #13
+ 2296 007a 0260     		str	r2, [r0, #0]
+ 2297              	.L264:
+ 2298 007c BBF1000F 		cmp	fp, #0
+ 2299 0080 02D0     		beq	.L265
+ 2300 0082 C868     		ldr	r0, [r1, #12]
+ 2301 0084 CBF80000 		str	r0, [fp, #0]
+ 2302              	.L265:
+ 2303 0088 15B1     		cbz	r5, .L266
+ 2304 008a 4A6A     		ldr	r2, [r1, #36]
+ 2305 008c 0D9B     		ldr	r3, [sp, #52]
+ 2306 008e 1A60     		str	r2, [r3, #0]
+ 2307              	.L266:
+ 2308 0090 2046     		mov	r0, r4
+ 2309 0092 FFF7FEFF 		bl	synopGMAC_is_last_rx_desc
+ 2310 0096 08B9     		cbnz	r0, .L270
+ 2311 0098 711C     		adds	r1, r6, #1
+ 2312 009a 00E0     		b	.L267
+ 2313              	.L270:
+ 2314 009c 0021     		movs	r1, #0
+ 2315              	.L267:
+ 2316 009e 606A     		ldr	r0, [r4, #36]
+ 2317 00a0 A163     		str	r1, [r4, #56]
+ 2318 00a2 421E     		subs	r2, r0, #1
+ 2319 00a4 6262     		str	r2, [r4, #36]
+ 2320 00a6 3046     		mov	r0, r6
+ 2321 00a8 BDE8F88F 		pop	{r3, r4, r5, r6, r7, r8, r9, sl, fp, pc}
+ 2322              	.L269:
+ 2323 00ac 4FF0FF30 		mov	r0, #-1
+ 2324 00b0 BDE8F88F 		pop	{r3, r4, r5, r6, r7, r8, r9, sl, fp, pc}
+ 2326              		.section	.text.synopGMAC_clear_interrupt,"ax",%progbits
+ 2327              		.align	1
+ 2328              		.global	synopGMAC_clear_interrupt
+ 2329              		.thumb
+ 2330              		.thumb_func
+ 2332              	synopGMAC_clear_interrupt:
+ 2333              		@ args = 0, pretend = 0, frame = 0
+ 2334              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2335 0000 10B5     		push	{r4, lr}
+ 2336 0002 1421     		movs	r1, #20
+ 2337 0004 0446     		mov	r4, r0
+ 2338 0006 4068     		ldr	r0, [r0, #4]
+ 2339 0008 FFF7FEFF 		bl	synopGMACReadReg
+ 2340 000c 0246     		mov	r2, r0
+ 2341 000e 6068     		ldr	r0, [r4, #4]
+ 2342 0010 1421     		movs	r1, #20
+ 2343 0012 BDE81040 		pop	{r4, lr}
+ 2344 0016 FFF7FEBF 		b	synopGMACWriteReg
+ 2346              		.section	.text.synopGMAC_get_interrupt_type,"ax",%progbits
+ 2347              		.align	1
+ 2348              		.global	synopGMAC_get_interrupt_type
+ 2349              		.thumb
+ 2350              		.thumb_func
+ 2352              	synopGMAC_get_interrupt_type:
+ 2353              		@ args = 0, pretend = 0, frame = 0
+ 2354              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2355 0000 38B5     		push	{r3, r4, r5, lr}
+ 2356 0002 1421     		movs	r1, #20
+ 2357 0004 0546     		mov	r5, r0
+ 2358 0006 4068     		ldr	r0, [r0, #4]
+ 2359 0008 FFF7FEFF 		bl	synopGMACReadReg
+ 2360 000c 0446     		mov	r4, r0
+ 2361 000e 1421     		movs	r1, #20
+ 2362 0010 2246     		mov	r2, r4
+ 2363 0012 6868     		ldr	r0, [r5, #4]
+ 2364 0014 FFF7FEFF 		bl	synopGMACWriteReg
+ 2365 0018 14F4005F 		tst	r4, #8192
+ 2366 001c 0CBF     		ite	eq
+ 2367 001e 0020     		moveq	r0, #0
+ 2368 0020 8020     		movne	r0, #128
+ 2369 0022 6206     		lsls	r2, r4, #25
+ 2370 0024 48BF     		it	mi
+ 2371 0026 40F00100 		orrmi	r0, r0, #1
+ 2372 002a 2306     		lsls	r3, r4, #24
+ 2373 002c 48BF     		it	mi
+ 2374 002e 40F00200 		orrmi	r0, r0, #2
+ 2375 0032 E105     		lsls	r1, r4, #23
+ 2376 0034 48BF     		it	mi
+ 2377 0036 40F00400 		orrmi	r0, r0, #4
+ 2378 003a E207     		lsls	r2, r4, #31
+ 2379 003c 48BF     		it	mi
+ 2380 003e 40F00800 		orrmi	r0, r0, #8
+ 2381 0042 A306     		lsls	r3, r4, #26
+ 2382 0044 48BF     		it	mi
+ 2383 0046 40F01000 		orrmi	r0, r0, #16
+ 2384 004a A107     		lsls	r1, r4, #30
+ 2385 004c 48BF     		it	mi
+ 2386 004e 40F02000 		orrmi	r0, r0, #32
+ 2387 0052 38BD     		pop	{r3, r4, r5, pc}
+ 2389              		.section	.text.synopGMAC_get_interrupt_mask,"ax",%progbits
+ 2390              		.align	1
+ 2391              		.global	synopGMAC_get_interrupt_mask
+ 2392              		.thumb
+ 2393              		.thumb_func
+ 2395              	synopGMAC_get_interrupt_mask:
+ 2396              		@ args = 0, pretend = 0, frame = 0
+ 2397              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2398              		@ link register save eliminated.
+ 2399 0000 4068     		ldr	r0, [r0, #4]
+ 2400 0002 1C21     		movs	r1, #28
+ 2401 0004 FFF7FEBF 		b	synopGMACReadReg
+ 2403              		.section	.text.synopGMAC_enable_interrupt,"ax",%progbits
+ 2404              		.align	1
+ 2405              		.global	synopGMAC_enable_interrupt
+ 2406              		.thumb
+ 2407              		.thumb_func
+ 2409              	synopGMAC_enable_interrupt:
+ 2410              		@ args = 0, pretend = 0, frame = 0
+ 2411              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2412              		@ link register save eliminated.
+ 2413 0000 4068     		ldr	r0, [r0, #4]
+ 2414 0002 0A46     		mov	r2, r1
+ 2415 0004 1C21     		movs	r1, #28
+ 2416 0006 FFF7FEBF 		b	synopGMACWriteReg
+ 2418              		.section	.text.synopGMAC_disable_interrupt_all,"ax",%progbits
+ 2419              		.align	1
+ 2420              		.global	synopGMAC_disable_interrupt_all
+ 2421              		.thumb
+ 2422              		.thumb_func
+ 2424              	synopGMAC_disable_interrupt_all:
+ 2425              		@ args = 0, pretend = 0, frame = 0
+ 2426              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2427              		@ link register save eliminated.
+ 2428 0000 4068     		ldr	r0, [r0, #4]
+ 2429 0002 1C21     		movs	r1, #28
+ 2430 0004 0022     		movs	r2, #0
+ 2431 0006 FFF7FEBF 		b	synopGMACWriteReg
+ 2433              		.section	.text.synopGMAC_disable_interrupt,"ax",%progbits
+ 2434              		.align	1
+ 2435              		.global	synopGMAC_disable_interrupt
+ 2436              		.thumb
+ 2437              		.thumb_func
+ 2439              	synopGMAC_disable_interrupt:
+ 2440              		@ args = 0, pretend = 0, frame = 0
+ 2441              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2442              		@ link register save eliminated.
+ 2443 0000 4068     		ldr	r0, [r0, #4]
+ 2444 0002 0A46     		mov	r2, r1
+ 2445 0004 1C21     		movs	r1, #28
+ 2446 0006 FFF7FEBF 		b	synopGMACClearBits
+ 2448              		.section	.text.synopGMAC_enable_dma_rx,"ax",%progbits
+ 2449              		.align	1
+ 2450              		.global	synopGMAC_enable_dma_rx
+ 2451              		.thumb
+ 2452              		.thumb_func
+ 2454              	synopGMAC_enable_dma_rx:
+ 2455              		@ args = 0, pretend = 0, frame = 0
+ 2456              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2457 0000 10B5     		push	{r4, lr}
+ 2458 0002 1821     		movs	r1, #24
+ 2459 0004 0446     		mov	r4, r0
+ 2460 0006 4068     		ldr	r0, [r0, #4]
+ 2461 0008 FFF7FEFF 		bl	synopGMACReadReg
+ 2462 000c 40F00202 		orr	r2, r0, #2
+ 2463 0010 6068     		ldr	r0, [r4, #4]
+ 2464 0012 1821     		movs	r1, #24
+ 2465 0014 BDE81040 		pop	{r4, lr}
+ 2466 0018 FFF7FEBF 		b	synopGMACWriteReg
+ 2468              		.section	.text.synopGMAC_enable_dma_tx,"ax",%progbits
+ 2469              		.align	1
+ 2470              		.global	synopGMAC_enable_dma_tx
+ 2471              		.thumb
+ 2472              		.thumb_func
+ 2474              	synopGMAC_enable_dma_tx:
+ 2475              		@ args = 0, pretend = 0, frame = 0
+ 2476              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2477 0000 10B5     		push	{r4, lr}
+ 2478 0002 1821     		movs	r1, #24
+ 2479 0004 0446     		mov	r4, r0
+ 2480 0006 4068     		ldr	r0, [r0, #4]
+ 2481 0008 FFF7FEFF 		bl	synopGMACReadReg
+ 2482 000c 40F40052 		orr	r2, r0, #8192
+ 2483 0010 6068     		ldr	r0, [r4, #4]
+ 2484 0012 1821     		movs	r1, #24
+ 2485 0014 BDE81040 		pop	{r4, lr}
+ 2486 0018 FFF7FEBF 		b	synopGMACWriteReg
+ 2488              		.section	.text.synopGMAC_resume_dma_tx,"ax",%progbits
+ 2489              		.align	1
+ 2490              		.global	synopGMAC_resume_dma_tx
+ 2491              		.thumb
+ 2492              		.thumb_func
+ 2494              	synopGMAC_resume_dma_tx:
+ 2495              		@ args = 0, pretend = 0, frame = 0
+ 2496              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2497              		@ link register save eliminated.
+ 2498 0000 4068     		ldr	r0, [r0, #4]
+ 2499 0002 0421     		movs	r1, #4
+ 2500 0004 0022     		movs	r2, #0
+ 2501 0006 FFF7FEBF 		b	synopGMACWriteReg
+ 2503              		.section	.text.synopGMAC_resume_dma_rx,"ax",%progbits
+ 2504              		.align	1
+ 2505              		.global	synopGMAC_resume_dma_rx
+ 2506              		.thumb
+ 2507              		.thumb_func
+ 2509              	synopGMAC_resume_dma_rx:
+ 2510              		@ args = 0, pretend = 0, frame = 0
+ 2511              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2512              		@ link register save eliminated.
+ 2513 0000 4068     		ldr	r0, [r0, #4]
+ 2514 0002 0821     		movs	r1, #8
+ 2515 0004 0022     		movs	r2, #0
+ 2516 0006 FFF7FEBF 		b	synopGMACWriteReg
+ 2518              		.section	.text.synopGMAC_take_desc_ownership,"ax",%progbits
+ 2519              		.align	1
+ 2520              		.global	synopGMAC_take_desc_ownership
+ 2521              		.thumb
+ 2522              		.thumb_func
+ 2524              	synopGMAC_take_desc_ownership:
+ 2525              		@ args = 0, pretend = 0, frame = 0
+ 2526              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2527              		@ link register save eliminated.
+ 2528 0000 18B1     		cbz	r0, .L337
+ 2529 0002 0368     		ldr	r3, [r0, #0]
+ 2530 0004 23F00041 		bic	r1, r3, #-2147483648
+ 2531 0008 0160     		str	r1, [r0, #0]
+ 2532              	.L337:
+ 2533 000a 7047     		bx	lr
+ 2535              		.section	.text.synopGMAC_take_desc_ownership_rx,"ax",%progbits
+ 2536              		.align	1
+ 2537              		.global	synopGMAC_take_desc_ownership_rx
+ 2538              		.thumb
+ 2539              		.thumb_func
+ 2541              	synopGMAC_take_desc_ownership_rx:
+ 2542              		@ args = 0, pretend = 0, frame = 0
+ 2543              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2544 0000 70B5     		push	{r4, r5, r6, lr}
+ 2545 0002 C469     		ldr	r4, [r0, #28]
+ 2546 0004 0646     		mov	r6, r0
+ 2547 0006 0025     		movs	r5, #0
+ 2548              	.L343:
+ 2549 0008 B36A     		ldr	r3, [r6, #40]
+ 2550 000a 9D42     		cmp	r5, r3
+ 2551 000c 0ED2     		bcs	.L347
+ 2552              	.L346:
+ 2553 000e 6068     		ldr	r0, [r4, #4]
+ 2554 0010 4104     		lsls	r1, r0, #17
+ 2555 0012 04D5     		bpl	.L344
+ 2556 0014 2046     		mov	r0, r4
+ 2557 0016 FFF7FEFF 		bl	synopGMAC_take_desc_ownership
+ 2558 001a 646A     		ldr	r4, [r4, #36]
+ 2559 001c 04E0     		b	.L345
+ 2560              	.L344:
+ 2561 001e 2821     		movs	r1, #40
+ 2562 0020 01FB0540 		mla	r0, r1, r5, r4
+ 2563 0024 FFF7FEFF 		bl	synopGMAC_take_desc_ownership
+ 2564              	.L345:
+ 2565 0028 0135     		adds	r5, r5, #1
+ 2566 002a EDE7     		b	.L343
+ 2567              	.L347:
+ 2568 002c 70BD     		pop	{r4, r5, r6, pc}
+ 2570              		.section	.text.synopGMAC_take_desc_ownership_tx,"ax",%progbits
+ 2571              		.align	1
+ 2572              		.global	synopGMAC_take_desc_ownership_tx
+ 2573              		.thumb
+ 2574              		.thumb_func
+ 2576              	synopGMAC_take_desc_ownership_tx:
+ 2577              		@ args = 0, pretend = 0, frame = 0
+ 2578              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2579 0000 70B5     		push	{r4, r5, r6, lr}
+ 2580 0002 8469     		ldr	r4, [r0, #24]
+ 2581 0004 0646     		mov	r6, r0
+ 2582 0006 0025     		movs	r5, #0
+ 2583              	.L349:
+ 2584 0008 F36A     		ldr	r3, [r6, #44]
+ 2585 000a 9D42     		cmp	r5, r3
+ 2586 000c 0ED2     		bcs	.L353
+ 2587              	.L352:
+ 2588 000e 2068     		ldr	r0, [r4, #0]
+ 2589 0010 C002     		lsls	r0, r0, #11
+ 2590 0012 04D5     		bpl	.L350
+ 2591 0014 2046     		mov	r0, r4
+ 2592 0016 FFF7FEFF 		bl	synopGMAC_take_desc_ownership
+ 2593 001a 646A     		ldr	r4, [r4, #36]
+ 2594 001c 04E0     		b	.L351
+ 2595              	.L350:
+ 2596 001e 2821     		movs	r1, #40
+ 2597 0020 01FB0540 		mla	r0, r1, r5, r4
+ 2598 0024 FFF7FEFF 		bl	synopGMAC_take_desc_ownership
+ 2599              	.L351:
+ 2600 0028 0135     		adds	r5, r5, #1
+ 2601 002a EDE7     		b	.L349
+ 2602              	.L353:
+ 2603 002c 70BD     		pop	{r4, r5, r6, pc}
+ 2605              		.section	.text.synopGMAC_disable_dma_tx,"ax",%progbits
+ 2606              		.align	1
+ 2607              		.global	synopGMAC_disable_dma_tx
+ 2608              		.thumb
+ 2609              		.thumb_func
+ 2611              	synopGMAC_disable_dma_tx:
+ 2612              		@ args = 0, pretend = 0, frame = 0
+ 2613              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2614 0000 10B5     		push	{r4, lr}
+ 2615 0002 1821     		movs	r1, #24
+ 2616 0004 0446     		mov	r4, r0
+ 2617 0006 4068     		ldr	r0, [r0, #4]
+ 2618 0008 FFF7FEFF 		bl	synopGMACReadReg
+ 2619 000c 20F40052 		bic	r2, r0, #8192
+ 2620 0010 6068     		ldr	r0, [r4, #4]
+ 2621 0012 1821     		movs	r1, #24
+ 2622 0014 BDE81040 		pop	{r4, lr}
+ 2623 0018 FFF7FEBF 		b	synopGMACWriteReg
+ 2625              		.section	.text.synopGMAC_disable_dma_rx,"ax",%progbits
+ 2626              		.align	1
+ 2627              		.global	synopGMAC_disable_dma_rx
+ 2628              		.thumb
+ 2629              		.thumb_func
+ 2631              	synopGMAC_disable_dma_rx:
+ 2632              		@ args = 0, pretend = 0, frame = 0
+ 2633              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2634 0000 10B5     		push	{r4, lr}
+ 2635 0002 1821     		movs	r1, #24
+ 2636 0004 0446     		mov	r4, r0
+ 2637 0006 4068     		ldr	r0, [r0, #4]
+ 2638 0008 FFF7FEFF 		bl	synopGMACReadReg
+ 2639 000c 20F00202 		bic	r2, r0, #2
+ 2640 0010 6068     		ldr	r0, [r4, #4]
+ 2641 0012 1821     		movs	r1, #24
+ 2642 0014 BDE81040 		pop	{r4, lr}
+ 2643 0018 FFF7FEBF 		b	synopGMACWriteReg
+ 2645              		.section	.text.synopGMAC_pmt_int_enable,"ax",%progbits
+ 2646              		.align	1
+ 2647              		.global	synopGMAC_pmt_int_enable
+ 2648              		.thumb
+ 2649              		.thumb_func
+ 2651              	synopGMAC_pmt_int_enable:
+ 2652              		@ args = 0, pretend = 0, frame = 0
+ 2653              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2654              		@ link register save eliminated.
+ 2655 0000 0068     		ldr	r0, [r0, #0]
+ 2656 0002 3C21     		movs	r1, #60
+ 2657 0004 0822     		movs	r2, #8
+ 2658 0006 FFF7FEBF 		b	synopGMACClearBits
+ 2660              		.section	.text.synopGMAC_pmt_int_disable,"ax",%progbits
+ 2661              		.align	1
+ 2662              		.global	synopGMAC_pmt_int_disable
+ 2663              		.thumb
+ 2664              		.thumb_func
+ 2666              	synopGMAC_pmt_int_disable:
+ 2667              		@ args = 0, pretend = 0, frame = 0
+ 2668              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2669              		@ link register save eliminated.
+ 2670 0000 0068     		ldr	r0, [r0, #0]
+ 2671 0002 3C21     		movs	r1, #60
+ 2672 0004 0822     		movs	r2, #8
+ 2673 0006 FFF7FEBF 		b	synopGMACSetBits
+ 2675              		.section	.text.synopGMAC_power_down_enable,"ax",%progbits
+ 2676              		.align	1
+ 2677              		.global	synopGMAC_power_down_enable
+ 2678              		.thumb
+ 2679              		.thumb_func
+ 2681              	synopGMAC_power_down_enable:
+ 2682              		@ args = 0, pretend = 0, frame = 0
+ 2683              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2684              		@ link register save eliminated.
+ 2685 0000 0068     		ldr	r0, [r0, #0]
+ 2686 0002 2C21     		movs	r1, #44
+ 2687 0004 0122     		movs	r2, #1
+ 2688 0006 FFF7FEBF 		b	synopGMACSetBits
+ 2690              		.section	.text.synopGMAC_power_down_disable,"ax",%progbits
+ 2691              		.align	1
+ 2692              		.global	synopGMAC_power_down_disable
+ 2693              		.thumb
+ 2694              		.thumb_func
+ 2696              	synopGMAC_power_down_disable:
+ 2697              		@ args = 0, pretend = 0, frame = 0
+ 2698              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2699              		@ link register save eliminated.
+ 2700 0000 0068     		ldr	r0, [r0, #0]
+ 2701 0002 2C21     		movs	r1, #44
+ 2702 0004 0122     		movs	r2, #1
+ 2703 0006 FFF7FEBF 		b	synopGMACClearBits
+ 2705              		.section	.text.synopGMAC_enable_pmt_interrupt,"ax",%progbits
+ 2706              		.align	1
+ 2707              		.global	synopGMAC_enable_pmt_interrupt
+ 2708              		.thumb
+ 2709              		.thumb_func
+ 2711              	synopGMAC_enable_pmt_interrupt:
+ 2712              		@ args = 0, pretend = 0, frame = 0
+ 2713              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2714              		@ link register save eliminated.
+ 2715 0000 0068     		ldr	r0, [r0, #0]
+ 2716 0002 3C21     		movs	r1, #60
+ 2717 0004 0822     		movs	r2, #8
+ 2718 0006 FFF7FEBF 		b	synopGMACClearBits
+ 2720              		.section	.text.synopGMAC_disable_pmt_interrupt,"ax",%progbits
+ 2721              		.align	1
+ 2722              		.global	synopGMAC_disable_pmt_interrupt
+ 2723              		.thumb
+ 2724              		.thumb_func
+ 2726              	synopGMAC_disable_pmt_interrupt:
+ 2727              		@ args = 0, pretend = 0, frame = 0
+ 2728              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2729              		@ link register save eliminated.
+ 2730 0000 0068     		ldr	r0, [r0, #0]
+ 2731 0002 3C21     		movs	r1, #60
+ 2732 0004 0822     		movs	r2, #8
+ 2733 0006 FFF7FEBF 		b	synopGMACSetBits
+ 2735              		.section	.text.synopGMAC_magic_packet_enable,"ax",%progbits
+ 2736              		.align	1
+ 2737              		.global	synopGMAC_magic_packet_enable
+ 2738              		.thumb
+ 2739              		.thumb_func
+ 2741              	synopGMAC_magic_packet_enable:
+ 2742              		@ args = 0, pretend = 0, frame = 0
+ 2743              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2744              		@ link register save eliminated.
+ 2745 0000 0068     		ldr	r0, [r0, #0]
+ 2746 0002 2C21     		movs	r1, #44
+ 2747 0004 0222     		movs	r2, #2
+ 2748 0006 FFF7FEBF 		b	synopGMACSetBits
+ 2750              		.section	.text.synopGMAC_wakeup_frame_enable,"ax",%progbits
+ 2751              		.align	1
+ 2752              		.global	synopGMAC_wakeup_frame_enable
+ 2753              		.thumb
+ 2754              		.thumb_func
+ 2756              	synopGMAC_wakeup_frame_enable:
+ 2757              		@ args = 0, pretend = 0, frame = 0
+ 2758              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2759              		@ link register save eliminated.
+ 2760 0000 0068     		ldr	r0, [r0, #0]
+ 2761 0002 2C21     		movs	r1, #44
+ 2762 0004 0422     		movs	r2, #4
+ 2763 0006 FFF7FEBF 		b	synopGMACSetBits
+ 2765              		.section	.text.synopGMAC_pmt_unicast_enable,"ax",%progbits
+ 2766              		.align	1
+ 2767              		.global	synopGMAC_pmt_unicast_enable
+ 2768              		.thumb
+ 2769              		.thumb_func
+ 2771              	synopGMAC_pmt_unicast_enable:
+ 2772              		@ args = 0, pretend = 0, frame = 0
+ 2773              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2774              		@ link register save eliminated.
+ 2775 0000 0068     		ldr	r0, [r0, #0]
+ 2776 0002 2C21     		movs	r1, #44
+ 2777 0004 4FF40072 		mov	r2, #512
+ 2778 0008 FFF7FEBF 		b	synopGMACSetBits
+ 2780              		.section	.text.synopGMAC_is_magic_packet_received,"ax",%progbits
+ 2781              		.align	1
+ 2782              		.global	synopGMAC_is_magic_packet_received
+ 2783              		.thumb
+ 2784              		.thumb_func
+ 2786              	synopGMAC_is_magic_packet_received:
+ 2787              		@ args = 0, pretend = 0, frame = 0
+ 2788              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2789 0000 08B5     		push	{r3, lr}
+ 2790 0002 2C21     		movs	r1, #44
+ 2791 0004 0068     		ldr	r0, [r0, #0]
+ 2792 0006 FFF7FEFF 		bl	synopGMACReadReg
+ 2793 000a C0F34010 		ubfx	r0, r0, #5, #1
+ 2794 000e 08BD     		pop	{r3, pc}
+ 2796              		.section	.text.synopGMAC_is_wakeup_frame_received,"ax",%progbits
+ 2797              		.align	1
+ 2798              		.global	synopGMAC_is_wakeup_frame_received
+ 2799              		.thumb
+ 2800              		.thumb_func
+ 2802              	synopGMAC_is_wakeup_frame_received:
+ 2803              		@ args = 0, pretend = 0, frame = 0
+ 2804              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2805 0000 08B5     		push	{r3, lr}
+ 2806 0002 2C21     		movs	r1, #44
+ 2807 0004 0068     		ldr	r0, [r0, #0]
+ 2808 0006 FFF7FEFF 		bl	synopGMACReadReg
+ 2809 000a C0F38010 		ubfx	r0, r0, #6, #1
+ 2810 000e 08BD     		pop	{r3, pc}
+ 2812              		.section	.text.synopGMAC_write_wakeup_frame_register,"ax",%progbits
+ 2813              		.align	1
+ 2814              		.global	synopGMAC_write_wakeup_frame_register
+ 2815              		.thumb
+ 2816              		.thumb_func
+ 2818              	synopGMAC_write_wakeup_frame_register:
+ 2819              		@ args = 0, pretend = 0, frame = 0
+ 2820              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2821 0000 70B5     		push	{r4, r5, r6, lr}
+ 2822 0002 4FF00042 		mov	r2, #-2147483648
+ 2823 0006 0546     		mov	r5, r0
+ 2824 0008 0E46     		mov	r6, r1
+ 2825 000a 0068     		ldr	r0, [r0, #0]
+ 2826 000c 2C21     		movs	r1, #44
+ 2827 000e FFF7FEFF 		bl	synopGMACSetBits
+ 2828 0012 074B     		ldr	r3, .L374
+ 2829 0014 1968     		ldr	r1, [r3, #0]
+ 2830 0016 09B1     		cbz	r1, .L368
+ 2831 0018 0120     		movs	r0, #1
+ 2832 001a 8847     		blx	r1
+ 2833              	.L368:
+ 2834 001c 0024     		movs	r4, #0
+ 2835              	.L369:
+ 2836 001e 2821     		movs	r1, #40
+ 2837 0020 3259     		ldr	r2, [r6, r4]
+ 2838 0022 2868     		ldr	r0, [r5, #0]
+ 2839 0024 0434     		adds	r4, r4, #4
+ 2840 0026 FFF7FEFF 		bl	synopGMACWriteReg
+ 2841 002a 202C     		cmp	r4, #32
+ 2842 002c F7D1     		bne	.L369
+ 2843 002e 70BD     		pop	{r4, r5, r6, pc}
+ 2844              	.L375:
+ 2845              		.align	2
+ 2846              	.L374:
+ 2847 0030 00000000 		.word	.LANCHOR0
+ 2849              		.section	.text.synopGMAC_mmc_counters_stop,"ax",%progbits
+ 2850              		.align	1
+ 2851              		.global	synopGMAC_mmc_counters_stop
+ 2852              		.thumb
+ 2853              		.thumb_func
+ 2855              	synopGMAC_mmc_counters_stop:
+ 2856              		@ args = 0, pretend = 0, frame = 0
+ 2857              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2858              		@ link register save eliminated.
+ 2859 0000 0068     		ldr	r0, [r0, #0]
+ 2860 0002 4FF48071 		mov	r1, #256
+ 2861 0006 0822     		movs	r2, #8
+ 2862 0008 FFF7FEBF 		b	synopGMACSetBits
+ 2864              		.section	.text.synopGMAC_mmc_counters_resume,"ax",%progbits
+ 2865              		.align	1
+ 2866              		.global	synopGMAC_mmc_counters_resume
+ 2867              		.thumb
+ 2868              		.thumb_func
+ 2870              	synopGMAC_mmc_counters_resume:
+ 2871              		@ args = 0, pretend = 0, frame = 0
+ 2872              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2873              		@ link register save eliminated.
+ 2874 0000 0068     		ldr	r0, [r0, #0]
+ 2875 0002 4FF48071 		mov	r1, #256
+ 2876 0006 0822     		movs	r2, #8
+ 2877 0008 FFF7FEBF 		b	synopGMACClearBits
+ 2879              		.section	.text.synopGMAC_mmc_counters_set_selfclear,"ax",%progbits
+ 2880              		.align	1
+ 2881              		.global	synopGMAC_mmc_counters_set_selfclear
+ 2882              		.thumb
+ 2883              		.thumb_func
+ 2885              	synopGMAC_mmc_counters_set_selfclear:
+ 2886              		@ args = 0, pretend = 0, frame = 0
+ 2887              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2888              		@ link register save eliminated.
+ 2889 0000 0068     		ldr	r0, [r0, #0]
+ 2890 0002 4FF48071 		mov	r1, #256
+ 2891 0006 0422     		movs	r2, #4
+ 2892 0008 FFF7FEBF 		b	synopGMACSetBits
+ 2894              		.section	.text.synopGMAC_mmc_counters_reset_selfclear,"ax",%progbits
+ 2895              		.align	1
+ 2896              		.global	synopGMAC_mmc_counters_reset_selfclear
+ 2897              		.thumb
+ 2898              		.thumb_func
+ 2900              	synopGMAC_mmc_counters_reset_selfclear:
+ 2901              		@ args = 0, pretend = 0, frame = 0
+ 2902              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2903              		@ link register save eliminated.
+ 2904 0000 0068     		ldr	r0, [r0, #0]
+ 2905 0002 4FF48071 		mov	r1, #256
+ 2906 0006 0422     		movs	r2, #4
+ 2907 0008 FFF7FEBF 		b	synopGMACClearBits
+ 2909              		.section	.text.synopGMAC_mmc_counters_disable_rollover,"ax",%progbits
+ 2910              		.align	1
+ 2911              		.global	synopGMAC_mmc_counters_disable_rollover
+ 2912              		.thumb
+ 2913              		.thumb_func
+ 2915              	synopGMAC_mmc_counters_disable_rollover:
+ 2916              		@ args = 0, pretend = 0, frame = 0
+ 2917              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2918              		@ link register save eliminated.
+ 2919 0000 0068     		ldr	r0, [r0, #0]
+ 2920 0002 4FF48071 		mov	r1, #256
+ 2921 0006 0222     		movs	r2, #2
+ 2922 0008 FFF7FEBF 		b	synopGMACSetBits
+ 2924              		.section	.text.synopGMAC_mmc_counters_enable_rollover,"ax",%progbits
+ 2925              		.align	1
+ 2926              		.global	synopGMAC_mmc_counters_enable_rollover
+ 2927              		.thumb
+ 2928              		.thumb_func
+ 2930              	synopGMAC_mmc_counters_enable_rollover:
+ 2931              		@ args = 0, pretend = 0, frame = 0
+ 2932              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2933              		@ link register save eliminated.
+ 2934 0000 0068     		ldr	r0, [r0, #0]
+ 2935 0002 4FF48071 		mov	r1, #256
+ 2936 0006 0222     		movs	r2, #2
+ 2937 0008 FFF7FEBF 		b	synopGMACClearBits
+ 2939              		.section	.text.synopGMAC_read_mmc_counter,"ax",%progbits
+ 2940              		.align	1
+ 2941              		.global	synopGMAC_read_mmc_counter
+ 2942              		.thumb
+ 2943              		.thumb_func
+ 2945              	synopGMAC_read_mmc_counter:
+ 2946              		@ args = 0, pretend = 0, frame = 0
+ 2947              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2948              		@ link register save eliminated.
+ 2949 0000 0068     		ldr	r0, [r0, #0]
+ 2950 0002 FFF7FEBF 		b	synopGMACReadReg
+ 2952              		.section	.text.synopGMAC_read_mmc_rx_int_status,"ax",%progbits
+ 2953              		.align	1
+ 2954              		.global	synopGMAC_read_mmc_rx_int_status
+ 2955              		.thumb
+ 2956              		.thumb_func
+ 2958              	synopGMAC_read_mmc_rx_int_status:
+ 2959              		@ args = 0, pretend = 0, frame = 0
+ 2960              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2961              		@ link register save eliminated.
+ 2962 0000 0068     		ldr	r0, [r0, #0]
+ 2963 0002 4FF48271 		mov	r1, #260
+ 2964 0006 FFF7FEBF 		b	synopGMACReadReg
+ 2966              		.section	.text.synopGMAC_read_mmc_tx_int_status,"ax",%progbits
+ 2967              		.align	1
+ 2968              		.global	synopGMAC_read_mmc_tx_int_status
+ 2969              		.thumb
+ 2970              		.thumb_func
+ 2972              	synopGMAC_read_mmc_tx_int_status:
+ 2973              		@ args = 0, pretend = 0, frame = 0
+ 2974              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2975              		@ link register save eliminated.
+ 2976 0000 0068     		ldr	r0, [r0, #0]
+ 2977 0002 4FF48471 		mov	r1, #264
+ 2978 0006 FFF7FEBF 		b	synopGMACReadReg
+ 2980              		.section	.text.synopGMAC_disable_mmc_tx_interrupt,"ax",%progbits
+ 2981              		.align	1
+ 2982              		.global	synopGMAC_disable_mmc_tx_interrupt
+ 2983              		.thumb
+ 2984              		.thumb_func
+ 2986              	synopGMAC_disable_mmc_tx_interrupt:
+ 2987              		@ args = 0, pretend = 0, frame = 0
+ 2988              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2989              		@ link register save eliminated.
+ 2990 0000 0068     		ldr	r0, [r0, #0]
+ 2991 0002 0A46     		mov	r2, r1
+ 2992 0004 4FF48871 		mov	r1, #272
+ 2993 0008 FFF7FEBF 		b	synopGMACSetBits
+ 2995              		.section	.text.synopGMAC_enable_mmc_tx_interrupt,"ax",%progbits
+ 2996              		.align	1
+ 2997              		.global	synopGMAC_enable_mmc_tx_interrupt
+ 2998              		.thumb
+ 2999              		.thumb_func
+ 3001              	synopGMAC_enable_mmc_tx_interrupt:
+ 3002              		@ args = 0, pretend = 0, frame = 0
+ 3003              		@ frame_needed = 0, uses_anonymous_args = 0
+ 3004              		@ link register save eliminated.
+ 3005 0000 0068     		ldr	r0, [r0, #0]
+ 3006 0002 0A46     		mov	r2, r1
+ 3007 0004 4FF48871 		mov	r1, #272
+ 3008 0008 FFF7FEBF 		b	synopGMACClearBits
+ 3010              		.section	.text.synopGMAC_disable_mmc_rx_interrupt,"ax",%progbits
+ 3011              		.align	1
+ 3012              		.global	synopGMAC_disable_mmc_rx_interrupt
+ 3013              		.thumb
+ 3014              		.thumb_func
+ 3016              	synopGMAC_disable_mmc_rx_interrupt:
+ 3017              		@ args = 0, pretend = 0, frame = 0
+ 3018              		@ frame_needed = 0, uses_anonymous_args = 0
+ 3019              		@ link register save eliminated.
+ 3020 0000 0068     		ldr	r0, [r0, #0]
+ 3021 0002 0A46     		mov	r2, r1
+ 3022 0004 4FF48671 		mov	r1, #268
+ 3023 0008 FFF7FEBF 		b	synopGMACSetBits
+ 3025              		.section	.text.synopGMAC_enable_mmc_rx_interrupt,"ax",%progbits
+ 3026              		.align	1
+ 3027              		.global	synopGMAC_enable_mmc_rx_interrupt
+ 3028              		.thumb
+ 3029              		.thumb_func
+ 3031              	synopGMAC_enable_mmc_rx_interrupt:
+ 3032              		@ args = 0, pretend = 0, frame = 0
+ 3033              		@ frame_needed = 0, uses_anonymous_args = 0
+ 3034              		@ link register save eliminated.
+ 3035 0000 0068     		ldr	r0, [r0, #0]
+ 3036 0002 0A46     		mov	r2, r1
+ 3037 0004 4FF48671 		mov	r1, #268
+ 3038 0008 FFF7FEBF 		b	synopGMACClearBits
+ 3040              		.section	.text.synopGMAC_disable_mmc_ipc_rx_interrupt,"ax",%progbits
+ 3041              		.align	1
+ 3042              		.global	synopGMAC_disable_mmc_ipc_rx_interrupt
+ 3043              		.thumb
+ 3044              		.thumb_func
+ 3046              	synopGMAC_disable_mmc_ipc_rx_interrupt:
+ 3047              		@ args = 0, pretend = 0, frame = 0
+ 3048              		@ frame_needed = 0, uses_anonymous_args = 0
+ 3049              		@ link register save eliminated.
+ 3050 0000 0068     		ldr	r0, [r0, #0]
+ 3051 0002 0A46     		mov	r2, r1
+ 3052 0004 4FF40071 		mov	r1, #512
+ 3053 0008 FFF7FEBF 		b	synopGMACSetBits
+ 3055              		.section	.text.synopGMAC_enable_mmc_ipc_rx_interrupt,"ax",%progbits
+ 3056              		.align	1
+ 3057              		.global	synopGMAC_enable_mmc_ipc_rx_interrupt
+ 3058              		.thumb
+ 3059              		.thumb_func
+ 3061              	synopGMAC_enable_mmc_ipc_rx_interrupt:
+ 3062              		@ args = 0, pretend = 0, frame = 0
+ 3063              		@ frame_needed = 0, uses_anonymous_args = 0
+ 3064              		@ link register save eliminated.
+ 3065 0000 0068     		ldr	r0, [r0, #0]
+ 3066 0002 0A46     		mov	r2, r1
+ 3067 0004 4FF40071 		mov	r1, #512
+ 3068 0008 FFF7FEBF 		b	synopGMACClearBits
+ 3070              		.section	.text.synopGMAC_enable_rx_chksum_offload,"ax",%progbits
+ 3071              		.align	1
+ 3072              		.global	synopGMAC_enable_rx_chksum_offload
+ 3073              		.thumb
+ 3074              		.thumb_func
+ 3076              	synopGMAC_enable_rx_chksum_offload:
+ 3077              		@ args = 0, pretend = 0, frame = 0
+ 3078              		@ frame_needed = 0, uses_anonymous_args = 0
+ 3079              		@ link register save eliminated.
+ 3080 0000 0068     		ldr	r0, [r0, #0]
+ 3081 0002 0021     		movs	r1, #0
+ 3082 0004 4FF48062 		mov	r2, #1024
+ 3083 0008 FFF7FEBF 		b	synopGMACSetBits
+ 3085              		.section	.text.synopGMAC_disable_rx_Ipchecksum_offload,"ax",%progbits
+ 3086              		.align	1
+ 3087              		.global	synopGMAC_disable_rx_Ipchecksum_offload
+ 3088              		.thumb
+ 3089              		.thumb_func
+ 3091              	synopGMAC_disable_rx_Ipchecksum_offload:
+ 3092              		@ args = 0, pretend = 0, frame = 0
+ 3093              		@ frame_needed = 0, uses_anonymous_args = 0
+ 3094              		@ link register save eliminated.
+ 3095 0000 0068     		ldr	r0, [r0, #0]
+ 3096 0002 0021     		movs	r1, #0
+ 3097 0004 4FF48062 		mov	r2, #1024
+ 3098 0008 FFF7FEBF 		b	synopGMACClearBits
+ 3100              		.section	.text.synopGMAC_rx_tcpip_chksum_drop_enable,"ax",%progbits
+ 3101              		.align	1
+ 3102              		.global	synopGMAC_rx_tcpip_chksum_drop_enable
+ 3103              		.thumb
+ 3104              		.thumb_func
+ 3106              	synopGMAC_rx_tcpip_chksum_drop_enable:
+ 3107              		@ args = 0, pretend = 0, frame = 0
+ 3108              		@ frame_needed = 0, uses_anonymous_args = 0
+ 3109              		@ link register save eliminated.
+ 3110 0000 4068     		ldr	r0, [r0, #4]
+ 3111 0002 1821     		movs	r1, #24
+ 3112 0004 4FF08062 		mov	r2, #67108864
+ 3113 0008 FFF7FEBF 		b	synopGMACClearBits
+ 3115              		.section	.text.synopGMAC_rx_tcpip_chksum_drop_disable,"ax",%progbits
+ 3116              		.align	1
+ 3117              		.global	synopGMAC_rx_tcpip_chksum_drop_disable
+ 3118              		.thumb
+ 3119              		.thumb_func
+ 3121              	synopGMAC_rx_tcpip_chksum_drop_disable:
+ 3122              		@ args = 0, pretend = 0, frame = 0
+ 3123              		@ frame_needed = 0, uses_anonymous_args = 0
+ 3124              		@ link register save eliminated.
+ 3125 0000 4068     		ldr	r0, [r0, #4]
+ 3126 0002 1821     		movs	r1, #24
+ 3127 0004 4FF08062 		mov	r2, #67108864
+ 3128 0008 FFF7FEBF 		b	synopGMACSetBits
+ 3130              		.section	.text.synopGMAC_is_ext_status,"ax",%progbits
+ 3131              		.align	1
+ 3132              		.global	synopGMAC_is_ext_status
+ 3133              		.thumb
+ 3134              		.thumb_func
+ 3136              	synopGMAC_is_ext_status:
+ 3137              		@ args = 0, pretend = 0, frame = 0
+ 3138              		@ frame_needed = 0, uses_anonymous_args = 0
+ 3139              		@ link register save eliminated.
+ 3140 0000 01F00100 		and	r0, r1, #1
+ 3141 0004 7047     		bx	lr
+ 3143              		.section	.text.synopGMAC_ES_is_IP_header_error,"ax",%progbits
+ 3144              		.align	1
+ 3145              		.global	synopGMAC_ES_is_IP_header_error
+ 3146              		.thumb
+ 3147              		.thumb_func
+ 3149              	synopGMAC_ES_is_IP_header_error:
+ 3150              		@ args = 0, pretend = 0, frame = 0
+ 3151              		@ frame_needed = 0, uses_anonymous_args = 0
+ 3152              		@ link register save eliminated.
+ 3153 0000 C1F3C000 		ubfx	r0, r1, #3, #1
+ 3154 0004 7047     		bx	lr
+ 3156              		.section	.text.synopGMAC_ES_is_rx_checksum_bypassed,"ax",%progbits
+ 3157              		.align	1
+ 3158              		.global	synopGMAC_ES_is_rx_checksum_bypassed
+ 3159              		.thumb
+ 3160              		.thumb_func
+ 3162              	synopGMAC_ES_is_rx_checksum_bypassed:
+ 3163              		@ args = 0, pretend = 0, frame = 0
+ 3164              		@ frame_needed = 0, uses_anonymous_args = 0
+ 3165              		@ link register save eliminated.
+ 3166 0000 C1F34010 		ubfx	r0, r1, #5, #1
+ 3167 0004 7047     		bx	lr
+ 3169              		.section	.text.synopGMAC_ES_is_IP_payload_error,"ax",%progbits
+ 3170              		.align	1
+ 3171              		.global	synopGMAC_ES_is_IP_payload_error
+ 3172              		.thumb
+ 3173              		.thumb_func
+ 3175              	synopGMAC_ES_is_IP_payload_error:
+ 3176              		@ args = 0, pretend = 0, frame = 0
+ 3177              		@ frame_needed = 0, uses_anonymous_args = 0
+ 3178              		@ link register save eliminated.
+ 3179 0000 C1F30010 		ubfx	r0, r1, #4, #1
+ 3180 0004 7047     		bx	lr
+ 3182              		.section	.text.synopGMAC_is_rx_checksum_error,"ax",%progbits
+ 3183              		.align	1
+ 3184              		.global	synopGMAC_is_rx_checksum_error
+ 3185              		.thumb
+ 3186              		.thumb_func
+ 3188              	synopGMAC_is_rx_checksum_error:
+ 3189              		@ args = 0, pretend = 0, frame = 0
+ 3190              		@ frame_needed = 0, uses_anonymous_args = 0
+ 3191              		@ link register save eliminated.
+ 3192 0000 11F0A101 		ands	r1, r1, #161
+ 3193 0004 0ED0     		beq	.L402
+ 3194 0006 0129     		cmp	r1, #1
+ 3195 0008 0CD0     		beq	.L402
+ 3196 000a 8129     		cmp	r1, #129
+ 3197 000c 0CD0     		beq	.L403
+ 3198 000e 2029     		cmp	r1, #32
+ 3199 0010 0CD0     		beq	.L404
+ 3200 0012 2129     		cmp	r1, #33
+ 3201 0014 0CD0     		beq	.L405
+ 3202 0016 A029     		cmp	r1, #160
+ 3203 0018 0CD0     		beq	.L406
+ 3204 001a A129     		cmp	r1, #161
+ 3205 001c 14BF     		ite	ne
+ 3206 001e 0220     		movne	r0, #2
+ 3207 0020 0720     		moveq	r0, #7
+ 3208 0022 7047     		bx	lr
+ 3209              	.L402:
+ 3210 0024 0846     		mov	r0, r1
+ 3211 0026 7047     		bx	lr
+ 3212              	.L403:
+ 3213 0028 0320     		movs	r0, #3
+ 3214 002a 7047     		bx	lr
+ 3215              	.L404:
+ 3216 002c 0420     		movs	r0, #4
+ 3217 002e 7047     		bx	lr
+ 3218              	.L405:
+ 3219 0030 0520     		movs	r0, #5
+ 3220 0032 7047     		bx	lr
+ 3221              	.L406:
+ 3222 0034 0620     		movs	r0, #6
+ 3223 0036 7047     		bx	lr
+ 3225              		.section	.text.synopGMAC_is_tx_ipv4header_checksum_error,"ax",%progbits
+ 3226              		.align	1
+ 3227              		.global	synopGMAC_is_tx_ipv4header_checksum_error
+ 3228              		.thumb
+ 3229              		.thumb_func
+ 3231              	synopGMAC_is_tx_ipv4header_checksum_error:
+ 3232              		@ args = 0, pretend = 0, frame = 0
+ 3233              		@ frame_needed = 0, uses_anonymous_args = 0
+ 3234              		@ link register save eliminated.
+ 3235 0000 C1F30040 		ubfx	r0, r1, #16, #1
+ 3236 0004 7047     		bx	lr
+ 3238              		.section	.text.synopGMAC_is_tx_payload_checksum_error,"ax",%progbits
+ 3239              		.align	1
+ 3240              		.global	synopGMAC_is_tx_payload_checksum_error
+ 3241              		.thumb
+ 3242              		.thumb_func
+ 3244              	synopGMAC_is_tx_payload_checksum_error:
+ 3245              		@ args = 0, pretend = 0, frame = 0
+ 3246              		@ frame_needed = 0, uses_anonymous_args = 0
+ 3247              		@ link register save eliminated.
+ 3248 0000 C1F30030 		ubfx	r0, r1, #12, #1
+ 3249 0004 7047     		bx	lr
+ 3251              		.section	.text.synopGMAC_tx_checksum_offload_bypass,"ax",%progbits
+ 3252              		.align	1
+ 3253              		.global	synopGMAC_tx_checksum_offload_bypass
+ 3254              		.thumb
+ 3255              		.thumb_func
+ 3257              	synopGMAC_tx_checksum_offload_bypass:
+ 3258              		@ args = 0, pretend = 0, frame = 0
+ 3259              		@ frame_needed = 0, uses_anonymous_args = 0
+ 3260              		@ link register save eliminated.
+ 3261 0000 4B68     		ldr	r3, [r1, #4]
+ 3262 0002 23F44000 		bic	r0, r3, #12582912
+ 3263 0006 0860     		str	r0, [r1, #0]
+ 3264 0008 7047     		bx	lr
+ 3266              		.section	.text.synopGMAC_tx_checksum_offload_ipv4hdr,"ax",%progbits
+ 3267              		.align	1
+ 3268              		.global	synopGMAC_tx_checksum_offload_ipv4hdr
+ 3269              		.thumb
+ 3270              		.thumb_func
+ 3272              	synopGMAC_tx_checksum_offload_ipv4hdr:
+ 3273              		@ args = 0, pretend = 0, frame = 0
+ 3274              		@ frame_needed = 0, uses_anonymous_args = 0
+ 3275              		@ link register save eliminated.
+ 3276 0000 0B68     		ldr	r3, [r1, #0]
+ 3277 0002 23F44000 		bic	r0, r3, #12582912
+ 3278 0006 40F48002 		orr	r2, r0, #4194304
+ 3279 000a 0A60     		str	r2, [r1, #0]
+ 3280 000c 7047     		bx	lr
+ 3282              		.section	.text.synopGMAC_tx_checksum_offload_tcponly,"ax",%progbits
+ 3283              		.align	1
+ 3284              		.global	synopGMAC_tx_checksum_offload_tcponly
+ 3285              		.thumb
+ 3286              		.thumb_func
+ 3288              	synopGMAC_tx_checksum_offload_tcponly:
+ 3289              		@ args = 0, pretend = 0, frame = 0
+ 3290              		@ frame_needed = 0, uses_anonymous_args = 0
+ 3291              		@ link register save eliminated.
+ 3292 0000 0B68     		ldr	r3, [r1, #0]
+ 3293 0002 23F44000 		bic	r0, r3, #12582912
+ 3294 0006 40F40002 		orr	r2, r0, #8388608
+ 3295 000a 0A60     		str	r2, [r1, #0]
+ 3296 000c 7047     		bx	lr
+ 3298              		.section	.text.synopGMAC_tx_checksum_offload_tcp_pseudo,"ax",%progbits
+ 3299              		.align	1
+ 3300              		.global	synopGMAC_tx_checksum_offload_tcp_pseudo
+ 3301              		.thumb
+ 3302              		.thumb_func
+ 3304              	synopGMAC_tx_checksum_offload_tcp_pseudo:
+ 3305              		@ args = 0, pretend = 0, frame = 0
+ 3306              		@ frame_needed = 0, uses_anonymous_args = 0
+ 3307              		@ link register save eliminated.
+ 3308 0000 0B68     		ldr	r3, [r1, #0]
+ 3309 0002 43F44000 		orr	r0, r3, #12582912
+ 3310 0006 0860     		str	r0, [r1, #0]
+ 3311 0008 7047     		bx	lr
+ 3313              		.section	.rodata
+ 3314              		.set	.LANCHOR1,. + 0
+ 3315              	.LC0:
+ 3316 0000 00       		.byte	0
+ 3317 0001 03       		.byte	3
+ 3318 0002 19       		.byte	25
+ 3319 0003 45       		.byte	69
+ 3320 0004 00       		.byte	0
+ 3321 0005 00       		.byte	0
+ 3322              		.bss
+ 3323              		.align	2
+ 3324              		.set	.LANCHOR0,. + 0
+ 3327              	SynopGMACOneShotTimerCallback:
+ 3328 0000 00000000 		.space	4
+ 3329              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 synopGMAC_Dev.c
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:17     .text.synopGMAC_set_tx_address:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:22     .text.synopGMAC_set_tx_address:00000000 synopGMAC_set_tx_address
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:37     .text.synopGMAC_RegisterOneShotTimerCallback:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:42     .text.synopGMAC_RegisterOneShotTimerCallback:00000000 synopGMAC_RegisterOneShotTimerCallback
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:52     .text.synopGMAC_RegisterOneShotTimerCallback:00000008 $d
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:55     .text.synopGMAC_set_mdc_clk_div:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:60     .text.synopGMAC_set_mdc_clk_div:00000000 synopGMAC_set_mdc_clk_div
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:78     .text.synopGMAC_get_mdc_clk_div:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:83     .text.synopGMAC_get_mdc_clk_div:00000000 synopGMAC_get_mdc_clk_div
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:94     .text.synopGMAC_read_version:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:99     .text.synopGMAC_read_version:00000000 synopGMAC_read_version
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:112    .text.synopGMAC_rmii_100mbps_enable:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:117    .text.synopGMAC_rmii_100mbps_enable:00000000 synopGMAC_rmii_100mbps_enable
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:127    .text.synopGMAC_reset:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:132    .text.synopGMAC_reset:00000000 synopGMAC_reset
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:156    .text.synopGMAC_reset:00000028 $d
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:159    .text.synopGMAC_dma_bus_mode_init:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:164    .text.synopGMAC_dma_bus_mode_init:00000000 synopGMAC_dma_bus_mode_init
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:176    .text.synopGMAC_dma_control_init:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:181    .text.synopGMAC_dma_control_init:00000000 synopGMAC_dma_control_init
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:193    .text.synopGMAC_wd_enable:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:198    .text.synopGMAC_wd_enable:00000000 synopGMAC_wd_enable
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:208    .text.synopGMAC_wd_disable:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:213    .text.synopGMAC_wd_disable:00000000 synopGMAC_wd_disable
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:223    .text.synopGMAC_jab_enable:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:228    .text.synopGMAC_jab_enable:00000000 synopGMAC_jab_enable
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:238    .text.synopGMAC_jab_disable:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:243    .text.synopGMAC_jab_disable:00000000 synopGMAC_jab_disable
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:253    .text.synopGMAC_frame_burst_enable:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:258    .text.synopGMAC_frame_burst_enable:00000000 synopGMAC_frame_burst_enable
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:268    .text.synopGMAC_frame_burst_disable:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:273    .text.synopGMAC_frame_burst_disable:00000000 synopGMAC_frame_burst_disable
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:283    .text.synopGMAC_jumbo_frame_enable:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:288    .text.synopGMAC_jumbo_frame_enable:00000000 synopGMAC_jumbo_frame_enable
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:298    .text.synopGMAC_jumbo_frame_disable:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:303    .text.synopGMAC_jumbo_frame_disable:00000000 synopGMAC_jumbo_frame_disable
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:313    .text.synopGMAC_disable_crs:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:318    .text.synopGMAC_disable_crs:00000000 synopGMAC_disable_crs
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:328    .text.synopGMAC_select_gmii:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:333    .text.synopGMAC_select_gmii:00000000 synopGMAC_select_gmii
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:343    .text.synopGMAC_select_mii:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:348    .text.synopGMAC_select_mii:00000000 synopGMAC_select_mii
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:358    .text.synopGMAC_rx_own_enable:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:363    .text.synopGMAC_rx_own_enable:00000000 synopGMAC_rx_own_enable
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:373    .text.synopGMAC_rx_own_disable:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:378    .text.synopGMAC_rx_own_disable:00000000 synopGMAC_rx_own_disable
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:388    .text.synopGMAC_loopback_on:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:393    .text.synopGMAC_loopback_on:00000000 synopGMAC_loopback_on
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:403    .text.synopGMAC_loopback_off:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:408    .text.synopGMAC_loopback_off:00000000 synopGMAC_loopback_off
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:418    .text.synopGMAC_set_full_duplex:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:423    .text.synopGMAC_set_full_duplex:00000000 synopGMAC_set_full_duplex
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:433    .text.synopGMAC_set_half_duplex:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:438    .text.synopGMAC_set_half_duplex:00000000 synopGMAC_set_half_duplex
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:448    .text.synopGMAC_retry_enable:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:453    .text.synopGMAC_retry_enable:00000000 synopGMAC_retry_enable
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:463    .text.synopGMAC_retry_disable:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:468    .text.synopGMAC_retry_disable:00000000 synopGMAC_retry_disable
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:478    .text.synopGMAC_pad_crc_strip_enable:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:483    .text.synopGMAC_pad_crc_strip_enable:00000000 synopGMAC_pad_crc_strip_enable
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:493    .text.synopGMAC_pad_crc_strip_disable:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:498    .text.synopGMAC_pad_crc_strip_disable:00000000 synopGMAC_pad_crc_strip_disable
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:508    .text.synopGMAC_back_off_limit:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:513    .text.synopGMAC_back_off_limit:00000000 synopGMAC_back_off_limit
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:530    .text.synopGMAC_deferral_check_enable:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:535    .text.synopGMAC_deferral_check_enable:00000000 synopGMAC_deferral_check_enable
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:545    .text.synopGMAC_deferral_check_disable:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:550    .text.synopGMAC_deferral_check_disable:00000000 synopGMAC_deferral_check_disable
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:560    .text.synopGMAC_rx_enable:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:565    .text.synopGMAC_rx_enable:00000000 synopGMAC_rx_enable
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:575    .text.synopGMAC_rx_disable:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:580    .text.synopGMAC_rx_disable:00000000 synopGMAC_rx_disable
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:590    .text.synopGMAC_tx_enable:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:595    .text.synopGMAC_tx_enable:00000000 synopGMAC_tx_enable
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:605    .text.synopGMAC_tx_disable:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:610    .text.synopGMAC_tx_disable:00000000 synopGMAC_tx_disable
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:620    .text.synopGMAC_frame_filter_enable:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:625    .text.synopGMAC_frame_filter_enable:00000000 synopGMAC_frame_filter_enable
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:635    .text.synopGMAC_frame_filter_disable:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:640    .text.synopGMAC_frame_filter_disable:00000000 synopGMAC_frame_filter_disable
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:650    .text.synopGMAC_write_hash_table_high:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:655    .text.synopGMAC_write_hash_table_high:00000000 synopGMAC_write_hash_table_high
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:665    .text.synopGMAC_write_hash_table_low:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:670    .text.synopGMAC_write_hash_table_low:00000000 synopGMAC_write_hash_table_low
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:680    .text.synopGMAC_hash_perfect_filter_enable:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:685    .text.synopGMAC_hash_perfect_filter_enable:00000000 synopGMAC_hash_perfect_filter_enable
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:695    .text.synopGMAC_Hash_filter_only_enable:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:700    .text.synopGMAC_Hash_filter_only_enable:00000000 synopGMAC_Hash_filter_only_enable
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:710    .text.synopGMAC_src_addr_filter_enable:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:715    .text.synopGMAC_src_addr_filter_enable:00000000 synopGMAC_src_addr_filter_enable
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:725    .text.synopGMAC_src_addr_filter_disable:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:730    .text.synopGMAC_src_addr_filter_disable:00000000 synopGMAC_src_addr_filter_disable
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:740    .text.synopGMAC_dst_addr_filter_inverse:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:745    .text.synopGMAC_dst_addr_filter_inverse:00000000 synopGMAC_dst_addr_filter_inverse
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:755    .text.synopGMAC_dst_addr_filter_normal:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:760    .text.synopGMAC_dst_addr_filter_normal:00000000 synopGMAC_dst_addr_filter_normal
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:770    .text.synopGMAC_set_pass_control:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:775    .text.synopGMAC_set_pass_control:00000000 synopGMAC_set_pass_control
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:792    .text.synopGMAC_broadcast_enable:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:797    .text.synopGMAC_broadcast_enable:00000000 synopGMAC_broadcast_enable
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:807    .text.synopGMAC_broadcast_disable:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:812    .text.synopGMAC_broadcast_disable:00000000 synopGMAC_broadcast_disable
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:822    .text.synopGMAC_multicast_enable:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:827    .text.synopGMAC_multicast_enable:00000000 synopGMAC_multicast_enable
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:837    .text.synopGMAC_multicast_disable:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:842    .text.synopGMAC_multicast_disable:00000000 synopGMAC_multicast_disable
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:852    .text.synopGMAC_multicast_hash_filter_enable:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:857    .text.synopGMAC_multicast_hash_filter_enable:00000000 synopGMAC_multicast_hash_filter_enable
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:867    .text.synopGMAC_multicast_hash_filter_disable:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:872    .text.synopGMAC_multicast_hash_filter_disable:00000000 synopGMAC_multicast_hash_filter_disable
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:882    .text.synopGMAC_promisc_enable:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:887    .text.synopGMAC_promisc_enable:00000000 synopGMAC_promisc_enable
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:897    .text.synopGMAC_promisc_disable:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:902    .text.synopGMAC_promisc_disable:00000000 synopGMAC_promisc_disable
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:912    .text.synopGMAC_unicast_hash_filter_enable:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:917    .text.synopGMAC_unicast_hash_filter_enable:00000000 synopGMAC_unicast_hash_filter_enable
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:927    .text.synopGMAC_unicast_hash_filter_disable:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:932    .text.synopGMAC_unicast_hash_filter_disable:00000000 synopGMAC_unicast_hash_filter_disable
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:942    .text.synopGMAC_unicast_pause_frame_detect_enable:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:947    .text.synopGMAC_unicast_pause_frame_detect_enable:00000000 synopGMAC_unicast_pause_frame_detect_enable
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:957    .text.synopGMAC_unicast_pause_frame_detect_disable:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:962    .text.synopGMAC_unicast_pause_frame_detect_disable:00000000 synopGMAC_unicast_pause_frame_detect_disable
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:972    .text.synopGMAC_rx_flow_control_enable:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:977    .text.synopGMAC_rx_flow_control_enable:00000000 synopGMAC_rx_flow_control_enable
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:987    .text.synopGMAC_rx_flow_control_disable:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:992    .text.synopGMAC_rx_flow_control_disable:00000000 synopGMAC_rx_flow_control_disable
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1002   .text.synopGMAC_tx_flow_control_enable:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1007   .text.synopGMAC_tx_flow_control_enable:00000000 synopGMAC_tx_flow_control_enable
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1017   .text.synopGMAC_tx_flow_control_disable:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1022   .text.synopGMAC_tx_flow_control_disable:00000000 synopGMAC_tx_flow_control_disable
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1032   .text.synopGMAC_tx_activate_flow_control:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1037   .text.synopGMAC_tx_activate_flow_control:00000000 synopGMAC_tx_activate_flow_control
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1060   .text.synopGMAC_tx_deactivate_flow_control:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1065   .text.synopGMAC_tx_deactivate_flow_control:00000000 synopGMAC_tx_deactivate_flow_control
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1079   .text.synopGMAC_pause_control:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1084   .text.synopGMAC_pause_control:00000000 synopGMAC_pause_control
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1109   .text.synopGMAC_pause_control:00000038 $d
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1112   .text.synopGMAC_mac_init:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1117   .text.synopGMAC_mac_init:00000000 synopGMAC_mac_init
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1238   .text.synopGMAC_set_mac_addr:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1243   .text.synopGMAC_set_mac_addr:00000000 synopGMAC_set_mac_addr
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1270   .text.synopGMAC_get_mac_addr:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1275   .text.synopGMAC_get_mac_addr:00000000 synopGMAC_get_mac_addr
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1301   .text.synopGMAC_attach:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1306   .text.synopGMAC_attach:00000000 synopGMAC_attach
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1336   .text.synopGMAC_attach:0000003c $d
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1339   .text.synopGMAC_rx_desc_init_ring:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1344   .text.synopGMAC_rx_desc_init_ring:00000000 synopGMAC_rx_desc_init_ring
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1362   .text.synopGMAC_tx_desc_init_ring:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1367   .text.synopGMAC_tx_desc_init_ring:00000000 synopGMAC_tx_desc_init_ring
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1381   .text.synopGMAC_rx_desc_init_chain:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1386   .text.synopGMAC_rx_desc_init_chain:00000000 synopGMAC_rx_desc_init_chain
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1399   .text.synopGMAC_tx_desc_init_chain:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1404   .text.synopGMAC_tx_desc_init_chain:00000000 synopGMAC_tx_desc_init_chain
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1414   .text.synopGMAC_init_tx_rx_desc_queue:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1419   .text.synopGMAC_init_tx_rx_desc_queue:00000000 synopGMAC_init_tx_rx_desc_queue
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1470   .text.synopGMAC_init_rx_desc_base:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1475   .text.synopGMAC_init_rx_desc_base:00000000 synopGMAC_init_rx_desc_base
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1486   .text.synopGMAC_init_tx_desc_base:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1491   .text.synopGMAC_init_tx_desc_base:00000000 synopGMAC_init_tx_desc_base
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1502   .text.synopGMAC_set_owner_dma:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1507   .text.synopGMAC_set_owner_dma:00000000 synopGMAC_set_owner_dma
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1517   .text.synopGMAC_set_desc_sof:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1522   .text.synopGMAC_set_desc_sof:00000000 synopGMAC_set_desc_sof
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1532   .text.synopGMAC_set_desc_eof:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1537   .text.synopGMAC_set_desc_eof:00000000 synopGMAC_set_desc_eof
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1547   .text.synopGMAC_is_sof_in_rx_desc:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1552   .text.synopGMAC_is_sof_in_rx_desc:00000000 synopGMAC_is_sof_in_rx_desc
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1561   .text.synopGMAC_is_eof_in_rx_desc:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1566   .text.synopGMAC_is_eof_in_rx_desc:00000000 synopGMAC_is_eof_in_rx_desc
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1575   .text.synopGMAC_is_da_filter_failed:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1580   .text.synopGMAC_is_da_filter_failed:00000000 synopGMAC_is_da_filter_failed
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1589   .text.synopGMAC_is_sa_filter_failed:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1594   .text.synopGMAC_is_sa_filter_failed:00000000 synopGMAC_is_sa_filter_failed
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1603   .text.synopGMAC_is_desc_owned_by_dma:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1608   .text.synopGMAC_is_desc_owned_by_dma:00000000 synopGMAC_is_desc_owned_by_dma
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1617   .text.synopGMAC_get_rx_desc_frame_length:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1622   .text.synopGMAC_get_rx_desc_frame_length:00000000 synopGMAC_get_rx_desc_frame_length
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1630   .text.synopGMAC_is_desc_valid:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1635   .text.synopGMAC_is_desc_valid:00000000 synopGMAC_is_desc_valid
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1644   .text.synopGMAC_is_desc_empty:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1649   .text.synopGMAC_is_desc_empty:00000000 synopGMAC_is_desc_empty
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1661   .text.synopGMAC_is_rx_desc_valid:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1666   .text.synopGMAC_is_rx_desc_valid:00000000 synopGMAC_is_rx_desc_valid
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1677   .text.synopGMAC_is_tx_aborted:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1682   .text.synopGMAC_is_tx_aborted:00000000 synopGMAC_is_tx_aborted
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1693   .text.synopGMAC_is_tx_carrier_error:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1698   .text.synopGMAC_is_tx_carrier_error:00000000 synopGMAC_is_tx_carrier_error
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1709   .text.synopGMAC_get_tx_collision_count:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1714   .text.synopGMAC_get_tx_collision_count:00000000 synopGMAC_get_tx_collision_count
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1722   .text.synopGMAC_is_exc_tx_collisions:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1727   .text.synopGMAC_is_exc_tx_collisions:00000000 synopGMAC_is_exc_tx_collisions
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1735   .text.synopGMAC_is_rx_frame_damaged:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1740   .text.synopGMAC_is_rx_frame_damaged:00000000 synopGMAC_is_rx_frame_damaged
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1751   .text.synopGMAC_is_rx_frame_collision:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1756   .text.synopGMAC_is_rx_frame_collision:00000000 synopGMAC_is_rx_frame_collision
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1764   .text.synopGMAC_is_rx_crc:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1769   .text.synopGMAC_is_rx_crc:00000000 synopGMAC_is_rx_crc
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1777   .text.synopGMAC_is_frame_dribbling_errors:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1782   .text.synopGMAC_is_frame_dribbling_errors:00000000 synopGMAC_is_frame_dribbling_errors
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1790   .text.synopGMAC_is_rx_frame_length_errors:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1795   .text.synopGMAC_is_rx_frame_length_errors:00000000 synopGMAC_is_rx_frame_length_errors
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1803   .text.synopGMAC_is_last_rx_desc:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1808   .text.synopGMAC_is_last_rx_desc:00000000 synopGMAC_is_last_rx_desc
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1826   .text.synopGMAC_is_last_tx_desc:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1831   .text.synopGMAC_is_last_tx_desc:00000000 synopGMAC_is_last_tx_desc
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1849   .text.synopGMAC_is_rx_desc_chained:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1854   .text.synopGMAC_is_rx_desc_chained:00000000 synopGMAC_is_rx_desc_chained
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1863   .text.synopGMAC_is_tx_desc_chained:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1868   .text.synopGMAC_is_tx_desc_chained:00000000 synopGMAC_is_tx_desc_chained
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1877   .text.synopGMAC_get_desc_data:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1882   .text.synopGMAC_get_desc_data:00000000 synopGMAC_get_desc_data
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1924   .text.synopGMAC_get_tx_qptr:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:1929   .text.synopGMAC_get_tx_qptr:00000000 synopGMAC_get_tx_qptr
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2045   .text.synopGMAC_set_tx_qptr:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2050   .text.synopGMAC_set_tx_qptr:00000000 synopGMAC_set_tx_qptr
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2143   .text.synopGMAC_set_tx_qptr:000000b8 $d
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2146   .text.synopGMAC_set_rx_qptr:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2151   .text.synopGMAC_set_rx_qptr:00000000 synopGMAC_set_rx_qptr
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2233   .text.synopGMAC_set_rx_qptr:000000b4 $d
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2236   .text.synopGMAC_get_rx_qptr:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2241   .text.synopGMAC_get_rx_qptr:00000000 synopGMAC_get_rx_qptr
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2327   .text.synopGMAC_clear_interrupt:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2332   .text.synopGMAC_clear_interrupt:00000000 synopGMAC_clear_interrupt
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2347   .text.synopGMAC_get_interrupt_type:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2352   .text.synopGMAC_get_interrupt_type:00000000 synopGMAC_get_interrupt_type
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2390   .text.synopGMAC_get_interrupt_mask:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2395   .text.synopGMAC_get_interrupt_mask:00000000 synopGMAC_get_interrupt_mask
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2404   .text.synopGMAC_enable_interrupt:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2409   .text.synopGMAC_enable_interrupt:00000000 synopGMAC_enable_interrupt
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2419   .text.synopGMAC_disable_interrupt_all:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2424   .text.synopGMAC_disable_interrupt_all:00000000 synopGMAC_disable_interrupt_all
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2434   .text.synopGMAC_disable_interrupt:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2439   .text.synopGMAC_disable_interrupt:00000000 synopGMAC_disable_interrupt
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2449   .text.synopGMAC_enable_dma_rx:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2454   .text.synopGMAC_enable_dma_rx:00000000 synopGMAC_enable_dma_rx
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2469   .text.synopGMAC_enable_dma_tx:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2474   .text.synopGMAC_enable_dma_tx:00000000 synopGMAC_enable_dma_tx
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2489   .text.synopGMAC_resume_dma_tx:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2494   .text.synopGMAC_resume_dma_tx:00000000 synopGMAC_resume_dma_tx
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2504   .text.synopGMAC_resume_dma_rx:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2509   .text.synopGMAC_resume_dma_rx:00000000 synopGMAC_resume_dma_rx
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2519   .text.synopGMAC_take_desc_ownership:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2524   .text.synopGMAC_take_desc_ownership:00000000 synopGMAC_take_desc_ownership
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2536   .text.synopGMAC_take_desc_ownership_rx:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2541   .text.synopGMAC_take_desc_ownership_rx:00000000 synopGMAC_take_desc_ownership_rx
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2571   .text.synopGMAC_take_desc_ownership_tx:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2576   .text.synopGMAC_take_desc_ownership_tx:00000000 synopGMAC_take_desc_ownership_tx
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2606   .text.synopGMAC_disable_dma_tx:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2611   .text.synopGMAC_disable_dma_tx:00000000 synopGMAC_disable_dma_tx
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2626   .text.synopGMAC_disable_dma_rx:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2631   .text.synopGMAC_disable_dma_rx:00000000 synopGMAC_disable_dma_rx
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2646   .text.synopGMAC_pmt_int_enable:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2651   .text.synopGMAC_pmt_int_enable:00000000 synopGMAC_pmt_int_enable
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2661   .text.synopGMAC_pmt_int_disable:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2666   .text.synopGMAC_pmt_int_disable:00000000 synopGMAC_pmt_int_disable
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2676   .text.synopGMAC_power_down_enable:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2681   .text.synopGMAC_power_down_enable:00000000 synopGMAC_power_down_enable
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2691   .text.synopGMAC_power_down_disable:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2696   .text.synopGMAC_power_down_disable:00000000 synopGMAC_power_down_disable
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2706   .text.synopGMAC_enable_pmt_interrupt:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2711   .text.synopGMAC_enable_pmt_interrupt:00000000 synopGMAC_enable_pmt_interrupt
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2721   .text.synopGMAC_disable_pmt_interrupt:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2726   .text.synopGMAC_disable_pmt_interrupt:00000000 synopGMAC_disable_pmt_interrupt
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2736   .text.synopGMAC_magic_packet_enable:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2741   .text.synopGMAC_magic_packet_enable:00000000 synopGMAC_magic_packet_enable
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2751   .text.synopGMAC_wakeup_frame_enable:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2756   .text.synopGMAC_wakeup_frame_enable:00000000 synopGMAC_wakeup_frame_enable
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2766   .text.synopGMAC_pmt_unicast_enable:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2771   .text.synopGMAC_pmt_unicast_enable:00000000 synopGMAC_pmt_unicast_enable
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2781   .text.synopGMAC_is_magic_packet_received:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2786   .text.synopGMAC_is_magic_packet_received:00000000 synopGMAC_is_magic_packet_received
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2797   .text.synopGMAC_is_wakeup_frame_received:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2802   .text.synopGMAC_is_wakeup_frame_received:00000000 synopGMAC_is_wakeup_frame_received
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2813   .text.synopGMAC_write_wakeup_frame_register:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2818   .text.synopGMAC_write_wakeup_frame_register:00000000 synopGMAC_write_wakeup_frame_register
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2847   .text.synopGMAC_write_wakeup_frame_register:00000030 $d
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2850   .text.synopGMAC_mmc_counters_stop:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2855   .text.synopGMAC_mmc_counters_stop:00000000 synopGMAC_mmc_counters_stop
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2865   .text.synopGMAC_mmc_counters_resume:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2870   .text.synopGMAC_mmc_counters_resume:00000000 synopGMAC_mmc_counters_resume
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2880   .text.synopGMAC_mmc_counters_set_selfclear:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2885   .text.synopGMAC_mmc_counters_set_selfclear:00000000 synopGMAC_mmc_counters_set_selfclear
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2895   .text.synopGMAC_mmc_counters_reset_selfclear:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2900   .text.synopGMAC_mmc_counters_reset_selfclear:00000000 synopGMAC_mmc_counters_reset_selfclear
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2910   .text.synopGMAC_mmc_counters_disable_rollover:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2915   .text.synopGMAC_mmc_counters_disable_rollover:00000000 synopGMAC_mmc_counters_disable_rollover
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2925   .text.synopGMAC_mmc_counters_enable_rollover:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2930   .text.synopGMAC_mmc_counters_enable_rollover:00000000 synopGMAC_mmc_counters_enable_rollover
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2940   .text.synopGMAC_read_mmc_counter:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2945   .text.synopGMAC_read_mmc_counter:00000000 synopGMAC_read_mmc_counter
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2953   .text.synopGMAC_read_mmc_rx_int_status:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2958   .text.synopGMAC_read_mmc_rx_int_status:00000000 synopGMAC_read_mmc_rx_int_status
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2967   .text.synopGMAC_read_mmc_tx_int_status:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2972   .text.synopGMAC_read_mmc_tx_int_status:00000000 synopGMAC_read_mmc_tx_int_status
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2981   .text.synopGMAC_disable_mmc_tx_interrupt:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2986   .text.synopGMAC_disable_mmc_tx_interrupt:00000000 synopGMAC_disable_mmc_tx_interrupt
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:2996   .text.synopGMAC_enable_mmc_tx_interrupt:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:3001   .text.synopGMAC_enable_mmc_tx_interrupt:00000000 synopGMAC_enable_mmc_tx_interrupt
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:3011   .text.synopGMAC_disable_mmc_rx_interrupt:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:3016   .text.synopGMAC_disable_mmc_rx_interrupt:00000000 synopGMAC_disable_mmc_rx_interrupt
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:3026   .text.synopGMAC_enable_mmc_rx_interrupt:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:3031   .text.synopGMAC_enable_mmc_rx_interrupt:00000000 synopGMAC_enable_mmc_rx_interrupt
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:3041   .text.synopGMAC_disable_mmc_ipc_rx_interrupt:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:3046   .text.synopGMAC_disable_mmc_ipc_rx_interrupt:00000000 synopGMAC_disable_mmc_ipc_rx_interrupt
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:3056   .text.synopGMAC_enable_mmc_ipc_rx_interrupt:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:3061   .text.synopGMAC_enable_mmc_ipc_rx_interrupt:00000000 synopGMAC_enable_mmc_ipc_rx_interrupt
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:3071   .text.synopGMAC_enable_rx_chksum_offload:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:3076   .text.synopGMAC_enable_rx_chksum_offload:00000000 synopGMAC_enable_rx_chksum_offload
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:3086   .text.synopGMAC_disable_rx_Ipchecksum_offload:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:3091   .text.synopGMAC_disable_rx_Ipchecksum_offload:00000000 synopGMAC_disable_rx_Ipchecksum_offload
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:3101   .text.synopGMAC_rx_tcpip_chksum_drop_enable:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:3106   .text.synopGMAC_rx_tcpip_chksum_drop_enable:00000000 synopGMAC_rx_tcpip_chksum_drop_enable
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:3116   .text.synopGMAC_rx_tcpip_chksum_drop_disable:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:3121   .text.synopGMAC_rx_tcpip_chksum_drop_disable:00000000 synopGMAC_rx_tcpip_chksum_drop_disable
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:3131   .text.synopGMAC_is_ext_status:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:3136   .text.synopGMAC_is_ext_status:00000000 synopGMAC_is_ext_status
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:3144   .text.synopGMAC_ES_is_IP_header_error:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:3149   .text.synopGMAC_ES_is_IP_header_error:00000000 synopGMAC_ES_is_IP_header_error
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:3157   .text.synopGMAC_ES_is_rx_checksum_bypassed:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:3162   .text.synopGMAC_ES_is_rx_checksum_bypassed:00000000 synopGMAC_ES_is_rx_checksum_bypassed
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:3170   .text.synopGMAC_ES_is_IP_payload_error:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:3175   .text.synopGMAC_ES_is_IP_payload_error:00000000 synopGMAC_ES_is_IP_payload_error
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:3183   .text.synopGMAC_is_rx_checksum_error:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:3188   .text.synopGMAC_is_rx_checksum_error:00000000 synopGMAC_is_rx_checksum_error
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:3226   .text.synopGMAC_is_tx_ipv4header_checksum_error:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:3231   .text.synopGMAC_is_tx_ipv4header_checksum_error:00000000 synopGMAC_is_tx_ipv4header_checksum_error
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:3239   .text.synopGMAC_is_tx_payload_checksum_error:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:3244   .text.synopGMAC_is_tx_payload_checksum_error:00000000 synopGMAC_is_tx_payload_checksum_error
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:3252   .text.synopGMAC_tx_checksum_offload_bypass:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:3257   .text.synopGMAC_tx_checksum_offload_bypass:00000000 synopGMAC_tx_checksum_offload_bypass
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:3267   .text.synopGMAC_tx_checksum_offload_ipv4hdr:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:3272   .text.synopGMAC_tx_checksum_offload_ipv4hdr:00000000 synopGMAC_tx_checksum_offload_ipv4hdr
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:3283   .text.synopGMAC_tx_checksum_offload_tcponly:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:3288   .text.synopGMAC_tx_checksum_offload_tcponly:00000000 synopGMAC_tx_checksum_offload_tcponly
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:3299   .text.synopGMAC_tx_checksum_offload_tcp_pseudo:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:3304   .text.synopGMAC_tx_checksum_offload_tcp_pseudo:00000000 synopGMAC_tx_checksum_offload_tcp_pseudo
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:3323   .bss:00000000 $d
+C:\Users\Mihai\AppData\Local\Temp\ccQuYiEd.s:3327   .bss:00000000 SynopGMACOneShotTimerCallback
+
+UNDEFINED SYMBOLS
+synopGMACReadReg
+synopGMACWriteReg
+synopGMACSetBits
+synopGMACClearBits
+synopGMACCheckBits
+memset

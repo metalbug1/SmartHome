@@ -1,0 +1,985 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"ethernetif.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.comm	MACaddr,6,4
+  20              		.section	.text.low_level_init,"ax",%progbits
+  21              		.align	2
+  22              		.thumb
+  23              		.thumb_func
+  25              	low_level_init:
+  26              	.LFB112:
+  27              		.file 1 "../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c"
+   1:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** /**
+   2:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * @file
+   3:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * Ethernet Interface Skeleton
+   4:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  *
+   5:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  */
+   6:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 
+   7:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** /*
+   8:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * Copyright (c) 2001-2004 Swedish Institute of Computer Science.
+   9:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * All rights reserved. 
+  10:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * 
+  11:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * Redistribution and use in source and binary forms, with or without modification, 
+  12:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * are permitted provided that the following conditions are met:
+  13:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  *
+  14:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * 1. Redistributions of source code must retain the above copyright notice,
+  15:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  *    this list of conditions and the following disclaimer.
+  16:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * 2. Redistributions in binary form must reproduce the above copyright notice,
+  17:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  *    this list of conditions and the following disclaimer in the documentation
+  18:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  *    and/or other materials provided with the distribution.
+  19:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * 3. The name of the author may not be used to endorse or promote products
+  20:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  *    derived from this software without specific prior written permission. 
+  21:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  *
+  22:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR IMPLIED 
+  23:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF 
+  24:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT 
+  25:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, 
+  26:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT 
+  27:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS 
+  28:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN 
+  29:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING 
+  30:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY 
+  31:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * OF SUCH DAMAGE.
+  32:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  *
+  33:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * This file is part of the lwIP TCP/IP stack.
+  34:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * 
+  35:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * Author: Adam Dunkels <adam@sics.se>
+  36:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  *
+  37:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  */
+  38:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** /* =========================================================================== *
+  39:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * Copyright (c) 2011, Infineon Technologies AG                                *
+  40:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * All rights reserved.                                                        *
+  41:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  *                                                                             *
+  42:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * Redistribution and use in source and binary forms, with or without          *
+  43:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * modification, are permitted provided that the following conditions are met: *
+  44:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * Redistributions of source code must retain the above copyright notice, this *
+  45:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * list of conditions and the following disclaimer. Redistributions in binary  *
+  46:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * form must reproduce the above copyright notice, this list of conditions and *
+  47:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * the following disclaimer in the documentation and/or other materials        *
+  48:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * provided with the distribution. Neither the name of the copyright holders   *
+  49:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * nor the names of its contributors may be used to endorse or promote         *
+  50:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * products derived from this software without specific prior written          *
+  51:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * permission.                                                                 *
+  52:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  *                                                                             *
+  53:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" *
+  54:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,       *
+  55:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR      *
+  56:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR           *
+  57:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,       *
+  58:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,         *
+  59:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; *
+  60:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,    *
+  61:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR     *
+  62:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF      *
+  63:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.                                  *
+  64:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * To improve the quality of the software, users are encouraged to share       *
+  65:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * modifications, enhancements or bug fixes with                               *
+  66:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * Infineon Technologies AG (dave@infineon.com).                               *
+  67:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  *                                                                             *
+  68:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * ==========================================================================  *
+  69:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** ********************************************************************************
+  70:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** **                                                                            **
+  71:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** **                                                                            **
+  72:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** ** PLATFORM : Infineon XMC4000 Series                                         **
+  73:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** **                                                                            **
+  74:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** ** COMPILER : Compiler Independent                                            **
+  75:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** **                                                                            **
+  76:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** ** AUTHOR : App Developer                                                     **
+  77:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** **                                                                            **
+  78:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** ** MAY BE CHANGED BY USER [Yes/No]: Yes                                       **
+  79:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** **                                                                            **
+  80:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** ** MODIFICATION DATE : Dec 12, 2012                                           **
+  81:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** **                                                                            **
+  82:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** *******************************************************************************/
+  83:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 
+  84:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** /*******************************************************************************
+  85:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** **                       Author(s) Identity                                   **
+  86:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** ********************************************************************************
+  87:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** **                                                                            **
+  88:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** ** Initials     Name                                                          **
+  89:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** ** ---------------------------------------------------------------------------**
+  90:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** ** JN          App Developer                                                  **
+  91:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** *******************************************************************************/
+  92:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** /*
+  93:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * This file is a skeleton for developing Ethernet network interface
+  94:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * drivers for lwIP. Add code to the low_level functions and do a
+  95:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * search-and-replace for the word "ethernetif" to replace it with
+  96:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * something that better describes your network interface.
+  97:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  */
+  98:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 
+  99:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** #include "lwip/opt.h"
+ 100:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 
+ 101:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 
+ 102:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** #include "lwip/def.h"
+ 103:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** #include "lwip/mem.h"
+ 104:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** #include "lwip/pbuf.h"
+ 105:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** #include "lwip/sys.h"
+ 106:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** #include <lwip/stats.h>
+ 107:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** #include <lwip/snmp.h>
+ 108:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** #include "netif/etharp.h"
+ 109:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** #include "netif/ppp_oe.h"
+ 110:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** #include "ethernetif.h"
+ 111:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** #include "netconf.h"
+ 112:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** #include <string.h>
+ 113:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 
+ 114:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** #include <DAVE3.h>
+ 115:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 
+ 116:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 
+ 117:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** /*****************************************************************************
+ 118:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****               DUMMY DEFINTIONS OF DEBUG LOG MACROS
+ 119:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** *****************************************************************************/
+ 120:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** /*These definitions are included here to avoid compilation errors,
+ 121:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  since the DBG002 app is not part of the project. All the macros are defined
+ 122:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  as empty*/
+ 123:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** #ifndef _DBG002_H_
+ 124:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 
+ 125:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** #define DBG002_RegisterCallBack(A,B,C)
+ 126:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** #define DBG002_I(e)
+ 127:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** #define DBG002_IG(e,g)
+ 128:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** #define DBG002_IH(e,h)
+ 129:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** #define DBG002_IP(e,p)
+ 130:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** #define DBG002_IGH(e,g,h)
+ 131:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** #define DBG002_IGP(e,g,p)
+ 132:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** #define DBG002_IHP(e,h,p)
+ 133:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** #define DBG002_IGHP(e,g,h,p)
+ 134:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** #define DBG002_N(e)
+ 135:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** #define DBG002_NG(e,g)
+ 136:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** #define DBG002_NH(e,h)
+ 137:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** #define DBG002_NP(e,p)
+ 138:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** #define DBG002_NGH(e,g,h)
+ 139:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** #define DBG002_NGP(e,g,p)
+ 140:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** #define DBG002_NHP(e,h,p)
+ 141:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** #define DBG002_NGHP(e,g,h,p)
+ 142:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** #define DBG002_ID(e)
+ 143:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** #define DBG002_IS(e)
+ 144:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** #define DBG002_ISG(e,g)
+ 145:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** #define DBG002_SAFETY_CRITICAL(groupid,messageid,length,value)
+ 146:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** #define DBG002_CRITICAL(groupid,messageid,length,value)
+ 147:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** #define DBG002_ERROR(groupid,messageid,length,value)
+ 148:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** #define DBG002_WARNING(groupid,messageid,length,value)
+ 149:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** #define DBG002_INFO(groupid,messageid,length,value)
+ 150:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** #define DBG002_TRACE(groupid,messageid,length,value)
+ 151:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** #define DBG002_FUNCTION_ENTRY(GID, Status)
+ 152:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** #define DBG002_FUNCTION_EXIT(GID, Status)
+ 153:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 
+ 154:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** #endif/* End of defintions of dummy Debug Log macros*/
+ 155:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 
+ 156:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 
+ 157:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** extern struct netif netif;
+ 158:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 
+ 159:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** /* MAC Address */
+ 160:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** u8_t MACaddr[6];
+ 161:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 
+ 162:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** /* Define those to better describe your network interface. */
+ 163:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** #define IFNAME0 'e'
+ 164:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** #define IFNAME1 'n'
+ 165:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 
+ 166:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** /**
+ 167:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * Helper struct to hold private data used to operate your ethernet interface.
+ 168:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * Keeping the ethernet address of the MAC in this struct is not necessary
+ 169:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * as it is already kept in the struct netif.
+ 170:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * But this is only an example, anyway...
+ 171:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  */
+ 172:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** struct ethernetif {
+ 173:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****   struct eth_addr *ethaddr;
+ 174:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****   /* Add whatever per-interface state that is needed here. */
+ 175:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** };
+ 176:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 
+ 177:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 
+ 178:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** /**
+ 179:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * In this function, the hardware should be initialized.
+ 180:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * Called from ethernetif_init().
+ 181:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  *
+ 182:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * @param netif the already initialized lwip network interface structure
+ 183:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  *        for this ethernetif
+ 184:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  */
+ 185:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** static void
+ 186:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** low_level_init(struct netif *netif)
+ 187:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** {
+  28              		.loc 1 187 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 24
+  31              		@ frame_needed = 1, uses_anonymous_args = 0
+  32 0000 80B5     		push	{r7, lr}
+  33              	.LCFI0:
+  34              		.cfi_def_cfa_offset 8
+  35              		.cfi_offset 7, -8
+  36              		.cfi_offset 14, -4
+  37 0002 86B0     		sub	sp, sp, #24
+  38              	.LCFI1:
+  39              		.cfi_def_cfa_offset 32
+  40 0004 00AF     		add	r7, sp, #0
+  41              	.LCFI2:
+  42              		.cfi_def_cfa_register 7
+  43 0006 7860     		str	r0, [r7, #4]
+ 188:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****   /* <<<DD_LWIP_PORT_2_1>>> */
+ 189:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****   status_t Status = DAVEApp_SUCCESS;
+  44              		.loc 1 189 0
+  45 0008 4FF00003 		mov	r3, #0
+  46 000c 7B61     		str	r3, [r7, #20]
+ 190:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****   Eth_IoctlParamType GetMacParams;
+ 191:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 
+ 192:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****   GetMacParams.Address = (uint32_t) netif->hwaddr;
+  47              		.loc 1 192 0
+  48 000e 7B68     		ldr	r3, [r7, #4]
+  49 0010 03F12303 		add	r3, r3, #35
+  50 0014 FB60     		str	r3, [r7, #12]
+ 193:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 
+ 194:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****   /* set MAC hardware address length */
+ 195:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****   netif->hwaddr_len = ETHARP_HWADDR_LEN;
+  51              		.loc 1 195 0
+  52 0016 7B68     		ldr	r3, [r7, #4]
+  53 0018 4FF00602 		mov	r2, #6
+  54 001c 83F82220 		strb	r2, [r3, #34]
+ 196:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 
+ 197:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****   /* device capabilities */
+ 198:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****   /* don't set NETIF_FLAG_ETHARP if this device is not an ethernet one */
+ 199:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****   netif->flags = NETIF_FLAG_BROADCAST | NETIF_FLAG_ETHARP | NETIF_FLAG_LINK_UP;
+  55              		.loc 1 199 0
+  56 0020 7B68     		ldr	r3, [r7, #4]
+  57 0022 4FF03202 		mov	r2, #50
+  58 0026 83F82920 		strb	r2, [r3, #41]
+ 200:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 
+ 201:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****   /* maximum transfer unit */
+ 202:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****   netif->mtu = MAX_MTU_SIZE;
+  59              		.loc 1 202 0
+  60 002a 7B68     		ldr	r3, [r7, #4]
+  61 002c 40F2DC52 		movw	r2, #1500
+  62 0030 1A84     		strh	r2, [r3, #32]	@ movhi
+ 203:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 
+ 204:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****   /* Do whatever else is needed to initialize interface. */
+ 205:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****   Status = Eth_InitNetworkInterface();
+  63              		.loc 1 205 0
+  64 0032 FFF7FEFF 		bl	Eth_InitNetworkInterface
+  65 0036 7861     		str	r0, [r7, #20]
+ 206:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****   if (Status != DAVEApp_SUCCESS)
+ 207:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****   {
+ 208:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 	  DBG002_ERROR(GID_LWIP, lwIP_INIT_ERROR, 0, NULL);
+ 209:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****   }
+ 210:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****   Status = Eth_OpenNetworkInterface();
+  66              		.loc 1 210 0
+  67 0038 FFF7FEFF 		bl	Eth_OpenNetworkInterface
+  68 003c 7861     		str	r0, [r7, #20]
+ 211:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****   if (Status != DAVEApp_SUCCESS)
+ 212:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****   {
+ 213:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****     DBG002_ERROR(GID_LWIP, lwIP_INIT_ERROR, 0, NULL);
+ 214:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****   }
+ 215:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****   /* Get MAC hardware address */
+ 216:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****   Status = Eth_PerformIoctl(IOCTL_GET_MAC_ADDRESS, &GetMacParams);
+  69              		.loc 1 216 0
+  70 003e 07F10803 		add	r3, r7, #8
+  71 0042 4FF00800 		mov	r0, #8
+  72 0046 1946     		mov	r1, r3
+  73 0048 FFF7FEFF 		bl	Eth_PerformIoctl
+  74 004c 7861     		str	r0, [r7, #20]
+ 217:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****   if (Status != DAVEApp_SUCCESS)
+ 218:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****   {
+ 219:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****     DBG002_ERROR(GID_LWIP, lwIP_INIT_ERROR, 0, NULL);
+ 220:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****   }
+ 221:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****   return;
+ 222:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** }
+  75              		.loc 1 222 0
+  76 004e 07F11807 		add	r7, r7, #24
+  77 0052 BD46     		mov	sp, r7
+  78 0054 80BD     		pop	{r7, pc}
+  79              		.cfi_endproc
+  80              	.LFE112:
+  82 0056 00BF     		.section	.text.low_level_output,"ax",%progbits
+  83              		.align	2
+  84              		.thumb
+  85              		.thumb_func
+  87              	low_level_output:
+  88              	.LFB113:
+ 223:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 
+ 224:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** /**
+ 225:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * This function should do the actual transmission of the packet. The packet is
+ 226:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * contained in the pbuf that is passed to the function. This pbuf
+ 227:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * might be chained.
+ 228:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  *
+ 229:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * @param netif the lwip network interface structure for this ethernetif
+ 230:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * @param p the MAC packet to send (e.g. IP packet including MAC addresses and type)
+ 231:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * @return ERR_OK if the packet could be sent
+ 232:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  *         an err_t value if the packet couldn't be sent
+ 233:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  *
+ 234:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * @note Returning ERR_MEM here if a DMA queue of your MAC is full can lead to
+ 235:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  *       strange results. You might consider waiting for space in the DMA queue
+ 236:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  *       to become availale since the stack doesn't retry to send a packet
+ 237:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  *       dropped because of memory failure (except for the TCP timers).
+ 238:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  */
+ 239:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** extern status_t Eth_GetTxBuffer(uint8_t** Buffer);
+ 240:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** static err_t
+ 241:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** low_level_output(struct netif *netif, struct pbuf *p)
+ 242:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** {
+  89              		.loc 1 242 0
+  90              		.cfi_startproc
+  91              		@ args = 0, pretend = 0, frame = 32
+  92              		@ frame_needed = 1, uses_anonymous_args = 0
+  93 0000 80B5     		push	{r7, lr}
+  94              	.LCFI3:
+  95              		.cfi_def_cfa_offset 8
+  96              		.cfi_offset 7, -8
+  97              		.cfi_offset 14, -4
+  98 0002 88B0     		sub	sp, sp, #32
+  99              	.LCFI4:
+ 100              		.cfi_def_cfa_offset 40
+ 101 0004 00AF     		add	r7, sp, #0
+ 102              	.LCFI5:
+ 103              		.cfi_def_cfa_register 7
+ 104 0006 7860     		str	r0, [r7, #4]
+ 105 0008 3960     		str	r1, [r7, #0]
+ 243:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****   /* <<<DD_LWIP_PORT_3_1>>> */
+ 244:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****   /* struct ethernetif *ethernetif = netif->state; */
+ 245:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****   struct pbuf *q;
+ 246:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****   status_t Status = lwIP_INIT_ERROR;
+ 106              		.loc 1 246 0
+ 107 000a 4FF00103 		mov	r3, #1
+ 108 000e 7B61     		str	r3, [r7, #20]
+ 247:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****   uint8_t* GetBuffer;
+ 248:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****   uint8_t* Temp;
+ 249:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****   uint32_t TxLength;
+ 250:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****   q=p;
+ 109              		.loc 1 250 0
+ 110 0010 3B68     		ldr	r3, [r7, #0]
+ 111 0012 FB61     		str	r3, [r7, #28]
+ 251:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****   TxLength = q->tot_len;
+ 112              		.loc 1 251 0
+ 113 0014 FB69     		ldr	r3, [r7, #28]
+ 114 0016 1B89     		ldrh	r3, [r3, #8]
+ 115 0018 3B61     		str	r3, [r7, #16]
+ 252:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 
+ 253:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****   Eth_GetTxBuffer(&GetBuffer);
+ 116              		.loc 1 253 0
+ 117 001a 07F10C03 		add	r3, r7, #12
+ 118 001e 1846     		mov	r0, r3
+ 119 0020 FFF7FEFF 		bl	Eth_GetTxBuffer
+ 254:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****   Temp = GetBuffer;
+ 120              		.loc 1 254 0
+ 121 0024 FB68     		ldr	r3, [r7, #12]
+ 122 0026 BB61     		str	r3, [r7, #24]
+ 255:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** #if ETH_PAD_SIZE
+ 256:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****   pbuf_header(p, -ETH_PAD_SIZE); /* drop the padding word */
+ 257:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** #endif
+ 258:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****   if(TxLength > 1500)
+ 123              		.loc 1 258 0
+ 124 0028 3A69     		ldr	r2, [r7, #16]
+ 125 002a 40F2DC53 		movw	r3, #1500
+ 126 002e 9A42     		cmp	r2, r3
+ 127 0030 03D9     		bls	.L4
+ 259:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****   {
+ 260:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****     TxLength = 0;    
+ 128              		.loc 1 260 0
+ 129 0032 4FF00003 		mov	r3, #0
+ 130 0036 3B61     		str	r3, [r7, #16]
+ 131 0038 1CE0     		b	.L5
+ 132              	.L4:
+ 261:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****   }
+ 262:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****   else
+ 263:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****   {
+ 264:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****     for(q = p; q != NULL; q = q->next)
+ 133              		.loc 1 264 0
+ 134 003a 3B68     		ldr	r3, [r7, #0]
+ 135 003c FB61     		str	r3, [r7, #28]
+ 136 003e 10E0     		b	.L6
+ 137              	.L7:
+ 265:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****     {
+ 266:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****   
+ 267:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****       /* Send the data from the pbuf to the interface, one pbuf at a
+ 268:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****          time. The size of the data in each pbuf is kept in the ->len
+ 269:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****          variable. */
+ 270:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****         memcpy(Temp,q->payload,q->len);
+ 138              		.loc 1 270 0 discriminator 2
+ 139 0040 FB69     		ldr	r3, [r7, #28]
+ 140 0042 5A68     		ldr	r2, [r3, #4]
+ 141 0044 FB69     		ldr	r3, [r7, #28]
+ 142 0046 5B89     		ldrh	r3, [r3, #10]
+ 143 0048 B869     		ldr	r0, [r7, #24]
+ 144 004a 1146     		mov	r1, r2
+ 145 004c 1A46     		mov	r2, r3
+ 146 004e FFF7FEFF 		bl	memcpy
+ 271:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****         Temp += q->len;
+ 147              		.loc 1 271 0 discriminator 2
+ 148 0052 FB69     		ldr	r3, [r7, #28]
+ 149 0054 5B89     		ldrh	r3, [r3, #10]
+ 150 0056 BA69     		ldr	r2, [r7, #24]
+ 151 0058 D318     		adds	r3, r2, r3
+ 152 005a BB61     		str	r3, [r7, #24]
+ 264:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****     for(q = p; q != NULL; q = q->next)
+ 153              		.loc 1 264 0 discriminator 2
+ 154 005c FB69     		ldr	r3, [r7, #28]
+ 155 005e 1B68     		ldr	r3, [r3, #0]
+ 156 0060 FB61     		str	r3, [r7, #28]
+ 157              	.L6:
+ 264:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****     for(q = p; q != NULL; q = q->next)
+ 158              		.loc 1 264 0 is_stmt 0 discriminator 1
+ 159 0062 FB69     		ldr	r3, [r7, #28]
+ 160 0064 002B     		cmp	r3, #0
+ 161 0066 EBD1     		bne	.L7
+ 272:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****     }
+ 273:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****     Status = Eth_TransmitFrames(GetBuffer, TxLength);
+ 162              		.loc 1 273 0 is_stmt 1
+ 163 0068 FB68     		ldr	r3, [r7, #12]
+ 164 006a 1846     		mov	r0, r3
+ 165 006c 3969     		ldr	r1, [r7, #16]
+ 166 006e FFF7FEFF 		bl	Eth_TransmitFrames
+ 167 0072 7861     		str	r0, [r7, #20]
+ 168              	.L5:
+ 274:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****     if (Status != DAVEApp_SUCCESS)
+ 275:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****     {
+ 276:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****       DBG002_WARNING(GID_LWIP, lwIP_INFO_MSG, sizeof("TX FAILE"), "TX FAILE");
+ 277:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****     }
+ 278:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****   }
+ 279:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** #if ETH_PAD_SIZE
+ 280:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****   pbuf_header(p, ETH_PAD_SIZE); /* reclaim the padding word */
+ 281:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** #endif
+ 282:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****   
+ 283:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****   LINK_STATS_INC(link.xmit);
+ 284:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 
+ 285:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****   return ERR_OK;
+ 169              		.loc 1 285 0
+ 170 0074 4FF00003 		mov	r3, #0
+ 171 0078 5BB2     		sxtb	r3, r3
+ 286:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** }
+ 172              		.loc 1 286 0
+ 173 007a 1846     		mov	r0, r3
+ 174 007c 07F12007 		add	r7, r7, #32
+ 175 0080 BD46     		mov	sp, r7
+ 176 0082 80BD     		pop	{r7, pc}
+ 177              		.cfi_endproc
+ 178              	.LFE113:
+ 180              		.section	.text.lwip_Input,"ax",%progbits
+ 181              		.align	2
+ 182              		.global	lwip_Input
+ 183              		.thumb
+ 184              		.thumb_func
+ 186              	lwip_Input:
+ 187              	.LFB114:
+ 287:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 
+ 288:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** /**
+ 289:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * This function should be called when a packet is ready to be read
+ 290:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * from the interface. It uses the function low_level_input() that
+ 291:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * should handle the actual reception of bytes from the network
+ 292:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * interface. Then the type of the received packet is determined and
+ 293:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * the appropriate input function is called.
+ 294:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  *
+ 295:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * @param netif the lwip network interface structure for this ethernetif
+ 296:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  */
+ 297:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** void lwip_Input(unsigned char *PacketBuffer, uint32_t PacketLength)
+ 298:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** {
+ 188              		.loc 1 298 0
+ 189              		.cfi_startproc
+ 190              		@ args = 0, pretend = 0, frame = 24
+ 191              		@ frame_needed = 1, uses_anonymous_args = 0
+ 192 0000 80B5     		push	{r7, lr}
+ 193              	.LCFI6:
+ 194              		.cfi_def_cfa_offset 8
+ 195              		.cfi_offset 7, -8
+ 196              		.cfi_offset 14, -4
+ 197 0002 86B0     		sub	sp, sp, #24
+ 198              	.LCFI7:
+ 199              		.cfi_def_cfa_offset 32
+ 200 0004 00AF     		add	r7, sp, #0
+ 201              	.LCFI8:
+ 202              		.cfi_def_cfa_register 7
+ 203 0006 7860     		str	r0, [r7, #4]
+ 204 0008 3960     		str	r1, [r7, #0]
+ 299:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****   /* <<<DD_LWIP_PORT_4_1>>> */
+ 300:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****   struct pbuf *p, *q;
+ 301:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****   uint32_t Length =0;
+ 205              		.loc 1 301 0
+ 206 000a 4FF00003 		mov	r3, #0
+ 207 000e 3B61     		str	r3, [r7, #16]
+ 302:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****   struct eth_hdr *ethhdr;
+ 303:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 
+ 304:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****   /* We allocate a pbuf chain of pbufs from the pool. */
+ 305:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****   p = pbuf_alloc(PBUF_RAW, PacketLength, PBUF_POOL);
+ 208              		.loc 1 305 0
+ 209 0010 3B68     		ldr	r3, [r7, #0]
+ 210 0012 9BB2     		uxth	r3, r3
+ 211 0014 4FF00300 		mov	r0, #3
+ 212 0018 1946     		mov	r1, r3
+ 213 001a 4FF00302 		mov	r2, #3
+ 214 001e FFF7FEFF 		bl	pbuf_alloc
+ 215 0022 F860     		str	r0, [r7, #12]
+ 306:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 
+ 307:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****   if (p != NULL)
+ 216              		.loc 1 307 0
+ 217 0024 FB68     		ldr	r3, [r7, #12]
+ 218 0026 002B     		cmp	r3, #0
+ 219 0028 49D0     		beq	.L20
+ 308:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****   {
+ 309:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 	for (q = p; q != NULL; q = q->next)
+ 220              		.loc 1 309 0
+ 221 002a FB68     		ldr	r3, [r7, #12]
+ 222 002c 7B61     		str	r3, [r7, #20]
+ 223 002e 13E0     		b	.L11
+ 224              	.L12:
+ 310:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 	{
+ 311:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 	  memcpy((u8_t*)q->payload, (u8_t*)&PacketBuffer[Length], q->len);
+ 225              		.loc 1 311 0 discriminator 2
+ 226 0030 7B69     		ldr	r3, [r7, #20]
+ 227 0032 5968     		ldr	r1, [r3, #4]
+ 228 0034 7A68     		ldr	r2, [r7, #4]
+ 229 0036 3B69     		ldr	r3, [r7, #16]
+ 230 0038 D218     		adds	r2, r2, r3
+ 231 003a 7B69     		ldr	r3, [r7, #20]
+ 232 003c 5B89     		ldrh	r3, [r3, #10]
+ 233 003e 0846     		mov	r0, r1
+ 234 0040 1146     		mov	r1, r2
+ 235 0042 1A46     		mov	r2, r3
+ 236 0044 FFF7FEFF 		bl	memcpy
+ 312:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 	  Length = Length + q->len;
+ 237              		.loc 1 312 0 discriminator 2
+ 238 0048 7B69     		ldr	r3, [r7, #20]
+ 239 004a 5B89     		ldrh	r3, [r3, #10]
+ 240 004c 3A69     		ldr	r2, [r7, #16]
+ 241 004e D318     		adds	r3, r2, r3
+ 242 0050 3B61     		str	r3, [r7, #16]
+ 309:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 	for (q = p; q != NULL; q = q->next)
+ 243              		.loc 1 309 0 discriminator 2
+ 244 0052 7B69     		ldr	r3, [r7, #20]
+ 245 0054 1B68     		ldr	r3, [r3, #0]
+ 246 0056 7B61     		str	r3, [r7, #20]
+ 247              	.L11:
+ 309:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 	for (q = p; q != NULL; q = q->next)
+ 248              		.loc 1 309 0 is_stmt 0 discriminator 1
+ 249 0058 7B69     		ldr	r3, [r7, #20]
+ 250 005a 002B     		cmp	r3, #0
+ 251 005c E8D1     		bne	.L12
+ 313:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 	}
+ 314:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****   }
+ 315:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****   else
+ 316:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****   {
+ 317:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 	  DBG002_ERROR(GID_LWIP, lwIP_OUT_OF_MEM, 0, NULL);
+ 318:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 	  return;
+ 319:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****   }
+ 320:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 
+ 321:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****   /* points to packet payload, which starts with an Ethernet header */
+ 322:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****   ethhdr = p->payload;
+ 252              		.loc 1 322 0 is_stmt 1
+ 253 005e FB68     		ldr	r3, [r7, #12]
+ 254 0060 5B68     		ldr	r3, [r3, #4]
+ 255 0062 BB60     		str	r3, [r7, #8]
+ 323:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 
+ 324:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****   switch (htons(ethhdr->type))
+ 256              		.loc 1 324 0
+ 257 0064 BB68     		ldr	r3, [r7, #8]
+ 258 0066 9B89     		ldrh	r3, [r3, #12]	@ unaligned
+ 259 0068 9BB2     		uxth	r3, r3
+ 260 006a 1846     		mov	r0, r3
+ 261 006c FFF7FEFF 		bl	htons
+ 262 0070 0346     		mov	r3, r0
+ 263 0072 B3F5006F 		cmp	r3, #2048
+ 264 0076 03D0     		beq	.L16
+ 265 0078 40F60602 		movw	r2, #2054
+ 266 007c 9342     		cmp	r3, r2
+ 267 007e 14D1     		bne	.L19
+ 268              	.L16:
+ 325:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****   {
+ 326:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****     /* IP or ARP packet? */
+ 327:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****     case ETHTYPE_IP:
+ 328:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****     case ETHTYPE_ARP:
+ 329:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 
+ 330:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** #if PPPOE_SUPPORT
+ 331:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****     /* PPPoE packet? */
+ 332:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****     case ETHTYPE_PPPOEDISC:
+ 333:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****     case ETHTYPE_PPPOE:
+ 334:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** #endif /* PPPOE_SUPPORT */
+ 335:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 
+ 336:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****     /* full packet send to tcpip_thread to process */
+ 337:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****     if ((&(netif))->input(p, &netif) != ERR_OK)
+ 269              		.loc 1 337 0
+ 270 0080 40F20003 		movw	r3, #:lower16:netif
+ 271 0084 C0F20003 		movt	r3, #:upper16:netif
+ 272 0088 1B69     		ldr	r3, [r3, #16]
+ 273 008a F868     		ldr	r0, [r7, #12]
+ 274 008c 40F20001 		movw	r1, #:lower16:netif
+ 275 0090 C0F20001 		movt	r1, #:upper16:netif
+ 276 0094 9847     		blx	r3
+ 277 0096 0346     		mov	r3, r0
+ 278 0098 002B     		cmp	r3, #0
+ 279 009a 0DD0     		beq	.L21
+ 338:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****     {
+ 339:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****       LWIP_DEBUGF(NETIF_DEBUG, ("ethernetif_input: IP input error\n"));
+ 340:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****       pbuf_free(p);
+ 280              		.loc 1 340 0
+ 281 009c F868     		ldr	r0, [r7, #12]
+ 282 009e FFF7FEFF 		bl	pbuf_free
+ 341:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****       p = NULL;
+ 283              		.loc 1 341 0
+ 284 00a2 4FF00003 		mov	r3, #0
+ 285 00a6 FB60     		str	r3, [r7, #12]
+ 342:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****     }
+ 343:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****     break;
+ 286              		.loc 1 343 0
+ 287 00a8 06E0     		b	.L21
+ 288              	.L19:
+ 344:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 
+ 345:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****     default:
+ 346:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****     {
+ 347:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****       pbuf_free(p);
+ 289              		.loc 1 347 0
+ 290 00aa F868     		ldr	r0, [r7, #12]
+ 291 00ac FFF7FEFF 		bl	pbuf_free
+ 348:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****       p = NULL;
+ 292              		.loc 1 348 0
+ 293 00b0 4FF00003 		mov	r3, #0
+ 294 00b4 FB60     		str	r3, [r7, #12]
+ 349:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****       break;
+ 295              		.loc 1 349 0
+ 296 00b6 00E0     		b	.L18
+ 297              	.L21:
+ 343:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****     break;
+ 298              		.loc 1 343 0
+ 299 00b8 00BF     		nop
+ 300              	.L18:
+ 350:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****     }
+ 351:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****   }/* End switch */
+ 352:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 
+ 353:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****   return;
+ 301              		.loc 1 353 0
+ 302 00ba 00BF     		nop
+ 303 00bc 00E0     		b	.L9
+ 304              	.L20:
+ 318:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 	  return;
+ 305              		.loc 1 318 0
+ 306 00be 00BF     		nop
+ 307              	.L9:
+ 354:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** }
+ 308              		.loc 1 354 0
+ 309 00c0 07F11807 		add	r7, r7, #24
+ 310 00c4 BD46     		mov	sp, r7
+ 311 00c6 80BD     		pop	{r7, pc}
+ 312              		.cfi_endproc
+ 313              	.LFE114:
+ 315              		.section	.text.ethernetif_init,"ax",%progbits
+ 316              		.align	2
+ 317              		.global	ethernetif_init
+ 318              		.thumb
+ 319              		.thumb_func
+ 321              	ethernetif_init:
+ 322              	.LFB115:
+ 355:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 
+ 356:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** /*
+ 357:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * This function is used to initialize the netif structure. It initializes the
+ 358:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * ethernet lld.
+ 359:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  */
+ 360:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** err_t
+ 361:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** ethernetif_init(struct netif *netif)
+ 362:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** {
+ 323              		.loc 1 362 0
+ 324              		.cfi_startproc
+ 325              		@ args = 0, pretend = 0, frame = 16
+ 326              		@ frame_needed = 1, uses_anonymous_args = 0
+ 327 0000 80B5     		push	{r7, lr}
+ 328              	.LCFI9:
+ 329              		.cfi_def_cfa_offset 8
+ 330              		.cfi_offset 7, -8
+ 331              		.cfi_offset 14, -4
+ 332 0002 84B0     		sub	sp, sp, #16
+ 333              	.LCFI10:
+ 334              		.cfi_def_cfa_offset 24
+ 335 0004 00AF     		add	r7, sp, #0
+ 336              	.LCFI11:
+ 337              		.cfi_def_cfa_register 7
+ 338 0006 7860     		str	r0, [r7, #4]
+ 363:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 	/* <<<DD_LWIP_PORT_5_1>>> */
+ 364:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 	  struct ethernetif *ethernetif;
+ 365:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 
+ 366:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 	  LWIP_ASSERT("netif != NULL", (netif != NULL));
+ 367:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 
+ 368:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 	  ethernetif = mem_malloc(sizeof(struct ethernetif));
+ 339              		.loc 1 368 0
+ 340 0008 4FF00400 		mov	r0, #4
+ 341 000c FFF7FEFF 		bl	mem_malloc
+ 342 0010 F860     		str	r0, [r7, #12]
+ 369:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 
+ 370:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 	  if (ethernetif == NULL)
+ 343              		.loc 1 370 0
+ 344 0012 FB68     		ldr	r3, [r7, #12]
+ 345 0014 002B     		cmp	r3, #0
+ 346 0016 02D1     		bne	.L23
+ 371:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 	  {
+ 372:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 	    LWIP_DEBUGF(NETIF_DEBUG, ("ethernetif_init: out of memory\n"));
+ 373:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 	    return ERR_MEM;
+ 347              		.loc 1 373 0
+ 348 0018 4FF0FF03 		mov	r3, #255
+ 349 001c 22E0     		b	.L24
+ 350              	.L23:
+ 374:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 	  }
+ 375:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 
+ 376:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 	#if LWIP_NETIF_HOSTNAME
+ 377:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 	  /* Initialize interface hostname */
+ 378:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 	  netif->hostname = "lwip";
+ 379:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 	#endif /* LWIP_NETIF_HOSTNAME */
+ 380:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 
+ 381:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 	  /*
+ 382:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 	   * Initialize the snmp variables and counters inside the struct netif.
+ 383:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 	   * The last argument should be replaced with your link speed, in units
+ 384:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 	   * of bits per second.
+ 385:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 	   */
+ 386:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 	  //todo:to be moved to proper place
+ 387:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 	#define LINK_SPEED_OF_YOUR_NETIF_IN_BPS 10000000
+ 388:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 	  NETIF_INIT_SNMP(netif, snmp_ifType_ethernet_csmacd, LINK_SPEED_OF_YOUR_NETIF_IN_BPS);
+ 389:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 
+ 390:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 	  netif->state = ethernetif;
+ 351              		.loc 1 390 0
+ 352 001e 7B68     		ldr	r3, [r7, #4]
+ 353 0020 FA68     		ldr	r2, [r7, #12]
+ 354 0022 DA61     		str	r2, [r3, #28]
+ 391:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 	  netif->name[0] = IFNAME0;
+ 355              		.loc 1 391 0
+ 356 0024 7B68     		ldr	r3, [r7, #4]
+ 357 0026 4FF06502 		mov	r2, #101
+ 358 002a 83F82A20 		strb	r2, [r3, #42]
+ 392:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 	  netif->name[1] = IFNAME1;
+ 359              		.loc 1 392 0
+ 360 002e 7B68     		ldr	r3, [r7, #4]
+ 361 0030 4FF06E02 		mov	r2, #110
+ 362 0034 83F82B20 		strb	r2, [r3, #43]
+ 393:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 
+ 394:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 	  /* We directly use etharp_output() here to save a function call.
+ 395:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 	   * You can instead declare your own function an call etharp_output()
+ 396:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 	   * from it if you have to do some checks before sending (e.g. if link
+ 397:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 	   * is available...) */
+ 398:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 	  netif->output = etharp_output;
+ 363              		.loc 1 398 0
+ 364 0038 7A68     		ldr	r2, [r7, #4]
+ 365 003a 40F20003 		movw	r3, #:lower16:etharp_output
+ 366 003e C0F20003 		movt	r3, #:upper16:etharp_output
+ 367 0042 5361     		str	r3, [r2, #20]
+ 399:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 	  netif->linkoutput = low_level_output;
+ 368              		.loc 1 399 0
+ 369 0044 7A68     		ldr	r2, [r7, #4]
+ 370 0046 40F20003 		movw	r3, #:lower16:low_level_output
+ 371 004a C0F20003 		movt	r3, #:upper16:low_level_output
+ 372 004e 9361     		str	r3, [r2, #24]
+ 400:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 	  ethernetif->ethaddr = (struct eth_addr *)&(netif->hwaddr[0]);
+ 373              		.loc 1 400 0
+ 374 0050 7B68     		ldr	r3, [r7, #4]
+ 375 0052 03F12302 		add	r2, r3, #35
+ 376 0056 FB68     		ldr	r3, [r7, #12]
+ 377 0058 1A60     		str	r2, [r3, #0]
+ 401:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 
+ 402:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 	  /* initialize the hardware */
+ 403:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 	  low_level_init(netif);
+ 378              		.loc 1 403 0
+ 379 005a 7868     		ldr	r0, [r7, #4]
+ 380 005c FFF7FEFF 		bl	low_level_init
+ 404:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 
+ 405:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 	  return ERR_OK;
+ 381              		.loc 1 405 0
+ 382 0060 4FF00003 		mov	r3, #0
+ 383              	.L24:
+ 384 0064 5BB2     		sxtb	r3, r3
+ 406:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** }
+ 385              		.loc 1 406 0
+ 386 0066 1846     		mov	r0, r3
+ 387 0068 07F11007 		add	r7, r7, #16
+ 388 006c BD46     		mov	sp, r7
+ 389 006e 80BD     		pop	{r7, pc}
+ 390              		.cfi_endproc
+ 391              	.LFE115:
+ 393              		.section	.text.Eth_Received_Data_Handler,"ax",%progbits
+ 394              		.align	2
+ 395              		.global	Eth_Received_Data_Handler
+ 396              		.thumb
+ 397              		.thumb_func
+ 399              	Eth_Received_Data_Handler:
+ 400              	.LFB116:
+ 407:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** /*
+ 408:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * This handler function is used to handle the Ethernet Packet. Here the Packet
+ 409:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * is passed to the lwIP stack
+ 410:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  */
+ 411:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** void Eth_Received_Data_Handler(uint32_t PacketBuffer, uint32_t PacketLength)
+ 412:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** {
+ 401              		.loc 1 412 0
+ 402              		.cfi_startproc
+ 403              		@ args = 0, pretend = 0, frame = 8
+ 404              		@ frame_needed = 1, uses_anonymous_args = 0
+ 405 0000 80B5     		push	{r7, lr}
+ 406              	.LCFI12:
+ 407              		.cfi_def_cfa_offset 8
+ 408              		.cfi_offset 7, -8
+ 409              		.cfi_offset 14, -4
+ 410 0002 82B0     		sub	sp, sp, #8
+ 411              	.LCFI13:
+ 412              		.cfi_def_cfa_offset 16
+ 413 0004 00AF     		add	r7, sp, #0
+ 414              	.LCFI14:
+ 415              		.cfi_def_cfa_register 7
+ 416 0006 7860     		str	r0, [r7, #4]
+ 417 0008 3960     		str	r1, [r7, #0]
+ 413:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 	 lwip_Input((u8*)PacketBuffer, PacketLength);
+ 418              		.loc 1 413 0
+ 419 000a 7B68     		ldr	r3, [r7, #4]
+ 420 000c 1846     		mov	r0, r3
+ 421 000e 3968     		ldr	r1, [r7, #0]
+ 422 0010 FFF7FEFF 		bl	lwip_Input
+ 414:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 
+ 415:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** }
+ 423              		.loc 1 415 0
+ 424 0014 07F10807 		add	r7, r7, #8
+ 425 0018 BD46     		mov	sp, r7
+ 426 001a 80BD     		pop	{r7, pc}
+ 427              		.cfi_endproc
+ 428              	.LFE116:
+ 430              		.text
+ 431              	.Letext0:
+ 432              		.file 2 "C:\\DAVE3_workspace\\ws3.1.10\\XMC4500_RK_HTTPserver\\XMC4500_RK_HTTPserver\\Dave\\Genera
+ 433              		.file 3 "C:\\DAVE3_workspace\\ws3.1.10\\XMC4500_RK_HTTPserver\\XMC4500_RK_HTTPserver\\Dave\\Genera
+ 434              		.file 4 "C:\\DAVE3_workspace\\ws3.1.10\\XMC4500_RK_HTTPserver\\XMC4500_RK_HTTPserver\\Dave\\Genera
+ 435              		.file 5 "C:\\DAVE3_workspace\\ws3.1.10\\XMC4500_RK_HTTPserver\\XMC4500_RK_HTTPserver\\Dave\\Genera
+ 436              		.file 6 "C:\\DAVE3_workspace\\ws3.1.10\\XMC4500_RK_HTTPserver\\XMC4500_RK_HTTPserver\\Dave\\Genera
+ 437              		.file 7 "C:\\DAVE3_workspace\\ws3.1.10\\XMC4500_RK_HTTPserver\\XMC4500_RK_HTTPserver\\Dave\\Genera
+ 438              		.file 8 "C:\\DAVE3_workspace\\ws3.1.10\\XMC4500_RK_HTTPserver\\XMC4500_RK_HTTPserver\\Dave\\Genera
+ 439              		.file 9 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
+ 440              		.file 10 "C:\\DAVE3_workspace\\ws3.1.10\\XMC4500_RK_HTTPserver\\XMC4500_RK_HTTPserver\\Dave\\Gener
+ 441              		.file 11 "C:\\DAVE3_workspace\\ws3.1.10\\XMC4500_RK_HTTPserver\\XMC4500_RK_HTTPserver\\Dave\\Gener
+ 442              		.file 12 "C:\\DAVE3_workspace\\ws3.1.10\\XMC4500_RK_HTTPserver\\XMC4500_RK_HTTPserver\\Dave\\Gener
+ 443              		.file 13 "C:\\DAVE3_workspace\\ws3.1.10\\XMC4500_RK_HTTPserver\\XMC4500_RK_HTTPserver\\Dave\\Gener
+ 444              		.file 14 "C:\\DAVE3_workspace\\ws3.1.10\\XMC4500_RK_HTTPserver\\XMC4500_RK_HTTPserver\\Dave\\Gener
+ 445              		.file 15 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Include/core_cm4.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 ethernetif.c
+                            *COM*:00000006 MACaddr
+C:\Users\Mihai\AppData\Local\Temp\cc1lsBYj.s:21     .text.low_level_init:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc1lsBYj.s:25     .text.low_level_init:00000000 low_level_init
+C:\Users\Mihai\AppData\Local\Temp\cc1lsBYj.s:83     .text.low_level_output:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc1lsBYj.s:87     .text.low_level_output:00000000 low_level_output
+C:\Users\Mihai\AppData\Local\Temp\cc1lsBYj.s:181    .text.lwip_Input:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc1lsBYj.s:186    .text.lwip_Input:00000000 lwip_Input
+C:\Users\Mihai\AppData\Local\Temp\cc1lsBYj.s:316    .text.ethernetif_init:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc1lsBYj.s:321    .text.ethernetif_init:00000000 ethernetif_init
+C:\Users\Mihai\AppData\Local\Temp\cc1lsBYj.s:394    .text.Eth_Received_Data_Handler:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc1lsBYj.s:399    .text.Eth_Received_Data_Handler:00000000 Eth_Received_Data_Handler
+                     .debug_frame:00000010 $d
+                           .group:00000000 wm4.1.1791a5ae2e936ca1033c1c44be394cc7
+                           .group:00000000 wm4.ETH004_Conf.h.56.564c3f309c32b3c742fc91049cf66940
+                           .group:00000000 wm4.lwipopts.h.73.a7a63bda1e8216abd1d90275eaaa0027
+                           .group:00000000 wm4.arch.h.33.6fa4aa86d33d1490ae882caef7316405
+                           .group:00000000 wm4.cpu.h.33.b213c7fd77614ebc3691cef18ad2ff22
+                           .group:00000000 wm4.cc.h.66.ec134211c658dcc89de4610e4e7bab46
+                           .group:00000000 wm4.arch.h.47.5153c52bfb94ee3b37299920afab6afd
+                           .group:00000000 wm4.debug.h.43.557ecd6c90cc70b375bb8a29118be47b
+                           .group:00000000 wm4.opt.h.94.d36882acafebb8726bce646fc8b2397b
+                           .group:00000000 wm4.def.h.33.d779a3244e06cea9e944e5db86767de8
+                           .group:00000000 wm4.mem.h.96.20770766e6c9e6c42af6bfa95ef5c63f
+                           .group:00000000 wm4.err.h.52.37c5d17538f8e8347a9c84196701e92d
+                           .group:00000000 wm4.pbuf.h.43.e9a1ad12b97478787a109e22d5306820
+                           .group:00000000 wm4.sys.h.65.4a0cd87b9e0d8bb4cd6b30e939b2ca7e
+                           .group:00000000 wm4.memp_std.h.15.aec196dc1c3fb1142dd450db0c167cbf
+                           .group:00000000 wm4.memp.h.86.dbc4cb1b8d6b9ea113f04174f716e4c0
+                           .group:00000000 wm4.stats.h.147.58ec5b890fad5bbc2a7711ad8105f087
+                           .group:00000000 wm4.inet.h.46.a1c378d398e089f18dd6ade9b427826c
+                           .group:00000000 wm4.ip_addr.h.79.9a0ce887ca8c88c22ad7686bcb5105df
+                           .group:00000000 wm4.netif.h.77.eb641fb35cae7e4880920e0acf78586f
+                           .group:00000000 wm4.ip.h.48.ad46847692d4d729760949b27e48a442
+                           .group:00000000 wm4.udp.h.48.1a8dde095cd0a13580afaba1443e5a3f
+                           .group:00000000 wm4.snmp.h.231.ffb5dc2779dd945785c887dfa42d86eb
+                           .group:00000000 wm4.etharp.h.52.95fd625a46d8a56126e59f92e1dd6365
+                           .group:00000000 wm4.ethernetif.h.52.6b5a39d5c14914832cc564a31fcfaebc
+                           .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
+                           .group:00000000 wm4.features.h.22.b72b3baab2bb2eab3661375590100b6b
+                           .group:00000000 wm4.config.h.193.5fb8ef056cdff92dec3dee9552839d8c
+                           .group:00000000 wm4._ansi.h.23.7aefdac4826acebbfc9f3822a0aeb14c
+                           .group:00000000 wm4.stdint.h.20.54ad762faa59e3c05491630641c8d8bf
+                           .group:00000000 wm4.stddef.h.40.50cf36416e06376af8a9dca28536f2e4
+                           .group:00000000 wm4.types.h.55.0006b5fda1d606516f2dcaf4aca92b11
+                           .group:00000000 wm4._default_types.h.6.5e12cd604db8ce00b62bb2f02708eaf3
+                           .group:00000000 wm4.lock.h.2.9bc98482741e5e2a9450b12934a684ea
+                           .group:00000000 wm4.stddef.h.161.c6104a0666cf681b6269ddc9b4f516d4
+                           .group:00000000 wm4.reent.h.16.9e42f0e588b85e70b2bf6572af57ce64
+                           .group:00000000 wm4.stddef.h.161.e50ff8a9d5d1abbc15641da28ac571bf
+                           .group:00000000 wm4.string.h.86.d5c872ff52e2712c985b588a0ef39f3c
+                           .group:00000000 wm4.XMC4500.h.45.215f4b8c79f46c7645c15373868d08c0
+                           .group:00000000 wm4.core_cm4.h.47.41af406cb4cda82c972f112a9cd0a024
+                           .group:00000000 wm4.core_cmInstr.h.39.3d3d1b4a79aef37532666dc6ee87c6ac
+                           .group:00000000 wm4.core_cm4_simd.h.43.b5d1d38735af6366227b4256d330cf13
+                           .group:00000000 wm4.core_cm4.h.178.e5ef5ce66d198d7f00f9d0076e267c41
+                           .group:00000000 wm4.system_XMC4500.h.29.827f68baa362c84f2abae4ab67dde7c9
+                           .group:00000000 wm4.XMC4500.h.198.8e022f279ff353ed081df898dc7b9cf3
+                           .group:00000000 wm4.MULTIPLEXER.h.43.4aa654be3ec80895f631b5281bbb9105
+                           .group:00000000 wm4.CCU8PWMLIB.h.70.a5d6a5267902b8b4aea2a0224518259a
+                           .group:00000000 wm4.DBG001.h.116.d6d9e7459a0faa3905c97c1d2edb339d
+                           .group:00000000 wm4.SYSTM001.h.63.668098b2213d40a5bd0db5fbe813cf05
+                           .group:00000000 wm4.ETH002_Conf.h.56.5bd2b085b66f43d51abd69396be7f35f
+                           .group:00000000 wm4.EthernetPHY.h.54.7af1709186b21e62a5f1d4049da3988b
+                           .group:00000000 wm4.ETH001_Conf.h.71.1e151af1ba54dd023e1f942bdf922819
+                           .group:00000000 wm4.synopGMAC_plat.h.78.7a90e072b497857344aea4ba1e994097
+                           .group:00000000 wm4.synopGMAC_stack_interface.h.73.6be6aaee0ac6637432f4d0589044479b
+                           .group:00000000 wm4.SynopGMAC_Dev.h.72.7c89c07cf666d37f5c9b615720d5e111
+                           .group:00000000 wm4.synopGMAC_network_interface.h.73.4dd08316a11bc43c8c4a9da15277fb0f
+                           .group:00000000 wm4.stdlib.h.13.603ed7eb09a1561ab06840b7c0fcff58
+                           .group:00000000 wm4.alloca.h.8.dfc0c703c47ec3e69746825b17d9e66d
+                           .group:00000000 wm4.stdlib.h.53.c69c7609933ff56d59c757cec2d13230
+                           .group:00000000 wm4.icmp.h.44.450dbf91f594cc26ad19d086cdc83713
+                           .group:00000000 wm4.tcp.h.55.5c30b9432fa60afaa85cbdd225b0c683
+                           .group:00000000 wm4.SDMMC003_Conf.h.50.e707c07613fb4e6f2eaec982a892429d
+                           .group:00000000 wm4.SDMMC003.h.85.b66055f6032a052f5173e3d123f9c61e
+                           .group:00000000 wm4.SDMMC001.h.50.3e2fedc7e5ace33db4121d5cc027e8a4
+                           .group:00000000 wm4.types.h.23.0d949686bbcadd1621462d4fa1f884f9
+                           .group:00000000 wm4.types.h.2.e9cec8c90ab35f77d9f499e06ae02400
+                           .group:00000000 wm4.types.h.80.1f2c84c0d57dd52dd9936095d9ac218e
+                           .group:00000000 wm4.time.h.16.a4579e68956d2601c6113814b546764b
+                           .group:00000000 wm4.diskio.h.7.93a3c8131d08770c060b04d2180fd09a
+                           .group:00000000 wm4.diskio.h.42.a863614abe78d56d18ed7cb292d0028d
+                           .group:00000000 wm4.ffconf.h.57.4ab321a2116d35ff7f28236ac31fad7c
+                           .group:00000000 wm4.ff.h.82.8f05a37d35a49dba2681a7f047fee4ee
+                           .group:00000000 wm4.lmm001_debuglog.h.40.8031299705ecf04ad726bd19baff976d
+                           .group:00000000 wm4.LMM001.h.42.c21fe9cbedc336738c3dc89405cad216
+                           .group:00000000 wm4.stdio.h.27.f2ac352bab34f31f9f478442827b2ba6
+                           .group:00000000 wm4.stdarg.h.34.3a23a216c0c293b3d2ea2e89281481e6
+                           .group:00000000 wm4.stdio.h.2.4aa87247282eca6c8f36f9de33d8df1a
+                           .group:00000000 wm4.stdio.h.63.dfdea6580b080784d08faace69b6ed76
+                           .group:00000000 wm4.time.h.2.9857e62ad6ac99431e29d58067232314
+                           .group:00000000 wm4.time.h.24.c499d4c1915694df17abb795fd34b719
+                           .group:00000000 wm4.time.h.124.10ced469f846269cafc58b59c853e1bb
+                           .group:00000000 wm4.errno.h.2.ba016d646105af6cad23be83630b6a3f
+                           .group:00000000 wm4.errno.h.9.65044c2b5d8494e43f5986ab0a1d770f
+                           .group:00000000 wm4.unistd.h.2.6ce1b91c4223f6078c1b210c7538c1d2
+                           .group:00000000 wm4.unistd.h.251.605bc560cdc6c3b07b599bb71ac4e425
+                           .group:00000000 wm4.malloc.h.4.62bd13b8107d5245f60bd92bb5994838
+                           .group:00000000 wm4.malloc.h.148.73b7de3bd065dafbd594b04197a9466e
+                           .group:00000000 wm4.reent.h.91.faac4d0ac97c0fcf23d10d0786197642
+                           .group:00000000 wm4.SLTHA003.h.100.69cb08672bc6ab3f052aa9d5bd6dc5ca
+                           .group:00000000 wm4._default_fcntl.h.6.d036cf640d0f9a06bcff1be55acd66be
+                           .group:00000000 wm4.stat.h.2.a761b02482a54847ff0d09dfcff24a5c
+                           .group:00000000 wm4.fcntl.h.9.9336f33d7f5028f694c75e6e224e0cf7
+                           .group:00000000 wm4.SLTHA001.h.97.d7e87c19a31e3244bdd5839e7cc42a61
+                           .group:00000000 wm4.WEBSERVER001_Conf.h.54.cd6d29aaa96a848cbc5321bab5d6cd90
+                           .group:00000000 wm4.ADCGROUP001.h.48.081c7f952eb4b6ea2df7d05180ee1663
+                           .group:00000000 wm4.IO001.h.49.1da965fb490206cf7cde64a90f6912e1
+                           .group:00000000 wm4.MOTORLIBS.h.59.b2e97de0df555dedfa51e24447b57ab8
+                           .group:00000000 wm4.uc_id.h.35.a6c4837fad81477ba31967683332b8cc
+                           .group:00000000 wm4.Usic.h.90.22743468abc46f16747d12430b219aaf
+                           .group:00000000 wm4.UART001_Conf.h.53.c5c972f6f634bc5116c171852aaab668
+                           .group:00000000 wm4.UART001.h.109.3e835815a7a59791d8bd39655f4d4cc9
+
+UNDEFINED SYMBOLS
+Eth_InitNetworkInterface
+Eth_OpenNetworkInterface
+Eth_PerformIoctl
+Eth_GetTxBuffer
+memcpy
+Eth_TransmitFrames
+pbuf_alloc
+htons
+netif
+pbuf_free
+mem_malloc
+etharp_output

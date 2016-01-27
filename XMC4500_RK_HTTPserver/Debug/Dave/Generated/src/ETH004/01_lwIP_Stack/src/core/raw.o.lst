@@ -1,0 +1,1061 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"raw.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.bss
+  20              		.align	2
+  21              	raw_pcbs:
+  22 0000 00000000 		.space	4
+  23              		.section	.text.raw_input,"ax",%progbits
+  24              		.align	2
+  25              		.global	raw_input
+  26              		.thumb
+  27              		.thumb_func
+  29              	raw_input:
+  30              	.LFB0:
+  31              		.file 1 "../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c"
+   1:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** /**
+   2:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  * @file
+   3:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  * Implementation of raw protocol PCBs for low-level handling of
+   4:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  * different types of protocols besides (or overriding) those
+   5:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  * already available in lwIP.
+   6:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  *
+   7:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  */
+   8:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** 
+   9:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** /*
+  10:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  * Copyright (c) 2001-2004 Swedish Institute of Computer Science.
+  11:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  * All rights reserved.
+  12:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  *
+  13:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  * Redistribution and use in source and binary forms, with or without modification,
+  14:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  * are permitted provided that the following conditions are met:
+  15:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  *
+  16:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  * 1. Redistributions of source code must retain the above copyright notice,
+  17:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  *    this list of conditions and the following disclaimer.
+  18:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  * 2. Redistributions in binary form must reproduce the above copyright notice,
+  19:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  *    this list of conditions and the following disclaimer in the documentation
+  20:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  *    and/or other materials provided with the distribution.
+  21:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  * 3. The name of the author may not be used to endorse or promote products
+  22:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  *    derived from this software without specific prior written permission.
+  23:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  *
+  24:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR IMPLIED
+  25:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+  26:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT
+  27:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  * SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+  28:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT
+  29:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  * OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+  30:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+  31:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING
+  32:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  * IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+  33:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  * OF SUCH DAMAGE.
+  34:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  *
+  35:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  * This file is part of the lwIP TCP/IP stack.
+  36:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  *
+  37:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  * Author: Adam Dunkels <adam@sics.se>
+  38:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  *
+  39:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  */
+  40:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** 
+  41:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** #include "lwip/opt.h"
+  42:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** 
+  43:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** #if LWIP_RAW /* don't build if not configured for use in lwipopts.h */
+  44:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** 
+  45:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** #include "lwip/def.h"
+  46:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** #include "lwip/memp.h"
+  47:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** #include "lwip/inet.h"
+  48:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** #include "lwip/ip_addr.h"
+  49:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** #include "lwip/netif.h"
+  50:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** #include "lwip/raw.h"
+  51:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** #include "lwip/stats.h"
+  52:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** #include "lwip/snmp.h"
+  53:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** #include "arch/perf.h"
+  54:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** 
+  55:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** #include <string.h>
+  56:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** 
+  57:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** /** The list of RAW PCBs */
+  58:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** static struct raw_pcb *raw_pcbs;
+  59:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** 
+  60:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** /**
+  61:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  * Determine if in incoming IP packet is covered by a RAW PCB
+  62:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  * and if so, pass it to a user-provided receive callback function.
+  63:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  *
+  64:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  * Given an incoming IP datagram (as a chain of pbufs) this function
+  65:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  * finds a corresponding RAW PCB and calls the corresponding receive
+  66:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  * callback function.
+  67:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  *
+  68:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  * @param p pbuf to be demultiplexed to a RAW PCB.
+  69:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  * @param inp network interface on which the datagram was received.
+  70:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  * @return - 1 if the packet has been eaten by a RAW PCB receive
+  71:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  *           callback function. The caller MAY NOT not reference the
+  72:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  *           packet any longer, and MAY NOT call pbuf_free().
+  73:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  * @return - 0 if packet is not eaten (pbuf is still referenced by the
+  74:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  *           caller).
+  75:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  *
+  76:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  */
+  77:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** u8_t
+  78:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** raw_input(struct pbuf *p, struct netif *inp)
+  79:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** {
+  32              		.loc 1 79 0
+  33              		.cfi_startproc
+  34              		@ args = 0, pretend = 0, frame = 32
+  35              		@ frame_needed = 1, uses_anonymous_args = 0
+  36 0000 90B5     		push	{r4, r7, lr}
+  37              	.LCFI0:
+  38              		.cfi_def_cfa_offset 12
+  39              		.cfi_offset 4, -12
+  40              		.cfi_offset 7, -8
+  41              		.cfi_offset 14, -4
+  42 0002 89B0     		sub	sp, sp, #36
+  43              	.LCFI1:
+  44              		.cfi_def_cfa_offset 48
+  45 0004 00AF     		add	r7, sp, #0
+  46              	.LCFI2:
+  47              		.cfi_def_cfa_register 7
+  48 0006 7860     		str	r0, [r7, #4]
+  49 0008 3960     		str	r1, [r7, #0]
+  80:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****   struct raw_pcb *pcb, *prev;
+  81:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****   struct ip_hdr *iphdr;
+  82:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****   s16_t proto;
+  83:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****   u8_t eaten = 0;
+  50              		.loc 1 83 0
+  51 000a 4FF00003 		mov	r3, #0
+  52 000e FB75     		strb	r3, [r7, #23]
+  84:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** 
+  85:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****   LWIP_UNUSED_ARG(inp);
+  86:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** 
+  87:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****   iphdr = p->payload;
+  53              		.loc 1 87 0
+  54 0010 7B68     		ldr	r3, [r7, #4]
+  55 0012 5B68     		ldr	r3, [r3, #4]
+  56 0014 3B61     		str	r3, [r7, #16]
+  88:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****   proto = IPH_PROTO(iphdr);
+  57              		.loc 1 88 0
+  58 0016 3B69     		ldr	r3, [r7, #16]
+  59 0018 1B89     		ldrh	r3, [r3, #8]	@ unaligned
+  60 001a 9BB2     		uxth	r3, r3
+  61 001c 1846     		mov	r0, r3
+  62 001e FFF7FEFF 		bl	ntohs
+  63 0022 0346     		mov	r3, r0
+  64 0024 9BB2     		uxth	r3, r3
+  65 0026 DBB2     		uxtb	r3, r3
+  66 0028 FB81     		strh	r3, [r7, #14]	@ movhi
+  89:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** 
+  90:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****   prev = NULL;
+  67              		.loc 1 90 0
+  68 002a 4FF00003 		mov	r3, #0
+  69 002e BB61     		str	r3, [r7, #24]
+  91:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****   pcb = raw_pcbs;
+  70              		.loc 1 91 0
+  71 0030 40F20003 		movw	r3, #:lower16:raw_pcbs
+  72 0034 C0F20003 		movt	r3, #:upper16:raw_pcbs
+  73 0038 1B68     		ldr	r3, [r3, #0]
+  74 003a FB61     		str	r3, [r7, #28]
+  92:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****   /* loop through all raw pcbs until the packet is eaten by one */
+  93:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****   /* this allows multiple pcbs to match against the packet by design */
+  94:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****   while ((eaten == 0) && (pcb != NULL)) {
+  75              		.loc 1 94 0
+  76 003c 37E0     		b	.L2
+  77              	.L5:
+  95:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****     if (pcb->protocol == proto) {
+  78              		.loc 1 95 0
+  79 003e FB69     		ldr	r3, [r7, #28]
+  80 0040 1B7C     		ldrb	r3, [r3, #16]	@ zero_extendqisi2
+  81 0042 1A46     		mov	r2, r3
+  82 0044 B7F90E30 		ldrsh	r3, [r7, #14]
+  83 0048 9A42     		cmp	r2, r3
+  84 004a 2BD1     		bne	.L3
+  96:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** #if IP_SOF_BROADCAST_RECV
+  97:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****       /* broadcast filter? */
+  98:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****       if ((pcb->so_options & SOF_BROADCAST) || !ip_addr_isbroadcast(&(iphdr->dest), inp))
+  99:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** #endif /* IP_SOF_BROADCAST_RECV */
+ 100:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****       {
+ 101:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****         /* receive callback function available? */
+ 102:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****         if (pcb->recv != NULL) {
+  85              		.loc 1 102 0
+  86 004c FB69     		ldr	r3, [r7, #28]
+  87 004e 5B69     		ldr	r3, [r3, #20]
+  88 0050 002B     		cmp	r3, #0
+  89 0052 27D0     		beq	.L3
+ 103:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****           /* the receive callback function did not eat the packet? */
+ 104:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****           if (pcb->recv(pcb->recv_arg, pcb, p, &(iphdr->src)) != 0) {
+  90              		.loc 1 104 0
+  91 0054 FB69     		ldr	r3, [r7, #28]
+  92 0056 5C69     		ldr	r4, [r3, #20]
+  93 0058 FB69     		ldr	r3, [r7, #28]
+  94 005a 9A69     		ldr	r2, [r3, #24]
+  95 005c 3B69     		ldr	r3, [r7, #16]
+  96 005e 03F10C03 		add	r3, r3, #12
+  97 0062 1046     		mov	r0, r2
+  98 0064 F969     		ldr	r1, [r7, #28]
+  99 0066 7A68     		ldr	r2, [r7, #4]
+ 100 0068 A047     		blx	r4
+ 101 006a 0346     		mov	r3, r0
+ 102 006c 002B     		cmp	r3, #0
+ 103 006e 19D0     		beq	.L3
+ 105:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****             /* receive function ate the packet */
+ 106:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****             p = NULL;
+ 104              		.loc 1 106 0
+ 105 0070 4FF00003 		mov	r3, #0
+ 106 0074 7B60     		str	r3, [r7, #4]
+ 107:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****             eaten = 1;
+ 107              		.loc 1 107 0
+ 108 0076 4FF00103 		mov	r3, #1
+ 109 007a FB75     		strb	r3, [r7, #23]
+ 108:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****             if (prev != NULL) {
+ 110              		.loc 1 108 0
+ 111 007c BB69     		ldr	r3, [r7, #24]
+ 112 007e 002B     		cmp	r3, #0
+ 113 0080 10D0     		beq	.L3
+ 109:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****             /* move the pcb to the front of raw_pcbs so that is
+ 110:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****                found faster next time */
+ 111:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****               prev->next = pcb->next;
+ 114              		.loc 1 111 0
+ 115 0082 FB69     		ldr	r3, [r7, #28]
+ 116 0084 DA68     		ldr	r2, [r3, #12]
+ 117 0086 BB69     		ldr	r3, [r7, #24]
+ 118 0088 DA60     		str	r2, [r3, #12]
+ 112:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****               pcb->next = raw_pcbs;
+ 119              		.loc 1 112 0
+ 120 008a 40F20003 		movw	r3, #:lower16:raw_pcbs
+ 121 008e C0F20003 		movt	r3, #:upper16:raw_pcbs
+ 122 0092 1A68     		ldr	r2, [r3, #0]
+ 123 0094 FB69     		ldr	r3, [r7, #28]
+ 124 0096 DA60     		str	r2, [r3, #12]
+ 113:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****               raw_pcbs = pcb;
+ 125              		.loc 1 113 0
+ 126 0098 40F20003 		movw	r3, #:lower16:raw_pcbs
+ 127 009c C0F20003 		movt	r3, #:upper16:raw_pcbs
+ 128 00a0 FA69     		ldr	r2, [r7, #28]
+ 129 00a2 1A60     		str	r2, [r3, #0]
+ 130              	.L3:
+ 114:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****             }
+ 115:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****           }
+ 116:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****         }
+ 117:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****         /* no receive callback function was set for this raw PCB */
+ 118:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****       }
+ 119:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****       /* drop the packet */
+ 120:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****     }
+ 121:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****     prev = pcb;
+ 131              		.loc 1 121 0
+ 132 00a4 FB69     		ldr	r3, [r7, #28]
+ 133 00a6 BB61     		str	r3, [r7, #24]
+ 122:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****     pcb = pcb->next;
+ 134              		.loc 1 122 0
+ 135 00a8 FB69     		ldr	r3, [r7, #28]
+ 136 00aa DB68     		ldr	r3, [r3, #12]
+ 137 00ac FB61     		str	r3, [r7, #28]
+ 138              	.L2:
+  94:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****   while ((eaten == 0) && (pcb != NULL)) {
+ 139              		.loc 1 94 0 discriminator 1
+ 140 00ae FB7D     		ldrb	r3, [r7, #23]	@ zero_extendqisi2
+ 141 00b0 002B     		cmp	r3, #0
+ 142 00b2 02D1     		bne	.L4
+  94:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****   while ((eaten == 0) && (pcb != NULL)) {
+ 143              		.loc 1 94 0 is_stmt 0 discriminator 2
+ 144 00b4 FB69     		ldr	r3, [r7, #28]
+ 145 00b6 002B     		cmp	r3, #0
+ 146 00b8 C1D1     		bne	.L5
+ 147              	.L4:
+ 123:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****   }
+ 124:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****   return eaten;
+ 148              		.loc 1 124 0 is_stmt 1
+ 149 00ba FB7D     		ldrb	r3, [r7, #23]	@ zero_extendqisi2
+ 125:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** }
+ 150              		.loc 1 125 0
+ 151 00bc 1846     		mov	r0, r3
+ 152 00be 07F12407 		add	r7, r7, #36
+ 153 00c2 BD46     		mov	sp, r7
+ 154 00c4 90BD     		pop	{r4, r7, pc}
+ 155              		.cfi_endproc
+ 156              	.LFE0:
+ 158 00c6 00BF     		.section	.text.raw_bind,"ax",%progbits
+ 159              		.align	2
+ 160              		.global	raw_bind
+ 161              		.thumb
+ 162              		.thumb_func
+ 164              	raw_bind:
+ 165              	.LFB1:
+ 126:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** 
+ 127:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** /**
+ 128:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  * Bind a RAW PCB.
+ 129:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  *
+ 130:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  * @param pcb RAW PCB to be bound with a local address ipaddr.
+ 131:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  * @param ipaddr local IP address to bind with. Use IP_ADDR_ANY to
+ 132:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  * bind to all local interfaces.
+ 133:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  *
+ 134:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  * @return lwIP error code.
+ 135:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  * - ERR_OK. Successful. No error occured.
+ 136:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  * - ERR_USE. The specified IP address is already bound to by
+ 137:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  * another RAW PCB.
+ 138:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  *
+ 139:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  * @see raw_disconnect()
+ 140:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  */
+ 141:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** err_t
+ 142:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** raw_bind(struct raw_pcb *pcb, struct ip_addr *ipaddr)
+ 143:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** {
+ 166              		.loc 1 143 0
+ 167              		.cfi_startproc
+ 168              		@ args = 0, pretend = 0, frame = 8
+ 169              		@ frame_needed = 1, uses_anonymous_args = 0
+ 170              		@ link register save eliminated.
+ 171 0000 80B4     		push	{r7}
+ 172              	.LCFI3:
+ 173              		.cfi_def_cfa_offset 4
+ 174              		.cfi_offset 7, -4
+ 175 0002 83B0     		sub	sp, sp, #12
+ 176              	.LCFI4:
+ 177              		.cfi_def_cfa_offset 16
+ 178 0004 00AF     		add	r7, sp, #0
+ 179              	.LCFI5:
+ 180              		.cfi_def_cfa_register 7
+ 181 0006 7860     		str	r0, [r7, #4]
+ 182 0008 3960     		str	r1, [r7, #0]
+ 144:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****   ip_addr_set(&pcb->local_ip, ipaddr);
+ 183              		.loc 1 144 0
+ 184 000a 3B68     		ldr	r3, [r7, #0]
+ 185 000c 002B     		cmp	r3, #0
+ 186 000e 02D0     		beq	.L8
+ 187              		.loc 1 144 0 is_stmt 0 discriminator 1
+ 188 0010 3B68     		ldr	r3, [r7, #0]
+ 189 0012 1B68     		ldr	r3, [r3, #0]	@ unaligned
+ 190 0014 01E0     		b	.L9
+ 191              	.L8:
+ 192              		.loc 1 144 0 discriminator 2
+ 193 0016 4FF00003 		mov	r3, #0
+ 194              	.L9:
+ 195              		.loc 1 144 0 discriminator 3
+ 196 001a 7A68     		ldr	r2, [r7, #4]
+ 197 001c 1360     		str	r3, [r2, #0]
+ 145:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****   return ERR_OK;
+ 198              		.loc 1 145 0 is_stmt 1 discriminator 3
+ 199 001e 4FF00003 		mov	r3, #0
+ 200 0022 5BB2     		sxtb	r3, r3
+ 146:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** }
+ 201              		.loc 1 146 0 discriminator 3
+ 202 0024 1846     		mov	r0, r3
+ 203 0026 07F10C07 		add	r7, r7, #12
+ 204 002a BD46     		mov	sp, r7
+ 205 002c 80BC     		pop	{r7}
+ 206 002e 7047     		bx	lr
+ 207              		.cfi_endproc
+ 208              	.LFE1:
+ 210              		.section	.text.raw_connect,"ax",%progbits
+ 211              		.align	2
+ 212              		.global	raw_connect
+ 213              		.thumb
+ 214              		.thumb_func
+ 216              	raw_connect:
+ 217              	.LFB2:
+ 147:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** 
+ 148:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** /**
+ 149:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  * Connect an RAW PCB. This function is required by upper layers
+ 150:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  * of lwip. Using the raw api you could use raw_sendto() instead
+ 151:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  *
+ 152:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  * This will associate the RAW PCB with the remote address.
+ 153:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  *
+ 154:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  * @param pcb RAW PCB to be connected with remote address ipaddr and port.
+ 155:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  * @param ipaddr remote IP address to connect with.
+ 156:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  *
+ 157:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  * @return lwIP error code
+ 158:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  *
+ 159:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  * @see raw_disconnect() and raw_sendto()
+ 160:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  */
+ 161:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** err_t
+ 162:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** raw_connect(struct raw_pcb *pcb, struct ip_addr *ipaddr)
+ 163:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** {
+ 218              		.loc 1 163 0
+ 219              		.cfi_startproc
+ 220              		@ args = 0, pretend = 0, frame = 8
+ 221              		@ frame_needed = 1, uses_anonymous_args = 0
+ 222              		@ link register save eliminated.
+ 223 0000 80B4     		push	{r7}
+ 224              	.LCFI6:
+ 225              		.cfi_def_cfa_offset 4
+ 226              		.cfi_offset 7, -4
+ 227 0002 83B0     		sub	sp, sp, #12
+ 228              	.LCFI7:
+ 229              		.cfi_def_cfa_offset 16
+ 230 0004 00AF     		add	r7, sp, #0
+ 231              	.LCFI8:
+ 232              		.cfi_def_cfa_register 7
+ 233 0006 7860     		str	r0, [r7, #4]
+ 234 0008 3960     		str	r1, [r7, #0]
+ 164:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****   ip_addr_set(&pcb->remote_ip, ipaddr);
+ 235              		.loc 1 164 0
+ 236 000a 3B68     		ldr	r3, [r7, #0]
+ 237 000c 002B     		cmp	r3, #0
+ 238 000e 02D0     		beq	.L12
+ 239              		.loc 1 164 0 is_stmt 0 discriminator 1
+ 240 0010 3B68     		ldr	r3, [r7, #0]
+ 241 0012 1B68     		ldr	r3, [r3, #0]	@ unaligned
+ 242 0014 01E0     		b	.L13
+ 243              	.L12:
+ 244              		.loc 1 164 0 discriminator 2
+ 245 0016 4FF00003 		mov	r3, #0
+ 246              	.L13:
+ 247              		.loc 1 164 0 discriminator 3
+ 248 001a 7A68     		ldr	r2, [r7, #4]
+ 249 001c 5360     		str	r3, [r2, #4]
+ 165:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****   return ERR_OK;
+ 250              		.loc 1 165 0 is_stmt 1 discriminator 3
+ 251 001e 4FF00003 		mov	r3, #0
+ 252 0022 5BB2     		sxtb	r3, r3
+ 166:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** }
+ 253              		.loc 1 166 0 discriminator 3
+ 254 0024 1846     		mov	r0, r3
+ 255 0026 07F10C07 		add	r7, r7, #12
+ 256 002a BD46     		mov	sp, r7
+ 257 002c 80BC     		pop	{r7}
+ 258 002e 7047     		bx	lr
+ 259              		.cfi_endproc
+ 260              	.LFE2:
+ 262              		.section	.text.raw_recv,"ax",%progbits
+ 263              		.align	2
+ 264              		.global	raw_recv
+ 265              		.thumb
+ 266              		.thumb_func
+ 268              	raw_recv:
+ 269              	.LFB3:
+ 167:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** 
+ 168:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** 
+ 169:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** /**
+ 170:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  * Set the callback function for received packets that match the
+ 171:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  * raw PCB's protocol and binding. 
+ 172:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  * 
+ 173:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  * The callback function MUST either
+ 174:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  * - eat the packet by calling pbuf_free() and returning non-zero. The
+ 175:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  *   packet will not be passed to other raw PCBs or other protocol layers.
+ 176:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  * - not free the packet, and return zero. The packet will be matched
+ 177:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  *   against further PCBs and/or forwarded to another protocol layers.
+ 178:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  * 
+ 179:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  * @return non-zero if the packet was free()d, zero if the packet remains
+ 180:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  * available for others.
+ 181:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  */
+ 182:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** void
+ 183:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** raw_recv(struct raw_pcb *pcb,
+ 184:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****          u8_t (* recv)(void *arg, struct raw_pcb *upcb, struct pbuf *p,
+ 185:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****                       struct ip_addr *addr),
+ 186:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****          void *recv_arg)
+ 187:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** {
+ 270              		.loc 1 187 0
+ 271              		.cfi_startproc
+ 272              		@ args = 0, pretend = 0, frame = 16
+ 273              		@ frame_needed = 1, uses_anonymous_args = 0
+ 274              		@ link register save eliminated.
+ 275 0000 80B4     		push	{r7}
+ 276              	.LCFI9:
+ 277              		.cfi_def_cfa_offset 4
+ 278              		.cfi_offset 7, -4
+ 279 0002 85B0     		sub	sp, sp, #20
+ 280              	.LCFI10:
+ 281              		.cfi_def_cfa_offset 24
+ 282 0004 00AF     		add	r7, sp, #0
+ 283              	.LCFI11:
+ 284              		.cfi_def_cfa_register 7
+ 285 0006 F860     		str	r0, [r7, #12]
+ 286 0008 B960     		str	r1, [r7, #8]
+ 287 000a 7A60     		str	r2, [r7, #4]
+ 188:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****   /* remember recv() callback and user data */
+ 189:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****   pcb->recv = recv;
+ 288              		.loc 1 189 0
+ 289 000c FB68     		ldr	r3, [r7, #12]
+ 290 000e BA68     		ldr	r2, [r7, #8]
+ 291 0010 5A61     		str	r2, [r3, #20]
+ 190:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****   pcb->recv_arg = recv_arg;
+ 292              		.loc 1 190 0
+ 293 0012 FB68     		ldr	r3, [r7, #12]
+ 294 0014 7A68     		ldr	r2, [r7, #4]
+ 295 0016 9A61     		str	r2, [r3, #24]
+ 191:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** }
+ 296              		.loc 1 191 0
+ 297 0018 07F11407 		add	r7, r7, #20
+ 298 001c BD46     		mov	sp, r7
+ 299 001e 80BC     		pop	{r7}
+ 300 0020 7047     		bx	lr
+ 301              		.cfi_endproc
+ 302              	.LFE3:
+ 304 0022 00BF     		.section	.text.raw_sendto,"ax",%progbits
+ 305              		.align	2
+ 306              		.global	raw_sendto
+ 307              		.thumb
+ 308              		.thumb_func
+ 310              	raw_sendto:
+ 311              	.LFB4:
+ 192:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** 
+ 193:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** /**
+ 194:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  * Send the raw IP packet to the given address. Note that actually you cannot
+ 195:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  * modify the IP headers (this is inconsistent with the receive callback where
+ 196:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  * you actually get the IP headers), you can only specify the IP payload here.
+ 197:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  * It requires some more changes in lwIP. (there will be a raw_send() function
+ 198:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  * then.)
+ 199:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  *
+ 200:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  * @param pcb the raw pcb which to send
+ 201:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  * @param p the IP payload to send
+ 202:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  * @param ipaddr the destination address of the IP packet
+ 203:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  *
+ 204:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  */
+ 205:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** err_t
+ 206:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** raw_sendto(struct raw_pcb *pcb, struct pbuf *p, struct ip_addr *ipaddr)
+ 207:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** {
+ 312              		.loc 1 207 0
+ 313              		.cfi_startproc
+ 314              		@ args = 0, pretend = 0, frame = 32
+ 315              		@ frame_needed = 1, uses_anonymous_args = 0
+ 316 0000 80B5     		push	{r7, lr}
+ 317              	.LCFI12:
+ 318              		.cfi_def_cfa_offset 8
+ 319              		.cfi_offset 7, -8
+ 320              		.cfi_offset 14, -4
+ 321 0002 8CB0     		sub	sp, sp, #48
+ 322              	.LCFI13:
+ 323              		.cfi_def_cfa_offset 56
+ 324 0004 04AF     		add	r7, sp, #16
+ 325              	.LCFI14:
+ 326              		.cfi_def_cfa 7, 40
+ 327 0006 F860     		str	r0, [r7, #12]
+ 328 0008 B960     		str	r1, [r7, #8]
+ 329 000a 7A60     		str	r2, [r7, #4]
+ 208:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****   err_t err;
+ 209:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****   struct netif *netif;
+ 210:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****   struct ip_addr *src_ip;
+ 211:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****   struct pbuf *q; /* q will be sent down the stack */
+ 212:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****   
+ 213:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****   LWIP_DEBUGF(RAW_DEBUG | LWIP_DBG_TRACE, ("raw_sendto\n"));
+ 214:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****   
+ 215:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****   /* not enough space to add an IP header to first pbuf in given p chain? */
+ 216:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****   if (pbuf_header(p, IP_HLEN)) {
+ 330              		.loc 1 216 0
+ 331 000c B868     		ldr	r0, [r7, #8]
+ 332 000e 4FF01401 		mov	r1, #20
+ 333 0012 FFF7FEFF 		bl	pbuf_header
+ 334 0016 0346     		mov	r3, r0
+ 335 0018 002B     		cmp	r3, #0
+ 336 001a 13D0     		beq	.L17
+ 217:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****     /* allocate header in new pbuf */
+ 218:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****     q = pbuf_alloc(PBUF_IP, 0, PBUF_RAM);
+ 337              		.loc 1 218 0
+ 338 001c 4FF00100 		mov	r0, #1
+ 339 0020 4FF00001 		mov	r1, #0
+ 340 0024 4FF00002 		mov	r2, #0
+ 341 0028 FFF7FEFF 		bl	pbuf_alloc
+ 342 002c B861     		str	r0, [r7, #24]
+ 219:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****     /* new header pbuf could not be allocated? */
+ 220:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****     if (q == NULL) {
+ 343              		.loc 1 220 0
+ 344 002e BB69     		ldr	r3, [r7, #24]
+ 345 0030 002B     		cmp	r3, #0
+ 346 0032 02D1     		bne	.L18
+ 221:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****       LWIP_DEBUGF(RAW_DEBUG | LWIP_DBG_TRACE | LWIP_DBG_LEVEL_SERIOUS, ("raw_sendto: could not allo
+ 222:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****       return ERR_MEM;
+ 347              		.loc 1 222 0
+ 348 0034 4FF0FF03 		mov	r3, #255
+ 349 0038 49E0     		b	.L19
+ 350              	.L18:
+ 223:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****     }
+ 224:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****     /* chain header q in front of given pbuf p */
+ 225:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****     pbuf_chain(q, p);
+ 351              		.loc 1 225 0
+ 352 003a B869     		ldr	r0, [r7, #24]
+ 353 003c B968     		ldr	r1, [r7, #8]
+ 354 003e FFF7FEFF 		bl	pbuf_chain
+ 355 0042 0CE0     		b	.L20
+ 356              	.L17:
+ 226:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****     /* { first pbuf q points to header pbuf } */
+ 227:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****     LWIP_DEBUGF(RAW_DEBUG, ("raw_sendto: added header pbuf %p before given pbuf %p\n", (void *)q, (
+ 228:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****   }  else {
+ 229:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****     /* first pbuf q equals given pbuf */
+ 230:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****     q = p;
+ 357              		.loc 1 230 0
+ 358 0044 BB68     		ldr	r3, [r7, #8]
+ 359 0046 BB61     		str	r3, [r7, #24]
+ 231:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****     if(pbuf_header(q, -IP_HLEN)) {
+ 360              		.loc 1 231 0
+ 361 0048 B869     		ldr	r0, [r7, #24]
+ 362 004a 6FF01301 		mvn	r1, #19
+ 363 004e FFF7FEFF 		bl	pbuf_header
+ 364 0052 0346     		mov	r3, r0
+ 365 0054 002B     		cmp	r3, #0
+ 366 0056 02D0     		beq	.L20
+ 232:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****       LWIP_ASSERT("Can't restore header we just removed!", 0);
+ 233:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****       return ERR_MEM;
+ 367              		.loc 1 233 0
+ 368 0058 4FF0FF03 		mov	r3, #255
+ 369 005c 37E0     		b	.L19
+ 370              	.L20:
+ 234:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****     }
+ 235:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****   }
+ 236:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** 
+ 237:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****   if ((netif = ip_route(ipaddr)) == NULL) {
+ 371              		.loc 1 237 0
+ 372 005e 7868     		ldr	r0, [r7, #4]
+ 373 0060 FFF7FEFF 		bl	ip_route
+ 374 0064 7861     		str	r0, [r7, #20]
+ 375 0066 7B69     		ldr	r3, [r7, #20]
+ 376 0068 002B     		cmp	r3, #0
+ 377 006a 09D1     		bne	.L21
+ 238:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****     LWIP_DEBUGF(RAW_DEBUG | LWIP_DBG_LEVEL_WARNING, ("raw_sendto: No route to 0x%"X32_F"\n", ipaddr
+ 239:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****     /* free any temporary header pbuf allocated by pbuf_header() */
+ 240:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****     if (q != p) {
+ 378              		.loc 1 240 0
+ 379 006c BA69     		ldr	r2, [r7, #24]
+ 380 006e BB68     		ldr	r3, [r7, #8]
+ 381 0070 9A42     		cmp	r2, r3
+ 382 0072 02D0     		beq	.L22
+ 241:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****       pbuf_free(q);
+ 383              		.loc 1 241 0
+ 384 0074 B869     		ldr	r0, [r7, #24]
+ 385 0076 FFF7FEFF 		bl	pbuf_free
+ 386              	.L22:
+ 242:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****     }
+ 243:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****     return ERR_RTE;
+ 387              		.loc 1 243 0
+ 388 007a 4FF0FC03 		mov	r3, #252
+ 389 007e 26E0     		b	.L19
+ 390              	.L21:
+ 244:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****   }
+ 245:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** 
+ 246:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** #if IP_SOF_BROADCAST
+ 247:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****   /* broadcast filter? */
+ 248:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****   if ( ((pcb->so_options & SOF_BROADCAST) == 0) && ip_addr_isbroadcast(ipaddr, netif) ) {
+ 249:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****     LWIP_DEBUGF(RAW_DEBUG | LWIP_DBG_LEVEL_WARNING, ("raw_sendto: SOF_BROADCAST not enabled on pcb 
+ 250:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****     /* free any temporary header pbuf allocated by pbuf_header() */
+ 251:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****     if (q != p) {
+ 252:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****       pbuf_free(q);
+ 253:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****     }
+ 254:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****     return ERR_VAL;
+ 255:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****   }
+ 256:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** #endif /* IP_SOF_BROADCAST */
+ 257:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** 
+ 258:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****   if (ip_addr_isany(&pcb->local_ip)) {
+ 391              		.loc 1 258 0
+ 392 0080 FB68     		ldr	r3, [r7, #12]
+ 393 0082 002B     		cmp	r3, #0
+ 394 0084 03D0     		beq	.L23
+ 395              		.loc 1 258 0 is_stmt 0 discriminator 1
+ 396 0086 FB68     		ldr	r3, [r7, #12]
+ 397 0088 1B68     		ldr	r3, [r3, #0]
+ 398 008a 002B     		cmp	r3, #0
+ 399 008c 04D1     		bne	.L24
+ 400              	.L23:
+ 259:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****     /* use outgoing network interface IP address as source address */
+ 260:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****     src_ip = &(netif->ip_addr);
+ 401              		.loc 1 260 0 is_stmt 1
+ 402 008e 7B69     		ldr	r3, [r7, #20]
+ 403 0090 03F10403 		add	r3, r3, #4
+ 404 0094 FB61     		str	r3, [r7, #28]
+ 405 0096 01E0     		b	.L25
+ 406              	.L24:
+ 261:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****   } else {
+ 262:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****     /* use RAW PCB local IP address as source address */
+ 263:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****     src_ip = &(pcb->local_ip);
+ 407              		.loc 1 263 0
+ 408 0098 FB68     		ldr	r3, [r7, #12]
+ 409 009a FB61     		str	r3, [r7, #28]
+ 410              	.L25:
+ 264:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****   }
+ 265:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** 
+ 266:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** #if LWIP_NETIF_HWADDRHINT
+ 267:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****   netif->addr_hint = &(pcb->addr_hint);
+ 268:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** #endif /* LWIP_NETIF_HWADDRHINT*/
+ 269:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****   err = ip_output_if (q, src_ip, ipaddr, pcb->ttl, pcb->tos, pcb->protocol, netif);
+ 411              		.loc 1 269 0
+ 412 009c FB68     		ldr	r3, [r7, #12]
+ 413 009e DB7A     		ldrb	r3, [r3, #11]	@ zero_extendqisi2
+ 414 00a0 FA68     		ldr	r2, [r7, #12]
+ 415 00a2 917A     		ldrb	r1, [r2, #10]	@ zero_extendqisi2
+ 416 00a4 FA68     		ldr	r2, [r7, #12]
+ 417 00a6 127C     		ldrb	r2, [r2, #16]	@ zero_extendqisi2
+ 418 00a8 0091     		str	r1, [sp, #0]
+ 419 00aa 0192     		str	r2, [sp, #4]
+ 420 00ac 7A69     		ldr	r2, [r7, #20]
+ 421 00ae 0292     		str	r2, [sp, #8]
+ 422 00b0 B869     		ldr	r0, [r7, #24]
+ 423 00b2 F969     		ldr	r1, [r7, #28]
+ 424 00b4 7A68     		ldr	r2, [r7, #4]
+ 425 00b6 FFF7FEFF 		bl	ip_output_if
+ 426 00ba 0346     		mov	r3, r0
+ 427 00bc FB74     		strb	r3, [r7, #19]
+ 270:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** #if LWIP_NETIF_HWADDRHINT
+ 271:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****   netif->addr_hint = NULL;
+ 272:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** #endif /* LWIP_NETIF_HWADDRHINT*/
+ 273:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** 
+ 274:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****   /* did we chain a header earlier? */
+ 275:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****   if (q != p) {
+ 428              		.loc 1 275 0
+ 429 00be BA69     		ldr	r2, [r7, #24]
+ 430 00c0 BB68     		ldr	r3, [r7, #8]
+ 431 00c2 9A42     		cmp	r2, r3
+ 432 00c4 02D0     		beq	.L26
+ 276:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****     /* free the header */
+ 277:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****     pbuf_free(q);
+ 433              		.loc 1 277 0
+ 434 00c6 B869     		ldr	r0, [r7, #24]
+ 435 00c8 FFF7FEFF 		bl	pbuf_free
+ 436              	.L26:
+ 278:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****   }
+ 279:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****   return err;
+ 437              		.loc 1 279 0
+ 438 00cc FB7C     		ldrb	r3, [r7, #19]	@ zero_extendqisi2
+ 439              	.L19:
+ 440 00ce 5BB2     		sxtb	r3, r3
+ 280:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** }
+ 441              		.loc 1 280 0
+ 442 00d0 1846     		mov	r0, r3
+ 443 00d2 07F12007 		add	r7, r7, #32
+ 444 00d6 BD46     		mov	sp, r7
+ 445 00d8 80BD     		pop	{r7, pc}
+ 446              		.cfi_endproc
+ 447              	.LFE4:
+ 449 00da 00BF     		.section	.text.raw_send,"ax",%progbits
+ 450              		.align	2
+ 451              		.global	raw_send
+ 452              		.thumb
+ 453              		.thumb_func
+ 455              	raw_send:
+ 456              	.LFB5:
+ 281:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** 
+ 282:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** /**
+ 283:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  * Send the raw IP packet to the address given by raw_connect()
+ 284:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  *
+ 285:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  * @param pcb the raw pcb which to send
+ 286:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  * @param p the IP payload to send
+ 287:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  *
+ 288:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  */
+ 289:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** err_t
+ 290:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** raw_send(struct raw_pcb *pcb, struct pbuf *p)
+ 291:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** {
+ 457              		.loc 1 291 0
+ 458              		.cfi_startproc
+ 459              		@ args = 0, pretend = 0, frame = 8
+ 460              		@ frame_needed = 1, uses_anonymous_args = 0
+ 461 0000 80B5     		push	{r7, lr}
+ 462              	.LCFI15:
+ 463              		.cfi_def_cfa_offset 8
+ 464              		.cfi_offset 7, -8
+ 465              		.cfi_offset 14, -4
+ 466 0002 82B0     		sub	sp, sp, #8
+ 467              	.LCFI16:
+ 468              		.cfi_def_cfa_offset 16
+ 469 0004 00AF     		add	r7, sp, #0
+ 470              	.LCFI17:
+ 471              		.cfi_def_cfa_register 7
+ 472 0006 7860     		str	r0, [r7, #4]
+ 473 0008 3960     		str	r1, [r7, #0]
+ 292:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****   return raw_sendto(pcb, p, &pcb->remote_ip);
+ 474              		.loc 1 292 0
+ 475 000a 7B68     		ldr	r3, [r7, #4]
+ 476 000c 03F10403 		add	r3, r3, #4
+ 477 0010 7868     		ldr	r0, [r7, #4]
+ 478 0012 3968     		ldr	r1, [r7, #0]
+ 479 0014 1A46     		mov	r2, r3
+ 480 0016 FFF7FEFF 		bl	raw_sendto
+ 481 001a 0346     		mov	r3, r0
+ 293:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** }
+ 482              		.loc 1 293 0
+ 483 001c 1846     		mov	r0, r3
+ 484 001e 07F10807 		add	r7, r7, #8
+ 485 0022 BD46     		mov	sp, r7
+ 486 0024 80BD     		pop	{r7, pc}
+ 487              		.cfi_endproc
+ 488              	.LFE5:
+ 490 0026 00BF     		.section	.text.raw_remove,"ax",%progbits
+ 491              		.align	2
+ 492              		.global	raw_remove
+ 493              		.thumb
+ 494              		.thumb_func
+ 496              	raw_remove:
+ 497              	.LFB6:
+ 294:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** 
+ 295:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** /**
+ 296:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  * Remove an RAW PCB.
+ 297:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  *
+ 298:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  * @param pcb RAW PCB to be removed. The PCB is removed from the list of
+ 299:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  * RAW PCB's and the data structure is freed from memory.
+ 300:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  *
+ 301:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  * @see raw_new()
+ 302:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  */
+ 303:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** void
+ 304:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** raw_remove(struct raw_pcb *pcb)
+ 305:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** {
+ 498              		.loc 1 305 0
+ 499              		.cfi_startproc
+ 500              		@ args = 0, pretend = 0, frame = 16
+ 501              		@ frame_needed = 1, uses_anonymous_args = 0
+ 502 0000 80B5     		push	{r7, lr}
+ 503              	.LCFI18:
+ 504              		.cfi_def_cfa_offset 8
+ 505              		.cfi_offset 7, -8
+ 506              		.cfi_offset 14, -4
+ 507 0002 84B0     		sub	sp, sp, #16
+ 508              	.LCFI19:
+ 509              		.cfi_def_cfa_offset 24
+ 510 0004 00AF     		add	r7, sp, #0
+ 511              	.LCFI20:
+ 512              		.cfi_def_cfa_register 7
+ 513 0006 7860     		str	r0, [r7, #4]
+ 306:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****   struct raw_pcb *pcb2;
+ 307:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****   /* pcb to be removed is first in list? */
+ 308:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****   if (raw_pcbs == pcb) {
+ 514              		.loc 1 308 0
+ 515 0008 40F20003 		movw	r3, #:lower16:raw_pcbs
+ 516 000c C0F20003 		movt	r3, #:upper16:raw_pcbs
+ 517 0010 1A68     		ldr	r2, [r3, #0]
+ 518 0012 7B68     		ldr	r3, [r7, #4]
+ 519 0014 9A42     		cmp	r2, r3
+ 520 0016 0BD1     		bne	.L30
+ 309:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****     /* make list start at 2nd pcb */
+ 310:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****     raw_pcbs = raw_pcbs->next;
+ 521              		.loc 1 310 0
+ 522 0018 40F20003 		movw	r3, #:lower16:raw_pcbs
+ 523 001c C0F20003 		movt	r3, #:upper16:raw_pcbs
+ 524 0020 1B68     		ldr	r3, [r3, #0]
+ 525 0022 DA68     		ldr	r2, [r3, #12]
+ 526 0024 40F20003 		movw	r3, #:lower16:raw_pcbs
+ 527 0028 C0F20003 		movt	r3, #:upper16:raw_pcbs
+ 528 002c 1A60     		str	r2, [r3, #0]
+ 529 002e 19E0     		b	.L31
+ 530              	.L30:
+ 311:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****     /* pcb not 1st in list */
+ 312:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****   } else {
+ 313:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****     for(pcb2 = raw_pcbs; pcb2 != NULL; pcb2 = pcb2->next) {
+ 531              		.loc 1 313 0
+ 532 0030 40F20003 		movw	r3, #:lower16:raw_pcbs
+ 533 0034 C0F20003 		movt	r3, #:upper16:raw_pcbs
+ 534 0038 1B68     		ldr	r3, [r3, #0]
+ 535 003a FB60     		str	r3, [r7, #12]
+ 536 003c 0FE0     		b	.L32
+ 537              	.L34:
+ 314:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****       /* find pcb in raw_pcbs list */
+ 315:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****       if (pcb2->next != NULL && pcb2->next == pcb) {
+ 538              		.loc 1 315 0
+ 539 003e FB68     		ldr	r3, [r7, #12]
+ 540 0040 DB68     		ldr	r3, [r3, #12]
+ 541 0042 002B     		cmp	r3, #0
+ 542 0044 08D0     		beq	.L33
+ 543              		.loc 1 315 0 is_stmt 0 discriminator 1
+ 544 0046 FB68     		ldr	r3, [r7, #12]
+ 545 0048 DA68     		ldr	r2, [r3, #12]
+ 546 004a 7B68     		ldr	r3, [r7, #4]
+ 547 004c 9A42     		cmp	r2, r3
+ 548 004e 03D1     		bne	.L33
+ 316:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****         /* remove pcb from list */
+ 317:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****         pcb2->next = pcb->next;
+ 549              		.loc 1 317 0 is_stmt 1
+ 550 0050 7B68     		ldr	r3, [r7, #4]
+ 551 0052 DA68     		ldr	r2, [r3, #12]
+ 552 0054 FB68     		ldr	r3, [r7, #12]
+ 553 0056 DA60     		str	r2, [r3, #12]
+ 554              	.L33:
+ 313:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****     for(pcb2 = raw_pcbs; pcb2 != NULL; pcb2 = pcb2->next) {
+ 555              		.loc 1 313 0
+ 556 0058 FB68     		ldr	r3, [r7, #12]
+ 557 005a DB68     		ldr	r3, [r3, #12]
+ 558 005c FB60     		str	r3, [r7, #12]
+ 559              	.L32:
+ 313:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****     for(pcb2 = raw_pcbs; pcb2 != NULL; pcb2 = pcb2->next) {
+ 560              		.loc 1 313 0 is_stmt 0 discriminator 1
+ 561 005e FB68     		ldr	r3, [r7, #12]
+ 562 0060 002B     		cmp	r3, #0
+ 563 0062 ECD1     		bne	.L34
+ 564              	.L31:
+ 318:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****       }
+ 319:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****     }
+ 320:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****   }
+ 321:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****   memp_free(MEMP_RAW_PCB, pcb);
+ 565              		.loc 1 321 0 is_stmt 1
+ 566 0064 7868     		ldr	r0, [r7, #4]
+ 567 0066 FFF7FEFF 		bl	mem_free
+ 322:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** }
+ 568              		.loc 1 322 0
+ 569 006a 07F11007 		add	r7, r7, #16
+ 570 006e BD46     		mov	sp, r7
+ 571 0070 80BD     		pop	{r7, pc}
+ 572              		.cfi_endproc
+ 573              	.LFE6:
+ 575 0072 00BF     		.section	.text.raw_new,"ax",%progbits
+ 576              		.align	2
+ 577              		.global	raw_new
+ 578              		.thumb
+ 579              		.thumb_func
+ 581              	raw_new:
+ 582              	.LFB7:
+ 323:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** 
+ 324:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** /**
+ 325:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  * Create a RAW PCB.
+ 326:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  *
+ 327:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  * @return The RAW PCB which was created. NULL if the PCB data structure
+ 328:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  * could not be allocated.
+ 329:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  *
+ 330:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  * @param proto the protocol number of the IPs payload (e.g. IP_PROTO_ICMP)
+ 331:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  *
+ 332:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  * @see raw_remove()
+ 333:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****  */
+ 334:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** struct raw_pcb *
+ 335:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** raw_new(u8_t proto) {
+ 583              		.loc 1 335 0
+ 584              		.cfi_startproc
+ 585              		@ args = 0, pretend = 0, frame = 16
+ 586              		@ frame_needed = 1, uses_anonymous_args = 0
+ 587 0000 80B5     		push	{r7, lr}
+ 588              	.LCFI21:
+ 589              		.cfi_def_cfa_offset 8
+ 590              		.cfi_offset 7, -8
+ 591              		.cfi_offset 14, -4
+ 592 0002 84B0     		sub	sp, sp, #16
+ 593              	.LCFI22:
+ 594              		.cfi_def_cfa_offset 24
+ 595 0004 00AF     		add	r7, sp, #0
+ 596              	.LCFI23:
+ 597              		.cfi_def_cfa_register 7
+ 598 0006 0346     		mov	r3, r0
+ 599 0008 FB71     		strb	r3, [r7, #7]
+ 336:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****   struct raw_pcb *pcb;
+ 337:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** 
+ 338:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****   LWIP_DEBUGF(RAW_DEBUG | LWIP_DBG_TRACE, ("raw_new\n"));
+ 339:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** 
+ 340:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****   pcb = memp_malloc(MEMP_RAW_PCB);
+ 600              		.loc 1 340 0
+ 601 000a 40F20003 		movw	r3, #:lower16:memp_sizes
+ 602 000e C0F20003 		movt	r3, #:upper16:memp_sizes
+ 603 0012 1B88     		ldrh	r3, [r3, #0]
+ 604 0014 1846     		mov	r0, r3
+ 605 0016 FFF7FEFF 		bl	mem_malloc
+ 606 001a F860     		str	r0, [r7, #12]
+ 341:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****   /* could allocate RAW PCB? */
+ 342:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****   if (pcb != NULL) {
+ 607              		.loc 1 342 0
+ 608 001c FB68     		ldr	r3, [r7, #12]
+ 609 001e 002B     		cmp	r3, #0
+ 610 0020 1AD0     		beq	.L36
+ 343:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****     /* initialize PCB to all zeroes */
+ 344:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****     memset(pcb, 0, sizeof(struct raw_pcb));
+ 611              		.loc 1 344 0
+ 612 0022 F868     		ldr	r0, [r7, #12]
+ 613 0024 4FF00001 		mov	r1, #0
+ 614 0028 4FF01C02 		mov	r2, #28
+ 615 002c FFF7FEFF 		bl	memset
+ 345:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****     pcb->protocol = proto;
+ 616              		.loc 1 345 0
+ 617 0030 FB68     		ldr	r3, [r7, #12]
+ 618 0032 FA79     		ldrb	r2, [r7, #7]
+ 619 0034 1A74     		strb	r2, [r3, #16]
+ 346:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****     pcb->ttl = RAW_TTL;
+ 620              		.loc 1 346 0
+ 621 0036 FB68     		ldr	r3, [r7, #12]
+ 622 0038 4FF0FF02 		mov	r2, #255
+ 623 003c DA72     		strb	r2, [r3, #11]
+ 347:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****     pcb->next = raw_pcbs;
+ 624              		.loc 1 347 0
+ 625 003e 40F20003 		movw	r3, #:lower16:raw_pcbs
+ 626 0042 C0F20003 		movt	r3, #:upper16:raw_pcbs
+ 627 0046 1A68     		ldr	r2, [r3, #0]
+ 628 0048 FB68     		ldr	r3, [r7, #12]
+ 629 004a DA60     		str	r2, [r3, #12]
+ 348:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****     raw_pcbs = pcb;
+ 630              		.loc 1 348 0
+ 631 004c 40F20003 		movw	r3, #:lower16:raw_pcbs
+ 632 0050 C0F20003 		movt	r3, #:upper16:raw_pcbs
+ 633 0054 FA68     		ldr	r2, [r7, #12]
+ 634 0056 1A60     		str	r2, [r3, #0]
+ 635              	.L36:
+ 349:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****   }
+ 350:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c ****   return pcb;
+ 636              		.loc 1 350 0
+ 637 0058 FB68     		ldr	r3, [r7, #12]
+ 351:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.c **** }
+ 638              		.loc 1 351 0
+ 639 005a 1846     		mov	r0, r3
+ 640 005c 07F11007 		add	r7, r7, #16
+ 641 0060 BD46     		mov	sp, r7
+ 642 0062 80BD     		pop	{r7, pc}
+ 643              		.cfi_endproc
+ 644              	.LFE7:
+ 646              		.text
+ 647              	.Letext0:
+ 648              		.file 2 "C:\\DAVE3_workspace\\ws3.1.10\\XMC4500_RK_HTTPserver\\XMC4500_RK_HTTPserver\\Dave\\Genera
+ 649              		.file 3 "C:\\DAVE3_workspace\\ws3.1.10\\XMC4500_RK_HTTPserver\\XMC4500_RK_HTTPserver\\Dave\\Genera
+ 650              		.file 4 "C:\\DAVE3_workspace\\ws3.1.10\\XMC4500_RK_HTTPserver\\XMC4500_RK_HTTPserver\\Dave\\Genera
+ 651              		.file 5 "C:\\DAVE3_workspace\\ws3.1.10\\XMC4500_RK_HTTPserver\\XMC4500_RK_HTTPserver\\Dave\\Genera
+ 652              		.file 6 "C:\\DAVE3_workspace\\ws3.1.10\\XMC4500_RK_HTTPserver\\XMC4500_RK_HTTPserver\\Dave\\Genera
+ 653              		.file 7 "C:\\DAVE3_workspace\\ws3.1.10\\XMC4500_RK_HTTPserver\\XMC4500_RK_HTTPserver\\Dave\\Genera
+ 654              		.file 8 "C:\\DAVE3_workspace\\ws3.1.10\\XMC4500_RK_HTTPserver\\XMC4500_RK_HTTPserver\\Dave\\Genera
+ 655              		.file 9 "C:\\DAVE3_workspace\\ws3.1.10\\XMC4500_RK_HTTPserver\\XMC4500_RK_HTTPserver\\Dave\\Genera
+DEFINED SYMBOLS
+                            *ABS*:00000000 raw.c
+C:\Users\Mihai\AppData\Local\Temp\ccZ7S753.s:20     .bss:00000000 $d
+C:\Users\Mihai\AppData\Local\Temp\ccZ7S753.s:21     .bss:00000000 raw_pcbs
+C:\Users\Mihai\AppData\Local\Temp\ccZ7S753.s:24     .text.raw_input:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccZ7S753.s:29     .text.raw_input:00000000 raw_input
+C:\Users\Mihai\AppData\Local\Temp\ccZ7S753.s:159    .text.raw_bind:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccZ7S753.s:164    .text.raw_bind:00000000 raw_bind
+C:\Users\Mihai\AppData\Local\Temp\ccZ7S753.s:211    .text.raw_connect:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccZ7S753.s:216    .text.raw_connect:00000000 raw_connect
+C:\Users\Mihai\AppData\Local\Temp\ccZ7S753.s:263    .text.raw_recv:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccZ7S753.s:268    .text.raw_recv:00000000 raw_recv
+C:\Users\Mihai\AppData\Local\Temp\ccZ7S753.s:305    .text.raw_sendto:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccZ7S753.s:310    .text.raw_sendto:00000000 raw_sendto
+C:\Users\Mihai\AppData\Local\Temp\ccZ7S753.s:450    .text.raw_send:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccZ7S753.s:455    .text.raw_send:00000000 raw_send
+C:\Users\Mihai\AppData\Local\Temp\ccZ7S753.s:491    .text.raw_remove:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccZ7S753.s:496    .text.raw_remove:00000000 raw_remove
+C:\Users\Mihai\AppData\Local\Temp\ccZ7S753.s:576    .text.raw_new:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccZ7S753.s:581    .text.raw_new:00000000 raw_new
+                     .debug_frame:00000010 $d
+                           .group:00000000 wm4.1.1791a5ae2e936ca1033c1c44be394cc7
+                           .group:00000000 wm4.ETH004_Conf.h.56.564c3f309c32b3c742fc91049cf66940
+                           .group:00000000 wm4.lwipopts.h.73.a7a63bda1e8216abd1d90275eaaa0027
+                           .group:00000000 wm4.arch.h.33.6fa4aa86d33d1490ae882caef7316405
+                           .group:00000000 wm4.cpu.h.33.b213c7fd77614ebc3691cef18ad2ff22
+                           .group:00000000 wm4.cc.h.66.ec134211c658dcc89de4610e4e7bab46
+                           .group:00000000 wm4.arch.h.47.5153c52bfb94ee3b37299920afab6afd
+                           .group:00000000 wm4.debug.h.43.557ecd6c90cc70b375bb8a29118be47b
+                           .group:00000000 wm4.opt.h.94.d36882acafebb8726bce646fc8b2397b
+                           .group:00000000 wm4.def.h.33.d779a3244e06cea9e944e5db86767de8
+                           .group:00000000 wm4.memp_std.h.15.aec196dc1c3fb1142dd450db0c167cbf
+                           .group:00000000 wm4.mem.h.96.20770766e6c9e6c42af6bfa95ef5c63f
+                           .group:00000000 wm4.memp.h.86.dbc4cb1b8d6b9ea113f04174f716e4c0
+                           .group:00000000 wm4.inet.h.46.a1c378d398e089f18dd6ade9b427826c
+                           .group:00000000 wm4.ip_addr.h.79.9a0ce887ca8c88c22ad7686bcb5105df
+                           .group:00000000 wm4.err.h.52.37c5d17538f8e8347a9c84196701e92d
+                           .group:00000000 wm4.pbuf.h.43.e9a1ad12b97478787a109e22d5306820
+                           .group:00000000 wm4.netif.h.77.eb641fb35cae7e4880920e0acf78586f
+                           .group:00000000 wm4.ip.h.48.ad46847692d4d729760949b27e48a442
+                           .group:00000000 wm4.stats.h.147.58ec5b890fad5bbc2a7711ad8105f087
+                           .group:00000000 wm4.udp.h.48.1a8dde095cd0a13580afaba1443e5a3f
+                           .group:00000000 wm4.snmp.h.231.ffb5dc2779dd945785c887dfa42d86eb
+                           .group:00000000 wm4.perf.h.33.85c55671e1b7570634f49777a207ad9f
+                           .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
+                           .group:00000000 wm4.features.h.22.b72b3baab2bb2eab3661375590100b6b
+                           .group:00000000 wm4.config.h.193.5fb8ef056cdff92dec3dee9552839d8c
+                           .group:00000000 wm4._ansi.h.23.7aefdac4826acebbfc9f3822a0aeb14c
+                           .group:00000000 wm4._default_types.h.6.5e12cd604db8ce00b62bb2f02708eaf3
+                           .group:00000000 wm4.lock.h.2.9bc98482741e5e2a9450b12934a684ea
+                           .group:00000000 wm4.stddef.h.349.31f4c5baff3fa2689010b32028da9c47
+                           .group:00000000 wm4.reent.h.16.9e42f0e588b85e70b2bf6572af57ce64
+                           .group:00000000 wm4.stddef.h.187.9e651b6b8b16e149c1353259404973ea
+                           .group:00000000 wm4.string.h.86.d5c872ff52e2712c985b588a0ef39f3c
+
+UNDEFINED SYMBOLS
+ntohs
+pbuf_header
+pbuf_alloc
+pbuf_chain
+ip_route
+pbuf_free
+ip_output_if
+mem_free
+memp_sizes
+mem_malloc
+memset

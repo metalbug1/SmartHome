@@ -1,0 +1,74 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"ETH004_Conf.c"
+  16              		.global	GWpos4
+  17              		.global	GWpos3
+  18              		.global	GWpos2
+  19              		.global	GWpos1
+  20              		.global	Netpos4
+  21              		.global	Netpos3
+  22              		.global	Netpos2
+  23              		.global	Netpos1
+  24              		.global	IPpos4
+  25              		.global	IPpos3
+  26              		.global	IPpos2
+  27              		.global	IPpos1
+  28              		.data
+  29              		.align	1
+  32              	GWpos4:
+  33 0000 0A00     		.short	10
+  36              	GWpos2:
+  37 0002 A800     		.short	168
+  40              	GWpos1:
+  41 0004 C000     		.short	192
+  44              	Netpos3:
+  45 0006 FF00     		.short	255
+  48              	Netpos2:
+  49 0008 FF00     		.short	255
+  52              	Netpos1:
+  53 000a FF00     		.short	255
+  56              	IPpos4:
+  57 000c 0A00     		.short	10
+  60              	IPpos2:
+  61 000e A800     		.short	168
+  64              	IPpos1:
+  65 0010 C000     		.short	192
+  66              		.bss
+  67              		.align	1
+  70              	GWpos3:
+  71 0000 0000     		.space	2
+  74              	Netpos4:
+  75 0002 0000     		.space	2
+  78              	IPpos3:
+  79 0004 0000     		.space	2
+  80              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 ETH004_Conf.c
+C:\Users\Mihai\AppData\Local\Temp\ccMUxDZs.s:32     .data:00000000 GWpos4
+C:\Users\Mihai\AppData\Local\Temp\ccMUxDZs.s:70     .bss:00000000 GWpos3
+C:\Users\Mihai\AppData\Local\Temp\ccMUxDZs.s:36     .data:00000002 GWpos2
+C:\Users\Mihai\AppData\Local\Temp\ccMUxDZs.s:40     .data:00000004 GWpos1
+C:\Users\Mihai\AppData\Local\Temp\ccMUxDZs.s:74     .bss:00000002 Netpos4
+C:\Users\Mihai\AppData\Local\Temp\ccMUxDZs.s:44     .data:00000006 Netpos3
+C:\Users\Mihai\AppData\Local\Temp\ccMUxDZs.s:48     .data:00000008 Netpos2
+C:\Users\Mihai\AppData\Local\Temp\ccMUxDZs.s:52     .data:0000000a Netpos1
+C:\Users\Mihai\AppData\Local\Temp\ccMUxDZs.s:56     .data:0000000c IPpos4
+C:\Users\Mihai\AppData\Local\Temp\ccMUxDZs.s:78     .bss:00000004 IPpos3
+C:\Users\Mihai\AppData\Local\Temp\ccMUxDZs.s:60     .data:0000000e IPpos2
+C:\Users\Mihai\AppData\Local\Temp\ccMUxDZs.s:64     .data:00000010 IPpos1
+C:\Users\Mihai\AppData\Local\Temp\ccMUxDZs.s:29     .data:00000000 $d
+C:\Users\Mihai\AppData\Local\Temp\ccMUxDZs.s:67     .bss:00000000 $d
+
+NO UNDEFINED SYMBOLS

@@ -1,0 +1,315 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"inet.c"
+  16              		.section	.text.inet_ntoa,"ax",%progbits
+  17              		.align	1
+  18              		.global	inet_ntoa
+  19              		.thumb
+  20              		.thumb_func
+  22              	inet_ntoa:
+  23              		@ args = 0, pretend = 0, frame = 8
+  24              		@ frame_needed = 0, uses_anonymous_args = 0
+  25 0000 F7B5     		push	{r0, r1, r2, r4, r5, r6, r7, lr}
+  26 0002 02A9     		add	r1, sp, #8
+  27 0004 184A     		ldr	r2, .L10
+  28 0006 41F8040D 		str	r0, [r1, #-4]!
+  29 000a 0DF10706 		add	r6, sp, #7
+  30 000e 0139     		subs	r1, r1, #1
+  31              	.L5:
+  32 0010 4878     		ldrb	r0, [r1, #1]	@ zero_extendqisi2
+  33 0012 0023     		movs	r3, #0
+  34              	.L2:
+  35 0014 0A25     		movs	r5, #10
+  36 0016 B0FBF5F4 		udiv	r4, r0, r5
+  37 001a 05FB1400 		mls	r0, r5, r4, r0
+  38 001e 02AD     		add	r5, sp, #8
+  39 0020 EF18     		adds	r7, r5, r3
+  40 0022 3030     		adds	r0, r0, #48
+  41 0024 0133     		adds	r3, r3, #1
+  42 0026 07F8080C 		strb	r0, [r7, #-8]
+  43 002a 14F0FF00 		ands	r0, r4, #255
+  44 002e DBB2     		uxtb	r3, r3
+  45 0030 F0D1     		bne	.L2
+  46 0032 01F8010F 		strb	r0, [r1, #1]!
+  47 0036 1C46     		mov	r4, r3
+  48 0038 1046     		mov	r0, r2
+  49              	.L3:
+  50 003a 013B     		subs	r3, r3, #1
+  51 003c DBB2     		uxtb	r3, r3
+  52 003e FF2B     		cmp	r3, #255
+  53 0040 06D0     		beq	.L9
+  54              	.L4:
+  55 0042 02AF     		add	r7, sp, #8
+  56 0044 FD18     		adds	r5, r7, r3
+  57 0046 15F8085C 		ldrb	r5, [r5, #-8]	@ zero_extendqisi2
+  58 004a 00F8015B 		strb	r5, [r0], #1
+  59 004e F4E7     		b	.L3
+  60              	.L9:
+  61 0050 2E20     		movs	r0, #46
+  62 0052 1319     		adds	r3, r2, r4
+  63 0054 1055     		strb	r0, [r2, r4]
+  64 0056 5A1C     		adds	r2, r3, #1
+  65 0058 B142     		cmp	r1, r6
+  66 005a D9D1     		bne	.L5
+  67 005c 0021     		movs	r1, #0
+  68 005e 02F8011C 		strb	r1, [r2, #-1]
+  69 0062 0148     		ldr	r0, .L10
+  70 0064 FEBD     		pop	{r1, r2, r3, r4, r5, r6, r7, pc}
+  71              	.L11:
+  72 0066 00BF     		.align	2
+  73              	.L10:
+  74 0068 00000000 		.word	.LANCHOR0
+  76              		.section	.text.htons,"ax",%progbits
+  77              		.align	1
+  78              		.global	htons
+  79              		.thumb
+  80              		.thumb_func
+  82              	htons:
+  83              		@ args = 0, pretend = 0, frame = 0
+  84              		@ frame_needed = 0, uses_anonymous_args = 0
+  85              		@ link register save eliminated.
+  86 0000 030A     		lsrs	r3, r0, #8
+  87 0002 43EA0020 		orr	r0, r3, r0, lsl #8
+  88 0006 80B2     		uxth	r0, r0
+  89 0008 7047     		bx	lr
+  91              		.section	.text.ntohs,"ax",%progbits
+  92              		.align	1
+  93              		.global	ntohs
+  94              		.thumb
+  95              		.thumb_func
+  97              	ntohs:
+  98              		@ args = 0, pretend = 0, frame = 0
+  99              		@ frame_needed = 0, uses_anonymous_args = 0
+ 100              		@ link register save eliminated.
+ 101 0000 030A     		lsrs	r3, r0, #8
+ 102 0002 43EA0020 		orr	r0, r3, r0, lsl #8
+ 103 0006 80B2     		uxth	r0, r0
+ 104 0008 7047     		bx	lr
+ 106              		.section	.text.htonl,"ax",%progbits
+ 107              		.align	1
+ 108              		.global	htonl
+ 109              		.thumb
+ 110              		.thumb_func
+ 112              	htonl:
+ 113              		@ args = 0, pretend = 0, frame = 0
+ 114              		@ frame_needed = 0, uses_anonymous_args = 0
+ 115              		@ link register save eliminated.
+ 116 0000 00BA     		rev	r0, r0
+ 117 0002 7047     		bx	lr
+ 119              		.section	.text.inet_aton,"ax",%progbits
+ 120              		.align	1
+ 121              		.global	inet_aton
+ 122              		.thumb
+ 123              		.thumb_func
+ 125              	inet_aton:
+ 126              		@ args = 0, pretend = 0, frame = 16
+ 127              		@ frame_needed = 0, uses_anonymous_args = 0
+ 128 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 129 0002 0378     		ldrb	r3, [r0, #0]	@ zero_extendqisi2
+ 130 0004 85B0     		sub	sp, sp, #20
+ 131 0006 0E46     		mov	r6, r1
+ 132 0008 0024     		movs	r4, #0
+ 133              	.L26:
+ 134 000a A3F13001 		sub	r1, r3, #48
+ 135 000e 00AA     		add	r2, sp, #0
+ 136 0010 0929     		cmp	r1, #9
+ 137 0012 04EB0207 		add	r7, r4, r2
+ 138 0016 71D8     		bhi	.L43
+ 139 0018 302B     		cmp	r3, #48
+ 140 001a 0BD1     		bne	.L34
+ 141 001c 4378     		ldrb	r3, [r0, #1]	@ zero_extendqisi2
+ 142 001e 782B     		cmp	r3, #120
+ 143 0020 04D0     		beq	.L18
+ 144 0022 582B     		cmp	r3, #88
+ 145 0024 02D0     		beq	.L18
+ 146 0026 0130     		adds	r0, r0, #1
+ 147 0028 0825     		movs	r5, #8
+ 148 002a 04E0     		b	.L17
+ 149              	.L18:
+ 150 002c 8378     		ldrb	r3, [r0, #2]	@ zero_extendqisi2
+ 151 002e 1025     		movs	r5, #16
+ 152 0030 0230     		adds	r0, r0, #2
+ 153 0032 00E0     		b	.L17
+ 154              	.L34:
+ 155 0034 0A25     		movs	r5, #10
+ 156              	.L17:
+ 157 0036 0246     		mov	r2, r0
+ 158 0038 0020     		movs	r0, #0
+ 159              	.L19:
+ 160 003a A3F13001 		sub	r1, r3, #48
+ 161 003e 0929     		cmp	r1, #9
+ 162 0040 03D8     		bhi	.L20
+ 163 0042 05FB0030 		mla	r0, r5, r0, r3
+ 164 0046 3038     		subs	r0, r0, #48
+ 165 0048 13E0     		b	.L70
+ 166              	.L20:
+ 167 004a 102D     		cmp	r5, #16
+ 168 004c 14D1     		bne	.L22
+ 169 004e A3F16101 		sub	r1, r3, #97
+ 170 0052 C9B2     		uxtb	r1, r1
+ 171 0054 0529     		cmp	r1, #5
+ 172 0056 04D9     		bls	.L23
+ 173 0058 A3F1410C 		sub	ip, r3, #65
+ 174 005c BCF1050F 		cmp	ip, #5
+ 175 0060 0AD8     		bhi	.L22
+ 176              	.L23:
+ 177 0062 0A33     		adds	r3, r3, #10
+ 178 0064 1929     		cmp	r1, #25
+ 179 0066 8CBF     		ite	hi
+ 180 0068 4121     		movhi	r1, #65
+ 181 006a 6121     		movls	r1, #97
+ 182 006c 5B1A     		subs	r3, r3, r1
+ 183 006e 43EA0010 		orr	r0, r3, r0, lsl #4
+ 184              	.L70:
+ 185 0072 5378     		ldrb	r3, [r2, #1]	@ zero_extendqisi2
+ 186 0074 0132     		adds	r2, r2, #1
+ 187 0076 E0E7     		b	.L19
+ 188              	.L22:
+ 189 0078 2E2B     		cmp	r3, #46
+ 190 007a 07D1     		bne	.L25
+ 191 007c 0C2C     		cmp	r4, #12
+ 192 007e 3DD0     		beq	.L43
+ 193 0080 4DF80400 		str	r0, [sp, r4]
+ 194 0084 5378     		ldrb	r3, [r2, #1]	@ zero_extendqisi2
+ 195 0086 501C     		adds	r0, r2, #1
+ 196 0088 0434     		adds	r4, r4, #4
+ 197 008a BEE7     		b	.L26
+ 198              	.L25:
+ 199 008c 5BB1     		cbz	r3, .L27
+ 200 008e 202B     		cmp	r3, #32
+ 201 0090 09D0     		beq	.L27
+ 202 0092 0C2B     		cmp	r3, #12
+ 203 0094 07D0     		beq	.L27
+ 204 0096 0A2B     		cmp	r3, #10
+ 205 0098 05D0     		beq	.L27
+ 206 009a 0D2B     		cmp	r3, #13
+ 207 009c 03D0     		beq	.L27
+ 208 009e 092B     		cmp	r3, #9
+ 209 00a0 01D0     		beq	.L27
+ 210 00a2 0B2B     		cmp	r3, #11
+ 211 00a4 2AD1     		bne	.L43
+ 212              	.L27:
+ 213 00a6 6B46     		mov	r3, sp
+ 214 00a8 FA1A     		subs	r2, r7, r3
+ 215 00aa 9110     		asrs	r1, r2, #2
+ 216 00ac 4B1C     		adds	r3, r1, #1
+ 217 00ae 042B     		cmp	r3, #4
+ 218 00b0 1FD8     		bhi	.L28
+ 219 00b2 DFE803F0 		tbb	[pc, r3]
+ 220              	.L32:
+ 221 00b6 23       		.byte	(.L43-.L32)/2
+ 222 00b7 1E       		.byte	(.L28-.L32)/2
+ 223 00b8 03       		.byte	(.L29-.L32)/2
+ 224 00b9 0A       		.byte	(.L30-.L32)/2
+ 225 00ba 13       		.byte	(.L31-.L32)/2
+ 226 00bb 00       		.align	1
+ 227              	.L29:
+ 228 00bc B0F1807F 		cmp	r0, #16777216
+ 229 00c0 1CD2     		bcs	.L43
+ 230 00c2 009A     		ldr	r2, [sp, #0]
+ 231 00c4 40EA0260 		orr	r0, r0, r2, lsl #24
+ 232 00c8 13E0     		b	.L28
+ 233              	.L30:
+ 234 00ca B0F5803F 		cmp	r0, #65536
+ 235 00ce 15D2     		bcs	.L43
+ 236 00d0 009A     		ldr	r2, [sp, #0]
+ 237 00d2 019B     		ldr	r3, [sp, #4]
+ 238 00d4 1106     		lsls	r1, r2, #24
+ 239 00d6 41EA0343 		orr	r3, r1, r3, lsl #16
+ 240 00da 09E0     		b	.L71
+ 241              	.L31:
+ 242 00dc FF28     		cmp	r0, #255
+ 243 00de 0DD8     		bhi	.L43
+ 244 00e0 0099     		ldr	r1, [sp, #0]
+ 245 00e2 019B     		ldr	r3, [sp, #4]
+ 246 00e4 0A06     		lsls	r2, r1, #24
+ 247 00e6 42EA0341 		orr	r1, r2, r3, lsl #16
+ 248 00ea 029A     		ldr	r2, [sp, #8]
+ 249 00ec 41EA0223 		orr	r3, r1, r2, lsl #8
+ 250              	.L71:
+ 251 00f0 1843     		orrs	r0, r0, r3
+ 252              	.L28:
+ 253 00f2 2EB1     		cbz	r6, .L44
+ 254 00f4 FFF7FEFF 		bl	htonl
+ 255 00f8 3060     		str	r0, [r6, #0]
+ 256 00fa 01E0     		b	.L44
+ 257              	.L43:
+ 258 00fc 0020     		movs	r0, #0
+ 259 00fe 00E0     		b	.L16
+ 260              	.L44:
+ 261 0100 0120     		movs	r0, #1
+ 262              	.L16:
+ 263 0102 05B0     		add	sp, sp, #20
+ 264 0104 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 266              		.section	.text.inet_addr,"ax",%progbits
+ 267              		.align	1
+ 268              		.global	inet_addr
+ 269              		.thumb
+ 270              		.thumb_func
+ 272              	inet_addr:
+ 273              		@ args = 0, pretend = 0, frame = 8
+ 274              		@ frame_needed = 0, uses_anonymous_args = 0
+ 275 0000 07B5     		push	{r0, r1, r2, lr}
+ 276 0002 01A9     		add	r1, sp, #4
+ 277 0004 FFF7FEFF 		bl	inet_aton
+ 278 0008 08B1     		cbz	r0, .L74
+ 279 000a 0198     		ldr	r0, [sp, #4]
+ 280 000c 01E0     		b	.L73
+ 281              	.L74:
+ 282 000e 4FF0FF30 		mov	r0, #-1
+ 283              	.L73:
+ 284 0012 0EBD     		pop	{r1, r2, r3, pc}
+ 286              		.section	.text.ntohl,"ax",%progbits
+ 287              		.align	1
+ 288              		.global	ntohl
+ 289              		.thumb
+ 290              		.thumb_func
+ 292              	ntohl:
+ 293              		@ args = 0, pretend = 0, frame = 0
+ 294              		@ frame_needed = 0, uses_anonymous_args = 0
+ 295              		@ link register save eliminated.
+ 296 0000 FFF7FEBF 		b	htonl
+ 298              		.bss
+ 299              		.set	.LANCHOR0,. + 0
+ 302              	str.4105:
+ 303 0000 00000000 		.space	16
+ 303      00000000 
+ 303      00000000 
+ 303      00000000 
+ 304              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 inet.c
+C:\Users\Mihai\AppData\Local\Temp\ccyYQ3y5.s:17     .text.inet_ntoa:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccyYQ3y5.s:22     .text.inet_ntoa:00000000 inet_ntoa
+C:\Users\Mihai\AppData\Local\Temp\ccyYQ3y5.s:74     .text.inet_ntoa:00000068 $d
+C:\Users\Mihai\AppData\Local\Temp\ccyYQ3y5.s:77     .text.htons:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccyYQ3y5.s:82     .text.htons:00000000 htons
+C:\Users\Mihai\AppData\Local\Temp\ccyYQ3y5.s:92     .text.ntohs:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccyYQ3y5.s:97     .text.ntohs:00000000 ntohs
+C:\Users\Mihai\AppData\Local\Temp\ccyYQ3y5.s:107    .text.htonl:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccyYQ3y5.s:112    .text.htonl:00000000 htonl
+C:\Users\Mihai\AppData\Local\Temp\ccyYQ3y5.s:120    .text.inet_aton:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccyYQ3y5.s:125    .text.inet_aton:00000000 inet_aton
+C:\Users\Mihai\AppData\Local\Temp\ccyYQ3y5.s:221    .text.inet_aton:000000b6 $d
+C:\Users\Mihai\AppData\Local\Temp\ccyYQ3y5.s:267    .text.inet_addr:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccyYQ3y5.s:272    .text.inet_addr:00000000 inet_addr
+C:\Users\Mihai\AppData\Local\Temp\ccyYQ3y5.s:287    .text.ntohl:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccyYQ3y5.s:292    .text.ntohl:00000000 ntohl
+C:\Users\Mihai\AppData\Local\Temp\ccyYQ3y5.s:302    .bss:00000000 str.4105
+C:\Users\Mihai\AppData\Local\Temp\ccyYQ3y5.s:303    .bss:00000000 $d
+C:\Users\Mihai\AppData\Local\Temp\ccyYQ3y5.s:226    .text.inet_aton:000000bb $d
+C:\Users\Mihai\AppData\Local\Temp\ccyYQ3y5.s:226    .text.inet_aton:000000bc $t
+
+NO UNDEFINED SYMBOLS

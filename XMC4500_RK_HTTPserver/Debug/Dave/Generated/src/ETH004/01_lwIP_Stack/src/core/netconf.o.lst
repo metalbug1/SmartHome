@@ -1,0 +1,1189 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"netconf.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.comm	Eth_TimerHandle,4,4
+  20              		.comm	netif,52,4
+  21              		.comm	lwip250mStimer,4,4
+  22              		.global	EthernetTimer
+  23              		.data
+  26              	EthernetTimer:
+  27 0000 01       		.byte	1
+  28              		.global	LinkCallback
+  29              		.bss
+  30              		.align	2
+  33              	LinkCallback:
+  34 0000 00000000 		.space	4
+  35              		.global	StatusCallback
+  36              		.align	2
+  39              	StatusCallback:
+  40 0004 00000000 		.space	4
+  41              		.global	TCPTimer
+  42              		.align	2
+  45              	TCPTimer:
+  46 0008 00000000 		.space	4
+  47              		.global	ARPTimer
+  48              		.align	2
+  51              	ARPTimer:
+  52 000c 00000000 		.space	4
+  53              		.section	.text.Periodic_Timer_CallBack,"ax",%progbits
+  54              		.align	2
+  55              		.global	Periodic_Timer_CallBack
+  56              		.thumb
+  57              		.thumb_func
+  59              	Periodic_Timer_CallBack:
+  60              	.LFB112:
+  61              		.file 1 "../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c"
+   1:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** /*
+   2:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  * Copyright (c) 2001-2004 Swedish Institute of Computer Science.
+   3:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  * All rights reserved.
+   4:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  *
+   5:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  * Redistribution and use in source and binary forms, with or without modification,
+   6:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  * are permitted provided that the following conditions are met:
+   7:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  *
+   8:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  * 1. Redistributions of source code must retain the above copyright notice,
+   9:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  *    this list of conditions and the following disclaimer.
+  10:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  * 2. Redistributions in binary form must reproduce the above copyright notice,
+  11:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  *    this list of conditions and the following disclaimer in the documentation
+  12:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  *    and/or other materials provided with the distribution.
+  13:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  * 3. The name of the author may not be used to endorse or promote products
+  14:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  *    derived from this software without specific prior written permission.
+  15:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  *
+  16:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR IMPLIED
+  17:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+  18:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT
+  19:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  * SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+  20:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT
+  21:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  * OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+  22:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+  23:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING
+  24:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  * IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+  25:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  * OF SUCH DAMAGE.
+  26:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  *
+  27:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  * This file is part of the lwIP TCP/IP stack.
+  28:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** 
+  29:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  * =========================================================================== *
+  30:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  * Copyright (c) 2011, Infineon Technologies AG                                *
+  31:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  * All rights reserved.                                                        *
+  32:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  *                                                                             *
+  33:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  * Redistribution and use in source and binary forms, with or without          *
+  34:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  * modification, are permitted provided that the following conditions are met: *
+  35:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  * Redistributions of source code must retain the above copyright notice, this *
+  36:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  * list of conditions and the following disclaimer. Redistributions in binary  *
+  37:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  * form must reproduce the above copyright notice, this list of conditions and *
+  38:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  * the following disclaimer in the documentation and/or other materials        *
+  39:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  * provided with the distribution. Neither the name of the copyright holders   *
+  40:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  * nor the names of its contributors may be used to endorse or promote         *
+  41:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  * products derived from this software without specific prior written          *
+  42:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  * permission.                                                                 *
+  43:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  *                                                                             *
+  44:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" *
+  45:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,       *
+  46:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR      *
+  47:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR           *
+  48:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,       *
+  49:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,         *
+  50:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; *
+  51:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,    *
+  52:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR     *
+  53:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF      *
+  54:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.                                  *
+  55:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  * To improve the quality of the software, users are encouraged to share       *
+  56:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  * modifications, enhancements or bug fixes with                               *
+  57:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  * Infineon Technologies AG (dave@infineon.com).                               *
+  58:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  *                                                                             *
+  59:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  * ========================================================================== *
+  60:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** ********************************************************************************
+  61:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** **                                                                            **
+  62:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** **                                                                            **
+  63:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** ** PLATFORM : Infineon <Microcontroller name, step>                           **
+  64:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** **                                                                            **
+  65:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** ** COMPILER : Compiler Independent                                            **
+  66:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** **                                                                            **
+  67:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** ** AUTHOR : App Developer                                                     **
+  68:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** **                                                                            **
+  69:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** ** MAY BE CHANGED BY USER [yes/Yes]: Ys                                       **
+  70:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** **                                                                            **
+  71:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** ** MODIFICATION DATE : Dec 12, 2012                                           **
+  72:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** **                                                                            **
+  73:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** *******************************************************************************/
+  74:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** 
+  75:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** /*******************************************************************************
+  76:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** **                       Author(s) Identity                                   **
+  77:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** ********************************************************************************
+  78:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** **                                                                            **
+  79:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** ** Initials     Name                                                          **
+  80:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** ** ---------------------------------------------------------------------------**
+  81:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** ** JN         App Developer                                                   **
+  82:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** *******************************************************************************/
+  83:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** 
+  84:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** /**
+  85:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  *
+  86:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  */
+  87:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** 
+  88:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** /*******************************************************************************
+  89:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  ** INCLUDE FILES                                                             **
+  90:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  ******************************************************************************/
+  91:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #include "lwip/memp.h"
+  92:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #include "lwip/dns.h"
+  93:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #include "lwip/tcp.h"
+  94:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #include "lwip/udp.h"
+  95:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #include "netif/etharp.h"
+  96:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #include "lwip/dhcp.h"
+  97:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #include "lwip/ip_addr.h"
+  98:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #include "ethernetif.h"
+  99:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #include "netconf.h"
+ 100:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #include "lwip/netif.h"
+ 101:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #include "lwip/init.h"
+ 102:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #include "lwip/tcpip.h"
+ 103:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #include "lwip/autoip.h"
+ 104:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #include "lwip/igmp.h"
+ 105:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** //todo:sagar
+ 106:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #include "lwip/ip_frag.h"
+ 107:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** /** Include for C Standard types */
+ 108:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #include <DAVE3.h>
+ 109:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** 
+ 110:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** 
+ 111:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** /*****************************************************************************
+ 112:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****               DUMMY DEFINTIONS OF DEBUG LOG MACROS
+ 113:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** *****************************************************************************/
+ 114:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** /*These definitions are included here to avoid compilation errors,
+ 115:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  since the DBG002 app is not part of the project. All the macros are defined
+ 116:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  as empty*/
+ 117:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #ifndef _DBG002_H_
+ 118:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** 
+ 119:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #define DBG002_RegisterCallBack(A,B,C)
+ 120:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #define DBG002_I(e)
+ 121:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #define DBG002_IG(e,g)
+ 122:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #define DBG002_IH(e,h)
+ 123:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #define DBG002_IP(e,p)
+ 124:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #define DBG002_IGH(e,g,h)
+ 125:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #define DBG002_IGP(e,g,p)
+ 126:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #define DBG002_IHP(e,h,p)
+ 127:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #define DBG002_IGHP(e,g,h,p)
+ 128:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #define DBG002_N(e)
+ 129:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #define DBG002_NG(e,g)
+ 130:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #define DBG002_NH(e,h)
+ 131:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #define DBG002_NP(e,p)
+ 132:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #define DBG002_NGH(e,g,h)
+ 133:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #define DBG002_NGP(e,g,p)
+ 134:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #define DBG002_NHP(e,h,p)
+ 135:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #define DBG002_NGHP(e,g,h,p)
+ 136:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #define DBG002_ID(e)
+ 137:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #define DBG002_IS(e)
+ 138:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #define DBG002_ISG(e,g)
+ 139:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #define DBG002_SAFETY_CRITICAL(groupid,messageid,length,value)
+ 140:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #define DBG002_CRITICAL(groupid,messageid,length,value)
+ 141:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #define DBG002_ERROR(groupid,messageid,length,value)
+ 142:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #define DBG002_WARNING(groupid,messageid,length,value)
+ 143:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #define DBG002_INFO(groupid,messageid,length,value)
+ 144:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #define DBG002_TRACE(groupid,messageid,length,value)
+ 145:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #define DBG002_FUNCTION_ENTRY(GID, Status)
+ 146:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #define DBG002_FUNCTION_EXIT(GID, Status)
+ 147:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** 
+ 148:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #endif/* End of defintions of dummy Debug Log macros*/
+ 149:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** 
+ 150:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** 
+ 151:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** void LwIP_Periodic_Timer_CallBack(void* Temp);
+ 152:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** void PHY_RegisterTimerCallback(PHYTimerCallbackType Callback);
+ 153:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** void synopGMAC_RegisterPeriodicTimerCallback(SynopGMACPeriodicTimerCallbackType Callback);
+ 154:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** void synopGMAC_RegisterOneShotTimerCallback(SynopGMACTimerCallbackType Callback);
+ 155:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** void synopGMAC_RegisterDeleteTimerCallback(SynopGMACDeletePeriodicTimerType Callback);
+ 156:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #if ENABLE_HTTP
+ 157:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** void httpd_init(void) ;
+ 158:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #endif
+ 159:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** /**
+ 160:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  * @cond INTERNAL_DOCS
+ 161:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  */
+ 162:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** /**
+ 163:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  * @file netconf.c
+ 164:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  *
+ 165:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  * @brief  This file contains public APIs for lwIP stack Init/Deinit APIs.
+ 166:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  *
+ 167:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  */
+ 168:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** 
+ 169:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** /*******************************************************************************
+ 170:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** **                      Global Variable Definitions                           **
+ 171:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** *******************************************************************************/
+ 172:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** extern handle_t  lwIPStackSem;
+ 173:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** handle_t Eth_TimerHandle;
+ 174:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** struct netif netif;
+ 175:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** uint32_t lwip250mStimer; 												 
+ 176:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** volatile bool EthernetTimer = TRUE;
+ 177:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** void *LinkCallback = NULL;
+ 178:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** void *StatusCallback = NULL;
+ 179:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** 
+ 180:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** __IO uint32_t TCPTimer = 0;
+ 181:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** __IO uint32_t ARPTimer = 0;
+ 182:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** 
+ 183:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #if LWIP_DHCP
+ 184:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** __IO uint32_t DHCPfineTimer = 0;
+ 185:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** __IO uint32_t DHCPcoarseTimer = 0;
+ 186:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #endif
+ 187:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** 
+ 188:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** /**
+ 189:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  * @addtogroup lwIP_apidoc
+ 190:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  * @{
+ 191:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  */
+ 192:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** 
+ 193:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** /**
+ 194:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  * @brief
+ 195:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  * The function initializes the lwIP stack
+ 196:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  *
+ 197:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  * @param [in] None
+ 198:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  *
+ 199:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  * @return DAVEApp_SUCCESS on success error code otherwise
+ 200:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** 
+ 201:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** */
+ 202:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** 
+ 203:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** void Periodic_Timer_CallBack()
+ 204:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** {
+  62              		.loc 1 204 0
+  63              		.cfi_startproc
+  64              		@ args = 0, pretend = 0, frame = 0
+  65              		@ frame_needed = 1, uses_anonymous_args = 0
+  66 0000 80B5     		push	{r7, lr}
+  67              	.LCFI0:
+  68              		.cfi_def_cfa_offset 8
+  69              		.cfi_offset 7, -8
+  70              		.cfi_offset 14, -4
+  71 0002 00AF     		add	r7, sp, #0
+  72              	.LCFI1:
+  73              		.cfi_def_cfa_register 7
+ 205:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****   LwIP_Periodic_Timer_CallBack(NULL);
+  74              		.loc 1 205 0
+  75 0004 4FF00000 		mov	r0, #0
+  76 0008 FFF7FEFF 		bl	LwIP_Periodic_Timer_CallBack
+ 206:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** }
+  77              		.loc 1 206 0
+  78 000c 80BD     		pop	{r7, pc}
+  79              		.cfi_endproc
+  80              	.LFE112:
+  82 000e 00BF     		.section	.text.Ethernetwait_Timer_CallBack,"ax",%progbits
+  83              		.align	2
+  84              		.global	Ethernetwait_Timer_CallBack
+  85              		.thumb
+  86              		.thumb_func
+  88              	Ethernetwait_Timer_CallBack:
+  89              	.LFB113:
+ 207:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** 
+ 208:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** void  Ethernetwait_Timer_CallBack(void* Temp)
+ 209:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** {
+  90              		.loc 1 209 0
+  91              		.cfi_startproc
+  92              		@ args = 0, pretend = 0, frame = 8
+  93              		@ frame_needed = 1, uses_anonymous_args = 0
+  94              		@ link register save eliminated.
+  95 0000 80B4     		push	{r7}
+  96              	.LCFI2:
+  97              		.cfi_def_cfa_offset 4
+  98              		.cfi_offset 7, -4
+  99 0002 83B0     		sub	sp, sp, #12
+ 100              	.LCFI3:
+ 101              		.cfi_def_cfa_offset 16
+ 102 0004 00AF     		add	r7, sp, #0
+ 103              	.LCFI4:
+ 104              		.cfi_def_cfa_register 7
+ 105 0006 7860     		str	r0, [r7, #4]
+ 210:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****     EthernetTimer = FALSE;
+ 106              		.loc 1 210 0
+ 107 0008 40F20003 		movw	r3, #:lower16:EthernetTimer
+ 108 000c C0F20003 		movt	r3, #:upper16:EthernetTimer
+ 109 0010 4FF00002 		mov	r2, #0
+ 110 0014 1A70     		strb	r2, [r3, #0]
+ 211:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** }
+ 111              		.loc 1 211 0
+ 112 0016 07F10C07 		add	r7, r7, #12
+ 113 001a BD46     		mov	sp, r7
+ 114 001c 80BC     		pop	{r7}
+ 115 001e 7047     		bx	lr
+ 116              		.cfi_endproc
+ 117              	.LFE113:
+ 119              		.section	.text.OneShotTimerCallback,"ax",%progbits
+ 120              		.align	2
+ 121              		.global	OneShotTimerCallback
+ 122              		.thumb
+ 123              		.thumb_func
+ 125              	OneShotTimerCallback:
+ 126              	.LFB114:
+ 212:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** 
+ 213:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** void OneShotTimerCallback(u32 count)
+ 214:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** {
+ 127              		.loc 1 214 0
+ 128              		.cfi_startproc
+ 129              		@ args = 0, pretend = 0, frame = 16
+ 130              		@ frame_needed = 1, uses_anonymous_args = 0
+ 131 0000 80B5     		push	{r7, lr}
+ 132              	.LCFI5:
+ 133              		.cfi_def_cfa_offset 8
+ 134              		.cfi_offset 7, -8
+ 135              		.cfi_offset 14, -4
+ 136 0002 84B0     		sub	sp, sp, #16
+ 137              	.LCFI6:
+ 138              		.cfi_def_cfa_offset 24
+ 139 0004 00AF     		add	r7, sp, #0
+ 140              	.LCFI7:
+ 141              		.cfi_def_cfa_register 7
+ 142 0006 7860     		str	r0, [r7, #4]
+ 215:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #if !NO_SYS
+ 216:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****   RTOS001_TaskDelay(count);
+ 217:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #else
+ 218:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****   handle_t TimerId;
+ 219:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****   status_t Status = 10;
+ 143              		.loc 1 219 0
+ 144 0008 4FF00A03 		mov	r3, #10
+ 145 000c FB60     		str	r3, [r7, #12]
+ 220:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****     EthernetTimer = TRUE;
+ 146              		.loc 1 220 0
+ 147 000e 40F20003 		movw	r3, #:lower16:EthernetTimer
+ 148 0012 C0F20003 		movt	r3, #:upper16:EthernetTimer
+ 149 0016 4FF00102 		mov	r2, #1
+ 150 001a 1A70     		strb	r2, [r3, #0]
+ 221:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****   TimerId = SYSTM001_CreateTimer(count,SYSTM001_ONE_SHOT, Ethernetwait_Timer_CallBack,NULL);
+ 151              		.loc 1 221 0
+ 152 001c 7868     		ldr	r0, [r7, #4]
+ 153 001e 4FF00001 		mov	r1, #0
+ 154 0022 40F20002 		movw	r2, #:lower16:Ethernetwait_Timer_CallBack
+ 155 0026 C0F20002 		movt	r2, #:upper16:Ethernetwait_Timer_CallBack
+ 156 002a 4FF00003 		mov	r3, #0
+ 157 002e FFF7FEFF 		bl	SYSTM001_CreateTimer
+ 158 0032 B860     		str	r0, [r7, #8]
+ 222:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****       if(TimerId != 0)
+ 159              		.loc 1 222 0
+ 160 0034 BB68     		ldr	r3, [r7, #8]
+ 161 0036 002B     		cmp	r3, #0
+ 162 0038 12D0     		beq	.L8
+ 223:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****       {
+ 224:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****         Status = SYSTM001_StartTimer(TimerId);
+ 163              		.loc 1 224 0
+ 164 003a B868     		ldr	r0, [r7, #8]
+ 165 003c FFF7FEFF 		bl	SYSTM001_StartTimer
+ 166 0040 F860     		str	r0, [r7, #12]
+ 225:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****         if(Status == DAVEApp_SUCCESS)
+ 167              		.loc 1 225 0
+ 168 0042 FB68     		ldr	r3, [r7, #12]
+ 169 0044 002B     		cmp	r3, #0
+ 170 0046 08D1     		bne	.L5
+ 226:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****         {
+ 227:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****           while(EthernetTimer);
+ 171              		.loc 1 227 0
+ 172 0048 00BF     		nop
+ 173              	.L6:
+ 174              		.loc 1 227 0 is_stmt 0 discriminator 1
+ 175 004a 40F20003 		movw	r3, #:lower16:EthernetTimer
+ 176 004e C0F20003 		movt	r3, #:upper16:EthernetTimer
+ 177 0052 1B78     		ldrb	r3, [r3, #0]
+ 178 0054 DBB2     		uxtb	r3, r3
+ 179 0056 002B     		cmp	r3, #0
+ 180 0058 F7D1     		bne	.L6
+ 181              	.L5:
+ 228:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****         }
+ 229:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** 				SYSTM001_DeleteTimer(TimerId);
+ 182              		.loc 1 229 0 is_stmt 1
+ 183 005a B868     		ldr	r0, [r7, #8]
+ 184 005c FFF7FEFF 		bl	SYSTM001_DeleteTimer
+ 185              	.L8:
+ 230:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****       }
+ 231:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  #endif
+ 232:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****     return ;
+ 186              		.loc 1 232 0
+ 187 0060 00BF     		nop
+ 188              	.L3:
+ 233:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** }
+ 189              		.loc 1 233 0
+ 190 0062 07F11007 		add	r7, r7, #16
+ 191 0066 BD46     		mov	sp, r7
+ 192 0068 80BD     		pop	{r7, pc}
+ 193              		.cfi_endproc
+ 194              	.LFE114:
+ 196 006a 00BF     		.section	.text.PeriodicTimerCallback,"ax",%progbits
+ 197              		.align	2
+ 198              		.global	PeriodicTimerCallback
+ 199              		.thumb
+ 200              		.thumb_func
+ 202              	PeriodicTimerCallback:
+ 203              	.LFB115:
+ 234:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** 
+ 235:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** void PeriodicTimerCallback(u32 count, synopGMACdevice *synopGMACdev)
+ 236:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** {
+ 204              		.loc 1 236 0
+ 205              		.cfi_startproc
+ 206              		@ args = 0, pretend = 0, frame = 8
+ 207              		@ frame_needed = 1, uses_anonymous_args = 0
+ 208              		@ link register save eliminated.
+ 209 0000 80B4     		push	{r7}
+ 210              	.LCFI8:
+ 211              		.cfi_def_cfa_offset 4
+ 212              		.cfi_offset 7, -4
+ 213 0002 83B0     		sub	sp, sp, #12
+ 214              	.LCFI9:
+ 215              		.cfi_def_cfa_offset 16
+ 216 0004 00AF     		add	r7, sp, #0
+ 217              	.LCFI10:
+ 218              		.cfi_def_cfa_register 7
+ 219 0006 7860     		str	r0, [r7, #4]
+ 220 0008 3960     		str	r1, [r7, #0]
+ 237:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #if !NO_SYS
+ 238:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****    Eth_TimerHandle = RTOS001_CreateTimer(count, PERIODIC,
+ 239:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****                                          synopGMAC_cable_unplug_function,
+ 240:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****                                          synopGMACdev); 
+ 241:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****     /* Start the Timer */
+ 242:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****    RTOS001_StartTimer(Eth_TimerHandle);
+ 243:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #endif
+ 244:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****     return ;
+ 221              		.loc 1 244 0
+ 222 000a 00BF     		nop
+ 245:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** }
+ 223              		.loc 1 245 0
+ 224 000c 07F10C07 		add	r7, r7, #12
+ 225 0010 BD46     		mov	sp, r7
+ 226 0012 80BC     		pop	{r7}
+ 227 0014 7047     		bx	lr
+ 228              		.cfi_endproc
+ 229              	.LFE115:
+ 231 0016 00BF     		.section	.text.DeletePeriodicTimer,"ax",%progbits
+ 232              		.align	2
+ 233              		.global	DeletePeriodicTimer
+ 234              		.thumb
+ 235              		.thumb_func
+ 237              	DeletePeriodicTimer:
+ 238              	.LFB116:
+ 246:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** 
+ 247:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** void DeletePeriodicTimer()
+ 248:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** {
+ 239              		.loc 1 248 0
+ 240              		.cfi_startproc
+ 241              		@ args = 0, pretend = 0, frame = 0
+ 242              		@ frame_needed = 1, uses_anonymous_args = 0
+ 243 0000 80B5     		push	{r7, lr}
+ 244              	.LCFI11:
+ 245              		.cfi_def_cfa_offset 8
+ 246              		.cfi_offset 7, -8
+ 247              		.cfi_offset 14, -4
+ 248 0002 00AF     		add	r7, sp, #0
+ 249              	.LCFI12:
+ 250              		.cfi_def_cfa_register 7
+ 249:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #if !NO_SYS
+ 250:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****   RTOS001_DeleteTimer(Eth_TimerHandle);
+ 251:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #else
+ 252:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****   SYSTM001_DeleteTimer(Eth_TimerHandle);
+ 251              		.loc 1 252 0
+ 252 0004 40F20003 		movw	r3, #:lower16:Eth_TimerHandle
+ 253 0008 C0F20003 		movt	r3, #:upper16:Eth_TimerHandle
+ 254 000c 1B68     		ldr	r3, [r3, #0]
+ 255 000e 1846     		mov	r0, r3
+ 256 0010 FFF7FEFF 		bl	SYSTM001_DeleteTimer
+ 253:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #endif
+ 254:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** 
+ 255:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** }
+ 257              		.loc 1 255 0
+ 258 0014 80BD     		pop	{r7, pc}
+ 259              		.cfi_endproc
+ 260              	.LFE116:
+ 262 0016 00BF     		.section	.text.lwIPStack_init,"ax",%progbits
+ 263              		.align	2
+ 264              		.global	lwIPStack_init
+ 265              		.thumb
+ 266              		.thumb_func
+ 268              	lwIPStack_init:
+ 269              	.LFB117:
+ 256:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** //void lwipProcessTimers(void);
+ 257:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** 
+ 258:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** status_t lwIPStack_init(void)
+ 259:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** {
+ 270              		.loc 1 259 0
+ 271              		.cfi_startproc
+ 272              		@ args = 0, pretend = 0, frame = 16
+ 273              		@ frame_needed = 1, uses_anonymous_args = 0
+ 274 0000 90B5     		push	{r4, r7, lr}
+ 275              	.LCFI13:
+ 276              		.cfi_def_cfa_offset 12
+ 277              		.cfi_offset 4, -12
+ 278              		.cfi_offset 7, -8
+ 279              		.cfi_offset 14, -4
+ 280 0002 89B0     		sub	sp, sp, #36
+ 281              	.LCFI14:
+ 282              		.cfi_def_cfa_offset 48
+ 283 0004 04AF     		add	r7, sp, #16
+ 284              	.LCFI15:
+ 285              		.cfi_def_cfa 7, 32
+ 260:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****   /* <<<DD_LWIP_PORT_1_1>>> */
+ 261:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****   handle_t TimerId;
+ 262:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****   struct ip_addr ipaddr;
+ 263:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****   struct ip_addr netmask;
+ 264:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****   struct ip_addr gw;
+ 265:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #if LWIP_DHCP
+ 266:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****   ipaddr.addr = 0;
+ 267:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****   netmask.addr = 0;
+ 268:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****   gw.addr = 0;
+ 269:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #else
+ 270:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****   /* <<<DD_LWIP_PORT_1_5>>> */
+ 271:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****   /* Set the IP address here. The IP address should be set by GUI */
+ 272:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** 	extern int IPpos1;
+ 273:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** 	extern int IPpos2;
+ 274:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** 	extern int IPpos3;
+ 275:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** 	extern int IPpos4;
+ 276:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** 
+ 277:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** 	extern int Netpos1;
+ 278:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** 	extern int Netpos2;
+ 279:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** 	extern int Netpos3;
+ 280:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** 	extern int Netpos4;
+ 281:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** 	
+ 282:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** 	extern int GWpos1;
+ 283:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** 	extern int GWpos2;
+ 284:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** 	extern int GWpos3;
+ 285:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** 	extern int GWpos4;
+ 286:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** 
+ 287:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** 	IP4_ADDR(&ipaddr, IPpos1, IPpos2, IPpos3, IPpos4);
+ 286              		.loc 1 287 0
+ 287 0006 40F20003 		movw	r3, #:lower16:IPpos1
+ 288 000a C0F20003 		movt	r3, #:upper16:IPpos1
+ 289 000e 1B68     		ldr	r3, [r3, #0]
+ 290 0010 4FEA0362 		lsl	r2, r3, #24
+ 291 0014 40F20003 		movw	r3, #:lower16:IPpos2
+ 292 0018 C0F20003 		movt	r3, #:upper16:IPpos2
+ 293 001c 1B68     		ldr	r3, [r3, #0]
+ 294 001e DBB2     		uxtb	r3, r3
+ 295 0020 4FEA0343 		lsl	r3, r3, #16
+ 296 0024 1A43     		orrs	r2, r2, r3
+ 297 0026 40F20003 		movw	r3, #:lower16:IPpos3
+ 298 002a C0F20003 		movt	r3, #:upper16:IPpos3
+ 299 002e 1B68     		ldr	r3, [r3, #0]
+ 300 0030 4FEA0323 		lsl	r3, r3, #8
+ 301 0034 4FEA0343 		lsl	r3, r3, #16
+ 302 0038 4FEA1343 		lsr	r3, r3, #16
+ 303 003c 1A43     		orrs	r2, r2, r3
+ 304 003e 40F20003 		movw	r3, #:lower16:IPpos4
+ 305 0042 C0F20003 		movt	r3, #:upper16:IPpos4
+ 306 0046 1B68     		ldr	r3, [r3, #0]
+ 307 0048 DBB2     		uxtb	r3, r3
+ 308 004a 1343     		orrs	r3, r3, r2
+ 309 004c 1846     		mov	r0, r3
+ 310 004e FFF7FEFF 		bl	htonl
+ 311 0052 0346     		mov	r3, r0
+ 312 0054 BB60     		str	r3, [r7, #8]
+ 288:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****     IP4_ADDR(&netmask, Netpos1, Netpos2, Netpos3, Netpos4);
+ 313              		.loc 1 288 0
+ 314 0056 40F20003 		movw	r3, #:lower16:Netpos1
+ 315 005a C0F20003 		movt	r3, #:upper16:Netpos1
+ 316 005e 1B68     		ldr	r3, [r3, #0]
+ 317 0060 4FEA0362 		lsl	r2, r3, #24
+ 318 0064 40F20003 		movw	r3, #:lower16:Netpos2
+ 319 0068 C0F20003 		movt	r3, #:upper16:Netpos2
+ 320 006c 1B68     		ldr	r3, [r3, #0]
+ 321 006e DBB2     		uxtb	r3, r3
+ 322 0070 4FEA0343 		lsl	r3, r3, #16
+ 323 0074 1A43     		orrs	r2, r2, r3
+ 324 0076 40F20003 		movw	r3, #:lower16:Netpos3
+ 325 007a C0F20003 		movt	r3, #:upper16:Netpos3
+ 326 007e 1B68     		ldr	r3, [r3, #0]
+ 327 0080 4FEA0323 		lsl	r3, r3, #8
+ 328 0084 4FEA0343 		lsl	r3, r3, #16
+ 329 0088 4FEA1343 		lsr	r3, r3, #16
+ 330 008c 1A43     		orrs	r2, r2, r3
+ 331 008e 40F20003 		movw	r3, #:lower16:Netpos4
+ 332 0092 C0F20003 		movt	r3, #:upper16:Netpos4
+ 333 0096 1B68     		ldr	r3, [r3, #0]
+ 334 0098 DBB2     		uxtb	r3, r3
+ 335 009a 1343     		orrs	r3, r3, r2
+ 336 009c 1846     		mov	r0, r3
+ 337 009e FFF7FEFF 		bl	htonl
+ 338 00a2 0346     		mov	r3, r0
+ 339 00a4 7B60     		str	r3, [r7, #4]
+ 289:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****     IP4_ADDR(&gw, GWpos1, GWpos2, GWpos3, GWpos4);
+ 340              		.loc 1 289 0
+ 341 00a6 40F20003 		movw	r3, #:lower16:GWpos1
+ 342 00aa C0F20003 		movt	r3, #:upper16:GWpos1
+ 343 00ae 1B68     		ldr	r3, [r3, #0]
+ 344 00b0 4FEA0362 		lsl	r2, r3, #24
+ 345 00b4 40F20003 		movw	r3, #:lower16:GWpos2
+ 346 00b8 C0F20003 		movt	r3, #:upper16:GWpos2
+ 347 00bc 1B68     		ldr	r3, [r3, #0]
+ 348 00be DBB2     		uxtb	r3, r3
+ 349 00c0 4FEA0343 		lsl	r3, r3, #16
+ 350 00c4 1A43     		orrs	r2, r2, r3
+ 351 00c6 40F20003 		movw	r3, #:lower16:GWpos3
+ 352 00ca C0F20003 		movt	r3, #:upper16:GWpos3
+ 353 00ce 1B68     		ldr	r3, [r3, #0]
+ 354 00d0 4FEA0323 		lsl	r3, r3, #8
+ 355 00d4 4FEA0343 		lsl	r3, r3, #16
+ 356 00d8 4FEA1343 		lsr	r3, r3, #16
+ 357 00dc 1A43     		orrs	r2, r2, r3
+ 358 00de 40F20003 		movw	r3, #:lower16:GWpos4
+ 359 00e2 C0F20003 		movt	r3, #:upper16:GWpos4
+ 360 00e6 1B68     		ldr	r3, [r3, #0]
+ 361 00e8 DBB2     		uxtb	r3, r3
+ 362 00ea 1343     		orrs	r3, r3, r2
+ 363 00ec 1846     		mov	r0, r3
+ 364 00ee FFF7FEFF 		bl	htonl
+ 365 00f2 0346     		mov	r3, r0
+ 366 00f4 3B60     		str	r3, [r7, #0]
+ 290:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #endif
+ 291:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** 	
+ 292:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** 	PHY_RegisterTimerCallback(OneShotTimerCallback);
+ 367              		.loc 1 292 0
+ 368 00f6 40F20000 		movw	r0, #:lower16:OneShotTimerCallback
+ 369 00fa C0F20000 		movt	r0, #:upper16:OneShotTimerCallback
+ 370 00fe FFF7FEFF 		bl	PHY_RegisterTimerCallback
+ 293:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** 	synopGMAC_RegisterOneShotTimerCallback(OneShotTimerCallback);	
+ 371              		.loc 1 293 0
+ 372 0102 40F20000 		movw	r0, #:lower16:OneShotTimerCallback
+ 373 0106 C0F20000 		movt	r0, #:upper16:OneShotTimerCallback
+ 374 010a FFF7FEFF 		bl	synopGMAC_RegisterOneShotTimerCallback
+ 294:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** 	synopGMAC_RegisterPeriodicTimerCallback(PeriodicTimerCallback);	
+ 375              		.loc 1 294 0
+ 376 010e 40F20000 		movw	r0, #:lower16:PeriodicTimerCallback
+ 377 0112 C0F20000 		movt	r0, #:upper16:PeriodicTimerCallback
+ 378 0116 FFF7FEFF 		bl	synopGMAC_RegisterPeriodicTimerCallback
+ 295:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** 	synopGMAC_RegisterDeleteTimerCallback(DeletePeriodicTimer);
+ 379              		.loc 1 295 0
+ 380 011a 40F20000 		movw	r0, #:lower16:DeletePeriodicTimer
+ 381 011e C0F20000 		movt	r0, #:upper16:DeletePeriodicTimer
+ 382 0122 FFF7FEFF 		bl	synopGMAC_RegisterDeleteTimerCallback
+ 296:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** 
+ 297:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #if NO_SYS
+ 298:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****   /* Initialize the LwIP stack */
+ 299:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****   /* <<<DD_LWIP_PORT_1_2>>> */
+ 300:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** //  SysTick_Config(50000);
+ 301:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****   lwip_init();
+ 383              		.loc 1 301 0
+ 384 0126 FFF7FEFF 		bl	lwip_init
+ 302:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #if ENABLE_HTTP
+ 303:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****   httpd_init() ;
+ 385              		.loc 1 303 0
+ 386 012a FFF7FEFF 		bl	httpd_init
+ 304:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #endif
+ 305:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #else
+ 306:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****   /* <<<DD_LWIP_PORT_1_3>>> */
+ 307:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****   /* Call this function to start a new TCP/IP thread */
+ 308:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****   tcpip_init(NULL, NULL);
+ 309:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #endif
+ 310:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** 
+ 311:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****   /* Add a new network interface */
+ 312:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****   netif_add(&netif, &ipaddr, &netmask, &gw, NULL, &ethernetif_init,
+ 387              		.loc 1 312 0
+ 388 012e 07F10801 		add	r1, r7, #8
+ 389 0132 07F10402 		add	r2, r7, #4
+ 390 0136 3C46     		mov	r4, r7
+ 391 0138 4FF00003 		mov	r3, #0
+ 392 013c 0093     		str	r3, [sp, #0]
+ 393 013e 40F20003 		movw	r3, #:lower16:ethernetif_init
+ 394 0142 C0F20003 		movt	r3, #:upper16:ethernetif_init
+ 395 0146 0193     		str	r3, [sp, #4]
+ 396 0148 40F20003 		movw	r3, #:lower16:ethernet_input
+ 397 014c C0F20003 		movt	r3, #:upper16:ethernet_input
+ 398 0150 0293     		str	r3, [sp, #8]
+ 399 0152 40F20000 		movw	r0, #:lower16:netif
+ 400 0156 C0F20000 		movt	r0, #:upper16:netif
+ 401 015a 2346     		mov	r3, r4
+ 402 015c FFF7FEFF 		bl	netif_add
+ 313:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****       &ethernet_input);
+ 314:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** 
+ 315:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****   /* Registers the default network interface.*/
+ 316:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****   netif_set_default(&netif);
+ 403              		.loc 1 316 0
+ 404 0160 40F20000 		movw	r0, #:lower16:netif
+ 405 0164 C0F20000 		movt	r0, #:upper16:netif
+ 406 0168 FFF7FEFF 		bl	netif_set_default
+ 317:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** 
+ 318:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #if LWIP_DHCP
+ 319:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****   /* <<<DD_LWIP_PORT_1_4>>> */
+ 320:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****   /* Creates a new DHCP client for this interface on the first call.
+ 321:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****   Note: you must call dhcp_fine_tmr() and dhcp_coarse_tmr() at
+ 322:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****   the predefined regular intervals after starting the client.
+ 323:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****   You can peek in the netif->dhcp struct for the actual DHCP status.*/
+ 324:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****   dhcp_start(&netif);
+ 325:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #endif
+ 326:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** 
+ 327:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #if LWIP_NETIF_LINK_CALLBACK
+ 328:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****   netif_set_link_callback(&netif, LinkCallback);
+ 329:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #endif
+ 330:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** 
+ 331:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #if LWIP_NETIF_STATUS_CALLBACK
+ 332:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** 	netif_set_status_callback(&netif, StatusCallback);
+ 333:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #endif
+ 334:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** 
+ 335:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****   /* When the netif is fully configured this function must be called.*/
+ 336:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****   netif_set_up(&netif);
+ 407              		.loc 1 336 0
+ 408 016c 40F20000 		movw	r0, #:lower16:netif
+ 409 0170 C0F20000 		movt	r0, #:upper16:netif
+ 410 0174 FFF7FEFF 		bl	netif_set_up
+ 337:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** 
+ 338:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****   TimerId = SYSTM001_CreateTimer(250, SYSTM001_PERIODIC, Periodic_Timer_CallBack, NULL);
+ 411              		.loc 1 338 0
+ 412 0178 4FF0FA00 		mov	r0, #250
+ 413 017c 4FF00101 		mov	r1, #1
+ 414 0180 40F20002 		movw	r2, #:lower16:Periodic_Timer_CallBack
+ 415 0184 C0F20002 		movt	r2, #:upper16:Periodic_Timer_CallBack
+ 416 0188 4FF00003 		mov	r3, #0
+ 417 018c FFF7FEFF 		bl	SYSTM001_CreateTimer
+ 418 0190 F860     		str	r0, [r7, #12]
+ 339:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****   if(TimerId != 0)
+ 419              		.loc 1 339 0
+ 420 0192 FB68     		ldr	r3, [r7, #12]
+ 421 0194 002B     		cmp	r3, #0
+ 422 0196 02D0     		beq	.L13
+ 340:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****   {
+ 341:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****   	  SYSTM001_StartTimer(TimerId);
+ 423              		.loc 1 341 0
+ 424 0198 F868     		ldr	r0, [r7, #12]
+ 425 019a FFF7FEFF 		bl	SYSTM001_StartTimer
+ 426              	.L13:
+ 342:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****   }
+ 343:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** 
+ 344:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****   /* Wait till TCP Main thread is ready */
+ 345:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****   /* sys_sem_wait(TCPMainThreadSem);*/
+ 346:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #if !NO_SYS
+ 347:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****   sys_sem_signal(lwIPStackSem);
+ 348:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** 
+ 349:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****   sys_thread_stop(0);
+ 350:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #endif
+ 351:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****   /* TODO: Add code for initialization of TCP applications */
+ 352:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****   return DAVEApp_SUCCESS;
+ 427              		.loc 1 352 0
+ 428 019e 4FF00003 		mov	r3, #0
+ 353:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** }
+ 429              		.loc 1 353 0
+ 430 01a2 1846     		mov	r0, r3
+ 431 01a4 07F11407 		add	r7, r7, #20
+ 432 01a8 BD46     		mov	sp, r7
+ 433 01aa 90BD     		pop	{r4, r7, pc}
+ 434              		.cfi_endproc
+ 435              	.LFE117:
+ 437              		.section	.text.LwIP_Periodic_Timer_CallBack,"ax",%progbits
+ 438              		.align	2
+ 439              		.global	LwIP_Periodic_Timer_CallBack
+ 440              		.thumb
+ 441              		.thumb_func
+ 443              	LwIP_Periodic_Timer_CallBack:
+ 444              	.LFB118:
+ 354:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** 
+ 355:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #if LWIP_NETIF_LINK_CALLBACK
+ 356:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** void Register_NetLink_Callback(void (* link_callback)(struct netif *netif ))
+ 357:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** {
+ 358:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** 	LinkCallback = link_callback;
+ 359:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** }
+ 360:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #endif
+ 361:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** 
+ 362:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #if LWIP_NETIF_STATUS_CALLBACK
+ 363:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** void Register_NetStatus_Callback(void (* status_callback)(struct netif *netif ))
+ 364:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** {
+ 365:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** 	StatusCallback = status_callback;
+ 366:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** }
+ 367:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #endif
+ 368:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** 
+ 369:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** // To be called by user at an interval of 250 microseconds
+ 370:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** void LwIP_Periodic_Timer_CallBack(void* Temp)	
+ 371:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** {
+ 445              		.loc 1 371 0
+ 446              		.cfi_startproc
+ 447              		@ args = 0, pretend = 0, frame = 8
+ 448              		@ frame_needed = 1, uses_anonymous_args = 0
+ 449 0000 80B5     		push	{r7, lr}
+ 450              	.LCFI16:
+ 451              		.cfi_def_cfa_offset 8
+ 452              		.cfi_offset 7, -8
+ 453              		.cfi_offset 14, -4
+ 454 0002 82B0     		sub	sp, sp, #8
+ 455              	.LCFI17:
+ 456              		.cfi_def_cfa_offset 16
+ 457 0004 00AF     		add	r7, sp, #0
+ 458              	.LCFI18:
+ 459              		.cfi_def_cfa_register 7
+ 460 0006 7860     		str	r0, [r7, #4]
+ 372:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****     lwip250mStimer += 250;
+ 461              		.loc 1 372 0
+ 462 0008 40F20003 		movw	r3, #:lower16:lwip250mStimer
+ 463 000c C0F20003 		movt	r3, #:upper16:lwip250mStimer
+ 464 0010 1B68     		ldr	r3, [r3, #0]
+ 465 0012 03F1FA02 		add	r2, r3, #250
+ 466 0016 40F20003 		movw	r3, #:lower16:lwip250mStimer
+ 467 001a C0F20003 		movt	r3, #:upper16:lwip250mStimer
+ 468 001e 1A60     		str	r2, [r3, #0]
+ 373:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #if LWIP_TCP
+ 374:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****     if( (lwip250mStimer % TCP_TMR_INTERVAL) == 0 ) { tcp_tmr(); }
+ 469              		.loc 1 374 0
+ 470 0020 40F20003 		movw	r3, #:lower16:lwip250mStimer
+ 471 0024 C0F20003 		movt	r3, #:upper16:lwip250mStimer
+ 472 0028 1A68     		ldr	r2, [r3, #0]
+ 473 002a 44F6D353 		movw	r3, #19923
+ 474 002e C1F26203 		movt	r3, 4194
+ 475 0032 A3FB0213 		umull	r1, r3, r3, r2
+ 476 0036 4FEA1313 		lsr	r3, r3, #4
+ 477 003a 4FF0FA01 		mov	r1, #250
+ 478 003e 01FB03F3 		mul	r3, r1, r3
+ 479 0042 D31A     		subs	r3, r2, r3
+ 480 0044 002B     		cmp	r3, #0
+ 481 0046 01D1     		bne	.L16
+ 482              		.loc 1 374 0 is_stmt 0 discriminator 1
+ 483 0048 FFF7FEFF 		bl	tcp_tmr
+ 484              	.L16:
+ 375:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #endif
+ 376:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****     if( (lwip250mStimer % ARP_TMR_INTERVAL) == 0 ) { etharp_tmr(); }
+ 485              		.loc 1 376 0 is_stmt 1
+ 486 004c 40F20003 		movw	r3, #:lower16:lwip250mStimer
+ 487 0050 C0F20003 		movt	r3, #:upper16:lwip250mStimer
+ 488 0054 1A68     		ldr	r2, [r3, #0]
+ 489 0056 41F25973 		movw	r3, #5977
+ 490 005a CDF2B713 		movt	r3, 53687
+ 491 005e A3FB0213 		umull	r1, r3, r3, r2
+ 492 0062 4FEA1333 		lsr	r3, r3, #12
+ 493 0066 41F28831 		movw	r1, #5000
+ 494 006a 01FB03F3 		mul	r3, r1, r3
+ 495 006e D31A     		subs	r3, r2, r3
+ 496 0070 002B     		cmp	r3, #0
+ 497 0072 01D1     		bne	.L17
+ 498              		.loc 1 376 0 is_stmt 0 discriminator 1
+ 499 0074 FFF7FEFF 		bl	etharp_tmr
+ 500              	.L17:
+ 377:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #if IP_REASSEMBLY
+ 378:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****     if( (lwip250mStimer % IP_TMR_INTERVAL) == 0 ) { ip_reass_tmr(); }
+ 501              		.loc 1 378 0 is_stmt 1
+ 502 0078 40F20003 		movw	r3, #:lower16:lwip250mStimer
+ 503 007c C0F20003 		movt	r3, #:upper16:lwip250mStimer
+ 504 0080 1A68     		ldr	r2, [r3, #0]
+ 505 0082 44F6D353 		movw	r3, #19923
+ 506 0086 C1F26203 		movt	r3, 4194
+ 507 008a A3FB0213 		umull	r1, r3, r3, r2
+ 508 008e 4FEA9313 		lsr	r3, r3, #6
+ 509 0092 4FF47A71 		mov	r1, #1000
+ 510 0096 01FB03F3 		mul	r3, r1, r3
+ 511 009a D31A     		subs	r3, r2, r3
+ 512 009c 002B     		cmp	r3, #0
+ 513 009e 01D1     		bne	.L18
+ 514              		.loc 1 378 0 is_stmt 0 discriminator 1
+ 515 00a0 FFF7FEFF 		bl	ip_reass_tmr
+ 516              	.L18:
+ 379:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #endif
+ 380:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #if LWIP_AUTOIP
+ 381:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****     if( (lwip250mStimer % AUTOIP_TMR_INTERVAL ) == 0 ) { autoip_tmr(); }
+ 382:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #endif
+ 383:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #if LWIP_IGMP
+ 384:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****     if( (lwip250mStimer % IGMP_TMR_INTERVAL ) == 0 ) { igmp_tmr(); } 
+ 517              		.loc 1 384 0 is_stmt 1
+ 518 00a4 40F20003 		movw	r3, #:lower16:lwip250mStimer
+ 519 00a8 C0F20003 		movt	r3, #:upper16:lwip250mStimer
+ 520 00ac 1A68     		ldr	r2, [r3, #0]
+ 521 00ae 48F21F53 		movw	r3, #34079
+ 522 00b2 C5F2EB13 		movt	r3, 20971
+ 523 00b6 A3FB0213 		umull	r1, r3, r3, r2
+ 524 00ba 4FEA5313 		lsr	r3, r3, #5
+ 525 00be 4FF06401 		mov	r1, #100
+ 526 00c2 01FB03F3 		mul	r3, r1, r3
+ 527 00c6 D31A     		subs	r3, r2, r3
+ 528 00c8 002B     		cmp	r3, #0
+ 529 00ca 01D1     		bne	.L19
+ 530              		.loc 1 384 0 is_stmt 0 discriminator 1
+ 531 00cc FFF7FEFF 		bl	igmp_tmr
+ 532              	.L19:
+ 385:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #endif
+ 386:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #if LWIP_DHCP
+ 387:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****     if( (lwip250mStimer % DHCP_FINE_TIMER_MSECS ) == 0 ) { dhcp_fine_tmr(); }
+ 388:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****     if( (lwip250mStimer % (DHCP_COARSE_TIMER_SECS*1000) ) == 0 ) { dhcp_coarse_tmr(); }
+ 389:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #endif
+ 390:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #if LWIP_DNS
+ 391:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****     if( (lwip250mStimer % DNS_TMR_INTERVAL) == 0 ) { dns_tmr(); }
+ 533              		.loc 1 391 0 is_stmt 1
+ 534 00d0 40F20003 		movw	r3, #:lower16:lwip250mStimer
+ 535 00d4 C0F20003 		movt	r3, #:upper16:lwip250mStimer
+ 536 00d8 1A68     		ldr	r2, [r3, #0]
+ 537 00da 44F6D353 		movw	r3, #19923
+ 538 00de C1F26203 		movt	r3, 4194
+ 539 00e2 A3FB0213 		umull	r1, r3, r3, r2
+ 540 00e6 4FEA9313 		lsr	r3, r3, #6
+ 541 00ea 4FF47A71 		mov	r1, #1000
+ 542 00ee 01FB03F3 		mul	r3, r1, r3
+ 543 00f2 D31A     		subs	r3, r2, r3
+ 544 00f4 002B     		cmp	r3, #0
+ 545 00f6 01D1     		bne	.L15
+ 546              		.loc 1 391 0 is_stmt 0 discriminator 1
+ 547 00f8 FFF7FEFF 		bl	dns_tmr
+ 548              	.L15:
+ 392:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #endif
+ 393:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** 
+ 394:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** }
+ 549              		.loc 1 394 0 is_stmt 1
+ 550 00fc 07F10807 		add	r7, r7, #8
+ 551 0100 BD46     		mov	sp, r7
+ 552 0102 80BD     		pop	{r7, pc}
+ 553              		.cfi_endproc
+ 554              	.LFE118:
+ 556              		.section	.text.lwIPStack_UnInit,"ax",%progbits
+ 557              		.align	2
+ 558              		.global	lwIPStack_UnInit
+ 559              		.thumb
+ 560              		.thumb_func
+ 562              	lwIPStack_UnInit:
+ 563              	.LFB119:
+ 395:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** 
+ 396:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** /**
+ 397:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  * @brief
+ 398:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  * The function de-initializes the lwIP stack
+ 399:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  *
+ 400:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  * @param [in] None
+ 401:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  *
+ 402:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  * @return DAVEApp_SUCCESS on success error code otherwise
+ 403:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****  */
+ 404:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** status_t lwIPStack_UnInit(void)
+ 405:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** {
+ 564              		.loc 1 405 0
+ 565              		.cfi_startproc
+ 566              		@ args = 0, pretend = 0, frame = 8
+ 567              		@ frame_needed = 1, uses_anonymous_args = 0
+ 568 0000 80B5     		push	{r7, lr}
+ 569              	.LCFI19:
+ 570              		.cfi_def_cfa_offset 8
+ 571              		.cfi_offset 7, -8
+ 572              		.cfi_offset 14, -4
+ 573 0002 82B0     		sub	sp, sp, #8
+ 574              	.LCFI20:
+ 575              		.cfi_def_cfa_offset 16
+ 576 0004 00AF     		add	r7, sp, #0
+ 577              	.LCFI21:
+ 578              		.cfi_def_cfa_register 7
+ 406:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****   status_t Status = lwIP_UNINIT_ERROR;
+ 579              		.loc 1 406 0
+ 580 0006 4FF00203 		mov	r3, #2
+ 581 000a 7B60     		str	r3, [r7, #4]
+ 407:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****   /* <<<DD_LWIP_PORT_16_1>>> */
+ 408:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #if !NO_SYS
+ 409:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****   /* Call this function to start a new TCP/IP thread */
+ 410:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****   //todo: sagar Added
+ 411:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****     sys_thread_stop(0);
+ 412:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** 
+ 413:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** #endif
+ 414:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** 
+ 415:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****   /* Disconnect netif */
+ 416:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****   // netif_set_down(&netif); // added to test link/status callback when set down is called
+ 417:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****   /* Remove the network interface */
+ 418:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****   netif_remove(&netif);
+ 582              		.loc 1 418 0
+ 583 000c 40F20000 		movw	r0, #:lower16:netif
+ 584 0010 C0F20000 		movt	r0, #:upper16:netif
+ 585 0014 FFF7FEFF 		bl	netif_remove
+ 419:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** 
+ 420:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****   /* Close Ethernet Interface */
+ 421:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****   Status = Eth_CloseNetworkInterface();
+ 586              		.loc 1 421 0
+ 587 0018 FFF7FEFF 		bl	Eth_CloseNetworkInterface
+ 588 001c 7860     		str	r0, [r7, #4]
+ 422:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** 
+ 423:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****   if (Status != DAVEApp_SUCCESS)
+ 424:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****   {
+ 425:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****     DBG002_WARNING(GID_LWIP, lwIP_UNINIT_ERROR, 0, NULL);
+ 426:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****   }
+ 427:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****   /* Exit from the Ethernet Interface */
+ 428:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****   Eth_ExitNetworkInterface();
+ 589              		.loc 1 428 0
+ 590 001e FFF7FEFF 		bl	Eth_ExitNetworkInterface
+ 429:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** 
+ 430:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c ****   return DAVEApp_SUCCESS;
+ 591              		.loc 1 430 0
+ 592 0022 4FF00003 		mov	r3, #0
+ 431:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.c **** }
+ 593              		.loc 1 431 0
+ 594 0026 1846     		mov	r0, r3
+ 595 0028 07F10807 		add	r7, r7, #8
+ 596 002c BD46     		mov	sp, r7
+ 597 002e 80BD     		pop	{r7, pc}
+ 598              		.cfi_endproc
+ 599              	.LFE119:
+ 601              		.text
+ 602              	.Letext0:
+ 603              		.file 2 "C:\\DAVE3_workspace\\ws3.1.10\\XMC4500_RK_HTTPserver\\XMC4500_RK_HTTPserver\\Dave\\Genera
+ 604              		.file 3 "C:\\DAVE3_workspace\\ws3.1.10\\XMC4500_RK_HTTPserver\\XMC4500_RK_HTTPserver\\Dave\\Genera
+ 605              		.file 4 "C:\\DAVE3_workspace\\ws3.1.10\\XMC4500_RK_HTTPserver\\XMC4500_RK_HTTPserver\\Dave\\Genera
+ 606              		.file 5 "C:\\DAVE3_workspace\\ws3.1.10\\XMC4500_RK_HTTPserver\\XMC4500_RK_HTTPserver\\Dave\\Genera
+ 607              		.file 6 "C:\\DAVE3_workspace\\ws3.1.10\\XMC4500_RK_HTTPserver\\XMC4500_RK_HTTPserver\\Dave\\Genera
+ 608              		.file 7 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
+ 609              		.file 8 "C:\\DAVE3_workspace\\ws3.1.10\\XMC4500_RK_HTTPserver\\XMC4500_RK_HTTPserver\\Dave\\Genera
+ 610              		.file 9 "C:\\DAVE3_workspace\\ws3.1.10\\XMC4500_RK_HTTPserver\\XMC4500_RK_HTTPserver\\Dave\\Genera
+ 611              		.file 10 "C:\\DAVE3_workspace\\ws3.1.10\\XMC4500_RK_HTTPserver\\XMC4500_RK_HTTPserver\\Dave\\Gener
+ 612              		.file 11 "C:\\DAVE3_workspace\\ws3.1.10\\XMC4500_RK_HTTPserver\\XMC4500_RK_HTTPserver\\Dave\\Gener
+ 613              		.file 12 "C:\\DAVE3_workspace\\ws3.1.10\\XMC4500_RK_HTTPserver\\XMC4500_RK_HTTPserver\\Dave\\Gener
+ 614              		.file 13 "C:\\DAVE3_workspace\\ws3.1.10\\XMC4500_RK_HTTPserver\\XMC4500_RK_HTTPserver\\Dave\\Gener
+ 615              		.file 14 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Include/core_cm4.h"
+ 616              		.file 15 "C:\\DAVE3_workspace\\ws3.1.10\\XMC4500_RK_HTTPserver\\XMC4500_RK_HTTPserver\\Dave\\Gener
+DEFINED SYMBOLS
+                            *ABS*:00000000 netconf.c
+                            *COM*:00000004 Eth_TimerHandle
+                            *COM*:00000034 netif
+                            *COM*:00000004 lwip250mStimer
+C:\Users\Mihai\AppData\Local\Temp\ccnR7NFr.s:26     .data:00000000 EthernetTimer
+C:\Users\Mihai\AppData\Local\Temp\ccnR7NFr.s:33     .bss:00000000 LinkCallback
+C:\Users\Mihai\AppData\Local\Temp\ccnR7NFr.s:30     .bss:00000000 $d
+C:\Users\Mihai\AppData\Local\Temp\ccnR7NFr.s:39     .bss:00000004 StatusCallback
+C:\Users\Mihai\AppData\Local\Temp\ccnR7NFr.s:45     .bss:00000008 TCPTimer
+C:\Users\Mihai\AppData\Local\Temp\ccnR7NFr.s:51     .bss:0000000c ARPTimer
+C:\Users\Mihai\AppData\Local\Temp\ccnR7NFr.s:54     .text.Periodic_Timer_CallBack:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccnR7NFr.s:59     .text.Periodic_Timer_CallBack:00000000 Periodic_Timer_CallBack
+C:\Users\Mihai\AppData\Local\Temp\ccnR7NFr.s:443    .text.LwIP_Periodic_Timer_CallBack:00000000 LwIP_Periodic_Timer_CallBack
+C:\Users\Mihai\AppData\Local\Temp\ccnR7NFr.s:83     .text.Ethernetwait_Timer_CallBack:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccnR7NFr.s:88     .text.Ethernetwait_Timer_CallBack:00000000 Ethernetwait_Timer_CallBack
+C:\Users\Mihai\AppData\Local\Temp\ccnR7NFr.s:120    .text.OneShotTimerCallback:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccnR7NFr.s:125    .text.OneShotTimerCallback:00000000 OneShotTimerCallback
+C:\Users\Mihai\AppData\Local\Temp\ccnR7NFr.s:197    .text.PeriodicTimerCallback:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccnR7NFr.s:202    .text.PeriodicTimerCallback:00000000 PeriodicTimerCallback
+C:\Users\Mihai\AppData\Local\Temp\ccnR7NFr.s:232    .text.DeletePeriodicTimer:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccnR7NFr.s:237    .text.DeletePeriodicTimer:00000000 DeletePeriodicTimer
+C:\Users\Mihai\AppData\Local\Temp\ccnR7NFr.s:263    .text.lwIPStack_init:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccnR7NFr.s:268    .text.lwIPStack_init:00000000 lwIPStack_init
+C:\Users\Mihai\AppData\Local\Temp\ccnR7NFr.s:438    .text.LwIP_Periodic_Timer_CallBack:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccnR7NFr.s:557    .text.lwIPStack_UnInit:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccnR7NFr.s:562    .text.lwIPStack_UnInit:00000000 lwIPStack_UnInit
+                     .debug_frame:00000010 $d
+                           .group:00000000 wm4.1.1791a5ae2e936ca1033c1c44be394cc7
+                           .group:00000000 wm4.ETH004_Conf.h.56.564c3f309c32b3c742fc91049cf66940
+                           .group:00000000 wm4.lwipopts.h.73.a7a63bda1e8216abd1d90275eaaa0027
+                           .group:00000000 wm4.arch.h.33.6fa4aa86d33d1490ae882caef7316405
+                           .group:00000000 wm4.cpu.h.33.b213c7fd77614ebc3691cef18ad2ff22
+                           .group:00000000 wm4.cc.h.66.ec134211c658dcc89de4610e4e7bab46
+                           .group:00000000 wm4.arch.h.47.5153c52bfb94ee3b37299920afab6afd
+                           .group:00000000 wm4.debug.h.43.557ecd6c90cc70b375bb8a29118be47b
+                           .group:00000000 wm4.opt.h.94.d36882acafebb8726bce646fc8b2397b
+                           .group:00000000 wm4.memp_std.h.15.aec196dc1c3fb1142dd450db0c167cbf
+                           .group:00000000 wm4.mem.h.96.20770766e6c9e6c42af6bfa95ef5c63f
+                           .group:00000000 wm4.memp.h.86.dbc4cb1b8d6b9ea113f04174f716e4c0
+                           .group:00000000 wm4.err.h.52.37c5d17538f8e8347a9c84196701e92d
+                           .group:00000000 wm4.inet.h.46.b516065779826845d16d49f513869a2b
+                           .group:00000000 wm4.ip_addr.h.79.9a0ce887ca8c88c22ad7686bcb5105df
+                           .group:00000000 wm4.dns.h.43.008401dfc4c9b0091d6c572f5c53ebc6
+                           .group:00000000 wm4.sys.h.65.4a0cd87b9e0d8bb4cd6b30e939b2ca7e
+                           .group:00000000 wm4.pbuf.h.43.e9a1ad12b97478787a109e22d5306820
+                           .group:00000000 wm4.def.h.33.f5df81959e69d85e6b3a0a040438efaf
+                           .group:00000000 wm4.netif.h.53.c13431a64f0e73a26710e71455725e84
+                           .group:00000000 wm4.ip.h.48.ad46847692d4d729760949b27e48a442
+                           .group:00000000 wm4.icmp.h.44.450dbf91f594cc26ad19d086cdc83713
+                           .group:00000000 wm4.tcp.h.55.5c30b9432fa60afaa85cbdd225b0c683
+                           .group:00000000 wm4.udp.h.48.1a8dde095cd0a13580afaba1443e5a3f
+                           .group:00000000 wm4.etharp.h.52.95fd625a46d8a56126e59f92e1dd6365
+                           .group:00000000 wm4.ethernetif.h.52.6b5a39d5c14914832cc564a31fcfaebc
+                           .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
+                           .group:00000000 wm4.features.h.22.b72b3baab2bb2eab3661375590100b6b
+                           .group:00000000 wm4.config.h.193.5fb8ef056cdff92dec3dee9552839d8c
+                           .group:00000000 wm4._ansi.h.23.7aefdac4826acebbfc9f3822a0aeb14c
+                           .group:00000000 wm4.stdint.h.20.54ad762faa59e3c05491630641c8d8bf
+                           .group:00000000 wm4.stddef.h.40.50cf36416e06376af8a9dca28536f2e4
+                           .group:00000000 wm4.types.h.55.0006b5fda1d606516f2dcaf4aca92b11
+                           .group:00000000 wm4.init.h.42.a1e632536572909d58007a21500cc83b
+                           .group:00000000 wm4.igmp.h.52.4b87c73c5052131fa24f56c9d0dd53d2
+                           .group:00000000 wm4.XMC4500.h.45.215f4b8c79f46c7645c15373868d08c0
+                           .group:00000000 wm4.core_cm4.h.47.41af406cb4cda82c972f112a9cd0a024
+                           .group:00000000 wm4.core_cmInstr.h.39.3d3d1b4a79aef37532666dc6ee87c6ac
+                           .group:00000000 wm4.core_cm4_simd.h.43.b5d1d38735af6366227b4256d330cf13
+                           .group:00000000 wm4.core_cm4.h.178.e5ef5ce66d198d7f00f9d0076e267c41
+                           .group:00000000 wm4.system_XMC4500.h.29.827f68baa362c84f2abae4ab67dde7c9
+                           .group:00000000 wm4.XMC4500.h.198.8e022f279ff353ed081df898dc7b9cf3
+                           .group:00000000 wm4.MULTIPLEXER.h.43.4aa654be3ec80895f631b5281bbb9105
+                           .group:00000000 wm4.CCU8PWMLIB.h.70.a5d6a5267902b8b4aea2a0224518259a
+                           .group:00000000 wm4.DBG001.h.116.d6d9e7459a0faa3905c97c1d2edb339d
+                           .group:00000000 wm4.SYSTM001.h.63.668098b2213d40a5bd0db5fbe813cf05
+                           .group:00000000 wm4.ETH002_Conf.h.56.5bd2b085b66f43d51abd69396be7f35f
+                           .group:00000000 wm4.EthernetPHY.h.54.7af1709186b21e62a5f1d4049da3988b
+                           .group:00000000 wm4.ETH001_Conf.h.71.1e151af1ba54dd023e1f942bdf922819
+                           .group:00000000 wm4.synopGMAC_plat.h.78.7a90e072b497857344aea4ba1e994097
+                           .group:00000000 wm4.synopGMAC_stack_interface.h.73.6be6aaee0ac6637432f4d0589044479b
+                           .group:00000000 wm4.SynopGMAC_Dev.h.72.7c89c07cf666d37f5c9b615720d5e111
+                           .group:00000000 wm4.synopGMAC_network_interface.h.73.4dd08316a11bc43c8c4a9da15277fb0f
+                           .group:00000000 wm4.stdlib.h.13.603ed7eb09a1561ab06840b7c0fcff58
+                           .group:00000000 wm4.stddef.h.161.e50ff8a9d5d1abbc15641da28ac571bf
+                           .group:00000000 wm4._default_types.h.6.5e12cd604db8ce00b62bb2f02708eaf3
+                           .group:00000000 wm4.lock.h.2.9bc98482741e5e2a9450b12934a684ea
+                           .group:00000000 wm4.stddef.h.161.c6104a0666cf681b6269ddc9b4f516d4
+                           .group:00000000 wm4.reent.h.16.9e42f0e588b85e70b2bf6572af57ce64
+                           .group:00000000 wm4.alloca.h.8.dfc0c703c47ec3e69746825b17d9e66d
+                           .group:00000000 wm4.stdlib.h.53.c69c7609933ff56d59c757cec2d13230
+                           .group:00000000 wm4.string.h.8.ef946ad0bc9ad5c970c365dcd1fc4b0a
+                           .group:00000000 wm4.string.h.86.d5c872ff52e2712c985b588a0ef39f3c
+                           .group:00000000 wm4.SDMMC003_Conf.h.50.e707c07613fb4e6f2eaec982a892429d
+                           .group:00000000 wm4.SDMMC003.h.85.b66055f6032a052f5173e3d123f9c61e
+                           .group:00000000 wm4.SDMMC001.h.50.3e2fedc7e5ace33db4121d5cc027e8a4
+                           .group:00000000 wm4.types.h.23.0d949686bbcadd1621462d4fa1f884f9
+                           .group:00000000 wm4.types.h.2.e9cec8c90ab35f77d9f499e06ae02400
+                           .group:00000000 wm4.types.h.80.1f2c84c0d57dd52dd9936095d9ac218e
+                           .group:00000000 wm4.time.h.16.a4579e68956d2601c6113814b546764b
+                           .group:00000000 wm4.diskio.h.7.93a3c8131d08770c060b04d2180fd09a
+                           .group:00000000 wm4.diskio.h.42.a863614abe78d56d18ed7cb292d0028d
+                           .group:00000000 wm4.ffconf.h.57.4ab321a2116d35ff7f28236ac31fad7c
+                           .group:00000000 wm4.ff.h.82.8f05a37d35a49dba2681a7f047fee4ee
+                           .group:00000000 wm4.lmm001_debuglog.h.40.8031299705ecf04ad726bd19baff976d
+                           .group:00000000 wm4.LMM001.h.42.c21fe9cbedc336738c3dc89405cad216
+                           .group:00000000 wm4.stdio.h.27.f2ac352bab34f31f9f478442827b2ba6
+                           .group:00000000 wm4.stdarg.h.34.3a23a216c0c293b3d2ea2e89281481e6
+                           .group:00000000 wm4.stdio.h.2.4aa87247282eca6c8f36f9de33d8df1a
+                           .group:00000000 wm4.stdio.h.63.dfdea6580b080784d08faace69b6ed76
+                           .group:00000000 wm4.time.h.2.9857e62ad6ac99431e29d58067232314
+                           .group:00000000 wm4.time.h.24.c499d4c1915694df17abb795fd34b719
+                           .group:00000000 wm4.time.h.124.10ced469f846269cafc58b59c853e1bb
+                           .group:00000000 wm4.errno.h.2.ba016d646105af6cad23be83630b6a3f
+                           .group:00000000 wm4.errno.h.9.65044c2b5d8494e43f5986ab0a1d770f
+                           .group:00000000 wm4.unistd.h.2.6ce1b91c4223f6078c1b210c7538c1d2
+                           .group:00000000 wm4.unistd.h.251.605bc560cdc6c3b07b599bb71ac4e425
+                           .group:00000000 wm4.malloc.h.4.62bd13b8107d5245f60bd92bb5994838
+                           .group:00000000 wm4.malloc.h.148.73b7de3bd065dafbd594b04197a9466e
+                           .group:00000000 wm4.reent.h.91.faac4d0ac97c0fcf23d10d0786197642
+                           .group:00000000 wm4.SLTHA003.h.100.69cb08672bc6ab3f052aa9d5bd6dc5ca
+                           .group:00000000 wm4._default_fcntl.h.6.d036cf640d0f9a06bcff1be55acd66be
+                           .group:00000000 wm4.stat.h.2.a761b02482a54847ff0d09dfcff24a5c
+                           .group:00000000 wm4.fcntl.h.9.9336f33d7f5028f694c75e6e224e0cf7
+                           .group:00000000 wm4.SLTHA001.h.97.d7e87c19a31e3244bdd5839e7cc42a61
+                           .group:00000000 wm4.WEBSERVER001_Conf.h.54.cd6d29aaa96a848cbc5321bab5d6cd90
+                           .group:00000000 wm4.ADCGROUP001.h.48.081c7f952eb4b6ea2df7d05180ee1663
+                           .group:00000000 wm4.IO001.h.49.1da965fb490206cf7cde64a90f6912e1
+                           .group:00000000 wm4.MOTORLIBS.h.59.b2e97de0df555dedfa51e24447b57ab8
+                           .group:00000000 wm4.uc_id.h.35.a6c4837fad81477ba31967683332b8cc
+                           .group:00000000 wm4.Usic.h.90.22743468abc46f16747d12430b219aaf
+                           .group:00000000 wm4.UART001_Conf.h.53.c5c972f6f634bc5116c171852aaab668
+                           .group:00000000 wm4.UART001.h.109.3e835815a7a59791d8bd39655f4d4cc9
+
+UNDEFINED SYMBOLS
+SYSTM001_CreateTimer
+SYSTM001_StartTimer
+SYSTM001_DeleteTimer
+IPpos1
+IPpos2
+IPpos3
+IPpos4
+htonl
+Netpos1
+Netpos2
+Netpos3
+Netpos4
+GWpos1
+GWpos2
+GWpos3
+GWpos4
+PHY_RegisterTimerCallback
+synopGMAC_RegisterOneShotTimerCallback
+synopGMAC_RegisterPeriodicTimerCallback
+synopGMAC_RegisterDeleteTimerCallback
+lwip_init
+httpd_init
+ethernetif_init
+ethernet_input
+netif_add
+netif_set_default
+netif_set_up
+tcp_tmr
+etharp_tmr
+ip_reass_tmr
+igmp_tmr
+dns_tmr
+netif_remove
+Eth_CloseNetworkInterface
+Eth_ExitNetworkInterface

@@ -1,0 +1,53 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"ADCCH001_Conf.c"
+  16              		.global	ADCCH001_Handle0
+  17              		.global	ADCCH001_DynamicHandle0
+  18              		.section	.rodata
+  19              		.align	2
+  22              	ADCCH001_Handle0:
+  23 0000 00440040 		.word	1073759232
+  24 0004 00000000 		.word	ADCCH001_DynamicHandle0
+  25 0008 01       		.byte	1
+  26 0009 00       		.byte	0
+  27 000a 04       		.byte	4
+  28 000b 00       		.byte	0
+  29 000c 00       		.byte	0
+  30 000d 00       		.byte	0
+  31 000e 00       		.byte	0
+  32 000f 00       		.byte	0
+  33 0010 00       		.byte	0
+  34 0011 00       		.byte	0
+  35 0012 00       		.byte	0
+  36 0013 0F       		.byte	15
+  37 0014 0F       		.byte	15
+  38 0015 00       		.byte	0
+  39 0016 00       		.byte	0
+  40 0017 00       		.byte	0
+  41 0018 0000     		.short	0
+  42 001a 0000     		.space	2
+  43              		.bss
+  44              		.align	1
+  47              	ADCCH001_DynamicHandle0:
+  48 0000 00000000 		.space	4
+  49              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 ADCCH001_Conf.c
+C:\Users\Mihai\AppData\Local\Temp\cca1o1mm.s:22     .rodata:00000000 ADCCH001_Handle0
+C:\Users\Mihai\AppData\Local\Temp\cca1o1mm.s:47     .bss:00000000 ADCCH001_DynamicHandle0
+C:\Users\Mihai\AppData\Local\Temp\cca1o1mm.s:19     .rodata:00000000 $d
+C:\Users\Mihai\AppData\Local\Temp\cca1o1mm.s:44     .bss:00000000 $d
+
+NO UNDEFINED SYMBOLS

@@ -1,0 +1,93 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"synopGMAC_plat.c"
+  16              		.section	.text.synopGMACReadReg,"ax",%progbits
+  17              		.align	1
+  18              		.global	synopGMACReadReg
+  19              		.thumb
+  20              		.thumb_func
+  22              	synopGMACReadReg:
+  23              		@ args = 0, pretend = 0, frame = 0
+  24              		@ frame_needed = 0, uses_anonymous_args = 0
+  25              		@ link register save eliminated.
+  26 0000 4058     		ldr	r0, [r0, r1]
+  27 0002 7047     		bx	lr
+  29              		.section	.text.synopGMACWriteReg,"ax",%progbits
+  30              		.align	1
+  31              		.global	synopGMACWriteReg
+  32              		.thumb
+  33              		.thumb_func
+  35              	synopGMACWriteReg:
+  36              		@ args = 0, pretend = 0, frame = 0
+  37              		@ frame_needed = 0, uses_anonymous_args = 0
+  38              		@ link register save eliminated.
+  39 0000 4250     		str	r2, [r0, r1]
+  40 0002 7047     		bx	lr
+  42              		.section	.text.synopGMACSetBits,"ax",%progbits
+  43              		.align	1
+  44              		.global	synopGMACSetBits
+  45              		.thumb
+  46              		.thumb_func
+  48              	synopGMACSetBits:
+  49              		@ args = 0, pretend = 0, frame = 0
+  50              		@ frame_needed = 0, uses_anonymous_args = 0
+  51              		@ link register save eliminated.
+  52 0000 4358     		ldr	r3, [r0, r1]
+  53 0002 1A43     		orrs	r2, r2, r3
+  54 0004 4250     		str	r2, [r0, r1]
+  55 0006 7047     		bx	lr
+  57              		.section	.text.synopGMACClearBits,"ax",%progbits
+  58              		.align	1
+  59              		.global	synopGMACClearBits
+  60              		.thumb
+  61              		.thumb_func
+  63              	synopGMACClearBits:
+  64              		@ args = 0, pretend = 0, frame = 0
+  65              		@ frame_needed = 0, uses_anonymous_args = 0
+  66              		@ link register save eliminated.
+  67 0000 4358     		ldr	r3, [r0, r1]
+  68 0002 23EA0202 		bic	r2, r3, r2
+  69 0006 4250     		str	r2, [r0, r1]
+  70 0008 7047     		bx	lr
+  72              		.section	.text.synopGMACCheckBits,"ax",%progbits
+  73              		.align	1
+  74              		.global	synopGMACCheckBits
+  75              		.thumb
+  76              		.thumb_func
+  78              	synopGMACCheckBits:
+  79              		@ args = 0, pretend = 0, frame = 0
+  80              		@ frame_needed = 0, uses_anonymous_args = 0
+  81              		@ link register save eliminated.
+  82 0000 4358     		ldr	r3, [r0, r1]
+  83 0002 1342     		tst	r3, r2
+  84 0004 0CBF     		ite	eq
+  85 0006 0020     		moveq	r0, #0
+  86 0008 0120     		movne	r0, #1
+  87 000a 7047     		bx	lr
+  89              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 synopGMAC_plat.c
+C:\Users\Mihai\AppData\Local\Temp\ccdavRBY.s:17     .text.synopGMACReadReg:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccdavRBY.s:22     .text.synopGMACReadReg:00000000 synopGMACReadReg
+C:\Users\Mihai\AppData\Local\Temp\ccdavRBY.s:30     .text.synopGMACWriteReg:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccdavRBY.s:35     .text.synopGMACWriteReg:00000000 synopGMACWriteReg
+C:\Users\Mihai\AppData\Local\Temp\ccdavRBY.s:43     .text.synopGMACSetBits:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccdavRBY.s:48     .text.synopGMACSetBits:00000000 synopGMACSetBits
+C:\Users\Mihai\AppData\Local\Temp\ccdavRBY.s:58     .text.synopGMACClearBits:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccdavRBY.s:63     .text.synopGMACClearBits:00000000 synopGMACClearBits
+C:\Users\Mihai\AppData\Local\Temp\ccdavRBY.s:73     .text.synopGMACCheckBits:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccdavRBY.s:78     .text.synopGMACCheckBits:00000000 synopGMACCheckBits
+
+NO UNDEFINED SYMBOLS
