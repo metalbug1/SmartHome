@@ -168,14 +168,14 @@
  176              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
 DEFINED SYMBOLS
                             *ABS*:00000000 inet_chksum.c
-C:\Users\Mihai\AppData\Local\Temp\ccoHmmqg.s:17     .text.lwip_standard_chksum:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccoHmmqg.s:21     .text.lwip_standard_chksum:00000000 lwip_standard_chksum
-C:\Users\Mihai\AppData\Local\Temp\ccoHmmqg.s:56     .text.inet_chksum_pseudo:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccoHmmqg.s:61     .text.inet_chksum_pseudo:00000000 inet_chksum_pseudo
-C:\Users\Mihai\AppData\Local\Temp\ccoHmmqg.s:119    .text.inet_chksum:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccoHmmqg.s:124    .text.inet_chksum:00000000 inet_chksum
-C:\Users\Mihai\AppData\Local\Temp\ccoHmmqg.s:134    .text.inet_chksum_pbuf:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccoHmmqg.s:139    .text.inet_chksum_pbuf:00000000 inet_chksum_pbuf
+C:\Users\Mihai\AppData\Local\Temp\ccBnyEmK.s:17     .text.lwip_standard_chksum:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccBnyEmK.s:21     .text.lwip_standard_chksum:00000000 lwip_standard_chksum
+C:\Users\Mihai\AppData\Local\Temp\ccBnyEmK.s:56     .text.inet_chksum_pseudo:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccBnyEmK.s:61     .text.inet_chksum_pseudo:00000000 inet_chksum_pseudo
+C:\Users\Mihai\AppData\Local\Temp\ccBnyEmK.s:119    .text.inet_chksum:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccBnyEmK.s:124    .text.inet_chksum:00000000 inet_chksum
+C:\Users\Mihai\AppData\Local\Temp\ccBnyEmK.s:134    .text.inet_chksum_pbuf:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccBnyEmK.s:139    .text.inet_chksum_pbuf:00000000 inet_chksum_pbuf
 
 UNDEFINED SYMBOLS
 htons

@@ -28,47 +28,47 @@
   28              		.data
   29              		.align	1
   32              	GWpos4:
-  33 0000 0A00     		.short	10
-  36              	GWpos2:
-  37 0002 A800     		.short	168
-  40              	GWpos1:
-  41 0004 C000     		.short	192
-  44              	Netpos3:
-  45 0006 FF00     		.short	255
-  48              	Netpos2:
+  33 0000 0100     		.short	1
+  36              	GWpos3:
+  37 0002 0100     		.short	1
+  40              	GWpos2:
+  41 0004 A800     		.short	168
+  44              	GWpos1:
+  45 0006 C000     		.short	192
+  48              	Netpos3:
   49 0008 FF00     		.short	255
-  52              	Netpos1:
+  52              	Netpos2:
   53 000a FF00     		.short	255
-  56              	IPpos4:
-  57 000c 0A00     		.short	10
-  60              	IPpos2:
-  61 000e A800     		.short	168
-  64              	IPpos1:
-  65 0010 C000     		.short	192
-  66              		.bss
-  67              		.align	1
-  70              	GWpos3:
-  71 0000 0000     		.space	2
-  74              	Netpos4:
-  75 0002 0000     		.space	2
-  78              	IPpos3:
-  79 0004 0000     		.space	2
+  56              	Netpos1:
+  57 000c FF00     		.short	255
+  60              	IPpos4:
+  61 000e 6700     		.short	103
+  64              	IPpos3:
+  65 0010 0100     		.short	1
+  68              	IPpos2:
+  69 0012 A800     		.short	168
+  72              	IPpos1:
+  73 0014 C000     		.short	192
+  74              		.bss
+  75              		.align	1
+  78              	Netpos4:
+  79 0000 0000     		.space	2
   80              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
 DEFINED SYMBOLS
                             *ABS*:00000000 ETH004_Conf.c
-C:\Users\Mihai\AppData\Local\Temp\ccMUxDZs.s:32     .data:00000000 GWpos4
-C:\Users\Mihai\AppData\Local\Temp\ccMUxDZs.s:70     .bss:00000000 GWpos3
-C:\Users\Mihai\AppData\Local\Temp\ccMUxDZs.s:36     .data:00000002 GWpos2
-C:\Users\Mihai\AppData\Local\Temp\ccMUxDZs.s:40     .data:00000004 GWpos1
-C:\Users\Mihai\AppData\Local\Temp\ccMUxDZs.s:74     .bss:00000002 Netpos4
-C:\Users\Mihai\AppData\Local\Temp\ccMUxDZs.s:44     .data:00000006 Netpos3
-C:\Users\Mihai\AppData\Local\Temp\ccMUxDZs.s:48     .data:00000008 Netpos2
-C:\Users\Mihai\AppData\Local\Temp\ccMUxDZs.s:52     .data:0000000a Netpos1
-C:\Users\Mihai\AppData\Local\Temp\ccMUxDZs.s:56     .data:0000000c IPpos4
-C:\Users\Mihai\AppData\Local\Temp\ccMUxDZs.s:78     .bss:00000004 IPpos3
-C:\Users\Mihai\AppData\Local\Temp\ccMUxDZs.s:60     .data:0000000e IPpos2
-C:\Users\Mihai\AppData\Local\Temp\ccMUxDZs.s:64     .data:00000010 IPpos1
-C:\Users\Mihai\AppData\Local\Temp\ccMUxDZs.s:29     .data:00000000 $d
-C:\Users\Mihai\AppData\Local\Temp\ccMUxDZs.s:67     .bss:00000000 $d
+C:\Users\Mihai\AppData\Local\Temp\ccq7THmH.s:32     .data:00000000 GWpos4
+C:\Users\Mihai\AppData\Local\Temp\ccq7THmH.s:36     .data:00000002 GWpos3
+C:\Users\Mihai\AppData\Local\Temp\ccq7THmH.s:40     .data:00000004 GWpos2
+C:\Users\Mihai\AppData\Local\Temp\ccq7THmH.s:44     .data:00000006 GWpos1
+C:\Users\Mihai\AppData\Local\Temp\ccq7THmH.s:78     .bss:00000000 Netpos4
+C:\Users\Mihai\AppData\Local\Temp\ccq7THmH.s:48     .data:00000008 Netpos3
+C:\Users\Mihai\AppData\Local\Temp\ccq7THmH.s:52     .data:0000000a Netpos2
+C:\Users\Mihai\AppData\Local\Temp\ccq7THmH.s:56     .data:0000000c Netpos1
+C:\Users\Mihai\AppData\Local\Temp\ccq7THmH.s:60     .data:0000000e IPpos4
+C:\Users\Mihai\AppData\Local\Temp\ccq7THmH.s:64     .data:00000010 IPpos3
+C:\Users\Mihai\AppData\Local\Temp\ccq7THmH.s:68     .data:00000012 IPpos2
+C:\Users\Mihai\AppData\Local\Temp\ccq7THmH.s:72     .data:00000014 IPpos1
+C:\Users\Mihai\AppData\Local\Temp\ccq7THmH.s:29     .data:00000000 $d
+C:\Users\Mihai\AppData\Local\Temp\ccq7THmH.s:75     .bss:00000000 $d
 
 NO UNDEFINED SYMBOLS

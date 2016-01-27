@@ -392,26 +392,26 @@
  408              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
 DEFINED SYMBOLS
                             *ABS*:00000000 SDMMC001.c
-C:\Users\Mihai\AppData\Local\Temp\ccUC7UAQ.s:17     .text.SDMMC001_lFindDiskStatus:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccUC7UAQ.s:22     .text.SDMMC001_lFindDiskStatus:00000000 SDMMC001_lFindDiskStatus
-C:\Users\Mihai\AppData\Local\Temp\ccUC7UAQ.s:52     .text.SDMMC001_lFindDiskStatus:00000030 $d
-C:\Users\Mihai\AppData\Local\Temp\ccUC7UAQ.s:55     .text.SDMMC001_Initialize:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccUC7UAQ.s:60     .text.SDMMC001_Initialize:00000000 SDMMC001_Initialize
-C:\Users\Mihai\AppData\Local\Temp\ccUC7UAQ.s:90     .text.SDMMC001_Initialize:00000034 $d
-C:\Users\Mihai\AppData\Local\Temp\ccUC7UAQ.s:93     .text.SDMMC001_GetStatus:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccUC7UAQ.s:98     .text.SDMMC001_GetStatus:00000000 SDMMC001_GetStatus
-C:\Users\Mihai\AppData\Local\Temp\ccUC7UAQ.s:105    .text.SDMMC001_ReadBlock:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccUC7UAQ.s:110    .text.SDMMC001_ReadBlock:00000000 SDMMC001_ReadBlock
-C:\Users\Mihai\AppData\Local\Temp\ccUC7UAQ.s:139    .text.SDMMC001_WriteBlock:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccUC7UAQ.s:144    .text.SDMMC001_WriteBlock:00000000 SDMMC001_WriteBlock
-C:\Users\Mihai\AppData\Local\Temp\ccUC7UAQ.s:179    .text.SDMMC001_Ioctl:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccUC7UAQ.s:184    .text.SDMMC001_Ioctl:00000000 SDMMC001_Ioctl
-C:\Users\Mihai\AppData\Local\Temp\ccUC7UAQ.s:213    .text.SDMMC001_Ioctl:00000042 $d
-C:\Users\Mihai\AppData\Local\Temp\ccUC7UAQ.s:251    .text.SDMMC001_Ioctl:00000068 $t
-C:\Users\Mihai\AppData\Local\Temp\ccUC7UAQ.s:396    .text.SDMMC001_Ioctl:000001a8 $d
-C:\Users\Mihai\AppData\Local\Temp\ccUC7UAQ.s:402    .bss:00000000 SDMMC001_LockFlag
-C:\Users\Mihai\AppData\Local\Temp\ccUC7UAQ.s:403    .bss:00000000 $d
-C:\Users\Mihai\AppData\Local\Temp\ccUC7UAQ.s:406    .bss:00000001 SDMMC001_InitializeFlag
+C:\Users\Mihai\AppData\Local\Temp\cc1Zez87.s:17     .text.SDMMC001_lFindDiskStatus:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc1Zez87.s:22     .text.SDMMC001_lFindDiskStatus:00000000 SDMMC001_lFindDiskStatus
+C:\Users\Mihai\AppData\Local\Temp\cc1Zez87.s:52     .text.SDMMC001_lFindDiskStatus:00000030 $d
+C:\Users\Mihai\AppData\Local\Temp\cc1Zez87.s:55     .text.SDMMC001_Initialize:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc1Zez87.s:60     .text.SDMMC001_Initialize:00000000 SDMMC001_Initialize
+C:\Users\Mihai\AppData\Local\Temp\cc1Zez87.s:90     .text.SDMMC001_Initialize:00000034 $d
+C:\Users\Mihai\AppData\Local\Temp\cc1Zez87.s:93     .text.SDMMC001_GetStatus:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc1Zez87.s:98     .text.SDMMC001_GetStatus:00000000 SDMMC001_GetStatus
+C:\Users\Mihai\AppData\Local\Temp\cc1Zez87.s:105    .text.SDMMC001_ReadBlock:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc1Zez87.s:110    .text.SDMMC001_ReadBlock:00000000 SDMMC001_ReadBlock
+C:\Users\Mihai\AppData\Local\Temp\cc1Zez87.s:139    .text.SDMMC001_WriteBlock:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc1Zez87.s:144    .text.SDMMC001_WriteBlock:00000000 SDMMC001_WriteBlock
+C:\Users\Mihai\AppData\Local\Temp\cc1Zez87.s:179    .text.SDMMC001_Ioctl:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc1Zez87.s:184    .text.SDMMC001_Ioctl:00000000 SDMMC001_Ioctl
+C:\Users\Mihai\AppData\Local\Temp\cc1Zez87.s:213    .text.SDMMC001_Ioctl:00000042 $d
+C:\Users\Mihai\AppData\Local\Temp\cc1Zez87.s:251    .text.SDMMC001_Ioctl:00000068 $t
+C:\Users\Mihai\AppData\Local\Temp\cc1Zez87.s:396    .text.SDMMC001_Ioctl:000001a8 $d
+C:\Users\Mihai\AppData\Local\Temp\cc1Zez87.s:402    .bss:00000000 SDMMC001_LockFlag
+C:\Users\Mihai\AppData\Local\Temp\cc1Zez87.s:403    .bss:00000000 $d
+C:\Users\Mihai\AppData\Local\Temp\cc1Zez87.s:406    .bss:00000001 SDMMC001_InitializeFlag
 
 UNDEFINED SYMBOLS
 SDMMC003_GetCurrentState

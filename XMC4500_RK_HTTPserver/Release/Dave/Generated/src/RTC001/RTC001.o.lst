@@ -609,40 +609,40 @@
  633 0041 000000   		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
 DEFINED SYMBOLS
                             *ABS*:00000000 RTC001.c
-C:\Users\Mihai\AppData\Local\Temp\ccASRg4j.s:17     .text.RTC001_ldatevalid:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccASRg4j.s:21     .text.RTC001_ldatevalid:00000000 RTC001_ldatevalid
-C:\Users\Mihai\AppData\Local\Temp\ccASRg4j.s:65     .text.RTC001_ldatevalid:00000050 $d
-C:\Users\Mihai\AppData\Local\Temp\ccASRg4j.s:68     .text.RTC001_DeInit:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccASRg4j.s:73     .text.RTC001_DeInit:00000000 RTC001_DeInit
-C:\Users\Mihai\AppData\Local\Temp\ccASRg4j.s:80     .text.RTC001_Enable:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccASRg4j.s:85     .text.RTC001_Enable:00000000 RTC001_Enable
-C:\Users\Mihai\AppData\Local\Temp\ccASRg4j.s:109    .text.RTC001_Enable:00000028 $d
-C:\Users\Mihai\AppData\Local\Temp\ccASRg4j.s:113    .text.RTC001_Disable:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccASRg4j.s:118    .text.RTC001_Disable:00000000 RTC001_Disable
-C:\Users\Mihai\AppData\Local\Temp\ccASRg4j.s:167    .text.RTC001_Disable:00000068 $d
-C:\Users\Mihai\AppData\Local\Temp\ccASRg4j.s:172    .text.RTC001_GetFlagStatus:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccASRg4j.s:177    .text.RTC001_GetFlagStatus:00000000 RTC001_GetFlagStatus
-C:\Users\Mihai\AppData\Local\Temp\ccASRg4j.s:191    .text.RTC001_GetFlagStatus:00000010 $d
-C:\Users\Mihai\AppData\Local\Temp\ccASRg4j.s:194    .text.RTC001_ClearFlagStatus:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccASRg4j.s:199    .text.RTC001_ClearFlagStatus:00000000 RTC001_ClearFlagStatus
-C:\Users\Mihai\AppData\Local\Temp\ccASRg4j.s:211    .text.RTC001_ClearFlagStatus:0000000c $d
-C:\Users\Mihai\AppData\Local\Temp\ccASRg4j.s:214    .text.RTC001_ConfigAlarm:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccASRg4j.s:219    .text.RTC001_ConfigAlarm:00000000 RTC001_ConfigAlarm
-C:\Users\Mihai\AppData\Local\Temp\ccASRg4j.s:280    .text.RTC001_ConfigAlarm:00000080 $d
-C:\Users\Mihai\AppData\Local\Temp\ccASRg4j.s:285    .text.RTC001_Clock_GetTime:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccASRg4j.s:290    .text.RTC001_Clock_GetTime:00000000 RTC001_Clock_GetTime
-C:\Users\Mihai\AppData\Local\Temp\ccASRg4j.s:318    .text.RTC001_Clock_GetTime:00000038 $d
-C:\Users\Mihai\AppData\Local\Temp\ccASRg4j.s:321    .text.RTC001_Clock_SetTime:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccASRg4j.s:326    .text.RTC001_Clock_SetTime:00000000 RTC001_Clock_SetTime
-C:\Users\Mihai\AppData\Local\Temp\ccASRg4j.s:430    .text.RTC001_Clock_SetTime:000000e8 $d
-C:\Users\Mihai\AppData\Local\Temp\ccASRg4j.s:436    .text.RTC001_Init:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccASRg4j.s:441    .text.RTC001_Init:00000000 RTC001_Init
-C:\Users\Mihai\AppData\Local\Temp\ccASRg4j.s:496    .text.RTC001_Init:0000006c $d
-C:\Users\Mihai\AppData\Local\Temp\ccASRg4j.s:502    .text.RTC001_Time:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccASRg4j.s:507    .text.RTC001_Time:00000000 RTC001_Time
-C:\Users\Mihai\AppData\Local\Temp\ccASRg4j.s:595    .text.RTC001_Time:000000c4 $d
-C:\Users\Mihai\AppData\Local\Temp\ccASRg4j.s:605    .rodata:00000000 RTC001_DAYS_IN_MONTH
-C:\Users\Mihai\AppData\Local\Temp\ccASRg4j.s:601    .rodata:00000000 $d
+C:\Users\Mihai\AppData\Local\Temp\cc46O9Qn.s:17     .text.RTC001_ldatevalid:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc46O9Qn.s:21     .text.RTC001_ldatevalid:00000000 RTC001_ldatevalid
+C:\Users\Mihai\AppData\Local\Temp\cc46O9Qn.s:65     .text.RTC001_ldatevalid:00000050 $d
+C:\Users\Mihai\AppData\Local\Temp\cc46O9Qn.s:68     .text.RTC001_DeInit:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc46O9Qn.s:73     .text.RTC001_DeInit:00000000 RTC001_DeInit
+C:\Users\Mihai\AppData\Local\Temp\cc46O9Qn.s:80     .text.RTC001_Enable:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc46O9Qn.s:85     .text.RTC001_Enable:00000000 RTC001_Enable
+C:\Users\Mihai\AppData\Local\Temp\cc46O9Qn.s:109    .text.RTC001_Enable:00000028 $d
+C:\Users\Mihai\AppData\Local\Temp\cc46O9Qn.s:113    .text.RTC001_Disable:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc46O9Qn.s:118    .text.RTC001_Disable:00000000 RTC001_Disable
+C:\Users\Mihai\AppData\Local\Temp\cc46O9Qn.s:167    .text.RTC001_Disable:00000068 $d
+C:\Users\Mihai\AppData\Local\Temp\cc46O9Qn.s:172    .text.RTC001_GetFlagStatus:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc46O9Qn.s:177    .text.RTC001_GetFlagStatus:00000000 RTC001_GetFlagStatus
+C:\Users\Mihai\AppData\Local\Temp\cc46O9Qn.s:191    .text.RTC001_GetFlagStatus:00000010 $d
+C:\Users\Mihai\AppData\Local\Temp\cc46O9Qn.s:194    .text.RTC001_ClearFlagStatus:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc46O9Qn.s:199    .text.RTC001_ClearFlagStatus:00000000 RTC001_ClearFlagStatus
+C:\Users\Mihai\AppData\Local\Temp\cc46O9Qn.s:211    .text.RTC001_ClearFlagStatus:0000000c $d
+C:\Users\Mihai\AppData\Local\Temp\cc46O9Qn.s:214    .text.RTC001_ConfigAlarm:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc46O9Qn.s:219    .text.RTC001_ConfigAlarm:00000000 RTC001_ConfigAlarm
+C:\Users\Mihai\AppData\Local\Temp\cc46O9Qn.s:280    .text.RTC001_ConfigAlarm:00000080 $d
+C:\Users\Mihai\AppData\Local\Temp\cc46O9Qn.s:285    .text.RTC001_Clock_GetTime:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc46O9Qn.s:290    .text.RTC001_Clock_GetTime:00000000 RTC001_Clock_GetTime
+C:\Users\Mihai\AppData\Local\Temp\cc46O9Qn.s:318    .text.RTC001_Clock_GetTime:00000038 $d
+C:\Users\Mihai\AppData\Local\Temp\cc46O9Qn.s:321    .text.RTC001_Clock_SetTime:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc46O9Qn.s:326    .text.RTC001_Clock_SetTime:00000000 RTC001_Clock_SetTime
+C:\Users\Mihai\AppData\Local\Temp\cc46O9Qn.s:430    .text.RTC001_Clock_SetTime:000000e8 $d
+C:\Users\Mihai\AppData\Local\Temp\cc46O9Qn.s:436    .text.RTC001_Init:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc46O9Qn.s:441    .text.RTC001_Init:00000000 RTC001_Init
+C:\Users\Mihai\AppData\Local\Temp\cc46O9Qn.s:496    .text.RTC001_Init:0000006c $d
+C:\Users\Mihai\AppData\Local\Temp\cc46O9Qn.s:502    .text.RTC001_Time:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc46O9Qn.s:507    .text.RTC001_Time:00000000 RTC001_Time
+C:\Users\Mihai\AppData\Local\Temp\cc46O9Qn.s:595    .text.RTC001_Time:000000c4 $d
+C:\Users\Mihai\AppData\Local\Temp\cc46O9Qn.s:605    .rodata:00000000 RTC001_DAYS_IN_MONTH
+C:\Users\Mihai\AppData\Local\Temp\cc46O9Qn.s:601    .rodata:00000000 $d
 
 UNDEFINED SYMBOLS
 NVIC_SCU001_RegisterCallback

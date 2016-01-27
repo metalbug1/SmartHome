@@ -232,25 +232,25 @@
  246              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
 DEFINED SYMBOLS
                             *ABS*:00000000 GMM001.c
-C:\Users\Mihai\AppData\Local\Temp\ccvwq5hw.s:17     .text.GMM001_Init:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccvwq5hw.s:22     .text.GMM001_Init:00000000 GMM001_Init
-C:\Users\Mihai\AppData\Local\Temp\ccvwq5hw.s:61     .text.GMM001_Init:00000048 $d
+C:\Users\Mihai\AppData\Local\Temp\cc8T2svf.s:17     .text.GMM001_Init:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc8T2svf.s:22     .text.GMM001_Init:00000000 GMM001_Init
+C:\Users\Mihai\AppData\Local\Temp\cc8T2svf.s:61     .text.GMM001_Init:00000048 $d
                             *COM*:00000006 GMM001_handle0
                             *COM*:00000006 GMM001_handle1
                             *COM*:00000006 GMM001_handle2
-C:\Users\Mihai\AppData\Local\Temp\ccvwq5hw.s:73     .text.GMM001_malloc:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccvwq5hw.s:78     .text.GMM001_malloc:00000000 GMM001_malloc
-C:\Users\Mihai\AppData\Local\Temp\ccvwq5hw.s:100    .text.GMM001_malloc:00000028 $d
-C:\Users\Mihai\AppData\Local\Temp\ccvwq5hw.s:105    .text.GMM001_realloc:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccvwq5hw.s:110    .text.GMM001_realloc:00000000 GMM001_realloc
-C:\Users\Mihai\AppData\Local\Temp\ccvwq5hw.s:159    .text.GMM001_realloc:00000054 $d
-C:\Users\Mihai\AppData\Local\Temp\ccvwq5hw.s:170    .text.GMM001_free:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccvwq5hw.s:175    .text.GMM001_free:00000000 GMM001_free
-C:\Users\Mihai\AppData\Local\Temp\ccvwq5hw.s:215    .text.GMM001_free:0000003c $d
-C:\Users\Mihai\AppData\Local\Temp\ccvwq5hw.s:244    .rodata:00000008 LENGTH3
-C:\Users\Mihai\AppData\Local\Temp\ccvwq5hw.s:240    .rodata:00000004 LENGTH2
-C:\Users\Mihai\AppData\Local\Temp\ccvwq5hw.s:236    .rodata:00000000 LENGTH1
-C:\Users\Mihai\AppData\Local\Temp\ccvwq5hw.s:232    .rodata:00000000 $d
+C:\Users\Mihai\AppData\Local\Temp\cc8T2svf.s:73     .text.GMM001_malloc:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc8T2svf.s:78     .text.GMM001_malloc:00000000 GMM001_malloc
+C:\Users\Mihai\AppData\Local\Temp\cc8T2svf.s:100    .text.GMM001_malloc:00000028 $d
+C:\Users\Mihai\AppData\Local\Temp\cc8T2svf.s:105    .text.GMM001_realloc:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc8T2svf.s:110    .text.GMM001_realloc:00000000 GMM001_realloc
+C:\Users\Mihai\AppData\Local\Temp\cc8T2svf.s:159    .text.GMM001_realloc:00000054 $d
+C:\Users\Mihai\AppData\Local\Temp\cc8T2svf.s:170    .text.GMM001_free:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc8T2svf.s:175    .text.GMM001_free:00000000 GMM001_free
+C:\Users\Mihai\AppData\Local\Temp\cc8T2svf.s:215    .text.GMM001_free:0000003c $d
+C:\Users\Mihai\AppData\Local\Temp\cc8T2svf.s:244    .rodata:00000008 LENGTH3
+C:\Users\Mihai\AppData\Local\Temp\cc8T2svf.s:240    .rodata:00000004 LENGTH2
+C:\Users\Mihai\AppData\Local\Temp\cc8T2svf.s:236    .rodata:00000000 LENGTH1
+C:\Users\Mihai\AppData\Local\Temp\cc8T2svf.s:232    .rodata:00000000 $d
 
 UNDEFINED SYMBOLS
 memset

@@ -116,11 +116,11 @@
  122              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
 DEFINED SYMBOLS
                             *ABS*:00000000 ADC002_Conf.c
-C:\Users\Mihai\AppData\Local\Temp\cccgaooW.s:23     .rodata:00000000 ADC002_Handle0
-C:\Users\Mihai\AppData\Local\Temp\cccgaooW.s:120    .bss:00000000 ADC002_DynamicHandle0
-C:\Users\Mihai\AppData\Local\Temp\cccgaooW.s:76     .data:00000000 ADC002_QueueEntryHandle0
-C:\Users\Mihai\AppData\Local\Temp\cccgaooW.s:20     .rodata:00000000 $d
-C:\Users\Mihai\AppData\Local\Temp\cccgaooW.s:121    .bss:00000000 $d
+C:\Users\Mihai\AppData\Local\Temp\cck48vQQ.s:23     .rodata:00000000 ADC002_Handle0
+C:\Users\Mihai\AppData\Local\Temp\cck48vQQ.s:120    .bss:00000000 ADC002_DynamicHandle0
+C:\Users\Mihai\AppData\Local\Temp\cck48vQQ.s:76     .data:00000000 ADC002_QueueEntryHandle0
+C:\Users\Mihai\AppData\Local\Temp\cck48vQQ.s:20     .rodata:00000000 $d
+C:\Users\Mihai\AppData\Local\Temp\cck48vQQ.s:121    .bss:00000000 $d
 
 UNDEFINED SYMBOLS
 ADCGROUP001_Handle0

@@ -79,15 +79,15 @@
   89              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
 DEFINED SYMBOLS
                             *ABS*:00000000 synopGMAC_plat.c
-C:\Users\Mihai\AppData\Local\Temp\ccdavRBY.s:17     .text.synopGMACReadReg:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccdavRBY.s:22     .text.synopGMACReadReg:00000000 synopGMACReadReg
-C:\Users\Mihai\AppData\Local\Temp\ccdavRBY.s:30     .text.synopGMACWriteReg:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccdavRBY.s:35     .text.synopGMACWriteReg:00000000 synopGMACWriteReg
-C:\Users\Mihai\AppData\Local\Temp\ccdavRBY.s:43     .text.synopGMACSetBits:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccdavRBY.s:48     .text.synopGMACSetBits:00000000 synopGMACSetBits
-C:\Users\Mihai\AppData\Local\Temp\ccdavRBY.s:58     .text.synopGMACClearBits:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccdavRBY.s:63     .text.synopGMACClearBits:00000000 synopGMACClearBits
-C:\Users\Mihai\AppData\Local\Temp\ccdavRBY.s:73     .text.synopGMACCheckBits:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccdavRBY.s:78     .text.synopGMACCheckBits:00000000 synopGMACCheckBits
+C:\Users\Mihai\AppData\Local\Temp\ccB2zz7a.s:17     .text.synopGMACReadReg:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccB2zz7a.s:22     .text.synopGMACReadReg:00000000 synopGMACReadReg
+C:\Users\Mihai\AppData\Local\Temp\ccB2zz7a.s:30     .text.synopGMACWriteReg:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccB2zz7a.s:35     .text.synopGMACWriteReg:00000000 synopGMACWriteReg
+C:\Users\Mihai\AppData\Local\Temp\ccB2zz7a.s:43     .text.synopGMACSetBits:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccB2zz7a.s:48     .text.synopGMACSetBits:00000000 synopGMACSetBits
+C:\Users\Mihai\AppData\Local\Temp\ccB2zz7a.s:58     .text.synopGMACClearBits:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccB2zz7a.s:63     .text.synopGMACClearBits:00000000 synopGMACClearBits
+C:\Users\Mihai\AppData\Local\Temp\ccB2zz7a.s:73     .text.synopGMACCheckBits:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccB2zz7a.s:78     .text.synopGMACCheckBits:00000000 synopGMACCheckBits
 
 NO UNDEFINED SYMBOLS

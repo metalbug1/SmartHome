@@ -291,25 +291,25 @@
  304              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
 DEFINED SYMBOLS
                             *ABS*:00000000 inet.c
-C:\Users\Mihai\AppData\Local\Temp\ccyYQ3y5.s:17     .text.inet_ntoa:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccyYQ3y5.s:22     .text.inet_ntoa:00000000 inet_ntoa
-C:\Users\Mihai\AppData\Local\Temp\ccyYQ3y5.s:74     .text.inet_ntoa:00000068 $d
-C:\Users\Mihai\AppData\Local\Temp\ccyYQ3y5.s:77     .text.htons:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccyYQ3y5.s:82     .text.htons:00000000 htons
-C:\Users\Mihai\AppData\Local\Temp\ccyYQ3y5.s:92     .text.ntohs:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccyYQ3y5.s:97     .text.ntohs:00000000 ntohs
-C:\Users\Mihai\AppData\Local\Temp\ccyYQ3y5.s:107    .text.htonl:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccyYQ3y5.s:112    .text.htonl:00000000 htonl
-C:\Users\Mihai\AppData\Local\Temp\ccyYQ3y5.s:120    .text.inet_aton:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccyYQ3y5.s:125    .text.inet_aton:00000000 inet_aton
-C:\Users\Mihai\AppData\Local\Temp\ccyYQ3y5.s:221    .text.inet_aton:000000b6 $d
-C:\Users\Mihai\AppData\Local\Temp\ccyYQ3y5.s:267    .text.inet_addr:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccyYQ3y5.s:272    .text.inet_addr:00000000 inet_addr
-C:\Users\Mihai\AppData\Local\Temp\ccyYQ3y5.s:287    .text.ntohl:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccyYQ3y5.s:292    .text.ntohl:00000000 ntohl
-C:\Users\Mihai\AppData\Local\Temp\ccyYQ3y5.s:302    .bss:00000000 str.4105
-C:\Users\Mihai\AppData\Local\Temp\ccyYQ3y5.s:303    .bss:00000000 $d
-C:\Users\Mihai\AppData\Local\Temp\ccyYQ3y5.s:226    .text.inet_aton:000000bb $d
-C:\Users\Mihai\AppData\Local\Temp\ccyYQ3y5.s:226    .text.inet_aton:000000bc $t
+C:\Users\Mihai\AppData\Local\Temp\ccR3JzGy.s:17     .text.inet_ntoa:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccR3JzGy.s:22     .text.inet_ntoa:00000000 inet_ntoa
+C:\Users\Mihai\AppData\Local\Temp\ccR3JzGy.s:74     .text.inet_ntoa:00000068 $d
+C:\Users\Mihai\AppData\Local\Temp\ccR3JzGy.s:77     .text.htons:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccR3JzGy.s:82     .text.htons:00000000 htons
+C:\Users\Mihai\AppData\Local\Temp\ccR3JzGy.s:92     .text.ntohs:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccR3JzGy.s:97     .text.ntohs:00000000 ntohs
+C:\Users\Mihai\AppData\Local\Temp\ccR3JzGy.s:107    .text.htonl:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccR3JzGy.s:112    .text.htonl:00000000 htonl
+C:\Users\Mihai\AppData\Local\Temp\ccR3JzGy.s:120    .text.inet_aton:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccR3JzGy.s:125    .text.inet_aton:00000000 inet_aton
+C:\Users\Mihai\AppData\Local\Temp\ccR3JzGy.s:221    .text.inet_aton:000000b6 $d
+C:\Users\Mihai\AppData\Local\Temp\ccR3JzGy.s:267    .text.inet_addr:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccR3JzGy.s:272    .text.inet_addr:00000000 inet_addr
+C:\Users\Mihai\AppData\Local\Temp\ccR3JzGy.s:287    .text.ntohl:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccR3JzGy.s:292    .text.ntohl:00000000 ntohl
+C:\Users\Mihai\AppData\Local\Temp\ccR3JzGy.s:302    .bss:00000000 str.4105
+C:\Users\Mihai\AppData\Local\Temp\ccR3JzGy.s:303    .bss:00000000 $d
+C:\Users\Mihai\AppData\Local\Temp\ccR3JzGy.s:226    .text.inet_aton:000000bb $d
+C:\Users\Mihai\AppData\Local\Temp\ccR3JzGy.s:226    .text.inet_aton:000000bc $t
 
 NO UNDEFINED SYMBOLS

@@ -1067,51 +1067,51 @@
  1095              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
 DEFINED SYMBOLS
                             *ABS*:00000000 synopGMAC_stack_interface.c
-C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:17     .text.Eth_GetTxBuffer:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:22     .text.Eth_GetTxBuffer:00000000 Eth_GetTxBuffer
-C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:36     .text.Eth_GetTxBuffer:00000010 $d
+C:\Users\Mihai\AppData\Local\Temp\cciCglLc.s:17     .text.Eth_GetTxBuffer:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cciCglLc.s:22     .text.Eth_GetTxBuffer:00000000 Eth_GetTxBuffer
+C:\Users\Mihai\AppData\Local\Temp\cciCglLc.s:36     .text.Eth_GetTxBuffer:00000010 $d
                             *COM*:00000004 synopGMACdev
-C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:39     .text.Eth_InitNetworkInterface:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:44     .text.Eth_InitNetworkInterface:00000000 Eth_InitNetworkInterface
-C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:83     .text.Eth_InitNetworkInterface:00000054 $d
+C:\Users\Mihai\AppData\Local\Temp\cciCglLc.s:39     .text.Eth_InitNetworkInterface:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cciCglLc.s:44     .text.Eth_InitNetworkInterface:00000000 Eth_InitNetworkInterface
+C:\Users\Mihai\AppData\Local\Temp\cciCglLc.s:83     .text.Eth_InitNetworkInterface:00000054 $d
                             *COM*:000000c4 GMACdevice
-C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:93     .text.Eth_ExitNetworkInterface:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:98     .text.Eth_ExitNetworkInterface:00000000 Eth_ExitNetworkInterface
-C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:105    .text.Eth_OpenNetworkInterface:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:110    .text.Eth_OpenNetworkInterface:00000000 Eth_OpenNetworkInterface
-C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:256    .text.Eth_OpenNetworkInterface:00000168 $d
-C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:268    .text.Eth_CloseNetworkInterface:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:273    .text.Eth_CloseNetworkInterface:00000000 Eth_CloseNetworkInterface
-C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:304    .text.Eth_CloseNetworkInterface:00000040 $d
-C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:308    .text.Eth_TransmitFrames:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:313    .text.Eth_TransmitFrames:00000000 Eth_TransmitFrames
-C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:346    .text.Eth_TransmitFrames:00000034 $d
-C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:349    .text.Eth_ReceiveData:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:354    .text.Eth_ReceiveData:00000000 Eth_ReceiveData
-C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:512    .text.Eth_ReceiveData:00000164 $d
-C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:516    .text.ETH0_0_IRQHandler:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:521    .text.ETH0_0_IRQHandler:00000000 ETH0_0_IRQHandler
-C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:674    .text.ETH0_0_IRQHandler:00000160 $d
+C:\Users\Mihai\AppData\Local\Temp\cciCglLc.s:93     .text.Eth_ExitNetworkInterface:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cciCglLc.s:98     .text.Eth_ExitNetworkInterface:00000000 Eth_ExitNetworkInterface
+C:\Users\Mihai\AppData\Local\Temp\cciCglLc.s:105    .text.Eth_OpenNetworkInterface:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cciCglLc.s:110    .text.Eth_OpenNetworkInterface:00000000 Eth_OpenNetworkInterface
+C:\Users\Mihai\AppData\Local\Temp\cciCglLc.s:256    .text.Eth_OpenNetworkInterface:00000168 $d
+C:\Users\Mihai\AppData\Local\Temp\cciCglLc.s:268    .text.Eth_CloseNetworkInterface:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cciCglLc.s:273    .text.Eth_CloseNetworkInterface:00000000 Eth_CloseNetworkInterface
+C:\Users\Mihai\AppData\Local\Temp\cciCglLc.s:304    .text.Eth_CloseNetworkInterface:00000040 $d
+C:\Users\Mihai\AppData\Local\Temp\cciCglLc.s:308    .text.Eth_TransmitFrames:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cciCglLc.s:313    .text.Eth_TransmitFrames:00000000 Eth_TransmitFrames
+C:\Users\Mihai\AppData\Local\Temp\cciCglLc.s:346    .text.Eth_TransmitFrames:00000034 $d
+C:\Users\Mihai\AppData\Local\Temp\cciCglLc.s:349    .text.Eth_ReceiveData:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cciCglLc.s:354    .text.Eth_ReceiveData:00000000 Eth_ReceiveData
+C:\Users\Mihai\AppData\Local\Temp\cciCglLc.s:512    .text.Eth_ReceiveData:00000164 $d
+C:\Users\Mihai\AppData\Local\Temp\cciCglLc.s:516    .text.ETH0_0_IRQHandler:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cciCglLc.s:521    .text.ETH0_0_IRQHandler:00000000 ETH0_0_IRQHandler
+C:\Users\Mihai\AppData\Local\Temp\cciCglLc.s:674    .text.ETH0_0_IRQHandler:00000160 $d
                             *COM*:00000004 GMAC_Power_down
-C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:683    .text.Eth_PerformIoctl:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:688    .text.Eth_PerformIoctl:00000000 Eth_PerformIoctl
-C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:699    .text.Eth_PerformIoctl:00000014 $d
-C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:710    .text.Eth_PerformIoctl:00000028 $t
-C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:981    .text.Eth_PerformIoctl:00000328 $d
-C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:985    .text.Eth_PerformIoctl:00000334 $t
-C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:1016   .text.Eth_PerformIoctl:00000368 $d
-C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:1019   .text.synopGMAC_RegisterPeriodicTimerCallback:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:1024   .text.synopGMAC_RegisterPeriodicTimerCallback:00000000 synopGMAC_RegisterPeriodicTimerCallback
-C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:1034   .text.synopGMAC_RegisterPeriodicTimerCallback:00000008 $d
-C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:1037   .text.synopGMAC_RegisterDeleteTimerCallback:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:1042   .text.synopGMAC_RegisterDeleteTimerCallback:00000000 synopGMAC_RegisterDeleteTimerCallback
-C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:1052   .text.synopGMAC_RegisterDeleteTimerCallback:00000008 $d
-C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:1055   .text.synopGMAC_periodic_check:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:1060   .text.synopGMAC_periodic_check:00000000 synopGMAC_periodic_check
-C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:1070   .text.synopGMAC_periodic_check:00000008 $d
-C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:1085   .bss:00000000 $d
-C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:1089   .bss:00000000 SynopGMACPeriodicTimerCallback
-C:\Users\Mihai\AppData\Local\Temp\ccLtGVuc.s:1093   .bss:00000004 SynopGMACDeletePeriodicTimer
+C:\Users\Mihai\AppData\Local\Temp\cciCglLc.s:683    .text.Eth_PerformIoctl:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cciCglLc.s:688    .text.Eth_PerformIoctl:00000000 Eth_PerformIoctl
+C:\Users\Mihai\AppData\Local\Temp\cciCglLc.s:699    .text.Eth_PerformIoctl:00000014 $d
+C:\Users\Mihai\AppData\Local\Temp\cciCglLc.s:710    .text.Eth_PerformIoctl:00000028 $t
+C:\Users\Mihai\AppData\Local\Temp\cciCglLc.s:981    .text.Eth_PerformIoctl:00000328 $d
+C:\Users\Mihai\AppData\Local\Temp\cciCglLc.s:985    .text.Eth_PerformIoctl:00000334 $t
+C:\Users\Mihai\AppData\Local\Temp\cciCglLc.s:1016   .text.Eth_PerformIoctl:00000368 $d
+C:\Users\Mihai\AppData\Local\Temp\cciCglLc.s:1019   .text.synopGMAC_RegisterPeriodicTimerCallback:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cciCglLc.s:1024   .text.synopGMAC_RegisterPeriodicTimerCallback:00000000 synopGMAC_RegisterPeriodicTimerCallback
+C:\Users\Mihai\AppData\Local\Temp\cciCglLc.s:1034   .text.synopGMAC_RegisterPeriodicTimerCallback:00000008 $d
+C:\Users\Mihai\AppData\Local\Temp\cciCglLc.s:1037   .text.synopGMAC_RegisterDeleteTimerCallback:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cciCglLc.s:1042   .text.synopGMAC_RegisterDeleteTimerCallback:00000000 synopGMAC_RegisterDeleteTimerCallback
+C:\Users\Mihai\AppData\Local\Temp\cciCglLc.s:1052   .text.synopGMAC_RegisterDeleteTimerCallback:00000008 $d
+C:\Users\Mihai\AppData\Local\Temp\cciCglLc.s:1055   .text.synopGMAC_periodic_check:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cciCglLc.s:1060   .text.synopGMAC_periodic_check:00000000 synopGMAC_periodic_check
+C:\Users\Mihai\AppData\Local\Temp\cciCglLc.s:1070   .text.synopGMAC_periodic_check:00000008 $d
+C:\Users\Mihai\AppData\Local\Temp\cciCglLc.s:1085   .bss:00000000 $d
+C:\Users\Mihai\AppData\Local\Temp\cciCglLc.s:1089   .bss:00000000 SynopGMACPeriodicTimerCallback
+C:\Users\Mihai\AppData\Local\Temp\cciCglLc.s:1093   .bss:00000004 SynopGMACDeletePeriodicTimer
 
 UNDEFINED SYMBOLS
 RESET001_DeassertReset

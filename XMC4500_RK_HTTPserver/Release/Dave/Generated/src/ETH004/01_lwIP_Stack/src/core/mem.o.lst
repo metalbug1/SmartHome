@@ -336,26 +336,26 @@
  352              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
 DEFINED SYMBOLS
                             *ABS*:00000000 mem.c
-C:\Users\Mihai\AppData\Local\Temp\ccKF5uKC.s:17     .text.mem_init:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccKF5uKC.s:22     .text.mem_init:00000000 mem_init
-C:\Users\Mihai\AppData\Local\Temp\ccKF5uKC.s:47     .text.mem_init:00000034 $d
-C:\Users\Mihai\AppData\Local\Temp\ccKF5uKC.s:51     .text.mem_free:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccKF5uKC.s:56     .text.mem_free:00000000 mem_free
-C:\Users\Mihai\AppData\Local\Temp\ccKF5uKC.s:118    .text.mem_free:0000008c $d
-C:\Users\Mihai\AppData\Local\Temp\ccKF5uKC.s:121    .text.mem_realloc:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccKF5uKC.s:126    .text.mem_realloc:00000000 mem_realloc
-C:\Users\Mihai\AppData\Local\Temp\ccKF5uKC.s:203    .text.mem_realloc:000000a4 $d
-C:\Users\Mihai\AppData\Local\Temp\ccKF5uKC.s:206    .text.mem_malloc:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccKF5uKC.s:211    .text.mem_malloc:00000000 mem_malloc
-C:\Users\Mihai\AppData\Local\Temp\ccKF5uKC.s:303    .text.mem_malloc:000000a8 $d
-C:\Users\Mihai\AppData\Local\Temp\ccKF5uKC.s:306    .text.mem_calloc:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccKF5uKC.s:311    .text.mem_calloc:00000000 mem_calloc
-C:\Users\Mihai\AppData\Local\Temp\ccKF5uKC.s:328    .bss:00000000 $d
-C:\Users\Mihai\AppData\Local\Temp\ccKF5uKC.s:333    .bss:00000000 ram_heap
-C:\Users\Mihai\AppData\Local\Temp\ccKF5uKC.s:337    .bss:00004014 ram
-C:\Users\Mihai\AppData\Local\Temp\ccKF5uKC.s:341    .bss:00004018 ram_end
-C:\Users\Mihai\AppData\Local\Temp\ccKF5uKC.s:345    .bss:0000401c mem_sem
-C:\Users\Mihai\AppData\Local\Temp\ccKF5uKC.s:350    .bss:00004020 lfree
+C:\Users\Mihai\AppData\Local\Temp\ccUEI1T0.s:17     .text.mem_init:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccUEI1T0.s:22     .text.mem_init:00000000 mem_init
+C:\Users\Mihai\AppData\Local\Temp\ccUEI1T0.s:47     .text.mem_init:00000034 $d
+C:\Users\Mihai\AppData\Local\Temp\ccUEI1T0.s:51     .text.mem_free:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccUEI1T0.s:56     .text.mem_free:00000000 mem_free
+C:\Users\Mihai\AppData\Local\Temp\ccUEI1T0.s:118    .text.mem_free:0000008c $d
+C:\Users\Mihai\AppData\Local\Temp\ccUEI1T0.s:121    .text.mem_realloc:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccUEI1T0.s:126    .text.mem_realloc:00000000 mem_realloc
+C:\Users\Mihai\AppData\Local\Temp\ccUEI1T0.s:203    .text.mem_realloc:000000a4 $d
+C:\Users\Mihai\AppData\Local\Temp\ccUEI1T0.s:206    .text.mem_malloc:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccUEI1T0.s:211    .text.mem_malloc:00000000 mem_malloc
+C:\Users\Mihai\AppData\Local\Temp\ccUEI1T0.s:303    .text.mem_malloc:000000a8 $d
+C:\Users\Mihai\AppData\Local\Temp\ccUEI1T0.s:306    .text.mem_calloc:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccUEI1T0.s:311    .text.mem_calloc:00000000 mem_calloc
+C:\Users\Mihai\AppData\Local\Temp\ccUEI1T0.s:328    .bss:00000000 $d
+C:\Users\Mihai\AppData\Local\Temp\ccUEI1T0.s:333    .bss:00000000 ram_heap
+C:\Users\Mihai\AppData\Local\Temp\ccUEI1T0.s:337    .bss:00004014 ram
+C:\Users\Mihai\AppData\Local\Temp\ccUEI1T0.s:341    .bss:00004018 ram_end
+C:\Users\Mihai\AppData\Local\Temp\ccUEI1T0.s:345    .bss:0000401c mem_sem
+C:\Users\Mihai\AppData\Local\Temp\ccUEI1T0.s:350    .bss:00004020 lfree
 
 UNDEFINED SYMBOLS
 memset
