@@ -21,7 +21,7 @@
   21              		.thumb
   22              		.thumb_func
   24              	LMM001_lblocks:
-  25              	.LFB112:
+  25              	.LFB117:
   26              		.file 1 "../Dave/Generated/src/LMM001/LMM001.c"
    1:../Dave/Generated/src/LMM001/LMM001.c **** // ----------------------------------------------------------------------------
    2:../Dave/Generated/src/LMM001/LMM001.c **** // umm_malloc.c - a memory allocator for embedded systems (microcontrollers)
@@ -802,13 +802,13 @@
   66 0032 80BC     		pop	{r7}
   67 0034 7047     		bx	lr
   68              		.cfi_endproc
-  69              	.LFE112:
+  69              	.LFE117:
   71 0036 00BF     		.section	.text.LMM001_lmake_new_block,"ax",%progbits
   72              		.align	2
   73              		.thumb
   74              		.thumb_func
   76              	LMM001_lmake_new_block:
-  77              	.LFB113:
+  77              	.LFB118:
  738:../Dave/Generated/src/LMM001/LMM001.c **** 
  739:../Dave/Generated/src/LMM001/LMM001.c **** // ----------------------------------------------------------------------------
  740:../Dave/Generated/src/LMM001/LMM001.c **** 
@@ -912,13 +912,13 @@
  164 00a0 80BC     		pop	{r7}
  165 00a2 7047     		bx	lr
  166              		.cfi_endproc
- 167              	.LFE113:
+ 167              	.LFE118:
  169              		.section	.text.LMM001_ldisconnect_from_free_list,"ax",%progbits
  170              		.align	2
  171              		.thumb
  172              		.thumb_func
  174              	LMM001_ldisconnect_from_free_list:
- 175              	.LFB114:
+ 175              	.LFB119:
  752:../Dave/Generated/src/LMM001/LMM001.c **** 
  753:../Dave/Generated/src/LMM001/LMM001.c **** // ----------------------------------------------------------------------------
  754:../Dave/Generated/src/LMM001/LMM001.c **** 
@@ -1013,13 +1013,13 @@
  254 0092 80BC     		pop	{r7}
  255 0094 7047     		bx	lr
  256              		.cfi_endproc
- 257              	.LFE114:
+ 257              	.LFE119:
  259 0096 00BF     		.section	.text.LMM001_l_assimilate_up,"ax",%progbits
  260              		.align	2
  261              		.thumb
  262              		.thumb_func
  264              	LMM001_l_assimilate_up:
- 265              	.LFB115:
+ 265              	.LFB120:
  765:../Dave/Generated/src/LMM001/LMM001.c **** 
  766:../Dave/Generated/src/LMM001/LMM001.c **** // ----------------------------------------------------------------------------
  767:../Dave/Generated/src/LMM001/LMM001.c **** 
@@ -1141,13 +1141,13 @@
  361 00b8 BD46     		mov	sp, r7
  362 00ba 80BD     		pop	{r7, pc}
  363              		.cfi_endproc
- 364              	.LFE115:
+ 364              	.LFE120:
  366              		.section	.text.LMM001_l_assimilate_down,"ax",%progbits
  367              		.align	2
  368              		.thumb
  369              		.thumb_func
  371              	LMM001_l_assimilate_down:
- 372              	.LFB116:
+ 372              	.LFB121:
  788:../Dave/Generated/src/LMM001/LMM001.c **** 
  789:../Dave/Generated/src/LMM001/LMM001.c **** // ----------------------------------------------------------------------------
  790:../Dave/Generated/src/LMM001/LMM001.c **** 
@@ -1236,14 +1236,14 @@
  448 0086 80BC     		pop	{r7}
  449 0088 7047     		bx	lr
  450              		.cfi_endproc
- 451              	.LFE116:
+ 451              	.LFE121:
  453 008a 00BF     		.section	.text.LMM001_free,"ax",%progbits
  454              		.align	2
  455              		.global	LMM001_free
  456              		.thumb
  457              		.thumb_func
  459              	LMM001_free:
- 460              	.LFB117:
+ 460              	.LFB122:
  798:../Dave/Generated/src/LMM001/LMM001.c **** 
  799:../Dave/Generated/src/LMM001/LMM001.c **** // ----------------------------------------------------------------------------
  800:../Dave/Generated/src/LMM001/LMM001.c **** /*******************************************************************************
@@ -1801,14 +1801,14 @@
  604 00e2 BD46     		mov	sp, r7
  605 00e4 80BD     		pop	{r7, pc}
  606              		.cfi_endproc
- 607              	.LFE117:
+ 607              	.LFE122:
  609 00e6 00BF     		.section	.text.LMM001_malloc,"ax",%progbits
  610              		.align	2
  611              		.global	LMM001_malloc
  612              		.thumb
  613              		.thumb_func
  615              	LMM001_malloc:
- 616              	.LFB118:
+ 616              	.LFB123:
  865:../Dave/Generated/src/LMM001/LMM001.c **** 
  866:../Dave/Generated/src/LMM001/LMM001.c **** // ----------------------------------------------------------------------------
  867:../Dave/Generated/src/LMM001/LMM001.c **** 
@@ -2247,14 +2247,14 @@
  915 01fe BD46     		mov	sp, r7
  916 0200 80BD     		pop	{r7, pc}
  917              		.cfi_endproc
- 918              	.LFE118:
+ 918              	.LFE123:
  920 0202 00BF     		.section	.text.LMM001_realloc,"ax",%progbits
  921              		.align	2
  922              		.global	LMM001_realloc
  923              		.thumb
  924              		.thumb_func
  926              	LMM001_realloc:
- 927              	.LFB119:
+ 927              	.LFB124:
  999:../Dave/Generated/src/LMM001/LMM001.c **** 
 1000:../Dave/Generated/src/LMM001/LMM001.c **** // ----------------------------------------------------------------------------
 1001:../Dave/Generated/src/LMM001/LMM001.c **** 
@@ -2685,7 +2685,7 @@
  1190 01b2 BD46     		mov	sp, r7
  1191 01b4 80BD     		pop	{r7, pc}
  1192              		.cfi_endproc
- 1193              	.LFE119:
+ 1193              	.LFE124:
  1195 01b6 00BF     		.text
  1196              	.Letext0:
  1197              		.file 3 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
@@ -2693,22 +2693,22 @@
  1199              		.file 5 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Include/core_cm4.h"
 DEFINED SYMBOLS
                             *ABS*:00000000 LMM001.c
-C:\Users\Mihai\AppData\Local\Temp\cct4kCzJ.s:20     .text.LMM001_lblocks:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cct4kCzJ.s:24     .text.LMM001_lblocks:00000000 LMM001_lblocks
-C:\Users\Mihai\AppData\Local\Temp\cct4kCzJ.s:72     .text.LMM001_lmake_new_block:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cct4kCzJ.s:76     .text.LMM001_lmake_new_block:00000000 LMM001_lmake_new_block
-C:\Users\Mihai\AppData\Local\Temp\cct4kCzJ.s:170    .text.LMM001_ldisconnect_from_free_list:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cct4kCzJ.s:174    .text.LMM001_ldisconnect_from_free_list:00000000 LMM001_ldisconnect_from_free_list
-C:\Users\Mihai\AppData\Local\Temp\cct4kCzJ.s:260    .text.LMM001_l_assimilate_up:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cct4kCzJ.s:264    .text.LMM001_l_assimilate_up:00000000 LMM001_l_assimilate_up
-C:\Users\Mihai\AppData\Local\Temp\cct4kCzJ.s:367    .text.LMM001_l_assimilate_down:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cct4kCzJ.s:371    .text.LMM001_l_assimilate_down:00000000 LMM001_l_assimilate_down
-C:\Users\Mihai\AppData\Local\Temp\cct4kCzJ.s:454    .text.LMM001_free:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cct4kCzJ.s:459    .text.LMM001_free:00000000 LMM001_free
-C:\Users\Mihai\AppData\Local\Temp\cct4kCzJ.s:610    .text.LMM001_malloc:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cct4kCzJ.s:615    .text.LMM001_malloc:00000000 LMM001_malloc
-C:\Users\Mihai\AppData\Local\Temp\cct4kCzJ.s:921    .text.LMM001_realloc:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cct4kCzJ.s:926    .text.LMM001_realloc:00000000 LMM001_realloc
+C:\Users\Mihai\AppData\Local\Temp\cc3yPgqB.s:20     .text.LMM001_lblocks:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc3yPgqB.s:24     .text.LMM001_lblocks:00000000 LMM001_lblocks
+C:\Users\Mihai\AppData\Local\Temp\cc3yPgqB.s:72     .text.LMM001_lmake_new_block:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc3yPgqB.s:76     .text.LMM001_lmake_new_block:00000000 LMM001_lmake_new_block
+C:\Users\Mihai\AppData\Local\Temp\cc3yPgqB.s:170    .text.LMM001_ldisconnect_from_free_list:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc3yPgqB.s:174    .text.LMM001_ldisconnect_from_free_list:00000000 LMM001_ldisconnect_from_free_list
+C:\Users\Mihai\AppData\Local\Temp\cc3yPgqB.s:260    .text.LMM001_l_assimilate_up:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc3yPgqB.s:264    .text.LMM001_l_assimilate_up:00000000 LMM001_l_assimilate_up
+C:\Users\Mihai\AppData\Local\Temp\cc3yPgqB.s:367    .text.LMM001_l_assimilate_down:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc3yPgqB.s:371    .text.LMM001_l_assimilate_down:00000000 LMM001_l_assimilate_down
+C:\Users\Mihai\AppData\Local\Temp\cc3yPgqB.s:454    .text.LMM001_free:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc3yPgqB.s:459    .text.LMM001_free:00000000 LMM001_free
+C:\Users\Mihai\AppData\Local\Temp\cc3yPgqB.s:610    .text.LMM001_malloc:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc3yPgqB.s:615    .text.LMM001_malloc:00000000 LMM001_malloc
+C:\Users\Mihai\AppData\Local\Temp\cc3yPgqB.s:921    .text.LMM001_realloc:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc3yPgqB.s:926    .text.LMM001_realloc:00000000 LMM001_realloc
                      .debug_frame:00000010 $d
                            .group:00000000 wm4.1.1791a5ae2e936ca1033c1c44be394cc7
                            .group:00000000 wm4.XMC4500.h.45.215f4b8c79f46c7645c15373868d08c0
@@ -2799,6 +2799,7 @@ C:\Users\Mihai\AppData\Local\Temp\cct4kCzJ.s:926    .text.LMM001_realloc:0000000
                            .group:00000000 wm4.fcntl.h.9.9336f33d7f5028f694c75e6e224e0cf7
                            .group:00000000 wm4.SLTHA001.h.97.d7e87c19a31e3244bdd5839e7cc42a61
                            .group:00000000 wm4.WEBSERVER001_Conf.h.54.cd6d29aaa96a848cbc5321bab5d6cd90
+                           .group:00000000 wm4.IO004.h.51.dbf9dd216c57d6a7f14a22b2cb7e5626
                            .group:00000000 wm4.ADCGROUP001.h.48.081c7f952eb4b6ea2df7d05180ee1663
                            .group:00000000 wm4.IO001.h.49.1da965fb490206cf7cde64a90f6912e1
                            .group:00000000 wm4.MOTORLIBS.h.59.b2e97de0df555dedfa51e24447b57ab8
@@ -2806,6 +2807,7 @@ C:\Users\Mihai\AppData\Local\Temp\cct4kCzJ.s:926    .text.LMM001_realloc:0000000
                            .group:00000000 wm4.Usic.h.90.22743468abc46f16747d12430b219aaf
                            .group:00000000 wm4.UART001_Conf.h.53.c5c972f6f634bc5116c171852aaab668
                            .group:00000000 wm4.UART001.h.109.3e835815a7a59791d8bd39655f4d4cc9
+                           .group:00000000 wm4.NVIC002_Conf.h.63.45e3c2b9806aa66850587e587798873e
 
 UNDEFINED SYMBOLS
 memcpy

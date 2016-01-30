@@ -138,7 +138,7 @@
  136              		.thumb
  137              		.thumb_func
  139              	strnstr:
- 140              	.LFB112:
+ 140              	.LFB117:
  141              		.file 1 "../Dave/Generated/src/WEBSERVER001/HTTPServer/httpd.c"
    1:../Dave/Generated/src/WEBSERVER001/HTTPServer/httpd.c **** /*
    2:../Dave/Generated/src/WEBSERVER001/HTTPServer/httpd.c ****  * Copyright (c) 2001-2003 Swedish Institute of Computer Science.
@@ -666,13 +666,13 @@
  224 0072 BD46     		mov	sp, r7
  225 0074 80BD     		pop	{r7, pc}
  226              		.cfi_endproc
- 227              	.LFE112:
+ 227              	.LFE117:
  229 0076 00BF     		.section	.text.http_state_alloc,"ax",%progbits
  230              		.align	2
  231              		.thumb
  232              		.thumb_func
  234              	http_state_alloc:
- 235              	.LFB113:
+ 235              	.LFB118:
  439:../Dave/Generated/src/WEBSERVER001/HTTPServer/httpd.c **** #endif /* LWIP_HTTPD_STRNSTR_PRIVATE */
  440:../Dave/Generated/src/WEBSERVER001/HTTPServer/httpd.c **** 
  441:../Dave/Generated/src/WEBSERVER001/HTTPServer/httpd.c **** /** Allocate a struct http_state. */
@@ -732,13 +732,13 @@
  270 002c BD46     		mov	sp, r7
  271 002e 80BD     		pop	{r7, pc}
  272              		.cfi_endproc
- 273              	.LFE113:
+ 273              	.LFE118:
  275              		.section	.text.http_state_free,"ax",%progbits
  276              		.align	2
  277              		.thumb
  278              		.thumb_func
  280              	http_state_free:
- 281              	.LFB114:
+ 281              	.LFB119:
  461:../Dave/Generated/src/WEBSERVER001/HTTPServer/httpd.c **** 
  462:../Dave/Generated/src/WEBSERVER001/HTTPServer/httpd.c **** /** Free a struct http_state.
  463:../Dave/Generated/src/WEBSERVER001/HTTPServer/httpd.c ****  * Also frees the file data if dynamic.
@@ -829,13 +829,13 @@
  338 004c BD46     		mov	sp, r7
  339 004e 80BD     		pop	{r7, pc}
  340              		.cfi_endproc
- 341              	.LFE114:
+ 341              	.LFE119:
  343              		.section	.text.http_write,"ax",%progbits
  344              		.align	2
  345              		.thumb
  346              		.thumb_func
  348              	http_write:
- 349              	.LFB115:
+ 349              	.LFB120:
  492:../Dave/Generated/src/WEBSERVER001/HTTPServer/httpd.c **** 
  493:../Dave/Generated/src/WEBSERVER001/HTTPServer/httpd.c **** /** Call tcp_write() in a loop trying smaller and smaller length
  494:../Dave/Generated/src/WEBSERVER001/HTTPServer/httpd.c ****  *
@@ -950,13 +950,13 @@
  420 0068 BD46     		mov	sp, r7
  421 006a 80BD     		pop	{r7, pc}
  422              		.cfi_endproc
- 423              	.LFE115:
+ 423              	.LFE120:
  425              		.section	.text.http_close_conn,"ax",%progbits
  426              		.align	2
  427              		.thumb
  428              		.thumb_func
  430              	http_close_conn:
- 431              	.LFB116:
+ 431              	.LFB121:
  533:../Dave/Generated/src/WEBSERVER001/HTTPServer/httpd.c **** 
  534:../Dave/Generated/src/WEBSERVER001/HTTPServer/httpd.c **** /**
  535:../Dave/Generated/src/WEBSERVER001/HTTPServer/httpd.c ****  * The connection shall be actively closed.
@@ -1074,13 +1074,13 @@
  500 007a BD46     		mov	sp, r7
  501 007c 80BD     		pop	{r7, pc}
  502              		.cfi_endproc
- 503              	.LFE116:
+ 503              	.LFE121:
  505 007e 00BF     		.section	.text.extract_uri_parameters,"ax",%progbits
  506              		.align	2
  507              		.thumb
  508              		.thumb_func
  510              	extract_uri_parameters:
- 511              	.LFB117:
+ 511              	.LFB122:
  579:../Dave/Generated/src/WEBSERVER001/HTTPServer/httpd.c **** #if LWIP_HTTPD_CGI
  580:../Dave/Generated/src/WEBSERVER001/HTTPServer/httpd.c **** /**
  581:../Dave/Generated/src/WEBSERVER001/HTTPServer/httpd.c ****  * Extract URI parameters from the parameter-part of an URI in the form
@@ -1293,7 +1293,7 @@
  652 00e6 BD46     		mov	sp, r7
  653 00e8 80BD     		pop	{r7, pc}
  654              		.cfi_endproc
- 655              	.LFE117:
+ 655              	.LFE122:
  657 00ea 00BF     		.section	.rodata
  658              		.align	2
  659              	.LC11:
@@ -1311,7 +1311,7 @@
  666              		.thumb
  667              		.thumb_func
  669              	get_tag_insert:
- 670              	.LFB118:
+ 670              	.LFB123:
  645:../Dave/Generated/src/WEBSERVER001/HTTPServer/httpd.c **** #endif /* LWIP_HTTPD_CGI */
  646:../Dave/Generated/src/WEBSERVER001/HTTPServer/httpd.c **** 
  647:../Dave/Generated/src/WEBSERVER001/HTTPServer/httpd.c **** #if LWIP_HTTPD_SSI
@@ -1532,13 +1532,13 @@
  826 0144 BD46     		mov	sp, r7
  827 0146 80BD     		pop	{r7, pc}
  828              		.cfi_endproc
- 829              	.LFE118:
+ 829              	.LFE123:
  831              		.section	.text.http_send_data,"ax",%progbits
  832              		.align	2
  833              		.thumb
  834              		.thumb_func
  836              	http_send_data:
- 837              	.LFB119:
+ 837              	.LFB124:
  705:../Dave/Generated/src/WEBSERVER001/HTTPServer/httpd.c **** #endif /* LWIP_HTTPD_SSI */
  706:../Dave/Generated/src/WEBSERVER001/HTTPServer/httpd.c **** 
  707:../Dave/Generated/src/WEBSERVER001/HTTPServer/httpd.c **** #if LWIP_HTTPD_DYNAMIC_HEADERS
@@ -3285,7 +3285,7 @@
  1926 0792 BD46     		mov	sp, r7
  1927 0794 80BD     		pop	{r7, pc}
  1928              		.cfi_endproc
- 1929              	.LFE119:
+ 1929              	.LFE124:
  1931 0796 00BF     		.section	.rodata
  1932              		.align	2
  1933              	.LC13:
@@ -3322,7 +3322,7 @@
  1952              		.thumb
  1953              		.thumb_func
  1955              	http_find_error_file:
- 1956              	.LFB120:
+ 1956              	.LFB125:
 1336:../Dave/Generated/src/WEBSERVER001/HTTPServer/httpd.c **** 
 1337:../Dave/Generated/src/WEBSERVER001/HTTPServer/httpd.c **** #if LWIP_HTTPD_SUPPORT_EXTSTATUS
 1338:../Dave/Generated/src/WEBSERVER001/HTTPServer/httpd.c **** /** Initialize a http connection with a file to send for an error message
@@ -3455,7 +3455,7 @@
  2047 009e BD46     		mov	sp, r7
  2048 00a0 80BD     		pop	{r7, pc}
  2049              		.cfi_endproc
- 2050              	.LFE120:
+ 2050              	.LFE125:
  2052 00a2 00BF     		.section	.rodata
  2053 00ff 00       		.align	2
  2054              	.LC19:
@@ -3481,7 +3481,7 @@
  2067              		.thumb
  2068              		.thumb_func
  2070              	http_get_404_file:
- 2071              	.LFB121:
+ 2071              	.LFB126:
 1375:../Dave/Generated/src/WEBSERVER001/HTTPServer/httpd.c **** #else /* LWIP_HTTPD_SUPPORT_EXTSTATUS */
 1376:../Dave/Generated/src/WEBSERVER001/HTTPServer/httpd.c **** #define http_find_error_file(hs, error_nr) ERR_ARG
 1377:../Dave/Generated/src/WEBSERVER001/HTTPServer/httpd.c **** #endif /* LWIP_HTTPD_SUPPORT_EXTSTATUS */
@@ -3596,7 +3596,7 @@
  2142 0074 BD46     		mov	sp, r7
  2143 0076 80BD     		pop	{r7, pc}
  2144              		.cfi_endproc
- 2145              	.LFE121:
+ 2145              	.LFE126:
  2147              		.section	.rodata
  2148 012b 00       		.align	2
  2149              	.LC23:
@@ -3613,7 +3613,7 @@
  2159              		.thumb
  2160              		.thumb_func
  2162              	http_parse_request:
- 2163              	.LFB122:
+ 2163              	.LFB127:
 1416:../Dave/Generated/src/WEBSERVER001/HTTPServer/httpd.c **** 
 1417:../Dave/Generated/src/WEBSERVER001/HTTPServer/httpd.c **** #if LWIP_HTTPD_SUPPORT_POST
 1418:../Dave/Generated/src/WEBSERVER001/HTTPServer/httpd.c **** static err_t
@@ -4209,13 +4209,13 @@
  2397 01a0 BD46     		mov	sp, r7
  2398 01a2 80BD     		pop	{r7, pc}
  2399              		.cfi_endproc
- 2400              	.LFE122:
+ 2400              	.LFE127:
  2402              		.section	.text.http_find_file,"ax",%progbits
  2403              		.align	2
  2404              		.thumb
  2405              		.thumb_func
  2407              	http_find_file:
- 2408              	.LFB123:
+ 2408              	.LFB128:
 1773:../Dave/Generated/src/WEBSERVER001/HTTPServer/httpd.c **** 
 1774:../Dave/Generated/src/WEBSERVER001/HTTPServer/httpd.c **** /** Try to find the file specified by uri and, if found, initialize hs
 1775:../Dave/Generated/src/WEBSERVER001/HTTPServer/httpd.c ****  * accordingly.
@@ -4587,13 +4587,13 @@
  2665 01e6 BD46     		mov	sp, r7
  2666 01e8 90BD     		pop	{r4, r7, pc}
  2667              		.cfi_endproc
- 2668              	.LFE123:
+ 2668              	.LFE128:
  2670 01ea 00BF     		.section	.text.http_init_file,"ax",%progbits
  2671              		.align	2
  2672              		.thumb
  2673              		.thumb_func
  2675              	http_init_file:
- 2676              	.LFB124:
+ 2676              	.LFB129:
 1877:../Dave/Generated/src/WEBSERVER001/HTTPServer/httpd.c **** 
 1878:../Dave/Generated/src/WEBSERVER001/HTTPServer/httpd.c **** /** Initialize a http connection with a file to send (if found).
 1879:../Dave/Generated/src/WEBSERVER001/HTTPServer/httpd.c ****  * Called by http_find_file and http_find_error_file.
@@ -4756,13 +4756,13 @@
  2762 008c 80BC     		pop	{r7}
  2763 008e 7047     		bx	lr
  2764              		.cfi_endproc
- 2765              	.LFE124:
+ 2765              	.LFE129:
  2767              		.section	.text.http_err,"ax",%progbits
  2768              		.align	2
  2769              		.thumb
  2770              		.thumb_func
  2772              	http_err:
- 2773              	.LFB125:
+ 2773              	.LFB130:
 1951:../Dave/Generated/src/WEBSERVER001/HTTPServer/httpd.c **** 
 1952:../Dave/Generated/src/WEBSERVER001/HTTPServer/httpd.c **** /**
 1953:../Dave/Generated/src/WEBSERVER001/HTTPServer/httpd.c ****  * The pcb had an error and is already deallocated.
@@ -4814,13 +4814,13 @@
  2805 0020 BD46     		mov	sp, r7
  2806 0022 80BD     		pop	{r7, pc}
  2807              		.cfi_endproc
- 2808              	.LFE125:
+ 2808              	.LFE130:
  2810              		.section	.text.http_sent,"ax",%progbits
  2811              		.align	2
  2812              		.thumb
  2813              		.thumb_func
  2815              	http_sent:
- 2816              	.LFB126:
+ 2816              	.LFB131:
 1968:../Dave/Generated/src/WEBSERVER001/HTTPServer/httpd.c **** 
 1969:../Dave/Generated/src/WEBSERVER001/HTTPServer/httpd.c **** /**
 1970:../Dave/Generated/src/WEBSERVER001/HTTPServer/httpd.c ****  * Data has been sent and acknowledged by the remote host.
@@ -4893,13 +4893,13 @@
  2862 003a BD46     		mov	sp, r7
  2863 003c 80BD     		pop	{r7, pc}
  2864              		.cfi_endproc
- 2865              	.LFE126:
+ 2865              	.LFE131:
  2867 003e 00BF     		.section	.text.http_poll,"ax",%progbits
  2868              		.align	2
  2869              		.thumb
  2870              		.thumb_func
  2872              	http_poll:
- 2873              	.LFB127:
+ 2873              	.LFB132:
 1992:../Dave/Generated/src/WEBSERVER001/HTTPServer/httpd.c **** 
 1993:../Dave/Generated/src/WEBSERVER001/HTTPServer/httpd.c **** /**
 1994:../Dave/Generated/src/WEBSERVER001/HTTPServer/httpd.c ****  * The poll function is called every 2nd second.
@@ -5037,13 +5037,13 @@
  2957 0078 BD46     		mov	sp, r7
  2958 007a 80BD     		pop	{r7, pc}
  2959              		.cfi_endproc
- 2960              	.LFE127:
+ 2960              	.LFE132:
  2962              		.section	.text.http_recv,"ax",%progbits
  2963              		.align	2
  2964              		.thumb
  2965              		.thumb_func
  2967              	http_recv:
- 2968              	.LFB128:
+ 2968              	.LFB133:
 2043:../Dave/Generated/src/WEBSERVER001/HTTPServer/httpd.c **** 
 2044:../Dave/Generated/src/WEBSERVER001/HTTPServer/httpd.c **** /**
 2045:../Dave/Generated/src/WEBSERVER001/HTTPServer/httpd.c ****  * Data has been received on this pcb.
@@ -5261,13 +5261,13 @@
  3094 00ce BD46     		mov	sp, r7
  3095 00d0 80BD     		pop	{r7, pc}
  3096              		.cfi_endproc
- 3097              	.LFE128:
+ 3097              	.LFE133:
  3099 00d2 00BF     		.section	.text.http_accept,"ax",%progbits
  3100              		.align	2
  3101              		.thumb
  3102              		.thumb_func
  3104              	http_accept:
- 3105              	.LFB129:
+ 3105              	.LFB134:
 2132:../Dave/Generated/src/WEBSERVER001/HTTPServer/httpd.c **** 
 2133:../Dave/Generated/src/WEBSERVER001/HTTPServer/httpd.c **** /**
 2134:../Dave/Generated/src/WEBSERVER001/HTTPServer/httpd.c ****  * A new incoming connection has been accepted.
@@ -5374,13 +5374,13 @@
  3172 007a BD46     		mov	sp, r7
  3173 007c 80BD     		pop	{r7, pc}
  3174              		.cfi_endproc
- 3175              	.LFE129:
+ 3175              	.LFE134:
  3177 007e 00BF     		.section	.text.httpd_init_addr,"ax",%progbits
  3178              		.align	2
  3179              		.thumb
  3180              		.thumb_func
  3182              	httpd_init_addr:
- 3183              	.LFB130:
+ 3183              	.LFB135:
 2169:../Dave/Generated/src/WEBSERVER001/HTTPServer/httpd.c **** 
 2170:../Dave/Generated/src/WEBSERVER001/HTTPServer/httpd.c **** /**
 2171:../Dave/Generated/src/WEBSERVER001/HTTPServer/httpd.c ****  * Initialize the httpd with the specified local address.
@@ -5452,14 +5452,14 @@
  3230 004e BD46     		mov	sp, r7
  3231 0050 80BD     		pop	{r7, pc}
  3232              		.cfi_endproc
- 3233              	.LFE130:
+ 3233              	.LFE135:
  3235 0052 00BF     		.section	.text.httpd_init,"ax",%progbits
  3236              		.align	2
  3237              		.global	httpd_init
  3238              		.thumb
  3239              		.thumb_func
  3241              	httpd_init:
- 3242              	.LFB131:
+ 3242              	.LFB136:
 2191:../Dave/Generated/src/WEBSERVER001/HTTPServer/httpd.c **** 
 2192:../Dave/Generated/src/WEBSERVER001/HTTPServer/httpd.c **** /**
 2193:../Dave/Generated/src/WEBSERVER001/HTTPServer/httpd.c ****  * Initialize the httpd: set up a listening PCB and bind it to the defined port
@@ -5504,14 +5504,14 @@
  3264              		.loc 1 2210 0
  3265 0020 80BD     		pop	{r7, pc}
  3266              		.cfi_endproc
- 3267              	.LFE131:
+ 3267              	.LFE136:
  3269 0022 00BF     		.section	.text.http_set_ssi_handler,"ax",%progbits
  3270              		.align	2
  3271              		.global	http_set_ssi_handler
  3272              		.thumb
  3273              		.thumb_func
  3275              	http_set_ssi_handler:
- 3276              	.LFB132:
+ 3276              	.LFB137:
 2211:../Dave/Generated/src/WEBSERVER001/HTTPServer/httpd.c **** 
 2212:../Dave/Generated/src/WEBSERVER001/HTTPServer/httpd.c **** #if LWIP_HTTPD_SSI
 2213:../Dave/Generated/src/WEBSERVER001/HTTPServer/httpd.c **** /**
@@ -5573,14 +5573,14 @@
  3313 0036 80BC     		pop	{r7}
  3314 0038 7047     		bx	lr
  3315              		.cfi_endproc
- 3316              	.LFE132:
+ 3316              	.LFE137:
  3318 003a 00BF     		.section	.text.http_set_cgi_handlers,"ax",%progbits
  3319              		.align	2
  3320              		.global	http_set_cgi_handlers
  3321              		.thumb
  3322              		.thumb_func
  3324              	http_set_cgi_handlers:
- 3325              	.LFB133:
+ 3325              	.LFB138:
 2233:../Dave/Generated/src/WEBSERVER001/HTTPServer/httpd.c **** #endif /* LWIP_HTTPD_SSI */
 2234:../Dave/Generated/src/WEBSERVER001/HTTPServer/httpd.c **** 
 2235:../Dave/Generated/src/WEBSERVER001/HTTPServer/httpd.c **** #if LWIP_HTTPD_CGI
@@ -5632,7 +5632,7 @@
  3356 0028 80BC     		pop	{r7}
  3357 002a 7047     		bx	lr
  3358              		.cfi_endproc
- 3359              	.LFE133:
+ 3359              	.LFE138:
  3361              		.text
  3362              	.Letext0:
  3363              		.file 2 "F:\\WORK\\SmartHome_checkout1\\XMC4500_RK_HTTPserver\\Dave\\Generated\\src\\ETH004\\01_lw
@@ -5657,81 +5657,81 @@
  3382              		.file 21 "F:\\WORK\\SmartHome_checkout1\\XMC4500_RK_HTTPserver\\Dave\\Generated\\src\\ETH004\\01_l
 DEFINED SYMBOLS
                             *ABS*:00000000 httpd.c
-C:\Users\Mihai\AppData\Local\Temp\cc62M99Q.s:39     .rodata:00000040 g_psDefaultFilenames
-C:\Users\Mihai\AppData\Local\Temp\cc62M99Q.s:21     .rodata:00000000 $d
+C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:39     .rodata:00000040 g_psDefaultFilenames
+C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:21     .rodata:00000000 $d
                             *COM*:00000234 myfsObject
-C:\Users\Mihai\AppData\Local\Temp\cc62M99Q.s:57     .bss:00000000 $d
-C:\Users\Mihai\AppData\Local\Temp\cc62M99Q.s:58     .bss:00000000 httpd_req_buf
-C:\Users\Mihai\AppData\Local\Temp\cc62M99Q.s:78     .data:00000000 g_pcSSIExtensions
-C:\Users\Mihai\AppData\Local\Temp\cc62M99Q.s:75     .data:00000000 $d
-C:\Users\Mihai\AppData\Local\Temp\cc62M99Q.s:88     .bss:00000400 g_pfnSSIHandler
-C:\Users\Mihai\AppData\Local\Temp\cc62M99Q.s:94     .bss:00000404 g_iNumTags
-C:\Users\Mihai\AppData\Local\Temp\cc62M99Q.s:100    .bss:00000408 g_ppcTags
-C:\Users\Mihai\AppData\Local\Temp\cc62M99Q.s:110    .rodata:00000090 g_pcTagLeadIn
-C:\Users\Mihai\AppData\Local\Temp\cc62M99Q.s:119    .rodata:00000098 g_pcTagLeadOut
-C:\Users\Mihai\AppData\Local\Temp\cc62M99Q.s:126    .bss:0000040c g_pCGIs
-C:\Users\Mihai\AppData\Local\Temp\cc62M99Q.s:132    .bss:00000410 g_iNumCGIs
-C:\Users\Mihai\AppData\Local\Temp\cc62M99Q.s:135    .text.strnstr:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc62M99Q.s:139    .text.strnstr:00000000 strnstr
-C:\Users\Mihai\AppData\Local\Temp\cc62M99Q.s:230    .text.http_state_alloc:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc62M99Q.s:234    .text.http_state_alloc:00000000 http_state_alloc
-C:\Users\Mihai\AppData\Local\Temp\cc62M99Q.s:276    .text.http_state_free:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc62M99Q.s:280    .text.http_state_free:00000000 http_state_free
-C:\Users\Mihai\AppData\Local\Temp\cc62M99Q.s:344    .text.http_write:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc62M99Q.s:348    .text.http_write:00000000 http_write
-C:\Users\Mihai\AppData\Local\Temp\cc62M99Q.s:426    .text.http_close_conn:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc62M99Q.s:430    .text.http_close_conn:00000000 http_close_conn
-C:\Users\Mihai\AppData\Local\Temp\cc62M99Q.s:2872   .text.http_poll:00000000 http_poll
-C:\Users\Mihai\AppData\Local\Temp\cc62M99Q.s:506    .text.extract_uri_parameters:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc62M99Q.s:510    .text.extract_uri_parameters:00000000 extract_uri_parameters
-C:\Users\Mihai\AppData\Local\Temp\cc62M99Q.s:659    .rodata:0000009c .LC11
-C:\Users\Mihai\AppData\Local\Temp\cc62M99Q.s:662    .rodata:000000b0 .LC12
-C:\Users\Mihai\AppData\Local\Temp\cc62M99Q.s:665    .text.get_tag_insert:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc62M99Q.s:669    .text.get_tag_insert:00000000 get_tag_insert
-C:\Users\Mihai\AppData\Local\Temp\cc62M99Q.s:832    .text.http_send_data:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc62M99Q.s:836    .text.http_send_data:00000000 http_send_data
-C:\Users\Mihai\AppData\Local\Temp\cc62M99Q.s:1186   .text.http_send_data:00000254 $d
-C:\Users\Mihai\AppData\Local\Temp\cc62M99Q.s:1193   .text.http_send_data:00000268 $t
-C:\Users\Mihai\AppData\Local\Temp\cc62M99Q.s:1933   .rodata:000000b8 .LC13
-C:\Users\Mihai\AppData\Local\Temp\cc62M99Q.s:1936   .rodata:000000c4 .LC14
-C:\Users\Mihai\AppData\Local\Temp\cc62M99Q.s:1939   .rodata:000000d0 .LC15
-C:\Users\Mihai\AppData\Local\Temp\cc62M99Q.s:1942   .rodata:000000dc .LC16
-C:\Users\Mihai\AppData\Local\Temp\cc62M99Q.s:1945   .rodata:000000e8 .LC17
-C:\Users\Mihai\AppData\Local\Temp\cc62M99Q.s:1948   .rodata:000000f4 .LC18
-C:\Users\Mihai\AppData\Local\Temp\cc62M99Q.s:1951   .text.http_find_error_file:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc62M99Q.s:1955   .text.http_find_error_file:00000000 http_find_error_file
-C:\Users\Mihai\AppData\Local\Temp\cc62M99Q.s:2675   .text.http_init_file:00000000 http_init_file
-C:\Users\Mihai\AppData\Local\Temp\cc62M99Q.s:2054   .rodata:00000100 .LC19
-C:\Users\Mihai\AppData\Local\Temp\cc62M99Q.s:2057   .rodata:0000010c .LC20
-C:\Users\Mihai\AppData\Local\Temp\cc62M99Q.s:2060   .rodata:00000114 .LC21
-C:\Users\Mihai\AppData\Local\Temp\cc62M99Q.s:2063   .rodata:00000120 .LC22
-C:\Users\Mihai\AppData\Local\Temp\cc62M99Q.s:2066   .text.http_get_404_file:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc62M99Q.s:2070   .text.http_get_404_file:00000000 http_get_404_file
-C:\Users\Mihai\AppData\Local\Temp\cc62M99Q.s:2149   .rodata:0000012c .LC23
-C:\Users\Mihai\AppData\Local\Temp\cc62M99Q.s:2152   .rodata:00000130 .LC24
-C:\Users\Mihai\AppData\Local\Temp\cc62M99Q.s:2155   .rodata:00000138 .LC25
-C:\Users\Mihai\AppData\Local\Temp\cc62M99Q.s:2158   .text.http_parse_request:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc62M99Q.s:2162   .text.http_parse_request:00000000 http_parse_request
-C:\Users\Mihai\AppData\Local\Temp\cc62M99Q.s:2407   .text.http_find_file:00000000 http_find_file
-C:\Users\Mihai\AppData\Local\Temp\cc62M99Q.s:2403   .text.http_find_file:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc62M99Q.s:2671   .text.http_init_file:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc62M99Q.s:2768   .text.http_err:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc62M99Q.s:2772   .text.http_err:00000000 http_err
-C:\Users\Mihai\AppData\Local\Temp\cc62M99Q.s:2811   .text.http_sent:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc62M99Q.s:2815   .text.http_sent:00000000 http_sent
-C:\Users\Mihai\AppData\Local\Temp\cc62M99Q.s:2868   .text.http_poll:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc62M99Q.s:2963   .text.http_recv:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc62M99Q.s:2967   .text.http_recv:00000000 http_recv
-C:\Users\Mihai\AppData\Local\Temp\cc62M99Q.s:3100   .text.http_accept:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc62M99Q.s:3104   .text.http_accept:00000000 http_accept
-C:\Users\Mihai\AppData\Local\Temp\cc62M99Q.s:3178   .text.httpd_init_addr:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc62M99Q.s:3182   .text.httpd_init_addr:00000000 httpd_init_addr
-C:\Users\Mihai\AppData\Local\Temp\cc62M99Q.s:3236   .text.httpd_init:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc62M99Q.s:3241   .text.httpd_init:00000000 httpd_init
-C:\Users\Mihai\AppData\Local\Temp\cc62M99Q.s:3270   .text.http_set_ssi_handler:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc62M99Q.s:3275   .text.http_set_ssi_handler:00000000 http_set_ssi_handler
-C:\Users\Mihai\AppData\Local\Temp\cc62M99Q.s:3319   .text.http_set_cgi_handlers:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc62M99Q.s:3324   .text.http_set_cgi_handlers:00000000 http_set_cgi_handlers
+C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:57     .bss:00000000 $d
+C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:58     .bss:00000000 httpd_req_buf
+C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:78     .data:00000000 g_pcSSIExtensions
+C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:75     .data:00000000 $d
+C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:88     .bss:00000400 g_pfnSSIHandler
+C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:94     .bss:00000404 g_iNumTags
+C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:100    .bss:00000408 g_ppcTags
+C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:110    .rodata:00000090 g_pcTagLeadIn
+C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:119    .rodata:00000098 g_pcTagLeadOut
+C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:126    .bss:0000040c g_pCGIs
+C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:132    .bss:00000410 g_iNumCGIs
+C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:135    .text.strnstr:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:139    .text.strnstr:00000000 strnstr
+C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:230    .text.http_state_alloc:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:234    .text.http_state_alloc:00000000 http_state_alloc
+C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:276    .text.http_state_free:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:280    .text.http_state_free:00000000 http_state_free
+C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:344    .text.http_write:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:348    .text.http_write:00000000 http_write
+C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:426    .text.http_close_conn:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:430    .text.http_close_conn:00000000 http_close_conn
+C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:2872   .text.http_poll:00000000 http_poll
+C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:506    .text.extract_uri_parameters:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:510    .text.extract_uri_parameters:00000000 extract_uri_parameters
+C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:659    .rodata:0000009c .LC11
+C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:662    .rodata:000000b0 .LC12
+C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:665    .text.get_tag_insert:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:669    .text.get_tag_insert:00000000 get_tag_insert
+C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:832    .text.http_send_data:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:836    .text.http_send_data:00000000 http_send_data
+C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:1186   .text.http_send_data:00000254 $d
+C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:1193   .text.http_send_data:00000268 $t
+C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:1933   .rodata:000000b8 .LC13
+C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:1936   .rodata:000000c4 .LC14
+C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:1939   .rodata:000000d0 .LC15
+C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:1942   .rodata:000000dc .LC16
+C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:1945   .rodata:000000e8 .LC17
+C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:1948   .rodata:000000f4 .LC18
+C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:1951   .text.http_find_error_file:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:1955   .text.http_find_error_file:00000000 http_find_error_file
+C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:2675   .text.http_init_file:00000000 http_init_file
+C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:2054   .rodata:00000100 .LC19
+C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:2057   .rodata:0000010c .LC20
+C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:2060   .rodata:00000114 .LC21
+C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:2063   .rodata:00000120 .LC22
+C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:2066   .text.http_get_404_file:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:2070   .text.http_get_404_file:00000000 http_get_404_file
+C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:2149   .rodata:0000012c .LC23
+C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:2152   .rodata:00000130 .LC24
+C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:2155   .rodata:00000138 .LC25
+C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:2158   .text.http_parse_request:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:2162   .text.http_parse_request:00000000 http_parse_request
+C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:2407   .text.http_find_file:00000000 http_find_file
+C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:2403   .text.http_find_file:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:2671   .text.http_init_file:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:2768   .text.http_err:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:2772   .text.http_err:00000000 http_err
+C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:2811   .text.http_sent:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:2815   .text.http_sent:00000000 http_sent
+C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:2868   .text.http_poll:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:2963   .text.http_recv:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:2967   .text.http_recv:00000000 http_recv
+C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:3100   .text.http_accept:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:3104   .text.http_accept:00000000 http_accept
+C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:3178   .text.httpd_init_addr:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:3182   .text.httpd_init_addr:00000000 httpd_init_addr
+C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:3236   .text.httpd_init:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:3241   .text.httpd_init:00000000 httpd_init
+C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:3270   .text.http_set_ssi_handler:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:3275   .text.http_set_ssi_handler:00000000 http_set_ssi_handler
+C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:3319   .text.http_set_cgi_handlers:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:3324   .text.http_set_cgi_handlers:00000000 http_set_cgi_handlers
                      .debug_frame:00000010 $d
                            .group:00000000 wm4.1.1791a5ae2e936ca1033c1c44be394cc7
                            .group:00000000 wm4.arch.h.33.6fa4aa86d33d1490ae882caef7316405
@@ -5827,6 +5827,7 @@ C:\Users\Mihai\AppData\Local\Temp\cc62M99Q.s:3324   .text.http_set_cgi_handlers:
                            .group:00000000 wm4.fcntl.h.9.9336f33d7f5028f694c75e6e224e0cf7
                            .group:00000000 wm4.SLTHA001.h.97.d7e87c19a31e3244bdd5839e7cc42a61
                            .group:00000000 wm4.WEBSERVER001_Conf.h.54.cd6d29aaa96a848cbc5321bab5d6cd90
+                           .group:00000000 wm4.IO004.h.51.dbf9dd216c57d6a7f14a22b2cb7e5626
                            .group:00000000 wm4.ADCGROUP001.h.48.081c7f952eb4b6ea2df7d05180ee1663
                            .group:00000000 wm4.IO001.h.49.1da965fb490206cf7cde64a90f6912e1
                            .group:00000000 wm4.MOTORLIBS.h.59.b2e97de0df555dedfa51e24447b57ab8
@@ -5834,6 +5835,7 @@ C:\Users\Mihai\AppData\Local\Temp\cc62M99Q.s:3324   .text.http_set_cgi_handlers:
                            .group:00000000 wm4.Usic.h.90.22743468abc46f16747d12430b219aaf
                            .group:00000000 wm4.UART001_Conf.h.53.c5c972f6f634bc5116c171852aaab668
                            .group:00000000 wm4.UART001.h.109.3e835815a7a59791d8bd39655f4d4cc9
+                           .group:00000000 wm4.NVIC002_Conf.h.63.45e3c2b9806aa66850587e587798873e
                            .group:00000000 wm4.fs.h.47.a3710c8cba84bb2c95ff7a1ff61bdc0a
 
 UNDEFINED SYMBOLS

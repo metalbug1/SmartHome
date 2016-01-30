@@ -1886,7 +1886,7 @@
  290              		.thumb
  291              		.thumb_func
  293              	SDMMC003_HostControllerInit:
- 294              	.LFB112:
+ 294              	.LFB117:
  295              		.file 2 "../Dave/Generated/src/SDMMC003/SDMMC003.c"
    1:../Dave/Generated/src/SDMMC003/SDMMC003.c **** /*******************************************************************************
    2:../Dave/Generated/src/SDMMC003/SDMMC003.c **** **  DAVE App Name : SDMMC003       App Version: 1.0.14               
@@ -2185,14 +2185,14 @@
  408 00f8 BD46     		mov	sp, r7
  409 00fa 80BD     		pop	{r7, pc}
  410              		.cfi_endproc
- 411              	.LFE112:
+ 411              	.LFE117:
  413              		.section	.text.SDMMC003_HostControllerDeInit,"ax",%progbits
  414              		.align	2
  415              		.global	SDMMC003_HostControllerDeInit
  416              		.thumb
  417              		.thumb_func
  419              	SDMMC003_HostControllerDeInit:
- 420              	.LFB113:
+ 420              	.LFB118:
  182:../Dave/Generated/src/SDMMC003/SDMMC003.c **** 
  183:../Dave/Generated/src/SDMMC003/SDMMC003.c **** /* <<<DD_SDMMC_API_2 >>> */
  184:../Dave/Generated/src/SDMMC003/SDMMC003.c **** /*
@@ -2286,14 +2286,14 @@
  476 004a BD46     		mov	sp, r7
  477 004c 80BD     		pop	{r7, pc}
  478              		.cfi_endproc
- 479              	.LFE113:
+ 479              	.LFE118:
  481 004e 00BF     		.section	.text.SDMMC003_CardReadMultipleBlocks,"ax",%progbits
  482              		.align	2
  483              		.global	SDMMC003_CardReadMultipleBlocks
  484              		.thumb
  485              		.thumb_func
  487              	SDMMC003_CardReadMultipleBlocks:
- 488              	.LFB114:
+ 488              	.LFB119:
  215:../Dave/Generated/src/SDMMC003/SDMMC003.c **** 
  216:../Dave/Generated/src/SDMMC003/SDMMC003.c **** /* <<<DD_SDMMC_API_3>>> */
  217:../Dave/Generated/src/SDMMC003/SDMMC003.c **** /*
@@ -2445,14 +2445,14 @@
  587 00be BD46     		mov	sp, r7
  588 00c0 80BD     		pop	{r7, pc}
  589              		.cfi_endproc
- 590              	.LFE114:
+ 590              	.LFE119:
  592 00c2 00BF     		.section	.text.SDMMC003_CardReadSingleBlock,"ax",%progbits
  593              		.align	2
  594              		.global	SDMMC003_CardReadSingleBlock
  595              		.thumb
  596              		.thumb_func
  598              	SDMMC003_CardReadSingleBlock:
- 599              	.LFB115:
+ 599              	.LFB120:
  263:../Dave/Generated/src/SDMMC003/SDMMC003.c **** 
  264:../Dave/Generated/src/SDMMC003/SDMMC003.c **** /* <<<DD_SDMMC_API_4>>> */
  265:../Dave/Generated/src/SDMMC003/SDMMC003.c **** /*
@@ -2603,14 +2603,14 @@
  695 00b0 BD46     		mov	sp, r7
  696 00b2 80BD     		pop	{r7, pc}
  697              		.cfi_endproc
- 698              	.LFE115:
+ 698              	.LFE120:
  700              		.section	.text.SDMMC003_CardWriteMultipleBlocks,"ax",%progbits
  701              		.align	2
  702              		.global	SDMMC003_CardWriteMultipleBlocks
  703              		.thumb
  704              		.thumb_func
  706              	SDMMC003_CardWriteMultipleBlocks:
- 707              	.LFB116:
+ 707              	.LFB121:
  314:../Dave/Generated/src/SDMMC003/SDMMC003.c **** 
  315:../Dave/Generated/src/SDMMC003/SDMMC003.c **** /* <<<DD_SDMMC_API_5>>> */
  316:../Dave/Generated/src/SDMMC003/SDMMC003.c **** /*
@@ -2763,14 +2763,14 @@
  806 00be BD46     		mov	sp, r7
  807 00c0 80BD     		pop	{r7, pc}
  808              		.cfi_endproc
- 809              	.LFE116:
+ 809              	.LFE121:
  811 00c2 00BF     		.section	.text.SDMMC003_CardWriteSingleBlock,"ax",%progbits
  812              		.align	2
  813              		.global	SDMMC003_CardWriteSingleBlock
  814              		.thumb
  815              		.thumb_func
  817              	SDMMC003_CardWriteSingleBlock:
- 818              	.LFB117:
+ 818              	.LFB122:
  363:../Dave/Generated/src/SDMMC003/SDMMC003.c **** 
  364:../Dave/Generated/src/SDMMC003/SDMMC003.c **** /* <<<DD_SDMMC_API_6>>> */
  365:../Dave/Generated/src/SDMMC003/SDMMC003.c **** /*
@@ -2921,7 +2921,7 @@
  914 00b0 BD46     		mov	sp, r7
  915 00b2 80BD     		pop	{r7, pc}
  916              		.cfi_endproc
- 917              	.LFE117:
+ 917              	.LFE122:
  919              		.section	.rodata
  920              		.align	2
  921              	.LC0:
@@ -2941,7 +2941,7 @@
  935              		.thumb
  936              		.thumb_func
  938              	SDMMC003_EraseBlock:
- 939              	.LFB118:
+ 939              	.LFB123:
  414:../Dave/Generated/src/SDMMC003/SDMMC003.c **** 
  415:../Dave/Generated/src/SDMMC003/SDMMC003.c **** /* <<<DD_SDMMC_API_7>>> */
  416:../Dave/Generated/src/SDMMC003/SDMMC003.c **** /*
@@ -3284,14 +3284,14 @@
  1170 01e0 BD46     		mov	sp, r7
  1171 01e2 B0BD     		pop	{r4, r5, r7, pc}
  1172              		.cfi_endproc
- 1173              	.LFE118:
+ 1173              	.LFE123:
  1175              		.section	.text.SDMMC003_LockUnlockCard,"ax",%progbits
  1176              		.align	2
  1177              		.global	SDMMC003_LockUnlockCard
  1178              		.thumb
  1179              		.thumb_func
  1181              	SDMMC003_LockUnlockCard:
- 1182              	.LFB119:
+ 1182              	.LFB124:
  518:../Dave/Generated/src/SDMMC003/SDMMC003.c **** 
  519:../Dave/Generated/src/SDMMC003/SDMMC003.c **** /* <<< DD_SDMMC_API_8 >>> */
  520:../Dave/Generated/src/SDMMC003/SDMMC003.c **** /*
@@ -3411,14 +3411,14 @@
  1257 0088 BD46     		mov	sp, r7
  1258 008a 80BD     		pop	{r7, pc}
  1259              		.cfi_endproc
- 1260              	.LFE119:
+ 1260              	.LFE124:
  1262              		.section	.text.SDMMC003_GetLockStatus,"ax",%progbits
  1263              		.align	2
  1264              		.global	SDMMC003_GetLockStatus
  1265              		.thumb
  1266              		.thumb_func
  1268              	SDMMC003_GetLockStatus:
- 1269              	.LFB120:
+ 1269              	.LFB125:
  559:../Dave/Generated/src/SDMMC003/SDMMC003.c **** 
  560:../Dave/Generated/src/SDMMC003/SDMMC003.c **** /* <<< DD_SDMMC_API_9 >>> */
  561:../Dave/Generated/src/SDMMC003/SDMMC003.c **** /*
@@ -3553,14 +3553,14 @@
  1349 0086 BD46     		mov	sp, r7
  1350 0088 80BD     		pop	{r7, pc}
  1351              		.cfi_endproc
- 1352              	.LFE120:
+ 1352              	.LFE125:
  1354 008a 00BF     		.section	.text.SDMMC003_GetCurrentState,"ax",%progbits
  1355              		.align	2
  1356              		.global	SDMMC003_GetCurrentState
  1357              		.thumb
  1358              		.thumb_func
  1360              	SDMMC003_GetCurrentState:
- 1361              	.LFB121:
+ 1361              	.LFB126:
  609:../Dave/Generated/src/SDMMC003/SDMMC003.c **** 
  610:../Dave/Generated/src/SDMMC003/SDMMC003.c **** /* <<< DD_SDMMC_API_10 >>> */
  611:../Dave/Generated/src/SDMMC003/SDMMC003.c **** /*
@@ -3677,14 +3677,14 @@
  1442 008e 80BC     		pop	{r7}
  1443 0090 7047     		bx	lr
  1444              		.cfi_endproc
- 1445              	.LFE121:
+ 1445              	.LFE126:
  1447 0092 00BF     		.section	.text.SDMMC003_GetCardType,"ax",%progbits
  1448              		.align	2
  1449              		.global	SDMMC003_GetCardType
  1450              		.thumb
  1451              		.thumb_func
  1453              	SDMMC003_GetCardType:
- 1454              	.LFB122:
+ 1454              	.LFB127:
  642:../Dave/Generated/src/SDMMC003/SDMMC003.c **** 
  643:../Dave/Generated/src/SDMMC003/SDMMC003.c **** 
  644:../Dave/Generated/src/SDMMC003/SDMMC003.c **** /* <<< DD_SDMMC_API_11 >>> */
@@ -3758,14 +3758,14 @@
  1501 0042 80BC     		pop	{r7}
  1502 0044 7047     		bx	lr
  1503              		.cfi_endproc
- 1504              	.LFE122:
+ 1504              	.LFE127:
  1506 0046 00BF     		.section	.text.SDMMC003_GetCid,"ax",%progbits
  1507              		.align	2
  1508              		.global	SDMMC003_GetCid
  1509              		.thumb
  1510              		.thumb_func
  1512              	SDMMC003_GetCid:
- 1513              	.LFB123:
+ 1513              	.LFB128:
  666:../Dave/Generated/src/SDMMC003/SDMMC003.c **** 
  667:../Dave/Generated/src/SDMMC003/SDMMC003.c **** /* <<< DD_SDMMC_API_12 >>> */
  668:../Dave/Generated/src/SDMMC003/SDMMC003.c **** /* This function is use to Get CID register information of card */
@@ -3938,14 +3938,14 @@
  1649 011c 80BC     		pop	{r7}
  1650 011e 7047     		bx	lr
  1651              		.cfi_endproc
- 1652              	.LFE123:
+ 1652              	.LFE128:
  1654              		.section	.text.SDMMC003_GetOcr,"ax",%progbits
  1655              		.align	2
  1656              		.global	SDMMC003_GetOcr
  1657              		.thumb
  1658              		.thumb_func
  1660              	SDMMC003_GetOcr:
- 1661              	.LFB124:
+ 1661              	.LFB129:
  699:../Dave/Generated/src/SDMMC003/SDMMC003.c **** 
  700:../Dave/Generated/src/SDMMC003/SDMMC003.c **** /* <<< DD_SDMMC_API_13>>> */
  701:../Dave/Generated/src/SDMMC003/SDMMC003.c **** /*
@@ -4016,14 +4016,14 @@
  1706 003e 80BC     		pop	{r7}
  1707 0040 7047     		bx	lr
  1708              		.cfi_endproc
- 1709              	.LFE124:
+ 1709              	.LFE129:
  1711 0042 00BF     		.section	.text.SDMMC003_GetCsd,"ax",%progbits
  1712              		.align	2
  1713              		.global	SDMMC003_GetCsd
  1714              		.thumb
  1715              		.thumb_func
  1717              	SDMMC003_GetCsd:
- 1718              	.LFB125:
+ 1718              	.LFB130:
  722:../Dave/Generated/src/SDMMC003/SDMMC003.c **** 
  723:../Dave/Generated/src/SDMMC003/SDMMC003.c **** /* <<< DD_SDMMC_API_14>>> */
  724:../Dave/Generated/src/SDMMC003/SDMMC003.c **** /* This function is use to get CSD information on the card */
@@ -4098,14 +4098,14 @@
  1767              	.L97:
  1768 0044 14000000 		.word	SDMMC003_CardInfo+20
  1769              		.cfi_endproc
- 1770              	.LFE125:
+ 1770              	.LFE130:
  1772              		.section	.text.SDMMC003_GetSectorCount,"ax",%progbits
  1773              		.align	2
  1774              		.global	SDMMC003_GetSectorCount
  1775              		.thumb
  1776              		.thumb_func
  1778              	SDMMC003_GetSectorCount:
- 1779              	.LFB126:
+ 1779              	.LFB131:
  745:../Dave/Generated/src/SDMMC003/SDMMC003.c **** 
  746:../Dave/Generated/src/SDMMC003/SDMMC003.c **** /* <<< DD_SDMMC_API_15 >>> */
  747:../Dave/Generated/src/SDMMC003/SDMMC003.c **** /*
@@ -4339,14 +4339,14 @@
  1924 0120 BD46     		mov	sp, r7
  1925 0122 80BD     		pop	{r7, pc}
  1926              		.cfi_endproc
- 1927              	.LFE126:
+ 1927              	.LFE131:
  1929              		.section	.text.SDMMC003_GetSectorSize,"ax",%progbits
  1930              		.align	2
  1931              		.global	SDMMC003_GetSectorSize
  1932              		.thumb
  1933              		.thumb_func
  1935              	SDMMC003_GetSectorSize:
- 1936              	.LFB127:
+ 1936              	.LFB132:
  827:../Dave/Generated/src/SDMMC003/SDMMC003.c **** 
  828:../Dave/Generated/src/SDMMC003/SDMMC003.c **** /* <<< DD_SDMMC_API_16 >>> */
  829:../Dave/Generated/src/SDMMC003/SDMMC003.c **** /*
@@ -4416,14 +4416,14 @@
  1979 0038 80BC     		pop	{r7}
  1980 003a 7047     		bx	lr
  1981              		.cfi_endproc
- 1982              	.LFE127:
+ 1982              	.LFE132:
  1984              		.section	.text.SDMMC003_GetBlockSize,"ax",%progbits
  1985              		.align	2
  1986              		.global	SDMMC003_GetBlockSize
  1987              		.thumb
  1988              		.thumb_func
  1990              	SDMMC003_GetBlockSize:
- 1991              	.LFB128:
+ 1991              	.LFB133:
  851:../Dave/Generated/src/SDMMC003/SDMMC003.c **** 
  852:../Dave/Generated/src/SDMMC003/SDMMC003.c **** /* <<< DD_SDMMC_API_17 >>> */
  853:../Dave/Generated/src/SDMMC003/SDMMC003.c **** /*
@@ -4582,14 +4582,14 @@
  2097 00d8 BD46     		mov	sp, r7
  2098 00da 80BD     		pop	{r7, pc}
  2099              		.cfi_endproc
- 2100              	.LFE128:
+ 2100              	.LFE133:
  2102              		.section	.text.SDMMC003_FlushDiskWriteCache,"ax",%progbits
  2103              		.align	2
  2104              		.global	SDMMC003_FlushDiskWriteCache
  2105              		.thumb
  2106              		.thumb_func
  2108              	SDMMC003_FlushDiskWriteCache:
- 2109              	.LFB129:
+ 2109              	.LFB134:
  901:../Dave/Generated/src/SDMMC003/SDMMC003.c **** 
  902:../Dave/Generated/src/SDMMC003/SDMMC003.c **** /* <<< DD_SDMMC_API_18 >>> */
  903:../Dave/Generated/src/SDMMC003/SDMMC003.c **** /*
@@ -4646,14 +4646,14 @@
  2145 002c 80BC     		pop	{r7}
  2146 002e 7047     		bx	lr
  2147              		.cfi_endproc
- 2148              	.LFE129:
+ 2148              	.LFE134:
  2150              		.section	.text.SDMMC003_GetSdStatus,"ax",%progbits
  2151              		.align	2
  2152              		.global	SDMMC003_GetSdStatus
  2153              		.thumb
  2154              		.thumb_func
  2156              	SDMMC003_GetSdStatus:
- 2157              	.LFB130:
+ 2157              	.LFB135:
  919:../Dave/Generated/src/SDMMC003/SDMMC003.c **** 
  920:../Dave/Generated/src/SDMMC003/SDMMC003.c **** /* <<<DD_SDMMC_API_19>>> */
  921:../Dave/Generated/src/SDMMC003/SDMMC003.c **** /*
@@ -4827,14 +4827,14 @@
  2260 00ca BD46     		mov	sp, r7
  2261 00cc 80BD     		pop	{r7, pc}
  2262              		.cfi_endproc
- 2263              	.LFE130:
+ 2263              	.LFE135:
  2265 00ce 00BF     		.section	.text.SDMMC003_EjectCard,"ax",%progbits
  2266              		.align	2
  2267              		.global	SDMMC003_EjectCard
  2268              		.thumb
  2269              		.thumb_func
  2271              	SDMMC003_EjectCard:
- 2272              	.LFB131:
+ 2272              	.LFB136:
  984:../Dave/Generated/src/SDMMC003/SDMMC003.c **** 
  985:../Dave/Generated/src/SDMMC003/SDMMC003.c **** /* <<< DD_SDMMC_API_20 >>> */
  986:../Dave/Generated/src/SDMMC003/SDMMC003.c **** /*
@@ -4951,14 +4951,14 @@
  2351 008c BD46     		mov	sp, r7
  2352 008e 80BD     		pop	{r7, pc}
  2353              		.cfi_endproc
- 2354              	.LFE131:
+ 2354              	.LFE136:
  2356              		.section	.text.SDMMC003_Init,"ax",%progbits
  2357              		.align	2
  2358              		.global	SDMMC003_Init
  2359              		.thumb
  2360              		.thumb_func
  2362              	SDMMC003_Init:
- 2363              	.LFB132:
+ 2363              	.LFB137:
 1017:../Dave/Generated/src/SDMMC003/SDMMC003.c **** 
 1018:../Dave/Generated/src/SDMMC003/SDMMC003.c **** /* <<< DD_SDMMC_API_22 >>> */
 1019:../Dave/Generated/src/SDMMC003/SDMMC003.c **** /*
@@ -4987,14 +4987,14 @@
  2380              		.loc 2 1025 0
  2381 0010 80BD     		pop	{r7, pc}
  2382              		.cfi_endproc
- 2383              	.LFE132:
+ 2383              	.LFE137:
  2385 0012 00BF     		.section	.text.SDMMC003_Start,"ax",%progbits
  2386              		.align	2
  2387              		.global	SDMMC003_Start
  2388              		.thumb
  2389              		.thumb_func
  2391              	SDMMC003_Start:
- 2392              	.LFB133:
+ 2392              	.LFB138:
 1026:../Dave/Generated/src/SDMMC003/SDMMC003.c **** 
 1027:../Dave/Generated/src/SDMMC003/SDMMC003.c **** /* <<< DD_SDMMC_API_23 >>> */
 1028:../Dave/Generated/src/SDMMC003/SDMMC003.c **** /*
@@ -5075,14 +5075,14 @@
  2445 005e BD46     		mov	sp, r7
  2446 0060 80BD     		pop	{r7, pc}
  2447              		.cfi_endproc
- 2448              	.LFE133:
+ 2448              	.LFE138:
  2450 0062 00BF     		.section	.text.SDMMC003_CardDetectionSupport,"ax",%progbits
  2451              		.align	2
  2452              		.global	SDMMC003_CardDetectionSupport
  2453              		.thumb
  2454              		.thumb_func
  2456              	SDMMC003_CardDetectionSupport:
- 2457              	.LFB134:
+ 2457              	.LFB139:
 1051:../Dave/Generated/src/SDMMC003/SDMMC003.c **** 
 1052:../Dave/Generated/src/SDMMC003/SDMMC003.c **** /* <<< DD_SDMMC_API_24 >>> */
 1053:../Dave/Generated/src/SDMMC003/SDMMC003.c **** /*
@@ -5136,7 +5136,7 @@
  2491 0028 BD46     		mov	sp, r7
  2492 002a 80BD     		pop	{r7, pc}
  2493              		.cfi_endproc
- 2494              	.LFE134:
+ 2494              	.LFE139:
  2496              		.text
  2497              	.Letext0:
  2498              		.file 3 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Infineon/XMC4500_series/Include/XMC4500.h"
@@ -5149,67 +5149,67 @@
  2505              		.file 10 "../Dave/Generated/src/SDMMC003/../../inc/SDMMC003/SDMMC003_Private.h"
 DEFINED SYMBOLS
                             *ABS*:00000000 SDMMC003.c
-C:\Users\Mihai\AppData\Local\Temp\ccoEFtj9.s:20     .text.NVIC_GetPriorityGrouping:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccoEFtj9.s:24     .text.NVIC_GetPriorityGrouping:00000000 NVIC_GetPriorityGrouping
-C:\Users\Mihai\AppData\Local\Temp\ccoEFtj9.s:54     .text.NVIC_EnableIRQ:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccoEFtj9.s:58     .text.NVIC_EnableIRQ:00000000 NVIC_EnableIRQ
-C:\Users\Mihai\AppData\Local\Temp\ccoEFtj9.s:96     .text.NVIC_ClearPendingIRQ:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccoEFtj9.s:100    .text.NVIC_ClearPendingIRQ:00000000 NVIC_ClearPendingIRQ
-C:\Users\Mihai\AppData\Local\Temp\ccoEFtj9.s:139    .text.NVIC_SetPriority:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccoEFtj9.s:143    .text.NVIC_SetPriority:00000000 NVIC_SetPriority
-C:\Users\Mihai\AppData\Local\Temp\ccoEFtj9.s:201    .text.NVIC_EncodePriority:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccoEFtj9.s:205    .text.NVIC_EncodePriority:00000000 NVIC_EncodePriority
-C:\Users\Mihai\AppData\Local\Temp\ccoEFtj9.s:285    .bss:00000000 SDMMC003_Handle
-C:\Users\Mihai\AppData\Local\Temp\ccoEFtj9.s:282    .bss:00000000 $d
-C:\Users\Mihai\AppData\Local\Temp\ccoEFtj9.s:288    .text.SDMMC003_HostControllerInit:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccoEFtj9.s:293    .text.SDMMC003_HostControllerInit:00000000 SDMMC003_HostControllerInit
-C:\Users\Mihai\AppData\Local\Temp\ccoEFtj9.s:414    .text.SDMMC003_HostControllerDeInit:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccoEFtj9.s:419    .text.SDMMC003_HostControllerDeInit:00000000 SDMMC003_HostControllerDeInit
-C:\Users\Mihai\AppData\Local\Temp\ccoEFtj9.s:482    .text.SDMMC003_CardReadMultipleBlocks:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccoEFtj9.s:487    .text.SDMMC003_CardReadMultipleBlocks:00000000 SDMMC003_CardReadMultipleBlocks
-C:\Users\Mihai\AppData\Local\Temp\ccoEFtj9.s:593    .text.SDMMC003_CardReadSingleBlock:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccoEFtj9.s:598    .text.SDMMC003_CardReadSingleBlock:00000000 SDMMC003_CardReadSingleBlock
-C:\Users\Mihai\AppData\Local\Temp\ccoEFtj9.s:701    .text.SDMMC003_CardWriteMultipleBlocks:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccoEFtj9.s:706    .text.SDMMC003_CardWriteMultipleBlocks:00000000 SDMMC003_CardWriteMultipleBlocks
-C:\Users\Mihai\AppData\Local\Temp\ccoEFtj9.s:812    .text.SDMMC003_CardWriteSingleBlock:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccoEFtj9.s:817    .text.SDMMC003_CardWriteSingleBlock:00000000 SDMMC003_CardWriteSingleBlock
-C:\Users\Mihai\AppData\Local\Temp\ccoEFtj9.s:920    .rodata:00000000 $d
-C:\Users\Mihai\AppData\Local\Temp\ccoEFtj9.s:921    .rodata:00000000 .LC0
-C:\Users\Mihai\AppData\Local\Temp\ccoEFtj9.s:933    .text.SDMMC003_EraseBlock:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccoEFtj9.s:938    .text.SDMMC003_EraseBlock:00000000 SDMMC003_EraseBlock
-C:\Users\Mihai\AppData\Local\Temp\ccoEFtj9.s:2156   .text.SDMMC003_GetSdStatus:00000000 SDMMC003_GetSdStatus
-C:\Users\Mihai\AppData\Local\Temp\ccoEFtj9.s:1176   .text.SDMMC003_LockUnlockCard:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccoEFtj9.s:1181   .text.SDMMC003_LockUnlockCard:00000000 SDMMC003_LockUnlockCard
-C:\Users\Mihai\AppData\Local\Temp\ccoEFtj9.s:1263   .text.SDMMC003_GetLockStatus:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccoEFtj9.s:1268   .text.SDMMC003_GetLockStatus:00000000 SDMMC003_GetLockStatus
-C:\Users\Mihai\AppData\Local\Temp\ccoEFtj9.s:1355   .text.SDMMC003_GetCurrentState:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccoEFtj9.s:1360   .text.SDMMC003_GetCurrentState:00000000 SDMMC003_GetCurrentState
-C:\Users\Mihai\AppData\Local\Temp\ccoEFtj9.s:1448   .text.SDMMC003_GetCardType:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccoEFtj9.s:1453   .text.SDMMC003_GetCardType:00000000 SDMMC003_GetCardType
-C:\Users\Mihai\AppData\Local\Temp\ccoEFtj9.s:1507   .text.SDMMC003_GetCid:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccoEFtj9.s:1512   .text.SDMMC003_GetCid:00000000 SDMMC003_GetCid
-C:\Users\Mihai\AppData\Local\Temp\ccoEFtj9.s:1655   .text.SDMMC003_GetOcr:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccoEFtj9.s:1660   .text.SDMMC003_GetOcr:00000000 SDMMC003_GetOcr
-C:\Users\Mihai\AppData\Local\Temp\ccoEFtj9.s:1712   .text.SDMMC003_GetCsd:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccoEFtj9.s:1717   .text.SDMMC003_GetCsd:00000000 SDMMC003_GetCsd
-C:\Users\Mihai\AppData\Local\Temp\ccoEFtj9.s:1768   .text.SDMMC003_GetCsd:00000044 $d
-C:\Users\Mihai\AppData\Local\Temp\ccoEFtj9.s:1773   .text.SDMMC003_GetSectorCount:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccoEFtj9.s:1778   .text.SDMMC003_GetSectorCount:00000000 SDMMC003_GetSectorCount
-C:\Users\Mihai\AppData\Local\Temp\ccoEFtj9.s:1930   .text.SDMMC003_GetSectorSize:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccoEFtj9.s:1935   .text.SDMMC003_GetSectorSize:00000000 SDMMC003_GetSectorSize
-C:\Users\Mihai\AppData\Local\Temp\ccoEFtj9.s:1985   .text.SDMMC003_GetBlockSize:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccoEFtj9.s:1990   .text.SDMMC003_GetBlockSize:00000000 SDMMC003_GetBlockSize
-C:\Users\Mihai\AppData\Local\Temp\ccoEFtj9.s:2103   .text.SDMMC003_FlushDiskWriteCache:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccoEFtj9.s:2108   .text.SDMMC003_FlushDiskWriteCache:00000000 SDMMC003_FlushDiskWriteCache
-C:\Users\Mihai\AppData\Local\Temp\ccoEFtj9.s:2151   .text.SDMMC003_GetSdStatus:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccoEFtj9.s:2266   .text.SDMMC003_EjectCard:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccoEFtj9.s:2271   .text.SDMMC003_EjectCard:00000000 SDMMC003_EjectCard
-C:\Users\Mihai\AppData\Local\Temp\ccoEFtj9.s:2357   .text.SDMMC003_Init:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccoEFtj9.s:2362   .text.SDMMC003_Init:00000000 SDMMC003_Init
-C:\Users\Mihai\AppData\Local\Temp\ccoEFtj9.s:2386   .text.SDMMC003_Start:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccoEFtj9.s:2391   .text.SDMMC003_Start:00000000 SDMMC003_Start
-C:\Users\Mihai\AppData\Local\Temp\ccoEFtj9.s:2451   .text.SDMMC003_CardDetectionSupport:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccoEFtj9.s:2456   .text.SDMMC003_CardDetectionSupport:00000000 SDMMC003_CardDetectionSupport
+C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:20     .text.NVIC_GetPriorityGrouping:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:24     .text.NVIC_GetPriorityGrouping:00000000 NVIC_GetPriorityGrouping
+C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:54     .text.NVIC_EnableIRQ:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:58     .text.NVIC_EnableIRQ:00000000 NVIC_EnableIRQ
+C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:96     .text.NVIC_ClearPendingIRQ:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:100    .text.NVIC_ClearPendingIRQ:00000000 NVIC_ClearPendingIRQ
+C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:139    .text.NVIC_SetPriority:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:143    .text.NVIC_SetPriority:00000000 NVIC_SetPriority
+C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:201    .text.NVIC_EncodePriority:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:205    .text.NVIC_EncodePriority:00000000 NVIC_EncodePriority
+C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:285    .bss:00000000 SDMMC003_Handle
+C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:282    .bss:00000000 $d
+C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:288    .text.SDMMC003_HostControllerInit:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:293    .text.SDMMC003_HostControllerInit:00000000 SDMMC003_HostControllerInit
+C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:414    .text.SDMMC003_HostControllerDeInit:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:419    .text.SDMMC003_HostControllerDeInit:00000000 SDMMC003_HostControllerDeInit
+C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:482    .text.SDMMC003_CardReadMultipleBlocks:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:487    .text.SDMMC003_CardReadMultipleBlocks:00000000 SDMMC003_CardReadMultipleBlocks
+C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:593    .text.SDMMC003_CardReadSingleBlock:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:598    .text.SDMMC003_CardReadSingleBlock:00000000 SDMMC003_CardReadSingleBlock
+C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:701    .text.SDMMC003_CardWriteMultipleBlocks:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:706    .text.SDMMC003_CardWriteMultipleBlocks:00000000 SDMMC003_CardWriteMultipleBlocks
+C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:812    .text.SDMMC003_CardWriteSingleBlock:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:817    .text.SDMMC003_CardWriteSingleBlock:00000000 SDMMC003_CardWriteSingleBlock
+C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:920    .rodata:00000000 $d
+C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:921    .rodata:00000000 .LC0
+C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:933    .text.SDMMC003_EraseBlock:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:938    .text.SDMMC003_EraseBlock:00000000 SDMMC003_EraseBlock
+C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:2156   .text.SDMMC003_GetSdStatus:00000000 SDMMC003_GetSdStatus
+C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:1176   .text.SDMMC003_LockUnlockCard:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:1181   .text.SDMMC003_LockUnlockCard:00000000 SDMMC003_LockUnlockCard
+C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:1263   .text.SDMMC003_GetLockStatus:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:1268   .text.SDMMC003_GetLockStatus:00000000 SDMMC003_GetLockStatus
+C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:1355   .text.SDMMC003_GetCurrentState:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:1360   .text.SDMMC003_GetCurrentState:00000000 SDMMC003_GetCurrentState
+C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:1448   .text.SDMMC003_GetCardType:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:1453   .text.SDMMC003_GetCardType:00000000 SDMMC003_GetCardType
+C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:1507   .text.SDMMC003_GetCid:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:1512   .text.SDMMC003_GetCid:00000000 SDMMC003_GetCid
+C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:1655   .text.SDMMC003_GetOcr:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:1660   .text.SDMMC003_GetOcr:00000000 SDMMC003_GetOcr
+C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:1712   .text.SDMMC003_GetCsd:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:1717   .text.SDMMC003_GetCsd:00000000 SDMMC003_GetCsd
+C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:1768   .text.SDMMC003_GetCsd:00000044 $d
+C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:1773   .text.SDMMC003_GetSectorCount:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:1778   .text.SDMMC003_GetSectorCount:00000000 SDMMC003_GetSectorCount
+C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:1930   .text.SDMMC003_GetSectorSize:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:1935   .text.SDMMC003_GetSectorSize:00000000 SDMMC003_GetSectorSize
+C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:1985   .text.SDMMC003_GetBlockSize:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:1990   .text.SDMMC003_GetBlockSize:00000000 SDMMC003_GetBlockSize
+C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:2103   .text.SDMMC003_FlushDiskWriteCache:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:2108   .text.SDMMC003_FlushDiskWriteCache:00000000 SDMMC003_FlushDiskWriteCache
+C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:2151   .text.SDMMC003_GetSdStatus:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:2266   .text.SDMMC003_EjectCard:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:2271   .text.SDMMC003_EjectCard:00000000 SDMMC003_EjectCard
+C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:2357   .text.SDMMC003_Init:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:2362   .text.SDMMC003_Init:00000000 SDMMC003_Init
+C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:2386   .text.SDMMC003_Start:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:2391   .text.SDMMC003_Start:00000000 SDMMC003_Start
+C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:2451   .text.SDMMC003_CardDetectionSupport:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:2456   .text.SDMMC003_CardDetectionSupport:00000000 SDMMC003_CardDetectionSupport
                      .debug_frame:00000010 $d
                            .group:00000000 wm4.1.1791a5ae2e936ca1033c1c44be394cc7
                            .group:00000000 wm4.SDMMC003_Conf.h.50.e707c07613fb4e6f2eaec982a892429d
@@ -5300,6 +5300,7 @@ C:\Users\Mihai\AppData\Local\Temp\ccoEFtj9.s:2456   .text.SDMMC003_CardDetection
                            .group:00000000 wm4.fcntl.h.9.9336f33d7f5028f694c75e6e224e0cf7
                            .group:00000000 wm4.SLTHA001.h.97.d7e87c19a31e3244bdd5839e7cc42a61
                            .group:00000000 wm4.WEBSERVER001_Conf.h.54.cd6d29aaa96a848cbc5321bab5d6cd90
+                           .group:00000000 wm4.IO004.h.51.dbf9dd216c57d6a7f14a22b2cb7e5626
                            .group:00000000 wm4.ADCGROUP001.h.48.081c7f952eb4b6ea2df7d05180ee1663
                            .group:00000000 wm4.IO001.h.49.1da965fb490206cf7cde64a90f6912e1
                            .group:00000000 wm4.MOTORLIBS.h.59.b2e97de0df555dedfa51e24447b57ab8
@@ -5307,6 +5308,7 @@ C:\Users\Mihai\AppData\Local\Temp\ccoEFtj9.s:2456   .text.SDMMC003_CardDetection
                            .group:00000000 wm4.Usic.h.90.22743468abc46f16747d12430b219aaf
                            .group:00000000 wm4.UART001_Conf.h.53.c5c972f6f634bc5116c171852aaab668
                            .group:00000000 wm4.UART001.h.109.3e835815a7a59791d8bd39655f4d4cc9
+                           .group:00000000 wm4.NVIC002_Conf.h.63.45e3c2b9806aa66850587e587798873e
                            .group:00000000 wm4.SDMMC003_Private.h.51.65f011a4ed3b9c916aeb9b57038ffa07
 
 UNDEFINED SYMBOLS

@@ -1,6 +1,6 @@
 Startup/startup_XMC4500.o
 Startup/system_XMC4500.o
-Main.o
+SmartHome.o
 Lib/System_LibcStubs.o
 Dave/Generated/src/WEBSERVER001/HTTPServer/fs.o
 Dave/Generated/src/WEBSERVER001/HTTPServer/fsdata.o
@@ -21,10 +21,14 @@ Dave/Generated/src/RTC001/RTC001.o
 Dave/Generated/src/RTC001/RTC001_Conf.o
 Dave/Generated/src/RESET001/RESET001.o
 Dave/Generated/src/NVIC_SCU001/NVIC_SCU001.o
+Dave/Generated/src/NVIC002/NVIC002.o
+Dave/Generated/src/NVIC002/NVIC002_Conf.o
 Dave/Generated/src/MOTORLIBS/MOTORLIBS.o
 Dave/Generated/src/LMM001/LMM001.o
 Dave/Generated/src/LMM001/LMM001_Conf.o
 Dave/Generated/src/LIBS/CCU8PWMLIB.o
+Dave/Generated/src/IO004/IO004.o
+Dave/Generated/src/IO004/IO004_Conf.o
 Dave/Generated/src/IO001/IO001.o
 Dave/Generated/src/IO001/IO001_Conf.o
 Dave/Generated/src/GMM001/GMM001.o

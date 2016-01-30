@@ -124,7 +124,7 @@ void IO001_Init(void)
   /* Enable Digital Pad Input*/
   IO001_Handle0.PortRegs->PDISC  &= (~((uint32_t)0x1U << 1));
   /*configure the Digital Input characteristics in IOCR register*/
-  IO001_Handle0.PortRegs->IOCR0 |= (0U << 11);
+  IO001_Handle0.PortRegs->IOCR0 |= (-1U << 11);
 }
 
 void IO001_EnableDigitalInput(const IO001_HandleType* Handle,IO001_InputModeType Mode)

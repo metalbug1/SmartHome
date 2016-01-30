@@ -23,7 +23,7 @@
   23              		.thumb
   24              		.thumb_func
   26              	PHY_InitializeDevice:
-  27              	.LFB112:
+  27              	.LFB117:
   28              		.file 1 "../Dave/Generated/src/ETH002/EthernetPHY.c"
    1:../Dave/Generated/src/ETH002/EthernetPHY.c **** 
    2:../Dave/Generated/src/ETH002/EthernetPHY.c **** /*CODE_BLOCK_BEGIN[EthernetPHY.c]*/
@@ -369,14 +369,14 @@
   90 004e BD46     		mov	sp, r7
   91 0050 80BD     		pop	{r7, pc}
   92              		.cfi_endproc
-  93              	.LFE112:
+  93              	.LFE117:
   95 0052 00BF     		.section	.text.PHY_IsLinkUP,"ax",%progbits
   96              		.align	2
   97              		.global	PHY_IsLinkUP
   98              		.thumb
   99              		.thumb_func
  101              	PHY_IsLinkUP:
- 102              	.LFB113:
+ 102              	.LFB118:
  279:../Dave/Generated/src/ETH002/EthernetPHY.c **** 
  280:../Dave/Generated/src/ETH002/EthernetPHY.c **** /**
  281:../Dave/Generated/src/ETH002/EthernetPHY.c ****  * The function returns Link status of Ethernet PHY
@@ -487,13 +487,13 @@
  166 006a BD46     		mov	sp, r7
  167 006c 80BD     		pop	{r7, pc}
  168              		.cfi_endproc
- 169              	.LFE113:
+ 169              	.LFE118:
  171 006e 00BF     		.section	.text.PHY_lReadReg,"ax",%progbits
  172              		.align	2
  173              		.thumb
  174              		.thumb_func
  176              	PHY_lReadReg:
- 177              	.LFB114:
+ 177              	.LFB119:
  323:../Dave/Generated/src/ETH002/EthernetPHY.c **** 
  324:../Dave/Generated/src/ETH002/EthernetPHY.c **** /**
  325:../Dave/Generated/src/ETH002/EthernetPHY.c ****  * @}
@@ -682,13 +682,13 @@
  283 00b0 BD46     		mov	sp, r7
  284 00b2 80BD     		pop	{r7, pc}
  285              		.cfi_endproc
- 286              	.LFE114:
+ 286              	.LFE119:
  288              		.section	.text.PHY_lWriteReg,"ax",%progbits
  289              		.align	2
  290              		.thumb
  291              		.thumb_func
  293              	PHY_lWriteReg:
- 294              	.LFB115:
+ 294              	.LFB120:
  399:../Dave/Generated/src/ETH002/EthernetPHY.c **** 
  400:../Dave/Generated/src/ETH002/EthernetPHY.c **** /**
  401:../Dave/Generated/src/ETH002/EthernetPHY.c ****   * @brief Function to write to the Phy register. The access to phy register
@@ -861,13 +861,13 @@
  400 00b2 BD46     		mov	sp, r7
  401 00b4 80BD     		pop	{r7, pc}
  402              		.cfi_endproc
- 403              	.LFE115:
+ 403              	.LFE120:
  405 00b6 00BF     		.section	.text.PHY_lResetPHY,"ax",%progbits
  406              		.align	2
  407              		.thumb
  408              		.thumb_func
  410              	PHY_lResetPHY:
- 411              	.LFB116:
+ 411              	.LFB121:
  459:../Dave/Generated/src/ETH002/EthernetPHY.c **** /**
  460:../Dave/Generated/src/ETH002/EthernetPHY.c **** * @brief Function to reset the Phy and disable interrupts. 
  461:../Dave/Generated/src/ETH002/EthernetPHY.c **** *
@@ -1040,13 +1040,13 @@
  493 0096 BD46     		mov	sp, r7
  494 0098 80BD     		pop	{r7, pc}
  495              		.cfi_endproc
- 496              	.LFE116:
+ 496              	.LFE121:
  498 009a 00BF     		.section	.text.PHY_lPerformLinkNegotiation,"ax",%progbits
  499              		.align	2
  500              		.thumb
  501              		.thumb_func
  503              	PHY_lPerformLinkNegotiation:
- 504              	.LFB117:
+ 504              	.LFB122:
  547:../Dave/Generated/src/ETH002/EthernetPHY.c **** 
  548:../Dave/Generated/src/ETH002/EthernetPHY.c **** #if AUTO_NEGO
  549:../Dave/Generated/src/ETH002/EthernetPHY.c **** /**
@@ -1259,13 +1259,13 @@
  626 00f2 BD46     		mov	sp, r7
  627 00f4 80BD     		pop	{r7, pc}
  628              		.cfi_endproc
- 629              	.LFE117:
+ 629              	.LFE122:
  631 00f6 00BF     		.section	.text.PHY_lIsAutoNegoComplete,"ax",%progbits
  632              		.align	2
  633              		.thumb
  634              		.thumb_func
  636              	PHY_lIsAutoNegoComplete:
- 637              	.LFB118:
+ 637              	.LFB123:
  635:../Dave/Generated/src/ETH002/EthernetPHY.c **** 
  636:../Dave/Generated/src/ETH002/EthernetPHY.c **** /**
  637:../Dave/Generated/src/ETH002/EthernetPHY.c **** * @brief Function to check if link auto negotiation is complete.
@@ -1391,14 +1391,14 @@
  717 0072 BD46     		mov	sp, r7
  718 0074 80BD     		pop	{r7, pc}
  719              		.cfi_endproc
- 720              	.LFE118:
+ 720              	.LFE123:
  722 0076 00BF     		.section	.text.PHY_RegisterTimerCallback,"ax",%progbits
  723              		.align	2
  724              		.global	PHY_RegisterTimerCallback
  725              		.thumb
  726              		.thumb_func
  728              	PHY_RegisterTimerCallback:
- 729              	.LFB119:
+ 729              	.LFB124:
  676:../Dave/Generated/src/ETH002/EthernetPHY.c **** #endif
  677:../Dave/Generated/src/ETH002/EthernetPHY.c **** 
  678:../Dave/Generated/src/ETH002/EthernetPHY.c **** 
@@ -1437,7 +1437,7 @@
  754 001a 80BC     		pop	{r7}
  755 001c 7047     		bx	lr
  756              		.cfi_endproc
- 757              	.LFE119:
+ 757              	.LFE124:
  759 001e 00BF     		.text
  760              	.Letext0:
  761              		.file 2 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
@@ -1451,22 +1451,22 @@
 DEFINED SYMBOLS
                             *ABS*:00000000 EthernetPHY.c
                             *COM*:00000004 PHYtimerCallback
-C:\Users\Mihai\AppData\Local\Temp\ccCvDC8f.s:21     .text.PHY_InitializeDevice:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccCvDC8f.s:26     .text.PHY_InitializeDevice:00000000 PHY_InitializeDevice
-C:\Users\Mihai\AppData\Local\Temp\ccCvDC8f.s:410    .text.PHY_lResetPHY:00000000 PHY_lResetPHY
-C:\Users\Mihai\AppData\Local\Temp\ccCvDC8f.s:503    .text.PHY_lPerformLinkNegotiation:00000000 PHY_lPerformLinkNegotiation
-C:\Users\Mihai\AppData\Local\Temp\ccCvDC8f.s:101    .text.PHY_IsLinkUP:00000000 PHY_IsLinkUP
-C:\Users\Mihai\AppData\Local\Temp\ccCvDC8f.s:96     .text.PHY_IsLinkUP:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccCvDC8f.s:176    .text.PHY_lReadReg:00000000 PHY_lReadReg
-C:\Users\Mihai\AppData\Local\Temp\ccCvDC8f.s:172    .text.PHY_lReadReg:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccCvDC8f.s:289    .text.PHY_lWriteReg:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccCvDC8f.s:293    .text.PHY_lWriteReg:00000000 PHY_lWriteReg
-C:\Users\Mihai\AppData\Local\Temp\ccCvDC8f.s:406    .text.PHY_lResetPHY:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccCvDC8f.s:499    .text.PHY_lPerformLinkNegotiation:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccCvDC8f.s:636    .text.PHY_lIsAutoNegoComplete:00000000 PHY_lIsAutoNegoComplete
-C:\Users\Mihai\AppData\Local\Temp\ccCvDC8f.s:632    .text.PHY_lIsAutoNegoComplete:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccCvDC8f.s:723    .text.PHY_RegisterTimerCallback:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccCvDC8f.s:728    .text.PHY_RegisterTimerCallback:00000000 PHY_RegisterTimerCallback
+C:\Users\Mihai\AppData\Local\Temp\ccbsZhpQ.s:21     .text.PHY_InitializeDevice:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccbsZhpQ.s:26     .text.PHY_InitializeDevice:00000000 PHY_InitializeDevice
+C:\Users\Mihai\AppData\Local\Temp\ccbsZhpQ.s:410    .text.PHY_lResetPHY:00000000 PHY_lResetPHY
+C:\Users\Mihai\AppData\Local\Temp\ccbsZhpQ.s:503    .text.PHY_lPerformLinkNegotiation:00000000 PHY_lPerformLinkNegotiation
+C:\Users\Mihai\AppData\Local\Temp\ccbsZhpQ.s:101    .text.PHY_IsLinkUP:00000000 PHY_IsLinkUP
+C:\Users\Mihai\AppData\Local\Temp\ccbsZhpQ.s:96     .text.PHY_IsLinkUP:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccbsZhpQ.s:176    .text.PHY_lReadReg:00000000 PHY_lReadReg
+C:\Users\Mihai\AppData\Local\Temp\ccbsZhpQ.s:172    .text.PHY_lReadReg:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccbsZhpQ.s:289    .text.PHY_lWriteReg:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccbsZhpQ.s:293    .text.PHY_lWriteReg:00000000 PHY_lWriteReg
+C:\Users\Mihai\AppData\Local\Temp\ccbsZhpQ.s:406    .text.PHY_lResetPHY:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccbsZhpQ.s:499    .text.PHY_lPerformLinkNegotiation:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccbsZhpQ.s:636    .text.PHY_lIsAutoNegoComplete:00000000 PHY_lIsAutoNegoComplete
+C:\Users\Mihai\AppData\Local\Temp\ccbsZhpQ.s:632    .text.PHY_lIsAutoNegoComplete:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccbsZhpQ.s:723    .text.PHY_RegisterTimerCallback:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccbsZhpQ.s:728    .text.PHY_RegisterTimerCallback:00000000 PHY_RegisterTimerCallback
                      .debug_frame:00000010 $d
                            .group:00000000 wm4.1.1791a5ae2e936ca1033c1c44be394cc7
                            .group:00000000 wm4.XMC4500.h.45.215f4b8c79f46c7645c15373868d08c0
@@ -1557,6 +1557,7 @@ C:\Users\Mihai\AppData\Local\Temp\ccCvDC8f.s:728    .text.PHY_RegisterTimerCallb
                            .group:00000000 wm4.fcntl.h.9.9336f33d7f5028f694c75e6e224e0cf7
                            .group:00000000 wm4.SLTHA001.h.97.d7e87c19a31e3244bdd5839e7cc42a61
                            .group:00000000 wm4.WEBSERVER001_Conf.h.54.cd6d29aaa96a848cbc5321bab5d6cd90
+                           .group:00000000 wm4.IO004.h.51.dbf9dd216c57d6a7f14a22b2cb7e5626
                            .group:00000000 wm4.ADCGROUP001.h.48.081c7f952eb4b6ea2df7d05180ee1663
                            .group:00000000 wm4.IO001.h.49.1da965fb490206cf7cde64a90f6912e1
                            .group:00000000 wm4.MOTORLIBS.h.59.b2e97de0df555dedfa51e24447b57ab8
@@ -1564,5 +1565,6 @@ C:\Users\Mihai\AppData\Local\Temp\ccCvDC8f.s:728    .text.PHY_RegisterTimerCallb
                            .group:00000000 wm4.Usic.h.90.22743468abc46f16747d12430b219aaf
                            .group:00000000 wm4.UART001_Conf.h.53.c5c972f6f634bc5116c171852aaab668
                            .group:00000000 wm4.UART001.h.109.3e835815a7a59791d8bd39655f4d4cc9
+                           .group:00000000 wm4.NVIC002_Conf.h.63.45e3c2b9806aa66850587e587798873e
 
 NO UNDEFINED SYMBOLS

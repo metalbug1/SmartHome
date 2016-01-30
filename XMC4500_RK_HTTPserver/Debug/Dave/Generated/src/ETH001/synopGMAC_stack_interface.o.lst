@@ -1848,7 +1848,7 @@
  250              		.thumb
  251              		.thumb_func
  253              	Eth_GetTxBuffer:
- 254              	.LFB112:
+ 254              	.LFB117:
  255              		.file 2 "../Dave/Generated/src/ETH001/synopGMAC_stack_interface.c"
    1:../Dave/Generated/src/ETH001/synopGMAC_stack_interface.c **** /*******************************************************************************
    2:../Dave/Generated/src/ETH001/synopGMAC_stack_interface.c **** **  DAVE App Name : ETH001       App Version: 1.0.16               
@@ -2080,14 +2080,14 @@
  287 0028 80BC     		pop	{r7}
  288 002a 7047     		bx	lr
  289              		.cfi_endproc
- 290              	.LFE112:
+ 290              	.LFE117:
  292              		.section	.text.Eth_InitNetworkInterface,"ax",%progbits
  293              		.align	2
  294              		.global	Eth_InitNetworkInterface
  295              		.thumb
  296              		.thumb_func
  298              	Eth_InitNetworkInterface:
- 299              	.LFB113:
+ 299              	.LFB118:
  197:../Dave/Generated/src/ETH001/synopGMAC_stack_interface.c **** status_t Eth_InitNetworkInterface(void)
  198:../Dave/Generated/src/ETH001/synopGMAC_stack_interface.c **** {
  300              		.loc 2 198 0
@@ -2204,14 +2204,14 @@
  382 00d2 1846     		mov	r0, r3
  383 00d4 80BD     		pop	{r7, pc}
  384              		.cfi_endproc
- 385              	.LFE113:
+ 385              	.LFE118:
  387 00d6 00BF     		.section	.text.Eth_ExitNetworkInterface,"ax",%progbits
  388              		.align	2
  389              		.global	Eth_ExitNetworkInterface
  390              		.thumb
  391              		.thumb_func
  393              	Eth_ExitNetworkInterface:
- 394              	.LFB114:
+ 394              	.LFB119:
  228:../Dave/Generated/src/ETH001/synopGMAC_stack_interface.c **** 
  229:../Dave/Generated/src/ETH001/synopGMAC_stack_interface.c **** 
  230:../Dave/Generated/src/ETH001/synopGMAC_stack_interface.c **** void Eth_ExitNetworkInterface(void)
@@ -2237,14 +2237,14 @@
  409 0006 80BC     		pop	{r7}
  410 0008 7047     		bx	lr
  411              		.cfi_endproc
- 412              	.LFE114:
+ 412              	.LFE119:
  414 000a 00BF     		.section	.text.Eth_OpenNetworkInterface,"ax",%progbits
  415              		.align	2
  416              		.global	Eth_OpenNetworkInterface
  417              		.thumb
  418              		.thumb_func
  420              	Eth_OpenNetworkInterface:
- 421              	.LFB115:
+ 421              	.LFB120:
  236:../Dave/Generated/src/ETH001/synopGMAC_stack_interface.c **** 
  237:../Dave/Generated/src/ETH001/synopGMAC_stack_interface.c **** 
  238:../Dave/Generated/src/ETH001/synopGMAC_stack_interface.c **** status_t Eth_OpenNetworkInterface(void)
@@ -2761,14 +2761,14 @@
  751 0338 BD46     		mov	sp, r7
  752 033a 90BD     		pop	{r4, r7, pc}
  753              		.cfi_endproc
- 754              	.LFE115:
+ 754              	.LFE120:
  756              		.section	.text.Eth_CloseNetworkInterface,"ax",%progbits
  757              		.align	2
  758              		.global	Eth_CloseNetworkInterface
  759              		.thumb
  760              		.thumb_func
  762              	Eth_CloseNetworkInterface:
- 763              	.LFB116:
+ 763              	.LFB121:
  415:../Dave/Generated/src/ETH001/synopGMAC_stack_interface.c **** 
  416:../Dave/Generated/src/ETH001/synopGMAC_stack_interface.c **** 
  417:../Dave/Generated/src/ETH001/synopGMAC_stack_interface.c **** status_t Eth_CloseNetworkInterface (void)
@@ -2896,14 +2896,14 @@
  846 00ac BD46     		mov	sp, r7
  847 00ae 80BD     		pop	{r7, pc}
  848              		.cfi_endproc
- 849              	.LFE116:
+ 849              	.LFE121:
  851              		.section	.text.Eth_TransmitFrames,"ax",%progbits
  852              		.align	2
  853              		.global	Eth_TransmitFrames
  854              		.thumb
  855              		.thumb_func
  857              	Eth_TransmitFrames:
- 858              	.LFB117:
+ 858              	.LFB122:
  457:../Dave/Generated/src/ETH001/synopGMAC_stack_interface.c **** 
  458:../Dave/Generated/src/ETH001/synopGMAC_stack_interface.c **** 
  459:../Dave/Generated/src/ETH001/synopGMAC_stack_interface.c **** status_t Eth_TransmitFrames
@@ -3044,14 +3044,14 @@
  940 0084 BD46     		mov	sp, r7
  941 0086 80BD     		pop	{r7, pc}
  942              		.cfi_endproc
- 943              	.LFE117:
+ 943              	.LFE122:
  945              		.section	.text.Eth_ReceiveData,"ax",%progbits
  946              		.align	2
  947              		.global	Eth_ReceiveData
  948              		.thumb
  949              		.thumb_func
  951              	Eth_ReceiveData:
- 952              	.LFB118:
+ 952              	.LFB123:
  511:../Dave/Generated/src/ETH001/synopGMAC_stack_interface.c **** 
  512:../Dave/Generated/src/ETH001/synopGMAC_stack_interface.c **** #ifdef BUILD_UIP
  513:../Dave/Generated/src/ETH001/synopGMAC_stack_interface.c **** uint32_t Eth_ReceiveData(void *buf)
@@ -3691,7 +3691,7 @@
  1312 0316 BD46     		mov	sp, r7
  1313 0318 B0BD     		pop	{r4, r5, r7, pc}
  1314              		.cfi_endproc
- 1315              	.LFE118:
+ 1315              	.LFE123:
  1317 031a 00BF     		.section	.rodata
  1318              		.align	2
  1319              	.LC0:
@@ -3707,7 +3707,7 @@
  1329              		.thumb
  1330              		.thumb_func
  1332              	ETH0_0_IRQHandler:
- 1333              	.LFB119:
+ 1333              	.LFB124:
  779:../Dave/Generated/src/ETH001/synopGMAC_stack_interface.c **** #endif  /* BUILD_UIP */
  780:../Dave/Generated/src/ETH001/synopGMAC_stack_interface.c **** 
  781:../Dave/Generated/src/ETH001/synopGMAC_stack_interface.c **** void IRQ_Hdlr_108(void)
@@ -4260,14 +4260,14 @@
  1693 0340 BD46     		mov	sp, r7
  1694 0342 80BD     		pop	{r7, pc}
  1695              		.cfi_endproc
- 1696              	.LFE119:
+ 1696              	.LFE124:
  1698              		.section	.text.Eth_PerformIoctl,"ax",%progbits
  1699              		.align	2
  1700              		.global	Eth_PerformIoctl
  1701              		.thumb
  1702              		.thumb_func
  1704              	Eth_PerformIoctl:
- 1705              	.LFB120:
+ 1705              	.LFB125:
  966:../Dave/Generated/src/ETH001/synopGMAC_stack_interface.c **** 
  967:../Dave/Generated/src/ETH001/synopGMAC_stack_interface.c **** status_t Eth_PerformIoctl(uint32_t Cmd, Eth_IoctlParamType *Eth_IoctlParam)
  968:../Dave/Generated/src/ETH001/synopGMAC_stack_interface.c **** {
@@ -4733,13 +4733,13 @@
  2004 021a BD46     		mov	sp, r7
  2005 021c 80BD     		pop	{r7, pc}
  2006              		.cfi_endproc
- 2007              	.LFE120:
+ 2007              	.LFE125:
  2009 021e 00BF     		.section	.text.Eth_lGetRMONCounters,"ax",%progbits
  2010              		.align	2
  2011              		.thumb
  2012              		.thumb_func
  2014              	Eth_lGetRMONCounters:
- 2015              	.LFB121:
+ 2015              	.LFB126:
 1120:../Dave/Generated/src/ETH001/synopGMAC_stack_interface.c **** 
 1121:../Dave/Generated/src/ETH001/synopGMAC_stack_interface.c **** /*******************************************************************************
 1122:../Dave/Generated/src/ETH001/synopGMAC_stack_interface.c **** **                      Private Function Definitions                          **
@@ -5445,14 +5445,14 @@
  2472 0464 BD46     		mov	sp, r7
  2473 0466 80BD     		pop	{r7, pc}
  2474              		.cfi_endproc
- 2475              	.LFE121:
+ 2475              	.LFE126:
  2477              		.section	.text.synopGMAC_RegisterPeriodicTimerCallback,"ax",%progbits
  2478              		.align	2
  2479              		.global	synopGMAC_RegisterPeriodicTimerCallback
  2480              		.thumb
  2481              		.thumb_func
  2483              	synopGMAC_RegisterPeriodicTimerCallback:
- 2484              	.LFB122:
+ 2484              	.LFB127:
 1320:../Dave/Generated/src/ETH001/synopGMAC_stack_interface.c **** 
 1321:../Dave/Generated/src/ETH001/synopGMAC_stack_interface.c **** void synopGMAC_RegisterPeriodicTimerCallback(SynopGMACPeriodicTimerCallbackType Callback)
 1322:../Dave/Generated/src/ETH001/synopGMAC_stack_interface.c **** {
@@ -5485,14 +5485,14 @@
  2509 001a 80BC     		pop	{r7}
  2510 001c 7047     		bx	lr
  2511              		.cfi_endproc
- 2512              	.LFE122:
+ 2512              	.LFE127:
  2514 001e 00BF     		.section	.text.synopGMAC_RegisterDeleteTimerCallback,"ax",%progbits
  2515              		.align	2
  2516              		.global	synopGMAC_RegisterDeleteTimerCallback
  2517              		.thumb
  2518              		.thumb_func
  2520              	synopGMAC_RegisterDeleteTimerCallback:
- 2521              	.LFB123:
+ 2521              	.LFB128:
 1325:../Dave/Generated/src/ETH001/synopGMAC_stack_interface.c **** 
 1326:../Dave/Generated/src/ETH001/synopGMAC_stack_interface.c **** void synopGMAC_RegisterDeleteTimerCallback(SynopGMACDeletePeriodicTimerType Callback)
 1327:../Dave/Generated/src/ETH001/synopGMAC_stack_interface.c **** {
@@ -5525,14 +5525,14 @@
  2546 001a 80BC     		pop	{r7}
  2547 001c 7047     		bx	lr
  2548              		.cfi_endproc
- 2549              	.LFE123:
+ 2549              	.LFE128:
  2551 001e 00BF     		.section	.text.synopGMAC_periodic_check,"ax",%progbits
  2552              		.align	2
  2553              		.global	synopGMAC_periodic_check
  2554              		.thumb
  2555              		.thumb_func
  2557              	synopGMAC_periodic_check:
- 2558              	.LFB124:
+ 2558              	.LFB129:
 1330:../Dave/Generated/src/ETH001/synopGMAC_stack_interface.c **** 
 1331:../Dave/Generated/src/ETH001/synopGMAC_stack_interface.c **** void synopGMAC_periodic_check()
 1332:../Dave/Generated/src/ETH001/synopGMAC_stack_interface.c **** {
@@ -5559,7 +5559,7 @@
  2577              		.loc 2 1334 0
  2578 0014 80BD     		pop	{r7, pc}
  2579              		.cfi_endproc
- 2580              	.LFE124:
+ 2580              	.LFE129:
  2582 0016 00BF     		.text
  2583              	.Letext0:
  2584              		.file 3 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Infineon/XMC4500_series/Include/XMC4500.h"
@@ -5572,50 +5572,50 @@
  2591              		.file 10 "F:\\WORK\\SmartHome_checkout1\\XMC4500_RK_HTTPserver\\Dave\\Generated\\inc\\DAVESupport/
 DEFINED SYMBOLS
                             *ABS*:00000000 synopGMAC_stack_interface.c
-C:\Users\Mihai\AppData\Local\Temp\ccJr4KTI.s:20     .text.NVIC_GetPriorityGrouping:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccJr4KTI.s:24     .text.NVIC_GetPriorityGrouping:00000000 NVIC_GetPriorityGrouping
-C:\Users\Mihai\AppData\Local\Temp\ccJr4KTI.s:54     .text.NVIC_EnableIRQ:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccJr4KTI.s:58     .text.NVIC_EnableIRQ:00000000 NVIC_EnableIRQ
-C:\Users\Mihai\AppData\Local\Temp\ccJr4KTI.s:96     .text.NVIC_SetPriority:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccJr4KTI.s:100    .text.NVIC_SetPriority:00000000 NVIC_SetPriority
-C:\Users\Mihai\AppData\Local\Temp\ccJr4KTI.s:158    .text.NVIC_EncodePriority:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccJr4KTI.s:162    .text.NVIC_EncodePriority:00000000 NVIC_EncodePriority
+C:\Users\Mihai\AppData\Local\Temp\cclQr5J1.s:20     .text.NVIC_GetPriorityGrouping:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cclQr5J1.s:24     .text.NVIC_GetPriorityGrouping:00000000 NVIC_GetPriorityGrouping
+C:\Users\Mihai\AppData\Local\Temp\cclQr5J1.s:54     .text.NVIC_EnableIRQ:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cclQr5J1.s:58     .text.NVIC_EnableIRQ:00000000 NVIC_EnableIRQ
+C:\Users\Mihai\AppData\Local\Temp\cclQr5J1.s:96     .text.NVIC_SetPriority:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cclQr5J1.s:100    .text.NVIC_SetPriority:00000000 NVIC_SetPriority
+C:\Users\Mihai\AppData\Local\Temp\cclQr5J1.s:158    .text.NVIC_EncodePriority:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cclQr5J1.s:162    .text.NVIC_EncodePriority:00000000 NVIC_EncodePriority
                             *COM*:000000c4 GMACdevice
                             *COM*:00000004 synopGMACdev
-C:\Users\Mihai\AppData\Local\Temp\ccJr4KTI.s:240    .bss:00000000 $d
-C:\Users\Mihai\AppData\Local\Temp\ccJr4KTI.s:241    .bss:00000000 SynopGMACPeriodicTimerCallback
-C:\Users\Mihai\AppData\Local\Temp\ccJr4KTI.s:244    .bss:00000004 SynopGMACDeletePeriodicTimer
+C:\Users\Mihai\AppData\Local\Temp\cclQr5J1.s:240    .bss:00000000 $d
+C:\Users\Mihai\AppData\Local\Temp\cclQr5J1.s:241    .bss:00000000 SynopGMACPeriodicTimerCallback
+C:\Users\Mihai\AppData\Local\Temp\cclQr5J1.s:244    .bss:00000004 SynopGMACDeletePeriodicTimer
                             *COM*:00000004 GMAC_Power_down
-C:\Users\Mihai\AppData\Local\Temp\ccJr4KTI.s:248    .text.Eth_GetTxBuffer:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccJr4KTI.s:253    .text.Eth_GetTxBuffer:00000000 Eth_GetTxBuffer
-C:\Users\Mihai\AppData\Local\Temp\ccJr4KTI.s:293    .text.Eth_InitNetworkInterface:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccJr4KTI.s:298    .text.Eth_InitNetworkInterface:00000000 Eth_InitNetworkInterface
-C:\Users\Mihai\AppData\Local\Temp\ccJr4KTI.s:388    .text.Eth_ExitNetworkInterface:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccJr4KTI.s:393    .text.Eth_ExitNetworkInterface:00000000 Eth_ExitNetworkInterface
-C:\Users\Mihai\AppData\Local\Temp\ccJr4KTI.s:415    .text.Eth_OpenNetworkInterface:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccJr4KTI.s:420    .text.Eth_OpenNetworkInterface:00000000 Eth_OpenNetworkInterface
-C:\Users\Mihai\AppData\Local\Temp\ccJr4KTI.s:757    .text.Eth_CloseNetworkInterface:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccJr4KTI.s:762    .text.Eth_CloseNetworkInterface:00000000 Eth_CloseNetworkInterface
-C:\Users\Mihai\AppData\Local\Temp\ccJr4KTI.s:852    .text.Eth_TransmitFrames:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccJr4KTI.s:857    .text.Eth_TransmitFrames:00000000 Eth_TransmitFrames
-C:\Users\Mihai\AppData\Local\Temp\ccJr4KTI.s:946    .text.Eth_ReceiveData:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccJr4KTI.s:951    .text.Eth_ReceiveData:00000000 Eth_ReceiveData
-C:\Users\Mihai\AppData\Local\Temp\ccJr4KTI.s:1318   .rodata:00000000 $d
-C:\Users\Mihai\AppData\Local\Temp\ccJr4KTI.s:1319   .rodata:00000000 .LC0
-C:\Users\Mihai\AppData\Local\Temp\ccJr4KTI.s:1327   .text.ETH0_0_IRQHandler:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccJr4KTI.s:1332   .text.ETH0_0_IRQHandler:00000000 ETH0_0_IRQHandler
-C:\Users\Mihai\AppData\Local\Temp\ccJr4KTI.s:1699   .text.Eth_PerformIoctl:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccJr4KTI.s:1704   .text.Eth_PerformIoctl:00000000 Eth_PerformIoctl
-C:\Users\Mihai\AppData\Local\Temp\ccJr4KTI.s:1739   .text.Eth_PerformIoctl:00000028 $d
-C:\Users\Mihai\AppData\Local\Temp\ccJr4KTI.s:1751   .text.Eth_PerformIoctl:00000050 $t
-C:\Users\Mihai\AppData\Local\Temp\ccJr4KTI.s:2014   .text.Eth_lGetRMONCounters:00000000 Eth_lGetRMONCounters
-C:\Users\Mihai\AppData\Local\Temp\ccJr4KTI.s:2010   .text.Eth_lGetRMONCounters:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccJr4KTI.s:2478   .text.synopGMAC_RegisterPeriodicTimerCallback:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccJr4KTI.s:2483   .text.synopGMAC_RegisterPeriodicTimerCallback:00000000 synopGMAC_RegisterPeriodicTimerCallback
-C:\Users\Mihai\AppData\Local\Temp\ccJr4KTI.s:2515   .text.synopGMAC_RegisterDeleteTimerCallback:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccJr4KTI.s:2520   .text.synopGMAC_RegisterDeleteTimerCallback:00000000 synopGMAC_RegisterDeleteTimerCallback
-C:\Users\Mihai\AppData\Local\Temp\ccJr4KTI.s:2552   .text.synopGMAC_periodic_check:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccJr4KTI.s:2557   .text.synopGMAC_periodic_check:00000000 synopGMAC_periodic_check
+C:\Users\Mihai\AppData\Local\Temp\cclQr5J1.s:248    .text.Eth_GetTxBuffer:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cclQr5J1.s:253    .text.Eth_GetTxBuffer:00000000 Eth_GetTxBuffer
+C:\Users\Mihai\AppData\Local\Temp\cclQr5J1.s:293    .text.Eth_InitNetworkInterface:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cclQr5J1.s:298    .text.Eth_InitNetworkInterface:00000000 Eth_InitNetworkInterface
+C:\Users\Mihai\AppData\Local\Temp\cclQr5J1.s:388    .text.Eth_ExitNetworkInterface:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cclQr5J1.s:393    .text.Eth_ExitNetworkInterface:00000000 Eth_ExitNetworkInterface
+C:\Users\Mihai\AppData\Local\Temp\cclQr5J1.s:415    .text.Eth_OpenNetworkInterface:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cclQr5J1.s:420    .text.Eth_OpenNetworkInterface:00000000 Eth_OpenNetworkInterface
+C:\Users\Mihai\AppData\Local\Temp\cclQr5J1.s:757    .text.Eth_CloseNetworkInterface:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cclQr5J1.s:762    .text.Eth_CloseNetworkInterface:00000000 Eth_CloseNetworkInterface
+C:\Users\Mihai\AppData\Local\Temp\cclQr5J1.s:852    .text.Eth_TransmitFrames:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cclQr5J1.s:857    .text.Eth_TransmitFrames:00000000 Eth_TransmitFrames
+C:\Users\Mihai\AppData\Local\Temp\cclQr5J1.s:946    .text.Eth_ReceiveData:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cclQr5J1.s:951    .text.Eth_ReceiveData:00000000 Eth_ReceiveData
+C:\Users\Mihai\AppData\Local\Temp\cclQr5J1.s:1318   .rodata:00000000 $d
+C:\Users\Mihai\AppData\Local\Temp\cclQr5J1.s:1319   .rodata:00000000 .LC0
+C:\Users\Mihai\AppData\Local\Temp\cclQr5J1.s:1327   .text.ETH0_0_IRQHandler:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cclQr5J1.s:1332   .text.ETH0_0_IRQHandler:00000000 ETH0_0_IRQHandler
+C:\Users\Mihai\AppData\Local\Temp\cclQr5J1.s:1699   .text.Eth_PerformIoctl:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cclQr5J1.s:1704   .text.Eth_PerformIoctl:00000000 Eth_PerformIoctl
+C:\Users\Mihai\AppData\Local\Temp\cclQr5J1.s:1739   .text.Eth_PerformIoctl:00000028 $d
+C:\Users\Mihai\AppData\Local\Temp\cclQr5J1.s:1751   .text.Eth_PerformIoctl:00000050 $t
+C:\Users\Mihai\AppData\Local\Temp\cclQr5J1.s:2014   .text.Eth_lGetRMONCounters:00000000 Eth_lGetRMONCounters
+C:\Users\Mihai\AppData\Local\Temp\cclQr5J1.s:2010   .text.Eth_lGetRMONCounters:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cclQr5J1.s:2478   .text.synopGMAC_RegisterPeriodicTimerCallback:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cclQr5J1.s:2483   .text.synopGMAC_RegisterPeriodicTimerCallback:00000000 synopGMAC_RegisterPeriodicTimerCallback
+C:\Users\Mihai\AppData\Local\Temp\cclQr5J1.s:2515   .text.synopGMAC_RegisterDeleteTimerCallback:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cclQr5J1.s:2520   .text.synopGMAC_RegisterDeleteTimerCallback:00000000 synopGMAC_RegisterDeleteTimerCallback
+C:\Users\Mihai\AppData\Local\Temp\cclQr5J1.s:2552   .text.synopGMAC_periodic_check:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cclQr5J1.s:2557   .text.synopGMAC_periodic_check:00000000 synopGMAC_periodic_check
                      .debug_frame:00000010 $d
                            .group:00000000 wm4.1.1791a5ae2e936ca1033c1c44be394cc7
                            .group:00000000 wm4.XMC4500.h.45.215f4b8c79f46c7645c15373868d08c0
@@ -5706,6 +5706,7 @@ C:\Users\Mihai\AppData\Local\Temp\ccJr4KTI.s:2557   .text.synopGMAC_periodic_che
                            .group:00000000 wm4.fcntl.h.9.9336f33d7f5028f694c75e6e224e0cf7
                            .group:00000000 wm4.SLTHA001.h.97.d7e87c19a31e3244bdd5839e7cc42a61
                            .group:00000000 wm4.WEBSERVER001_Conf.h.54.cd6d29aaa96a848cbc5321bab5d6cd90
+                           .group:00000000 wm4.IO004.h.51.dbf9dd216c57d6a7f14a22b2cb7e5626
                            .group:00000000 wm4.ADCGROUP001.h.48.081c7f952eb4b6ea2df7d05180ee1663
                            .group:00000000 wm4.IO001.h.49.1da965fb490206cf7cde64a90f6912e1
                            .group:00000000 wm4.MOTORLIBS.h.59.b2e97de0df555dedfa51e24447b57ab8
@@ -5713,6 +5714,7 @@ C:\Users\Mihai\AppData\Local\Temp\ccJr4KTI.s:2557   .text.synopGMAC_periodic_che
                            .group:00000000 wm4.Usic.h.90.22743468abc46f16747d12430b219aaf
                            .group:00000000 wm4.UART001_Conf.h.53.c5c972f6f634bc5116c171852aaab668
                            .group:00000000 wm4.UART001.h.109.3e835815a7a59791d8bd39655f4d4cc9
+                           .group:00000000 wm4.NVIC002_Conf.h.63.45e3c2b9806aa66850587e587798873e
 
 UNDEFINED SYMBOLS
 RESET001_DeassertReset

@@ -21,7 +21,7 @@
   21              		.thumb
   22              		.thumb_func
   24              	ADCCH001_lInit:
-  25              	.LFB112:
+  25              	.LFB117:
   26              		.file 1 "../Dave/Generated/src/ADCCH001/ADCCH001.c"
    1:../Dave/Generated/src/ADCCH001/ADCCH001.c **** /*******************************************************************************
    2:../Dave/Generated/src/ADCCH001/ADCCH001.c **** **  DAVE App Name : ADCCH001       App Version: 1.0.4               
@@ -567,14 +567,14 @@
  341 02d6 80BC     		pop	{r7}
  342 02d8 7047     		bx	lr
  343              		.cfi_endproc
- 344              	.LFE112:
+ 344              	.LFE117:
  346 02da 00BF     		.section	.text.ADCCH001_Init,"ax",%progbits
  347              		.align	2
  348              		.global	ADCCH001_Init
  349              		.thumb
  350              		.thumb_func
  352              	ADCCH001_Init:
- 353              	.LFB113:
+ 353              	.LFB118:
  225:../Dave/Generated/src/ADCCH001/ADCCH001.c **** 
  226:../Dave/Generated/src/ADCCH001/ADCCH001.c **** /**************************************************************************************************
  227:../Dave/Generated/src/ADCCH001/ADCCH001.c ****  *                 API DEFINITION
@@ -612,14 +612,14 @@
  372              		.loc 1 240 0
  373 0014 80BD     		pop	{r7, pc}
  374              		.cfi_endproc
- 375              	.LFE113:
+ 375              	.LFE118:
  377 0016 00BF     		.section	.text.ADCCH001_Deinit,"ax",%progbits
  378              		.align	2
  379              		.global	ADCCH001_Deinit
  380              		.thumb
  381              		.thumb_func
  383              	ADCCH001_Deinit:
- 384              	.LFB114:
+ 384              	.LFB119:
  241:../Dave/Generated/src/ADCCH001/ADCCH001.c **** 
  242:../Dave/Generated/src/ADCCH001/ADCCH001.c **** /**
  243:../Dave/Generated/src/ADCCH001/ADCCH001.c ****  * This function resets all the channel and result registers. 
@@ -769,14 +769,14 @@
  490 00c0 80BC     		pop	{r7}
  491 00c2 7047     		bx	lr
  492              		.cfi_endproc
- 493              	.LFE114:
+ 493              	.LFE119:
  495              		.section	.text.ADCCH001_SetAlias,"ax",%progbits
  496              		.align	2
  497              		.global	ADCCH001_SetAlias
  498              		.thumb
  499              		.thumb_func
  501              	ADCCH001_SetAlias:
- 502              	.LFB115:
+ 502              	.LFB120:
  280:../Dave/Generated/src/ADCCH001/ADCCH001.c **** 
  281:../Dave/Generated/src/ADCCH001/ADCCH001.c **** /**
  282:../Dave/Generated/src/ADCCH001/ADCCH001.c ****  * This function assigns the alias channel number
@@ -895,14 +895,14 @@
  588 0090 80BC     		pop	{r7}
  589 0092 7047     		bx	lr
  590              		.cfi_endproc
- 591              	.LFE115:
+ 591              	.LFE120:
  593              		.section	.text.ADCCH001_EnableBoundaryFlag,"ax",%progbits
  594              		.align	2
  595              		.global	ADCCH001_EnableBoundaryFlag
  596              		.thumb
  597              		.thumb_func
  599              	ADCCH001_EnableBoundaryFlag:
- 600              	.LFB116:
+ 600              	.LFB121:
  309:../Dave/Generated/src/ADCCH001/ADCCH001.c **** 
  310:../Dave/Generated/src/ADCCH001/ADCCH001.c **** 
  311:../Dave/Generated/src/ADCCH001/ADCCH001.c **** 
@@ -993,14 +993,14 @@
  659 005a 80BC     		pop	{r7}
  660 005c 7047     		bx	lr
  661              		.cfi_endproc
- 662              	.LFE116:
+ 662              	.LFE121:
  664 005e 00BF     		.section	.text.ADCCH001_DisableBoundaryFlag,"ax",%progbits
  665              		.align	2
  666              		.global	ADCCH001_DisableBoundaryFlag
  667              		.thumb
  668              		.thumb_func
  670              	ADCCH001_DisableBoundaryFlag:
- 671              	.LFB117:
+ 671              	.LFB122:
  338:../Dave/Generated/src/ADCCH001/ADCCH001.c **** 
  339:../Dave/Generated/src/ADCCH001/ADCCH001.c **** /**
  340:../Dave/Generated/src/ADCCH001/ADCCH001.c ****  * This function disables the boundary flag for result register 0, 1, 2 or 3.
@@ -1090,14 +1090,14 @@
  731 005e 80BC     		pop	{r7}
  732 0060 7047     		bx	lr
  733              		.cfi_endproc
- 734              	.LFE117:
+ 734              	.LFE122:
  736 0062 00BF     		.section	.text.ADCCH001_SelectInputClass,"ax",%progbits
  737              		.align	2
  738              		.global	ADCCH001_SelectInputClass
  739              		.thumb
  740              		.thumb_func
  742              	ADCCH001_SelectInputClass:
- 743              	.LFB118:
+ 743              	.LFB123:
  365:../Dave/Generated/src/ADCCH001/ADCCH001.c **** 
  366:../Dave/Generated/src/ADCCH001/ADCCH001.c **** 
  367:../Dave/Generated/src/ADCCH001/ADCCH001.c **** /**
@@ -1205,14 +1205,14 @@
  814 006e 90BC     		pop	{r4, r7}
  815 0070 7047     		bx	lr
  816              		.cfi_endproc
- 817              	.LFE118:
+ 817              	.LFE123:
  819 0072 00BF     		.section	.text.ADCCH001_SelectChEvtMode,"ax",%progbits
  820              		.align	2
  821              		.global	ADCCH001_SelectChEvtMode
  822              		.thumb
  823              		.thumb_func
  825              	ADCCH001_SelectChEvtMode:
- 826              	.LFB119:
+ 826              	.LFB124:
  398:../Dave/Generated/src/ADCCH001/ADCCH001.c **** 
  399:../Dave/Generated/src/ADCCH001/ADCCH001.c **** 
  400:../Dave/Generated/src/ADCCH001/ADCCH001.c **** /**
@@ -1313,14 +1313,14 @@
  892 006a 90BC     		pop	{r4, r7}
  893 006c 7047     		bx	lr
  894              		.cfi_endproc
- 895              	.LFE119:
+ 895              	.LFE124:
  897 006e 00BF     		.section	.text.ADCCH001_SelectUpperBoundary,"ax",%progbits
  898              		.align	2
  899              		.global	ADCCH001_SelectUpperBoundary
  900              		.thumb
  901              		.thumb_func
  903              	ADCCH001_SelectUpperBoundary:
- 904              	.LFB120:
+ 904              	.LFB125:
  430:../Dave/Generated/src/ADCCH001/ADCCH001.c **** 
  431:../Dave/Generated/src/ADCCH001/ADCCH001.c **** /**
  432:../Dave/Generated/src/ADCCH001/ADCCH001.c ****  * This function selects the upper boundary for limit checking function. 
@@ -1429,14 +1429,14 @@
  976 0070 90BC     		pop	{r4, r7}
  977 0072 7047     		bx	lr
  978              		.cfi_endproc
- 979              	.LFE120:
+ 979              	.LFE125:
  981              		.section	.text.ADCCH001_SelectLowerBoundary,"ax",%progbits
  982              		.align	2
  983              		.global	ADCCH001_SelectLowerBoundary
  984              		.thumb
  985              		.thumb_func
  987              	ADCCH001_SelectLowerBoundary:
- 988              	.LFB121:
+ 988              	.LFB126:
  463:../Dave/Generated/src/ADCCH001/ADCCH001.c **** 
  464:../Dave/Generated/src/ADCCH001/ADCCH001.c **** /**
  465:../Dave/Generated/src/ADCCH001/ADCCH001.c ****  * This function selects the lower boundary for limit checking function. 
@@ -1545,14 +1545,14 @@
  1060 0072 90BC     		pop	{r4, r7}
  1061 0074 7047     		bx	lr
  1062              		.cfi_endproc
- 1063              	.LFE121:
+ 1063              	.LFE126:
  1065 0076 00BF     		.section	.text.ADCCH001_GetResult,"ax",%progbits
  1066              		.align	2
  1067              		.global	ADCCH001_GetResult
  1068              		.thumb
  1069              		.thumb_func
  1071              	ADCCH001_GetResult:
- 1072              	.LFB122:
+ 1072              	.LFB127:
  496:../Dave/Generated/src/ADCCH001/ADCCH001.c **** 
  497:../Dave/Generated/src/ADCCH001/ADCCH001.c **** /**
  498:../Dave/Generated/src/ADCCH001/ADCCH001.c ****  * This function returns the result of the normal mode ADC conversion. 
@@ -1681,14 +1681,14 @@
  1157 007a 80BC     		pop	{r7}
  1158 007c 7047     		bx	lr
  1159              		.cfi_endproc
- 1160              	.LFE122:
+ 1160              	.LFE127:
  1162 007e 00BF     		.section	.text.ADCCH001_GetFastCompareResult,"ax",%progbits
  1163              		.align	2
  1164              		.global	ADCCH001_GetFastCompareResult
  1165              		.thumb
  1166              		.thumb_func
  1168              	ADCCH001_GetFastCompareResult:
- 1169              	.LFB123:
+ 1169              	.LFB128:
  535:../Dave/Generated/src/ADCCH001/ADCCH001.c **** 
  536:../Dave/Generated/src/ADCCH001/ADCCH001.c **** /**
  537:../Dave/Generated/src/ADCCH001/ADCCH001.c ****  * This function returns the result of the fast compare ADC conversion. 
@@ -1818,14 +1818,14 @@
  1254 0082 80BC     		pop	{r7}
  1255 0084 7047     		bx	lr
  1256              		.cfi_endproc
- 1257              	.LFE123:
+ 1257              	.LFE128:
  1259 0086 00BF     		.section	.text.ADCCH001_SetCompareValue,"ax",%progbits
  1260              		.align	2
  1261              		.global	ADCCH001_SetCompareValue
  1262              		.thumb
  1263              		.thumb_func
  1265              	ADCCH001_SetCompareValue:
- 1266              	.LFB124:
+ 1266              	.LFB129:
  576:../Dave/Generated/src/ADCCH001/ADCCH001.c **** 
  577:../Dave/Generated/src/ADCCH001/ADCCH001.c **** /**
  578:../Dave/Generated/src/ADCCH001/ADCCH001.c ****  * This function sets the compare value for the Fast Compare Mode. 
@@ -1937,14 +1937,14 @@
  1342 0080 90BC     		pop	{r4, r7}
  1343 0082 7047     		bx	lr
  1344              		.cfi_endproc
- 1345              	.LFE124:
+ 1345              	.LFE129:
  1347              		.section	.text.ADCCH001_EnablePriorityChannel,"ax",%progbits
  1348              		.align	2
  1349              		.global	ADCCH001_EnablePriorityChannel
  1350              		.thumb
  1351              		.thumb_func
  1353              	ADCCH001_EnablePriorityChannel:
- 1354              	.LFB125:
+ 1354              	.LFB130:
  608:../Dave/Generated/src/ADCCH001/ADCCH001.c **** 
  609:../Dave/Generated/src/ADCCH001/ADCCH001.c **** /**
  610:../Dave/Generated/src/ADCCH001/ADCCH001.c ****  * This function enables the channel as a priority channel. 
@@ -2016,14 +2016,14 @@
  1402 0046 80BC     		pop	{r7}
  1403 0048 7047     		bx	lr
  1404              		.cfi_endproc
- 1405              	.LFE125:
+ 1405              	.LFE130:
  1407 004a 00BF     		.section	.text.ADCCH001_DisablePriorityChannel,"ax",%progbits
  1408              		.align	2
  1409              		.global	ADCCH001_DisablePriorityChannel
  1410              		.thumb
  1411              		.thumb_func
  1413              	ADCCH001_DisablePriorityChannel:
- 1414              	.LFB126:
+ 1414              	.LFB131:
  629:../Dave/Generated/src/ADCCH001/ADCCH001.c **** 
  630:../Dave/Generated/src/ADCCH001/ADCCH001.c **** /**
  631:../Dave/Generated/src/ADCCH001/ADCCH001.c ****  * This function disables the channel as a priority channel. 
@@ -2096,14 +2096,14 @@
  1463 004a 80BC     		pop	{r7}
  1464 004c 7047     		bx	lr
  1465              		.cfi_endproc
- 1466              	.LFE126:
+ 1466              	.LFE131:
  1468 004e 00BF     		.section	.text.ADCCH001_EnableResultEvt,"ax",%progbits
  1469              		.align	2
  1470              		.global	ADCCH001_EnableResultEvt
  1471              		.thumb
  1472              		.thumb_func
  1474              	ADCCH001_EnableResultEvt:
- 1475              	.LFB127:
+ 1475              	.LFB132:
  650:../Dave/Generated/src/ADCCH001/ADCCH001.c **** 
  651:../Dave/Generated/src/ADCCH001/ADCCH001.c **** /**
  652:../Dave/Generated/src/ADCCH001/ADCCH001.c ****  * This function enables the  Result event. 
@@ -2187,14 +2187,14 @@
  1531 0054 80BC     		pop	{r7}
  1532 0056 7047     		bx	lr
  1533              		.cfi_endproc
- 1534              	.LFE127:
+ 1534              	.LFE132:
  1536              		.section	.text.ADCCH001_DisableResultEvt,"ax",%progbits
  1537              		.align	2
  1538              		.global	ADCCH001_DisableResultEvt
  1539              		.thumb
  1540              		.thumb_func
  1542              	ADCCH001_DisableResultEvt:
- 1543              	.LFB128:
+ 1543              	.LFB133:
  674:../Dave/Generated/src/ADCCH001/ADCCH001.c **** 
  675:../Dave/Generated/src/ADCCH001/ADCCH001.c **** /**
  676:../Dave/Generated/src/ADCCH001/ADCCH001.c ****  * This function disables the  Result event. 
@@ -2278,14 +2278,14 @@
  1599 0054 80BC     		pop	{r7}
  1600 0056 7047     		bx	lr
  1601              		.cfi_endproc
- 1602              	.LFE128:
+ 1602              	.LFE133:
  1604              		.section	.text.ADCCH001_GetResultEvtFlag,"ax",%progbits
  1605              		.align	2
  1606              		.global	ADCCH001_GetResultEvtFlag
  1607              		.thumb
  1608              		.thumb_func
  1610              	ADCCH001_GetResultEvtFlag:
- 1611              	.LFB129:
+ 1611              	.LFB134:
  698:../Dave/Generated/src/ADCCH001/ADCCH001.c **** 
  699:../Dave/Generated/src/ADCCH001/ADCCH001.c **** 
  700:../Dave/Generated/src/ADCCH001/ADCCH001.c **** /**
@@ -2374,14 +2374,14 @@
  1669 0056 80BC     		pop	{r7}
  1670 0058 7047     		bx	lr
  1671              		.cfi_endproc
- 1672              	.LFE129:
+ 1672              	.LFE134:
  1674 005a 00BF     		.section	.text.ADCCH001_GetChannelEvtFlag,"ax",%progbits
  1675              		.align	2
  1676              		.global	ADCCH001_GetChannelEvtFlag
  1677              		.thumb
  1678              		.thumb_func
  1680              	ADCCH001_GetChannelEvtFlag:
- 1681              	.LFB130:
+ 1681              	.LFB135:
  725:../Dave/Generated/src/ADCCH001/ADCCH001.c **** 
  726:../Dave/Generated/src/ADCCH001/ADCCH001.c **** /**
  727:../Dave/Generated/src/ADCCH001/ADCCH001.c ****  * This function checks whether Channel event flag is set.
@@ -2460,14 +2460,14 @@
  1733 004e 80BC     		pop	{r7}
  1734 0050 7047     		bx	lr
  1735              		.cfi_endproc
- 1736              	.LFE130:
+ 1736              	.LFE135:
  1738 0052 00BF     		.section	.text.ADCCH001_SetResultEvtFlag,"ax",%progbits
  1739              		.align	2
  1740              		.global	ADCCH001_SetResultEvtFlag
  1741              		.thumb
  1742              		.thumb_func
  1744              	ADCCH001_SetResultEvtFlag:
- 1745              	.LFB131:
+ 1745              	.LFB136:
  749:../Dave/Generated/src/ADCCH001/ADCCH001.c **** 
  750:../Dave/Generated/src/ADCCH001/ADCCH001.c **** /**
  751:../Dave/Generated/src/ADCCH001/ADCCH001.c ****  * This will set the result event flag through software.
@@ -2549,14 +2549,14 @@
  1799 004e 80BC     		pop	{r7}
  1800 0050 7047     		bx	lr
  1801              		.cfi_endproc
- 1802              	.LFE131:
+ 1802              	.LFE136:
  1804 0052 00BF     		.section	.text.ADCCH001_SetChannelEvtFlag,"ax",%progbits
  1805              		.align	2
  1806              		.global	ADCCH001_SetChannelEvtFlag
  1807              		.thumb
  1808              		.thumb_func
  1810              	ADCCH001_SetChannelEvtFlag:
- 1811              	.LFB132:
+ 1811              	.LFB137:
  773:../Dave/Generated/src/ADCCH001/ADCCH001.c **** 
  774:../Dave/Generated/src/ADCCH001/ADCCH001.c **** /**
  775:../Dave/Generated/src/ADCCH001/ADCCH001.c ****  * This will set the channel event flagv through software
@@ -2630,14 +2630,14 @@
  1859 0046 80BC     		pop	{r7}
  1860 0048 7047     		bx	lr
  1861              		.cfi_endproc
- 1862              	.LFE132:
+ 1862              	.LFE137:
  1864 004a 00BF     		.section	.text.ADCCH001_ClearResultEvtFlag,"ax",%progbits
  1865              		.align	2
  1866              		.global	ADCCH001_ClearResultEvtFlag
  1867              		.thumb
  1868              		.thumb_func
  1870              	ADCCH001_ClearResultEvtFlag:
- 1871              	.LFB133:
+ 1871              	.LFB138:
  796:../Dave/Generated/src/ADCCH001/ADCCH001.c **** 
  797:../Dave/Generated/src/ADCCH001/ADCCH001.c **** /**
  798:../Dave/Generated/src/ADCCH001/ADCCH001.c ****  * This will clear the pending result event flag
@@ -2719,14 +2719,14 @@
  1925 004e 80BC     		pop	{r7}
  1926 0050 7047     		bx	lr
  1927              		.cfi_endproc
- 1928              	.LFE133:
+ 1928              	.LFE138:
  1930 0052 00BF     		.section	.text.ADCCH001_ClearChannelEvtFlag,"ax",%progbits
  1931              		.align	2
  1932              		.global	ADCCH001_ClearChannelEvtFlag
  1933              		.thumb
  1934              		.thumb_func
  1936              	ADCCH001_ClearChannelEvtFlag:
- 1937              	.LFB134:
+ 1937              	.LFB139:
  820:../Dave/Generated/src/ADCCH001/ADCCH001.c **** 
  821:../Dave/Generated/src/ADCCH001/ADCCH001.c **** /**
  822:../Dave/Generated/src/ADCCH001/ADCCH001.c ****  * This will clear the pending channel event flag
@@ -2800,14 +2800,14 @@
  1985 0046 80BC     		pop	{r7}
  1986 0048 7047     		bx	lr
  1987              		.cfi_endproc
- 1988              	.LFE134:
+ 1988              	.LFE139:
  1990 004a 00BF     		.section	.text.ADCCH001_SetBWDChannel,"ax",%progbits
  1991              		.align	2
  1992              		.global	ADCCH001_SetBWDChannel
  1993              		.thumb
  1994              		.thumb_func
  1996              	ADCCH001_SetBWDChannel:
- 1997              	.LFB135:
+ 1997              	.LFB140:
  843:../Dave/Generated/src/ADCCH001/ADCCH001.c **** 
  844:../Dave/Generated/src/ADCCH001/ADCCH001.c **** /**
  845:../Dave/Generated/src/ADCCH001/ADCCH001.c ****  * This function slects the Broken Wire Detection Channel. 
@@ -2901,14 +2901,14 @@
  2060 0064 90BC     		pop	{r4, r7}
  2061 0066 7047     		bx	lr
  2062              		.cfi_endproc
- 2063              	.LFE135:
+ 2063              	.LFE140:
  2065              		.section	.text.ADCCH001_EnableBWD,"ax",%progbits
  2066              		.align	2
  2067              		.global	ADCCH001_EnableBWD
  2068              		.thumb
  2069              		.thumb_func
  2071              	ADCCH001_EnableBWD:
- 2072              	.LFB136:
+ 2072              	.LFB141:
  870:../Dave/Generated/src/ADCCH001/ADCCH001.c **** 
  871:../Dave/Generated/src/ADCCH001/ADCCH001.c **** /**
  872:../Dave/Generated/src/ADCCH001/ADCCH001.c ****  * This will enable the Broken Wire Detection feature.
@@ -2994,14 +2994,14 @@
  2128 0054 80BC     		pop	{r7}
  2129 0056 7047     		bx	lr
  2130              		.cfi_endproc
- 2131              	.LFE136:
+ 2131              	.LFE141:
  2133              		.section	.text.ADCCH001_DisableBWD,"ax",%progbits
  2134              		.align	2
  2135              		.global	ADCCH001_DisableBWD
  2136              		.thumb
  2137              		.thumb_func
  2139              	ADCCH001_DisableBWD:
- 2140              	.LFB137:
+ 2140              	.LFB142:
  896:../Dave/Generated/src/ADCCH001/ADCCH001.c **** 
  897:../Dave/Generated/src/ADCCH001/ADCCH001.c **** /**
  898:../Dave/Generated/src/ADCCH001/ADCCH001.c ****  * This will disable the Broken Wire Detection feature.
@@ -3087,14 +3087,14 @@
  2196 0054 80BC     		pop	{r7}
  2197 0056 7047     		bx	lr
  2198              		.cfi_endproc
- 2199              	.LFE137:
+ 2199              	.LFE142:
  2201              		.section	.text.ADCCH001_EnableWaitForRead,"ax",%progbits
  2202              		.align	2
  2203              		.global	ADCCH001_EnableWaitForRead
  2204              		.thumb
  2205              		.thumb_func
  2207              	ADCCH001_EnableWaitForRead:
- 2208              	.LFB138:
+ 2208              	.LFB143:
  922:../Dave/Generated/src/ADCCH001/ADCCH001.c **** 
  923:../Dave/Generated/src/ADCCH001/ADCCH001.c **** /**
  924:../Dave/Generated/src/ADCCH001/ADCCH001.c ****  * This will enable wait for read mode of the result register
@@ -3182,14 +3182,14 @@
  2264 0054 80BC     		pop	{r7}
  2265 0056 7047     		bx	lr
  2266              		.cfi_endproc
- 2267              	.LFE138:
+ 2267              	.LFE143:
  2269              		.section	.text.ADCCH001_DisableWaitForRead,"ax",%progbits
  2270              		.align	2
  2271              		.global	ADCCH001_DisableWaitForRead
  2272              		.thumb
  2273              		.thumb_func
  2275              	ADCCH001_DisableWaitForRead:
- 2276              	.LFB139:
+ 2276              	.LFB144:
  950:../Dave/Generated/src/ADCCH001/ADCCH001.c **** 
  951:../Dave/Generated/src/ADCCH001/ADCCH001.c **** 
  952:../Dave/Generated/src/ADCCH001/ADCCH001.c **** /**
@@ -3278,7 +3278,7 @@
  2332 0054 80BC     		pop	{r7}
  2333 0056 7047     		bx	lr
  2334              		.cfi_endproc
- 2335              	.LFE139:
+ 2335              	.LFE144:
  2337              		.text
  2338              	.Letext0:
  2339              		.file 2 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
@@ -3289,62 +3289,62 @@
  2344              		.file 7 "F:\\WORK\\SmartHome_checkout1\\XMC4500_RK_HTTPserver\\Dave\\Generated\\inc\\DAVESupport/.
 DEFINED SYMBOLS
                             *ABS*:00000000 ADCCH001.c
-C:\Users\Mihai\AppData\Local\Temp\ccF12NTW.s:20     .text.ADCCH001_lInit:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccF12NTW.s:24     .text.ADCCH001_lInit:00000000 ADCCH001_lInit
-C:\Users\Mihai\AppData\Local\Temp\ccF12NTW.s:347    .text.ADCCH001_Init:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccF12NTW.s:352    .text.ADCCH001_Init:00000000 ADCCH001_Init
-C:\Users\Mihai\AppData\Local\Temp\ccF12NTW.s:378    .text.ADCCH001_Deinit:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccF12NTW.s:383    .text.ADCCH001_Deinit:00000000 ADCCH001_Deinit
-C:\Users\Mihai\AppData\Local\Temp\ccF12NTW.s:496    .text.ADCCH001_SetAlias:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccF12NTW.s:501    .text.ADCCH001_SetAlias:00000000 ADCCH001_SetAlias
-C:\Users\Mihai\AppData\Local\Temp\ccF12NTW.s:594    .text.ADCCH001_EnableBoundaryFlag:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccF12NTW.s:599    .text.ADCCH001_EnableBoundaryFlag:00000000 ADCCH001_EnableBoundaryFlag
-C:\Users\Mihai\AppData\Local\Temp\ccF12NTW.s:665    .text.ADCCH001_DisableBoundaryFlag:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccF12NTW.s:670    .text.ADCCH001_DisableBoundaryFlag:00000000 ADCCH001_DisableBoundaryFlag
-C:\Users\Mihai\AppData\Local\Temp\ccF12NTW.s:737    .text.ADCCH001_SelectInputClass:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccF12NTW.s:742    .text.ADCCH001_SelectInputClass:00000000 ADCCH001_SelectInputClass
-C:\Users\Mihai\AppData\Local\Temp\ccF12NTW.s:820    .text.ADCCH001_SelectChEvtMode:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccF12NTW.s:825    .text.ADCCH001_SelectChEvtMode:00000000 ADCCH001_SelectChEvtMode
-C:\Users\Mihai\AppData\Local\Temp\ccF12NTW.s:898    .text.ADCCH001_SelectUpperBoundary:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccF12NTW.s:903    .text.ADCCH001_SelectUpperBoundary:00000000 ADCCH001_SelectUpperBoundary
-C:\Users\Mihai\AppData\Local\Temp\ccF12NTW.s:982    .text.ADCCH001_SelectLowerBoundary:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccF12NTW.s:987    .text.ADCCH001_SelectLowerBoundary:00000000 ADCCH001_SelectLowerBoundary
-C:\Users\Mihai\AppData\Local\Temp\ccF12NTW.s:1066   .text.ADCCH001_GetResult:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccF12NTW.s:1071   .text.ADCCH001_GetResult:00000000 ADCCH001_GetResult
-C:\Users\Mihai\AppData\Local\Temp\ccF12NTW.s:1163   .text.ADCCH001_GetFastCompareResult:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccF12NTW.s:1168   .text.ADCCH001_GetFastCompareResult:00000000 ADCCH001_GetFastCompareResult
-C:\Users\Mihai\AppData\Local\Temp\ccF12NTW.s:1260   .text.ADCCH001_SetCompareValue:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccF12NTW.s:1265   .text.ADCCH001_SetCompareValue:00000000 ADCCH001_SetCompareValue
-C:\Users\Mihai\AppData\Local\Temp\ccF12NTW.s:1348   .text.ADCCH001_EnablePriorityChannel:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccF12NTW.s:1353   .text.ADCCH001_EnablePriorityChannel:00000000 ADCCH001_EnablePriorityChannel
-C:\Users\Mihai\AppData\Local\Temp\ccF12NTW.s:1408   .text.ADCCH001_DisablePriorityChannel:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccF12NTW.s:1413   .text.ADCCH001_DisablePriorityChannel:00000000 ADCCH001_DisablePriorityChannel
-C:\Users\Mihai\AppData\Local\Temp\ccF12NTW.s:1469   .text.ADCCH001_EnableResultEvt:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccF12NTW.s:1474   .text.ADCCH001_EnableResultEvt:00000000 ADCCH001_EnableResultEvt
-C:\Users\Mihai\AppData\Local\Temp\ccF12NTW.s:1537   .text.ADCCH001_DisableResultEvt:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccF12NTW.s:1542   .text.ADCCH001_DisableResultEvt:00000000 ADCCH001_DisableResultEvt
-C:\Users\Mihai\AppData\Local\Temp\ccF12NTW.s:1605   .text.ADCCH001_GetResultEvtFlag:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccF12NTW.s:1610   .text.ADCCH001_GetResultEvtFlag:00000000 ADCCH001_GetResultEvtFlag
-C:\Users\Mihai\AppData\Local\Temp\ccF12NTW.s:1675   .text.ADCCH001_GetChannelEvtFlag:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccF12NTW.s:1680   .text.ADCCH001_GetChannelEvtFlag:00000000 ADCCH001_GetChannelEvtFlag
-C:\Users\Mihai\AppData\Local\Temp\ccF12NTW.s:1739   .text.ADCCH001_SetResultEvtFlag:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccF12NTW.s:1744   .text.ADCCH001_SetResultEvtFlag:00000000 ADCCH001_SetResultEvtFlag
-C:\Users\Mihai\AppData\Local\Temp\ccF12NTW.s:1805   .text.ADCCH001_SetChannelEvtFlag:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccF12NTW.s:1810   .text.ADCCH001_SetChannelEvtFlag:00000000 ADCCH001_SetChannelEvtFlag
-C:\Users\Mihai\AppData\Local\Temp\ccF12NTW.s:1865   .text.ADCCH001_ClearResultEvtFlag:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccF12NTW.s:1870   .text.ADCCH001_ClearResultEvtFlag:00000000 ADCCH001_ClearResultEvtFlag
-C:\Users\Mihai\AppData\Local\Temp\ccF12NTW.s:1931   .text.ADCCH001_ClearChannelEvtFlag:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccF12NTW.s:1936   .text.ADCCH001_ClearChannelEvtFlag:00000000 ADCCH001_ClearChannelEvtFlag
-C:\Users\Mihai\AppData\Local\Temp\ccF12NTW.s:1991   .text.ADCCH001_SetBWDChannel:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccF12NTW.s:1996   .text.ADCCH001_SetBWDChannel:00000000 ADCCH001_SetBWDChannel
-C:\Users\Mihai\AppData\Local\Temp\ccF12NTW.s:2066   .text.ADCCH001_EnableBWD:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccF12NTW.s:2071   .text.ADCCH001_EnableBWD:00000000 ADCCH001_EnableBWD
-C:\Users\Mihai\AppData\Local\Temp\ccF12NTW.s:2134   .text.ADCCH001_DisableBWD:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccF12NTW.s:2139   .text.ADCCH001_DisableBWD:00000000 ADCCH001_DisableBWD
-C:\Users\Mihai\AppData\Local\Temp\ccF12NTW.s:2202   .text.ADCCH001_EnableWaitForRead:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccF12NTW.s:2207   .text.ADCCH001_EnableWaitForRead:00000000 ADCCH001_EnableWaitForRead
-C:\Users\Mihai\AppData\Local\Temp\ccF12NTW.s:2270   .text.ADCCH001_DisableWaitForRead:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccF12NTW.s:2275   .text.ADCCH001_DisableWaitForRead:00000000 ADCCH001_DisableWaitForRead
+C:\Users\Mihai\AppData\Local\Temp\ccjlT4qA.s:20     .text.ADCCH001_lInit:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccjlT4qA.s:24     .text.ADCCH001_lInit:00000000 ADCCH001_lInit
+C:\Users\Mihai\AppData\Local\Temp\ccjlT4qA.s:347    .text.ADCCH001_Init:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccjlT4qA.s:352    .text.ADCCH001_Init:00000000 ADCCH001_Init
+C:\Users\Mihai\AppData\Local\Temp\ccjlT4qA.s:378    .text.ADCCH001_Deinit:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccjlT4qA.s:383    .text.ADCCH001_Deinit:00000000 ADCCH001_Deinit
+C:\Users\Mihai\AppData\Local\Temp\ccjlT4qA.s:496    .text.ADCCH001_SetAlias:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccjlT4qA.s:501    .text.ADCCH001_SetAlias:00000000 ADCCH001_SetAlias
+C:\Users\Mihai\AppData\Local\Temp\ccjlT4qA.s:594    .text.ADCCH001_EnableBoundaryFlag:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccjlT4qA.s:599    .text.ADCCH001_EnableBoundaryFlag:00000000 ADCCH001_EnableBoundaryFlag
+C:\Users\Mihai\AppData\Local\Temp\ccjlT4qA.s:665    .text.ADCCH001_DisableBoundaryFlag:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccjlT4qA.s:670    .text.ADCCH001_DisableBoundaryFlag:00000000 ADCCH001_DisableBoundaryFlag
+C:\Users\Mihai\AppData\Local\Temp\ccjlT4qA.s:737    .text.ADCCH001_SelectInputClass:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccjlT4qA.s:742    .text.ADCCH001_SelectInputClass:00000000 ADCCH001_SelectInputClass
+C:\Users\Mihai\AppData\Local\Temp\ccjlT4qA.s:820    .text.ADCCH001_SelectChEvtMode:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccjlT4qA.s:825    .text.ADCCH001_SelectChEvtMode:00000000 ADCCH001_SelectChEvtMode
+C:\Users\Mihai\AppData\Local\Temp\ccjlT4qA.s:898    .text.ADCCH001_SelectUpperBoundary:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccjlT4qA.s:903    .text.ADCCH001_SelectUpperBoundary:00000000 ADCCH001_SelectUpperBoundary
+C:\Users\Mihai\AppData\Local\Temp\ccjlT4qA.s:982    .text.ADCCH001_SelectLowerBoundary:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccjlT4qA.s:987    .text.ADCCH001_SelectLowerBoundary:00000000 ADCCH001_SelectLowerBoundary
+C:\Users\Mihai\AppData\Local\Temp\ccjlT4qA.s:1066   .text.ADCCH001_GetResult:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccjlT4qA.s:1071   .text.ADCCH001_GetResult:00000000 ADCCH001_GetResult
+C:\Users\Mihai\AppData\Local\Temp\ccjlT4qA.s:1163   .text.ADCCH001_GetFastCompareResult:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccjlT4qA.s:1168   .text.ADCCH001_GetFastCompareResult:00000000 ADCCH001_GetFastCompareResult
+C:\Users\Mihai\AppData\Local\Temp\ccjlT4qA.s:1260   .text.ADCCH001_SetCompareValue:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccjlT4qA.s:1265   .text.ADCCH001_SetCompareValue:00000000 ADCCH001_SetCompareValue
+C:\Users\Mihai\AppData\Local\Temp\ccjlT4qA.s:1348   .text.ADCCH001_EnablePriorityChannel:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccjlT4qA.s:1353   .text.ADCCH001_EnablePriorityChannel:00000000 ADCCH001_EnablePriorityChannel
+C:\Users\Mihai\AppData\Local\Temp\ccjlT4qA.s:1408   .text.ADCCH001_DisablePriorityChannel:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccjlT4qA.s:1413   .text.ADCCH001_DisablePriorityChannel:00000000 ADCCH001_DisablePriorityChannel
+C:\Users\Mihai\AppData\Local\Temp\ccjlT4qA.s:1469   .text.ADCCH001_EnableResultEvt:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccjlT4qA.s:1474   .text.ADCCH001_EnableResultEvt:00000000 ADCCH001_EnableResultEvt
+C:\Users\Mihai\AppData\Local\Temp\ccjlT4qA.s:1537   .text.ADCCH001_DisableResultEvt:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccjlT4qA.s:1542   .text.ADCCH001_DisableResultEvt:00000000 ADCCH001_DisableResultEvt
+C:\Users\Mihai\AppData\Local\Temp\ccjlT4qA.s:1605   .text.ADCCH001_GetResultEvtFlag:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccjlT4qA.s:1610   .text.ADCCH001_GetResultEvtFlag:00000000 ADCCH001_GetResultEvtFlag
+C:\Users\Mihai\AppData\Local\Temp\ccjlT4qA.s:1675   .text.ADCCH001_GetChannelEvtFlag:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccjlT4qA.s:1680   .text.ADCCH001_GetChannelEvtFlag:00000000 ADCCH001_GetChannelEvtFlag
+C:\Users\Mihai\AppData\Local\Temp\ccjlT4qA.s:1739   .text.ADCCH001_SetResultEvtFlag:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccjlT4qA.s:1744   .text.ADCCH001_SetResultEvtFlag:00000000 ADCCH001_SetResultEvtFlag
+C:\Users\Mihai\AppData\Local\Temp\ccjlT4qA.s:1805   .text.ADCCH001_SetChannelEvtFlag:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccjlT4qA.s:1810   .text.ADCCH001_SetChannelEvtFlag:00000000 ADCCH001_SetChannelEvtFlag
+C:\Users\Mihai\AppData\Local\Temp\ccjlT4qA.s:1865   .text.ADCCH001_ClearResultEvtFlag:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccjlT4qA.s:1870   .text.ADCCH001_ClearResultEvtFlag:00000000 ADCCH001_ClearResultEvtFlag
+C:\Users\Mihai\AppData\Local\Temp\ccjlT4qA.s:1931   .text.ADCCH001_ClearChannelEvtFlag:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccjlT4qA.s:1936   .text.ADCCH001_ClearChannelEvtFlag:00000000 ADCCH001_ClearChannelEvtFlag
+C:\Users\Mihai\AppData\Local\Temp\ccjlT4qA.s:1991   .text.ADCCH001_SetBWDChannel:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccjlT4qA.s:1996   .text.ADCCH001_SetBWDChannel:00000000 ADCCH001_SetBWDChannel
+C:\Users\Mihai\AppData\Local\Temp\ccjlT4qA.s:2066   .text.ADCCH001_EnableBWD:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccjlT4qA.s:2071   .text.ADCCH001_EnableBWD:00000000 ADCCH001_EnableBWD
+C:\Users\Mihai\AppData\Local\Temp\ccjlT4qA.s:2134   .text.ADCCH001_DisableBWD:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccjlT4qA.s:2139   .text.ADCCH001_DisableBWD:00000000 ADCCH001_DisableBWD
+C:\Users\Mihai\AppData\Local\Temp\ccjlT4qA.s:2202   .text.ADCCH001_EnableWaitForRead:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccjlT4qA.s:2207   .text.ADCCH001_EnableWaitForRead:00000000 ADCCH001_EnableWaitForRead
+C:\Users\Mihai\AppData\Local\Temp\ccjlT4qA.s:2270   .text.ADCCH001_DisableWaitForRead:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccjlT4qA.s:2275   .text.ADCCH001_DisableWaitForRead:00000000 ADCCH001_DisableWaitForRead
                      .debug_frame:00000010 $d
                            .group:00000000 wm4.1.1791a5ae2e936ca1033c1c44be394cc7
                            .group:00000000 wm4.XMC4500.h.45.215f4b8c79f46c7645c15373868d08c0
@@ -3435,6 +3435,7 @@ C:\Users\Mihai\AppData\Local\Temp\ccF12NTW.s:2275   .text.ADCCH001_DisableWaitFo
                            .group:00000000 wm4.fcntl.h.9.9336f33d7f5028f694c75e6e224e0cf7
                            .group:00000000 wm4.SLTHA001.h.97.d7e87c19a31e3244bdd5839e7cc42a61
                            .group:00000000 wm4.WEBSERVER001_Conf.h.54.cd6d29aaa96a848cbc5321bab5d6cd90
+                           .group:00000000 wm4.IO004.h.51.dbf9dd216c57d6a7f14a22b2cb7e5626
                            .group:00000000 wm4.ADCGROUP001.h.48.081c7f952eb4b6ea2df7d05180ee1663
                            .group:00000000 wm4.IO001.h.49.1da965fb490206cf7cde64a90f6912e1
                            .group:00000000 wm4.MOTORLIBS.h.59.b2e97de0df555dedfa51e24447b57ab8
@@ -3442,6 +3443,7 @@ C:\Users\Mihai\AppData\Local\Temp\ccF12NTW.s:2275   .text.ADCCH001_DisableWaitFo
                            .group:00000000 wm4.Usic.h.90.22743468abc46f16747d12430b219aaf
                            .group:00000000 wm4.UART001_Conf.h.53.c5c972f6f634bc5116c171852aaab668
                            .group:00000000 wm4.UART001.h.109.3e835815a7a59791d8bd39655f4d4cc9
+                           .group:00000000 wm4.NVIC002_Conf.h.63.45e3c2b9806aa66850587e587798873e
 
 UNDEFINED SYMBOLS
 ADCGLOB001_Init

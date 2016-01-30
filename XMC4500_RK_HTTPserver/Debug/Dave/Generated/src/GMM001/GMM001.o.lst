@@ -38,7 +38,7 @@
   44              		.thumb
   45              		.thumb_func
   47              	GMM001_Init:
-  48              	.LFB112:
+  48              	.LFB117:
   49              		.file 1 "../Dave/Generated/src/GMM001/GMM001.c"
    1:../Dave/Generated/src/GMM001/GMM001.c **** 
    2:../Dave/Generated/src/GMM001/GMM001.c **** /*CODE_BLOCK_BEGIN[gmm001.c]*/
@@ -254,14 +254,14 @@
  134              		.loc 1 127 0
  135 00dc 80BD     		pop	{r7, pc}
  136              		.cfi_endproc
- 137              	.LFE112:
+ 137              	.LFE117:
  139 00de 00BF     		.section	.text.GMM001_malloc,"ax",%progbits
  140              		.align	2
  141              		.global	GMM001_malloc
  142              		.thumb
  143              		.thumb_func
  145              	GMM001_malloc:
- 146              	.LFB113:
+ 146              	.LFB118:
  128:../Dave/Generated/src/GMM001/GMM001.c **** 
  129:../Dave/Generated/src/GMM001/GMM001.c **** /*<<<DD_GMM001_API_2>>>*/
  130:../Dave/Generated/src/GMM001/GMM001.c **** /*
@@ -340,14 +340,14 @@
  198 0052 BD46     		mov	sp, r7
  199 0054 80BD     		pop	{r7, pc}
  200              		.cfi_endproc
- 201              	.LFE113:
+ 201              	.LFE118:
  203 0056 00BF     		.section	.text.GMM001_realloc,"ax",%progbits
  204              		.align	2
  205              		.global	GMM001_realloc
  206              		.thumb
  207              		.thumb_func
  209              	GMM001_realloc:
- 210              	.LFB114:
+ 210              	.LFB119:
  152:../Dave/Generated/src/GMM001/GMM001.c **** 
  153:../Dave/Generated/src/GMM001/GMM001.c **** /*<<<DD_GMM001_API_3>>>*/ 
  154:../Dave/Generated/src/GMM001/GMM001.c **** /*
@@ -496,14 +496,14 @@
  321 00da BD46     		mov	sp, r7
  322 00dc 80BD     		pop	{r7, pc}
  323              		.cfi_endproc
- 324              	.LFE114:
+ 324              	.LFE119:
  326 00de 00BF     		.section	.text.GMM001_free,"ax",%progbits
  327              		.align	2
  328              		.global	GMM001_free
  329              		.thumb
  330              		.thumb_func
  332              	GMM001_free:
- 333              	.LFB115:
+ 333              	.LFB120:
  187:../Dave/Generated/src/GMM001/GMM001.c **** 
  188:../Dave/Generated/src/GMM001/GMM001.c **** /*<<<DD_GMM001_API_4>>>*/ 
  189:../Dave/Generated/src/GMM001/GMM001.c **** /*
@@ -621,7 +621,7 @@
  420 00b2 BD46     		mov	sp, r7
  421 00b4 80BD     		pop	{r7, pc}
  422              		.cfi_endproc
- 423              	.LFE115:
+ 423              	.LFE120:
  425 00b6 00BF     		.text
  426              	.Letext0:
  427              		.file 2 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
@@ -631,21 +631,21 @@
  431              		.file 6 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Include/core_cm4.h"
 DEFINED SYMBOLS
                             *ABS*:00000000 GMM001.c
-C:\Users\Mihai\AppData\Local\Temp\ccdUCNOV.s:24     .rodata:00000000 LENGTH1
-C:\Users\Mihai\AppData\Local\Temp\ccdUCNOV.s:21     .rodata:00000000 $d
-C:\Users\Mihai\AppData\Local\Temp\ccdUCNOV.s:30     .rodata:00000004 LENGTH2
-C:\Users\Mihai\AppData\Local\Temp\ccdUCNOV.s:36     .rodata:00000008 LENGTH3
+C:\Users\Mihai\AppData\Local\Temp\ccG1opv7.s:24     .rodata:00000000 LENGTH1
+C:\Users\Mihai\AppData\Local\Temp\ccG1opv7.s:21     .rodata:00000000 $d
+C:\Users\Mihai\AppData\Local\Temp\ccG1opv7.s:30     .rodata:00000004 LENGTH2
+C:\Users\Mihai\AppData\Local\Temp\ccG1opv7.s:36     .rodata:00000008 LENGTH3
                             *COM*:00000006 GMM001_handle0
                             *COM*:00000006 GMM001_handle1
                             *COM*:00000006 GMM001_handle2
-C:\Users\Mihai\AppData\Local\Temp\ccdUCNOV.s:42     .text.GMM001_Init:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccdUCNOV.s:47     .text.GMM001_Init:00000000 GMM001_Init
-C:\Users\Mihai\AppData\Local\Temp\ccdUCNOV.s:140    .text.GMM001_malloc:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccdUCNOV.s:145    .text.GMM001_malloc:00000000 GMM001_malloc
-C:\Users\Mihai\AppData\Local\Temp\ccdUCNOV.s:204    .text.GMM001_realloc:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccdUCNOV.s:209    .text.GMM001_realloc:00000000 GMM001_realloc
-C:\Users\Mihai\AppData\Local\Temp\ccdUCNOV.s:327    .text.GMM001_free:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccdUCNOV.s:332    .text.GMM001_free:00000000 GMM001_free
+C:\Users\Mihai\AppData\Local\Temp\ccG1opv7.s:42     .text.GMM001_Init:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccG1opv7.s:47     .text.GMM001_Init:00000000 GMM001_Init
+C:\Users\Mihai\AppData\Local\Temp\ccG1opv7.s:140    .text.GMM001_malloc:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccG1opv7.s:145    .text.GMM001_malloc:00000000 GMM001_malloc
+C:\Users\Mihai\AppData\Local\Temp\ccG1opv7.s:204    .text.GMM001_realloc:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccG1opv7.s:209    .text.GMM001_realloc:00000000 GMM001_realloc
+C:\Users\Mihai\AppData\Local\Temp\ccG1opv7.s:327    .text.GMM001_free:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccG1opv7.s:332    .text.GMM001_free:00000000 GMM001_free
                      .debug_frame:00000010 $d
                            .group:00000000 wm4.1.1791a5ae2e936ca1033c1c44be394cc7
                            .group:00000000 wm4.XMC4500.h.45.215f4b8c79f46c7645c15373868d08c0
@@ -736,6 +736,7 @@ C:\Users\Mihai\AppData\Local\Temp\ccdUCNOV.s:332    .text.GMM001_free:00000000 G
                            .group:00000000 wm4.fcntl.h.9.9336f33d7f5028f694c75e6e224e0cf7
                            .group:00000000 wm4.SLTHA001.h.97.d7e87c19a31e3244bdd5839e7cc42a61
                            .group:00000000 wm4.WEBSERVER001_Conf.h.54.cd6d29aaa96a848cbc5321bab5d6cd90
+                           .group:00000000 wm4.IO004.h.51.dbf9dd216c57d6a7f14a22b2cb7e5626
                            .group:00000000 wm4.ADCGROUP001.h.48.081c7f952eb4b6ea2df7d05180ee1663
                            .group:00000000 wm4.IO001.h.49.1da965fb490206cf7cde64a90f6912e1
                            .group:00000000 wm4.MOTORLIBS.h.59.b2e97de0df555dedfa51e24447b57ab8
@@ -743,6 +744,7 @@ C:\Users\Mihai\AppData\Local\Temp\ccdUCNOV.s:332    .text.GMM001_free:00000000 G
                            .group:00000000 wm4.Usic.h.90.22743468abc46f16747d12430b219aaf
                            .group:00000000 wm4.UART001_Conf.h.53.c5c972f6f634bc5116c171852aaab668
                            .group:00000000 wm4.UART001.h.109.3e835815a7a59791d8bd39655f4d4cc9
+                           .group:00000000 wm4.NVIC002_Conf.h.63.45e3c2b9806aa66850587e587798873e
 
 UNDEFINED SYMBOLS
 Heap_Bank1_Size

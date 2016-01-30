@@ -22,7 +22,7 @@
   22              		.thumb
   23              		.thumb_func
   25              	RESET001_AssertReset:
-  26              	.LFB112:
+  26              	.LFB117:
   27              		.file 1 "../Dave/Generated/src/RESET001/RESET001.c"
    1:../Dave/Generated/src/RESET001/RESET001.c **** /*******************************************************************************
    2:../Dave/Generated/src/RESET001/RESET001.c **** **  DAVE App Name : RESET001       App Version: 1.0.8               
@@ -196,14 +196,14 @@
   77 0050 80BC     		pop	{r7}
   78 0052 7047     		bx	lr
   79              		.cfi_endproc
-  80              	.LFE112:
+  80              	.LFE117:
   82              		.section	.text.RESET001_DeassertReset,"ax",%progbits
   83              		.align	2
   84              		.global	RESET001_DeassertReset
   85              		.thumb
   86              		.thumb_func
   88              	RESET001_DeassertReset:
-  89              	.LFB113:
+  89              	.LFB118:
  121:../Dave/Generated/src/RESET001/RESET001.c **** 
  122:../Dave/Generated/src/RESET001/RESET001.c **** /* API to get the  reason of last reset */	
  123:../Dave/Generated/src/RESET001/RESET001.c **** 
@@ -269,14 +269,14 @@
  139 0050 80BC     		pop	{r7}
  140 0052 7047     		bx	lr
  141              		.cfi_endproc
- 142              	.LFE113:
+ 142              	.LFE118:
  144              		.section	.text.RESET001_GetResetInfo,"ax",%progbits
  145              		.align	2
  146              		.global	RESET001_GetResetInfo
  147              		.thumb
  148              		.thumb_func
  150              	RESET001_GetResetInfo:
- 151              	.LFB114:
+ 151              	.LFB119:
  134:../Dave/Generated/src/RESET001/RESET001.c **** 	
  135:../Dave/Generated/src/RESET001/RESET001.c **** /* API to get the  reason of last reset. */
  136:../Dave/Generated/src/RESET001/RESET001.c **** RESET001_InfoType RESET001_GetResetInfo()
@@ -315,14 +315,14 @@
  179 001e 80BC     		pop	{r7}
  180 0020 7047     		bx	lr
  181              		.cfi_endproc
- 182              	.LFE114:
+ 182              	.LFE119:
  184 0022 00BF     		.section	.text.RESET001_GetStatus,"ax",%progbits
  185              		.align	2
  186              		.global	RESET001_GetStatus
  187              		.thumb
  188              		.thumb_func
  190              	RESET001_GetStatus:
- 191              	.LFB115:
+ 191              	.LFB120:
  142:../Dave/Generated/src/RESET001/RESET001.c **** 		
  143:../Dave/Generated/src/RESET001/RESET001.c **** /* Get the reset status of the peripheral */		
  144:../Dave/Generated/src/RESET001/RESET001.c **** status_t RESET001_GetStatus(RESET001_ResetnType Resetn)
@@ -422,7 +422,7 @@
  265 0078 80BC     		pop	{r7}
  266 007a 7047     		bx	lr
  267              		.cfi_endproc
- 268              	.LFE115:
+ 268              	.LFE120:
  270              		.text
  271              	.Letext0:
  272              		.file 2 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
@@ -432,14 +432,14 @@
  276              		.file 6 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Include/core_cm4.h"
 DEFINED SYMBOLS
                             *ABS*:00000000 RESET001.c
-C:\Users\Mihai\AppData\Local\Temp\ccniCo2N.s:20     .text.RESET001_AssertReset:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccniCo2N.s:25     .text.RESET001_AssertReset:00000000 RESET001_AssertReset
-C:\Users\Mihai\AppData\Local\Temp\ccniCo2N.s:83     .text.RESET001_DeassertReset:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccniCo2N.s:88     .text.RESET001_DeassertReset:00000000 RESET001_DeassertReset
-C:\Users\Mihai\AppData\Local\Temp\ccniCo2N.s:145    .text.RESET001_GetResetInfo:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccniCo2N.s:150    .text.RESET001_GetResetInfo:00000000 RESET001_GetResetInfo
-C:\Users\Mihai\AppData\Local\Temp\ccniCo2N.s:185    .text.RESET001_GetStatus:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccniCo2N.s:190    .text.RESET001_GetStatus:00000000 RESET001_GetStatus
+C:\Users\Mihai\AppData\Local\Temp\cca5fDtc.s:20     .text.RESET001_AssertReset:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cca5fDtc.s:25     .text.RESET001_AssertReset:00000000 RESET001_AssertReset
+C:\Users\Mihai\AppData\Local\Temp\cca5fDtc.s:83     .text.RESET001_DeassertReset:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cca5fDtc.s:88     .text.RESET001_DeassertReset:00000000 RESET001_DeassertReset
+C:\Users\Mihai\AppData\Local\Temp\cca5fDtc.s:145    .text.RESET001_GetResetInfo:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cca5fDtc.s:150    .text.RESET001_GetResetInfo:00000000 RESET001_GetResetInfo
+C:\Users\Mihai\AppData\Local\Temp\cca5fDtc.s:185    .text.RESET001_GetStatus:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cca5fDtc.s:190    .text.RESET001_GetStatus:00000000 RESET001_GetStatus
                      .debug_frame:00000010 $d
                            .group:00000000 wm4.1.1791a5ae2e936ca1033c1c44be394cc7
                            .group:00000000 wm4.XMC4500.h.45.215f4b8c79f46c7645c15373868d08c0
@@ -530,6 +530,7 @@ C:\Users\Mihai\AppData\Local\Temp\ccniCo2N.s:190    .text.RESET001_GetStatus:000
                            .group:00000000 wm4.fcntl.h.9.9336f33d7f5028f694c75e6e224e0cf7
                            .group:00000000 wm4.SLTHA001.h.97.d7e87c19a31e3244bdd5839e7cc42a61
                            .group:00000000 wm4.WEBSERVER001_Conf.h.54.cd6d29aaa96a848cbc5321bab5d6cd90
+                           .group:00000000 wm4.IO004.h.51.dbf9dd216c57d6a7f14a22b2cb7e5626
                            .group:00000000 wm4.ADCGROUP001.h.48.081c7f952eb4b6ea2df7d05180ee1663
                            .group:00000000 wm4.IO001.h.49.1da965fb490206cf7cde64a90f6912e1
                            .group:00000000 wm4.MOTORLIBS.h.59.b2e97de0df555dedfa51e24447b57ab8
@@ -537,5 +538,6 @@ C:\Users\Mihai\AppData\Local\Temp\ccniCo2N.s:190    .text.RESET001_GetStatus:000
                            .group:00000000 wm4.Usic.h.90.22743468abc46f16747d12430b219aaf
                            .group:00000000 wm4.UART001_Conf.h.53.c5c972f6f634bc5116c171852aaab668
                            .group:00000000 wm4.UART001.h.109.3e835815a7a59791d8bd39655f4d4cc9
+                           .group:00000000 wm4.NVIC002_Conf.h.63.45e3c2b9806aa66850587e587798873e
 
 NO UNDEFINED SYMBOLS

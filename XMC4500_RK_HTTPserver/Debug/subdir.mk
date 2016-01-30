@@ -4,13 +4,13 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
-../Main.c 
+../SmartHome.c 
 
 OBJS += \
-./Main.o 
+./SmartHome.o 
 
 C_DEPS += \
-./Main.d 
+./SmartHome.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes

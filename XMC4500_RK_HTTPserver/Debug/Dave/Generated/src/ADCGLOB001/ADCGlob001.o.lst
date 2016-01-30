@@ -22,7 +22,7 @@
   22              		.thumb
   23              		.thumb_func
   25              	ADCGLOB001_Init:
-  26              	.LFB112:
+  26              	.LFB117:
   27              		.file 1 "../Dave/Generated/src/ADCGLOB001/ADCGlob001.c"
    1:../Dave/Generated/src/ADCGLOB001/ADCGlob001.c **** /*******************************************************************************
    2:../Dave/Generated/src/ADCGLOB001/ADCGlob001.c **** **  DAVE App Name : ADCGLOB001       App Version: 1.0.2               
@@ -362,14 +362,14 @@
  199              		.loc 1 151 0
  200 019e 80BD     		pop	{r7, pc}
  201              		.cfi_endproc
- 202              	.LFE112:
+ 202              	.LFE117:
  204              		.section	.text.ADCGLOB001_DeInit,"ax",%progbits
  205              		.align	2
  206              		.global	ADCGLOB001_DeInit
  207              		.thumb
  208              		.thumb_func
  210              	ADCGLOB001_DeInit:
- 211              	.LFB113:
+ 211              	.LFB118:
  152:../Dave/Generated/src/ADCGLOB001/ADCGlob001.c **** 
  153:../Dave/Generated/src/ADCGLOB001/ADCGlob001.c **** /**
  154:../Dave/Generated/src/ADCGLOB001/ADCGlob001.c ****  * This function will de-initialize VADC Global registers.
@@ -511,14 +511,14 @@
  291 0092 80BC     		pop	{r7}
  292 0094 7047     		bx	lr
  293              		.cfi_endproc
- 294              	.LFE113:
+ 294              	.LFE118:
  296 0096 00BF     		.section	.text.ADCGLOB001_CLKRequestDisable,"ax",%progbits
  297              		.align	2
  298              		.global	ADCGLOB001_CLKRequestDisable
  299              		.thumb
  300              		.thumb_func
  302              	ADCGLOB001_CLKRequestDisable:
- 303              	.LFB114:
+ 303              	.LFB119:
  211:../Dave/Generated/src/ADCGLOB001/ADCGlob001.c **** 
  212:../Dave/Generated/src/ADCGLOB001/ADCGlob001.c **** /**
  213:../Dave/Generated/src/ADCGLOB001/ADCGlob001.c ****  * This function disable the control of the module.
@@ -596,14 +596,14 @@
  347 0038 80BC     		pop	{r7}
  348 003a 7047     		bx	lr
  349              		.cfi_endproc
- 350              	.LFE114:
+ 350              	.LFE119:
  352              		.section	.text.ADCGLOB001_CLKRequestEnable,"ax",%progbits
  353              		.align	2
  354              		.global	ADCGLOB001_CLKRequestEnable
  355              		.thumb
  356              		.thumb_func
  358              	ADCGLOB001_CLKRequestEnable:
- 359              	.LFB115:
+ 359              	.LFB120:
  242:../Dave/Generated/src/ADCGLOB001/ADCGlob001.c **** /**
  243:../Dave/Generated/src/ADCGLOB001/ADCGlob001.c ****  * This function enable the control of the module.
  244:../Dave/Generated/src/ADCGLOB001/ADCGlob001.c ****  */
@@ -675,14 +675,14 @@
  403 0038 80BC     		pop	{r7}
  404 003a 7047     		bx	lr
  405              		.cfi_endproc
- 406              	.LFE115:
+ 406              	.LFE120:
  408              		.section	.text.ADCGLOB001_SetStartUpCalibration,"ax",%progbits
  409              		.align	2
  410              		.global	ADCGLOB001_SetStartUpCalibration
  411              		.thumb
  412              		.thumb_func
  414              	ADCGLOB001_SetStartUpCalibration:
- 415              	.LFB116:
+ 415              	.LFB121:
  267:../Dave/Generated/src/ADCGLOB001/ADCGlob001.c **** /**
  268:../Dave/Generated/src/ADCGLOB001/ADCGlob001.c ****  * This function Initiate the start-up calibration phase.
  269:../Dave/Generated/src/ADCGLOB001/ADCGlob001.c ****  */
@@ -774,14 +774,14 @@
  470 0050 80BC     		pop	{r7}
  471 0052 7047     		bx	lr
  472              		.cfi_endproc
- 473              	.LFE116:
+ 473              	.LFE121:
  475              		.section	.text.ADCGLOB001_StartUpCalibrationInit,"ax",%progbits
  476              		.align	2
  477              		.global	ADCGLOB001_StartUpCalibrationInit
  478              		.thumb
  479              		.thumb_func
  481              	ADCGLOB001_StartUpCalibrationInit:
- 482              	.LFB117:
+ 482              	.LFB122:
  301:../Dave/Generated/src/ADCGLOB001/ADCGlob001.c **** /**
  302:../Dave/Generated/src/ADCGLOB001/ADCGlob001.c ****  * This function Initialise the calibration based based on GUI configuration.
  303:../Dave/Generated/src/ADCGLOB001/ADCGlob001.c ****  */
@@ -890,14 +890,14 @@
  548 0074 80BC     		pop	{r7}
  549 0076 7047     		bx	lr
  550              		.cfi_endproc
- 551              	.LFE117:
+ 551              	.LFE122:
  553              		.section	.text.ADCGLOB001_EnableSleepModeControl,"ax",%progbits
  554              		.align	2
  555              		.global	ADCGLOB001_EnableSleepModeControl
  556              		.thumb
  557              		.thumb_func
  559              	ADCGLOB001_EnableSleepModeControl:
- 560              	.LFB118:
+ 560              	.LFB123:
  340:../Dave/Generated/src/ADCGLOB001/ADCGlob001.c **** 
  341:../Dave/Generated/src/ADCGLOB001/ADCGlob001.c **** /**
  342:../Dave/Generated/src/ADCGLOB001/ADCGlob001.c ****  * This function Enables Sleep Mode Control.Which is used to control module?s 
@@ -972,14 +972,14 @@
  604 0038 80BC     		pop	{r7}
  605 003a 7047     		bx	lr
  606              		.cfi_endproc
- 607              	.LFE118:
+ 607              	.LFE123:
  609              		.section	.text.ADCGLOB001_DisregardSleepModeControl,"ax",%progbits
  610              		.align	2
  611              		.global	ADCGLOB001_DisregardSleepModeControl
  612              		.thumb
  613              		.thumb_func
  615              	ADCGLOB001_DisregardSleepModeControl:
- 616              	.LFB119:
+ 616              	.LFB124:
  368:../Dave/Generated/src/ADCGLOB001/ADCGlob001.c **** /**
  369:../Dave/Generated/src/ADCGLOB001/ADCGlob001.c ****  * This function disregards Sleep Mode Control.
  370:../Dave/Generated/src/ADCGLOB001/ADCGlob001.c ****  */
@@ -1052,14 +1052,14 @@
  660 0038 80BC     		pop	{r7}
  661 003a 7047     		bx	lr
  662              		.cfi_endproc
- 663              	.LFE119:
+ 663              	.LFE124:
  665              		.section	.text.ADCGLOB001_SetGlobClass0ConvMode,"ax",%progbits
  666              		.align	2
  667              		.global	ADCGLOB001_SetGlobClass0ConvMode
  668              		.thumb
  669              		.thumb_func
  671              	ADCGLOB001_SetGlobClass0ConvMode:
- 672              	.LFB120:
+ 672              	.LFB125:
  394:../Dave/Generated/src/ADCGLOB001/ADCGlob001.c **** 
  395:../Dave/Generated/src/ADCGLOB001/ADCGlob001.c **** /**
  396:../Dave/Generated/src/ADCGLOB001/ADCGlob001.c ****  * This function configure the class 0 conversion mode for standard conversions.
@@ -1164,14 +1164,14 @@
  736 0060 80BC     		pop	{r7}
  737 0062 7047     		bx	lr
  738              		.cfi_endproc
- 739              	.LFE120:
+ 739              	.LFE125:
  741              		.section	.text.ADCGLOB001_SetGlobClass0SampleTime,"ax",%progbits
  742              		.align	2
  743              		.global	ADCGLOB001_SetGlobClass0SampleTime
  744              		.thumb
  745              		.thumb_func
  747              	ADCGLOB001_SetGlobClass0SampleTime:
- 748              	.LFB121:
+ 748              	.LFB126:
  432:../Dave/Generated/src/ADCGLOB001/ADCGlob001.c **** /**
  433:../Dave/Generated/src/ADCGLOB001/ADCGlob001.c ****  * This function configure the class 0 Sample Time Control for Standard 
  434:../Dave/Generated/src/ADCGLOB001/ADCGlob001.c ****  * Conversions.
@@ -1270,14 +1270,14 @@
  806 0056 80BC     		pop	{r7}
  807 0058 7047     		bx	lr
  808              		.cfi_endproc
- 809              	.LFE121:
+ 809              	.LFE126:
  811 005a 00BF     		.section	.text.ADCGLOB001_SetGlobClass0EmuxConvMode,"ax",%progbits
  812              		.align	2
  813              		.global	ADCGLOB001_SetGlobClass0EmuxConvMode
  814              		.thumb
  815              		.thumb_func
  817              	ADCGLOB001_SetGlobClass0EmuxConvMode:
- 818              	.LFB122:
+ 818              	.LFB127:
  470:../Dave/Generated/src/ADCGLOB001/ADCGlob001.c **** /**
  471:../Dave/Generated/src/ADCGLOB001/ADCGlob001.c ****  * This function configure the class 0 Conversion Mode for EMUX Conversions.
  472:../Dave/Generated/src/ADCGLOB001/ADCGlob001.c ****  */
@@ -1381,14 +1381,14 @@
  882 0060 80BC     		pop	{r7}
  883 0062 7047     		bx	lr
  884              		.cfi_endproc
- 885              	.LFE122:
+ 885              	.LFE127:
  887              		.section	.text.ADCGLOB001_SetGlobClass0EmuxSampleTime,"ax",%progbits
  888              		.align	2
  889              		.global	ADCGLOB001_SetGlobClass0EmuxSampleTime
  890              		.thumb
  891              		.thumb_func
  893              	ADCGLOB001_SetGlobClass0EmuxSampleTime:
- 894              	.LFB123:
+ 894              	.LFB128:
  507:../Dave/Generated/src/ADCGLOB001/ADCGlob001.c **** 
  508:../Dave/Generated/src/ADCGLOB001/ADCGlob001.c **** /**
  509:../Dave/Generated/src/ADCGLOB001/ADCGlob001.c ****  * This function configure the class 0 Sample Time Control for EMUX Conversions.
@@ -1489,14 +1489,14 @@
  953 005a 80BC     		pop	{r7}
  954 005c 7047     		bx	lr
  955              		.cfi_endproc
- 956              	.LFE123:
+ 956              	.LFE128:
  958 005e 00BF     		.section	.text.ADCGLOB001_SetGlobClass1ConvMode,"ax",%progbits
  959              		.align	2
  960              		.global	ADCGLOB001_SetGlobClass1ConvMode
  961              		.thumb
  962              		.thumb_func
  964              	ADCGLOB001_SetGlobClass1ConvMode:
- 965              	.LFB124:
+ 965              	.LFB129:
  546:../Dave/Generated/src/ADCGLOB001/ADCGlob001.c **** 
  547:../Dave/Generated/src/ADCGLOB001/ADCGlob001.c **** /**
  548:../Dave/Generated/src/ADCGLOB001/ADCGlob001.c ****  * This function configure the class 1 conversion mode for standard conversions.
@@ -1601,14 +1601,14 @@
  1029 0060 80BC     		pop	{r7}
  1030 0062 7047     		bx	lr
  1031              		.cfi_endproc
- 1032              	.LFE124:
+ 1032              	.LFE129:
  1034              		.section	.text.ADCGLOB001_SetGlobClass1SampleTime,"ax",%progbits
  1035              		.align	2
  1036              		.global	ADCGLOB001_SetGlobClass1SampleTime
  1037              		.thumb
  1038              		.thumb_func
  1040              	ADCGLOB001_SetGlobClass1SampleTime:
- 1041              	.LFB125:
+ 1041              	.LFB130:
  584:../Dave/Generated/src/ADCGLOB001/ADCGlob001.c **** /**
  585:../Dave/Generated/src/ADCGLOB001/ADCGlob001.c ****  * This function configure the class 1 Sample Time Control for Standard
  586:../Dave/Generated/src/ADCGLOB001/ADCGlob001.c ****  * Conversions.
@@ -1708,14 +1708,14 @@
  1099 0056 80BC     		pop	{r7}
  1100 0058 7047     		bx	lr
  1101              		.cfi_endproc
- 1102              	.LFE125:
+ 1102              	.LFE130:
  1104 005a 00BF     		.section	.text.ADCGLOB001_SetGlobClass1EmuxConvMode,"ax",%progbits
  1105              		.align	2
  1106              		.global	ADCGLOB001_SetGlobClass1EmuxConvMode
  1107              		.thumb
  1108              		.thumb_func
  1110              	ADCGLOB001_SetGlobClass1EmuxConvMode:
- 1111              	.LFB126:
+ 1111              	.LFB131:
  623:../Dave/Generated/src/ADCGLOB001/ADCGlob001.c **** 
  624:../Dave/Generated/src/ADCGLOB001/ADCGlob001.c **** /**
  625:../Dave/Generated/src/ADCGLOB001/ADCGlob001.c ****  * This function configure the class 1 Conversion Mode for EMUX Conversions.
@@ -1819,14 +1819,14 @@
  1175 0060 80BC     		pop	{r7}
  1176 0062 7047     		bx	lr
  1177              		.cfi_endproc
- 1178              	.LFE126:
+ 1178              	.LFE131:
  1180              		.section	.text.ADCGLOB001_SetGlobClass1EmuxSampleTime,"ax",%progbits
  1181              		.align	2
  1182              		.global	ADCGLOB001_SetGlobClass1EmuxSampleTime
  1183              		.thumb
  1184              		.thumb_func
  1186              	ADCGLOB001_SetGlobClass1EmuxSampleTime:
- 1187              	.LFB127:
+ 1187              	.LFB132:
  660:../Dave/Generated/src/ADCGLOB001/ADCGlob001.c **** 
  661:../Dave/Generated/src/ADCGLOB001/ADCGlob001.c **** /**
  662:../Dave/Generated/src/ADCGLOB001/ADCGlob001.c ****  * This function configure the class 1 Sample Time Control for EMUX Conversions.
@@ -1925,14 +1925,14 @@
  1246 005a 80BC     		pop	{r7}
  1247 005c 7047     		bx	lr
  1248              		.cfi_endproc
- 1249              	.LFE127:
+ 1249              	.LFE132:
  1251 005e 00BF     		.section	.text.ADCGLOB001_GetDisableBitStatus,"ax",%progbits
  1252              		.align	2
  1253              		.global	ADCGLOB001_GetDisableBitStatus
  1254              		.thumb
  1255              		.thumb_func
  1257              	ADCGLOB001_GetDisableBitStatus:
- 1258              	.LFB128:
+ 1258              	.LFB133:
  697:../Dave/Generated/src/ADCGLOB001/ADCGlob001.c **** /**
  698:../Dave/Generated/src/ADCGLOB001/ADCGlob001.c ****  * This function gives the status of Module Disable bit.
  699:../Dave/Generated/src/ADCGLOB001/ADCGlob001.c ****  */
@@ -2011,14 +2011,14 @@
  1304 003e 80BC     		pop	{r7}
  1305 0040 7047     		bx	lr
  1306              		.cfi_endproc
- 1307              	.LFE128:
+ 1307              	.LFE133:
  1309 0042 00BF     		.section	.text.ADCGLOB001_GetIdValue,"ax",%progbits
  1310              		.align	2
  1311              		.global	ADCGLOB001_GetIdValue
  1312              		.thumb
  1313              		.thumb_func
  1315              	ADCGLOB001_GetIdValue:
- 1316              	.LFB129:
+ 1316              	.LFB134:
  727:../Dave/Generated/src/ADCGLOB001/ADCGlob001.c **** /**
  728:../Dave/Generated/src/ADCGLOB001/ADCGlob001.c ****  * This function gives the Id Value.
  729:../Dave/Generated/src/ADCGLOB001/ADCGlob001.c ****  */
@@ -2092,14 +2092,14 @@
  1359 0034 80BC     		pop	{r7}
  1360 0036 7047     		bx	lr
  1361              		.cfi_endproc
- 1362              	.LFE129:
+ 1362              	.LFE134:
  1364              		.section	.text.ADCGLOB001_GTFRConvtrDiagnoGrp,"ax",%progbits
  1365              		.align	2
  1366              		.global	ADCGLOB001_GTFRConvtrDiagnoGrp
  1367              		.thumb
  1368              		.thumb_func
  1370              	ADCGLOB001_GTFRConvtrDiagnoGrp:
- 1371              	.LFB130:
+ 1371              	.LFB135:
  755:../Dave/Generated/src/ADCGLOB001/ADCGlob001.c **** 
  756:../Dave/Generated/src/ADCGLOB001/ADCGlob001.c **** /**
  757:../Dave/Generated/src/ADCGLOB001/ADCGlob001.c ****  * This function configure the group number to be used for converter diagnostics
@@ -2224,14 +2224,14 @@
  1452 0088 80BC     		pop	{r7}
  1453 008a 7047     		bx	lr
  1454              		.cfi_endproc
- 1455              	.LFE130:
+ 1455              	.LFE135:
  1457              		.section	.text.ADCGLOB001_GTFRConvtrDiagnoEnable,"ax",%progbits
  1458              		.align	2
  1459              		.global	ADCGLOB001_GTFRConvtrDiagnoEnable
  1460              		.thumb
  1461              		.thumb_func
  1463              	ADCGLOB001_GTFRConvtrDiagnoEnable:
- 1464              	.LFB131:
+ 1464              	.LFB136:
  794:../Dave/Generated/src/ADCGLOB001/ADCGlob001.c **** /**
  795:../Dave/Generated/src/ADCGLOB001/ADCGlob001.c ****  * This function configure the Converter Diagnostics pull devices connected as 
  796:../Dave/Generated/src/ADCGLOB001/ADCGlob001.c ****  * selected by bitfield CDSEL.
@@ -2315,14 +2315,14 @@
  1516 0050 80BC     		pop	{r7}
  1517 0052 7047     		bx	lr
  1518              		.cfi_endproc
- 1519              	.LFE131:
+ 1519              	.LFE136:
  1521              		.section	.text.ADCGLOB001_GTFRConvtrDiagnoPullDevicesSelect,"ax",%progbits
  1522              		.align	2
  1523              		.global	ADCGLOB001_GTFRConvtrDiagnoPullDevicesSelect
  1524              		.thumb
  1525              		.thumb_func
  1527              	ADCGLOB001_GTFRConvtrDiagnoPullDevicesSelect:
- 1528              	.LFB132:
+ 1528              	.LFB137:
  823:../Dave/Generated/src/ADCGLOB001/ADCGlob001.c **** /**
  824:../Dave/Generated/src/ADCGLOB001/ADCGlob001.c ****  * This function configure the Converter Diagnostics Pull-Devices Select value.
  825:../Dave/Generated/src/ADCGLOB001/ADCGlob001.c ****  */
@@ -2444,14 +2444,14 @@
  1608 0086 80BC     		pop	{r7}
  1609 0088 7047     		bx	lr
  1610              		.cfi_endproc
- 1611              	.LFE132:
+ 1611              	.LFE137:
  1613 008a 00BF     		.section	.text.ADCGLOB001_GTFRPullDwnDiagnoEnable,"ax",%progbits
  1614              		.align	2
  1615              		.global	ADCGLOB001_GTFRPullDwnDiagnoEnable
  1616              		.thumb
  1617              		.thumb_func
  1619              	ADCGLOB001_GTFRPullDwnDiagnoEnable:
- 1620              	.LFB133:
+ 1620              	.LFB138:
  860:../Dave/Generated/src/ADCGLOB001/ADCGlob001.c **** 
  861:../Dave/Generated/src/ADCGLOB001/ADCGlob001.c **** /**
  862:../Dave/Generated/src/ADCGLOB001/ADCGlob001.c ****  * This function configure the Pull-Down Diagnostics Enable register.
@@ -2536,7 +2536,7 @@
  1672 0050 80BC     		pop	{r7}
  1673 0052 7047     		bx	lr
  1674              		.cfi_endproc
- 1675              	.LFE133:
+ 1675              	.LFE138:
  1677              		.text
  1678              	.Letext0:
  1679              		.file 2 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
@@ -2548,50 +2548,50 @@
  1685              		.file 8 "F:\\WORK\\SmartHome_checkout1\\XMC4500_RK_HTTPserver\\Dave\\Generated\\inc\\DAVESupport/.
 DEFINED SYMBOLS
                             *ABS*:00000000 ADCGlob001.c
-C:\Users\Mihai\AppData\Local\Temp\cc92EGgZ.s:20     .text.ADCGLOB001_Init:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc92EGgZ.s:25     .text.ADCGLOB001_Init:00000000 ADCGLOB001_Init
-C:\Users\Mihai\AppData\Local\Temp\cc92EGgZ.s:205    .text.ADCGLOB001_DeInit:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc92EGgZ.s:210    .text.ADCGLOB001_DeInit:00000000 ADCGLOB001_DeInit
-C:\Users\Mihai\AppData\Local\Temp\cc92EGgZ.s:297    .text.ADCGLOB001_CLKRequestDisable:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc92EGgZ.s:302    .text.ADCGLOB001_CLKRequestDisable:00000000 ADCGLOB001_CLKRequestDisable
-C:\Users\Mihai\AppData\Local\Temp\cc92EGgZ.s:353    .text.ADCGLOB001_CLKRequestEnable:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc92EGgZ.s:358    .text.ADCGLOB001_CLKRequestEnable:00000000 ADCGLOB001_CLKRequestEnable
-C:\Users\Mihai\AppData\Local\Temp\cc92EGgZ.s:409    .text.ADCGLOB001_SetStartUpCalibration:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc92EGgZ.s:414    .text.ADCGLOB001_SetStartUpCalibration:00000000 ADCGLOB001_SetStartUpCalibration
-C:\Users\Mihai\AppData\Local\Temp\cc92EGgZ.s:476    .text.ADCGLOB001_StartUpCalibrationInit:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc92EGgZ.s:481    .text.ADCGLOB001_StartUpCalibrationInit:00000000 ADCGLOB001_StartUpCalibrationInit
-C:\Users\Mihai\AppData\Local\Temp\cc92EGgZ.s:554    .text.ADCGLOB001_EnableSleepModeControl:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc92EGgZ.s:559    .text.ADCGLOB001_EnableSleepModeControl:00000000 ADCGLOB001_EnableSleepModeControl
-C:\Users\Mihai\AppData\Local\Temp\cc92EGgZ.s:610    .text.ADCGLOB001_DisregardSleepModeControl:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc92EGgZ.s:615    .text.ADCGLOB001_DisregardSleepModeControl:00000000 ADCGLOB001_DisregardSleepModeControl
-C:\Users\Mihai\AppData\Local\Temp\cc92EGgZ.s:666    .text.ADCGLOB001_SetGlobClass0ConvMode:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc92EGgZ.s:671    .text.ADCGLOB001_SetGlobClass0ConvMode:00000000 ADCGLOB001_SetGlobClass0ConvMode
-C:\Users\Mihai\AppData\Local\Temp\cc92EGgZ.s:742    .text.ADCGLOB001_SetGlobClass0SampleTime:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc92EGgZ.s:747    .text.ADCGLOB001_SetGlobClass0SampleTime:00000000 ADCGLOB001_SetGlobClass0SampleTime
-C:\Users\Mihai\AppData\Local\Temp\cc92EGgZ.s:812    .text.ADCGLOB001_SetGlobClass0EmuxConvMode:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc92EGgZ.s:817    .text.ADCGLOB001_SetGlobClass0EmuxConvMode:00000000 ADCGLOB001_SetGlobClass0EmuxConvMode
-C:\Users\Mihai\AppData\Local\Temp\cc92EGgZ.s:888    .text.ADCGLOB001_SetGlobClass0EmuxSampleTime:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc92EGgZ.s:893    .text.ADCGLOB001_SetGlobClass0EmuxSampleTime:00000000 ADCGLOB001_SetGlobClass0EmuxSampleTime
-C:\Users\Mihai\AppData\Local\Temp\cc92EGgZ.s:959    .text.ADCGLOB001_SetGlobClass1ConvMode:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc92EGgZ.s:964    .text.ADCGLOB001_SetGlobClass1ConvMode:00000000 ADCGLOB001_SetGlobClass1ConvMode
-C:\Users\Mihai\AppData\Local\Temp\cc92EGgZ.s:1035   .text.ADCGLOB001_SetGlobClass1SampleTime:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc92EGgZ.s:1040   .text.ADCGLOB001_SetGlobClass1SampleTime:00000000 ADCGLOB001_SetGlobClass1SampleTime
-C:\Users\Mihai\AppData\Local\Temp\cc92EGgZ.s:1105   .text.ADCGLOB001_SetGlobClass1EmuxConvMode:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc92EGgZ.s:1110   .text.ADCGLOB001_SetGlobClass1EmuxConvMode:00000000 ADCGLOB001_SetGlobClass1EmuxConvMode
-C:\Users\Mihai\AppData\Local\Temp\cc92EGgZ.s:1181   .text.ADCGLOB001_SetGlobClass1EmuxSampleTime:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc92EGgZ.s:1186   .text.ADCGLOB001_SetGlobClass1EmuxSampleTime:00000000 ADCGLOB001_SetGlobClass1EmuxSampleTime
-C:\Users\Mihai\AppData\Local\Temp\cc92EGgZ.s:1252   .text.ADCGLOB001_GetDisableBitStatus:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc92EGgZ.s:1257   .text.ADCGLOB001_GetDisableBitStatus:00000000 ADCGLOB001_GetDisableBitStatus
-C:\Users\Mihai\AppData\Local\Temp\cc92EGgZ.s:1310   .text.ADCGLOB001_GetIdValue:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc92EGgZ.s:1315   .text.ADCGLOB001_GetIdValue:00000000 ADCGLOB001_GetIdValue
-C:\Users\Mihai\AppData\Local\Temp\cc92EGgZ.s:1365   .text.ADCGLOB001_GTFRConvtrDiagnoGrp:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc92EGgZ.s:1370   .text.ADCGLOB001_GTFRConvtrDiagnoGrp:00000000 ADCGLOB001_GTFRConvtrDiagnoGrp
-C:\Users\Mihai\AppData\Local\Temp\cc92EGgZ.s:1458   .text.ADCGLOB001_GTFRConvtrDiagnoEnable:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc92EGgZ.s:1463   .text.ADCGLOB001_GTFRConvtrDiagnoEnable:00000000 ADCGLOB001_GTFRConvtrDiagnoEnable
-C:\Users\Mihai\AppData\Local\Temp\cc92EGgZ.s:1522   .text.ADCGLOB001_GTFRConvtrDiagnoPullDevicesSelect:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc92EGgZ.s:1527   .text.ADCGLOB001_GTFRConvtrDiagnoPullDevicesSelect:00000000 ADCGLOB001_GTFRConvtrDiagnoPullDevicesSelect
-C:\Users\Mihai\AppData\Local\Temp\cc92EGgZ.s:1614   .text.ADCGLOB001_GTFRPullDwnDiagnoEnable:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc92EGgZ.s:1619   .text.ADCGLOB001_GTFRPullDwnDiagnoEnable:00000000 ADCGLOB001_GTFRPullDwnDiagnoEnable
+C:\Users\Mihai\AppData\Local\Temp\cc76siiK.s:20     .text.ADCGLOB001_Init:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc76siiK.s:25     .text.ADCGLOB001_Init:00000000 ADCGLOB001_Init
+C:\Users\Mihai\AppData\Local\Temp\cc76siiK.s:205    .text.ADCGLOB001_DeInit:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc76siiK.s:210    .text.ADCGLOB001_DeInit:00000000 ADCGLOB001_DeInit
+C:\Users\Mihai\AppData\Local\Temp\cc76siiK.s:297    .text.ADCGLOB001_CLKRequestDisable:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc76siiK.s:302    .text.ADCGLOB001_CLKRequestDisable:00000000 ADCGLOB001_CLKRequestDisable
+C:\Users\Mihai\AppData\Local\Temp\cc76siiK.s:353    .text.ADCGLOB001_CLKRequestEnable:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc76siiK.s:358    .text.ADCGLOB001_CLKRequestEnable:00000000 ADCGLOB001_CLKRequestEnable
+C:\Users\Mihai\AppData\Local\Temp\cc76siiK.s:409    .text.ADCGLOB001_SetStartUpCalibration:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc76siiK.s:414    .text.ADCGLOB001_SetStartUpCalibration:00000000 ADCGLOB001_SetStartUpCalibration
+C:\Users\Mihai\AppData\Local\Temp\cc76siiK.s:476    .text.ADCGLOB001_StartUpCalibrationInit:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc76siiK.s:481    .text.ADCGLOB001_StartUpCalibrationInit:00000000 ADCGLOB001_StartUpCalibrationInit
+C:\Users\Mihai\AppData\Local\Temp\cc76siiK.s:554    .text.ADCGLOB001_EnableSleepModeControl:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc76siiK.s:559    .text.ADCGLOB001_EnableSleepModeControl:00000000 ADCGLOB001_EnableSleepModeControl
+C:\Users\Mihai\AppData\Local\Temp\cc76siiK.s:610    .text.ADCGLOB001_DisregardSleepModeControl:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc76siiK.s:615    .text.ADCGLOB001_DisregardSleepModeControl:00000000 ADCGLOB001_DisregardSleepModeControl
+C:\Users\Mihai\AppData\Local\Temp\cc76siiK.s:666    .text.ADCGLOB001_SetGlobClass0ConvMode:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc76siiK.s:671    .text.ADCGLOB001_SetGlobClass0ConvMode:00000000 ADCGLOB001_SetGlobClass0ConvMode
+C:\Users\Mihai\AppData\Local\Temp\cc76siiK.s:742    .text.ADCGLOB001_SetGlobClass0SampleTime:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc76siiK.s:747    .text.ADCGLOB001_SetGlobClass0SampleTime:00000000 ADCGLOB001_SetGlobClass0SampleTime
+C:\Users\Mihai\AppData\Local\Temp\cc76siiK.s:812    .text.ADCGLOB001_SetGlobClass0EmuxConvMode:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc76siiK.s:817    .text.ADCGLOB001_SetGlobClass0EmuxConvMode:00000000 ADCGLOB001_SetGlobClass0EmuxConvMode
+C:\Users\Mihai\AppData\Local\Temp\cc76siiK.s:888    .text.ADCGLOB001_SetGlobClass0EmuxSampleTime:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc76siiK.s:893    .text.ADCGLOB001_SetGlobClass0EmuxSampleTime:00000000 ADCGLOB001_SetGlobClass0EmuxSampleTime
+C:\Users\Mihai\AppData\Local\Temp\cc76siiK.s:959    .text.ADCGLOB001_SetGlobClass1ConvMode:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc76siiK.s:964    .text.ADCGLOB001_SetGlobClass1ConvMode:00000000 ADCGLOB001_SetGlobClass1ConvMode
+C:\Users\Mihai\AppData\Local\Temp\cc76siiK.s:1035   .text.ADCGLOB001_SetGlobClass1SampleTime:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc76siiK.s:1040   .text.ADCGLOB001_SetGlobClass1SampleTime:00000000 ADCGLOB001_SetGlobClass1SampleTime
+C:\Users\Mihai\AppData\Local\Temp\cc76siiK.s:1105   .text.ADCGLOB001_SetGlobClass1EmuxConvMode:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc76siiK.s:1110   .text.ADCGLOB001_SetGlobClass1EmuxConvMode:00000000 ADCGLOB001_SetGlobClass1EmuxConvMode
+C:\Users\Mihai\AppData\Local\Temp\cc76siiK.s:1181   .text.ADCGLOB001_SetGlobClass1EmuxSampleTime:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc76siiK.s:1186   .text.ADCGLOB001_SetGlobClass1EmuxSampleTime:00000000 ADCGLOB001_SetGlobClass1EmuxSampleTime
+C:\Users\Mihai\AppData\Local\Temp\cc76siiK.s:1252   .text.ADCGLOB001_GetDisableBitStatus:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc76siiK.s:1257   .text.ADCGLOB001_GetDisableBitStatus:00000000 ADCGLOB001_GetDisableBitStatus
+C:\Users\Mihai\AppData\Local\Temp\cc76siiK.s:1310   .text.ADCGLOB001_GetIdValue:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc76siiK.s:1315   .text.ADCGLOB001_GetIdValue:00000000 ADCGLOB001_GetIdValue
+C:\Users\Mihai\AppData\Local\Temp\cc76siiK.s:1365   .text.ADCGLOB001_GTFRConvtrDiagnoGrp:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc76siiK.s:1370   .text.ADCGLOB001_GTFRConvtrDiagnoGrp:00000000 ADCGLOB001_GTFRConvtrDiagnoGrp
+C:\Users\Mihai\AppData\Local\Temp\cc76siiK.s:1458   .text.ADCGLOB001_GTFRConvtrDiagnoEnable:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc76siiK.s:1463   .text.ADCGLOB001_GTFRConvtrDiagnoEnable:00000000 ADCGLOB001_GTFRConvtrDiagnoEnable
+C:\Users\Mihai\AppData\Local\Temp\cc76siiK.s:1522   .text.ADCGLOB001_GTFRConvtrDiagnoPullDevicesSelect:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc76siiK.s:1527   .text.ADCGLOB001_GTFRConvtrDiagnoPullDevicesSelect:00000000 ADCGLOB001_GTFRConvtrDiagnoPullDevicesSelect
+C:\Users\Mihai\AppData\Local\Temp\cc76siiK.s:1614   .text.ADCGLOB001_GTFRPullDwnDiagnoEnable:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc76siiK.s:1619   .text.ADCGLOB001_GTFRPullDwnDiagnoEnable:00000000 ADCGLOB001_GTFRPullDwnDiagnoEnable
                      .debug_frame:00000010 $d
                            .group:00000000 wm4.1.1791a5ae2e936ca1033c1c44be394cc7
                            .group:00000000 wm4.XMC4500.h.45.215f4b8c79f46c7645c15373868d08c0
@@ -2682,6 +2682,7 @@ C:\Users\Mihai\AppData\Local\Temp\cc92EGgZ.s:1619   .text.ADCGLOB001_GTFRPullDwn
                            .group:00000000 wm4.fcntl.h.9.9336f33d7f5028f694c75e6e224e0cf7
                            .group:00000000 wm4.SLTHA001.h.97.d7e87c19a31e3244bdd5839e7cc42a61
                            .group:00000000 wm4.WEBSERVER001_Conf.h.54.cd6d29aaa96a848cbc5321bab5d6cd90
+                           .group:00000000 wm4.IO004.h.51.dbf9dd216c57d6a7f14a22b2cb7e5626
                            .group:00000000 wm4.ADCGROUP001.h.48.081c7f952eb4b6ea2df7d05180ee1663
                            .group:00000000 wm4.IO001.h.49.1da965fb490206cf7cde64a90f6912e1
                            .group:00000000 wm4.MOTORLIBS.h.59.b2e97de0df555dedfa51e24447b57ab8
@@ -2689,6 +2690,7 @@ C:\Users\Mihai\AppData\Local\Temp\cc92EGgZ.s:1619   .text.ADCGLOB001_GTFRPullDwn
                            .group:00000000 wm4.Usic.h.90.22743468abc46f16747d12430b219aaf
                            .group:00000000 wm4.UART001_Conf.h.53.c5c972f6f634bc5116c171852aaab668
                            .group:00000000 wm4.UART001.h.109.3e835815a7a59791d8bd39655f4d4cc9
+                           .group:00000000 wm4.NVIC002_Conf.h.63.45e3c2b9806aa66850587e587798873e
 
 UNDEFINED SYMBOLS
 ADCGLOB001_Handle0

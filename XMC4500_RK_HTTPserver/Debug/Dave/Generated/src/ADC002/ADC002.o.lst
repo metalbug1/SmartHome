@@ -22,7 +22,7 @@
   22              		.thumb
   23              		.thumb_func
   25              	ADC002_Init:
-  26              	.LFB112:
+  26              	.LFB117:
   27              		.file 1 "../Dave/Generated/src/ADC002/ADC002.c"
    1:../Dave/Generated/src/ADC002/ADC002.c **** /*******************************************************************************
    2:../Dave/Generated/src/ADC002/ADC002.c **** **  DAVE App Name : ADC002       App Version: 1.0.4               
@@ -182,13 +182,13 @@
   46              		.loc 1 137 0
   47 0014 80BD     		pop	{r7, pc}
   48              		.cfi_endproc
-  49              	.LFE112:
+  49              	.LFE117:
   51 0016 00BF     		.section	.text.ADC002_lInit,"ax",%progbits
   52              		.align	2
   53              		.thumb
   54              		.thumb_func
   56              	ADC002_lInit:
-  57              	.LFB113:
+  57              	.LFB118:
  138:../Dave/Generated/src/ADC002/ADC002.c **** /* 
  139:../Dave/Generated/src/ADC002/ADC002.c ****  * This function initializes the queue App. Local function is used to 
  140:../Dave/Generated/src/ADC002/ADC002.c ****  * initialize all the instances of the app.
@@ -363,14 +363,14 @@
  169 00d4 80BC     		pop	{r7}
  170 00d6 7047     		bx	lr
  171              		.cfi_endproc
- 172              	.LFE113:
+ 172              	.LFE118:
  174              		.section	.text.ADC002_InitializeQueue,"ax",%progbits
  175              		.align	2
  176              		.global	ADC002_InitializeQueue
  177              		.thumb
  178              		.thumb_func
  180              	ADC002_InitializeQueue:
- 181              	.LFB114:
+ 181              	.LFB119:
  195:../Dave/Generated/src/ADC002/ADC002.c **** /*This function initializes queue entries*/
  196:../Dave/Generated/src/ADC002/ADC002.c **** status_t ADC002_InitializeQueue(const ADC002_HandleType *HandlePtr )
  197:../Dave/Generated/src/ADC002/ADC002.c **** {
@@ -572,14 +572,14 @@
  327 00fe 80BC     		pop	{r7}
  328 0100 7047     		bx	lr
  329              		.cfi_endproc
- 330              	.LFE114:
+ 330              	.LFE119:
  332 0102 00BF     		.section	.text.ADC002_Deinit,"ax",%progbits
  333              		.align	2
  334              		.global	ADC002_Deinit
  335              		.thumb
  336              		.thumb_func
  338              	ADC002_Deinit:
- 339              	.LFB115:
+ 339              	.LFB120:
  242:../Dave/Generated/src/ADC002/ADC002.c **** 
  243:../Dave/Generated/src/ADC002/ADC002.c **** 
  244:../Dave/Generated/src/ADC002/ADC002.c **** /* This function resets the ADC002 app */
@@ -702,14 +702,14 @@
  414 0086 80BC     		pop	{r7}
  415 0088 7047     		bx	lr
  416              		.cfi_endproc
- 417              	.LFE115:
+ 417              	.LFE120:
  419 008a 00BF     		.section	.text.ADC002_ClearEvent,"ax",%progbits
  420              		.align	2
  421              		.global	ADC002_ClearEvent
  422              		.thumb
  423              		.thumb_func
  425              	ADC002_ClearEvent:
- 426              	.LFB116:
+ 426              	.LFB121:
  287:../Dave/Generated/src/ADC002/ADC002.c **** 
  288:../Dave/Generated/src/ADC002/ADC002.c **** 
  289:../Dave/Generated/src/ADC002/ADC002.c **** /* This function clears the Event flag. */
@@ -784,14 +784,14 @@
  472 003e 80BC     		pop	{r7}
  473 0040 7047     		bx	lr
  474              		.cfi_endproc
- 475              	.LFE116:
+ 475              	.LFE121:
  477 0042 00BF     		.section	.text.ADC002_FlushQueue,"ax",%progbits
  478              		.align	2
  479              		.global	ADC002_FlushQueue
  480              		.thumb
  481              		.thumb_func
  483              	ADC002_FlushQueue:
- 484              	.LFB117:
+ 484              	.LFB122:
  313:../Dave/Generated/src/ADC002/ADC002.c **** 
  314:../Dave/Generated/src/ADC002/ADC002.c **** 
  315:../Dave/Generated/src/ADC002/ADC002.c **** /* This function clears the queue entries. */
@@ -865,14 +865,14 @@
  530 003e 80BC     		pop	{r7}
  531 0040 7047     		bx	lr
  532              		.cfi_endproc
- 533              	.LFE117:
+ 533              	.LFE122:
  535 0042 00BF     		.section	.text.ADC002_TriggerEvent,"ax",%progbits
  536              		.align	2
  537              		.global	ADC002_TriggerEvent
  538              		.thumb
  539              		.thumb_func
  541              	ADC002_TriggerEvent:
- 542              	.LFB118:
+ 542              	.LFB123:
  338:../Dave/Generated/src/ADC002/ADC002.c **** 
  339:../Dave/Generated/src/ADC002/ADC002.c **** 
  340:../Dave/Generated/src/ADC002/ADC002.c **** /* This function generates a trigger event.*/
@@ -946,14 +946,14 @@
  588 003e 80BC     		pop	{r7}
  589 0040 7047     		bx	lr
  590              		.cfi_endproc
- 591              	.LFE118:
+ 591              	.LFE123:
  593 0042 00BF     		.section	.text.ADC002_ClearValidBit,"ax",%progbits
  594              		.align	2
  595              		.global	ADC002_ClearValidBit
  596              		.thumb
  597              		.thumb_func
  599              	ADC002_ClearValidBit:
- 600              	.LFB119:
+ 600              	.LFB124:
  363:../Dave/Generated/src/ADC002/ADC002.c **** 
  364:../Dave/Generated/src/ADC002/ADC002.c **** 
  365:../Dave/Generated/src/ADC002/ADC002.c **** /*
@@ -1030,14 +1030,14 @@
  646 003e 80BC     		pop	{r7}
  647 0040 7047     		bx	lr
  648              		.cfi_endproc
- 649              	.LFE119:
+ 649              	.LFE124:
  651 0042 00BF     		.section	.text.ADC002_EnableGate,"ax",%progbits
  652              		.align	2
  653              		.global	ADC002_EnableGate
  654              		.thumb
  655              		.thumb_func
  657              	ADC002_EnableGate:
- 658              	.LFB120:
+ 658              	.LFB125:
  391:../Dave/Generated/src/ADC002/ADC002.c **** 
  392:../Dave/Generated/src/ADC002/ADC002.c **** /*
  393:../Dave/Generated/src/ADC002/ADC002.c ****  * This function enables the gating.
@@ -1135,14 +1135,14 @@
  718 0058 80BC     		pop	{r7}
  719 005a 7047     		bx	lr
  720              		.cfi_endproc
- 721              	.LFE120:
+ 721              	.LFE125:
  723              		.section	.text.ADC002_EnableQueueArbitrationSlot,"ax",%progbits
  724              		.align	2
  725              		.global	ADC002_EnableQueueArbitrationSlot
  726              		.thumb
  727              		.thumb_func
  729              	ADC002_EnableQueueArbitrationSlot:
- 730              	.LFB121:
+ 730              	.LFB126:
  426:../Dave/Generated/src/ADC002/ADC002.c **** 
  427:../Dave/Generated/src/ADC002/ADC002.c **** /*
  428:../Dave/Generated/src/ADC002/ADC002.c ****  * This function enables queue arbitration slot.
@@ -1217,14 +1217,14 @@
  776 003e 80BC     		pop	{r7}
  777 0040 7047     		bx	lr
  778              		.cfi_endproc
- 779              	.LFE121:
+ 779              	.LFE126:
  781 0042 00BF     		.section	.text.ADC002_DisableQueueArbitrationSlot,"ax",%progbits
  782              		.align	2
  783              		.global	ADC002_DisableQueueArbitrationSlot
  784              		.thumb
  785              		.thumb_func
  787              	ADC002_DisableQueueArbitrationSlot:
- 788              	.LFB122:
+ 788              	.LFB127:
  452:../Dave/Generated/src/ADC002/ADC002.c **** 
  453:../Dave/Generated/src/ADC002/ADC002.c **** /*
  454:../Dave/Generated/src/ADC002/ADC002.c ****  * This function disables queue arbitration slot.
@@ -1299,14 +1299,14 @@
  834 003e 80BC     		pop	{r7}
  835 0040 7047     		bx	lr
  836              		.cfi_endproc
- 837              	.LFE122:
+ 837              	.LFE127:
  839 0042 00BF     		.section	.text.ADC002_SetExternalTriggerMode,"ax",%progbits
  840              		.align	2
  841              		.global	ADC002_SetExternalTriggerMode
  842              		.thumb
  843              		.thumb_func
  845              	ADC002_SetExternalTriggerMode:
- 846              	.LFB123:
+ 846              	.LFB128:
  478:../Dave/Generated/src/ADC002/ADC002.c **** /*
  479:../Dave/Generated/src/ADC002/ADC002.c ****  * This function selects the External trigger mode.
  480:../Dave/Generated/src/ADC002/ADC002.c ****  */
@@ -1442,14 +1442,14 @@
  929 0088 80BC     		pop	{r7}
  930 008a 7047     		bx	lr
  931              		.cfi_endproc
- 932              	.LFE123:
+ 932              	.LFE128:
  934              		.section	.text.ADC002_EnableExternalTrigger,"ax",%progbits
  935              		.align	2
  936              		.global	ADC002_EnableExternalTrigger
  937              		.thumb
  938              		.thumb_func
  940              	ADC002_EnableExternalTrigger:
- 941              	.LFB124:
+ 941              	.LFB129:
  527:../Dave/Generated/src/ADC002/ADC002.c **** 
  528:../Dave/Generated/src/ADC002/ADC002.c **** /*
  529:../Dave/Generated/src/ADC002/ADC002.c ****  * This function enables external trigger.
@@ -1524,14 +1524,14 @@
  987 003e 80BC     		pop	{r7}
  988 0040 7047     		bx	lr
  989              		.cfi_endproc
- 990              	.LFE124:
+ 990              	.LFE129:
  992 0042 00BF     		.section	.text.ADC002_DisableExternalTrigger,"ax",%progbits
  993              		.align	2
  994              		.global	ADC002_DisableExternalTrigger
  995              		.thumb
  996              		.thumb_func
  998              	ADC002_DisableExternalTrigger:
- 999              	.LFB125:
+ 999              	.LFB130:
  553:../Dave/Generated/src/ADC002/ADC002.c **** 
  554:../Dave/Generated/src/ADC002/ADC002.c **** /*
  555:../Dave/Generated/src/ADC002/ADC002.c ****  * This function disables external trigger.
@@ -1606,14 +1606,14 @@
  1045 003e 80BC     		pop	{r7}
  1046 0040 7047     		bx	lr
  1047              		.cfi_endproc
- 1048              	.LFE125:
+ 1048              	.LFE130:
  1050 0042 00BF     		.section	.text.ADC002_IsEmpty,"ax",%progbits
  1051              		.align	2
  1052              		.global	ADC002_IsEmpty
  1053              		.thumb
  1054              		.thumb_func
  1056              	ADC002_IsEmpty:
- 1057              	.LFB126:
+ 1057              	.LFB131:
  579:../Dave/Generated/src/ADC002/ADC002.c **** 
  580:../Dave/Generated/src/ADC002/ADC002.c **** 
  581:../Dave/Generated/src/ADC002/ADC002.c **** /* This function checks if there is valid entry in the queue. */
@@ -1708,14 +1708,14 @@
  1115 0052 80BC     		pop	{r7}
  1116 0054 7047     		bx	lr
  1117              		.cfi_endproc
- 1118              	.LFE126:
+ 1118              	.LFE131:
  1120 0056 00BF     		.section	.text.ADC002_GetFillingLevel,"ax",%progbits
  1121              		.align	2
  1122              		.global	ADC002_GetFillingLevel
  1123              		.thumb
  1124              		.thumb_func
  1126              	ADC002_GetFillingLevel:
- 1127              	.LFB127:
+ 1127              	.LFB132:
  613:../Dave/Generated/src/ADC002/ADC002.c **** 
  614:../Dave/Generated/src/ADC002/ADC002.c **** /* This function indicates number of valid entries in the queue. */
  615:../Dave/Generated/src/ADC002/ADC002.c **** status_t ADC002_GetFillingLevel(const ADC002_HandleType *HandlePtr, 
@@ -1891,14 +1891,14 @@
  1230 00a2 BD46     		mov	sp, r7
  1231 00a4 80BD     		pop	{r7, pc}
  1232              		.cfi_endproc
- 1233              	.LFE127:
+ 1233              	.LFE132:
  1235 00a6 00BF     		.section	.text.ADC002_GetGateLevel,"ax",%progbits
  1236              		.align	2
  1237              		.global	ADC002_GetGateLevel
  1238              		.thumb
  1239              		.thumb_func
  1241              	ADC002_GetGateLevel:
- 1242              	.LFB128:
+ 1242              	.LFB133:
  683:../Dave/Generated/src/ADC002/ADC002.c **** 
  684:../Dave/Generated/src/ADC002/ADC002.c **** /* This function gets the current level of the selected gate input */
  685:../Dave/Generated/src/ADC002/ADC002.c **** status_t ADC002_GetGateLevel(const ADC002_HandleType *HandlePtr, 
@@ -1992,14 +1992,14 @@
  1300 0052 80BC     		pop	{r7}
  1301 0054 7047     		bx	lr
  1302              		.cfi_endproc
- 1303              	.LFE128:
+ 1303              	.LFE133:
  1305 0056 00BF     		.section	.text.ADC002_IsEventDetected,"ax",%progbits
  1306              		.align	2
  1307              		.global	ADC002_IsEventDetected
  1308              		.thumb
  1309              		.thumb_func
  1311              	ADC002_IsEventDetected:
- 1312              	.LFB129:
+ 1312              	.LFB134:
  716:../Dave/Generated/src/ADC002/ADC002.c **** 
  717:../Dave/Generated/src/ADC002/ADC002.c **** /*
  718:../Dave/Generated/src/ADC002/ADC002.c ****  * This function indicates whether an event has been detected while at
@@ -2096,14 +2096,14 @@
  1370 0052 80BC     		pop	{r7}
  1371 0054 7047     		bx	lr
  1372              		.cfi_endproc
- 1373              	.LFE129:
+ 1373              	.LFE134:
  1375 0056 00BF     		.section	.text.ADC002_AddQueueEntry,"ax",%progbits
  1376              		.align	2
  1377              		.global	ADC002_AddQueueEntry
  1378              		.thumb
  1379              		.thumb_func
  1381              	ADC002_AddQueueEntry:
- 1382              	.LFB130:
+ 1382              	.LFB135:
  752:../Dave/Generated/src/ADC002/ADC002.c **** 
  753:../Dave/Generated/src/ADC002/ADC002.c **** 
  754:../Dave/Generated/src/ADC002/ADC002.c **** /*
@@ -2249,14 +2249,14 @@
  1477 008e 80BC     		pop	{r7}
  1478 0090 7047     		bx	lr
  1479              		.cfi_endproc
- 1480              	.LFE130:
+ 1480              	.LFE135:
  1482 0092 00BF     		.section	.text.ADC002_SetConversionMode,"ax",%progbits
  1483              		.align	2
  1484              		.global	ADC002_SetConversionMode
  1485              		.thumb
  1486              		.thumb_func
  1488              	ADC002_SetConversionMode:
- 1489              	.LFB131:
+ 1489              	.LFB136:
  795:../Dave/Generated/src/ADC002/ADC002.c **** 
  796:../Dave/Generated/src/ADC002/ADC002.c **** /*
  797:../Dave/Generated/src/ADC002/ADC002.c ****  * This function sets standard conversion mode.
@@ -2345,14 +2345,14 @@
  1542 0044 BD46     		mov	sp, r7
  1543 0046 80BD     		pop	{r7, pc}
  1544              		.cfi_endproc
- 1545              	.LFE131:
+ 1545              	.LFE136:
  1547              		.section	.text.ADC002_SetSampleTime,"ax",%progbits
  1548              		.align	2
  1549              		.global	ADC002_SetSampleTime
  1550              		.thumb
  1551              		.thumb_func
  1553              	ADC002_SetSampleTime:
- 1554              	.LFB132:
+ 1554              	.LFB137:
  827:../Dave/Generated/src/ADC002/ADC002.c **** 
  828:../Dave/Generated/src/ADC002/ADC002.c **** 
  829:../Dave/Generated/src/ADC002/ADC002.c **** /*
@@ -2442,14 +2442,14 @@
  1607 0044 BD46     		mov	sp, r7
  1608 0046 80BD     		pop	{r7, pc}
  1609              		.cfi_endproc
- 1610              	.LFE132:
+ 1610              	.LFE137:
  1612              		.section	.text.ADC002_SetEMUXConversionMode,"ax",%progbits
  1613              		.align	2
  1614              		.global	ADC002_SetEMUXConversionMode
  1615              		.thumb
  1616              		.thumb_func
  1618              	ADC002_SetEMUXConversionMode:
- 1619              	.LFB133:
+ 1619              	.LFB138:
  860:../Dave/Generated/src/ADC002/ADC002.c **** 
  861:../Dave/Generated/src/ADC002/ADC002.c **** 
  862:../Dave/Generated/src/ADC002/ADC002.c **** /*
@@ -2539,14 +2539,14 @@
  1672 0044 BD46     		mov	sp, r7
  1673 0046 80BD     		pop	{r7, pc}
  1674              		.cfi_endproc
- 1675              	.LFE133:
+ 1675              	.LFE138:
  1677              		.section	.text.ADC002_EMUXSetSampleTime,"ax",%progbits
  1678              		.align	2
  1679              		.global	ADC002_EMUXSetSampleTime
  1680              		.thumb
  1681              		.thumb_func
  1683              	ADC002_EMUXSetSampleTime:
- 1684              	.LFB134:
+ 1684              	.LFB139:
  893:../Dave/Generated/src/ADC002/ADC002.c **** 
  894:../Dave/Generated/src/ADC002/ADC002.c **** 
  895:../Dave/Generated/src/ADC002/ADC002.c **** /*
@@ -2636,14 +2636,14 @@
  1737 0044 BD46     		mov	sp, r7
  1738 0046 80BD     		pop	{r7, pc}
  1739              		.cfi_endproc
- 1740              	.LFE134:
+ 1740              	.LFE139:
  1742              		.section	.text.ADC002_GetQueueStage0Entry,"ax",%progbits
  1743              		.align	2
  1744              		.global	ADC002_GetQueueStage0Entry
  1745              		.thumb
  1746              		.thumb_func
  1748              	ADC002_GetQueueStage0Entry:
- 1749              	.LFB135:
+ 1749              	.LFB140:
  926:../Dave/Generated/src/ADC002/ADC002.c **** 
  927:../Dave/Generated/src/ADC002/ADC002.c **** 
  928:../Dave/Generated/src/ADC002/ADC002.c **** /* This function gets the current level of the selected gate input */
@@ -2733,14 +2733,14 @@
  1804 0048 80BC     		pop	{r7}
  1805 004a 7047     		bx	lr
  1806              		.cfi_endproc
- 1807              	.LFE135:
+ 1807              	.LFE140:
  1809              		.section	.text.ADC002_GetQueueBackupStageEntry,"ax",%progbits
  1810              		.align	2
  1811              		.global	ADC002_GetQueueBackupStageEntry
  1812              		.thumb
  1813              		.thumb_func
  1815              	ADC002_GetQueueBackupStageEntry:
- 1816              	.LFB136:
+ 1816              	.LFB141:
  958:../Dave/Generated/src/ADC002/ADC002.c **** 
  959:../Dave/Generated/src/ADC002/ADC002.c **** 
  960:../Dave/Generated/src/ADC002/ADC002.c **** /* This function gets the current level of the selected gate input */
@@ -2830,14 +2830,14 @@
  1871 0048 80BC     		pop	{r7}
  1872 004a 7047     		bx	lr
  1873              		.cfi_endproc
- 1874              	.LFE136:
+ 1874              	.LFE141:
  1876              		.section	.text.ADC002_GetSourceEventFlag,"ax",%progbits
  1877              		.align	2
  1878              		.global	ADC002_GetSourceEventFlag
  1879              		.thumb
  1880              		.thumb_func
  1882              	ADC002_GetSourceEventFlag:
- 1883              	.LFB137:
+ 1883              	.LFB142:
  990:../Dave/Generated/src/ADC002/ADC002.c **** 
  991:../Dave/Generated/src/ADC002/ADC002.c **** 
  992:../Dave/Generated/src/ADC002/ADC002.c **** /* This function gets the Event flag. */
@@ -2932,14 +2932,14 @@
  1941 0050 80BC     		pop	{r7}
  1942 0052 7047     		bx	lr
  1943              		.cfi_endproc
- 1944              	.LFE137:
+ 1944              	.LFE142:
  1946              		.section	.text.ADC002_SetSourceEventFlag,"ax",%progbits
  1947              		.align	2
  1948              		.global	ADC002_SetSourceEventFlag
  1949              		.thumb
  1950              		.thumb_func
  1952              	ADC002_SetSourceEventFlag:
- 1953              	.LFB138:
+ 1953              	.LFB143:
 1024:../Dave/Generated/src/ADC002/ADC002.c **** 
 1025:../Dave/Generated/src/ADC002/ADC002.c **** /* This function sets the Event flag. */
 1026:../Dave/Generated/src/ADC002/ADC002.c **** status_t ADC002_SetSourceEventFlag(const ADC002_HandleType *HandlePtr)
@@ -3012,14 +3012,14 @@
  1999 003e 80BC     		pop	{r7}
  2000 0040 7047     		bx	lr
  2001              		.cfi_endproc
- 2002              	.LFE138:
+ 2002              	.LFE143:
  2004 0042 00BF     		.section	.text.ADC002_ClearSourceEventFlag,"ax",%progbits
  2005              		.align	2
  2006              		.global	ADC002_ClearSourceEventFlag
  2007              		.thumb
  2008              		.thumb_func
  2010              	ADC002_ClearSourceEventFlag:
- 2011              	.LFB139:
+ 2011              	.LFB144:
 1048:../Dave/Generated/src/ADC002/ADC002.c **** 
 1049:../Dave/Generated/src/ADC002/ADC002.c **** 
 1050:../Dave/Generated/src/ADC002/ADC002.c **** /* This function clears the source Event flag. */
@@ -3092,7 +3092,7 @@
  2057 003e 80BC     		pop	{r7}
  2058 0040 7047     		bx	lr
  2059              		.cfi_endproc
- 2060              	.LFE139:
+ 2060              	.LFE144:
  2062 0042 00BF     		.text
  2063              	.Letext0:
  2064              		.file 2 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
@@ -3104,62 +3104,62 @@
  2070              		.file 8 "F:\\WORK\\SmartHome_checkout1\\XMC4500_RK_HTTPserver\\Dave\\Generated\\inc\\DAVESupport/.
 DEFINED SYMBOLS
                             *ABS*:00000000 ADC002.c
-C:\Users\Mihai\AppData\Local\Temp\ccpZmSqW.s:20     .text.ADC002_Init:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccpZmSqW.s:25     .text.ADC002_Init:00000000 ADC002_Init
-C:\Users\Mihai\AppData\Local\Temp\ccpZmSqW.s:56     .text.ADC002_lInit:00000000 ADC002_lInit
-C:\Users\Mihai\AppData\Local\Temp\ccpZmSqW.s:52     .text.ADC002_lInit:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccpZmSqW.s:175    .text.ADC002_InitializeQueue:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccpZmSqW.s:180    .text.ADC002_InitializeQueue:00000000 ADC002_InitializeQueue
-C:\Users\Mihai\AppData\Local\Temp\ccpZmSqW.s:333    .text.ADC002_Deinit:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccpZmSqW.s:338    .text.ADC002_Deinit:00000000 ADC002_Deinit
-C:\Users\Mihai\AppData\Local\Temp\ccpZmSqW.s:420    .text.ADC002_ClearEvent:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccpZmSqW.s:425    .text.ADC002_ClearEvent:00000000 ADC002_ClearEvent
-C:\Users\Mihai\AppData\Local\Temp\ccpZmSqW.s:478    .text.ADC002_FlushQueue:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccpZmSqW.s:483    .text.ADC002_FlushQueue:00000000 ADC002_FlushQueue
-C:\Users\Mihai\AppData\Local\Temp\ccpZmSqW.s:536    .text.ADC002_TriggerEvent:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccpZmSqW.s:541    .text.ADC002_TriggerEvent:00000000 ADC002_TriggerEvent
-C:\Users\Mihai\AppData\Local\Temp\ccpZmSqW.s:594    .text.ADC002_ClearValidBit:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccpZmSqW.s:599    .text.ADC002_ClearValidBit:00000000 ADC002_ClearValidBit
-C:\Users\Mihai\AppData\Local\Temp\ccpZmSqW.s:652    .text.ADC002_EnableGate:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccpZmSqW.s:657    .text.ADC002_EnableGate:00000000 ADC002_EnableGate
-C:\Users\Mihai\AppData\Local\Temp\ccpZmSqW.s:724    .text.ADC002_EnableQueueArbitrationSlot:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccpZmSqW.s:729    .text.ADC002_EnableQueueArbitrationSlot:00000000 ADC002_EnableQueueArbitrationSlot
-C:\Users\Mihai\AppData\Local\Temp\ccpZmSqW.s:782    .text.ADC002_DisableQueueArbitrationSlot:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccpZmSqW.s:787    .text.ADC002_DisableQueueArbitrationSlot:00000000 ADC002_DisableQueueArbitrationSlot
-C:\Users\Mihai\AppData\Local\Temp\ccpZmSqW.s:840    .text.ADC002_SetExternalTriggerMode:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccpZmSqW.s:845    .text.ADC002_SetExternalTriggerMode:00000000 ADC002_SetExternalTriggerMode
-C:\Users\Mihai\AppData\Local\Temp\ccpZmSqW.s:935    .text.ADC002_EnableExternalTrigger:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccpZmSqW.s:940    .text.ADC002_EnableExternalTrigger:00000000 ADC002_EnableExternalTrigger
-C:\Users\Mihai\AppData\Local\Temp\ccpZmSqW.s:993    .text.ADC002_DisableExternalTrigger:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccpZmSqW.s:998    .text.ADC002_DisableExternalTrigger:00000000 ADC002_DisableExternalTrigger
-C:\Users\Mihai\AppData\Local\Temp\ccpZmSqW.s:1051   .text.ADC002_IsEmpty:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccpZmSqW.s:1056   .text.ADC002_IsEmpty:00000000 ADC002_IsEmpty
-C:\Users\Mihai\AppData\Local\Temp\ccpZmSqW.s:1121   .text.ADC002_GetFillingLevel:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccpZmSqW.s:1126   .text.ADC002_GetFillingLevel:00000000 ADC002_GetFillingLevel
-C:\Users\Mihai\AppData\Local\Temp\ccpZmSqW.s:1236   .text.ADC002_GetGateLevel:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccpZmSqW.s:1241   .text.ADC002_GetGateLevel:00000000 ADC002_GetGateLevel
-C:\Users\Mihai\AppData\Local\Temp\ccpZmSqW.s:1306   .text.ADC002_IsEventDetected:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccpZmSqW.s:1311   .text.ADC002_IsEventDetected:00000000 ADC002_IsEventDetected
-C:\Users\Mihai\AppData\Local\Temp\ccpZmSqW.s:1376   .text.ADC002_AddQueueEntry:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccpZmSqW.s:1381   .text.ADC002_AddQueueEntry:00000000 ADC002_AddQueueEntry
-C:\Users\Mihai\AppData\Local\Temp\ccpZmSqW.s:1483   .text.ADC002_SetConversionMode:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccpZmSqW.s:1488   .text.ADC002_SetConversionMode:00000000 ADC002_SetConversionMode
-C:\Users\Mihai\AppData\Local\Temp\ccpZmSqW.s:1548   .text.ADC002_SetSampleTime:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccpZmSqW.s:1553   .text.ADC002_SetSampleTime:00000000 ADC002_SetSampleTime
-C:\Users\Mihai\AppData\Local\Temp\ccpZmSqW.s:1613   .text.ADC002_SetEMUXConversionMode:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccpZmSqW.s:1618   .text.ADC002_SetEMUXConversionMode:00000000 ADC002_SetEMUXConversionMode
-C:\Users\Mihai\AppData\Local\Temp\ccpZmSqW.s:1678   .text.ADC002_EMUXSetSampleTime:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccpZmSqW.s:1683   .text.ADC002_EMUXSetSampleTime:00000000 ADC002_EMUXSetSampleTime
-C:\Users\Mihai\AppData\Local\Temp\ccpZmSqW.s:1743   .text.ADC002_GetQueueStage0Entry:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccpZmSqW.s:1748   .text.ADC002_GetQueueStage0Entry:00000000 ADC002_GetQueueStage0Entry
-C:\Users\Mihai\AppData\Local\Temp\ccpZmSqW.s:1810   .text.ADC002_GetQueueBackupStageEntry:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccpZmSqW.s:1815   .text.ADC002_GetQueueBackupStageEntry:00000000 ADC002_GetQueueBackupStageEntry
-C:\Users\Mihai\AppData\Local\Temp\ccpZmSqW.s:1877   .text.ADC002_GetSourceEventFlag:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccpZmSqW.s:1882   .text.ADC002_GetSourceEventFlag:00000000 ADC002_GetSourceEventFlag
-C:\Users\Mihai\AppData\Local\Temp\ccpZmSqW.s:1947   .text.ADC002_SetSourceEventFlag:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccpZmSqW.s:1952   .text.ADC002_SetSourceEventFlag:00000000 ADC002_SetSourceEventFlag
-C:\Users\Mihai\AppData\Local\Temp\ccpZmSqW.s:2005   .text.ADC002_ClearSourceEventFlag:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccpZmSqW.s:2010   .text.ADC002_ClearSourceEventFlag:00000000 ADC002_ClearSourceEventFlag
+C:\Users\Mihai\AppData\Local\Temp\ccdGljrt.s:20     .text.ADC002_Init:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccdGljrt.s:25     .text.ADC002_Init:00000000 ADC002_Init
+C:\Users\Mihai\AppData\Local\Temp\ccdGljrt.s:56     .text.ADC002_lInit:00000000 ADC002_lInit
+C:\Users\Mihai\AppData\Local\Temp\ccdGljrt.s:52     .text.ADC002_lInit:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccdGljrt.s:175    .text.ADC002_InitializeQueue:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccdGljrt.s:180    .text.ADC002_InitializeQueue:00000000 ADC002_InitializeQueue
+C:\Users\Mihai\AppData\Local\Temp\ccdGljrt.s:333    .text.ADC002_Deinit:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccdGljrt.s:338    .text.ADC002_Deinit:00000000 ADC002_Deinit
+C:\Users\Mihai\AppData\Local\Temp\ccdGljrt.s:420    .text.ADC002_ClearEvent:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccdGljrt.s:425    .text.ADC002_ClearEvent:00000000 ADC002_ClearEvent
+C:\Users\Mihai\AppData\Local\Temp\ccdGljrt.s:478    .text.ADC002_FlushQueue:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccdGljrt.s:483    .text.ADC002_FlushQueue:00000000 ADC002_FlushQueue
+C:\Users\Mihai\AppData\Local\Temp\ccdGljrt.s:536    .text.ADC002_TriggerEvent:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccdGljrt.s:541    .text.ADC002_TriggerEvent:00000000 ADC002_TriggerEvent
+C:\Users\Mihai\AppData\Local\Temp\ccdGljrt.s:594    .text.ADC002_ClearValidBit:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccdGljrt.s:599    .text.ADC002_ClearValidBit:00000000 ADC002_ClearValidBit
+C:\Users\Mihai\AppData\Local\Temp\ccdGljrt.s:652    .text.ADC002_EnableGate:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccdGljrt.s:657    .text.ADC002_EnableGate:00000000 ADC002_EnableGate
+C:\Users\Mihai\AppData\Local\Temp\ccdGljrt.s:724    .text.ADC002_EnableQueueArbitrationSlot:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccdGljrt.s:729    .text.ADC002_EnableQueueArbitrationSlot:00000000 ADC002_EnableQueueArbitrationSlot
+C:\Users\Mihai\AppData\Local\Temp\ccdGljrt.s:782    .text.ADC002_DisableQueueArbitrationSlot:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccdGljrt.s:787    .text.ADC002_DisableQueueArbitrationSlot:00000000 ADC002_DisableQueueArbitrationSlot
+C:\Users\Mihai\AppData\Local\Temp\ccdGljrt.s:840    .text.ADC002_SetExternalTriggerMode:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccdGljrt.s:845    .text.ADC002_SetExternalTriggerMode:00000000 ADC002_SetExternalTriggerMode
+C:\Users\Mihai\AppData\Local\Temp\ccdGljrt.s:935    .text.ADC002_EnableExternalTrigger:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccdGljrt.s:940    .text.ADC002_EnableExternalTrigger:00000000 ADC002_EnableExternalTrigger
+C:\Users\Mihai\AppData\Local\Temp\ccdGljrt.s:993    .text.ADC002_DisableExternalTrigger:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccdGljrt.s:998    .text.ADC002_DisableExternalTrigger:00000000 ADC002_DisableExternalTrigger
+C:\Users\Mihai\AppData\Local\Temp\ccdGljrt.s:1051   .text.ADC002_IsEmpty:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccdGljrt.s:1056   .text.ADC002_IsEmpty:00000000 ADC002_IsEmpty
+C:\Users\Mihai\AppData\Local\Temp\ccdGljrt.s:1121   .text.ADC002_GetFillingLevel:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccdGljrt.s:1126   .text.ADC002_GetFillingLevel:00000000 ADC002_GetFillingLevel
+C:\Users\Mihai\AppData\Local\Temp\ccdGljrt.s:1236   .text.ADC002_GetGateLevel:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccdGljrt.s:1241   .text.ADC002_GetGateLevel:00000000 ADC002_GetGateLevel
+C:\Users\Mihai\AppData\Local\Temp\ccdGljrt.s:1306   .text.ADC002_IsEventDetected:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccdGljrt.s:1311   .text.ADC002_IsEventDetected:00000000 ADC002_IsEventDetected
+C:\Users\Mihai\AppData\Local\Temp\ccdGljrt.s:1376   .text.ADC002_AddQueueEntry:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccdGljrt.s:1381   .text.ADC002_AddQueueEntry:00000000 ADC002_AddQueueEntry
+C:\Users\Mihai\AppData\Local\Temp\ccdGljrt.s:1483   .text.ADC002_SetConversionMode:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccdGljrt.s:1488   .text.ADC002_SetConversionMode:00000000 ADC002_SetConversionMode
+C:\Users\Mihai\AppData\Local\Temp\ccdGljrt.s:1548   .text.ADC002_SetSampleTime:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccdGljrt.s:1553   .text.ADC002_SetSampleTime:00000000 ADC002_SetSampleTime
+C:\Users\Mihai\AppData\Local\Temp\ccdGljrt.s:1613   .text.ADC002_SetEMUXConversionMode:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccdGljrt.s:1618   .text.ADC002_SetEMUXConversionMode:00000000 ADC002_SetEMUXConversionMode
+C:\Users\Mihai\AppData\Local\Temp\ccdGljrt.s:1678   .text.ADC002_EMUXSetSampleTime:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccdGljrt.s:1683   .text.ADC002_EMUXSetSampleTime:00000000 ADC002_EMUXSetSampleTime
+C:\Users\Mihai\AppData\Local\Temp\ccdGljrt.s:1743   .text.ADC002_GetQueueStage0Entry:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccdGljrt.s:1748   .text.ADC002_GetQueueStage0Entry:00000000 ADC002_GetQueueStage0Entry
+C:\Users\Mihai\AppData\Local\Temp\ccdGljrt.s:1810   .text.ADC002_GetQueueBackupStageEntry:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccdGljrt.s:1815   .text.ADC002_GetQueueBackupStageEntry:00000000 ADC002_GetQueueBackupStageEntry
+C:\Users\Mihai\AppData\Local\Temp\ccdGljrt.s:1877   .text.ADC002_GetSourceEventFlag:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccdGljrt.s:1882   .text.ADC002_GetSourceEventFlag:00000000 ADC002_GetSourceEventFlag
+C:\Users\Mihai\AppData\Local\Temp\ccdGljrt.s:1947   .text.ADC002_SetSourceEventFlag:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccdGljrt.s:1952   .text.ADC002_SetSourceEventFlag:00000000 ADC002_SetSourceEventFlag
+C:\Users\Mihai\AppData\Local\Temp\ccdGljrt.s:2005   .text.ADC002_ClearSourceEventFlag:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccdGljrt.s:2010   .text.ADC002_ClearSourceEventFlag:00000000 ADC002_ClearSourceEventFlag
                      .debug_frame:00000010 $d
                            .group:00000000 wm4.1.1791a5ae2e936ca1033c1c44be394cc7
                            .group:00000000 wm4.XMC4500.h.45.215f4b8c79f46c7645c15373868d08c0
@@ -3250,6 +3250,7 @@ C:\Users\Mihai\AppData\Local\Temp\ccpZmSqW.s:2010   .text.ADC002_ClearSourceEven
                            .group:00000000 wm4.fcntl.h.9.9336f33d7f5028f694c75e6e224e0cf7
                            .group:00000000 wm4.SLTHA001.h.97.d7e87c19a31e3244bdd5839e7cc42a61
                            .group:00000000 wm4.WEBSERVER001_Conf.h.54.cd6d29aaa96a848cbc5321bab5d6cd90
+                           .group:00000000 wm4.IO004.h.51.dbf9dd216c57d6a7f14a22b2cb7e5626
                            .group:00000000 wm4.ADCGROUP001.h.48.081c7f952eb4b6ea2df7d05180ee1663
                            .group:00000000 wm4.IO001.h.49.1da965fb490206cf7cde64a90f6912e1
                            .group:00000000 wm4.MOTORLIBS.h.59.b2e97de0df555dedfa51e24447b57ab8
@@ -3257,6 +3258,7 @@ C:\Users\Mihai\AppData\Local\Temp\ccpZmSqW.s:2010   .text.ADC002_ClearSourceEven
                            .group:00000000 wm4.Usic.h.90.22743468abc46f16747d12430b219aaf
                            .group:00000000 wm4.UART001_Conf.h.53.c5c972f6f634bc5116c171852aaab668
                            .group:00000000 wm4.UART001.h.109.3e835815a7a59791d8bd39655f4d4cc9
+                           .group:00000000 wm4.NVIC002_Conf.h.63.45e3c2b9806aa66850587e587798873e
 
 UNDEFINED SYMBOLS
 ADCGLOB001_Init

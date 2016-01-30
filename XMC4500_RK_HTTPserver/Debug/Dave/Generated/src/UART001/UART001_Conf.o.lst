@@ -31,7 +31,7 @@
   33 0015 00       		.byte	0
   34 0016 00       		.byte	0
   35 0017 00       		.space	1
-  36 0018 004B0000 		.word	19200
+  36 0018 00C20100 		.word	115200
   37 001c 0700     		.short	7
   38 001e 01       		.byte	1
   39 001f 01       		.byte	1
@@ -43,8 +43,8 @@
   45 0025 00       		.byte	0
   46 0026 00       		.byte	0
   47 0027 00       		.space	1
-  48 0028 4203     		.short	834
-  49 002a FC01     		.short	508
+  48 0028 BA02     		.short	698
+  49 002a 4600     		.short	70
   50 002c 0900     		.short	9
   51 002e 0600     		.short	6
   52 0030 00       		.byte	0
@@ -65,10 +65,10 @@
   69              		.file 7 "../Dave/Generated/src/UART001/UART001_Conf.c"
 DEFINED SYMBOLS
                             *ABS*:00000000 UART001_Conf.c
-C:\Users\Mihai\AppData\Local\Temp\ccIWY3q5.s:24     .rodata:00000000 UART001_Handle0
-C:\Users\Mihai\AppData\Local\Temp\ccIWY3q5.s:21     .rodata:00000000 $d
-C:\Users\Mihai\AppData\Local\Temp\ccIWY3q5.s:59     .data:00000000 UART001_HandleArray
-C:\Users\Mihai\AppData\Local\Temp\ccIWY3q5.s:56     .data:00000000 $d
+C:\Users\Mihai\AppData\Local\Temp\ccXhqFjy.s:24     .rodata:00000000 UART001_Handle0
+C:\Users\Mihai\AppData\Local\Temp\ccXhqFjy.s:21     .rodata:00000000 $d
+C:\Users\Mihai\AppData\Local\Temp\ccXhqFjy.s:59     .data:00000000 UART001_HandleArray
+C:\Users\Mihai\AppData\Local\Temp\ccXhqFjy.s:56     .data:00000000 $d
                            .group:00000000 wm4.1.1791a5ae2e936ca1033c1c44be394cc7
                            .group:00000000 wm4.uc_id.h.35.a6c4837fad81477ba31967683332b8cc
                            .group:00000000 wm4.XMC4500.h.45.215f4b8c79f46c7645c15373868d08c0

@@ -29,9 +29,11 @@ Dave/Generated/src/SDMMC001 \
 Dave/Generated/src/RTC001 \
 Dave/Generated/src/RESET001 \
 Dave/Generated/src/NVIC_SCU001 \
+Dave/Generated/src/NVIC002 \
 Dave/Generated/src/MOTORLIBS \
 Dave/Generated/src/LMM001 \
 Dave/Generated/src/LIBS \
+Dave/Generated/src/IO004 \
 Dave/Generated/src/IO001 \
 Dave/Generated/src/GMM001 \
 Dave/Generated/src/FATFS004 \

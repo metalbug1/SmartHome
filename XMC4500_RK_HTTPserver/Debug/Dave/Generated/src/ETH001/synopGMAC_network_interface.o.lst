@@ -22,7 +22,7 @@
   22              		.thumb
   23              		.thumb_func
   25              	synopGMAC_IsEtherAddrsValid:
-  26              	.LFB112:
+  26              	.LFB117:
   27              		.file 1 "../Dave/Generated/src/ETH001/synopGMAC_network_interface.c"
    1:../Dave/Generated/src/ETH001/synopGMAC_network_interface.c **** /* ===================================================================================
    2:../Dave/Generated/src/ETH001/synopGMAC_network_interface.c ****  * Copyright (c) <2009> Synopsys, Inc.
@@ -289,14 +289,14 @@
   62 0028 BD46     		mov	sp, r7
   63 002a 80BD     		pop	{r7, pc}
   64              		.cfi_endproc
-  65              	.LFE112:
+  65              	.LFE117:
   67              		.section	.text.synopGMAC_powerup_mac,"ax",%progbits
   68              		.align	2
   69              		.global	synopGMAC_powerup_mac
   70              		.thumb
   71              		.thumb_func
   73              	synopGMAC_powerup_mac:
-  74              	.LFB113:
+  74              	.LFB118:
  229:../Dave/Generated/src/ETH001/synopGMAC_network_interface.c **** 
  230:../Dave/Generated/src/ETH001/synopGMAC_network_interface.c **** 
  231:../Dave/Generated/src/ETH001/synopGMAC_network_interface.c **** 
@@ -383,14 +383,14 @@
  121 0046 BD46     		mov	sp, r7
  122 0048 80BD     		pop	{r7, pc}
  123              		.cfi_endproc
- 124              	.LFE113:
+ 124              	.LFE118:
  126 004a 00BF     		.section	.text.synopGMAC_cable_unplug_function,"ax",%progbits
  127              		.align	2
  128              		.global	synopGMAC_cable_unplug_function
  129              		.thumb
  130              		.thumb_func
  132              	synopGMAC_cable_unplug_function:
- 133              	.LFB114:
+ 133              	.LFB119:
  266:../Dave/Generated/src/ETH001/synopGMAC_network_interface.c **** 
  267:../Dave/Generated/src/ETH001/synopGMAC_network_interface.c **** #ifdef LINUX_CODE
  268:../Dave/Generated/src/ETH001/synopGMAC_network_interface.c **** /**
@@ -551,14 +551,14 @@
  196 0066 BD46     		mov	sp, r7
  197 0068 80BD     		pop	{r7, pc}
  198              		.cfi_endproc
- 199              	.LFE114:
+ 199              	.LFE119:
  201 006a 00BF     		.section	.text.synopGMAC_setup_rx_desc_queue,"ax",%progbits
  202              		.align	2
  203              		.global	synopGMAC_setup_rx_desc_queue
  204              		.thumb
  205              		.thumb_func
  207              	synopGMAC_setup_rx_desc_queue:
- 208              	.LFB115:
+ 208              	.LFB120:
  361:../Dave/Generated/src/ETH001/synopGMAC_network_interface.c **** 
  362:../Dave/Generated/src/ETH001/synopGMAC_network_interface.c **** 
  363:../Dave/Generated/src/ETH001/synopGMAC_network_interface.c **** /**
@@ -860,14 +860,14 @@
  412 016c BD46     		mov	sp, r7
  413 016e 80BD     		pop	{r7, pc}
  414              		.cfi_endproc
- 415              	.LFE115:
+ 415              	.LFE120:
  417              		.section	.text.synopGMAC_giveup_rx_desc_queue,"ax",%progbits
  418              		.align	2
  419              		.global	synopGMAC_giveup_rx_desc_queue
  420              		.thumb
  421              		.thumb_func
  423              	synopGMAC_giveup_rx_desc_queue:
- 424              	.LFB116:
+ 424              	.LFB121:
  451:../Dave/Generated/src/ETH001/synopGMAC_network_interface.c **** 
  452:../Dave/Generated/src/ETH001/synopGMAC_network_interface.c **** /**
  453:../Dave/Generated/src/ETH001/synopGMAC_network_interface.c ****   * This gives up the receive Descriptor queue in ring or chain mode.
@@ -1077,14 +1077,14 @@
  547 00dc BD46     		mov	sp, r7
  548 00de 90BD     		pop	{r4, r7, pc}
  549              		.cfi_endproc
- 550              	.LFE116:
+ 550              	.LFE121:
  552              		.section	.text.synopGMAC_setup_tx_desc_queue,"ax",%progbits
  553              		.align	2
  554              		.global	synopGMAC_setup_tx_desc_queue
  555              		.thumb
  556              		.thumb_func
  558              	synopGMAC_setup_tx_desc_queue:
- 559              	.LFB117:
+ 559              	.LFB122:
  530:../Dave/Generated/src/ETH001/synopGMAC_network_interface.c **** 
  531:../Dave/Generated/src/ETH001/synopGMAC_network_interface.c **** /**
  532:../Dave/Generated/src/ETH001/synopGMAC_network_interface.c ****   * This sets up the transmit Descriptor queue in ring or chain mode.
@@ -1387,14 +1387,14 @@
  763 016c BD46     		mov	sp, r7
  764 016e 80BD     		pop	{r7, pc}
  765              		.cfi_endproc
- 766              	.LFE117:
+ 766              	.LFE122:
  768              		.section	.text.synopGMAC_giveup_tx_desc_queue,"ax",%progbits
  769              		.align	2
  770              		.global	synopGMAC_giveup_tx_desc_queue
  771              		.thumb
  772              		.thumb_func
  774              	synopGMAC_giveup_tx_desc_queue:
- 775              	.LFB118:
+ 775              	.LFB123:
  621:../Dave/Generated/src/ETH001/synopGMAC_network_interface.c **** 
  622:../Dave/Generated/src/ETH001/synopGMAC_network_interface.c **** /**
  623:../Dave/Generated/src/ETH001/synopGMAC_network_interface.c ****   * This gives up the transmit Descriptor queue in ring or chain mode.
@@ -1605,14 +1605,14 @@
  898 00dc BD46     		mov	sp, r7
  899 00de 90BD     		pop	{r4, r7, pc}
  900              		.cfi_endproc
- 901              	.LFE118:
+ 901              	.LFE123:
  903              		.section	.text.synop_handle_transmit_over,"ax",%progbits
  904              		.align	2
  905              		.global	synop_handle_transmit_over
  906              		.thumb
  907              		.thumb_func
  909              	synop_handle_transmit_over:
- 910              	.LFB119:
+ 910              	.LFB124:
  701:../Dave/Generated/src/ETH001/synopGMAC_network_interface.c **** 
  702:../Dave/Generated/src/ETH001/synopGMAC_network_interface.c **** #ifdef AVB_SUPPORT
  703:../Dave/Generated/src/ETH001/synopGMAC_network_interface.c **** static void populate_tx_avb_data (u32 dma_index, u32 avb_frame_size, u32 * skb_data, synopGMACavbSt
@@ -2187,13 +2187,13 @@
  1028 00da BD46     		mov	sp, r7
  1029 00dc 90BD     		pop	{r4, r7, pc}
  1030              		.cfi_endproc
- 1031              	.LFE119:
+ 1031              	.LFE124:
  1033 00de 00BF     		.section	.text.is_valid_ether_addr,"ax",%progbits
  1034              		.align	2
  1035              		.thumb
  1036              		.thumb_func
  1038              	is_valid_ether_addr:
- 1039              	.LFB120:
+ 1039              	.LFB125:
 1155:../Dave/Generated/src/ETH001/synopGMAC_network_interface.c **** 
 1156:../Dave/Generated/src/ETH001/synopGMAC_network_interface.c **** 
 1157:../Dave/Generated/src/ETH001/synopGMAC_network_interface.c **** #ifdef AVB_SUPPORT
@@ -2850,14 +2850,14 @@
  1113 006c 80BC     		pop	{r7}
  1114 006e 7047     		bx	lr
  1115              		.cfi_endproc
- 1116              	.LFE120:
+ 1116              	.LFE125:
  1118              		.section	.text.synopGMAC_set_mac_address,"ax",%progbits
  1119              		.align	2
  1120              		.global	synopGMAC_set_mac_address
  1121              		.thumb
  1122              		.thumb_func
  1124              	synopGMAC_set_mac_address:
- 1125              	.LFB121:
+ 1125              	.LFB126:
 1728:../Dave/Generated/src/ETH001/synopGMAC_network_interface.c **** 
 1729:../Dave/Generated/src/ETH001/synopGMAC_network_interface.c **** 
 1730:../Dave/Generated/src/ETH001/synopGMAC_network_interface.c **** /**
@@ -2948,14 +2948,14 @@
  1181 0056 BD46     		mov	sp, r7
  1182 0058 80BD     		pop	{r7, pc}
  1183              		.cfi_endproc
- 1184              	.LFE121:
+ 1184              	.LFE126:
  1186 005a 00BF     		.section	.text.synopGMAC_change_mtu,"ax",%progbits
  1187              		.align	2
  1188              		.global	synopGMAC_change_mtu
  1189              		.thumb
  1190              		.thumb_func
  1192              	synopGMAC_change_mtu:
- 1193              	.LFB122:
+ 1193              	.LFB127:
 1759:../Dave/Generated/src/ETH001/synopGMAC_network_interface.c **** 
 1760:../Dave/Generated/src/ETH001/synopGMAC_network_interface.c **** /**
 1761:../Dave/Generated/src/ETH001/synopGMAC_network_interface.c ****  * Function to change the Maximum Transfer Unit.
@@ -2994,7 +2994,7 @@
  1217 0016 80BC     		pop	{r7}
  1218 0018 7047     		bx	lr
  1219              		.cfi_endproc
- 1220              	.LFE122:
+ 1220              	.LFE127:
  1222 001a 00BF     		.text
  1223              	.Letext0:
  1224              		.file 2 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
@@ -3004,28 +3004,28 @@
  1228              		.file 6 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Include/core_cm4.h"
 DEFINED SYMBOLS
                             *ABS*:00000000 synopGMAC_network_interface.c
-C:\Users\Mihai\AppData\Local\Temp\ccxXnMMB.s:20     .text.synopGMAC_IsEtherAddrsValid:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccxXnMMB.s:25     .text.synopGMAC_IsEtherAddrsValid:00000000 synopGMAC_IsEtherAddrsValid
-C:\Users\Mihai\AppData\Local\Temp\ccxXnMMB.s:1038   .text.is_valid_ether_addr:00000000 is_valid_ether_addr
-C:\Users\Mihai\AppData\Local\Temp\ccxXnMMB.s:68     .text.synopGMAC_powerup_mac:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccxXnMMB.s:73     .text.synopGMAC_powerup_mac:00000000 synopGMAC_powerup_mac
-C:\Users\Mihai\AppData\Local\Temp\ccxXnMMB.s:127    .text.synopGMAC_cable_unplug_function:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccxXnMMB.s:132    .text.synopGMAC_cable_unplug_function:00000000 synopGMAC_cable_unplug_function
-C:\Users\Mihai\AppData\Local\Temp\ccxXnMMB.s:202    .text.synopGMAC_setup_rx_desc_queue:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccxXnMMB.s:207    .text.synopGMAC_setup_rx_desc_queue:00000000 synopGMAC_setup_rx_desc_queue
-C:\Users\Mihai\AppData\Local\Temp\ccxXnMMB.s:418    .text.synopGMAC_giveup_rx_desc_queue:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccxXnMMB.s:423    .text.synopGMAC_giveup_rx_desc_queue:00000000 synopGMAC_giveup_rx_desc_queue
-C:\Users\Mihai\AppData\Local\Temp\ccxXnMMB.s:553    .text.synopGMAC_setup_tx_desc_queue:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccxXnMMB.s:558    .text.synopGMAC_setup_tx_desc_queue:00000000 synopGMAC_setup_tx_desc_queue
-C:\Users\Mihai\AppData\Local\Temp\ccxXnMMB.s:769    .text.synopGMAC_giveup_tx_desc_queue:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccxXnMMB.s:774    .text.synopGMAC_giveup_tx_desc_queue:00000000 synopGMAC_giveup_tx_desc_queue
-C:\Users\Mihai\AppData\Local\Temp\ccxXnMMB.s:904    .text.synop_handle_transmit_over:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccxXnMMB.s:909    .text.synop_handle_transmit_over:00000000 synop_handle_transmit_over
-C:\Users\Mihai\AppData\Local\Temp\ccxXnMMB.s:1034   .text.is_valid_ether_addr:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccxXnMMB.s:1119   .text.synopGMAC_set_mac_address:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccxXnMMB.s:1124   .text.synopGMAC_set_mac_address:00000000 synopGMAC_set_mac_address
-C:\Users\Mihai\AppData\Local\Temp\ccxXnMMB.s:1187   .text.synopGMAC_change_mtu:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccxXnMMB.s:1192   .text.synopGMAC_change_mtu:00000000 synopGMAC_change_mtu
+C:\Users\Mihai\AppData\Local\Temp\ccbJrjrd.s:20     .text.synopGMAC_IsEtherAddrsValid:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccbJrjrd.s:25     .text.synopGMAC_IsEtherAddrsValid:00000000 synopGMAC_IsEtherAddrsValid
+C:\Users\Mihai\AppData\Local\Temp\ccbJrjrd.s:1038   .text.is_valid_ether_addr:00000000 is_valid_ether_addr
+C:\Users\Mihai\AppData\Local\Temp\ccbJrjrd.s:68     .text.synopGMAC_powerup_mac:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccbJrjrd.s:73     .text.synopGMAC_powerup_mac:00000000 synopGMAC_powerup_mac
+C:\Users\Mihai\AppData\Local\Temp\ccbJrjrd.s:127    .text.synopGMAC_cable_unplug_function:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccbJrjrd.s:132    .text.synopGMAC_cable_unplug_function:00000000 synopGMAC_cable_unplug_function
+C:\Users\Mihai\AppData\Local\Temp\ccbJrjrd.s:202    .text.synopGMAC_setup_rx_desc_queue:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccbJrjrd.s:207    .text.synopGMAC_setup_rx_desc_queue:00000000 synopGMAC_setup_rx_desc_queue
+C:\Users\Mihai\AppData\Local\Temp\ccbJrjrd.s:418    .text.synopGMAC_giveup_rx_desc_queue:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccbJrjrd.s:423    .text.synopGMAC_giveup_rx_desc_queue:00000000 synopGMAC_giveup_rx_desc_queue
+C:\Users\Mihai\AppData\Local\Temp\ccbJrjrd.s:553    .text.synopGMAC_setup_tx_desc_queue:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccbJrjrd.s:558    .text.synopGMAC_setup_tx_desc_queue:00000000 synopGMAC_setup_tx_desc_queue
+C:\Users\Mihai\AppData\Local\Temp\ccbJrjrd.s:769    .text.synopGMAC_giveup_tx_desc_queue:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccbJrjrd.s:774    .text.synopGMAC_giveup_tx_desc_queue:00000000 synopGMAC_giveup_tx_desc_queue
+C:\Users\Mihai\AppData\Local\Temp\ccbJrjrd.s:904    .text.synop_handle_transmit_over:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccbJrjrd.s:909    .text.synop_handle_transmit_over:00000000 synop_handle_transmit_over
+C:\Users\Mihai\AppData\Local\Temp\ccbJrjrd.s:1034   .text.is_valid_ether_addr:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccbJrjrd.s:1119   .text.synopGMAC_set_mac_address:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccbJrjrd.s:1124   .text.synopGMAC_set_mac_address:00000000 synopGMAC_set_mac_address
+C:\Users\Mihai\AppData\Local\Temp\ccbJrjrd.s:1187   .text.synopGMAC_change_mtu:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccbJrjrd.s:1192   .text.synopGMAC_change_mtu:00000000 synopGMAC_change_mtu
                      .debug_frame:00000010 $d
                            .group:00000000 wm4.1.1791a5ae2e936ca1033c1c44be394cc7
                            .group:00000000 wm4.XMC4500.h.45.215f4b8c79f46c7645c15373868d08c0
@@ -3116,6 +3116,7 @@ C:\Users\Mihai\AppData\Local\Temp\ccxXnMMB.s:1192   .text.synopGMAC_change_mtu:0
                            .group:00000000 wm4.fcntl.h.9.9336f33d7f5028f694c75e6e224e0cf7
                            .group:00000000 wm4.SLTHA001.h.97.d7e87c19a31e3244bdd5839e7cc42a61
                            .group:00000000 wm4.WEBSERVER001_Conf.h.54.cd6d29aaa96a848cbc5321bab5d6cd90
+                           .group:00000000 wm4.IO004.h.51.dbf9dd216c57d6a7f14a22b2cb7e5626
                            .group:00000000 wm4.ADCGROUP001.h.48.081c7f952eb4b6ea2df7d05180ee1663
                            .group:00000000 wm4.IO001.h.49.1da965fb490206cf7cde64a90f6912e1
                            .group:00000000 wm4.MOTORLIBS.h.59.b2e97de0df555dedfa51e24447b57ab8
@@ -3123,6 +3124,7 @@ C:\Users\Mihai\AppData\Local\Temp\ccxXnMMB.s:1192   .text.synopGMAC_change_mtu:0
                            .group:00000000 wm4.Usic.h.90.22743468abc46f16747d12430b219aaf
                            .group:00000000 wm4.UART001_Conf.h.53.c5c972f6f634bc5116c171852aaab668
                            .group:00000000 wm4.UART001.h.109.3e835815a7a59791d8bd39655f4d4cc9
+                           .group:00000000 wm4.NVIC002_Conf.h.63.45e3c2b9806aa66850587e587798873e
 
 UNDEFINED SYMBOLS
 GMAC_Power_down

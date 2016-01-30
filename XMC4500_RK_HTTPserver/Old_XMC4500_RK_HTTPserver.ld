@@ -6,6 +6,7 @@
 OUTPUT_FORMAT("elf32-littlearm")
 OUTPUT_ARCH(arm)
 ENTRY(__Xmc4500_reset_cortex_m)
+GROUP(-lxmclibcstubs)
 
 MEMORY
 {

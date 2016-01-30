@@ -6,9 +6,6 @@
  */
 
 
-
-
-
 /** Inclusion of header file */
 #include <DAVE3.h>
 #include "netconf.h"
@@ -19,7 +16,7 @@
 #include "lwip/netif.h"
 #include "./Dave/Generated/src/WEBSERVER001/HTTPServer/httpd.h"
 
-
+#include "SmartHome_Types.h"
 
 /* Initialisation of functions to be used with CGi*/
 //  CGI handler to switch LED status
@@ -28,7 +25,32 @@ const char *CGI_led_handler(int iIndex, int iNumParams, char *pcParam[], char *p
 
 	uint32_t i=0;
 	
+	/* We have only one CGI handler iIndex = 0 */
+	if (iIndex==0)
+	{
+
+	  /* Check cgi parameter : example GET /leds.cgi?led=2&led=4 */
+	  for (i=0; i<iNumParams; i++)
+	  {
+		/* check parameter "led" */
+		if (strcmp(pcParam[i] , "led")==0)	 
+		{
+		  /* switch led1 ON if 1 */
+		  if(strcmp(pcValue[i], "1") ==0) 
+				IO004_TogglePin(IO004_Handle0);
+			
+		  /* switch led2 ON if 2 */
+		  else if(strcmp(pcValue[i], "2") ==0) 
+				IO004_TogglePin(IO004_Handle0);
+		}
+	  }
+	}
+	/* uri to send after cgi call*/
+
+
 	return "/LED.htm";
+
+
 }
 
 
@@ -52,13 +74,12 @@ void http_CGI_init( void)
 	http_set_cgi_handlers(&CGI_TAB[0], 1);
 }
 
-u16_t SSI_Temp_Handler (int iIndex, char *pcInsert, int iInsertLen)
+u16_t SSI_ADC_Handler (int iIndex, char *pcInsert, int iInsertLen)
 {
 
     char Digit1=0, Digit2=0, Digit3=0, Digit4=0; 
     uint16_t ADCVal = 0;        
 	status_t status;
-
 
 	/* We have only one SSI handler iIndex = 0 */
 
@@ -106,31 +127,51 @@ u16_t SSI_Temp_Handler (int iIndex, char *pcInsert, int iInsertLen)
 		return 0;
 }
 
+
+
 char const* TAGCHAR="t";
 char const* TAGCHAR2="u";
 char const** TAGS= {&TAGCHAR, &TAGCHAR2};
 
+
 void http_SSI_init (void)
 {
-
-
-/*
-SSI is a method used to dynamically include dynamic data in HTML code.
-This done by placing a specific tag inside the HTML code of the web page. The tag should
-have the following format: <!--#tag-->
-For the ADC conversion page, the following tag "t" is used inside the HTML code: <!--#t-->
-*/
-http_set_ssi_handler(SSI_Temp_Handler, (char const **)TAGS, 2);
-
+	/*
+	SSI is a method used to dynamically include dynamic data in HTML code.
+	This done by placing a specific tag inside the HTML code of the web page. The tag should
+	have the following format: <!--#tag-->
+	For the ADC conversion page, the following tag "t" is used inside the HTML code: <!--#t-->
+	*/
+	http_set_ssi_handler(SSI_ADC_Handler, (char const **)TAGS, 2);
 }
 
 
+DataQueueType receivedData;
+
+void UART_ReceiveInterrupt(void)
+{
+	uint16_t au16tempBuffer[256];
+	uint16_t u16rnumberOfReceivedBytes;
+	uint16_t u16tempIndex;
+
+	u16rnumberOfReceivedBytes = UART001_ReadDataMultiple(&UART001_Handle0, au16tempBuffer, 256);
+	if (0 != u16rnumberOfReceivedBytes)
+	{
+		for (u16tempIndex=0; u16tempIndex < u16rnumberOfReceivedBytes; u16tempIndex++)
+		{
+			receivedData.au8dataBuffer[u16tempIndex + receivedData.u8rxIndex] = (char)au16tempBuffer[u16tempIndex];
+			receivedData.u8rxIndex++;
+		}
+	}
+}
+
+RoomInformationType roomInformation[NUMBER_OF_ROOMS];
 
 int main(void)
 {
+	char Data[] = {'a','b','c'};
+	uint8_t k = 0;
 //	status_t status;		// Declaration of return variable for DAVE3 APIs (toggle comment if required)
-
-
 	DAVE_Init();			// Initialization of DAVE Apps
 
 	ADC002_InitializeQueue((ADC002_HandleType*)&ADC002_Handle0);
@@ -140,6 +181,11 @@ int main(void)
     // ... infinite loop ...
 	while(1)
 	{
+		if ((receivedData.u8rxIndex > 6) && (k == 0))
+		{
+			UART001_WriteDataBytes(&UART001_Handle0, Data, 3);
+			k = 1;
+		}
 
 	}
 	return 0;

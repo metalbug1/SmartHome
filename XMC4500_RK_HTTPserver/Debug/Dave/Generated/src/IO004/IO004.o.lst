@@ -22,7 +22,7 @@
   22              		.thumb
   23              		.thumb_func
   25              	IO004_Init:
-  26              	.LFB112:
+  26              	.LFB117:
   27              		.file 1 "../Dave/Generated/src/IO004/IO004.c"
    1:../Dave/Generated/src/IO004/IO004.c **** /*******************************************************************************
    2:../Dave/Generated/src/IO004/IO004.c **** **  DAVE App Name : IO004       App Version: 1.0.12               
@@ -167,8 +167,8 @@
  129:../Dave/Generated/src/IO004/IO004.c ****  
  130:../Dave/Generated/src/IO004/IO004.c ****    
  131:../Dave/Generated/src/IO004/IO004.c **** 
- 132:../Dave/Generated/src/IO004/IO004.c ****   /* Configuration of 3 Port 9 based on User configuration */
- 133:../Dave/Generated/src/IO004/IO004.c ****   IO004_Handle0.PortRegs->OMR |= (1U<< 9);
+ 132:../Dave/Generated/src/IO004/IO004.c ****   /* Configuration of 1 Port 0 based on User configuration */
+ 133:../Dave/Generated/src/IO004/IO004.c ****   IO004_Handle0.PortRegs->OMR |= (1U<< 0);
   40              		.loc 1 133 0
   41 0004 40F20003 		movw	r3, #:lower16:IO004_Handle0
   42 0008 C0F20003 		movt	r3, #:upper16:IO004_Handle0
@@ -177,10 +177,10 @@
   45 0012 C0F20003 		movt	r3, #:upper16:IO004_Handle0
   46 0016 5B68     		ldr	r3, [r3, #4]
   47 0018 5B68     		ldr	r3, [r3, #4]
-  48 001a 43F40073 		orr	r3, r3, #512
+  48 001a 43F00103 		orr	r3, r3, #1
   49 001e 5360     		str	r3, [r2, #4]
  134:../Dave/Generated/src/IO004/IO004.c ****   
- 135:../Dave/Generated/src/IO004/IO004.c ****   IO004_Handle0.PortRegs->PDR1  &= (uint32_t)(~(PORT3_PDR1_PD9_Msk));
+ 135:../Dave/Generated/src/IO004/IO004.c ****   IO004_Handle0.PortRegs->PDR0   &= (uint32_t)(~(PORT1_PDR0_PD0_Msk));
   50              		.loc 1 135 0
   51 0020 40F20003 		movw	r3, #:lower16:IO004_Handle0
   52 0024 C0F20003 		movt	r3, #:upper16:IO004_Handle0
@@ -188,10 +188,10 @@
   54 002a 40F20003 		movw	r3, #:lower16:IO004_Handle0
   55 002e C0F20003 		movt	r3, #:upper16:IO004_Handle0
   56 0032 5B68     		ldr	r3, [r3, #4]
-  57 0034 5B6C     		ldr	r3, [r3, #68]
-  58 0036 23F07003 		bic	r3, r3, #112
-  59 003a 5364     		str	r3, [r2, #68]
- 136:../Dave/Generated/src/IO004/IO004.c ****   IO004_Handle0.PortRegs->PDR1  |= (uint32_t)((4UL << PORT3_PDR1_PD9_Pos) & \
+  57 0034 1B6C     		ldr	r3, [r3, #64]
+  58 0036 23F00703 		bic	r3, r3, #7
+  59 003a 1364     		str	r3, [r2, #64]
+ 136:../Dave/Generated/src/IO004/IO004.c ****   IO004_Handle0.PortRegs->PDR0   |= (uint32_t)((4UL << PORT1_PDR0_PD0_Pos) & \
   60              		.loc 1 136 0
   61 003c 40F20003 		movw	r3, #:lower16:IO004_Handle0
   62 0040 C0F20003 		movt	r3, #:upper16:IO004_Handle0
@@ -199,11 +199,11 @@
   64 0046 40F20003 		movw	r3, #:lower16:IO004_Handle0
   65 004a C0F20003 		movt	r3, #:upper16:IO004_Handle0
   66 004e 5B68     		ldr	r3, [r3, #4]
-  67 0050 5B6C     		ldr	r3, [r3, #68]
-  68 0052 43F04003 		orr	r3, r3, #64
-  69 0056 5364     		str	r3, [r2, #68]
- 137:../Dave/Generated/src/IO004/IO004.c ****                                      PORT3_PDR1_PD9_Msk);
- 138:../Dave/Generated/src/IO004/IO004.c ****   IO004_Handle0.PortRegs->IOCR8 |= (0U << 11);
+  67 0050 1B6C     		ldr	r3, [r3, #64]
+  68 0052 43F00403 		orr	r3, r3, #4
+  69 0056 1364     		str	r3, [r2, #64]
+ 137:../Dave/Generated/src/IO004/IO004.c ****                                           PORT1_PDR0_PD0_Msk);
+ 138:../Dave/Generated/src/IO004/IO004.c ****   IO004_Handle0.PortRegs->IOCR0 |= (0U << 3);
   70              		.loc 1 138 0
   71 0058 40F20003 		movw	r3, #:lower16:IO004_Handle0
   72 005c C0F20003 		movt	r3, #:upper16:IO004_Handle0
@@ -211,22 +211,22 @@
   74 0062 40F20003 		movw	r3, #:lower16:IO004_Handle0
   75 0066 C0F20003 		movt	r3, #:upper16:IO004_Handle0
   76 006a 5B68     		ldr	r3, [r3, #4]
-  77 006c 9B69     		ldr	r3, [r3, #24]
-  78 006e 9361     		str	r3, [r2, #24]
+  77 006c 1B69     		ldr	r3, [r3, #16]
+  78 006e 1361     		str	r3, [r2, #16]
  139:../Dave/Generated/src/IO004/IO004.c **** }
   79              		.loc 1 139 0
   80 0070 BD46     		mov	sp, r7
   81 0072 80BC     		pop	{r7}
   82 0074 7047     		bx	lr
   83              		.cfi_endproc
-  84              	.LFE112:
+  84              	.LFE117:
   86 0076 00BF     		.section	.text.IO004_DisableOutputDriver,"ax",%progbits
   87              		.align	2
   88              		.global	IO004_DisableOutputDriver
   89              		.thumb
   90              		.thumb_func
   92              	IO004_DisableOutputDriver:
-  93              	.LFB113:
+  93              	.LFB118:
  140:../Dave/Generated/src/IO004/IO004.c **** 
  141:../Dave/Generated/src/IO004/IO004.c **** void IO004_DisableOutputDriver(const IO004_HandleType* Handle,IO004_InputModeType Mode)
  142:../Dave/Generated/src/IO004/IO004.c **** {
@@ -445,14 +445,14 @@
  278 0178 80BC     		pop	{r7}
  279 017a 7047     		bx	lr
  280              		.cfi_endproc
- 281              	.LFE113:
+ 281              	.LFE118:
  283              		.section	.text.IO004_EnableOutputDriver,"ax",%progbits
  284              		.align	2
  285              		.global	IO004_EnableOutputDriver
  286              		.thumb
  287              		.thumb_func
  289              	IO004_EnableOutputDriver:
- 290              	.LFB114:
+ 290              	.LFB119:
  171:../Dave/Generated/src/IO004/IO004.c **** 
  172:../Dave/Generated/src/IO004/IO004.c **** void IO004_EnableOutputDriver(const IO004_HandleType* Handle,IO004_OutputModeType Mode)
  173:../Dave/Generated/src/IO004/IO004.c **** {
@@ -671,23 +671,23 @@
  475 0178 80BC     		pop	{r7}
  476 017a 7047     		bx	lr
  477              		.cfi_endproc
- 478              	.LFE114:
+ 478              	.LFE119:
  480              		.text
  481              	.Letext0:
  482              		.file 2 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
- 483              		.file 3 "C:\\DAVE3_workspace\\ws3.1.10\\XMC4500_RK_HTTPserver\\XMC4500_RK_HTTPserver\\Dave\\Genera
+ 483              		.file 3 "F:\\WORK\\SmartHome_checkout1\\XMC4500_RK_HTTPserver\\Dave\\Generated\\inc\\DAVESupport/.
  484              		.file 4 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Include/core_cm4.h"
- 485              		.file 5 "C:\\DAVE3_workspace\\ws3.1.10\\XMC4500_RK_HTTPserver\\XMC4500_RK_HTTPserver\\Dave\\Genera
+ 485              		.file 5 "F:\\WORK\\SmartHome_checkout1\\XMC4500_RK_HTTPserver\\Dave\\Generated\\inc\\DAVESupport/.
 DEFINED SYMBOLS
                             *ABS*:00000000 IO004.c
-C:\Users\Mihai\AppData\Local\Temp\ccnG0Tzj.s:20     .text.IO004_Init:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccnG0Tzj.s:25     .text.IO004_Init:00000000 IO004_Init
-C:\Users\Mihai\AppData\Local\Temp\ccnG0Tzj.s:87     .text.IO004_DisableOutputDriver:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccnG0Tzj.s:92     .text.IO004_DisableOutputDriver:00000000 IO004_DisableOutputDriver
-C:\Users\Mihai\AppData\Local\Temp\ccnG0Tzj.s:284    .text.IO004_EnableOutputDriver:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccnG0Tzj.s:289    .text.IO004_EnableOutputDriver:00000000 IO004_EnableOutputDriver
+C:\Users\Mihai\AppData\Local\Temp\cclG0W4y.s:20     .text.IO004_Init:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cclG0W4y.s:25     .text.IO004_Init:00000000 IO004_Init
+C:\Users\Mihai\AppData\Local\Temp\cclG0W4y.s:87     .text.IO004_DisableOutputDriver:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cclG0W4y.s:92     .text.IO004_DisableOutputDriver:00000000 IO004_DisableOutputDriver
+C:\Users\Mihai\AppData\Local\Temp\cclG0W4y.s:284    .text.IO004_EnableOutputDriver:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cclG0W4y.s:289    .text.IO004_EnableOutputDriver:00000000 IO004_EnableOutputDriver
                      .debug_frame:00000010 $d
-                           .group:00000000 wm4.1.ba21c23494364c0fa332159cc0e77461
+                           .group:00000000 wm4.1.1791a5ae2e936ca1033c1c44be394cc7
                            .group:00000000 wm4.XMC4500.h.45.215f4b8c79f46c7645c15373868d08c0
                            .group:00000000 wm4.core_cm4.h.47.41af406cb4cda82c972f112a9cd0a024
                            .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
@@ -780,6 +780,11 @@ C:\Users\Mihai\AppData\Local\Temp\ccnG0Tzj.s:289    .text.IO004_EnableOutputDriv
                            .group:00000000 wm4.ADCGROUP001.h.48.081c7f952eb4b6ea2df7d05180ee1663
                            .group:00000000 wm4.IO001.h.49.1da965fb490206cf7cde64a90f6912e1
                            .group:00000000 wm4.MOTORLIBS.h.59.b2e97de0df555dedfa51e24447b57ab8
+                           .group:00000000 wm4.uc_id.h.35.a6c4837fad81477ba31967683332b8cc
+                           .group:00000000 wm4.Usic.h.90.22743468abc46f16747d12430b219aaf
+                           .group:00000000 wm4.UART001_Conf.h.53.c5c972f6f634bc5116c171852aaab668
+                           .group:00000000 wm4.UART001.h.109.3e835815a7a59791d8bd39655f4d4cc9
+                           .group:00000000 wm4.NVIC002_Conf.h.63.45e3c2b9806aa66850587e587798873e
 
 UNDEFINED SYMBOLS
 IO004_Handle0

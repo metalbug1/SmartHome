@@ -22,7 +22,7 @@
   22              		.thumb
   23              		.thumb_func
   25              	low_level_init:
-  26              	.LFB112:
+  26              	.LFB117:
   27              		.file 1 "../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c"
    1:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** /**
    2:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * @file
@@ -298,13 +298,13 @@
   77 0052 BD46     		mov	sp, r7
   78 0054 80BD     		pop	{r7, pc}
   79              		.cfi_endproc
-  80              	.LFE112:
+  80              	.LFE117:
   82 0056 00BF     		.section	.text.low_level_output,"ax",%progbits
   83              		.align	2
   84              		.thumb
   85              		.thumb_func
   87              	low_level_output:
-  88              	.LFB113:
+  88              	.LFB118:
  223:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 
  224:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** /**
  225:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * This function should do the actual transmission of the packet. The packet is
@@ -460,14 +460,14 @@
  175 0080 BD46     		mov	sp, r7
  176 0082 80BD     		pop	{r7, pc}
  177              		.cfi_endproc
- 178              	.LFE113:
+ 178              	.LFE118:
  180              		.section	.text.lwip_Input,"ax",%progbits
  181              		.align	2
  182              		.global	lwip_Input
  183              		.thumb
  184              		.thumb_func
  186              	lwip_Input:
- 187              	.LFB114:
+ 187              	.LFB119:
  287:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 
  288:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** /**
  289:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * This function should be called when a packet is ready to be read
@@ -665,14 +665,14 @@
  310 00c4 BD46     		mov	sp, r7
  311 00c6 80BD     		pop	{r7, pc}
  312              		.cfi_endproc
- 313              	.LFE114:
+ 313              	.LFE119:
  315              		.section	.text.ethernetif_init,"ax",%progbits
  316              		.align	2
  317              		.global	ethernetif_init
  318              		.thumb
  319              		.thumb_func
  321              	ethernetif_init:
- 322              	.LFB115:
+ 322              	.LFB120:
  355:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** 
  356:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** /*
  357:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * This function is used to initialize the netif structure. It initializes the
@@ -793,14 +793,14 @@
  388 006c BD46     		mov	sp, r7
  389 006e 80BD     		pop	{r7, pc}
  390              		.cfi_endproc
- 391              	.LFE115:
+ 391              	.LFE120:
  393              		.section	.text.Eth_Received_Data_Handler,"ax",%progbits
  394              		.align	2
  395              		.global	Eth_Received_Data_Handler
  396              		.thumb
  397              		.thumb_func
  399              	Eth_Received_Data_Handler:
- 400              	.LFB116:
+ 400              	.LFB121:
  407:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c **** /*
  408:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * This handler function is used to handle the Ethernet Packet. Here the Packet
  409:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.c ****  * is passed to the lwIP stack
@@ -837,7 +837,7 @@
  425 0018 BD46     		mov	sp, r7
  426 001a 80BD     		pop	{r7, pc}
  427              		.cfi_endproc
- 428              	.LFE116:
+ 428              	.LFE121:
  430              		.text
  431              	.Letext0:
  432              		.file 2 "F:\\WORK\\SmartHome_checkout1\\XMC4500_RK_HTTPserver\\Dave\\Generated\\src\\ETH004\\01_lw
@@ -857,16 +857,16 @@
 DEFINED SYMBOLS
                             *ABS*:00000000 ethernetif.c
                             *COM*:00000006 MACaddr
-C:\Users\Mihai\AppData\Local\Temp\ccYz44Y6.s:21     .text.low_level_init:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccYz44Y6.s:25     .text.low_level_init:00000000 low_level_init
-C:\Users\Mihai\AppData\Local\Temp\ccYz44Y6.s:83     .text.low_level_output:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccYz44Y6.s:87     .text.low_level_output:00000000 low_level_output
-C:\Users\Mihai\AppData\Local\Temp\ccYz44Y6.s:181    .text.lwip_Input:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccYz44Y6.s:186    .text.lwip_Input:00000000 lwip_Input
-C:\Users\Mihai\AppData\Local\Temp\ccYz44Y6.s:316    .text.ethernetif_init:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccYz44Y6.s:321    .text.ethernetif_init:00000000 ethernetif_init
-C:\Users\Mihai\AppData\Local\Temp\ccYz44Y6.s:394    .text.Eth_Received_Data_Handler:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccYz44Y6.s:399    .text.Eth_Received_Data_Handler:00000000 Eth_Received_Data_Handler
+C:\Users\Mihai\AppData\Local\Temp\ccJ2wOlb.s:21     .text.low_level_init:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccJ2wOlb.s:25     .text.low_level_init:00000000 low_level_init
+C:\Users\Mihai\AppData\Local\Temp\ccJ2wOlb.s:83     .text.low_level_output:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccJ2wOlb.s:87     .text.low_level_output:00000000 low_level_output
+C:\Users\Mihai\AppData\Local\Temp\ccJ2wOlb.s:181    .text.lwip_Input:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccJ2wOlb.s:186    .text.lwip_Input:00000000 lwip_Input
+C:\Users\Mihai\AppData\Local\Temp\ccJ2wOlb.s:316    .text.ethernetif_init:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccJ2wOlb.s:321    .text.ethernetif_init:00000000 ethernetif_init
+C:\Users\Mihai\AppData\Local\Temp\ccJ2wOlb.s:394    .text.Eth_Received_Data_Handler:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccJ2wOlb.s:399    .text.Eth_Received_Data_Handler:00000000 Eth_Received_Data_Handler
                      .debug_frame:00000010 $d
                            .group:00000000 wm4.1.1791a5ae2e936ca1033c1c44be394cc7
                            .group:00000000 wm4.ETH004_Conf.h.56.564c3f309c32b3c742fc91049cf66940
@@ -962,6 +962,7 @@ C:\Users\Mihai\AppData\Local\Temp\ccYz44Y6.s:399    .text.Eth_Received_Data_Hand
                            .group:00000000 wm4.fcntl.h.9.9336f33d7f5028f694c75e6e224e0cf7
                            .group:00000000 wm4.SLTHA001.h.97.d7e87c19a31e3244bdd5839e7cc42a61
                            .group:00000000 wm4.WEBSERVER001_Conf.h.54.cd6d29aaa96a848cbc5321bab5d6cd90
+                           .group:00000000 wm4.IO004.h.51.dbf9dd216c57d6a7f14a22b2cb7e5626
                            .group:00000000 wm4.ADCGROUP001.h.48.081c7f952eb4b6ea2df7d05180ee1663
                            .group:00000000 wm4.IO001.h.49.1da965fb490206cf7cde64a90f6912e1
                            .group:00000000 wm4.MOTORLIBS.h.59.b2e97de0df555dedfa51e24447b57ab8
@@ -969,6 +970,7 @@ C:\Users\Mihai\AppData\Local\Temp\ccYz44Y6.s:399    .text.Eth_Received_Data_Hand
                            .group:00000000 wm4.Usic.h.90.22743468abc46f16747d12430b219aaf
                            .group:00000000 wm4.UART001_Conf.h.53.c5c972f6f634bc5116c171852aaab668
                            .group:00000000 wm4.UART001.h.109.3e835815a7a59791d8bd39655f4d4cc9
+                           .group:00000000 wm4.NVIC002_Conf.h.63.45e3c2b9806aa66850587e587798873e
 
 UNDEFINED SYMBOLS
 Eth_InitNetworkInterface

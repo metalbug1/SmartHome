@@ -22,7 +22,7 @@
   22              		.thumb
   23              		.thumb_func
   25              	UART001_lInit:
-  26              	.LFB112:
+  26              	.LFB117:
   27              		.file 1 "../Dave/Generated/src/UART001/UART001.c"
    1:../Dave/Generated/src/UART001/UART001.c **** /*******************************************************************************
    2:../Dave/Generated/src/UART001/UART001.c ****  Copyright (c) 2014, Infineon Technologies AG                                 **
@@ -595,14 +595,14 @@
  251 01a2 80BC     		pop	{r7}
  252 01a4 7047     		bx	lr
  253              		.cfi_endproc
- 254              	.LFE112:
+ 254              	.LFE117:
  256 01a6 00BF     		.section	.text.UART001_lConfigTXPin,"ax",%progbits
  257              		.align	2
  258              		.global	UART001_lConfigTXPin
  259              		.thumb
  260              		.thumb_func
  262              	UART001_lConfigTXPin:
- 263              	.LFB113:
+ 263              	.LFB118:
  336:../Dave/Generated/src/UART001/UART001.c **** /*******************************************************************************
  337:../Dave/Generated/src/UART001/UART001.c ****  * @brief This function configures TX pin as Open-drain General-purpose
  338:../Dave/Generated/src/UART001/UART001.c ****  * output and sets to '1'. 
@@ -815,14 +815,14 @@
  412 00f6 80BC     		pop	{r7}
  413 00f8 7047     		bx	lr
  414              		.cfi_endproc
- 415              	.LFE113:
+ 415              	.LFE118:
  417 00fa 00BF     		.section	.text.UART001_labsRealType,"ax",%progbits
  418              		.align	2
  419              		.global	UART001_labsRealType
  420              		.thumb
  421              		.thumb_func
  423              	UART001_labsRealType:
- 424              	.LFB114:
+ 424              	.LFB119:
  388:../Dave/Generated/src/UART001/UART001.c **** 
  389:../Dave/Generated/src/UART001/UART001.c **** /*******************************************************************************
  390:../Dave/Generated/src/UART001/UART001.c ****  * @brief This function finds the real type of the float number
@@ -887,14 +887,14 @@
  463 0032 80BC     		pop	{r7}
  464 0034 7047     		bx	lr
  465              		.cfi_endproc
- 466              	.LFE114:
+ 466              	.LFE119:
  468 0036 00BF     		.section	.text.UART001_lConfigureBaudRate,"ax",%progbits
  469              		.align	2
  470              		.global	UART001_lConfigureBaudRate
  471              		.thumb
  472              		.thumb_func
  474              	UART001_lConfigureBaudRate:
- 475              	.LFB115:
+ 475              	.LFB120:
  411:../Dave/Generated/src/UART001/UART001.c **** /*******************************************************************************
  412:../Dave/Generated/src/UART001/UART001.c ****  * @brief This function gives optimised PDIV and STEP value for the given 
  413:../Dave/Generated/src/UART001/UART001.c ****  * baud rate.  
@@ -1559,14 +1559,14 @@
  966 04e0 BDEC028B 		fldmfdd	sp!, {d8}
  967 04e4 80BD     		pop	{r7, pc}
  968              		.cfi_endproc
- 969              	.LFE115:
+ 969              	.LFE120:
  971 04e6 00BF     		.section	.text.UART001_Init,"ax",%progbits
  972              		.align	2
  973              		.global	UART001_Init
  974              		.thumb
  975              		.thumb_func
  977              	UART001_Init:
- 978              	.LFB116:
+ 978              	.LFB121:
  570:../Dave/Generated/src/UART001/UART001.c **** /*******************************************************************************
  571:../Dave/Generated/src/UART001/UART001.c **** **                      Public Function Definitions                           **
  572:../Dave/Generated/src/UART001/UART001.c **** *******************************************************************************/
@@ -1708,14 +1708,14 @@
  1037 0068 BD46     		mov	sp, r7
  1038 006a 80BD     		pop	{r7, pc}
  1039              		.cfi_endproc
- 1040              	.LFE116:
+ 1040              	.LFE121:
  1042              		.section	.text.UART001_DeInit,"ax",%progbits
  1043              		.align	2
  1044              		.global	UART001_DeInit
  1045              		.thumb
  1046              		.thumb_func
  1048              	UART001_DeInit:
- 1049              	.LFB117:
+ 1049              	.LFB122:
  648:../Dave/Generated/src/UART001/UART001.c **** /*******************************************************************************
  649:../Dave/Generated/src/UART001/UART001.c ****  * @brief This function de-initialises the USIC channel configurations.
  650:../Dave/Generated/src/UART001/UART001.c ****  * 
@@ -1753,14 +1753,14 @@
  1069 000e 80BC     		pop	{r7}
  1070 0010 7047     		bx	lr
  1071              		.cfi_endproc
- 1072              	.LFE117:
+ 1072              	.LFE122:
  1074 0012 00BF     		.section	.text.UART001_Configure,"ax",%progbits
  1075              		.align	2
  1076              		.global	UART001_Configure
  1077              		.thumb
  1078              		.thumb_func
  1080              	UART001_Configure:
- 1081              	.LFB118:
+ 1081              	.LFB123:
  663:../Dave/Generated/src/UART001/UART001.c ****  /******************************************************************************
  664:../Dave/Generated/src/UART001/UART001.c ****   * @brief Function which allows changing of baud rate, parity & stop bit  
  665:../Dave/Generated/src/UART001/UART001.c ****   * configuration at run time.
@@ -2002,14 +2002,14 @@
  1231 010e BD46     		mov	sp, r7
  1232 0110 80BD     		pop	{r7, pc}
  1233              		.cfi_endproc
- 1234              	.LFE118:
+ 1234              	.LFE123:
  1236 0112 00BF     		.section	.text.UART001_ReadDataMultiple,"ax",%progbits
  1237              		.align	2
  1238              		.global	UART001_ReadDataMultiple
  1239              		.thumb
  1240              		.thumb_func
  1242              	UART001_ReadDataMultiple:
- 1243              	.LFB119:
+ 1243              	.LFB124:
  747:../Dave/Generated/src/UART001/UART001.c **** 
  748:../Dave/Generated/src/UART001/UART001.c **** /*******************************************************************************
  749:../Dave/Generated/src/UART001/UART001.c ****  * @brief When receive FIFO is enabled, this function reads the USIC receive
@@ -2151,14 +2151,14 @@
  1327 007c 80BC     		pop	{r7}
  1328 007e 7047     		bx	lr
  1329              		.cfi_endproc
- 1330              	.LFE119:
+ 1330              	.LFE124:
  1332              		.section	.text.UART001_ReadDataBytes,"ax",%progbits
  1333              		.align	2
  1334              		.global	UART001_ReadDataBytes
  1335              		.thumb
  1336              		.thumb_func
  1338              	UART001_ReadDataBytes:
- 1339              	.LFB120:
+ 1339              	.LFB125:
  799:../Dave/Generated/src/UART001/UART001.c **** /*******************************************************************************
  800:../Dave/Generated/src/UART001/UART001.c ****  * @brief When receive FIFO is enabled, this function reads the USIC receive
  801:../Dave/Generated/src/UART001/UART001.c ****  * FIFO Buffer, byte by byte, until there is no data in the FIFO buffer and 
@@ -2300,14 +2300,14 @@
  1423 007c 80BC     		pop	{r7}
  1424 007e 7047     		bx	lr
  1425              		.cfi_endproc
- 1426              	.LFE120:
+ 1426              	.LFE125:
  1428              		.section	.text.UART001_WriteDataMultiple,"ax",%progbits
  1429              		.align	2
  1430              		.global	UART001_WriteDataMultiple
  1431              		.thumb
  1432              		.thumb_func
  1434              	UART001_WriteDataMultiple:
- 1435              	.LFB121:
+ 1435              	.LFB126:
  851:../Dave/Generated/src/UART001/UART001.c **** 
  852:../Dave/Generated/src/UART001/UART001.c **** /*******************************************************************************
  853:../Dave/Generated/src/UART001/UART001.c ****  * @brief When FIFO is enabled, this function writes data to the USIC FIFO 
@@ -2460,14 +2460,14 @@
  1525 008a 80BC     		pop	{r7}
  1526 008c 7047     		bx	lr
  1527              		.cfi_endproc
- 1528              	.LFE121:
+ 1528              	.LFE126:
  1530 008e 00BF     		.section	.text.UART001_WriteDataBytes,"ax",%progbits
  1531              		.align	2
  1532              		.global	UART001_WriteDataBytes
  1533              		.thumb
  1534              		.thumb_func
  1536              	UART001_WriteDataBytes:
- 1537              	.LFB122:
+ 1537              	.LFB127:
  908:../Dave/Generated/src/UART001/UART001.c **** 
  909:../Dave/Generated/src/UART001/UART001.c **** /*******************************************************************************
  910:../Dave/Generated/src/UART001/UART001.c ****  * @brief When FIFO is enabled, this function writes data to the USIC FIFO 
@@ -2621,14 +2621,14 @@
  1627 008a 80BC     		pop	{r7}
  1628 008c 7047     		bx	lr
  1629              		.cfi_endproc
- 1630              	.LFE122:
+ 1630              	.LFE127:
  1632 008e 00BF     		.section	.text.UART001_GetFlagStatus,"ax",%progbits
  1633              		.align	2
  1634              		.global	UART001_GetFlagStatus
  1635              		.thumb
  1636              		.thumb_func
  1638              	UART001_GetFlagStatus:
- 1639              	.LFB123:
+ 1639              	.LFB128:
  966:../Dave/Generated/src/UART001/UART001.c **** 
  967:../Dave/Generated/src/UART001/UART001.c **** /*******************************************************************************
  968:../Dave/Generated/src/UART001/UART001.c ****  * @brief The function is used to get the event flag status specified.
@@ -2779,14 +2779,14 @@
  1732 0092 80BC     		pop	{r7}
  1733 0094 7047     		bx	lr
  1734              		.cfi_endproc
- 1735              	.LFE123:
+ 1735              	.LFE128:
  1737 0096 00BF     		.section	.text.UART001_ClearFlag,"ax",%progbits
  1738              		.align	2
  1739              		.global	UART001_ClearFlag
  1740              		.thumb
  1741              		.thumb_func
  1743              	UART001_ClearFlag:
- 1744              	.LFB124:
+ 1744              	.LFB129:
 1019:../Dave/Generated/src/UART001/UART001.c **** 
 1020:../Dave/Generated/src/UART001/UART001.c **** /*******************************************************************************
 1021:../Dave/Generated/src/UART001/UART001.c ****  * @brief This function clears the specified event flag status.
@@ -2903,7 +2903,7 @@
  1816 0074 80BC     		pop	{r7}
  1817 0076 7047     		bx	lr
  1818              		.cfi_endproc
- 1819              	.LFE124:
+ 1819              	.LFE129:
  1821              		.text
  1822              	.Letext0:
  1823              		.file 2 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
@@ -2916,32 +2916,32 @@
  1830              		.file 9 "../Dave/Generated/src/UART001/../../inc/UART001/UART001_Extern.h"
 DEFINED SYMBOLS
                             *ABS*:00000000 UART001.c
-C:\Users\Mihai\AppData\Local\Temp\ccwN9PG2.s:20     .text.UART001_lInit:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccwN9PG2.s:25     .text.UART001_lInit:00000000 UART001_lInit
-C:\Users\Mihai\AppData\Local\Temp\ccwN9PG2.s:257    .text.UART001_lConfigTXPin:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccwN9PG2.s:262    .text.UART001_lConfigTXPin:00000000 UART001_lConfigTXPin
-C:\Users\Mihai\AppData\Local\Temp\ccwN9PG2.s:418    .text.UART001_labsRealType:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccwN9PG2.s:423    .text.UART001_labsRealType:00000000 UART001_labsRealType
-C:\Users\Mihai\AppData\Local\Temp\ccwN9PG2.s:469    .text.UART001_lConfigureBaudRate:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccwN9PG2.s:474    .text.UART001_lConfigureBaudRate:00000000 UART001_lConfigureBaudRate
-C:\Users\Mihai\AppData\Local\Temp\ccwN9PG2.s:972    .text.UART001_Init:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccwN9PG2.s:977    .text.UART001_Init:00000000 UART001_Init
-C:\Users\Mihai\AppData\Local\Temp\ccwN9PG2.s:1043   .text.UART001_DeInit:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccwN9PG2.s:1048   .text.UART001_DeInit:00000000 UART001_DeInit
-C:\Users\Mihai\AppData\Local\Temp\ccwN9PG2.s:1075   .text.UART001_Configure:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccwN9PG2.s:1080   .text.UART001_Configure:00000000 UART001_Configure
-C:\Users\Mihai\AppData\Local\Temp\ccwN9PG2.s:1237   .text.UART001_ReadDataMultiple:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccwN9PG2.s:1242   .text.UART001_ReadDataMultiple:00000000 UART001_ReadDataMultiple
-C:\Users\Mihai\AppData\Local\Temp\ccwN9PG2.s:1333   .text.UART001_ReadDataBytes:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccwN9PG2.s:1338   .text.UART001_ReadDataBytes:00000000 UART001_ReadDataBytes
-C:\Users\Mihai\AppData\Local\Temp\ccwN9PG2.s:1429   .text.UART001_WriteDataMultiple:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccwN9PG2.s:1434   .text.UART001_WriteDataMultiple:00000000 UART001_WriteDataMultiple
-C:\Users\Mihai\AppData\Local\Temp\ccwN9PG2.s:1531   .text.UART001_WriteDataBytes:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccwN9PG2.s:1536   .text.UART001_WriteDataBytes:00000000 UART001_WriteDataBytes
-C:\Users\Mihai\AppData\Local\Temp\ccwN9PG2.s:1633   .text.UART001_GetFlagStatus:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccwN9PG2.s:1638   .text.UART001_GetFlagStatus:00000000 UART001_GetFlagStatus
-C:\Users\Mihai\AppData\Local\Temp\ccwN9PG2.s:1738   .text.UART001_ClearFlag:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccwN9PG2.s:1743   .text.UART001_ClearFlag:00000000 UART001_ClearFlag
+C:\Users\Mihai\AppData\Local\Temp\ccRnMiSx.s:20     .text.UART001_lInit:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccRnMiSx.s:25     .text.UART001_lInit:00000000 UART001_lInit
+C:\Users\Mihai\AppData\Local\Temp\ccRnMiSx.s:257    .text.UART001_lConfigTXPin:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccRnMiSx.s:262    .text.UART001_lConfigTXPin:00000000 UART001_lConfigTXPin
+C:\Users\Mihai\AppData\Local\Temp\ccRnMiSx.s:418    .text.UART001_labsRealType:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccRnMiSx.s:423    .text.UART001_labsRealType:00000000 UART001_labsRealType
+C:\Users\Mihai\AppData\Local\Temp\ccRnMiSx.s:469    .text.UART001_lConfigureBaudRate:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccRnMiSx.s:474    .text.UART001_lConfigureBaudRate:00000000 UART001_lConfigureBaudRate
+C:\Users\Mihai\AppData\Local\Temp\ccRnMiSx.s:972    .text.UART001_Init:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccRnMiSx.s:977    .text.UART001_Init:00000000 UART001_Init
+C:\Users\Mihai\AppData\Local\Temp\ccRnMiSx.s:1043   .text.UART001_DeInit:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccRnMiSx.s:1048   .text.UART001_DeInit:00000000 UART001_DeInit
+C:\Users\Mihai\AppData\Local\Temp\ccRnMiSx.s:1075   .text.UART001_Configure:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccRnMiSx.s:1080   .text.UART001_Configure:00000000 UART001_Configure
+C:\Users\Mihai\AppData\Local\Temp\ccRnMiSx.s:1237   .text.UART001_ReadDataMultiple:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccRnMiSx.s:1242   .text.UART001_ReadDataMultiple:00000000 UART001_ReadDataMultiple
+C:\Users\Mihai\AppData\Local\Temp\ccRnMiSx.s:1333   .text.UART001_ReadDataBytes:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccRnMiSx.s:1338   .text.UART001_ReadDataBytes:00000000 UART001_ReadDataBytes
+C:\Users\Mihai\AppData\Local\Temp\ccRnMiSx.s:1429   .text.UART001_WriteDataMultiple:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccRnMiSx.s:1434   .text.UART001_WriteDataMultiple:00000000 UART001_WriteDataMultiple
+C:\Users\Mihai\AppData\Local\Temp\ccRnMiSx.s:1531   .text.UART001_WriteDataBytes:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccRnMiSx.s:1536   .text.UART001_WriteDataBytes:00000000 UART001_WriteDataBytes
+C:\Users\Mihai\AppData\Local\Temp\ccRnMiSx.s:1633   .text.UART001_GetFlagStatus:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccRnMiSx.s:1638   .text.UART001_GetFlagStatus:00000000 UART001_GetFlagStatus
+C:\Users\Mihai\AppData\Local\Temp\ccRnMiSx.s:1738   .text.UART001_ClearFlag:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccRnMiSx.s:1743   .text.UART001_ClearFlag:00000000 UART001_ClearFlag
                      .debug_frame:00000010 $d
                            .group:00000000 wm4.1.1791a5ae2e936ca1033c1c44be394cc7
                            .group:00000000 wm4.uc_id.h.35.a6c4837fad81477ba31967683332b8cc
@@ -3037,9 +3037,11 @@ C:\Users\Mihai\AppData\Local\Temp\ccwN9PG2.s:1743   .text.UART001_ClearFlag:0000
                            .group:00000000 wm4.fcntl.h.9.9336f33d7f5028f694c75e6e224e0cf7
                            .group:00000000 wm4.SLTHA001.h.97.d7e87c19a31e3244bdd5839e7cc42a61
                            .group:00000000 wm4.WEBSERVER001_Conf.h.54.cd6d29aaa96a848cbc5321bab5d6cd90
+                           .group:00000000 wm4.IO004.h.51.dbf9dd216c57d6a7f14a22b2cb7e5626
                            .group:00000000 wm4.ADCGROUP001.h.48.081c7f952eb4b6ea2df7d05180ee1663
                            .group:00000000 wm4.IO001.h.49.1da965fb490206cf7cde64a90f6912e1
                            .group:00000000 wm4.MOTORLIBS.h.59.b2e97de0df555dedfa51e24447b57ab8
+                           .group:00000000 wm4.NVIC002_Conf.h.63.45e3c2b9806aa66850587e587798873e
 
 UNDEFINED SYMBOLS
 RESET001_DeassertReset

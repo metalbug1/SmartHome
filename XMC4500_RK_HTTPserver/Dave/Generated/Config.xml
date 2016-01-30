@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<Project MotherSystem_Version="" Name="XMC4500_RK_HTTPserver" Path="C:\DAVE3_workspace\ws3.1.10\XMC4500_RK_HTTPserver\XMC4500_RK_HTTPserver">
+<Project MotherSystem_Version="" Name="XMC4500_RK_HTTPserver" Path="F:\WORK\SmartHome_checkout1\XMC4500_RK_HTTPserver">
     <COMPILER>
         <Name>ARM-GCC</Name>
         <Version/>
         <Memory_Model/>
     </COMPILER>
     <DEVICE>
-        <Sales_Code>XMC4500-F100x1024</Sales_Code>
+        <Sales_Code>XMC4500-F144x1024</Sales_Code>
         <Description/>
     </DEVICE>
     <Generated_Files>
@@ -327,6 +327,16 @@
                 <Type>C File</Type>
             </Source_File>
             <Source_File>
+                <File_Name>IO004.c</File_Name>
+                <Path>\Dave\Generated\src\IO004\IO004.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>IO004_Conf.c</File_Name>
+                <Path>\Dave\Generated\src\IO004\IO004_Conf.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
                 <File_Name>CCU8PWMLIB.c</File_Name>
                 <Path>\Dave\Generated\src\LIBS\CCU8PWMLIB.c</Path>
                 <Type>C File</Type>
@@ -344,6 +354,16 @@
             <Source_File>
                 <File_Name>MOTORLIBS.c</File_Name>
                 <Path>\Dave\Generated\src\MOTORLIBS\MOTORLIBS.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>NVIC002.c</File_Name>
+                <Path>\Dave\Generated\src\NVIC002\NVIC002.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>NVIC002_Conf.c</File_Name>
+                <Path>\Dave\Generated\src\NVIC002\NVIC002_Conf.c</Path>
                 <Type>C File</Type>
             </Source_File>
             <Source_File>
@@ -604,6 +624,16 @@
                 <Type>H File</Type>
             </Header_File>
             <Header_File>
+                <File_Name>IO004.h</File_Name>
+                <Path>\Dave\Generated\inc\IO004\IO004.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>IO004_Conf.h</File_Name>
+                <Path>\Dave\Generated\inc\IO004\IO004_Conf.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
                 <File_Name>CCU8PWMLIB.h</File_Name>
                 <Path>\Dave\Generated\inc\LIBS\CCU8PWMLIB.h</Path>
                 <Type>H File</Type>
@@ -631,6 +661,21 @@
             <Header_File>
                 <File_Name>MOTORLIBS.h</File_Name>
                 <Path>\Dave\Generated\inc\MOTORLIBS\MOTORLIBS.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>NVIC002.h</File_Name>
+                <Path>\Dave\Generated\inc\NVIC002\NVIC002.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>NVIC002_Conf.h</File_Name>
+                <Path>\Dave\Generated\inc\NVIC002\NVIC002_Conf.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>NVIC002_Extern.h</File_Name>
+                <Path>\Dave\Generated\inc\NVIC002\NVIC002_Extern.h</Path>
                 <Type>H File</Type>
             </Header_File>
             <Header_File>

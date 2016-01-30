@@ -40,7 +40,7 @@
   44              		.thumb
   45              		.thumb_func
   47              	disk_initialize:
-  48              	.LFB112:
+  48              	.LFB117:
   49              		.file 1 "../Dave/Generated/src/FATFS004/FATFS004.c"
    1:../Dave/Generated/src/FATFS004/FATFS004.c **** /*******************************************************************************
    2:../Dave/Generated/src/FATFS004/FATFS004.c **** **  DAVE App Name : FATFS004       App Version: 1.0.18               
@@ -248,14 +248,14 @@
  105 0054 BD46     		mov	sp, r7
  106 0056 80BD     		pop	{r7, pc}
  107              		.cfi_endproc
- 108              	.LFE112:
+ 108              	.LFE117:
  110              		.section	.text.disk_status,"ax",%progbits
  111              		.align	2
  112              		.global	disk_status
  113              		.thumb
  114              		.thumb_func
  116              	disk_status:
- 117              	.LFB113:
+ 117              	.LFB118:
  149:../Dave/Generated/src/FATFS004/FATFS004.c **** 
  150:../Dave/Generated/src/FATFS004/FATFS004.c **** /*<<<DD_FATFS004_API_2>>>  */
  151:../Dave/Generated/src/FATFS004/FATFS004.c **** /*
@@ -341,14 +341,14 @@
  171 0052 BD46     		mov	sp, r7
  172 0054 80BD     		pop	{r7, pc}
  173              		.cfi_endproc
- 174              	.LFE113:
+ 174              	.LFE118:
  176 0056 00BF     		.section	.text.disk_read,"ax",%progbits
  177              		.align	2
  178              		.global	disk_read
  179              		.thumb
  180              		.thumb_func
  182              	disk_read:
- 183              	.LFB114:
+ 183              	.LFB119:
  178:../Dave/Generated/src/FATFS004/FATFS004.c **** 
  179:../Dave/Generated/src/FATFS004/FATFS004.c **** /*  <<<DD_FATFS004_API_3>>>  */
  180:../Dave/Generated/src/FATFS004/FATFS004.c **** /*
@@ -482,14 +482,14 @@
  264 007e BD46     		mov	sp, r7
  265 0080 80BD     		pop	{r7, pc}
  266              		.cfi_endproc
- 267              	.LFE114:
+ 267              	.LFE119:
  269 0082 00BF     		.section	.text.disk_write,"ax",%progbits
  270              		.align	2
  271              		.global	disk_write
  272              		.thumb
  273              		.thumb_func
  275              	disk_write:
- 276              	.LFB115:
+ 276              	.LFB120:
  228:../Dave/Generated/src/FATFS004/FATFS004.c **** 
  229:../Dave/Generated/src/FATFS004/FATFS004.c **** /*<<<DD_FATFS004_API_4>>>*/
  230:../Dave/Generated/src/FATFS004/FATFS004.c **** /*
@@ -622,14 +622,14 @@
  357 007e BD46     		mov	sp, r7
  358 0080 80BD     		pop	{r7, pc}
  359              		.cfi_endproc
- 360              	.LFE115:
+ 360              	.LFE120:
  362 0082 00BF     		.section	.text.disk_ioctl,"ax",%progbits
  363              		.align	2
  364              		.global	disk_ioctl
  365              		.thumb
  366              		.thumb_func
  368              	disk_ioctl:
- 369              	.LFB116:
+ 369              	.LFB121:
  277:../Dave/Generated/src/FATFS004/FATFS004.c **** 
  278:../Dave/Generated/src/FATFS004/FATFS004.c **** /*<<<DD_FATFS004_API_5>>>*/
  279:../Dave/Generated/src/FATFS004/FATFS004.c **** /*
@@ -738,14 +738,14 @@
  440 0070 BD46     		mov	sp, r7
  441 0072 80BD     		pop	{r7, pc}
  442              		.cfi_endproc
- 443              	.LFE116:
+ 443              	.LFE121:
  445              		.section	.text.get_fattime,"ax",%progbits
  446              		.align	2
  447              		.global	get_fattime
  448              		.thumb
  449              		.thumb_func
  451              	get_fattime:
- 452              	.LFB117:
+ 452              	.LFB122:
  312:../Dave/Generated/src/FATFS004/FATFS004.c **** 
  313:../Dave/Generated/src/FATFS004/FATFS004.c **** /*<<<DD_FATFS004_API_6>>> */
  314:../Dave/Generated/src/FATFS004/FATFS004.c **** /**
@@ -825,7 +825,7 @@
  510 0060 BD46     		mov	sp, r7
  511 0062 80BD     		pop	{r7, pc}
  512              		.cfi_endproc
- 513              	.LFE117:
+ 513              	.LFE122:
  515              		.text
  516              	.Letext0:
  517              		.file 2 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
@@ -839,22 +839,22 @@
  525              		.file 10 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Include/core_cm4.h"
 DEFINED SYMBOLS
                             *ABS*:00000000 FATFS004.c
-C:\Users\Mihai\AppData\Local\Temp\ccDQw4q5.s:24     .data:00000000 FATFS004_ErrorCodes
-C:\Users\Mihai\AppData\Local\Temp\ccDQw4q5.s:21     .data:00000000 $d
-C:\Users\Mihai\AppData\Local\Temp\ccDQw4q5.s:34     .data:00000008 FATFS004_StatusCodes
+C:\Users\Mihai\AppData\Local\Temp\ccg7SWDc.s:24     .data:00000000 FATFS004_ErrorCodes
+C:\Users\Mihai\AppData\Local\Temp\ccg7SWDc.s:21     .data:00000000 $d
+C:\Users\Mihai\AppData\Local\Temp\ccg7SWDc.s:34     .data:00000008 FATFS004_StatusCodes
                             *COM*:00000004 FATFS004_UnusedStatus
-C:\Users\Mihai\AppData\Local\Temp\ccDQw4q5.s:42     .text.disk_initialize:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccDQw4q5.s:47     .text.disk_initialize:00000000 disk_initialize
-C:\Users\Mihai\AppData\Local\Temp\ccDQw4q5.s:111    .text.disk_status:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccDQw4q5.s:116    .text.disk_status:00000000 disk_status
-C:\Users\Mihai\AppData\Local\Temp\ccDQw4q5.s:177    .text.disk_read:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccDQw4q5.s:182    .text.disk_read:00000000 disk_read
-C:\Users\Mihai\AppData\Local\Temp\ccDQw4q5.s:270    .text.disk_write:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccDQw4q5.s:275    .text.disk_write:00000000 disk_write
-C:\Users\Mihai\AppData\Local\Temp\ccDQw4q5.s:363    .text.disk_ioctl:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccDQw4q5.s:368    .text.disk_ioctl:00000000 disk_ioctl
-C:\Users\Mihai\AppData\Local\Temp\ccDQw4q5.s:446    .text.get_fattime:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccDQw4q5.s:451    .text.get_fattime:00000000 get_fattime
+C:\Users\Mihai\AppData\Local\Temp\ccg7SWDc.s:42     .text.disk_initialize:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccg7SWDc.s:47     .text.disk_initialize:00000000 disk_initialize
+C:\Users\Mihai\AppData\Local\Temp\ccg7SWDc.s:111    .text.disk_status:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccg7SWDc.s:116    .text.disk_status:00000000 disk_status
+C:\Users\Mihai\AppData\Local\Temp\ccg7SWDc.s:177    .text.disk_read:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccg7SWDc.s:182    .text.disk_read:00000000 disk_read
+C:\Users\Mihai\AppData\Local\Temp\ccg7SWDc.s:270    .text.disk_write:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccg7SWDc.s:275    .text.disk_write:00000000 disk_write
+C:\Users\Mihai\AppData\Local\Temp\ccg7SWDc.s:363    .text.disk_ioctl:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccg7SWDc.s:368    .text.disk_ioctl:00000000 disk_ioctl
+C:\Users\Mihai\AppData\Local\Temp\ccg7SWDc.s:446    .text.get_fattime:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccg7SWDc.s:451    .text.get_fattime:00000000 get_fattime
                      .debug_frame:00000010 $d
                            .group:00000000 wm4.1.1791a5ae2e936ca1033c1c44be394cc7
                            .group:00000000 wm4.XMC4500.h.45.215f4b8c79f46c7645c15373868d08c0
@@ -945,6 +945,7 @@ C:\Users\Mihai\AppData\Local\Temp\ccDQw4q5.s:451    .text.get_fattime:00000000 g
                            .group:00000000 wm4.fcntl.h.9.9336f33d7f5028f694c75e6e224e0cf7
                            .group:00000000 wm4.SLTHA001.h.97.d7e87c19a31e3244bdd5839e7cc42a61
                            .group:00000000 wm4.WEBSERVER001_Conf.h.54.cd6d29aaa96a848cbc5321bab5d6cd90
+                           .group:00000000 wm4.IO004.h.51.dbf9dd216c57d6a7f14a22b2cb7e5626
                            .group:00000000 wm4.ADCGROUP001.h.48.081c7f952eb4b6ea2df7d05180ee1663
                            .group:00000000 wm4.IO001.h.49.1da965fb490206cf7cde64a90f6912e1
                            .group:00000000 wm4.MOTORLIBS.h.59.b2e97de0df555dedfa51e24447b57ab8
@@ -952,6 +953,7 @@ C:\Users\Mihai\AppData\Local\Temp\ccDQw4q5.s:451    .text.get_fattime:00000000 g
                            .group:00000000 wm4.Usic.h.90.22743468abc46f16747d12430b219aaf
                            .group:00000000 wm4.UART001_Conf.h.53.c5c972f6f634bc5116c171852aaab668
                            .group:00000000 wm4.UART001.h.109.3e835815a7a59791d8bd39655f4d4cc9
+                           .group:00000000 wm4.NVIC002_Conf.h.63.45e3c2b9806aa66850587e587798873e
 
 UNDEFINED SYMBOLS
 FATFS004_DeviceFunc

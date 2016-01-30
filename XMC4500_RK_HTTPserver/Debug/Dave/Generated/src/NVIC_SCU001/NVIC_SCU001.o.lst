@@ -1839,7 +1839,7 @@
  241              		.thumb
  242              		.thumb_func
  244              	NVIC_SCU001_Init:
- 245              	.LFB112:
+ 245              	.LFB117:
  246              		.file 2 "../Dave/Generated/src/NVIC_SCU001/NVIC_SCU001.c"
    1:../Dave/Generated/src/NVIC_SCU001/NVIC_SCU001.c **** /*******************************************************************************
    2:../Dave/Generated/src/NVIC_SCU001/NVIC_SCU001.c **** **  DAVE App Name : NVIC_SCU001       App Version: 1.0.10               
@@ -2017,7 +2017,7 @@
  257              	.LCFI12:
  258              		.cfi_def_cfa_register 7
  164:../Dave/Generated/src/NVIC_SCU001/NVIC_SCU001.c ****  DBG002_FUNCTION_ENTRY(APP_GID,NVIC_SCU001_FUNC_ENTRY);
- 165:../Dave/Generated/src/NVIC_SCU001/NVIC_SCU001.c ****   NVIC_SetPriority((IRQn_Type)90, NVIC_EncodePriority(NVIC_GetPriorityGrouping(),63,0));
+ 165:../Dave/Generated/src/NVIC_SCU001/NVIC_SCU001.c ****   NVIC_SetPriority((IRQn_Type)64, NVIC_EncodePriority(NVIC_GetPriorityGrouping(),63,0));
  259              		.loc 2 165 0
  260 0004 FFF7FEFF 		bl	NVIC_GetPriorityGrouping
  261 0008 0346     		mov	r3, r0
@@ -2026,13 +2026,13 @@
  264 0010 4FF00002 		mov	r2, #0
  265 0014 FFF7FEFF 		bl	NVIC_EncodePriority
  266 0018 0346     		mov	r3, r0
- 267 001a 4FF05A00 		mov	r0, #90
+ 267 001a 4FF04000 		mov	r0, #64
  268 001e 1946     		mov	r1, r3
  269 0020 FFF7FEFF 		bl	NVIC_SetPriority
  166:../Dave/Generated/src/NVIC_SCU001/NVIC_SCU001.c ****   /* Enable Interrupt */
- 167:../Dave/Generated/src/NVIC_SCU001/NVIC_SCU001.c ****   NVIC_EnableIRQ((IRQn_Type)90); 
+ 167:../Dave/Generated/src/NVIC_SCU001/NVIC_SCU001.c ****   NVIC_EnableIRQ((IRQn_Type)64); 
  270              		.loc 2 167 0
- 271 0024 4FF05A00 		mov	r0, #90
+ 271 0024 4FF04000 		mov	r0, #64
  272 0028 FFF7FEFF 		bl	NVIC_EnableIRQ
  168:../Dave/Generated/src/NVIC_SCU001/NVIC_SCU001.c ****  
  169:../Dave/Generated/src/NVIC_SCU001/NVIC_SCU001.c ****   DBG002_FUNCTION_EXIT(APP_GID,NVIC_SCU001_FUNC_EXIT);
@@ -2040,14 +2040,14 @@
  273              		.loc 2 170 0
  274 002c 80BD     		pop	{r7, pc}
  275              		.cfi_endproc
- 276              	.LFE112:
+ 276              	.LFE117:
  278 002e 00BF     		.section	.text.NVIC_SCU001_RegisterCallback,"ax",%progbits
  279              		.align	2
  280              		.global	NVIC_SCU001_RegisterCallback
  281              		.thumb
  282              		.thumb_func
  284              	NVIC_SCU001_RegisterCallback:
- 285              	.LFB113:
+ 285              	.LFB118:
  171:../Dave/Generated/src/NVIC_SCU001/NVIC_SCU001.c **** 
  172:../Dave/Generated/src/NVIC_SCU001/NVIC_SCU001.c **** /*  Utility function to register Event Handler for a given event.
  173:../Dave/Generated/src/NVIC_SCU001/NVIC_SCU001.c ****  * 
@@ -2107,14 +2107,14 @@
  324 0036 80BC     		pop	{r7}
  325 0038 7047     		bx	lr
  326              		.cfi_endproc
- 327              	.LFE113:
+ 327              	.LFE118:
  329 003a 00BF     		.section	.text.SCU_0_IRQHandler,"ax",%progbits
  330              		.align	2
  331              		.global	SCU_0_IRQHandler
  332              		.thumb
  333              		.thumb_func
  335              	SCU_0_IRQHandler:
- 336              	.LFB114:
+ 336              	.LFB119:
  189:../Dave/Generated/src/NVIC_SCU001/NVIC_SCU001.c **** 
  190:../Dave/Generated/src/NVIC_SCU001/NVIC_SCU001.c **** 
  191:../Dave/Generated/src/NVIC_SCU001/NVIC_SCU001.c **** /*  SCU Interrupt Handler.
@@ -2984,7 +2984,7 @@
  945 048e BD46     		mov	sp, r7
  946 0490 80BD     		pop	{r7, pc}
  947              		.cfi_endproc
- 948              	.LFE114:
+ 948              	.LFE119:
  950 0492 00BF     		.text
  951              	.Letext0:
  952              		.file 3 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Infineon/XMC4500_series/Include/XMC4500.h"
@@ -2993,21 +2993,21 @@
  955              		.file 6 "F:\\WORK\\SmartHome_checkout1\\XMC4500_RK_HTTPserver\\Dave\\Generated\\inc\\DAVESupport/.
 DEFINED SYMBOLS
                             *ABS*:00000000 NVIC_SCU001.c
-C:\Users\Mihai\AppData\Local\Temp\ccNycRYM.s:20     .text.NVIC_GetPriorityGrouping:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccNycRYM.s:24     .text.NVIC_GetPriorityGrouping:00000000 NVIC_GetPriorityGrouping
-C:\Users\Mihai\AppData\Local\Temp\ccNycRYM.s:54     .text.NVIC_EnableIRQ:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccNycRYM.s:58     .text.NVIC_EnableIRQ:00000000 NVIC_EnableIRQ
-C:\Users\Mihai\AppData\Local\Temp\ccNycRYM.s:96     .text.NVIC_SetPriority:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccNycRYM.s:100    .text.NVIC_SetPriority:00000000 NVIC_SetPriority
-C:\Users\Mihai\AppData\Local\Temp\ccNycRYM.s:158    .text.NVIC_EncodePriority:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccNycRYM.s:162    .text.NVIC_EncodePriority:00000000 NVIC_EncodePriority
+C:\Users\Mihai\AppData\Local\Temp\cc3MZJHc.s:20     .text.NVIC_GetPriorityGrouping:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc3MZJHc.s:24     .text.NVIC_GetPriorityGrouping:00000000 NVIC_GetPriorityGrouping
+C:\Users\Mihai\AppData\Local\Temp\cc3MZJHc.s:54     .text.NVIC_EnableIRQ:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc3MZJHc.s:58     .text.NVIC_EnableIRQ:00000000 NVIC_EnableIRQ
+C:\Users\Mihai\AppData\Local\Temp\cc3MZJHc.s:96     .text.NVIC_SetPriority:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc3MZJHc.s:100    .text.NVIC_SetPriority:00000000 NVIC_SetPriority
+C:\Users\Mihai\AppData\Local\Temp\cc3MZJHc.s:158    .text.NVIC_EncodePriority:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc3MZJHc.s:162    .text.NVIC_EncodePriority:00000000 NVIC_EncodePriority
                             *COM*:00000088 NVIC_SCU001_Handle0
-C:\Users\Mihai\AppData\Local\Temp\ccNycRYM.s:239    .text.NVIC_SCU001_Init:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccNycRYM.s:244    .text.NVIC_SCU001_Init:00000000 NVIC_SCU001_Init
-C:\Users\Mihai\AppData\Local\Temp\ccNycRYM.s:279    .text.NVIC_SCU001_RegisterCallback:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccNycRYM.s:284    .text.NVIC_SCU001_RegisterCallback:00000000 NVIC_SCU001_RegisterCallback
-C:\Users\Mihai\AppData\Local\Temp\ccNycRYM.s:330    .text.SCU_0_IRQHandler:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccNycRYM.s:335    .text.SCU_0_IRQHandler:00000000 SCU_0_IRQHandler
+C:\Users\Mihai\AppData\Local\Temp\cc3MZJHc.s:239    .text.NVIC_SCU001_Init:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc3MZJHc.s:244    .text.NVIC_SCU001_Init:00000000 NVIC_SCU001_Init
+C:\Users\Mihai\AppData\Local\Temp\cc3MZJHc.s:279    .text.NVIC_SCU001_RegisterCallback:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc3MZJHc.s:284    .text.NVIC_SCU001_RegisterCallback:00000000 NVIC_SCU001_RegisterCallback
+C:\Users\Mihai\AppData\Local\Temp\cc3MZJHc.s:330    .text.SCU_0_IRQHandler:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc3MZJHc.s:335    .text.SCU_0_IRQHandler:00000000 SCU_0_IRQHandler
                      .debug_frame:00000010 $d
                            .group:00000000 wm4.1.1791a5ae2e936ca1033c1c44be394cc7
                            .group:00000000 wm4.XMC4500.h.45.215f4b8c79f46c7645c15373868d08c0
@@ -3098,6 +3098,7 @@ C:\Users\Mihai\AppData\Local\Temp\ccNycRYM.s:335    .text.SCU_0_IRQHandler:00000
                            .group:00000000 wm4.fcntl.h.9.9336f33d7f5028f694c75e6e224e0cf7
                            .group:00000000 wm4.SLTHA001.h.97.d7e87c19a31e3244bdd5839e7cc42a61
                            .group:00000000 wm4.WEBSERVER001_Conf.h.54.cd6d29aaa96a848cbc5321bab5d6cd90
+                           .group:00000000 wm4.IO004.h.51.dbf9dd216c57d6a7f14a22b2cb7e5626
                            .group:00000000 wm4.ADCGROUP001.h.48.081c7f952eb4b6ea2df7d05180ee1663
                            .group:00000000 wm4.IO001.h.49.1da965fb490206cf7cde64a90f6912e1
                            .group:00000000 wm4.MOTORLIBS.h.59.b2e97de0df555dedfa51e24447b57ab8
@@ -3105,5 +3106,6 @@ C:\Users\Mihai\AppData\Local\Temp\ccNycRYM.s:335    .text.SCU_0_IRQHandler:00000
                            .group:00000000 wm4.Usic.h.90.22743468abc46f16747d12430b219aaf
                            .group:00000000 wm4.UART001_Conf.h.53.c5c972f6f634bc5116c171852aaab668
                            .group:00000000 wm4.UART001.h.109.3e835815a7a59791d8bd39655f4d4cc9
+                           .group:00000000 wm4.NVIC002_Conf.h.63.45e3c2b9806aa66850587e587798873e
 
 NO UNDEFINED SYMBOLS

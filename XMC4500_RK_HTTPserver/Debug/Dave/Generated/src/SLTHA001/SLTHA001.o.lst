@@ -54,7 +54,7 @@
   54              		.thumb
   55              		.thumb_func
   57              	SLTHA001_lFindAvailableSlot:
-  58              	.LFB112:
+  58              	.LFB117:
   59              		.file 1 "../Dave/Generated/src/SLTHA001/SLTHA001.c"
    1:../Dave/Generated/src/SLTHA001/SLTHA001.c **** /*******************************************************************************
    2:../Dave/Generated/src/SLTHA001/SLTHA001.c **** **  DAVE App Name : SLTHA001       App Version: 1.0.10               
@@ -316,8 +316,8 @@
   78 000a B3F1FF3F 		cmp	r3, #-1
   79 000e 07D0     		beq	.L2
   80              		.loc 1 239 0 is_stmt 0 discriminator 1
-  81 0010 40F20003 		movw	r3, #:lower16:LastAllocFileHandle.12368
-  82 0014 C0F20003 		movt	r3, #:upper16:LastAllocFileHandle.12368
+  81 0010 40F20003 		movw	r3, #:lower16:LastAllocFileHandle.12440
+  82 0014 C0F20003 		movt	r3, #:upper16:LastAllocFileHandle.12440
   83 0018 1B68     		ldr	r3, [r3, #0]
   84 001a 7A68     		ldr	r2, [r7, #4]
   85 001c 9A42     		cmp	r2, r3
@@ -330,8 +330,8 @@
  244:../Dave/Generated/src/SLTHA001/SLTHA001.c ****     /* Check the FileHandle array to find the match for the File Handle*/
  245:../Dave/Generated/src/SLTHA001/SLTHA001.c ****     for (Slot=0; Slot< MAX_OPEN_FILES; Slot++)
   88              		.loc 1 245 0 is_stmt 1
-  89 0020 40F20003 		movw	r3, #:lower16:Slot.12367
-  90 0024 C0F20003 		movt	r3, #:upper16:Slot.12367
+  89 0020 40F20003 		movw	r3, #:lower16:Slot.12439
+  90 0024 C0F20003 		movt	r3, #:upper16:Slot.12439
   91 0028 4FF00002 		mov	r2, #0
   92 002c 1A60     		str	r2, [r3, #0]
   93 002e 1FE0     		b	.L4
@@ -339,8 +339,8 @@
  246:../Dave/Generated/src/SLTHA001/SLTHA001.c ****     {
  247:../Dave/Generated/src/SLTHA001/SLTHA001.c ****       if(FileHandle[Slot].Fd == FileDesc)
   95              		.loc 1 247 0
-  96 0030 40F20003 		movw	r3, #:lower16:Slot.12367
-  97 0034 C0F20003 		movt	r3, #:upper16:Slot.12367
+  96 0030 40F20003 		movw	r3, #:lower16:Slot.12439
+  97 0034 C0F20003 		movt	r3, #:upper16:Slot.12439
   98 0038 1968     		ldr	r1, [r3, #0]
   99 003a 40F20002 		movw	r2, #:lower16:FileHandle
  100 003e C0F20002 		movt	r2, #:upper16:FileHandle
@@ -356,18 +356,18 @@
  110              	.L5:
  245:../Dave/Generated/src/SLTHA001/SLTHA001.c ****     for (Slot=0; Slot< MAX_OPEN_FILES; Slot++)
  111              		.loc 1 245 0
- 112 0058 40F20003 		movw	r3, #:lower16:Slot.12367
- 113 005c C0F20003 		movt	r3, #:upper16:Slot.12367
+ 112 0058 40F20003 		movw	r3, #:lower16:Slot.12439
+ 113 005c C0F20003 		movt	r3, #:upper16:Slot.12439
  114 0060 1B68     		ldr	r3, [r3, #0]
  115 0062 03F10102 		add	r2, r3, #1
- 116 0066 40F20003 		movw	r3, #:lower16:Slot.12367
- 117 006a C0F20003 		movt	r3, #:upper16:Slot.12367
+ 116 0066 40F20003 		movw	r3, #:lower16:Slot.12439
+ 117 006a C0F20003 		movt	r3, #:upper16:Slot.12439
  118 006e 1A60     		str	r2, [r3, #0]
  119              	.L4:
  245:../Dave/Generated/src/SLTHA001/SLTHA001.c ****     for (Slot=0; Slot< MAX_OPEN_FILES; Slot++)
  120              		.loc 1 245 0 is_stmt 0 discriminator 1
- 121 0070 40F20003 		movw	r3, #:lower16:Slot.12367
- 122 0074 C0F20003 		movt	r3, #:upper16:Slot.12367
+ 121 0070 40F20003 		movw	r3, #:lower16:Slot.12439
+ 122 0074 C0F20003 		movt	r3, #:upper16:Slot.12439
  123 0078 1B68     		ldr	r3, [r3, #0]
  124 007a 132B     		cmp	r3, #19
  125 007c D8DD     		ble	.L7
@@ -381,8 +381,8 @@
  250:../Dave/Generated/src/SLTHA001/SLTHA001.c ****     /* Save the last Allocated File Handle.*/
  251:../Dave/Generated/src/SLTHA001/SLTHA001.c ****     LastAllocFileHandle = FileDesc;
  131              		.loc 1 251 0
- 132 0082 40F20003 		movw	r3, #:lower16:LastAllocFileHandle.12368
- 133 0086 C0F20003 		movt	r3, #:upper16:LastAllocFileHandle.12368
+ 132 0082 40F20003 		movw	r3, #:lower16:LastAllocFileHandle.12440
+ 133 0086 C0F20003 		movt	r3, #:upper16:LastAllocFileHandle.12440
  134 008a 7A68     		ldr	r2, [r7, #4]
  135 008c 1A60     		str	r2, [r3, #0]
  136 008e 00E0     		b	.L3
@@ -394,8 +394,8 @@
  252:../Dave/Generated/src/SLTHA001/SLTHA001.c ****   } while(0);
  253:../Dave/Generated/src/SLTHA001/SLTHA001.c ****   return Slot;
  141              		.loc 1 253 0
- 142 0092 40F20003 		movw	r3, #:lower16:Slot.12367
- 143 0096 C0F20003 		movt	r3, #:upper16:Slot.12367
+ 142 0092 40F20003 		movw	r3, #:lower16:Slot.12439
+ 143 0096 C0F20003 		movt	r3, #:upper16:Slot.12439
  144 009a 1B68     		ldr	r3, [r3, #0]
  254:../Dave/Generated/src/SLTHA001/SLTHA001.c **** }
  145              		.loc 1 254 0
@@ -405,14 +405,14 @@
  149 00a4 80BC     		pop	{r7}
  150 00a6 7047     		bx	lr
  151              		.cfi_endproc
- 152              	.LFE112:
+ 152              	.LFE117:
  154              		.section	.text.SLTHA001_lLocalInitialize,"ax",%progbits
  155              		.align	2
  156              		.global	SLTHA001_lLocalInitialize
  157              		.thumb
  158              		.thumb_func
  160              	SLTHA001_lLocalInitialize:
- 161              	.LFB113:
+ 161              	.LFB118:
  255:../Dave/Generated/src/SLTHA001/SLTHA001.c **** 
  256:../Dave/Generated/src/SLTHA001/SLTHA001.c **** /*<<<DD_SLTHA001_nonAPI_2>>>*/
  257:../Dave/Generated/src/SLTHA001/SLTHA001.c **** /*
@@ -495,13 +495,13 @@
  220 006a 80BC     		pop	{r7}
  221 006c 7047     		bx	lr
  222              		.cfi_endproc
- 223              	.LFE113:
+ 223              	.LFE118:
  225 006e 00BF     		.section	.text.SLTHA001_lTimeFormat,"ax",%progbits
  226              		.align	2
  227              		.thumb
  228              		.thumb_func
  230              	SLTHA001_lTimeFormat:
- 231              	.LFB114:
+ 231              	.LFB119:
  274:../Dave/Generated/src/SLTHA001/SLTHA001.c **** 
  275:../Dave/Generated/src/SLTHA001/SLTHA001.c **** 
  276:../Dave/Generated/src/SLTHA001/SLTHA001.c **** #if _FS_MINIMIZE == 0
@@ -589,13 +589,13 @@
  296 0074 BD46     		mov	sp, r7
  297 0076 80BD     		pop	{r7, pc}
  298              		.cfi_endproc
- 299              	.LFE114:
+ 299              	.LFE119:
  301              		.section	.text.SLTHA001_lFatInfoToStatus,"ax",%progbits
  302              		.align	2
  303              		.thumb
  304              		.thumb_func
  306              	SLTHA001_lFatInfoToStatus:
- 307              	.LFB115:
+ 307              	.LFB120:
  294:../Dave/Generated/src/SLTHA001/SLTHA001.c **** #endif
  295:../Dave/Generated/src/SLTHA001/SLTHA001.c **** 
  296:../Dave/Generated/src/SLTHA001/SLTHA001.c **** /* <<<DD_SLTHA001_nonAPI_5>>> */
@@ -722,13 +722,13 @@
  396 008a BD46     		mov	sp, r7
  397 008c 80BD     		pop	{r7, pc}
  398              		.cfi_endproc
- 399              	.LFE115:
+ 399              	.LFE120:
  401 008e 00BF     		.section	.text.SLTHA001_lSetFlagsAccessModes,"ax",%progbits
  402              		.align	2
  403              		.thumb
  404              		.thumb_func
  406              	SLTHA001_lSetFlagsAccessModes:
- 407              	.LFB116:
+ 407              	.LFB121:
  329:../Dave/Generated/src/SLTHA001/SLTHA001.c **** #endif
  330:../Dave/Generated/src/SLTHA001/SLTHA001.c **** #endif
  331:../Dave/Generated/src/SLTHA001/SLTHA001.c **** 
@@ -1028,14 +1028,14 @@
  575 011a BD46     		mov	sp, r7
  576 011c 80BD     		pop	{r7, pc}
  577              		.cfi_endproc
- 578              	.LFE116:
+ 578              	.LFE121:
  580 011e 00BF     		.section	.text._open,"ax",%progbits
  581              		.align	2
  582              		.global	_open
  583              		.thumb
  584              		.thumb_func
  586              	_open:
- 587              	.LFB117:
+ 587              	.LFB122:
  458:../Dave/Generated/src/SLTHA001/SLTHA001.c **** 
  459:../Dave/Generated/src/SLTHA001/SLTHA001.c **** /**
  460:../Dave/Generated/src/SLTHA001/SLTHA001.c ****  * @endcond
@@ -1598,14 +1598,14 @@
  991 0398 03B0     		add	sp, sp, #12
  992 039a 7047     		bx	lr
  993              		.cfi_endproc
- 994              	.LFE117:
+ 994              	.LFE122:
  996              		.section	.text._close,"ax",%progbits
  997              		.align	2
  998              		.global	_close
  999              		.thumb
  1000              		.thumb_func
  1002              	_close:
- 1003              	.LFB118:
+ 1003              	.LFB123:
  611:../Dave/Generated/src/SLTHA001/SLTHA001.c **** 
  612:../Dave/Generated/src/SLTHA001/SLTHA001.c **** /* <<<DD_SLTHA001_API_2>>> */
  613:../Dave/Generated/src/SLTHA001/SLTHA001.c **** /*
@@ -1805,14 +1805,14 @@
  1141 012a BD46     		mov	sp, r7
  1142 012c 80BD     		pop	{r7, pc}
  1143              		.cfi_endproc
- 1144              	.LFE118:
+ 1144              	.LFE123:
  1146 012e 00BF     		.section	.text._read_r,"ax",%progbits
  1147              		.align	2
  1148              		.global	_read_r
  1149              		.thumb
  1150              		.thumb_func
  1152              	_read_r:
- 1153              	.LFB119:
+ 1153              	.LFB124:
  670:../Dave/Generated/src/SLTHA001/SLTHA001.c **** 
  671:../Dave/Generated/src/SLTHA001/SLTHA001.c **** /* <<<DD_SLTHA001_API_3>>> */
  672:../Dave/Generated/src/SLTHA001/SLTHA001.c **** /*
@@ -2116,14 +2116,14 @@
  1340 015e BD46     		mov	sp, r7
  1341 0160 80BD     		pop	{r7, pc}
  1342              		.cfi_endproc
- 1343              	.LFE119:
+ 1343              	.LFE124:
  1345 0162 00BF     		.section	.text._write_r,"ax",%progbits
  1346              		.align	2
  1347              		.global	_write_r
  1348              		.thumb
  1349              		.thumb_func
  1351              	_write_r:
- 1352              	.LFB120:
+ 1352              	.LFB125:
  779:../Dave/Generated/src/SLTHA001/SLTHA001.c **** 
  780:../Dave/Generated/src/SLTHA001/SLTHA001.c **** /* <<<DD_SLTHA001_API_4>>> */
  781:../Dave/Generated/src/SLTHA001/SLTHA001.c **** /*
@@ -2415,14 +2415,14 @@
  1522 0136 BD46     		mov	sp, r7
  1523 0138 80BD     		pop	{r7, pc}
  1524              		.cfi_endproc
- 1525              	.LFE120:
+ 1525              	.LFE125:
  1527 013a 00BF     		.section	.text._lseek,"ax",%progbits
  1528              		.align	2
  1529              		.global	_lseek
  1530              		.thumb
  1531              		.thumb_func
  1533              	_lseek:
- 1534              	.LFB121:
+ 1534              	.LFB126:
  894:../Dave/Generated/src/SLTHA001/SLTHA001.c **** 
  895:../Dave/Generated/src/SLTHA001/SLTHA001.c **** /* <<<DD_SLTHA001_API_5>>> */
  896:../Dave/Generated/src/SLTHA001/SLTHA001.c **** /*
@@ -2735,14 +2735,14 @@
  1742 01b6 BD46     		mov	sp, r7
  1743 01b8 80BD     		pop	{r7, pc}
  1744              		.cfi_endproc
- 1745              	.LFE121:
+ 1745              	.LFE126:
  1747 01ba 00BF     		.section	.text._unlink,"ax",%progbits
  1748              		.align	2
  1749              		.global	_unlink
  1750              		.thumb
  1751              		.thumb_func
  1753              	_unlink:
- 1754              	.LFB122:
+ 1754              	.LFB127:
  992:../Dave/Generated/src/SLTHA001/SLTHA001.c **** 
  993:../Dave/Generated/src/SLTHA001/SLTHA001.c **** /* <<<DD_SLTHA001_API_6>>> */
  994:../Dave/Generated/src/SLTHA001/SLTHA001.c **** /* 
@@ -2831,14 +2831,14 @@
  1803 0044 BD46     		mov	sp, r7
  1804 0046 80BD     		pop	{r7, pc}
  1805              		.cfi_endproc
- 1806              	.LFE122:
+ 1806              	.LFE127:
  1808              		.section	.text._fstat,"ax",%progbits
  1809              		.align	2
  1810              		.global	_fstat
  1811              		.thumb
  1812              		.thumb_func
  1814              	_fstat:
- 1815              	.LFB123:
+ 1815              	.LFB128:
 1029:../Dave/Generated/src/SLTHA001/SLTHA001.c **** 
 1030:../Dave/Generated/src/SLTHA001/SLTHA001.c **** /* <<<DD_SLTHA001_API_7>>> */
 1031:../Dave/Generated/src/SLTHA001/SLTHA001.c **** /*
@@ -2993,14 +2993,14 @@
  1924 00e0 BD46     		mov	sp, r7
  1925 00e2 80BD     		pop	{r7, pc}
  1926              		.cfi_endproc
- 1927              	.LFE123:
+ 1927              	.LFE128:
  1929              		.section	.text._stat,"ax",%progbits
  1930              		.align	2
  1931              		.global	_stat
  1932              		.thumb
  1933              		.thumb_func
  1935              	_stat:
- 1936              	.LFB124:
+ 1936              	.LFB129:
 1072:../Dave/Generated/src/SLTHA001/SLTHA001.c **** 
 1073:../Dave/Generated/src/SLTHA001/SLTHA001.c **** 
 1074:../Dave/Generated/src/SLTHA001/SLTHA001.c **** /* <<<DD_SLTHA001_API_8>>> */
@@ -3112,14 +3112,14 @@
  2013 009e BD46     		mov	sp, r7
  2014 00a0 80BD     		pop	{r7, pc}
  2015              		.cfi_endproc
- 2016              	.LFE124:
+ 2016              	.LFE129:
  2018 00a2 00BF     		.section	.text.rename,"ax",%progbits
  2019              		.align	2
  2020              		.global	rename
  2021              		.thumb
  2022              		.thumb_func
  2024              	rename:
- 2025              	.LFB125:
+ 2025              	.LFB130:
 1104:../Dave/Generated/src/SLTHA001/SLTHA001.c **** #endif
 1105:../Dave/Generated/src/SLTHA001/SLTHA001.c **** 
 1106:../Dave/Generated/src/SLTHA001/SLTHA001.c **** 
@@ -3210,14 +3210,14 @@
  2076 0048 BD46     		mov	sp, r7
  2077 004a 80BD     		pop	{r7, pc}
  2078              		.cfi_endproc
- 2079              	.LFE125:
+ 2079              	.LFE130:
  2081              		.section	.text._chmod,"ax",%progbits
  2082              		.align	2
  2083              		.global	_chmod
  2084              		.thumb
  2085              		.thumb_func
  2087              	_chmod:
- 2088              	.LFB126:
+ 2088              	.LFB131:
 1141:../Dave/Generated/src/SLTHA001/SLTHA001.c **** 
 1142:../Dave/Generated/src/SLTHA001/SLTHA001.c **** /* <<<DD_SLTHA001_API_10>>> */
 1143:../Dave/Generated/src/SLTHA001/SLTHA001.c **** /*
@@ -3307,14 +3307,14 @@
  2142 0050 BD46     		mov	sp, r7
  2143 0052 80BD     		pop	{r7, pc}
  2144              		.cfi_endproc
- 2145              	.LFE126:
+ 2145              	.LFE131:
  2147              		.section	.text._mkdir,"ax",%progbits
  2148              		.align	2
  2149              		.global	_mkdir
  2150              		.thumb
  2151              		.thumb_func
  2153              	_mkdir:
- 2154              	.LFB127:
+ 2154              	.LFB132:
 1174:../Dave/Generated/src/SLTHA001/SLTHA001.c **** 
 1175:../Dave/Generated/src/SLTHA001/SLTHA001.c **** /* <<<DD_SLTHA001_API_11>>> */
 1176:../Dave/Generated/src/SLTHA001/SLTHA001.c **** /*
@@ -3400,14 +3400,14 @@
  2204 0046 BD46     		mov	sp, r7
  2205 0048 80BD     		pop	{r7, pc}
  2206              		.cfi_endproc
- 2207              	.LFE127:
+ 2207              	.LFE132:
  2209 004a 00BF     		.section	.text._sync,"ax",%progbits
  2210              		.align	2
  2211              		.global	_sync
  2212              		.thumb
  2213              		.thumb_func
  2215              	_sync:
- 2216              	.LFB128:
+ 2216              	.LFB133:
 1207:../Dave/Generated/src/SLTHA001/SLTHA001.c **** 
 1208:../Dave/Generated/src/SLTHA001/SLTHA001.c **** /* <<<DD_SLTHA001_API_12>>> */
 1209:../Dave/Generated/src/SLTHA001/SLTHA001.c **** /*
@@ -3492,14 +3492,14 @@
  2275 0066 BD46     		mov	sp, r7
  2276 0068 80BD     		pop	{r7, pc}
  2277              		.cfi_endproc
- 2278              	.LFE128:
+ 2278              	.LFE133:
  2280 006a 00BF     		.section	.text.mkfs,"ax",%progbits
  2281              		.align	2
  2282              		.global	mkfs
  2283              		.thumb
  2284              		.thumb_func
  2286              	mkfs:
- 2287              	.LFB129:
+ 2287              	.LFB134:
 1228:../Dave/Generated/src/SLTHA001/SLTHA001.c **** 
 1229:../Dave/Generated/src/SLTHA001/SLTHA001.c **** 
 1230:../Dave/Generated/src/SLTHA001/SLTHA001.c **** /* <<<DD_SLTHA001_API_13>>> */
@@ -3584,14 +3584,14 @@
  2344 0054 BD46     		mov	sp, r7
  2345 0056 80BD     		pop	{r7, pc}
  2346              		.cfi_endproc
- 2347              	.LFE129:
+ 2347              	.LFE134:
  2349              		.section	.text.mount,"ax",%progbits
  2350              		.align	2
  2351              		.global	mount
  2352              		.thumb
  2353              		.thumb_func
  2355              	mount:
- 2356              	.LFB130:
+ 2356              	.LFB135:
 1253:../Dave/Generated/src/SLTHA001/SLTHA001.c **** 
 1254:../Dave/Generated/src/SLTHA001/SLTHA001.c **** 
 1255:../Dave/Generated/src/SLTHA001/SLTHA001.c **** /* <<<DD_SLTHA001_API_14>>> */
@@ -3670,14 +3670,14 @@
  2409 004c BD46     		mov	sp, r7
  2410 004e 80BD     		pop	{r7, pc}
  2411              		.cfi_endproc
- 2412              	.LFE130:
+ 2412              	.LFE135:
  2414              		.section	.text._isatty,"ax",%progbits
  2415              		.align	2
  2416              		.global	_isatty
  2417              		.thumb
  2418              		.thumb_func
  2420              	_isatty:
- 2421              	.LFB131:
+ 2421              	.LFB136:
 1276:../Dave/Generated/src/SLTHA001/SLTHA001.c **** 
 1277:../Dave/Generated/src/SLTHA001/SLTHA001.c **** /*
 1278:../Dave/Generated/src/SLTHA001/SLTHA001.c ****  * This function querries whether output stream is a terminal. 
@@ -3723,14 +3723,14 @@
  2449 001c 80BC     		pop	{r7}
  2450 001e 7047     		bx	lr
  2451              		.cfi_endproc
- 2452              	.LFE131:
+ 2452              	.LFE136:
  2454              		.section	.text.SLTHA001_Init,"ax",%progbits
  2455              		.align	2
  2456              		.global	SLTHA001_Init
  2457              		.thumb
  2458              		.thumb_func
  2460              	SLTHA001_Init:
- 2461              	.LFB132:
+ 2461              	.LFB137:
 1291:../Dave/Generated/src/SLTHA001/SLTHA001.c **** #endif
 1292:../Dave/Generated/src/SLTHA001/SLTHA001.c **** 
 1293:../Dave/Generated/src/SLTHA001/SLTHA001.c **** 
@@ -3759,14 +3759,14 @@
  2476              		.loc 1 1301 0
  2477 0008 80BD     		pop	{r7, pc}
  2478              		.cfi_endproc
- 2479              	.LFE132:
+ 2479              	.LFE137:
  2481 000a 00BF     		.section	.text._link,"ax",%progbits
  2482              		.align	2
  2483              		.global	_link
  2484              		.thumb
  2485              		.thumb_func
  2487              	_link:
- 2488              	.LFB133:
+ 2488              	.LFB138:
 1302:../Dave/Generated/src/SLTHA001/SLTHA001.c **** 
 1303:../Dave/Generated/src/SLTHA001/SLTHA001.c **** 
 1304:../Dave/Generated/src/SLTHA001/SLTHA001.c **** #if defined(__GNUC__)
@@ -3809,14 +3809,14 @@
  2516 0020 BD46     		mov	sp, r7
  2517 0022 80BD     		pop	{r7, pc}
  2518              		.cfi_endproc
- 2519              	.LFE133:
+ 2519              	.LFE138:
  2521              		.section	.text.fdisk,"ax",%progbits
  2522              		.align	2
  2523              		.global	fdisk
  2524              		.thumb
  2525              		.thumb_func
  2527              	fdisk:
- 2528              	.LFB134:
+ 2528              	.LFB139:
 1314:../Dave/Generated/src/SLTHA001/SLTHA001.c **** #endif
 1315:../Dave/Generated/src/SLTHA001/SLTHA001.c **** 
 1316:../Dave/Generated/src/SLTHA001/SLTHA001.c **** /* This function creates a partition table into the MBR of the physical drive.
@@ -3872,14 +3872,14 @@
  2557 001e 80BC     		pop	{r7}
  2558 0020 7047     		bx	lr
  2559              		.cfi_endproc
- 2560              	.LFE134:
+ 2560              	.LFE139:
  2562 0022 00BF     		.data
  2563              		.align	2
- 2566              	LastAllocFileHandle.12368:
+ 2566              	LastAllocFileHandle.12440:
  2567 004c FFFFFFFF 		.word	-1
  2568              		.bss
  2569              		.align	2
- 2570              	Slot.12367:
+ 2570              	Slot.12439:
  2571 0190 00000000 		.space	4
  2572              		.text
  2573              	.Letext0:
@@ -3902,58 +3902,58 @@
  2590              		.file 18 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Include/core_cm4.h"
 DEFINED SYMBOLS
                             *ABS*:00000000 SLTHA001.c
-C:\Users\Mihai\AppData\Local\Temp\cc0iBSUW.s:24     .data:00000000 ErrorCodes
-C:\Users\Mihai\AppData\Local\Temp\cc0iBSUW.s:21     .data:00000000 $d
-C:\Users\Mihai\AppData\Local\Temp\cc0iBSUW.s:49     .bss:00000000 FileHandle
-C:\Users\Mihai\AppData\Local\Temp\cc0iBSUW.s:46     .bss:00000000 $d
-C:\Users\Mihai\AppData\Local\Temp\cc0iBSUW.s:52     .text.SLTHA001_lFindAvailableSlot:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc0iBSUW.s:57     .text.SLTHA001_lFindAvailableSlot:00000000 SLTHA001_lFindAvailableSlot
-C:\Users\Mihai\AppData\Local\Temp\cc0iBSUW.s:2566   .data:0000004c LastAllocFileHandle.12368
-C:\Users\Mihai\AppData\Local\Temp\cc0iBSUW.s:2570   .bss:00000190 Slot.12367
-C:\Users\Mihai\AppData\Local\Temp\cc0iBSUW.s:155    .text.SLTHA001_lLocalInitialize:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc0iBSUW.s:160    .text.SLTHA001_lLocalInitialize:00000000 SLTHA001_lLocalInitialize
-C:\Users\Mihai\AppData\Local\Temp\cc0iBSUW.s:226    .text.SLTHA001_lTimeFormat:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc0iBSUW.s:230    .text.SLTHA001_lTimeFormat:00000000 SLTHA001_lTimeFormat
-C:\Users\Mihai\AppData\Local\Temp\cc0iBSUW.s:302    .text.SLTHA001_lFatInfoToStatus:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc0iBSUW.s:306    .text.SLTHA001_lFatInfoToStatus:00000000 SLTHA001_lFatInfoToStatus
-C:\Users\Mihai\AppData\Local\Temp\cc0iBSUW.s:402    .text.SLTHA001_lSetFlagsAccessModes:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc0iBSUW.s:406    .text.SLTHA001_lSetFlagsAccessModes:00000000 SLTHA001_lSetFlagsAccessModes
-C:\Users\Mihai\AppData\Local\Temp\cc0iBSUW.s:581    .text._open:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc0iBSUW.s:586    .text._open:00000000 _open
-C:\Users\Mihai\AppData\Local\Temp\cc0iBSUW.s:997    .text._close:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc0iBSUW.s:1002   .text._close:00000000 _close
-C:\Users\Mihai\AppData\Local\Temp\cc0iBSUW.s:1147   .text._read_r:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc0iBSUW.s:1152   .text._read_r:00000000 _read_r
-C:\Users\Mihai\AppData\Local\Temp\cc0iBSUW.s:1346   .text._write_r:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc0iBSUW.s:1351   .text._write_r:00000000 _write_r
-C:\Users\Mihai\AppData\Local\Temp\cc0iBSUW.s:1528   .text._lseek:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc0iBSUW.s:1533   .text._lseek:00000000 _lseek
-C:\Users\Mihai\AppData\Local\Temp\cc0iBSUW.s:1748   .text._unlink:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc0iBSUW.s:1753   .text._unlink:00000000 _unlink
-C:\Users\Mihai\AppData\Local\Temp\cc0iBSUW.s:1809   .text._fstat:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc0iBSUW.s:1814   .text._fstat:00000000 _fstat
-C:\Users\Mihai\AppData\Local\Temp\cc0iBSUW.s:1930   .text._stat:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc0iBSUW.s:1935   .text._stat:00000000 _stat
-C:\Users\Mihai\AppData\Local\Temp\cc0iBSUW.s:2019   .text.rename:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc0iBSUW.s:2024   .text.rename:00000000 rename
-C:\Users\Mihai\AppData\Local\Temp\cc0iBSUW.s:2082   .text._chmod:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc0iBSUW.s:2087   .text._chmod:00000000 _chmod
-C:\Users\Mihai\AppData\Local\Temp\cc0iBSUW.s:2148   .text._mkdir:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc0iBSUW.s:2153   .text._mkdir:00000000 _mkdir
-C:\Users\Mihai\AppData\Local\Temp\cc0iBSUW.s:2210   .text._sync:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc0iBSUW.s:2215   .text._sync:00000000 _sync
-C:\Users\Mihai\AppData\Local\Temp\cc0iBSUW.s:2281   .text.mkfs:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc0iBSUW.s:2286   .text.mkfs:00000000 mkfs
-C:\Users\Mihai\AppData\Local\Temp\cc0iBSUW.s:2350   .text.mount:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc0iBSUW.s:2355   .text.mount:00000000 mount
-C:\Users\Mihai\AppData\Local\Temp\cc0iBSUW.s:2415   .text._isatty:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc0iBSUW.s:2420   .text._isatty:00000000 _isatty
-C:\Users\Mihai\AppData\Local\Temp\cc0iBSUW.s:2455   .text.SLTHA001_Init:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc0iBSUW.s:2460   .text.SLTHA001_Init:00000000 SLTHA001_Init
-C:\Users\Mihai\AppData\Local\Temp\cc0iBSUW.s:2482   .text._link:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc0iBSUW.s:2487   .text._link:00000000 _link
-C:\Users\Mihai\AppData\Local\Temp\cc0iBSUW.s:2522   .text.fdisk:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc0iBSUW.s:2527   .text.fdisk:00000000 fdisk
+C:\Users\Mihai\AppData\Local\Temp\ccDqYqEi.s:24     .data:00000000 ErrorCodes
+C:\Users\Mihai\AppData\Local\Temp\ccDqYqEi.s:21     .data:00000000 $d
+C:\Users\Mihai\AppData\Local\Temp\ccDqYqEi.s:49     .bss:00000000 FileHandle
+C:\Users\Mihai\AppData\Local\Temp\ccDqYqEi.s:46     .bss:00000000 $d
+C:\Users\Mihai\AppData\Local\Temp\ccDqYqEi.s:52     .text.SLTHA001_lFindAvailableSlot:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccDqYqEi.s:57     .text.SLTHA001_lFindAvailableSlot:00000000 SLTHA001_lFindAvailableSlot
+C:\Users\Mihai\AppData\Local\Temp\ccDqYqEi.s:2566   .data:0000004c LastAllocFileHandle.12440
+C:\Users\Mihai\AppData\Local\Temp\ccDqYqEi.s:2570   .bss:00000190 Slot.12439
+C:\Users\Mihai\AppData\Local\Temp\ccDqYqEi.s:155    .text.SLTHA001_lLocalInitialize:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccDqYqEi.s:160    .text.SLTHA001_lLocalInitialize:00000000 SLTHA001_lLocalInitialize
+C:\Users\Mihai\AppData\Local\Temp\ccDqYqEi.s:226    .text.SLTHA001_lTimeFormat:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccDqYqEi.s:230    .text.SLTHA001_lTimeFormat:00000000 SLTHA001_lTimeFormat
+C:\Users\Mihai\AppData\Local\Temp\ccDqYqEi.s:302    .text.SLTHA001_lFatInfoToStatus:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccDqYqEi.s:306    .text.SLTHA001_lFatInfoToStatus:00000000 SLTHA001_lFatInfoToStatus
+C:\Users\Mihai\AppData\Local\Temp\ccDqYqEi.s:402    .text.SLTHA001_lSetFlagsAccessModes:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccDqYqEi.s:406    .text.SLTHA001_lSetFlagsAccessModes:00000000 SLTHA001_lSetFlagsAccessModes
+C:\Users\Mihai\AppData\Local\Temp\ccDqYqEi.s:581    .text._open:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccDqYqEi.s:586    .text._open:00000000 _open
+C:\Users\Mihai\AppData\Local\Temp\ccDqYqEi.s:997    .text._close:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccDqYqEi.s:1002   .text._close:00000000 _close
+C:\Users\Mihai\AppData\Local\Temp\ccDqYqEi.s:1147   .text._read_r:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccDqYqEi.s:1152   .text._read_r:00000000 _read_r
+C:\Users\Mihai\AppData\Local\Temp\ccDqYqEi.s:1346   .text._write_r:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccDqYqEi.s:1351   .text._write_r:00000000 _write_r
+C:\Users\Mihai\AppData\Local\Temp\ccDqYqEi.s:1528   .text._lseek:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccDqYqEi.s:1533   .text._lseek:00000000 _lseek
+C:\Users\Mihai\AppData\Local\Temp\ccDqYqEi.s:1748   .text._unlink:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccDqYqEi.s:1753   .text._unlink:00000000 _unlink
+C:\Users\Mihai\AppData\Local\Temp\ccDqYqEi.s:1809   .text._fstat:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccDqYqEi.s:1814   .text._fstat:00000000 _fstat
+C:\Users\Mihai\AppData\Local\Temp\ccDqYqEi.s:1930   .text._stat:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccDqYqEi.s:1935   .text._stat:00000000 _stat
+C:\Users\Mihai\AppData\Local\Temp\ccDqYqEi.s:2019   .text.rename:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccDqYqEi.s:2024   .text.rename:00000000 rename
+C:\Users\Mihai\AppData\Local\Temp\ccDqYqEi.s:2082   .text._chmod:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccDqYqEi.s:2087   .text._chmod:00000000 _chmod
+C:\Users\Mihai\AppData\Local\Temp\ccDqYqEi.s:2148   .text._mkdir:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccDqYqEi.s:2153   .text._mkdir:00000000 _mkdir
+C:\Users\Mihai\AppData\Local\Temp\ccDqYqEi.s:2210   .text._sync:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccDqYqEi.s:2215   .text._sync:00000000 _sync
+C:\Users\Mihai\AppData\Local\Temp\ccDqYqEi.s:2281   .text.mkfs:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccDqYqEi.s:2286   .text.mkfs:00000000 mkfs
+C:\Users\Mihai\AppData\Local\Temp\ccDqYqEi.s:2350   .text.mount:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccDqYqEi.s:2355   .text.mount:00000000 mount
+C:\Users\Mihai\AppData\Local\Temp\ccDqYqEi.s:2415   .text._isatty:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccDqYqEi.s:2420   .text._isatty:00000000 _isatty
+C:\Users\Mihai\AppData\Local\Temp\ccDqYqEi.s:2455   .text.SLTHA001_Init:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccDqYqEi.s:2460   .text.SLTHA001_Init:00000000 SLTHA001_Init
+C:\Users\Mihai\AppData\Local\Temp\ccDqYqEi.s:2482   .text._link:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccDqYqEi.s:2487   .text._link:00000000 _link
+C:\Users\Mihai\AppData\Local\Temp\ccDqYqEi.s:2522   .text.fdisk:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccDqYqEi.s:2527   .text.fdisk:00000000 fdisk
                      .debug_frame:00000010 $d
                            .group:00000000 wm4.1.1791a5ae2e936ca1033c1c44be394cc7
                            .group:00000000 wm4.XMC4500.h.45.215f4b8c79f46c7645c15373868d08c0
@@ -4044,6 +4044,7 @@ C:\Users\Mihai\AppData\Local\Temp\cc0iBSUW.s:2527   .text.fdisk:00000000 fdisk
                            .group:00000000 wm4.fcntl.h.9.9336f33d7f5028f694c75e6e224e0cf7
                            .group:00000000 wm4.SLTHA001.h.97.d7e87c19a31e3244bdd5839e7cc42a61
                            .group:00000000 wm4.WEBSERVER001_Conf.h.54.cd6d29aaa96a848cbc5321bab5d6cd90
+                           .group:00000000 wm4.IO004.h.51.dbf9dd216c57d6a7f14a22b2cb7e5626
                            .group:00000000 wm4.ADCGROUP001.h.48.081c7f952eb4b6ea2df7d05180ee1663
                            .group:00000000 wm4.IO001.h.49.1da965fb490206cf7cde64a90f6912e1
                            .group:00000000 wm4.MOTORLIBS.h.59.b2e97de0df555dedfa51e24447b57ab8
@@ -4051,6 +4052,7 @@ C:\Users\Mihai\AppData\Local\Temp\cc0iBSUW.s:2527   .text.fdisk:00000000 fdisk
                            .group:00000000 wm4.Usic.h.90.22743468abc46f16747d12430b219aaf
                            .group:00000000 wm4.UART001_Conf.h.53.c5c972f6f634bc5116c171852aaab668
                            .group:00000000 wm4.UART001.h.109.3e835815a7a59791d8bd39655f4d4cc9
+                           .group:00000000 wm4.NVIC002_Conf.h.63.45e3c2b9806aa66850587e587798873e
 
 UNDEFINED SYMBOLS
 mktime

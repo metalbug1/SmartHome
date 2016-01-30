@@ -46,7 +46,7 @@
   45              		.thumb
   46              		.thumb_func
   48              	free_etharp_q:
-  49              	.LFB112:
+  49              	.LFB117:
   50              		.file 1 "../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/etharp.c"
    1:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/etharp.c **** /**
    2:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/etharp.c ****  * @file
@@ -250,14 +250,14 @@
   92 002e BD46     		mov	sp, r7
   93 0030 80BD     		pop	{r7, pc}
   94              		.cfi_endproc
-  95              	.LFE112:
+  95              	.LFE117:
   97 0032 00BF     		.section	.text.etharp_tmr,"ax",%progbits
   98              		.align	2
   99              		.global	etharp_tmr
  100              		.thumb
  101              		.thumb_func
  103              	etharp_tmr:
- 104              	.LFB113:
+ 104              	.LFB118:
  158:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/etharp.c **** #endif
  159:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/etharp.c **** 
  160:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/etharp.c **** /**
@@ -479,13 +479,13 @@
  271 0178 BD46     		mov	sp, r7
  272 017a 80BD     		pop	{r7, pc}
  273              		.cfi_endproc
- 274              	.LFE113:
+ 274              	.LFE118:
  276              		.section	.text.find_entry,"ax",%progbits
  277              		.align	2
  278              		.thumb
  279              		.thumb_func
  281              	find_entry:
- 282              	.LFB114:
+ 282              	.LFB119:
  205:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/etharp.c **** 
  206:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/etharp.c **** /**
  207:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/etharp.c ****  * Search the ARP table for a matching or new entry.
@@ -1169,13 +1169,13 @@
  748 03f4 BD46     		mov	sp, r7
  749 03f6 80BD     		pop	{r7, pc}
  750              		.cfi_endproc
- 751              	.LFE114:
+ 751              	.LFE119:
  753              		.section	.text.etharp_send_ip,"ax",%progbits
  754              		.align	2
  755              		.thumb
  756              		.thumb_func
  758              	etharp_send_ip:
- 759              	.LFB115:
+ 759              	.LFB120:
  418:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/etharp.c **** 
  419:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/etharp.c **** /**
  420:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/etharp.c ****  * Send an IP packet on the network using netif->linkoutput
@@ -1280,13 +1280,13 @@
  830 0066 BD46     		mov	sp, r7
  831 0068 80BD     		pop	{r7, pc}
  832              		.cfi_endproc
- 833              	.LFE115:
+ 833              	.LFE120:
  835 006a 00BF     		.section	.text.update_arp_entry,"ax",%progbits
  836              		.align	2
  837              		.thumb
  838              		.thumb_func
  840              	update_arp_entry:
- 841              	.LFB116:
+ 841              	.LFB121:
  448:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/etharp.c **** 
  449:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/etharp.c **** /**
  450:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/etharp.c ****  * Update (or insert) a IP/MAC address pair in the ARP cache.
@@ -1583,14 +1583,14 @@
  1046 01a4 BD46     		mov	sp, r7
  1047 01a6 90BD     		pop	{r4, r7, pc}
  1048              		.cfi_endproc
- 1049              	.LFE116:
+ 1049              	.LFE121:
  1051              		.section	.text.etharp_find_addr,"ax",%progbits
  1052              		.align	2
  1053              		.global	etharp_find_addr
  1054              		.thumb
  1055              		.thumb_func
  1057              	etharp_find_addr:
- 1058              	.LFB117:
+ 1058              	.LFB122:
  533:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/etharp.c **** 
  534:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/etharp.c **** /**
  535:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/etharp.c ****  * Finds (stable) ethernet/IP address pair from ARP table
@@ -1703,14 +1703,14 @@
  1136 009c BD46     		mov	sp, r7
  1137 009e 80BD     		pop	{r7, pc}
  1138              		.cfi_endproc
- 1139              	.LFE117:
+ 1139              	.LFE122:
  1141              		.section	.text.etharp_ip_input,"ax",%progbits
  1142              		.align	2
  1143              		.global	etharp_ip_input
  1144              		.thumb
  1145              		.thumb_func
  1147              	etharp_ip_input:
- 1148              	.LFB118:
+ 1148              	.LFB123:
  565:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/etharp.c **** 
  566:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/etharp.c **** /**
  567:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/etharp.c ****  * Updates the ARP table using the given IP packet.
@@ -1818,14 +1818,14 @@
  1208 0054 BD46     		mov	sp, r7
  1209 0056 80BD     		pop	{r7, pc}
  1210              		.cfi_endproc
- 1211              	.LFE118:
+ 1211              	.LFE123:
  1213              		.section	.text.etharp_arp_input,"ax",%progbits
  1214              		.align	2
  1215              		.global	etharp_arp_input
  1216              		.thumb
  1217              		.thumb_func
  1219              	etharp_arp_input:
- 1220              	.LFB119:
+ 1220              	.LFB124:
  609:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/etharp.c **** 
  610:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/etharp.c **** 
  611:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/etharp.c **** /**
@@ -2266,14 +2266,14 @@
  1478 01e4 BD46     		mov	sp, r7
  1479 01e6 90BD     		pop	{r4, r7, pc}
  1480              		.cfi_endproc
- 1481              	.LFE119:
+ 1481              	.LFE124:
  1483              		.section	.text.etharp_output,"ax",%progbits
  1484              		.align	2
  1485              		.global	etharp_output
  1486              		.thumb
  1487              		.thumb_func
  1489              	etharp_output:
- 1490              	.LFB120:
+ 1490              	.LFB125:
  783:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/etharp.c **** 
  784:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/etharp.c **** /**
  785:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/etharp.c ****  * Resolve and fill-in Ethernet address header for outgoing IP packet.
@@ -2501,14 +2501,14 @@
  1639 010e BD46     		mov	sp, r7
  1640 0110 90BD     		pop	{r4, r7, pc}
  1641              		.cfi_endproc
- 1642              	.LFE120:
+ 1642              	.LFE125:
  1644 0112 00BF     		.section	.text.etharp_query,"ax",%progbits
  1645              		.align	2
  1646              		.global	etharp_query
  1647              		.thumb
  1648              		.thumb_func
  1650              	etharp_query:
- 1651              	.LFB121:
+ 1651              	.LFB126:
  859:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/etharp.c **** 
  860:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/etharp.c **** /**
  861:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/etharp.c ****  * Send an ARP request for the given IP address and/or queue a packet.
@@ -3050,13 +3050,13 @@
  2018 02e0 BD46     		mov	sp, r7
  2019 02e2 90BD     		pop	{r4, r7, pc}
  2020              		.cfi_endproc
- 2021              	.LFE121:
+ 2021              	.LFE126:
  2023              		.section	.text.etharp_raw,"ax",%progbits
  2024              		.align	2
  2025              		.thumb
  2026              		.thumb_func
  2028              	etharp_raw:
- 2029              	.LFB122:
+ 2029              	.LFB127:
 1028:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/etharp.c **** 
 1029:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/etharp.c **** /**
 1030:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/etharp.c ****  * Send a raw ARP packet (opcode and all addresses can be modified)
@@ -3314,14 +3314,14 @@
  2189 0118 BD46     		mov	sp, r7
  2190 011a 80BD     		pop	{r7, pc}
  2191              		.cfi_endproc
- 2192              	.LFE122:
+ 2192              	.LFE127:
  2194              		.section	.text.etharp_request,"ax",%progbits
  2195              		.align	2
  2196              		.global	etharp_request
  2197              		.thumb
  2198              		.thumb_func
  2200              	etharp_request:
- 2201              	.LFB123:
+ 2201              	.LFB128:
 1122:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/etharp.c **** 
 1123:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/etharp.c **** /**
 1124:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/etharp.c ****  * Send an ARP request packet asking for ipaddr.
@@ -3388,14 +3388,14 @@
  2247 004c BD46     		mov	sp, r7
  2248 004e 90BD     		pop	{r4, r7, pc}
  2249              		.cfi_endproc
- 2250              	.LFE123:
+ 2250              	.LFE128:
  2252              		.section	.text.ethernet_input,"ax",%progbits
  2253              		.align	2
  2254              		.global	ethernet_input
  2255              		.thumb
  2256              		.thumb_func
  2258              	ethernet_input:
- 2259              	.LFB124:
+ 2259              	.LFB129:
 1139:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/etharp.c **** 
 1140:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/etharp.c **** /**
 1141:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/etharp.c ****  * Process received ethernet frames. Using this function instead of directly
@@ -3575,7 +3575,7 @@
  2350 008e BD46     		mov	sp, r7
  2351 0090 80BD     		pop	{r7, pc}
  2352              		.cfi_endproc
- 2353              	.LFE124:
+ 2353              	.LFE129:
  2355 0092 00BF     		.text
  2356              	.Letext0:
  2357              		.file 2 "F:\\WORK\\SmartHome_checkout1\\XMC4500_RK_HTTPserver\\Dave\\Generated\\src\\ETH004\\01_lw
@@ -3592,38 +3592,38 @@
  2368              		.file 13 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Include/core_cm4.h"
 DEFINED SYMBOLS
                             *ABS*:00000000 etharp.c
-C:\Users\Mihai\AppData\Local\Temp\ccw2DISY.s:24     .rodata:00000000 ethbroadcast
-C:\Users\Mihai\AppData\Local\Temp\ccw2DISY.s:21     .rodata:00000000 $d
-C:\Users\Mihai\AppData\Local\Temp\ccw2DISY.s:35     .rodata:00000008 ethzero
-C:\Users\Mihai\AppData\Local\Temp\ccw2DISY.s:38     .bss:00000000 $d
-C:\Users\Mihai\AppData\Local\Temp\ccw2DISY.s:39     .bss:00000000 arp_table
-C:\Users\Mihai\AppData\Local\Temp\ccw2DISY.s:41     .bss:000000c8 etharp_cached_entry
-C:\Users\Mihai\AppData\Local\Temp\ccw2DISY.s:44     .text.free_etharp_q:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccw2DISY.s:48     .text.free_etharp_q:00000000 free_etharp_q
-C:\Users\Mihai\AppData\Local\Temp\ccw2DISY.s:98     .text.etharp_tmr:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccw2DISY.s:103    .text.etharp_tmr:00000000 etharp_tmr
-C:\Users\Mihai\AppData\Local\Temp\ccw2DISY.s:277    .text.find_entry:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccw2DISY.s:281    .text.find_entry:00000000 find_entry
-C:\Users\Mihai\AppData\Local\Temp\ccw2DISY.s:754    .text.etharp_send_ip:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccw2DISY.s:758    .text.etharp_send_ip:00000000 etharp_send_ip
-C:\Users\Mihai\AppData\Local\Temp\ccw2DISY.s:836    .text.update_arp_entry:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccw2DISY.s:840    .text.update_arp_entry:00000000 update_arp_entry
-C:\Users\Mihai\AppData\Local\Temp\ccw2DISY.s:1052   .text.etharp_find_addr:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccw2DISY.s:1057   .text.etharp_find_addr:00000000 etharp_find_addr
-C:\Users\Mihai\AppData\Local\Temp\ccw2DISY.s:1142   .text.etharp_ip_input:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccw2DISY.s:1147   .text.etharp_ip_input:00000000 etharp_ip_input
-C:\Users\Mihai\AppData\Local\Temp\ccw2DISY.s:1214   .text.etharp_arp_input:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccw2DISY.s:1219   .text.etharp_arp_input:00000000 etharp_arp_input
-C:\Users\Mihai\AppData\Local\Temp\ccw2DISY.s:1484   .text.etharp_output:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccw2DISY.s:1489   .text.etharp_output:00000000 etharp_output
-C:\Users\Mihai\AppData\Local\Temp\ccw2DISY.s:1650   .text.etharp_query:00000000 etharp_query
-C:\Users\Mihai\AppData\Local\Temp\ccw2DISY.s:1645   .text.etharp_query:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccw2DISY.s:2200   .text.etharp_request:00000000 etharp_request
-C:\Users\Mihai\AppData\Local\Temp\ccw2DISY.s:2024   .text.etharp_raw:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccw2DISY.s:2028   .text.etharp_raw:00000000 etharp_raw
-C:\Users\Mihai\AppData\Local\Temp\ccw2DISY.s:2195   .text.etharp_request:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccw2DISY.s:2253   .text.ethernet_input:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccw2DISY.s:2258   .text.ethernet_input:00000000 ethernet_input
+C:\Users\Mihai\AppData\Local\Temp\ccXsIpG2.s:24     .rodata:00000000 ethbroadcast
+C:\Users\Mihai\AppData\Local\Temp\ccXsIpG2.s:21     .rodata:00000000 $d
+C:\Users\Mihai\AppData\Local\Temp\ccXsIpG2.s:35     .rodata:00000008 ethzero
+C:\Users\Mihai\AppData\Local\Temp\ccXsIpG2.s:38     .bss:00000000 $d
+C:\Users\Mihai\AppData\Local\Temp\ccXsIpG2.s:39     .bss:00000000 arp_table
+C:\Users\Mihai\AppData\Local\Temp\ccXsIpG2.s:41     .bss:000000c8 etharp_cached_entry
+C:\Users\Mihai\AppData\Local\Temp\ccXsIpG2.s:44     .text.free_etharp_q:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccXsIpG2.s:48     .text.free_etharp_q:00000000 free_etharp_q
+C:\Users\Mihai\AppData\Local\Temp\ccXsIpG2.s:98     .text.etharp_tmr:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccXsIpG2.s:103    .text.etharp_tmr:00000000 etharp_tmr
+C:\Users\Mihai\AppData\Local\Temp\ccXsIpG2.s:277    .text.find_entry:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccXsIpG2.s:281    .text.find_entry:00000000 find_entry
+C:\Users\Mihai\AppData\Local\Temp\ccXsIpG2.s:754    .text.etharp_send_ip:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccXsIpG2.s:758    .text.etharp_send_ip:00000000 etharp_send_ip
+C:\Users\Mihai\AppData\Local\Temp\ccXsIpG2.s:836    .text.update_arp_entry:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccXsIpG2.s:840    .text.update_arp_entry:00000000 update_arp_entry
+C:\Users\Mihai\AppData\Local\Temp\ccXsIpG2.s:1052   .text.etharp_find_addr:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccXsIpG2.s:1057   .text.etharp_find_addr:00000000 etharp_find_addr
+C:\Users\Mihai\AppData\Local\Temp\ccXsIpG2.s:1142   .text.etharp_ip_input:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccXsIpG2.s:1147   .text.etharp_ip_input:00000000 etharp_ip_input
+C:\Users\Mihai\AppData\Local\Temp\ccXsIpG2.s:1214   .text.etharp_arp_input:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccXsIpG2.s:1219   .text.etharp_arp_input:00000000 etharp_arp_input
+C:\Users\Mihai\AppData\Local\Temp\ccXsIpG2.s:1484   .text.etharp_output:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccXsIpG2.s:1489   .text.etharp_output:00000000 etharp_output
+C:\Users\Mihai\AppData\Local\Temp\ccXsIpG2.s:1650   .text.etharp_query:00000000 etharp_query
+C:\Users\Mihai\AppData\Local\Temp\ccXsIpG2.s:1645   .text.etharp_query:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccXsIpG2.s:2200   .text.etharp_request:00000000 etharp_request
+C:\Users\Mihai\AppData\Local\Temp\ccXsIpG2.s:2024   .text.etharp_raw:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccXsIpG2.s:2028   .text.etharp_raw:00000000 etharp_raw
+C:\Users\Mihai\AppData\Local\Temp\ccXsIpG2.s:2195   .text.etharp_request:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccXsIpG2.s:2253   .text.ethernet_input:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccXsIpG2.s:2258   .text.ethernet_input:00000000 ethernet_input
                      .debug_frame:00000010 $d
                            .group:00000000 wm4.1.1791a5ae2e936ca1033c1c44be394cc7
                            .group:00000000 wm4.ETH004_Conf.h.56.564c3f309c32b3c742fc91049cf66940
@@ -3719,6 +3719,7 @@ C:\Users\Mihai\AppData\Local\Temp\ccw2DISY.s:2258   .text.ethernet_input:0000000
                            .group:00000000 wm4.fcntl.h.9.9336f33d7f5028f694c75e6e224e0cf7
                            .group:00000000 wm4.SLTHA001.h.97.d7e87c19a31e3244bdd5839e7cc42a61
                            .group:00000000 wm4.WEBSERVER001_Conf.h.54.cd6d29aaa96a848cbc5321bab5d6cd90
+                           .group:00000000 wm4.IO004.h.51.dbf9dd216c57d6a7f14a22b2cb7e5626
                            .group:00000000 wm4.ADCGROUP001.h.48.081c7f952eb4b6ea2df7d05180ee1663
                            .group:00000000 wm4.IO001.h.49.1da965fb490206cf7cde64a90f6912e1
                            .group:00000000 wm4.MOTORLIBS.h.59.b2e97de0df555dedfa51e24447b57ab8
@@ -3726,6 +3727,7 @@ C:\Users\Mihai\AppData\Local\Temp\ccw2DISY.s:2258   .text.ethernet_input:0000000
                            .group:00000000 wm4.Usic.h.90.22743468abc46f16747d12430b219aaf
                            .group:00000000 wm4.UART001_Conf.h.53.c5c972f6f634bc5116c171852aaab668
                            .group:00000000 wm4.UART001.h.109.3e835815a7a59791d8bd39655f4d4cc9
+                           .group:00000000 wm4.NVIC002_Conf.h.63.45e3c2b9806aa66850587e587798873e
 
 UNDEFINED SYMBOLS
 pbuf_free

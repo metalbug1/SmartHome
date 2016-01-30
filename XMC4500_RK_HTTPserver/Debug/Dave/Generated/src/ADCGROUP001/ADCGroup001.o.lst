@@ -22,7 +22,7 @@
   22              		.thumb
   23              		.thumb_func
   25              	ADCGROUP001_Init:
-  26              	.LFB112:
+  26              	.LFB117:
   27              		.file 1 "../Dave/Generated/src/ADCGROUP001/ADCGroup001.c"
    1:../Dave/Generated/src/ADCGROUP001/ADCGroup001.c **** /*******************************************************************************
    2:../Dave/Generated/src/ADCGROUP001/ADCGroup001.c **** **  DAVE App Name : ADCGROUP001       App Version: 1.0.4               
@@ -181,14 +181,14 @@
   46              		.loc 1 136 0
   47 0014 80BD     		pop	{r7, pc}
   48              		.cfi_endproc
-  49              	.LFE112:
+  49              	.LFE117:
   51 0016 00BF     		.section	.text.ADCGROUP001_lInit,"ax",%progbits
   52              		.align	2
   53              		.global	ADCGROUP001_lInit
   54              		.thumb
   55              		.thumb_func
   57              	ADCGROUP001_lInit:
-  58              	.LFB113:
+  58              	.LFB118:
  137:../Dave/Generated/src/ADCGROUP001/ADCGroup001.c **** 
  138:../Dave/Generated/src/ADCGROUP001/ADCGroup001.c **** /* 
  139:../Dave/Generated/src/ADCGROUP001/ADCGroup001.c ****  * This Function initializes the adcgroup App. Local function is used to 
@@ -497,14 +497,14 @@
  260 0196 BD46     		mov	sp, r7
  261 0198 80BD     		pop	{r7, pc}
  262              		.cfi_endproc
- 263              	.LFE113:
+ 263              	.LFE118:
  265 019a 00BF     		.section	.text.ADCGROUP001_Deinit,"ax",%progbits
  266              		.align	2
  267              		.global	ADCGROUP001_Deinit
  268              		.thumb
  269              		.thumb_func
  271              	ADCGROUP001_Deinit:
- 272              	.LFB114:
+ 272              	.LFB119:
  233:../Dave/Generated/src/ADCGROUP001/ADCGroup001.c **** 
  234:../Dave/Generated/src/ADCGROUP001/ADCGroup001.c **** /* This Function resets the adcgroup001 app */
  235:../Dave/Generated/src/ADCGROUP001/ADCGroup001.c **** status_t ADCGROUP001_Deinit(const ADCGROUP001_HandleType *HandlePtr )
@@ -630,14 +630,14 @@
  347 0080 80BC     		pop	{r7}
  348 0082 7047     		bx	lr
  349              		.cfi_endproc
- 350              	.LFE114:
+ 350              	.LFE119:
  352              		.section	.text.ADCGROUP001_SetGroupBound0,"ax",%progbits
  353              		.align	2
  354              		.global	ADCGROUP001_SetGroupBound0
  355              		.thumb
  356              		.thumb_func
  358              	ADCGROUP001_SetGroupBound0:
- 359              	.LFB115:
+ 359              	.LFB120:
  281:../Dave/Generated/src/ADCGROUP001/ADCGroup001.c **** 
  282:../Dave/Generated/src/ADCGROUP001/ADCGroup001.c **** 
  283:../Dave/Generated/src/ADCGROUP001/ADCGroup001.c **** /* This Function sets the group specific boundary 0 */
@@ -738,14 +738,14 @@
  421 0062 80BC     		pop	{r7}
  422 0064 7047     		bx	lr
  423              		.cfi_endproc
- 424              	.LFE115:
+ 424              	.LFE120:
  426 0066 00BF     		.section	.text.ADCGROUP001_SetGroupBound1,"ax",%progbits
  427              		.align	2
  428              		.global	ADCGROUP001_SetGroupBound1
  429              		.thumb
  430              		.thumb_func
  432              	ADCGROUP001_SetGroupBound1:
- 433              	.LFB116:
+ 433              	.LFB121:
  317:../Dave/Generated/src/ADCGROUP001/ADCGroup001.c **** 
  318:../Dave/Generated/src/ADCGROUP001/ADCGroup001.c **** 
  319:../Dave/Generated/src/ADCGROUP001/ADCGroup001.c **** /* This Function sets the group specific boundary 1 */
@@ -849,14 +849,14 @@
  497 0068 80BC     		pop	{r7}
  498 006a 7047     		bx	lr
  499              		.cfi_endproc
- 500              	.LFE116:
+ 500              	.LFE121:
  502              		.section	.text.ADCGROUP001_ActiveGroupServiceRequestNode,"ax",%progbits
  503              		.align	2
  504              		.global	ADCGROUP001_ActiveGroupServiceRequestNode
  505              		.thumb
  506              		.thumb_func
  508              	ADCGROUP001_ActiveGroupServiceRequestNode:
- 509              	.LFB117:
+ 509              	.LFB122:
  354:../Dave/Generated/src/ADCGROUP001/ADCGroup001.c **** 
  355:../Dave/Generated/src/ADCGROUP001/ADCGroup001.c **** 
  356:../Dave/Generated/src/ADCGROUP001/ADCGroup001.c **** /* This function activates group specific service request node */
@@ -964,14 +964,14 @@
  579 0074 80BC     		pop	{r7}
  580 0076 7047     		bx	lr
  581              		.cfi_endproc
- 582              	.LFE117:
+ 582              	.LFE122:
  584              		.section	.text.ADCGROUP001_DeActiveGroupServiceRequestNode,"ax",%progbits
  585              		.align	2
  586              		.global	ADCGROUP001_DeActiveGroupServiceRequestNode
  587              		.thumb
  588              		.thumb_func
  590              	ADCGROUP001_DeActiveGroupServiceRequestNode:
- 591              	.LFB118:
+ 591              	.LFB123:
  389:../Dave/Generated/src/ADCGROUP001/ADCGroup001.c **** 
  390:../Dave/Generated/src/ADCGROUP001/ADCGroup001.c **** /* This function deactivates group specific service request node */
  391:../Dave/Generated/src/ADCGROUP001/ADCGroup001.c **** status_t ADCGROUP001_DeActiveGroupServiceRequestNode(
@@ -1068,14 +1068,14 @@
  652 005c 80BC     		pop	{r7}
  653 005e 7047     		bx	lr
  654              		.cfi_endproc
- 655              	.LFE118:
+ 655              	.LFE123:
  657              		.section	.text.ADCGROUP001_ActiveSharedServiceRequestNode,"ax",%progbits
  658              		.align	2
  659              		.global	ADCGROUP001_ActiveSharedServiceRequestNode
  660              		.thumb
  661              		.thumb_func
  663              	ADCGROUP001_ActiveSharedServiceRequestNode:
- 664              	.LFB119:
+ 664              	.LFB124:
  422:../Dave/Generated/src/ADCGROUP001/ADCGroup001.c **** 
  423:../Dave/Generated/src/ADCGROUP001/ADCGroup001.c **** /* This function activates the shared service request node. */
  424:../Dave/Generated/src/ADCGROUP001/ADCGroup001.c **** status_t ADCGROUP001_ActiveSharedServiceRequestNode(
@@ -1185,14 +1185,14 @@
  736 007c 80BC     		pop	{r7}
  737 007e 7047     		bx	lr
  738              		.cfi_endproc
- 739              	.LFE119:
+ 739              	.LFE124:
  741              		.section	.text.ADCGROUP001_DeActiveSharedServiceRequestNode,"ax",%progbits
  742              		.align	2
  743              		.global	ADCGROUP001_DeActiveSharedServiceRequestNode
  744              		.thumb
  745              		.thumb_func
  747              	ADCGROUP001_DeActiveSharedServiceRequestNode:
- 748              	.LFB120:
+ 748              	.LFB125:
  457:../Dave/Generated/src/ADCGROUP001/ADCGroup001.c **** 
  458:../Dave/Generated/src/ADCGROUP001/ADCGroup001.c **** /* This deactivates the shared service request node.*/
  459:../Dave/Generated/src/ADCGROUP001/ADCGroup001.c **** status_t ADCGROUP001_DeActiveSharedServiceRequestNode(
@@ -1291,14 +1291,14 @@
  810 0060 80BC     		pop	{r7}
  811 0062 7047     		bx	lr
  812              		.cfi_endproc
- 813              	.LFE120:
+ 813              	.LFE125:
  815              		.section	.text.ADCGROUP001_EMUXStartSelection,"ax",%progbits
  816              		.align	2
  817              		.global	ADCGROUP001_EMUXStartSelection
  818              		.thumb
  819              		.thumb_func
  821              	ADCGROUP001_EMUXStartSelection:
- 822              	.LFB121:
+ 822              	.LFB126:
  491:../Dave/Generated/src/ADCGROUP001/ADCGroup001.c **** 
  492:../Dave/Generated/src/ADCGROUP001/ADCGroup001.c **** 
  493:../Dave/Generated/src/ADCGROUP001/ADCGroup001.c **** /* This Function sets the value of EMUX start selection. */
@@ -1396,14 +1396,14 @@
  882 0058 80BC     		pop	{r7}
  883 005a 7047     		bx	lr
  884              		.cfi_endproc
- 885              	.LFE121:
+ 885              	.LFE126:
  887              		.section	.text.ADCGROUP001_GetEMUXStartSelection,"ax",%progbits
  888              		.align	2
  889              		.global	ADCGROUP001_GetEMUXStartSelection
  890              		.thumb
  891              		.thumb_func
  893              	ADCGROUP001_GetEMUXStartSelection:
- 894              	.LFB122:
+ 894              	.LFB127:
  526:../Dave/Generated/src/ADCGROUP001/ADCGroup001.c **** 
  527:../Dave/Generated/src/ADCGROUP001/ADCGroup001.c **** /* This function gets the value of EMUX start selection. */
  528:../Dave/Generated/src/ADCGROUP001/ADCGroup001.c **** status_t ADCGROUP001_GetEMUXStartSelection(
@@ -1497,14 +1497,14 @@
  952 0050 80BC     		pop	{r7}
  953 0052 7047     		bx	lr
  954              		.cfi_endproc
- 955              	.LFE122:
+ 955              	.LFE127:
  957              		.section	.text.ADCGROUP001_SetEMUXChannelSelect,"ax",%progbits
  958              		.align	2
  959              		.global	ADCGROUP001_SetEMUXChannelSelect
  960              		.thumb
  961              		.thumb_func
  963              	ADCGROUP001_SetEMUXChannelSelect:
- 964              	.LFB123:
+ 964              	.LFB128:
  559:../Dave/Generated/src/ADCGROUP001/ADCGroup001.c **** 
  560:../Dave/Generated/src/ADCGROUP001/ADCGroup001.c **** /* This function sets the value of EMUX channel select. */
  561:../Dave/Generated/src/ADCGROUP001/ADCGroup001.c **** status_t ADCGROUP001_SetEMUXChannelSelect(
@@ -1603,14 +1603,14 @@
  1025 005c 80BC     		pop	{r7}
  1026 005e 7047     		bx	lr
  1027              		.cfi_endproc
- 1028              	.LFE123:
+ 1028              	.LFE128:
  1030              		.section	.text.ADCGROUP001_SetEMUXMode,"ax",%progbits
  1031              		.align	2
  1032              		.global	ADCGROUP001_SetEMUXMode
  1033              		.thumb
  1034              		.thumb_func
  1036              	ADCGROUP001_SetEMUXMode:
- 1037              	.LFB124:
+ 1037              	.LFB129:
  594:../Dave/Generated/src/ADCGROUP001/ADCGroup001.c **** 
  595:../Dave/Generated/src/ADCGROUP001/ADCGroup001.c **** /* This function sets the value of EMUX mode. */
  596:../Dave/Generated/src/ADCGROUP001/ADCGroup001.c **** status_t ADCGROUP001_SetEMUXMode(const ADCGROUP001_HandleType *HandlePtr, 
@@ -1725,14 +1725,14 @@
  1109 006c 80BC     		pop	{r7}
  1110 006e 7047     		bx	lr
  1111              		.cfi_endproc
- 1112              	.LFE124:
+ 1112              	.LFE129:
  1114              		.section	.text.ADCGROUP001_SetEMUXCodeScheme,"ax",%progbits
  1115              		.align	2
  1116              		.global	ADCGROUP001_SetEMUXCodeScheme
  1117              		.thumb
  1118              		.thumb_func
  1120              	ADCGROUP001_SetEMUXCodeScheme:
- 1121              	.LFB125:
+ 1121              	.LFB130:
  633:../Dave/Generated/src/ADCGROUP001/ADCGroup001.c **** 
  634:../Dave/Generated/src/ADCGROUP001/ADCGroup001.c **** 
  635:../Dave/Generated/src/ADCGROUP001/ADCGroup001.c **** /* This function sets the value of EMUX coding scheme. */
@@ -1851,14 +1851,14 @@
  1196 0072 80BC     		pop	{r7}
  1197 0074 7047     		bx	lr
  1198              		.cfi_endproc
- 1199              	.LFE125:
+ 1199              	.LFE130:
  1201 0076 00BF     		.section	.text.ADCGROUP001_SetGroupClass0SampleTime,"ax",%progbits
  1202              		.align	2
  1203              		.global	ADCGROUP001_SetGroupClass0SampleTime
  1204              		.thumb
  1205              		.thumb_func
  1207              	ADCGROUP001_SetGroupClass0SampleTime:
- 1208              	.LFB126:
+ 1208              	.LFB131:
  673:../Dave/Generated/src/ADCGROUP001/ADCGroup001.c **** 
  674:../Dave/Generated/src/ADCGROUP001/ADCGroup001.c **** /* This function sets the sample time for standard conversion mode */
  675:../Dave/Generated/src/ADCGROUP001/ADCGroup001.c **** status_t ADCGROUP001_SetGroupClass0SampleTime(
@@ -1957,14 +1957,14 @@
  1268 0058 80BC     		pop	{r7}
  1269 005a 7047     		bx	lr
  1270              		.cfi_endproc
- 1271              	.LFE126:
+ 1271              	.LFE131:
  1273              		.section	.text.ADCGROUP001_SetGroupClass1SampleTime,"ax",%progbits
  1274              		.align	2
  1275              		.global	ADCGROUP001_SetGroupClass1SampleTime
  1276              		.thumb
  1277              		.thumb_func
  1279              	ADCGROUP001_SetGroupClass1SampleTime:
- 1280              	.LFB127:
+ 1280              	.LFB132:
  709:../Dave/Generated/src/ADCGROUP001/ADCGroup001.c **** 
  710:../Dave/Generated/src/ADCGROUP001/ADCGroup001.c **** 
  711:../Dave/Generated/src/ADCGROUP001/ADCGroup001.c **** /* This function sets the sample time for standard conversion mode */
@@ -2064,14 +2064,14 @@
  1340 0058 80BC     		pop	{r7}
  1341 005a 7047     		bx	lr
  1342              		.cfi_endproc
- 1343              	.LFE127:
+ 1343              	.LFE132:
  1345              		.section	.text.ADCGROUP001_SetGroupClass0EmuxSampleTime,"ax",%progbits
  1346              		.align	2
  1347              		.global	ADCGROUP001_SetGroupClass0EmuxSampleTime
  1348              		.thumb
  1349              		.thumb_func
  1351              	ADCGROUP001_SetGroupClass0EmuxSampleTime:
- 1352              	.LFB128:
+ 1352              	.LFB133:
  746:../Dave/Generated/src/ADCGROUP001/ADCGroup001.c **** 
  747:../Dave/Generated/src/ADCGROUP001/ADCGroup001.c **** 
  748:../Dave/Generated/src/ADCGROUP001/ADCGroup001.c **** /* This function sets the sample time for EMUX conversion mode*/
@@ -2172,14 +2172,14 @@
  1413 005c 80BC     		pop	{r7}
  1414 005e 7047     		bx	lr
  1415              		.cfi_endproc
- 1416              	.LFE128:
+ 1416              	.LFE133:
  1418              		.section	.text.ADCGROUP001_SetGroupClass1EmuxSampleTime,"ax",%progbits
  1419              		.align	2
  1420              		.global	ADCGROUP001_SetGroupClass1EmuxSampleTime
  1421              		.thumb
  1422              		.thumb_func
  1424              	ADCGROUP001_SetGroupClass1EmuxSampleTime:
- 1425              	.LFB129:
+ 1425              	.LFB134:
  783:../Dave/Generated/src/ADCGROUP001/ADCGroup001.c **** 
  784:../Dave/Generated/src/ADCGROUP001/ADCGroup001.c **** 
  785:../Dave/Generated/src/ADCGROUP001/ADCGroup001.c **** /* This function sets the sample time for EMUX conversion mode*/
@@ -2279,14 +2279,14 @@
  1486 005c 80BC     		pop	{r7}
  1487 005e 7047     		bx	lr
  1488              		.cfi_endproc
- 1489              	.LFE129:
+ 1489              	.LFE134:
  1491              		.section	.text.ADCGROUP001_SetGroupClass0ConvMode,"ax",%progbits
  1492              		.align	2
  1493              		.global	ADCGROUP001_SetGroupClass0ConvMode
  1494              		.thumb
  1495              		.thumb_func
  1497              	ADCGROUP001_SetGroupClass0ConvMode:
- 1498              	.LFB130:
+ 1498              	.LFB135:
  819:../Dave/Generated/src/ADCGROUP001/ADCGroup001.c **** 
  820:../Dave/Generated/src/ADCGROUP001/ADCGroup001.c **** 
  821:../Dave/Generated/src/ADCGROUP001/ADCGroup001.c **** /* This function sets the standard conversion mode in group class 0 */
@@ -2393,14 +2393,14 @@
  1564 0062 80BC     		pop	{r7}
  1565 0064 7047     		bx	lr
  1566              		.cfi_endproc
- 1567              	.LFE130:
+ 1567              	.LFE135:
  1569 0066 00BF     		.section	.text.ADCGROUP001_SetGroupClass1ConvMode,"ax",%progbits
  1570              		.align	2
  1571              		.global	ADCGROUP001_SetGroupClass1ConvMode
  1572              		.thumb
  1573              		.thumb_func
  1575              	ADCGROUP001_SetGroupClass1ConvMode:
- 1576              	.LFB131:
+ 1576              	.LFB136:
  857:../Dave/Generated/src/ADCGROUP001/ADCGroup001.c **** 
  858:../Dave/Generated/src/ADCGROUP001/ADCGroup001.c **** 
  859:../Dave/Generated/src/ADCGROUP001/ADCGroup001.c **** /* This function sets the standard conversion mode */
@@ -2506,14 +2506,14 @@
  1642 0062 80BC     		pop	{r7}
  1643 0064 7047     		bx	lr
  1644              		.cfi_endproc
- 1645              	.LFE131:
+ 1645              	.LFE136:
  1647 0066 00BF     		.section	.text.ADCGROUP001_SetGroupClass0EmuxConvMode,"ax",%progbits
  1648              		.align	2
  1649              		.global	ADCGROUP001_SetGroupClass0EmuxConvMode
  1650              		.thumb
  1651              		.thumb_func
  1653              	ADCGROUP001_SetGroupClass0EmuxConvMode:
- 1654              	.LFB132:
+ 1654              	.LFB137:
  894:../Dave/Generated/src/ADCGROUP001/ADCGroup001.c **** 
  895:../Dave/Generated/src/ADCGROUP001/ADCGroup001.c **** 
  896:../Dave/Generated/src/ADCGROUP001/ADCGroup001.c **** /* This function sets the emux conversion mode */
@@ -2621,14 +2621,14 @@
  1720 0062 80BC     		pop	{r7}
  1721 0064 7047     		bx	lr
  1722              		.cfi_endproc
- 1723              	.LFE132:
+ 1723              	.LFE137:
  1725 0066 00BF     		.section	.text.ADCGROUP001_SetGroupClass1EmuxConvMode,"ax",%progbits
  1726              		.align	2
  1727              		.global	ADCGROUP001_SetGroupClass1EmuxConvMode
  1728              		.thumb
  1729              		.thumb_func
  1731              	ADCGROUP001_SetGroupClass1EmuxConvMode:
- 1732              	.LFB133:
+ 1732              	.LFB138:
  933:../Dave/Generated/src/ADCGROUP001/ADCGroup001.c **** 
  934:../Dave/Generated/src/ADCGROUP001/ADCGroup001.c **** 
  935:../Dave/Generated/src/ADCGROUP001/ADCGroup001.c **** /* This function sets the emux conversion mode */
@@ -2736,14 +2736,14 @@
  1798 0062 80BC     		pop	{r7}
  1799 0064 7047     		bx	lr
  1800              		.cfi_endproc
- 1801              	.LFE133:
+ 1801              	.LFE138:
  1803 0066 00BF     		.section	.text.ADCGROUP001_SetEMUXSampleTimeControl,"ax",%progbits
  1804              		.align	2
  1805              		.global	ADCGROUP001_SetEMUXSampleTimeControl
  1806              		.thumb
  1807              		.thumb_func
  1809              	ADCGROUP001_SetEMUXSampleTimeControl:
- 1810              	.LFB134:
+ 1810              	.LFB139:
  972:../Dave/Generated/src/ADCGROUP001/ADCGroup001.c **** 
  973:../Dave/Generated/src/ADCGROUP001/ADCGroup001.c **** 
  974:../Dave/Generated/src/ADCGROUP001/ADCGroup001.c **** /* This function sets the value of EMUX sample time control. */
@@ -2859,7 +2859,7 @@
  1882 006c 80BC     		pop	{r7}
  1883 006e 7047     		bx	lr
  1884              		.cfi_endproc
- 1885              	.LFE134:
+ 1885              	.LFE139:
  1887              		.text
  1888              	.Letext0:
  1889              		.file 2 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
@@ -2870,52 +2870,52 @@
  1894              		.file 7 "F:\\WORK\\SmartHome_checkout1\\XMC4500_RK_HTTPserver\\Dave\\Generated\\inc\\DAVESupport/.
 DEFINED SYMBOLS
                             *ABS*:00000000 ADCGroup001.c
-C:\Users\Mihai\AppData\Local\Temp\ccHwKpoV.s:20     .text.ADCGROUP001_Init:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccHwKpoV.s:25     .text.ADCGROUP001_Init:00000000 ADCGROUP001_Init
-C:\Users\Mihai\AppData\Local\Temp\ccHwKpoV.s:57     .text.ADCGROUP001_lInit:00000000 ADCGROUP001_lInit
-C:\Users\Mihai\AppData\Local\Temp\ccHwKpoV.s:52     .text.ADCGROUP001_lInit:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccHwKpoV.s:266    .text.ADCGROUP001_Deinit:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccHwKpoV.s:271    .text.ADCGROUP001_Deinit:00000000 ADCGROUP001_Deinit
-C:\Users\Mihai\AppData\Local\Temp\ccHwKpoV.s:353    .text.ADCGROUP001_SetGroupBound0:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccHwKpoV.s:358    .text.ADCGROUP001_SetGroupBound0:00000000 ADCGROUP001_SetGroupBound0
-C:\Users\Mihai\AppData\Local\Temp\ccHwKpoV.s:427    .text.ADCGROUP001_SetGroupBound1:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccHwKpoV.s:432    .text.ADCGROUP001_SetGroupBound1:00000000 ADCGROUP001_SetGroupBound1
-C:\Users\Mihai\AppData\Local\Temp\ccHwKpoV.s:503    .text.ADCGROUP001_ActiveGroupServiceRequestNode:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccHwKpoV.s:508    .text.ADCGROUP001_ActiveGroupServiceRequestNode:00000000 ADCGROUP001_ActiveGroupServiceRequestNode
-C:\Users\Mihai\AppData\Local\Temp\ccHwKpoV.s:585    .text.ADCGROUP001_DeActiveGroupServiceRequestNode:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccHwKpoV.s:590    .text.ADCGROUP001_DeActiveGroupServiceRequestNode:00000000 ADCGROUP001_DeActiveGroupServiceRequestNode
-C:\Users\Mihai\AppData\Local\Temp\ccHwKpoV.s:658    .text.ADCGROUP001_ActiveSharedServiceRequestNode:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccHwKpoV.s:663    .text.ADCGROUP001_ActiveSharedServiceRequestNode:00000000 ADCGROUP001_ActiveSharedServiceRequestNode
-C:\Users\Mihai\AppData\Local\Temp\ccHwKpoV.s:742    .text.ADCGROUP001_DeActiveSharedServiceRequestNode:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccHwKpoV.s:747    .text.ADCGROUP001_DeActiveSharedServiceRequestNode:00000000 ADCGROUP001_DeActiveSharedServiceRequestNode
-C:\Users\Mihai\AppData\Local\Temp\ccHwKpoV.s:816    .text.ADCGROUP001_EMUXStartSelection:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccHwKpoV.s:821    .text.ADCGROUP001_EMUXStartSelection:00000000 ADCGROUP001_EMUXStartSelection
-C:\Users\Mihai\AppData\Local\Temp\ccHwKpoV.s:888    .text.ADCGROUP001_GetEMUXStartSelection:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccHwKpoV.s:893    .text.ADCGROUP001_GetEMUXStartSelection:00000000 ADCGROUP001_GetEMUXStartSelection
-C:\Users\Mihai\AppData\Local\Temp\ccHwKpoV.s:958    .text.ADCGROUP001_SetEMUXChannelSelect:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccHwKpoV.s:963    .text.ADCGROUP001_SetEMUXChannelSelect:00000000 ADCGROUP001_SetEMUXChannelSelect
-C:\Users\Mihai\AppData\Local\Temp\ccHwKpoV.s:1031   .text.ADCGROUP001_SetEMUXMode:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccHwKpoV.s:1036   .text.ADCGROUP001_SetEMUXMode:00000000 ADCGROUP001_SetEMUXMode
-C:\Users\Mihai\AppData\Local\Temp\ccHwKpoV.s:1115   .text.ADCGROUP001_SetEMUXCodeScheme:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccHwKpoV.s:1120   .text.ADCGROUP001_SetEMUXCodeScheme:00000000 ADCGROUP001_SetEMUXCodeScheme
-C:\Users\Mihai\AppData\Local\Temp\ccHwKpoV.s:1202   .text.ADCGROUP001_SetGroupClass0SampleTime:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccHwKpoV.s:1207   .text.ADCGROUP001_SetGroupClass0SampleTime:00000000 ADCGROUP001_SetGroupClass0SampleTime
-C:\Users\Mihai\AppData\Local\Temp\ccHwKpoV.s:1274   .text.ADCGROUP001_SetGroupClass1SampleTime:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccHwKpoV.s:1279   .text.ADCGROUP001_SetGroupClass1SampleTime:00000000 ADCGROUP001_SetGroupClass1SampleTime
-C:\Users\Mihai\AppData\Local\Temp\ccHwKpoV.s:1346   .text.ADCGROUP001_SetGroupClass0EmuxSampleTime:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccHwKpoV.s:1351   .text.ADCGROUP001_SetGroupClass0EmuxSampleTime:00000000 ADCGROUP001_SetGroupClass0EmuxSampleTime
-C:\Users\Mihai\AppData\Local\Temp\ccHwKpoV.s:1419   .text.ADCGROUP001_SetGroupClass1EmuxSampleTime:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccHwKpoV.s:1424   .text.ADCGROUP001_SetGroupClass1EmuxSampleTime:00000000 ADCGROUP001_SetGroupClass1EmuxSampleTime
-C:\Users\Mihai\AppData\Local\Temp\ccHwKpoV.s:1492   .text.ADCGROUP001_SetGroupClass0ConvMode:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccHwKpoV.s:1497   .text.ADCGROUP001_SetGroupClass0ConvMode:00000000 ADCGROUP001_SetGroupClass0ConvMode
-C:\Users\Mihai\AppData\Local\Temp\ccHwKpoV.s:1570   .text.ADCGROUP001_SetGroupClass1ConvMode:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccHwKpoV.s:1575   .text.ADCGROUP001_SetGroupClass1ConvMode:00000000 ADCGROUP001_SetGroupClass1ConvMode
-C:\Users\Mihai\AppData\Local\Temp\ccHwKpoV.s:1648   .text.ADCGROUP001_SetGroupClass0EmuxConvMode:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccHwKpoV.s:1653   .text.ADCGROUP001_SetGroupClass0EmuxConvMode:00000000 ADCGROUP001_SetGroupClass0EmuxConvMode
-C:\Users\Mihai\AppData\Local\Temp\ccHwKpoV.s:1726   .text.ADCGROUP001_SetGroupClass1EmuxConvMode:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccHwKpoV.s:1731   .text.ADCGROUP001_SetGroupClass1EmuxConvMode:00000000 ADCGROUP001_SetGroupClass1EmuxConvMode
-C:\Users\Mihai\AppData\Local\Temp\ccHwKpoV.s:1804   .text.ADCGROUP001_SetEMUXSampleTimeControl:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccHwKpoV.s:1809   .text.ADCGROUP001_SetEMUXSampleTimeControl:00000000 ADCGROUP001_SetEMUXSampleTimeControl
+C:\Users\Mihai\AppData\Local\Temp\cc1fqWxT.s:20     .text.ADCGROUP001_Init:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc1fqWxT.s:25     .text.ADCGROUP001_Init:00000000 ADCGROUP001_Init
+C:\Users\Mihai\AppData\Local\Temp\cc1fqWxT.s:57     .text.ADCGROUP001_lInit:00000000 ADCGROUP001_lInit
+C:\Users\Mihai\AppData\Local\Temp\cc1fqWxT.s:52     .text.ADCGROUP001_lInit:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc1fqWxT.s:266    .text.ADCGROUP001_Deinit:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc1fqWxT.s:271    .text.ADCGROUP001_Deinit:00000000 ADCGROUP001_Deinit
+C:\Users\Mihai\AppData\Local\Temp\cc1fqWxT.s:353    .text.ADCGROUP001_SetGroupBound0:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc1fqWxT.s:358    .text.ADCGROUP001_SetGroupBound0:00000000 ADCGROUP001_SetGroupBound0
+C:\Users\Mihai\AppData\Local\Temp\cc1fqWxT.s:427    .text.ADCGROUP001_SetGroupBound1:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc1fqWxT.s:432    .text.ADCGROUP001_SetGroupBound1:00000000 ADCGROUP001_SetGroupBound1
+C:\Users\Mihai\AppData\Local\Temp\cc1fqWxT.s:503    .text.ADCGROUP001_ActiveGroupServiceRequestNode:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc1fqWxT.s:508    .text.ADCGROUP001_ActiveGroupServiceRequestNode:00000000 ADCGROUP001_ActiveGroupServiceRequestNode
+C:\Users\Mihai\AppData\Local\Temp\cc1fqWxT.s:585    .text.ADCGROUP001_DeActiveGroupServiceRequestNode:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc1fqWxT.s:590    .text.ADCGROUP001_DeActiveGroupServiceRequestNode:00000000 ADCGROUP001_DeActiveGroupServiceRequestNode
+C:\Users\Mihai\AppData\Local\Temp\cc1fqWxT.s:658    .text.ADCGROUP001_ActiveSharedServiceRequestNode:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc1fqWxT.s:663    .text.ADCGROUP001_ActiveSharedServiceRequestNode:00000000 ADCGROUP001_ActiveSharedServiceRequestNode
+C:\Users\Mihai\AppData\Local\Temp\cc1fqWxT.s:742    .text.ADCGROUP001_DeActiveSharedServiceRequestNode:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc1fqWxT.s:747    .text.ADCGROUP001_DeActiveSharedServiceRequestNode:00000000 ADCGROUP001_DeActiveSharedServiceRequestNode
+C:\Users\Mihai\AppData\Local\Temp\cc1fqWxT.s:816    .text.ADCGROUP001_EMUXStartSelection:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc1fqWxT.s:821    .text.ADCGROUP001_EMUXStartSelection:00000000 ADCGROUP001_EMUXStartSelection
+C:\Users\Mihai\AppData\Local\Temp\cc1fqWxT.s:888    .text.ADCGROUP001_GetEMUXStartSelection:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc1fqWxT.s:893    .text.ADCGROUP001_GetEMUXStartSelection:00000000 ADCGROUP001_GetEMUXStartSelection
+C:\Users\Mihai\AppData\Local\Temp\cc1fqWxT.s:958    .text.ADCGROUP001_SetEMUXChannelSelect:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc1fqWxT.s:963    .text.ADCGROUP001_SetEMUXChannelSelect:00000000 ADCGROUP001_SetEMUXChannelSelect
+C:\Users\Mihai\AppData\Local\Temp\cc1fqWxT.s:1031   .text.ADCGROUP001_SetEMUXMode:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc1fqWxT.s:1036   .text.ADCGROUP001_SetEMUXMode:00000000 ADCGROUP001_SetEMUXMode
+C:\Users\Mihai\AppData\Local\Temp\cc1fqWxT.s:1115   .text.ADCGROUP001_SetEMUXCodeScheme:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc1fqWxT.s:1120   .text.ADCGROUP001_SetEMUXCodeScheme:00000000 ADCGROUP001_SetEMUXCodeScheme
+C:\Users\Mihai\AppData\Local\Temp\cc1fqWxT.s:1202   .text.ADCGROUP001_SetGroupClass0SampleTime:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc1fqWxT.s:1207   .text.ADCGROUP001_SetGroupClass0SampleTime:00000000 ADCGROUP001_SetGroupClass0SampleTime
+C:\Users\Mihai\AppData\Local\Temp\cc1fqWxT.s:1274   .text.ADCGROUP001_SetGroupClass1SampleTime:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc1fqWxT.s:1279   .text.ADCGROUP001_SetGroupClass1SampleTime:00000000 ADCGROUP001_SetGroupClass1SampleTime
+C:\Users\Mihai\AppData\Local\Temp\cc1fqWxT.s:1346   .text.ADCGROUP001_SetGroupClass0EmuxSampleTime:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc1fqWxT.s:1351   .text.ADCGROUP001_SetGroupClass0EmuxSampleTime:00000000 ADCGROUP001_SetGroupClass0EmuxSampleTime
+C:\Users\Mihai\AppData\Local\Temp\cc1fqWxT.s:1419   .text.ADCGROUP001_SetGroupClass1EmuxSampleTime:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc1fqWxT.s:1424   .text.ADCGROUP001_SetGroupClass1EmuxSampleTime:00000000 ADCGROUP001_SetGroupClass1EmuxSampleTime
+C:\Users\Mihai\AppData\Local\Temp\cc1fqWxT.s:1492   .text.ADCGROUP001_SetGroupClass0ConvMode:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc1fqWxT.s:1497   .text.ADCGROUP001_SetGroupClass0ConvMode:00000000 ADCGROUP001_SetGroupClass0ConvMode
+C:\Users\Mihai\AppData\Local\Temp\cc1fqWxT.s:1570   .text.ADCGROUP001_SetGroupClass1ConvMode:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc1fqWxT.s:1575   .text.ADCGROUP001_SetGroupClass1ConvMode:00000000 ADCGROUP001_SetGroupClass1ConvMode
+C:\Users\Mihai\AppData\Local\Temp\cc1fqWxT.s:1648   .text.ADCGROUP001_SetGroupClass0EmuxConvMode:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc1fqWxT.s:1653   .text.ADCGROUP001_SetGroupClass0EmuxConvMode:00000000 ADCGROUP001_SetGroupClass0EmuxConvMode
+C:\Users\Mihai\AppData\Local\Temp\cc1fqWxT.s:1726   .text.ADCGROUP001_SetGroupClass1EmuxConvMode:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc1fqWxT.s:1731   .text.ADCGROUP001_SetGroupClass1EmuxConvMode:00000000 ADCGROUP001_SetGroupClass1EmuxConvMode
+C:\Users\Mihai\AppData\Local\Temp\cc1fqWxT.s:1804   .text.ADCGROUP001_SetEMUXSampleTimeControl:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc1fqWxT.s:1809   .text.ADCGROUP001_SetEMUXSampleTimeControl:00000000 ADCGROUP001_SetEMUXSampleTimeControl
                      .debug_frame:00000010 $d
                            .group:00000000 wm4.1.1791a5ae2e936ca1033c1c44be394cc7
                            .group:00000000 wm4.XMC4500.h.45.215f4b8c79f46c7645c15373868d08c0
@@ -3006,6 +3006,7 @@ C:\Users\Mihai\AppData\Local\Temp\ccHwKpoV.s:1809   .text.ADCGROUP001_SetEMUXSam
                            .group:00000000 wm4.fcntl.h.9.9336f33d7f5028f694c75e6e224e0cf7
                            .group:00000000 wm4.SLTHA001.h.97.d7e87c19a31e3244bdd5839e7cc42a61
                            .group:00000000 wm4.WEBSERVER001_Conf.h.54.cd6d29aaa96a848cbc5321bab5d6cd90
+                           .group:00000000 wm4.IO004.h.51.dbf9dd216c57d6a7f14a22b2cb7e5626
                            .group:00000000 wm4.ADCGROUP001.h.48.081c7f952eb4b6ea2df7d05180ee1663
                            .group:00000000 wm4.IO001.h.49.1da965fb490206cf7cde64a90f6912e1
                            .group:00000000 wm4.MOTORLIBS.h.59.b2e97de0df555dedfa51e24447b57ab8
@@ -3013,6 +3014,7 @@ C:\Users\Mihai\AppData\Local\Temp\ccHwKpoV.s:1809   .text.ADCGROUP001_SetEMUXSam
                            .group:00000000 wm4.Usic.h.90.22743468abc46f16747d12430b219aaf
                            .group:00000000 wm4.UART001_Conf.h.53.c5c972f6f634bc5116c171852aaab668
                            .group:00000000 wm4.UART001.h.109.3e835815a7a59791d8bd39655f4d4cc9
+                           .group:00000000 wm4.NVIC002_Conf.h.63.45e3c2b9806aa66850587e587798873e
 
 UNDEFINED SYMBOLS
 ADCGLOB001_Init

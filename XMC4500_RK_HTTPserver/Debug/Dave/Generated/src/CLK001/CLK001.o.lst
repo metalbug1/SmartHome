@@ -21,7 +21,7 @@
   21              		.thumb
   22              		.thumb_func
   24              	Delay:
-  25              	.LFB112:
+  25              	.LFB117:
   26              		.file 1 "../Dave/Generated/src/CLK001/CLK001.c"
    1:../Dave/Generated/src/CLK001/CLK001.c **** /*******************************************************************************
    2:../Dave/Generated/src/CLK001/CLK001.c **** **  DAVE App Name : CLK001       App Version: 1.0.28               
@@ -660,13 +660,13 @@
   98 0034 80BC     		pop	{r7}
   99 0036 7047     		bx	lr
  100              		.cfi_endproc
- 101              	.LFE112:
+ 101              	.LFE117:
  103              		.section	.text.System_Clock_valid,"ax",%progbits
  104              		.align	2
  105              		.thumb
  106              		.thumb_func
  108              	System_Clock_valid:
- 109              	.LFB113:
+ 109              	.LFB118:
  237:../Dave/Generated/src/CLK001/CLK001.c **** /**
  238:../Dave/Generated/src/CLK001/CLK001.c ****   * @brief  Function to check current MAIN Clock setting based on UI configuration 
  239:../Dave/Generated/src/CLK001/CLK001.c ****   * @note   -  
@@ -724,13 +724,13 @@
  147 0034 80BC     		pop	{r7}
  148 0036 7047     		bx	lr
  149              		.cfi_endproc
- 150              	.LFE113:
+ 150              	.LFE118:
  152              		.section	.text.System_Clock_init,"ax",%progbits
  153              		.align	2
  154              		.thumb
  155              		.thumb_func
  157              	System_Clock_init:
- 158              	.LFB114:
+ 158              	.LFB119:
  254:../Dave/Generated/src/CLK001/CLK001.c **** 
  255:../Dave/Generated/src/CLK001/CLK001.c **** /**
  256:../Dave/Generated/src/CLK001/CLK001.c ****   * @brief  Function to initialize the Main Clock based on UI configuration 
@@ -1436,13 +1436,13 @@
  502 036a BD46     		mov	sp, r7
  503 036c 80BD     		pop	{r7, pc}
  504              		.cfi_endproc
- 505              	.LFE114:
+ 505              	.LFE119:
  507 036e 00BF     		.section	.text.USB_Clock_valid,"ax",%progbits
  508              		.align	2
  509              		.thumb
  510              		.thumb_func
  512              	USB_Clock_valid:
- 513              	.LFB115:
+ 513              	.LFB120:
  610:../Dave/Generated/src/CLK001/CLK001.c ****      
  611:../Dave/Generated/src/CLK001/CLK001.c **** /**
  612:../Dave/Generated/src/CLK001/CLK001.c ****   * @brief  Function to check current USB Clock setting based on UI configuration 
@@ -1501,13 +1501,13 @@
  551 0034 80BC     		pop	{r7}
  552 0036 7047     		bx	lr
  553              		.cfi_endproc
- 554              	.LFE115:
+ 554              	.LFE120:
  556              		.section	.text.USB_Clock_init,"ax",%progbits
  557              		.align	2
  558              		.thumb
  559              		.thumb_func
  561              	USB_Clock_init:
- 562              	.LFB116:
+ 562              	.LFB121:
  628:../Dave/Generated/src/CLK001/CLK001.c **** 
  629:../Dave/Generated/src/CLK001/CLK001.c **** /**
  630:../Dave/Generated/src/CLK001/CLK001.c ****   * @brief  Function to initialize the USB Clock based on UI configuration 
@@ -1785,13 +1785,13 @@
  748 01cc BD46     		mov	sp, r7
  749 01ce 80BD     		pop	{r7, pc}
  750              		.cfi_endproc
- 751              	.LFE116:
+ 751              	.LFE121:
  753              		.section	.text.MMC_Clock_init,"ax",%progbits
  754              		.align	2
  755              		.thumb
  756              		.thumb_func
  758              	MMC_Clock_init:
- 759              	.LFB117:
+ 759              	.LFB122:
  717:../Dave/Generated/src/CLK001/CLK001.c **** 
  718:../Dave/Generated/src/CLK001/CLK001.c **** 
  719:../Dave/Generated/src/CLK001/CLK001.c **** 
@@ -1831,13 +1831,13 @@
  782 001e 80BC     		pop	{r7}
  783 0020 7047     		bx	lr
  784              		.cfi_endproc
- 785              	.LFE117:
+ 785              	.LFE122:
  787 0022 00BF     		.section	.text.RTC_Clock_init,"ax",%progbits
  788              		.align	2
  789              		.thumb
  790              		.thumb_func
  792              	RTC_Clock_init:
- 793              	.LFB118:
+ 793              	.LFB123:
  731:../Dave/Generated/src/CLK001/CLK001.c **** 
  732:../Dave/Generated/src/CLK001/CLK001.c **** /**
  733:../Dave/Generated/src/CLK001/CLK001.c ****   * @brief  Function to initialize the RTC clock based on UI configuration
@@ -1956,14 +1956,14 @@
  872 00a4 80BC     		pop	{r7}
  873 00a6 7047     		bx	lr
  874              		.cfi_endproc
- 875              	.LFE118:
+ 875              	.LFE123:
  877              		.section	.text.CLK001_Init,"ax",%progbits
  878              		.align	2
  879              		.global	CLK001_Init
  880              		.thumb
  881              		.thumb_func
  883              	CLK001_Init:
- 884              	.LFB119:
+ 884              	.LFB124:
  768:../Dave/Generated/src/CLK001/CLK001.c ****   
  769:../Dave/Generated/src/CLK001/CLK001.c **** 
  770:../Dave/Generated/src/CLK001/CLK001.c **** /*******************************************************************************
@@ -2037,14 +2037,14 @@
  919              		.loc 1 803 0
  920 002c 80BD     		pop	{r7, pc}
  921              		.cfi_endproc
- 922              	.LFE119:
+ 922              	.LFE124:
  924 002e 00BF     		.section	.text.AllowPLLInitByStartup,"ax",%progbits
  925              		.align	2
  926              		.global	AllowPLLInitByStartup
  927              		.thumb
  928              		.thumb_func
  930              	AllowPLLInitByStartup:
- 931              	.LFB120:
+ 931              	.LFB125:
  804:../Dave/Generated/src/CLK001/CLK001.c **** 
  805:../Dave/Generated/src/CLK001/CLK001.c **** /*
  806:../Dave/Generated/src/CLK001/CLK001.c ****  * This routine is called by CMSIS startup to find out if clock tree setup should
@@ -2089,7 +2089,7 @@
  949 000c 80BC     		pop	{r7}
  950 000e 7047     		bx	lr
  951              		.cfi_endproc
- 952              	.LFE120:
+ 952              	.LFE125:
  954              		.text
  955              	.Letext0:
  956              		.file 3 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
@@ -2097,24 +2097,24 @@
  958              		.file 5 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Include/core_cm4.h"
 DEFINED SYMBOLS
                             *ABS*:00000000 CLK001.c
-C:\Users\Mihai\AppData\Local\Temp\cc5lzl9Y.s:20     .text.Delay:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc5lzl9Y.s:24     .text.Delay:00000000 Delay
-C:\Users\Mihai\AppData\Local\Temp\cc5lzl9Y.s:104    .text.System_Clock_valid:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc5lzl9Y.s:108    .text.System_Clock_valid:00000000 System_Clock_valid
-C:\Users\Mihai\AppData\Local\Temp\cc5lzl9Y.s:153    .text.System_Clock_init:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc5lzl9Y.s:157    .text.System_Clock_init:00000000 System_Clock_init
-C:\Users\Mihai\AppData\Local\Temp\cc5lzl9Y.s:508    .text.USB_Clock_valid:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc5lzl9Y.s:512    .text.USB_Clock_valid:00000000 USB_Clock_valid
-C:\Users\Mihai\AppData\Local\Temp\cc5lzl9Y.s:557    .text.USB_Clock_init:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc5lzl9Y.s:561    .text.USB_Clock_init:00000000 USB_Clock_init
-C:\Users\Mihai\AppData\Local\Temp\cc5lzl9Y.s:754    .text.MMC_Clock_init:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc5lzl9Y.s:758    .text.MMC_Clock_init:00000000 MMC_Clock_init
-C:\Users\Mihai\AppData\Local\Temp\cc5lzl9Y.s:788    .text.RTC_Clock_init:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc5lzl9Y.s:792    .text.RTC_Clock_init:00000000 RTC_Clock_init
-C:\Users\Mihai\AppData\Local\Temp\cc5lzl9Y.s:878    .text.CLK001_Init:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc5lzl9Y.s:883    .text.CLK001_Init:00000000 CLK001_Init
-C:\Users\Mihai\AppData\Local\Temp\cc5lzl9Y.s:925    .text.AllowPLLInitByStartup:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc5lzl9Y.s:930    .text.AllowPLLInitByStartup:00000000 AllowPLLInitByStartup
+C:\Users\Mihai\AppData\Local\Temp\ccRRpZw1.s:20     .text.Delay:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccRRpZw1.s:24     .text.Delay:00000000 Delay
+C:\Users\Mihai\AppData\Local\Temp\ccRRpZw1.s:104    .text.System_Clock_valid:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccRRpZw1.s:108    .text.System_Clock_valid:00000000 System_Clock_valid
+C:\Users\Mihai\AppData\Local\Temp\ccRRpZw1.s:153    .text.System_Clock_init:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccRRpZw1.s:157    .text.System_Clock_init:00000000 System_Clock_init
+C:\Users\Mihai\AppData\Local\Temp\ccRRpZw1.s:508    .text.USB_Clock_valid:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccRRpZw1.s:512    .text.USB_Clock_valid:00000000 USB_Clock_valid
+C:\Users\Mihai\AppData\Local\Temp\ccRRpZw1.s:557    .text.USB_Clock_init:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccRRpZw1.s:561    .text.USB_Clock_init:00000000 USB_Clock_init
+C:\Users\Mihai\AppData\Local\Temp\ccRRpZw1.s:754    .text.MMC_Clock_init:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccRRpZw1.s:758    .text.MMC_Clock_init:00000000 MMC_Clock_init
+C:\Users\Mihai\AppData\Local\Temp\ccRRpZw1.s:788    .text.RTC_Clock_init:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccRRpZw1.s:792    .text.RTC_Clock_init:00000000 RTC_Clock_init
+C:\Users\Mihai\AppData\Local\Temp\ccRRpZw1.s:878    .text.CLK001_Init:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccRRpZw1.s:883    .text.CLK001_Init:00000000 CLK001_Init
+C:\Users\Mihai\AppData\Local\Temp\ccRRpZw1.s:925    .text.AllowPLLInitByStartup:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccRRpZw1.s:930    .text.AllowPLLInitByStartup:00000000 AllowPLLInitByStartup
                      .debug_frame:00000010 $d
                            .group:00000000 wm4.1.1791a5ae2e936ca1033c1c44be394cc7
                            .group:00000000 wm4.XMC4500.h.45.215f4b8c79f46c7645c15373868d08c0
@@ -2205,6 +2205,7 @@ C:\Users\Mihai\AppData\Local\Temp\cc5lzl9Y.s:930    .text.AllowPLLInitByStartup:
                            .group:00000000 wm4.fcntl.h.9.9336f33d7f5028f694c75e6e224e0cf7
                            .group:00000000 wm4.SLTHA001.h.97.d7e87c19a31e3244bdd5839e7cc42a61
                            .group:00000000 wm4.WEBSERVER001_Conf.h.54.cd6d29aaa96a848cbc5321bab5d6cd90
+                           .group:00000000 wm4.IO004.h.51.dbf9dd216c57d6a7f14a22b2cb7e5626
                            .group:00000000 wm4.ADCGROUP001.h.48.081c7f952eb4b6ea2df7d05180ee1663
                            .group:00000000 wm4.IO001.h.49.1da965fb490206cf7cde64a90f6912e1
                            .group:00000000 wm4.MOTORLIBS.h.59.b2e97de0df555dedfa51e24447b57ab8
@@ -2212,6 +2213,7 @@ C:\Users\Mihai\AppData\Local\Temp\cc5lzl9Y.s:930    .text.AllowPLLInitByStartup:
                            .group:00000000 wm4.Usic.h.90.22743468abc46f16747d12430b219aaf
                            .group:00000000 wm4.UART001_Conf.h.53.c5c972f6f634bc5116c171852aaab668
                            .group:00000000 wm4.UART001.h.109.3e835815a7a59791d8bd39655f4d4cc9
+                           .group:00000000 wm4.NVIC002_Conf.h.63.45e3c2b9806aa66850587e587798873e
 
 UNDEFINED SYMBOLS
 SystemCoreClockUpdate

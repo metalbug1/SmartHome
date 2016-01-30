@@ -18,18 +18,27 @@
   18              		.cfi_sections	.debug_frame
   19              		.section	.rodata
   20              		.align	2
-  21              	.LC0:
-  22 0000 2F4C4544 		.ascii	"/LED.htm\000"
-  22      2E68746D 
-  22      00
-  23              		.section	.text.CGI_led_handler,"ax",%progbits
-  24              		.align	2
-  25              		.global	CGI_led_handler
-  26              		.thumb
-  27              		.thumb_func
-  29              	CGI_led_handler:
-  30              	.LFB112:
-  31              		.file 1 "../Main.c"
+  21              	.LC1:
+  22 0000 6C656400 		.ascii	"led\000"
+  23              		.align	2
+  24              	.LC2:
+  25 0004 3100     		.ascii	"1\000"
+  26 0006 0000     		.align	2
+  27              	.LC3:
+  28 0008 3200     		.ascii	"2\000"
+  29 000a 0000     		.align	2
+  30              	.LC4:
+  31 000c 2F4C4544 		.ascii	"/LED.htm\000"
+  31      2E68746D 
+  31      00
+  32              		.section	.text.CGI_led_handler,"ax",%progbits
+  33              		.align	2
+  34              		.global	CGI_led_handler
+  35              		.thumb
+  36              		.thumb_func
+  38              	CGI_led_handler:
+  39              	.LFB117:
+  40              		.file 1 "../Main.c"
    1:../Main.c     **** /*
    2:../Main.c     ****  * Main.c
    3:../Main.c     ****  *
@@ -57,546 +66,837 @@
   25:../Main.c     **** //  CGI handler to switch LED status
   26:../Main.c     **** const char *CGI_led_handler(int iIndex, int iNumParams, char *pcParam[], char *pcValue[])
   27:../Main.c     **** {
-  32              		.loc 1 27 0
-  33              		.cfi_startproc
-  34              		@ args = 0, pretend = 0, frame = 24
-  35              		@ frame_needed = 1, uses_anonymous_args = 0
-  36              		@ link register save eliminated.
-  37 0000 80B4     		push	{r7}
-  38              	.LCFI0:
-  39              		.cfi_def_cfa_offset 4
-  40              		.cfi_offset 7, -4
-  41 0002 87B0     		sub	sp, sp, #28
-  42              	.LCFI1:
-  43              		.cfi_def_cfa_offset 32
-  44 0004 00AF     		add	r7, sp, #0
-  45              	.LCFI2:
-  46              		.cfi_def_cfa_register 7
-  47 0006 F860     		str	r0, [r7, #12]
-  48 0008 B960     		str	r1, [r7, #8]
-  49 000a 7A60     		str	r2, [r7, #4]
-  50 000c 3B60     		str	r3, [r7, #0]
+  41              		.loc 1 27 0
+  42              		.cfi_startproc
+  43              		@ args = 0, pretend = 0, frame = 24
+  44              		@ frame_needed = 1, uses_anonymous_args = 0
+  45 0000 80B5     		push	{r7, lr}
+  46              	.LCFI0:
+  47              		.cfi_def_cfa_offset 8
+  48              		.cfi_offset 7, -8
+  49              		.cfi_offset 14, -4
+  50 0002 86B0     		sub	sp, sp, #24
+  51              	.LCFI1:
+  52              		.cfi_def_cfa_offset 32
+  53 0004 00AF     		add	r7, sp, #0
+  54              	.LCFI2:
+  55              		.cfi_def_cfa_register 7
+  56 0006 F860     		str	r0, [r7, #12]
+  57 0008 B960     		str	r1, [r7, #8]
+  58 000a 7A60     		str	r2, [r7, #4]
+  59 000c 3B60     		str	r3, [r7, #0]
   28:../Main.c     **** 
   29:../Main.c     **** 	uint32_t i=0;
-  51              		.loc 1 29 0
-  52 000e 4FF00003 		mov	r3, #0
-  53 0012 7B61     		str	r3, [r7, #20]
+  60              		.loc 1 29 0
+  61 000e 4FF00003 		mov	r3, #0
+  62 0012 7B61     		str	r3, [r7, #20]
   30:../Main.c     **** 	
-  31:../Main.c     **** 	return "/LED.htm";
-  54              		.loc 1 31 0
-  55 0014 40F20003 		movw	r3, #:lower16:.LC0
-  56 0018 C0F20003 		movt	r3, #:upper16:.LC0
-  32:../Main.c     **** }
-  57              		.loc 1 32 0
-  58 001c 1846     		mov	r0, r3
-  59 001e 07F11C07 		add	r7, r7, #28
-  60 0022 BD46     		mov	sp, r7
-  61 0024 80BC     		pop	{r7}
-  62 0026 7047     		bx	lr
-  63              		.cfi_endproc
-  64              	.LFE112:
-  66              		.global	LED_CGI
-  67              		.section	.rodata
-  68 0009 000000   		.align	2
-  69              	.LC1:
-  70 000c 2F6C6564 		.ascii	"/leds.cgi\000"
-  70      732E6367 
-  70      6900
-  71 0016 0000     		.align	2
-  74              	LED_CGI:
-  75 0018 0C000000 		.word	.LC1
-  76 001c 00000000 		.word	CGI_led_handler
-  77              		.comm	CGI_TAB,8,4
-  78              		.section	.text.http_CGI_init,"ax",%progbits
-  79              		.align	2
-  80              		.global	http_CGI_init
-  81              		.thumb
-  82              		.thumb_func
-  84              	http_CGI_init:
-  85              	.LFB113:
-  33:../Main.c     **** 
+  31:../Main.c     **** 	/* We have only one CGI handler iIndex = 0 */
+  32:../Main.c     **** 	if (iIndex==0)
+  63              		.loc 1 32 0
+  64 0014 FB68     		ldr	r3, [r7, #12]
+  65 0016 002B     		cmp	r3, #0
+  66 0018 68D1     		bne	.L2
+  33:../Main.c     **** 	{
   34:../Main.c     **** 
-  35:../Main.c     **** 
-  36:../Main.c     **** /* Htm request for "/leds.cgi" will start led_handler */
-  37:../Main.c     **** /*<form method="get" action="/leds.cgi">*/
-  38:../Main.c     **** const tCGI LED_CGI={"/leds.cgi", CGI_led_handler};
-  39:../Main.c     **** 
-  40:../Main.c     **** /* Cgi call table, only one CGI used */
-  41:../Main.c     **** tCGI CGI_TAB[1];
-  42:../Main.c     **** 
-  43:../Main.c     **** 
-  44:../Main.c     **** 
-  45:../Main.c     **** //Initialise cgi environment
-  46:../Main.c     **** void http_CGI_init( void)
-  47:../Main.c     **** {
-  86              		.loc 1 47 0
-  87              		.cfi_startproc
-  88              		@ args = 0, pretend = 0, frame = 0
-  89              		@ frame_needed = 1, uses_anonymous_args = 0
-  90 0000 80B5     		push	{r7, lr}
-  91              	.LCFI3:
-  92              		.cfi_def_cfa_offset 8
-  93              		.cfi_offset 7, -8
-  94              		.cfi_offset 14, -4
-  95 0002 00AF     		add	r7, sp, #0
-  96              	.LCFI4:
-  97              		.cfi_def_cfa_register 7
-  48:../Main.c     **** 	//Initialised CGI structure for LED
-  49:../Main.c     **** 	CGI_TAB[0] = LED_CGI;
-  98              		.loc 1 49 0
-  99 0004 40F20002 		movw	r2, #:lower16:CGI_TAB
- 100 0008 C0F20002 		movt	r2, #:upper16:CGI_TAB
- 101 000c 40F20003 		movw	r3, #:lower16:LED_CGI
- 102 0010 C0F20003 		movt	r3, #:upper16:LED_CGI
- 103 0014 93E80300 		ldmia	r3, {r0, r1}
- 104 0018 82E80300 		stmia	r2, {r0, r1}
-  50:../Main.c     **** 
-  51:../Main.c     **** 	// Set CGI
-  52:../Main.c     **** 	http_set_cgi_handlers(&CGI_TAB[0], 1);
- 105              		.loc 1 52 0
- 106 001c 40F20000 		movw	r0, #:lower16:CGI_TAB
- 107 0020 C0F20000 		movt	r0, #:upper16:CGI_TAB
- 108 0024 4FF00101 		mov	r1, #1
- 109 0028 FFF7FEFF 		bl	http_set_cgi_handlers
-  53:../Main.c     **** }
- 110              		.loc 1 53 0
- 111 002c 80BD     		pop	{r7, pc}
- 112              		.cfi_endproc
- 113              	.LFE113:
- 115              		.global	__aeabi_i2d
- 116              		.global	__aeabi_dmul
- 117              		.global	__aeabi_d2uiz
- 118 002e 00BF     		.section	.text.SSI_Temp_Handler,"ax",%progbits
- 119              		.align	2
- 120              		.global	SSI_Temp_Handler
- 121              		.thumb
- 122              		.thumb_func
- 124              	SSI_Temp_Handler:
- 125              	.LFB114:
-  54:../Main.c     **** 
-  55:../Main.c     **** u16_t SSI_Temp_Handler (int iIndex, char *pcInsert, int iInsertLen)
-  56:../Main.c     **** {
- 126              		.loc 1 56 0
- 127              		.cfi_startproc
- 128              		@ args = 0, pretend = 0, frame = 32
- 129              		@ frame_needed = 1, uses_anonymous_args = 0
- 130 0000 90B5     		push	{r4, r7, lr}
- 131              	.LCFI5:
- 132              		.cfi_def_cfa_offset 12
- 133              		.cfi_offset 4, -12
- 134              		.cfi_offset 7, -8
- 135              		.cfi_offset 14, -4
- 136 0002 89B0     		sub	sp, sp, #36
- 137              	.LCFI6:
- 138              		.cfi_def_cfa_offset 48
- 139 0004 00AF     		add	r7, sp, #0
- 140              	.LCFI7:
- 141              		.cfi_def_cfa_register 7
- 142 0006 F860     		str	r0, [r7, #12]
- 143 0008 B960     		str	r1, [r7, #8]
- 144 000a 7A60     		str	r2, [r7, #4]
-  57:../Main.c     **** 
-  58:../Main.c     ****     char Digit1=0, Digit2=0, Digit3=0, Digit4=0; 
- 145              		.loc 1 58 0
- 146 000c 4FF00003 		mov	r3, #0
- 147 0010 FB77     		strb	r3, [r7, #31]
- 148 0012 4FF00003 		mov	r3, #0
- 149 0016 BB77     		strb	r3, [r7, #30]
- 150 0018 4FF00003 		mov	r3, #0
- 151 001c 7B77     		strb	r3, [r7, #29]
- 152 001e 4FF00003 		mov	r3, #0
- 153 0022 3B77     		strb	r3, [r7, #28]
-  59:../Main.c     ****     uint16_t ADCVal = 0;        
- 154              		.loc 1 59 0
- 155 0024 4FF00003 		mov	r3, #0
- 156 0028 FB82     		strh	r3, [r7, #22]	@ movhi
-  60:../Main.c     **** 	status_t status;
-  61:../Main.c     **** 
-  62:../Main.c     **** 
-  63:../Main.c     **** 	/* We have only one SSI handler iIndex = 0 */
+  35:../Main.c     **** 	  /* Check cgi parameter : example GET /leds.cgi?led=2&led=4 */
+  36:../Main.c     **** 	  for (i=0; i<iNumParams; i++)
+  67              		.loc 1 36 0
+  68 001a 4FF00003 		mov	r3, #0
+  69 001e 7B61     		str	r3, [r7, #20]
+  70 0020 60E0     		b	.L3
+  71              	.L6:
+  37:../Main.c     **** 	  {
+  38:../Main.c     **** 		/* check parameter "led" */
+  39:../Main.c     **** 		if (strcmp(pcParam[i] , "led")==0)	 
+  72              		.loc 1 39 0
+  73 0022 7B69     		ldr	r3, [r7, #20]
+  74 0024 4FEA8303 		lsl	r3, r3, #2
+  75 0028 7A68     		ldr	r2, [r7, #4]
+  76 002a D318     		adds	r3, r2, r3
+  77 002c 1B68     		ldr	r3, [r3, #0]
+  78 002e 1846     		mov	r0, r3
+  79 0030 40F20001 		movw	r1, #:lower16:.LC1
+  80 0034 C0F20001 		movt	r1, #:upper16:.LC1
+  81 0038 FFF7FEFF 		bl	strcmp
+  82 003c 0346     		mov	r3, r0
+  83 003e 002B     		cmp	r3, #0
+  84 0040 4CD1     		bne	.L4
+  40:../Main.c     **** 		{
+  41:../Main.c     **** 		  /* switch led1 ON if 1 */
+  42:../Main.c     **** 		  if(strcmp(pcValue[i], "1") ==0) 
+  85              		.loc 1 42 0
+  86 0042 7B69     		ldr	r3, [r7, #20]
+  87 0044 4FEA8303 		lsl	r3, r3, #2
+  88 0048 3A68     		ldr	r2, [r7, #0]
+  89 004a D318     		adds	r3, r2, r3
+  90 004c 1B68     		ldr	r3, [r3, #0]
+  91 004e 1846     		mov	r0, r3
+  92 0050 40F20001 		movw	r1, #:lower16:.LC2
+  93 0054 C0F20001 		movt	r1, #:upper16:.LC2
+  94 0058 FFF7FEFF 		bl	strcmp
+  95 005c 0346     		mov	r3, r0
+  96 005e 002B     		cmp	r3, #0
+  97 0060 16D1     		bne	.L5
+  43:../Main.c     **** 				IO004_TogglePin(IO004_Handle0);
+  98              		.loc 1 43 0
+  99 0062 40F20003 		movw	r3, #:lower16:IO004_Handle0
+ 100 0066 C0F20003 		movt	r3, #:upper16:IO004_Handle0
+ 101 006a 5A68     		ldr	r2, [r3, #4]
+ 102 006c 40F20003 		movw	r3, #:lower16:IO004_Handle0
+ 103 0070 C0F20003 		movt	r3, #:upper16:IO004_Handle0
+ 104 0074 5B68     		ldr	r3, [r3, #4]
+ 105 0076 5968     		ldr	r1, [r3, #4]
+ 106 0078 40F20003 		movw	r3, #:lower16:IO004_Handle0
+ 107 007c C0F20003 		movt	r3, #:upper16:IO004_Handle0
+ 108 0080 5B78     		ldrb	r3, [r3, #1]	@ zero_extendqisi2
+ 109 0082 4FF00110 		mov	r0, #65537
+ 110 0086 00FA03F3 		lsl	r3, r0, r3
+ 111 008a 0B43     		orrs	r3, r3, r1
+ 112 008c 5360     		str	r3, [r2, #4]
+ 113 008e 25E0     		b	.L4
+ 114              	.L5:
+  44:../Main.c     **** 			
+  45:../Main.c     **** 		  /* switch led2 ON if 2 */
+  46:../Main.c     **** 		  else if(strcmp(pcValue[i], "2") ==0) 
+ 115              		.loc 1 46 0
+ 116 0090 7B69     		ldr	r3, [r7, #20]
+ 117 0092 4FEA8303 		lsl	r3, r3, #2
+ 118 0096 3A68     		ldr	r2, [r7, #0]
+ 119 0098 D318     		adds	r3, r2, r3
+ 120 009a 1B68     		ldr	r3, [r3, #0]
+ 121 009c 1846     		mov	r0, r3
+ 122 009e 40F20001 		movw	r1, #:lower16:.LC3
+ 123 00a2 C0F20001 		movt	r1, #:upper16:.LC3
+ 124 00a6 FFF7FEFF 		bl	strcmp
+ 125 00aa 0346     		mov	r3, r0
+ 126 00ac 002B     		cmp	r3, #0
+ 127 00ae 15D1     		bne	.L4
+  47:../Main.c     **** 				IO004_TogglePin(IO004_Handle0);
+ 128              		.loc 1 47 0
+ 129 00b0 40F20003 		movw	r3, #:lower16:IO004_Handle0
+ 130 00b4 C0F20003 		movt	r3, #:upper16:IO004_Handle0
+ 131 00b8 5A68     		ldr	r2, [r3, #4]
+ 132 00ba 40F20003 		movw	r3, #:lower16:IO004_Handle0
+ 133 00be C0F20003 		movt	r3, #:upper16:IO004_Handle0
+ 134 00c2 5B68     		ldr	r3, [r3, #4]
+ 135 00c4 5968     		ldr	r1, [r3, #4]
+ 136 00c6 40F20003 		movw	r3, #:lower16:IO004_Handle0
+ 137 00ca C0F20003 		movt	r3, #:upper16:IO004_Handle0
+ 138 00ce 5B78     		ldrb	r3, [r3, #1]	@ zero_extendqisi2
+ 139 00d0 4FF00110 		mov	r0, #65537
+ 140 00d4 00FA03F3 		lsl	r3, r0, r3
+ 141 00d8 0B43     		orrs	r3, r3, r1
+ 142 00da 5360     		str	r3, [r2, #4]
+ 143              	.L4:
+  36:../Main.c     **** 	  for (i=0; i<iNumParams; i++)
+ 144              		.loc 1 36 0
+ 145 00dc 7B69     		ldr	r3, [r7, #20]
+ 146 00de 03F10103 		add	r3, r3, #1
+ 147 00e2 7B61     		str	r3, [r7, #20]
+ 148              	.L3:
+  36:../Main.c     **** 	  for (i=0; i<iNumParams; i++)
+ 149              		.loc 1 36 0 is_stmt 0 discriminator 1
+ 150 00e4 BA68     		ldr	r2, [r7, #8]
+ 151 00e6 7B69     		ldr	r3, [r7, #20]
+ 152 00e8 9A42     		cmp	r2, r3
+ 153 00ea 9AD8     		bhi	.L6
+ 154              	.L2:
+  48:../Main.c     **** 		}
+  49:../Main.c     **** 	  }
+  50:../Main.c     **** 	}
+  51:../Main.c     **** 	/* uri to send after cgi call*/
+  52:../Main.c     **** 
+  53:../Main.c     **** 
+  54:../Main.c     **** 	return "/LED.htm";
+ 155              		.loc 1 54 0 is_stmt 1
+ 156 00ec 40F20003 		movw	r3, #:lower16:.LC4
+ 157 00f0 C0F20003 		movt	r3, #:upper16:.LC4
+  55:../Main.c     **** 
+  56:../Main.c     **** 
+  57:../Main.c     **** }
+ 158              		.loc 1 57 0
+ 159 00f4 1846     		mov	r0, r3
+ 160 00f6 07F11807 		add	r7, r7, #24
+ 161 00fa BD46     		mov	sp, r7
+ 162 00fc 80BD     		pop	{r7, pc}
+ 163              		.cfi_endproc
+ 164              	.LFE117:
+ 166              		.global	LED_CGI
+ 167 00fe 00BF     		.section	.rodata
+ 168 0015 000000   		.align	2
+ 169              	.LC5:
+ 170 0018 2F6C6564 		.ascii	"/leds.cgi\000"
+ 170      732E6367 
+ 170      6900
+ 171 0022 0000     		.align	2
+ 174              	LED_CGI:
+ 175 0024 18000000 		.word	.LC5
+ 176 0028 00000000 		.word	CGI_led_handler
+ 177              		.comm	CGI_TAB,8,4
+ 178              		.section	.text.http_CGI_init,"ax",%progbits
+ 179              		.align	2
+ 180              		.global	http_CGI_init
+ 181              		.thumb
+ 182              		.thumb_func
+ 184              	http_CGI_init:
+ 185              	.LFB118:
+  58:../Main.c     **** 
+  59:../Main.c     **** 
+  60:../Main.c     **** 
+  61:../Main.c     **** /* Htm request for "/leds.cgi" will start led_handler */
+  62:../Main.c     **** /*<form method="get" action="/leds.cgi">*/
+  63:../Main.c     **** const tCGI LED_CGI={"/leds.cgi", CGI_led_handler};
   64:../Main.c     **** 
-  65:../Main.c     **** 	if (iIndex ==0)
- 157              		.loc 1 65 0
- 158 002a FB68     		ldr	r3, [r7, #12]
- 159 002c 002B     		cmp	r3, #0
- 160 002e 40F0A480 		bne	.L5
-  66:../Main.c     **** 	{  
+  65:../Main.c     **** /* Cgi call table, only one CGI used */
+  66:../Main.c     **** tCGI CGI_TAB[1];
   67:../Main.c     **** 
   68:../Main.c     **** 
-  69:../Main.c     **** 	/* get ADC conversion value */
-  70:../Main.c     **** 
-  71:../Main.c     **** 	status = ADCCH001_GetResult(&ADCCH001_Handle0, &ADCVal);
- 161              		.loc 1 71 0
- 162 0032 07F11603 		add	r3, r7, #22
- 163 0036 40F20000 		movw	r0, #:lower16:ADCCH001_Handle0
- 164 003a C0F20000 		movt	r0, #:upper16:ADCCH001_Handle0
- 165 003e 1946     		mov	r1, r3
- 166 0040 FFF7FEFF 		bl	ADCCH001_GetResult
- 167 0044 B861     		str	r0, [r7, #24]
-  72:../Main.c     **** 		//ADCVal = AD_result;//ADC_GetConversionValue(ADC3);
-  73:../Main.c     **** 		
-  74:../Main.c     **** 		/* convert to Voltage,	step = 0.8 mV */
-  75:../Main.c     **** 		ADCVal = (uint16_t)(ADCVal * 0.8);	
- 168              		.loc 1 75 0
- 169 0046 FB8A     		ldrh	r3, [r7, #22]
- 170 0048 1846     		mov	r0, r3
- 171 004a FFF7FEFF 		bl	__aeabi_i2d
- 172 004e 0246     		mov	r2, r0
- 173 0050 0B46     		mov	r3, r1
- 174 0052 1046     		mov	r0, r2
- 175 0054 1946     		mov	r1, r3
- 176 0056 5AA3     		adr	r3, .L9
- 177 0058 D3E90023 		ldrd	r2, [r3]
- 178 005c FFF7FEFF 		bl	__aeabi_dmul
- 179 0060 0246     		mov	r2, r0
- 180 0062 0B46     		mov	r3, r1
- 181 0064 1046     		mov	r0, r2
- 182 0066 1946     		mov	r1, r3
- 183 0068 FFF7FEFF 		bl	__aeabi_d2uiz
- 184 006c 0346     		mov	r3, r0
- 185 006e 9BB2     		uxth	r3, r3
- 186 0070 FB82     		strh	r3, [r7, #22]	@ movhi
-  76:../Main.c     **** 		
-  77:../Main.c     **** 		/* get digits to display */
-  78:../Main.c     **** 		
-  79:../Main.c     **** 		Digit1= ADCVal/1000;
- 187              		.loc 1 79 0
- 188 0072 FA8A     		ldrh	r2, [r7, #22]
- 189 0074 44F6D353 		movw	r3, #19923
- 190 0078 C1F26203 		movt	r3, 4194
- 191 007c A3FB0213 		umull	r1, r3, r3, r2
- 192 0080 4FEA9313 		lsr	r3, r3, #6
- 193 0084 9BB2     		uxth	r3, r3
- 194 0086 FB77     		strb	r3, [r7, #31]
-  80:../Main.c     **** 		Digit2= (ADCVal-(Digit1*1000))/100 ;
- 195              		.loc 1 80 0
- 196 0088 FB8A     		ldrh	r3, [r7, #22]
- 197 008a 1A46     		mov	r2, r3
- 198 008c F97F     		ldrb	r1, [r7, #31]	@ zero_extendqisi2
- 199 008e 4FF61843 		movw	r3, #64536
- 200 0092 CFF6FF73 		movt	r3, 65535
- 201 0096 03FB01F3 		mul	r3, r3, r1
- 202 009a D218     		adds	r2, r2, r3
- 203 009c 48F21F53 		movw	r3, #34079
- 204 00a0 C5F2EB13 		movt	r3, 20971
- 205 00a4 83FB0213 		smull	r1, r3, r3, r2
- 206 00a8 4FEA6311 		asr	r1, r3, #5
- 207 00ac 4FEAE273 		asr	r3, r2, #31
- 208 00b0 CB1A     		subs	r3, r1, r3
- 209 00b2 BB77     		strb	r3, [r7, #30]
-  81:../Main.c     **** 		Digit3= (ADCVal-((Digit1*1000)+(Digit2*100)))/10;
- 210              		.loc 1 81 0
- 211 00b4 FB8A     		ldrh	r3, [r7, #22]
- 212 00b6 1A46     		mov	r2, r3
- 213 00b8 BB7F     		ldrb	r3, [r7, #30]	@ zero_extendqisi2
- 214 00ba 6FF06301 		mvn	r1, #99
- 215 00be 01FB03F1 		mul	r1, r1, r3
- 216 00c2 F87F     		ldrb	r0, [r7, #31]	@ zero_extendqisi2
- 217 00c4 4FF61843 		movw	r3, #64536
- 218 00c8 CFF6FF73 		movt	r3, 65535
- 219 00cc 03FB00F3 		mul	r3, r3, r0
- 220 00d0 CB18     		adds	r3, r1, r3
- 221 00d2 D218     		adds	r2, r2, r3
- 222 00d4 46F26763 		movw	r3, #26215
- 223 00d8 C6F26663 		movt	r3, 26214
- 224 00dc 83FB0213 		smull	r1, r3, r3, r2
- 225 00e0 4FEAA301 		asr	r1, r3, #2
- 226 00e4 4FEAE273 		asr	r3, r2, #31
- 227 00e8 CB1A     		subs	r3, r1, r3
- 228 00ea 7B77     		strb	r3, [r7, #29]
-  82:../Main.c     **** 		Digit4= ADCVal -((Digit1*1000)+(Digit2*100)+ (Digit3*10));
- 229              		.loc 1 82 0
- 230 00ec FB8A     		ldrh	r3, [r7, #22]
- 231 00ee DAB2     		uxtb	r2, r3
- 232 00f0 7B7F     		ldrb	r3, [r7, #29]
- 233 00f2 1946     		mov	r1, r3
- 234 00f4 4FEA4111 		lsl	r1, r1, #5
- 235 00f8 C91A     		subs	r1, r1, r3
- 236 00fa 4FEA8101 		lsl	r1, r1, #2
- 237 00fe CB1A     		subs	r3, r1, r3
- 238 0100 4FEA4303 		lsl	r3, r3, #1
- 239 0104 D9B2     		uxtb	r1, r3
- 240 0106 BB7F     		ldrb	r3, [r7, #30]
- 241 0108 1846     		mov	r0, r3
- 242 010a 4FEA8000 		lsl	r0, r0, #2
- 243 010e C018     		adds	r0, r0, r3
- 244 0110 4FEAC000 		lsl	r0, r0, #3
- 245 0114 C31A     		subs	r3, r0, r3
- 246 0116 4FEA8303 		lsl	r3, r3, #2
- 247 011a D8B2     		uxtb	r0, r3
- 248 011c FB7F     		ldrb	r3, [r7, #31]
- 249 011e 1C46     		mov	r4, r3
- 250 0120 4FEA4404 		lsl	r4, r4, #1
- 251 0124 E318     		adds	r3, r4, r3
- 252 0126 4FEAC303 		lsl	r3, r3, #3
- 253 012a DBB2     		uxtb	r3, r3
- 254 012c C318     		adds	r3, r0, r3
- 255 012e DBB2     		uxtb	r3, r3
- 256 0130 CB18     		adds	r3, r1, r3
- 257 0132 DBB2     		uxtb	r3, r3
- 258 0134 D318     		adds	r3, r2, r3
- 259 0136 3B77     		strb	r3, [r7, #28]
-  83:../Main.c     **** 		   
-  84:../Main.c     **** 		/* prepare data to be inserted in html */
-  85:../Main.c     **** 		*pcInsert		= (char)(Digit1+0x30);
- 260              		.loc 1 85 0
- 261 0138 FB7F     		ldrb	r3, [r7, #31]
- 262 013a 03F13003 		add	r3, r3, #48
- 263 013e DAB2     		uxtb	r2, r3
- 264 0140 BB68     		ldr	r3, [r7, #8]
- 265 0142 1A70     		strb	r2, [r3, #0]
-  86:../Main.c     **** 		*(pcInsert + 1) = (char)(Digit2+0x30);
- 266              		.loc 1 86 0
- 267 0144 BB68     		ldr	r3, [r7, #8]
- 268 0146 03F10103 		add	r3, r3, #1
- 269 014a BA7F     		ldrb	r2, [r7, #30]
- 270 014c 02F13002 		add	r2, r2, #48
- 271 0150 D2B2     		uxtb	r2, r2
- 272 0152 1A70     		strb	r2, [r3, #0]
-  87:../Main.c     **** 		*(pcInsert + 2) = (char)(Digit3+0x30);
- 273              		.loc 1 87 0
- 274 0154 BB68     		ldr	r3, [r7, #8]
- 275 0156 03F10203 		add	r3, r3, #2
- 276 015a 7A7F     		ldrb	r2, [r7, #29]
- 277 015c 02F13002 		add	r2, r2, #48
- 278 0160 D2B2     		uxtb	r2, r2
- 279 0162 1A70     		strb	r2, [r3, #0]
-  88:../Main.c     **** 		*(pcInsert + 3) = (char)(Digit4+0x30);
- 280              		.loc 1 88 0
- 281 0164 BB68     		ldr	r3, [r7, #8]
- 282 0166 03F10303 		add	r3, r3, #3
- 283 016a 3A7F     		ldrb	r2, [r7, #28]
- 284 016c 02F13002 		add	r2, r2, #48
- 285 0170 D2B2     		uxtb	r2, r2
- 286 0172 1A70     		strb	r2, [r3, #0]
-  89:../Main.c     **** 	   
-  90:../Main.c     **** 	   /* 4 characters need to be inserted in html*/
-  91:../Main.c     **** 	   return 4;
- 287              		.loc 1 91 0
- 288 0174 4FF00403 		mov	r3, #4
- 289 0178 1DE0     		b	.L8
- 290              	.L5:
+  69:../Main.c     **** 
+  70:../Main.c     **** //Initialise cgi environment
+  71:../Main.c     **** void http_CGI_init( void)
+  72:../Main.c     **** {
+ 186              		.loc 1 72 0
+ 187              		.cfi_startproc
+ 188              		@ args = 0, pretend = 0, frame = 0
+ 189              		@ frame_needed = 1, uses_anonymous_args = 0
+ 190 0000 80B5     		push	{r7, lr}
+ 191              	.LCFI3:
+ 192              		.cfi_def_cfa_offset 8
+ 193              		.cfi_offset 7, -8
+ 194              		.cfi_offset 14, -4
+ 195 0002 00AF     		add	r7, sp, #0
+ 196              	.LCFI4:
+ 197              		.cfi_def_cfa_register 7
+  73:../Main.c     **** 	//Initialised CGI structure for LED
+  74:../Main.c     **** 	CGI_TAB[0] = LED_CGI;
+ 198              		.loc 1 74 0
+ 199 0004 40F20002 		movw	r2, #:lower16:CGI_TAB
+ 200 0008 C0F20002 		movt	r2, #:upper16:CGI_TAB
+ 201 000c 40F20003 		movw	r3, #:lower16:LED_CGI
+ 202 0010 C0F20003 		movt	r3, #:upper16:LED_CGI
+ 203 0014 93E80300 		ldmia	r3, {r0, r1}
+ 204 0018 82E80300 		stmia	r2, {r0, r1}
+  75:../Main.c     **** 
+  76:../Main.c     **** 	// Set CGI
+  77:../Main.c     **** 	http_set_cgi_handlers(&CGI_TAB[0], 1);
+ 205              		.loc 1 77 0
+ 206 001c 40F20000 		movw	r0, #:lower16:CGI_TAB
+ 207 0020 C0F20000 		movt	r0, #:upper16:CGI_TAB
+ 208 0024 4FF00101 		mov	r1, #1
+ 209 0028 FFF7FEFF 		bl	http_set_cgi_handlers
+  78:../Main.c     **** }
+ 210              		.loc 1 78 0
+ 211 002c 80BD     		pop	{r7, pc}
+ 212              		.cfi_endproc
+ 213              	.LFE118:
+ 215              		.global	__aeabi_i2d
+ 216              		.global	__aeabi_dmul
+ 217              		.global	__aeabi_d2uiz
+ 218 002e 00BF     		.section	.text.SSI_ADC_Handler,"ax",%progbits
+ 219              		.align	2
+ 220              		.global	SSI_ADC_Handler
+ 221              		.thumb
+ 222              		.thumb_func
+ 224              	SSI_ADC_Handler:
+ 225              	.LFB119:
+  79:../Main.c     **** 
+  80:../Main.c     **** u16_t SSI_ADC_Handler (int iIndex, char *pcInsert, int iInsertLen)
+  81:../Main.c     **** {
+ 226              		.loc 1 81 0
+ 227              		.cfi_startproc
+ 228              		@ args = 0, pretend = 0, frame = 32
+ 229              		@ frame_needed = 1, uses_anonymous_args = 0
+ 230 0000 90B5     		push	{r4, r7, lr}
+ 231              	.LCFI5:
+ 232              		.cfi_def_cfa_offset 12
+ 233              		.cfi_offset 4, -12
+ 234              		.cfi_offset 7, -8
+ 235              		.cfi_offset 14, -4
+ 236 0002 89B0     		sub	sp, sp, #36
+ 237              	.LCFI6:
+ 238              		.cfi_def_cfa_offset 48
+ 239 0004 00AF     		add	r7, sp, #0
+ 240              	.LCFI7:
+ 241              		.cfi_def_cfa_register 7
+ 242 0006 F860     		str	r0, [r7, #12]
+ 243 0008 B960     		str	r1, [r7, #8]
+ 244 000a 7A60     		str	r2, [r7, #4]
+  82:../Main.c     **** 
+  83:../Main.c     ****     char Digit1=0, Digit2=0, Digit3=0, Digit4=0; 
+ 245              		.loc 1 83 0
+ 246 000c 4FF00003 		mov	r3, #0
+ 247 0010 FB77     		strb	r3, [r7, #31]
+ 248 0012 4FF00003 		mov	r3, #0
+ 249 0016 BB77     		strb	r3, [r7, #30]
+ 250 0018 4FF00003 		mov	r3, #0
+ 251 001c 7B77     		strb	r3, [r7, #29]
+ 252 001e 4FF00003 		mov	r3, #0
+ 253 0022 3B77     		strb	r3, [r7, #28]
+  84:../Main.c     ****     uint16_t ADCVal = 0;        
+ 254              		.loc 1 84 0
+ 255 0024 4FF00003 		mov	r3, #0
+ 256 0028 FB82     		strh	r3, [r7, #22]	@ movhi
+  85:../Main.c     **** 	status_t status;
+  86:../Main.c     **** 
+  87:../Main.c     **** 
+  88:../Main.c     **** 	/* We have only one SSI handler iIndex = 0 */
+  89:../Main.c     **** 
+  90:../Main.c     **** 	if (iIndex ==0)
+ 257              		.loc 1 90 0
+ 258 002a FB68     		ldr	r3, [r7, #12]
+ 259 002c 002B     		cmp	r3, #0
+ 260 002e 40F0A480 		bne	.L10
+  91:../Main.c     **** 	{  
   92:../Main.c     **** 
-  93:../Main.c     **** 	}
-  94:../Main.c     **** 
-  95:../Main.c     **** 	if (iIndex == 1)
- 291              		.loc 1 95 0
- 292 017a FB68     		ldr	r3, [r7, #12]
- 293 017c 012B     		cmp	r3, #1
- 294 017e 18D1     		bne	.L7
-  96:../Main.c     **** 	{
-  97:../Main.c     **** 		*pcInsert		= (char)'c';
- 295              		.loc 1 97 0
- 296 0180 BB68     		ldr	r3, [r7, #8]
- 297 0182 4FF06302 		mov	r2, #99
- 298 0186 1A70     		strb	r2, [r3, #0]
-  98:../Main.c     **** 		*(pcInsert + 1) = (char)'a';
- 299              		.loc 1 98 0
- 300 0188 BB68     		ldr	r3, [r7, #8]
- 301 018a 03F10103 		add	r3, r3, #1
- 302 018e 4FF06102 		mov	r2, #97
- 303 0192 1A70     		strb	r2, [r3, #0]
-  99:../Main.c     **** 		*(pcInsert + 2) = (char)'l';
- 304              		.loc 1 99 0
- 305 0194 BB68     		ldr	r3, [r7, #8]
- 306 0196 03F10203 		add	r3, r3, #2
- 307 019a 4FF06C02 		mov	r2, #108
- 308 019e 1A70     		strb	r2, [r3, #0]
- 100:../Main.c     **** 		*(pcInsert + 3) = (char)'d';
- 309              		.loc 1 100 0
- 310 01a0 BB68     		ldr	r3, [r7, #8]
- 311 01a2 03F10303 		add	r3, r3, #3
- 312 01a6 4FF06402 		mov	r2, #100
- 313 01aa 1A70     		strb	r2, [r3, #0]
- 101:../Main.c     **** 
- 102:../Main.c     **** 	   /* 4 characters need to be inserted in html*/
- 103:../Main.c     **** 	   return 4;
- 314              		.loc 1 103 0
- 315 01ac 4FF00403 		mov	r3, #4
- 316 01b0 01E0     		b	.L8
- 317              	.L7:
- 104:../Main.c     **** 	}
- 105:../Main.c     **** 
- 106:../Main.c     **** 		return 0;
- 318              		.loc 1 106 0
- 319 01b2 4FF00003 		mov	r3, #0
- 320              	.L8:
- 107:../Main.c     **** }
- 321              		.loc 1 107 0
- 322 01b6 1846     		mov	r0, r3
- 323 01b8 07F12407 		add	r7, r7, #36
- 324 01bc BD46     		mov	sp, r7
- 325 01be 90BD     		pop	{r4, r7, pc}
- 326              	.L10:
- 327              		.align	3
- 328              	.L9:
- 329 01c0 9A999999 		.word	-1717986918
- 330 01c4 9999E93F 		.word	1072273817
- 331              		.cfi_endproc
- 332              	.LFE114:
- 334              		.global	TAGCHAR
- 335              		.section	.rodata
- 336              		.align	2
- 337              	.LC2:
- 338 0020 7400     		.ascii	"t\000"
- 339              		.data
- 340              		.align	2
- 343              	TAGCHAR:
- 344 0000 20000000 		.word	.LC2
- 345              		.global	TAGCHAR2
- 346              		.section	.rodata
- 347 0022 0000     		.align	2
- 348              	.LC3:
- 349 0024 7500     		.ascii	"u\000"
- 350 0026 0000     		.data
- 351              		.align	2
- 354              	TAGCHAR2:
- 355 0004 24000000 		.word	.LC3
- 356              		.global	TAGS
- 357              		.align	2
- 360              	TAGS:
- 361 0008 00000000 		.word	TAGCHAR
- 362              		.section	.text.http_SSI_init,"ax",%progbits
- 363              		.align	2
- 364              		.global	http_SSI_init
- 365              		.thumb
- 366              		.thumb_func
- 368              	http_SSI_init:
- 369              	.LFB115:
- 108:../Main.c     **** 
- 109:../Main.c     **** char const* TAGCHAR="t";
- 110:../Main.c     **** char const* TAGCHAR2="u";
- 111:../Main.c     **** char const** TAGS= {&TAGCHAR, &TAGCHAR2};
- 112:../Main.c     **** 
- 113:../Main.c     **** void http_SSI_init (void)
- 114:../Main.c     **** {
- 370              		.loc 1 114 0
- 371              		.cfi_startproc
- 372              		@ args = 0, pretend = 0, frame = 0
- 373              		@ frame_needed = 1, uses_anonymous_args = 0
- 374 0000 80B5     		push	{r7, lr}
- 375              	.LCFI8:
- 376              		.cfi_def_cfa_offset 8
- 377              		.cfi_offset 7, -8
- 378              		.cfi_offset 14, -4
- 379 0002 00AF     		add	r7, sp, #0
- 380              	.LCFI9:
- 381              		.cfi_def_cfa_register 7
- 115:../Main.c     **** 
- 116:../Main.c     **** 
- 117:../Main.c     **** /*
- 118:../Main.c     **** SSI is a method used to dynamically include dynamic data in HTML code.
- 119:../Main.c     **** This done by placing a specific tag inside the HTML code of the web page. The tag should
- 120:../Main.c     **** have the following format: <!--#tag-->
- 121:../Main.c     **** For the ADC conversion page, the following tag "t" is used inside the HTML code: <!--#t-->
- 122:../Main.c     **** */
- 123:../Main.c     **** http_set_ssi_handler(SSI_Temp_Handler, (char const **)TAGS, 2);
- 382              		.loc 1 123 0
- 383 0004 40F20003 		movw	r3, #:lower16:TAGS
- 384 0008 C0F20003 		movt	r3, #:upper16:TAGS
- 385 000c 1B68     		ldr	r3, [r3, #0]
- 386 000e 40F20000 		movw	r0, #:lower16:SSI_Temp_Handler
- 387 0012 C0F20000 		movt	r0, #:upper16:SSI_Temp_Handler
- 388 0016 1946     		mov	r1, r3
- 389 0018 4FF00202 		mov	r2, #2
- 390 001c FFF7FEFF 		bl	http_set_ssi_handler
- 124:../Main.c     **** 
- 125:../Main.c     **** }
- 391              		.loc 1 125 0
- 392 0020 80BD     		pop	{r7, pc}
- 393              		.cfi_endproc
- 394              	.LFE115:
- 396 0022 00BF     		.section	.text.main,"ax",%progbits
- 397              		.align	2
- 398              		.global	main
- 399              		.thumb
- 400              		.thumb_func
- 402              	main:
- 403              	.LFB116:
+  93:../Main.c     **** 
+  94:../Main.c     **** 	/* get ADC conversion value */
+  95:../Main.c     **** 
+  96:../Main.c     **** 	status = ADCCH001_GetResult(&ADCCH001_Handle0, &ADCVal);
+ 261              		.loc 1 96 0
+ 262 0032 07F11603 		add	r3, r7, #22
+ 263 0036 40F20000 		movw	r0, #:lower16:ADCCH001_Handle0
+ 264 003a C0F20000 		movt	r0, #:upper16:ADCCH001_Handle0
+ 265 003e 1946     		mov	r1, r3
+ 266 0040 FFF7FEFF 		bl	ADCCH001_GetResult
+ 267 0044 B861     		str	r0, [r7, #24]
+  97:../Main.c     **** 		//ADCVal = AD_result;//ADC_GetConversionValue(ADC3);
+  98:../Main.c     **** 		
+  99:../Main.c     **** 		/* convert to Voltage,	step = 0.8 mV */
+ 100:../Main.c     **** 		ADCVal = (uint16_t)(ADCVal * 0.8);	
+ 268              		.loc 1 100 0
+ 269 0046 FB8A     		ldrh	r3, [r7, #22]
+ 270 0048 1846     		mov	r0, r3
+ 271 004a FFF7FEFF 		bl	__aeabi_i2d
+ 272 004e 0246     		mov	r2, r0
+ 273 0050 0B46     		mov	r3, r1
+ 274 0052 1046     		mov	r0, r2
+ 275 0054 1946     		mov	r1, r3
+ 276 0056 5AA3     		adr	r3, .L14
+ 277 0058 D3E90023 		ldrd	r2, [r3]
+ 278 005c FFF7FEFF 		bl	__aeabi_dmul
+ 279 0060 0246     		mov	r2, r0
+ 280 0062 0B46     		mov	r3, r1
+ 281 0064 1046     		mov	r0, r2
+ 282 0066 1946     		mov	r1, r3
+ 283 0068 FFF7FEFF 		bl	__aeabi_d2uiz
+ 284 006c 0346     		mov	r3, r0
+ 285 006e 9BB2     		uxth	r3, r3
+ 286 0070 FB82     		strh	r3, [r7, #22]	@ movhi
+ 101:../Main.c     **** 		
+ 102:../Main.c     **** 		/* get digits to display */
+ 103:../Main.c     **** 		
+ 104:../Main.c     **** 		Digit1= ADCVal/1000;
+ 287              		.loc 1 104 0
+ 288 0072 FA8A     		ldrh	r2, [r7, #22]
+ 289 0074 44F6D353 		movw	r3, #19923
+ 290 0078 C1F26203 		movt	r3, 4194
+ 291 007c A3FB0213 		umull	r1, r3, r3, r2
+ 292 0080 4FEA9313 		lsr	r3, r3, #6
+ 293 0084 9BB2     		uxth	r3, r3
+ 294 0086 FB77     		strb	r3, [r7, #31]
+ 105:../Main.c     **** 		Digit2= (ADCVal-(Digit1*1000))/100 ;
+ 295              		.loc 1 105 0
+ 296 0088 FB8A     		ldrh	r3, [r7, #22]
+ 297 008a 1A46     		mov	r2, r3
+ 298 008c F97F     		ldrb	r1, [r7, #31]	@ zero_extendqisi2
+ 299 008e 4FF61843 		movw	r3, #64536
+ 300 0092 CFF6FF73 		movt	r3, 65535
+ 301 0096 03FB01F3 		mul	r3, r3, r1
+ 302 009a D218     		adds	r2, r2, r3
+ 303 009c 48F21F53 		movw	r3, #34079
+ 304 00a0 C5F2EB13 		movt	r3, 20971
+ 305 00a4 83FB0213 		smull	r1, r3, r3, r2
+ 306 00a8 4FEA6311 		asr	r1, r3, #5
+ 307 00ac 4FEAE273 		asr	r3, r2, #31
+ 308 00b0 CB1A     		subs	r3, r1, r3
+ 309 00b2 BB77     		strb	r3, [r7, #30]
+ 106:../Main.c     **** 		Digit3= (ADCVal-((Digit1*1000)+(Digit2*100)))/10;
+ 310              		.loc 1 106 0
+ 311 00b4 FB8A     		ldrh	r3, [r7, #22]
+ 312 00b6 1A46     		mov	r2, r3
+ 313 00b8 BB7F     		ldrb	r3, [r7, #30]	@ zero_extendqisi2
+ 314 00ba 6FF06301 		mvn	r1, #99
+ 315 00be 01FB03F1 		mul	r1, r1, r3
+ 316 00c2 F87F     		ldrb	r0, [r7, #31]	@ zero_extendqisi2
+ 317 00c4 4FF61843 		movw	r3, #64536
+ 318 00c8 CFF6FF73 		movt	r3, 65535
+ 319 00cc 03FB00F3 		mul	r3, r3, r0
+ 320 00d0 CB18     		adds	r3, r1, r3
+ 321 00d2 D218     		adds	r2, r2, r3
+ 322 00d4 46F26763 		movw	r3, #26215
+ 323 00d8 C6F26663 		movt	r3, 26214
+ 324 00dc 83FB0213 		smull	r1, r3, r3, r2
+ 325 00e0 4FEAA301 		asr	r1, r3, #2
+ 326 00e4 4FEAE273 		asr	r3, r2, #31
+ 327 00e8 CB1A     		subs	r3, r1, r3
+ 328 00ea 7B77     		strb	r3, [r7, #29]
+ 107:../Main.c     **** 		Digit4= ADCVal -((Digit1*1000)+(Digit2*100)+ (Digit3*10));
+ 329              		.loc 1 107 0
+ 330 00ec FB8A     		ldrh	r3, [r7, #22]
+ 331 00ee DAB2     		uxtb	r2, r3
+ 332 00f0 7B7F     		ldrb	r3, [r7, #29]
+ 333 00f2 1946     		mov	r1, r3
+ 334 00f4 4FEA4111 		lsl	r1, r1, #5
+ 335 00f8 C91A     		subs	r1, r1, r3
+ 336 00fa 4FEA8101 		lsl	r1, r1, #2
+ 337 00fe CB1A     		subs	r3, r1, r3
+ 338 0100 4FEA4303 		lsl	r3, r3, #1
+ 339 0104 D9B2     		uxtb	r1, r3
+ 340 0106 BB7F     		ldrb	r3, [r7, #30]
+ 341 0108 1846     		mov	r0, r3
+ 342 010a 4FEA8000 		lsl	r0, r0, #2
+ 343 010e C018     		adds	r0, r0, r3
+ 344 0110 4FEAC000 		lsl	r0, r0, #3
+ 345 0114 C31A     		subs	r3, r0, r3
+ 346 0116 4FEA8303 		lsl	r3, r3, #2
+ 347 011a D8B2     		uxtb	r0, r3
+ 348 011c FB7F     		ldrb	r3, [r7, #31]
+ 349 011e 1C46     		mov	r4, r3
+ 350 0120 4FEA4404 		lsl	r4, r4, #1
+ 351 0124 E318     		adds	r3, r4, r3
+ 352 0126 4FEAC303 		lsl	r3, r3, #3
+ 353 012a DBB2     		uxtb	r3, r3
+ 354 012c C318     		adds	r3, r0, r3
+ 355 012e DBB2     		uxtb	r3, r3
+ 356 0130 CB18     		adds	r3, r1, r3
+ 357 0132 DBB2     		uxtb	r3, r3
+ 358 0134 D318     		adds	r3, r2, r3
+ 359 0136 3B77     		strb	r3, [r7, #28]
+ 108:../Main.c     **** 		   
+ 109:../Main.c     **** 		/* prepare data to be inserted in html */
+ 110:../Main.c     **** 		*pcInsert		= (char)(Digit1+0x30);
+ 360              		.loc 1 110 0
+ 361 0138 FB7F     		ldrb	r3, [r7, #31]
+ 362 013a 03F13003 		add	r3, r3, #48
+ 363 013e DAB2     		uxtb	r2, r3
+ 364 0140 BB68     		ldr	r3, [r7, #8]
+ 365 0142 1A70     		strb	r2, [r3, #0]
+ 111:../Main.c     **** 		*(pcInsert + 1) = (char)(Digit2+0x30);
+ 366              		.loc 1 111 0
+ 367 0144 BB68     		ldr	r3, [r7, #8]
+ 368 0146 03F10103 		add	r3, r3, #1
+ 369 014a BA7F     		ldrb	r2, [r7, #30]
+ 370 014c 02F13002 		add	r2, r2, #48
+ 371 0150 D2B2     		uxtb	r2, r2
+ 372 0152 1A70     		strb	r2, [r3, #0]
+ 112:../Main.c     **** 		*(pcInsert + 2) = (char)(Digit3+0x30);
+ 373              		.loc 1 112 0
+ 374 0154 BB68     		ldr	r3, [r7, #8]
+ 375 0156 03F10203 		add	r3, r3, #2
+ 376 015a 7A7F     		ldrb	r2, [r7, #29]
+ 377 015c 02F13002 		add	r2, r2, #48
+ 378 0160 D2B2     		uxtb	r2, r2
+ 379 0162 1A70     		strb	r2, [r3, #0]
+ 113:../Main.c     **** 		*(pcInsert + 3) = (char)(Digit4+0x30);
+ 380              		.loc 1 113 0
+ 381 0164 BB68     		ldr	r3, [r7, #8]
+ 382 0166 03F10303 		add	r3, r3, #3
+ 383 016a 3A7F     		ldrb	r2, [r7, #28]
+ 384 016c 02F13002 		add	r2, r2, #48
+ 385 0170 D2B2     		uxtb	r2, r2
+ 386 0172 1A70     		strb	r2, [r3, #0]
+ 114:../Main.c     **** 	   
+ 115:../Main.c     **** 	   /* 4 characters need to be inserted in html*/
+ 116:../Main.c     **** 	   return 4;
+ 387              		.loc 1 116 0
+ 388 0174 4FF00403 		mov	r3, #4
+ 389 0178 1DE0     		b	.L13
+ 390              	.L10:
+ 117:../Main.c     **** 
+ 118:../Main.c     **** 	}
+ 119:../Main.c     **** 
+ 120:../Main.c     **** 	if (iIndex == 1)
+ 391              		.loc 1 120 0
+ 392 017a FB68     		ldr	r3, [r7, #12]
+ 393 017c 012B     		cmp	r3, #1
+ 394 017e 18D1     		bne	.L12
+ 121:../Main.c     **** 	{
+ 122:../Main.c     **** 		*pcInsert		= (char)'c';
+ 395              		.loc 1 122 0
+ 396 0180 BB68     		ldr	r3, [r7, #8]
+ 397 0182 4FF06302 		mov	r2, #99
+ 398 0186 1A70     		strb	r2, [r3, #0]
+ 123:../Main.c     **** 		*(pcInsert + 1) = (char)'a';
+ 399              		.loc 1 123 0
+ 400 0188 BB68     		ldr	r3, [r7, #8]
+ 401 018a 03F10103 		add	r3, r3, #1
+ 402 018e 4FF06102 		mov	r2, #97
+ 403 0192 1A70     		strb	r2, [r3, #0]
+ 124:../Main.c     **** 		*(pcInsert + 2) = (char)'l';
+ 404              		.loc 1 124 0
+ 405 0194 BB68     		ldr	r3, [r7, #8]
+ 406 0196 03F10203 		add	r3, r3, #2
+ 407 019a 4FF06C02 		mov	r2, #108
+ 408 019e 1A70     		strb	r2, [r3, #0]
+ 125:../Main.c     **** 		*(pcInsert + 3) = (char)'d';
+ 409              		.loc 1 125 0
+ 410 01a0 BB68     		ldr	r3, [r7, #8]
+ 411 01a2 03F10303 		add	r3, r3, #3
+ 412 01a6 4FF06402 		mov	r2, #100
+ 413 01aa 1A70     		strb	r2, [r3, #0]
  126:../Main.c     **** 
- 127:../Main.c     **** 
- 128:../Main.c     **** 
- 129:../Main.c     **** int main(void)
- 130:../Main.c     **** {
- 404              		.loc 1 130 0
- 405              		.cfi_startproc
- 406              		@ args = 0, pretend = 0, frame = 0
- 407              		@ frame_needed = 1, uses_anonymous_args = 0
- 408 0000 80B5     		push	{r7, lr}
- 409              	.LCFI10:
- 410              		.cfi_def_cfa_offset 8
- 411              		.cfi_offset 7, -8
- 412              		.cfi_offset 14, -4
- 413 0002 00AF     		add	r7, sp, #0
- 414              	.LCFI11:
- 415              		.cfi_def_cfa_register 7
- 131:../Main.c     **** //	status_t status;		// Declaration of return variable for DAVE3 APIs (toggle comment if required)
- 132:../Main.c     **** 
- 133:../Main.c     **** 
- 134:../Main.c     **** 	DAVE_Init();			// Initialization of DAVE Apps
- 416              		.loc 1 134 0
- 417 0004 FFF7FEFF 		bl	DAVE_Init
- 135:../Main.c     **** 
- 136:../Main.c     **** 	ADC002_InitializeQueue((ADC002_HandleType*)&ADC002_Handle0);
- 418              		.loc 1 136 0
- 419 0008 40F20000 		movw	r0, #:lower16:ADC002_Handle0
- 420 000c C0F20000 		movt	r0, #:upper16:ADC002_Handle0
- 421 0010 FFF7FEFF 		bl	ADC002_InitializeQueue
- 137:../Main.c     ****     lwIPStack_init();
- 422              		.loc 1 137 0
- 423 0014 FFF7FEFF 		bl	lwIPStack_init
- 138:../Main.c     ****     http_CGI_init();
- 424              		.loc 1 138 0
- 425 0018 FFF7FEFF 		bl	http_CGI_init
- 139:../Main.c     ****     http_SSI_init();
- 426              		.loc 1 139 0
- 427 001c FFF7FEFF 		bl	http_SSI_init
- 428              	.L13:
- 140:../Main.c     ****     // ... infinite loop ...
- 141:../Main.c     **** 	while(1)
- 142:../Main.c     **** 	{
- 143:../Main.c     **** 
- 144:../Main.c     **** 	}
- 429              		.loc 1 144 0 discriminator 1
- 430 0020 FEE7     		b	.L13
+ 127:../Main.c     **** 	   /* 4 characters need to be inserted in html*/
+ 128:../Main.c     **** 	   return 4;
+ 414              		.loc 1 128 0
+ 415 01ac 4FF00403 		mov	r3, #4
+ 416 01b0 01E0     		b	.L13
+ 417              	.L12:
+ 129:../Main.c     **** 	}
+ 130:../Main.c     **** 
+ 131:../Main.c     **** 		return 0;
+ 418              		.loc 1 131 0
+ 419 01b2 4FF00003 		mov	r3, #0
+ 420              	.L13:
+ 132:../Main.c     **** }
+ 421              		.loc 1 132 0
+ 422 01b6 1846     		mov	r0, r3
+ 423 01b8 07F12407 		add	r7, r7, #36
+ 424 01bc BD46     		mov	sp, r7
+ 425 01be 90BD     		pop	{r4, r7, pc}
+ 426              	.L15:
+ 427              		.align	3
+ 428              	.L14:
+ 429 01c0 9A999999 		.word	-1717986918
+ 430 01c4 9999E93F 		.word	1072273817
  431              		.cfi_endproc
- 432              	.LFE116:
- 434 0022 00BF     		.text
- 435              	.Letext0:
- 436              		.file 2 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
- 437              		.file 3 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Infineon/XMC4500_series/Include/XMC4500.h"
- 438              		.file 4 "F:\\WORK\\SmartHome_checkout1\\XMC4500_RK_HTTPserver\\Dave\\Generated\\inc\\DAVESupport/.
- 439              		.file 5 "F:\\WORK\\SmartHome_checkout1\\XMC4500_RK_HTTPserver\\Dave\\Generated\\inc\\DAVESupport/.
- 440              		.file 6 "F:\\WORK\\SmartHome_checkout1\\XMC4500_RK_HTTPserver\\Dave\\Generated\\src\\ETH004\\01_lw
- 441              		.file 7 "F:\\WORK\\SmartHome_checkout1\\XMC4500_RK_HTTPserver\\Dave\\Generated\\inc\\DAVESupport/.
- 442              		.file 8 "F:\\WORK\\SmartHome_checkout1\\XMC4500_RK_HTTPserver\\Dave\\Generated\\inc\\DAVESupport/.
- 443              		.file 9 "F:\\WORK\\SmartHome_checkout1\\XMC4500_RK_HTTPserver\\Dave\\Generated\\inc\\DAVESupport/.
- 444              		.file 10 "F:\\WORK\\SmartHome_checkout1\\XMC4500_RK_HTTPserver\\Dave\\Generated\\inc\\DAVESupport/
- 445              		.file 11 ".././Dave/Generated/src/WEBSERVER001/HTTPServer/httpd.h"
- 446              		.file 12 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Include/core_cm4.h"
- 447              		.file 13 "F:\\WORK\\SmartHome_checkout1\\XMC4500_RK_HTTPserver\\Dave\\Generated\\inc\\DAVESupport/
- 448              		.file 14 "F:\\WORK\\SmartHome_checkout1\\XMC4500_RK_HTTPserver\\Dave\\Generated\\inc\\DAVESupport/
+ 432              	.LFE119:
+ 434              		.global	TAGCHAR
+ 435              		.section	.rodata
+ 436              		.align	2
+ 437              	.LC6:
+ 438 002c 7400     		.ascii	"t\000"
+ 439              		.data
+ 440              		.align	2
+ 443              	TAGCHAR:
+ 444 0000 2C000000 		.word	.LC6
+ 445              		.global	TAGCHAR2
+ 446              		.section	.rodata
+ 447 002e 0000     		.align	2
+ 448              	.LC7:
+ 449 0030 7500     		.ascii	"u\000"
+ 450              		.data
+ 451              		.align	2
+ 454              	TAGCHAR2:
+ 455 0004 30000000 		.word	.LC7
+ 456              		.global	TAGS
+ 457              		.align	2
+ 460              	TAGS:
+ 461 0008 00000000 		.word	TAGCHAR
+ 462              		.section	.text.http_SSI_init,"ax",%progbits
+ 463              		.align	2
+ 464              		.global	http_SSI_init
+ 465              		.thumb
+ 466              		.thumb_func
+ 468              	http_SSI_init:
+ 469              	.LFB120:
+ 133:../Main.c     **** 
+ 134:../Main.c     **** 
+ 135:../Main.c     **** 
+ 136:../Main.c     **** char const* TAGCHAR="t";
+ 137:../Main.c     **** char const* TAGCHAR2="u";
+ 138:../Main.c     **** char const** TAGS= {&TAGCHAR, &TAGCHAR2};
+ 139:../Main.c     **** 
+ 140:../Main.c     **** 
+ 141:../Main.c     **** void http_SSI_init (void)
+ 142:../Main.c     **** {
+ 470              		.loc 1 142 0
+ 471              		.cfi_startproc
+ 472              		@ args = 0, pretend = 0, frame = 0
+ 473              		@ frame_needed = 1, uses_anonymous_args = 0
+ 474 0000 80B5     		push	{r7, lr}
+ 475              	.LCFI8:
+ 476              		.cfi_def_cfa_offset 8
+ 477              		.cfi_offset 7, -8
+ 478              		.cfi_offset 14, -4
+ 479 0002 00AF     		add	r7, sp, #0
+ 480              	.LCFI9:
+ 481              		.cfi_def_cfa_register 7
+ 143:../Main.c     **** 
+ 144:../Main.c     **** 
+ 145:../Main.c     **** /*
+ 146:../Main.c     **** SSI is a method used to dynamically include dynamic data in HTML code.
+ 147:../Main.c     **** This done by placing a specific tag inside the HTML code of the web page. The tag should
+ 148:../Main.c     **** have the following format: <!--#tag-->
+ 149:../Main.c     **** For the ADC conversion page, the following tag "t" is used inside the HTML code: <!--#t-->
+ 150:../Main.c     **** */
+ 151:../Main.c     **** http_set_ssi_handler(SSI_ADC_Handler, (char const **)TAGS, 2);
+ 482              		.loc 1 151 0
+ 483 0004 40F20003 		movw	r3, #:lower16:TAGS
+ 484 0008 C0F20003 		movt	r3, #:upper16:TAGS
+ 485 000c 1B68     		ldr	r3, [r3, #0]
+ 486 000e 40F20000 		movw	r0, #:lower16:SSI_ADC_Handler
+ 487 0012 C0F20000 		movt	r0, #:upper16:SSI_ADC_Handler
+ 488 0016 1946     		mov	r1, r3
+ 489 0018 4FF00202 		mov	r2, #2
+ 490 001c FFF7FEFF 		bl	http_set_ssi_handler
+ 152:../Main.c     **** 
+ 153:../Main.c     **** 
+ 154:../Main.c     **** }
+ 491              		.loc 1 154 0
+ 492 0020 80BD     		pop	{r7, pc}
+ 493              		.cfi_endproc
+ 494              	.LFE120:
+ 496              		.comm	receivedData,257,4
+ 497 0022 00BF     		.section	.text.USIC1_0_IRQHandler,"ax",%progbits
+ 498              		.align	2
+ 499              		.global	USIC1_0_IRQHandler
+ 500              		.thumb
+ 501              		.thumb_func
+ 503              	USIC1_0_IRQHandler:
+ 504              	.LFB121:
+ 155:../Main.c     **** 
+ 156:../Main.c     **** typedef struct
+ 157:../Main.c     **** {
+ 158:../Main.c     **** 	uint8_t au8dataBuffer[256];
+ 159:../Main.c     **** 	uint8_t u8rxIndex;
+ 160:../Main.c     **** }DataQueue;
+ 161:../Main.c     **** 
+ 162:../Main.c     **** DataQueue receivedData;
+ 163:../Main.c     **** 
+ 164:../Main.c     **** void UART_ReceiveInterrupt(void)
+ 165:../Main.c     **** {
+ 505              		.loc 1 165 0
+ 506              		.cfi_startproc
+ 507              		@ args = 0, pretend = 0, frame = 520
+ 508              		@ frame_needed = 1, uses_anonymous_args = 0
+ 509 0000 80B5     		push	{r7, lr}
+ 510              	.LCFI10:
+ 511              		.cfi_def_cfa_offset 8
+ 512              		.cfi_offset 7, -8
+ 513              		.cfi_offset 14, -4
+ 514 0002 ADF5027D 		sub	sp, sp, #520
+ 515              	.LCFI11:
+ 516              		.cfi_def_cfa_offset 528
+ 517 0006 00AF     		add	r7, sp, #0
+ 518              	.LCFI12:
+ 519              		.cfi_def_cfa_register 7
+ 166:../Main.c     **** 	uint16_t au16tempBuffer[256];
+ 167:../Main.c     **** 	uint16_t u16rnumberOfReceivedBytes;
+ 168:../Main.c     **** 	uint16_t u16tempIndex;
+ 169:../Main.c     **** 
+ 170:../Main.c     **** 	u16rnumberOfReceivedBytes = UART001_ReadDataMultiple(&UART001_Handle0, au16tempBuffer, 256);
+ 520              		.loc 1 170 0
+ 521 0008 07F10403 		add	r3, r7, #4
+ 522 000c 40F20000 		movw	r0, #:lower16:UART001_Handle0
+ 523 0010 C0F20000 		movt	r0, #:upper16:UART001_Handle0
+ 524 0014 1946     		mov	r1, r3
+ 525 0016 4FF48072 		mov	r2, #256
+ 526 001a FFF7FEFF 		bl	UART001_ReadDataMultiple
+ 527 001e 0346     		mov	r3, r0
+ 528 0020 A7F80432 		strh	r3, [r7, #516]	@ movhi
+ 171:../Main.c     **** 	if (0 != u16rnumberOfReceivedBytes)
+ 529              		.loc 1 171 0
+ 530 0024 B7F80432 		ldrh	r3, [r7, #516]
+ 531 0028 002B     		cmp	r3, #0
+ 532 002a 34D0     		beq	.L17
+ 172:../Main.c     **** 	{
+ 173:../Main.c     **** 		for (u16tempIndex=0; u16tempIndex < u16rnumberOfReceivedBytes; u16tempIndex++)
+ 533              		.loc 1 173 0
+ 534 002c 4FF00003 		mov	r3, #0
+ 535 0030 A7F80632 		strh	r3, [r7, #518]	@ movhi
+ 536 0034 29E0     		b	.L19
+ 537              	.L20:
+ 174:../Main.c     **** 		{
+ 175:../Main.c     **** 			receivedData.au8dataBuffer[u16tempIndex + receivedData.u8rxIndex] = (char)au16tempBuffer[u16temp
+ 538              		.loc 1 175 0 discriminator 2
+ 539 0036 B7F80622 		ldrh	r2, [r7, #518]
+ 540 003a 40F20003 		movw	r3, #:lower16:receivedData
+ 541 003e C0F20003 		movt	r3, #:upper16:receivedData
+ 542 0042 93F80031 		ldrb	r3, [r3, #256]	@ zero_extendqisi2
+ 543 0046 D218     		adds	r2, r2, r3
+ 544 0048 B7F80612 		ldrh	r1, [r7, #518]
+ 545 004c 07F10403 		add	r3, r7, #4
+ 546 0050 33F81130 		ldrh	r3, [r3, r1, lsl #1]
+ 547 0054 D9B2     		uxtb	r1, r3
+ 548 0056 40F20003 		movw	r3, #:lower16:receivedData
+ 549 005a C0F20003 		movt	r3, #:upper16:receivedData
+ 550 005e 9954     		strb	r1, [r3, r2]
+ 176:../Main.c     **** 			receivedData.u8rxIndex++;
+ 551              		.loc 1 176 0 discriminator 2
+ 552 0060 40F20003 		movw	r3, #:lower16:receivedData
+ 553 0064 C0F20003 		movt	r3, #:upper16:receivedData
+ 554 0068 93F80031 		ldrb	r3, [r3, #256]	@ zero_extendqisi2
+ 555 006c 03F10103 		add	r3, r3, #1
+ 556 0070 DAB2     		uxtb	r2, r3
+ 557 0072 40F20003 		movw	r3, #:lower16:receivedData
+ 558 0076 C0F20003 		movt	r3, #:upper16:receivedData
+ 559 007a 83F80021 		strb	r2, [r3, #256]
+ 173:../Main.c     **** 		for (u16tempIndex=0; u16tempIndex < u16rnumberOfReceivedBytes; u16tempIndex++)
+ 560              		.loc 1 173 0 discriminator 2
+ 561 007e B7F80632 		ldrh	r3, [r7, #518]	@ movhi
+ 562 0082 03F10103 		add	r3, r3, #1
+ 563 0086 A7F80632 		strh	r3, [r7, #518]	@ movhi
+ 564              	.L19:
+ 173:../Main.c     **** 		for (u16tempIndex=0; u16tempIndex < u16rnumberOfReceivedBytes; u16tempIndex++)
+ 565              		.loc 1 173 0 is_stmt 0 discriminator 1
+ 566 008a B7F80622 		ldrh	r2, [r7, #518]
+ 567 008e B7F80432 		ldrh	r3, [r7, #516]
+ 568 0092 9A42     		cmp	r2, r3
+ 569 0094 CFD3     		bcc	.L20
+ 570              	.L17:
+ 177:../Main.c     **** 		}
+ 178:../Main.c     **** 	}
+ 179:../Main.c     **** }
+ 571              		.loc 1 179 0 is_stmt 1
+ 572 0096 07F50277 		add	r7, r7, #520
+ 573 009a BD46     		mov	sp, r7
+ 574 009c 80BD     		pop	{r7, pc}
+ 575              		.cfi_endproc
+ 576              	.LFE121:
+ 578 009e 00BF     		.section	.rodata
+ 579 0032 0000     		.align	2
+ 580              	.LC0:
+ 581 0034 61       		.byte	97
+ 582 0035 62       		.byte	98
+ 583 0036 63       		.byte	99
+ 584 0037 00       		.section	.text.main,"ax",%progbits
+ 585              		.align	2
+ 586              		.global	main
+ 587              		.thumb
+ 588              		.thumb_func
+ 590              	main:
+ 591              	.LFB122:
+ 180:../Main.c     **** int main(void)
+ 181:../Main.c     **** {
+ 592              		.loc 1 181 0
+ 593              		.cfi_startproc
+ 594              		@ args = 0, pretend = 0, frame = 8
+ 595              		@ frame_needed = 1, uses_anonymous_args = 0
+ 596 0000 80B5     		push	{r7, lr}
+ 597              	.LCFI13:
+ 598              		.cfi_def_cfa_offset 8
+ 599              		.cfi_offset 7, -8
+ 600              		.cfi_offset 14, -4
+ 601 0002 82B0     		sub	sp, sp, #8
+ 602              	.LCFI14:
+ 603              		.cfi_def_cfa_offset 16
+ 604 0004 00AF     		add	r7, sp, #0
+ 605              	.LCFI15:
+ 606              		.cfi_def_cfa_register 7
+ 182:../Main.c     **** 	char Data[] = {'a','b','c'};
+ 607              		.loc 1 182 0
+ 608 0006 40F20003 		movw	r3, #:lower16:.LC0
+ 609 000a C0F20003 		movt	r3, #:upper16:.LC0
+ 610 000e 07F10402 		add	r2, r7, #4
+ 611 0012 1988     		ldrh	r1, [r3, #0]	@ unaligned
+ 612 0014 9B78     		ldrb	r3, [r3, #2]
+ 613 0016 1180     		strh	r1, [r2, #0]	@ unaligned
+ 614 0018 9370     		strb	r3, [r2, #2]
+ 183:../Main.c     **** 	uint8_t k = 0;
+ 615              		.loc 1 183 0
+ 616 001a 4FF00003 		mov	r3, #0
+ 617 001e FB71     		strb	r3, [r7, #7]
+ 184:../Main.c     **** //	status_t status;		// Declaration of return variable for DAVE3 APIs (toggle comment if required)
+ 185:../Main.c     **** 	DAVE_Init();			// Initialization of DAVE Apps
+ 618              		.loc 1 185 0
+ 619 0020 FFF7FEFF 		bl	DAVE_Init
+ 186:../Main.c     **** 
+ 187:../Main.c     **** 	ADC002_InitializeQueue((ADC002_HandleType*)&ADC002_Handle0);
+ 620              		.loc 1 187 0
+ 621 0024 40F20000 		movw	r0, #:lower16:ADC002_Handle0
+ 622 0028 C0F20000 		movt	r0, #:upper16:ADC002_Handle0
+ 623 002c FFF7FEFF 		bl	ADC002_InitializeQueue
+ 188:../Main.c     ****     lwIPStack_init();
+ 624              		.loc 1 188 0
+ 625 0030 FFF7FEFF 		bl	lwIPStack_init
+ 189:../Main.c     ****     http_CGI_init();
+ 626              		.loc 1 189 0
+ 627 0034 FFF7FEFF 		bl	http_CGI_init
+ 190:../Main.c     ****     http_SSI_init();
+ 628              		.loc 1 190 0
+ 629 0038 FFF7FEFF 		bl	http_SSI_init
+ 630 003c 00E0     		b	.L23
+ 631              	.L24:
+ 191:../Main.c     ****     // ... infinite loop ...
+ 192:../Main.c     **** 	while(1)
+ 193:../Main.c     **** 	{
+ 194:../Main.c     **** 		if ((receivedData.u8rxIndex > 6) && (k == 0))
+ 195:../Main.c     **** 		{
+ 196:../Main.c     **** 			UART001_WriteDataBytes(&UART001_Handle0, Data, 3);
+ 197:../Main.c     **** 			k = 1;
+ 198:../Main.c     **** 		}
+ 199:../Main.c     **** 
+ 200:../Main.c     **** 	}
+ 632              		.loc 1 200 0
+ 633 003e 00BF     		nop
+ 634              	.L23:
+ 194:../Main.c     **** 		if ((receivedData.u8rxIndex > 6) && (k == 0))
+ 635              		.loc 1 194 0
+ 636 0040 40F20003 		movw	r3, #:lower16:receivedData
+ 637 0044 C0F20003 		movt	r3, #:upper16:receivedData
+ 638 0048 93F80031 		ldrb	r3, [r3, #256]	@ zero_extendqisi2
+ 639 004c 062B     		cmp	r3, #6
+ 640 004e F6D9     		bls	.L24
+ 194:../Main.c     **** 		if ((receivedData.u8rxIndex > 6) && (k == 0))
+ 641              		.loc 1 194 0 is_stmt 0 discriminator 1
+ 642 0050 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 643 0052 002B     		cmp	r3, #0
+ 644 0054 F3D1     		bne	.L24
+ 196:../Main.c     **** 			UART001_WriteDataBytes(&UART001_Handle0, Data, 3);
+ 645              		.loc 1 196 0 is_stmt 1
+ 646 0056 07F10403 		add	r3, r7, #4
+ 647 005a 40F20000 		movw	r0, #:lower16:UART001_Handle0
+ 648 005e C0F20000 		movt	r0, #:upper16:UART001_Handle0
+ 649 0062 1946     		mov	r1, r3
+ 650 0064 4FF00302 		mov	r2, #3
+ 651 0068 FFF7FEFF 		bl	UART001_WriteDataBytes
+ 197:../Main.c     **** 			k = 1;
+ 652              		.loc 1 197 0
+ 653 006c 4FF00103 		mov	r3, #1
+ 654 0070 FB71     		strb	r3, [r7, #7]
+ 655              		.loc 1 200 0
+ 656 0072 E4E7     		b	.L24
+ 657              		.cfi_endproc
+ 658              	.LFE122:
+ 660              		.text
+ 661              	.Letext0:
+ 662              		.file 2 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
+ 663              		.file 3 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Infineon/XMC4500_series/Include/XMC4500.h"
+ 664              		.file 4 "F:\\WORK\\SmartHome_checkout1\\XMC4500_RK_HTTPserver\\Dave\\Generated\\inc\\DAVESupport/.
+ 665              		.file 5 "F:\\WORK\\SmartHome_checkout1\\XMC4500_RK_HTTPserver\\Dave\\Generated\\inc\\DAVESupport/.
+ 666              		.file 6 "F:\\WORK\\SmartHome_checkout1\\XMC4500_RK_HTTPserver\\Dave\\Generated\\src\\ETH004\\01_lw
+ 667              		.file 7 "F:\\WORK\\SmartHome_checkout1\\XMC4500_RK_HTTPserver\\Dave\\Generated\\inc\\DAVESupport/.
+ 668              		.file 8 "F:\\WORK\\SmartHome_checkout1\\XMC4500_RK_HTTPserver\\Dave\\Generated\\inc\\DAVESupport/.
+ 669              		.file 9 "F:\\WORK\\SmartHome_checkout1\\XMC4500_RK_HTTPserver\\Dave\\Generated\\inc\\DAVESupport/.
+ 670              		.file 10 "F:\\WORK\\SmartHome_checkout1\\XMC4500_RK_HTTPserver\\Dave\\Generated\\inc\\DAVESupport/
+ 671              		.file 11 "F:\\WORK\\SmartHome_checkout1\\XMC4500_RK_HTTPserver\\Dave\\Generated\\inc\\DAVESupport/
+ 672              		.file 12 "F:\\WORK\\SmartHome_checkout1\\XMC4500_RK_HTTPserver\\Dave\\Generated\\inc\\DAVESupport/
+ 673              		.file 13 "F:\\WORK\\SmartHome_checkout1\\XMC4500_RK_HTTPserver\\Dave\\Generated\\inc\\DAVESupport/
+ 674              		.file 14 ".././Dave/Generated/src/WEBSERVER001/HTTPServer/httpd.h"
+ 675              		.file 15 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Include/core_cm4.h"
+ 676              		.file 16 "F:\\WORK\\SmartHome_checkout1\\XMC4500_RK_HTTPserver\\Dave\\Generated\\inc\\DAVESupport/
+ 677              		.file 17 "F:\\WORK\\SmartHome_checkout1\\XMC4500_RK_HTTPserver\\Dave\\Generated\\inc\\DAVESupport/
+ 678              		.file 18 "F:\\WORK\\SmartHome_checkout1\\XMC4500_RK_HTTPserver\\Dave\\Generated\\inc\\DAVESupport/
+ 679              		.file 19 "F:\\WORK\\SmartHome_checkout1\\XMC4500_RK_HTTPserver\\Dave\\Generated\\inc\\DAVESupport/
 DEFINED SYMBOLS
                             *ABS*:00000000 Main.c
-C:\Users\Mihai\AppData\Local\Temp\ccvKPzOY.s:20     .rodata:00000000 $d
-C:\Users\Mihai\AppData\Local\Temp\ccvKPzOY.s:21     .rodata:00000000 .LC0
-C:\Users\Mihai\AppData\Local\Temp\ccvKPzOY.s:24     .text.CGI_led_handler:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccvKPzOY.s:29     .text.CGI_led_handler:00000000 CGI_led_handler
-C:\Users\Mihai\AppData\Local\Temp\ccvKPzOY.s:74     .rodata:00000018 LED_CGI
+C:\Users\Mihai\AppData\Local\Temp\ccrSERkL.s:20     .rodata:00000000 $d
+C:\Users\Mihai\AppData\Local\Temp\ccrSERkL.s:21     .rodata:00000000 .LC1
+C:\Users\Mihai\AppData\Local\Temp\ccrSERkL.s:24     .rodata:00000004 .LC2
+C:\Users\Mihai\AppData\Local\Temp\ccrSERkL.s:27     .rodata:00000008 .LC3
+C:\Users\Mihai\AppData\Local\Temp\ccrSERkL.s:30     .rodata:0000000c .LC4
+C:\Users\Mihai\AppData\Local\Temp\ccrSERkL.s:33     .text.CGI_led_handler:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccrSERkL.s:38     .text.CGI_led_handler:00000000 CGI_led_handler
+C:\Users\Mihai\AppData\Local\Temp\ccrSERkL.s:174    .rodata:00000024 LED_CGI
                             *COM*:00000008 CGI_TAB
-C:\Users\Mihai\AppData\Local\Temp\ccvKPzOY.s:79     .text.http_CGI_init:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccvKPzOY.s:84     .text.http_CGI_init:00000000 http_CGI_init
-C:\Users\Mihai\AppData\Local\Temp\ccvKPzOY.s:119    .text.SSI_Temp_Handler:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccvKPzOY.s:124    .text.SSI_Temp_Handler:00000000 SSI_Temp_Handler
-C:\Users\Mihai\AppData\Local\Temp\ccvKPzOY.s:329    .text.SSI_Temp_Handler:000001c0 $d
-C:\Users\Mihai\AppData\Local\Temp\ccvKPzOY.s:343    .data:00000000 TAGCHAR
-C:\Users\Mihai\AppData\Local\Temp\ccvKPzOY.s:340    .data:00000000 $d
-C:\Users\Mihai\AppData\Local\Temp\ccvKPzOY.s:354    .data:00000004 TAGCHAR2
-C:\Users\Mihai\AppData\Local\Temp\ccvKPzOY.s:360    .data:00000008 TAGS
-C:\Users\Mihai\AppData\Local\Temp\ccvKPzOY.s:363    .text.http_SSI_init:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccvKPzOY.s:368    .text.http_SSI_init:00000000 http_SSI_init
-C:\Users\Mihai\AppData\Local\Temp\ccvKPzOY.s:397    .text.main:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccvKPzOY.s:402    .text.main:00000000 main
+C:\Users\Mihai\AppData\Local\Temp\ccrSERkL.s:179    .text.http_CGI_init:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccrSERkL.s:184    .text.http_CGI_init:00000000 http_CGI_init
+C:\Users\Mihai\AppData\Local\Temp\ccrSERkL.s:219    .text.SSI_ADC_Handler:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccrSERkL.s:224    .text.SSI_ADC_Handler:00000000 SSI_ADC_Handler
+C:\Users\Mihai\AppData\Local\Temp\ccrSERkL.s:429    .text.SSI_ADC_Handler:000001c0 $d
+C:\Users\Mihai\AppData\Local\Temp\ccrSERkL.s:443    .data:00000000 TAGCHAR
+C:\Users\Mihai\AppData\Local\Temp\ccrSERkL.s:440    .data:00000000 $d
+C:\Users\Mihai\AppData\Local\Temp\ccrSERkL.s:454    .data:00000004 TAGCHAR2
+C:\Users\Mihai\AppData\Local\Temp\ccrSERkL.s:460    .data:00000008 TAGS
+C:\Users\Mihai\AppData\Local\Temp\ccrSERkL.s:463    .text.http_SSI_init:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccrSERkL.s:468    .text.http_SSI_init:00000000 http_SSI_init
+                            *COM*:00000101 receivedData
+C:\Users\Mihai\AppData\Local\Temp\ccrSERkL.s:498    .text.USIC1_0_IRQHandler:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccrSERkL.s:503    .text.USIC1_0_IRQHandler:00000000 USIC1_0_IRQHandler
+C:\Users\Mihai\AppData\Local\Temp\ccrSERkL.s:580    .rodata:00000034 .LC0
+C:\Users\Mihai\AppData\Local\Temp\ccrSERkL.s:585    .text.main:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccrSERkL.s:590    .text.main:00000000 main
                      .debug_frame:00000010 $d
                            .group:00000000 wm4.1.1791a5ae2e936ca1033c1c44be394cc7
                            .group:00000000 wm4.XMC4500.h.45.215f4b8c79f46c7645c15373868d08c0
@@ -687,6 +987,7 @@ C:\Users\Mihai\AppData\Local\Temp\ccvKPzOY.s:402    .text.main:00000000 main
                            .group:00000000 wm4.fcntl.h.9.9336f33d7f5028f694c75e6e224e0cf7
                            .group:00000000 wm4.SLTHA001.h.97.d7e87c19a31e3244bdd5839e7cc42a61
                            .group:00000000 wm4.WEBSERVER001_Conf.h.54.cd6d29aaa96a848cbc5321bab5d6cd90
+                           .group:00000000 wm4.IO004.h.51.dbf9dd216c57d6a7f14a22b2cb7e5626
                            .group:00000000 wm4.ADCGROUP001.h.48.081c7f952eb4b6ea2df7d05180ee1663
                            .group:00000000 wm4.IO001.h.49.1da965fb490206cf7cde64a90f6912e1
                            .group:00000000 wm4.MOTORLIBS.h.59.b2e97de0df555dedfa51e24447b57ab8
@@ -694,9 +995,12 @@ C:\Users\Mihai\AppData\Local\Temp\ccvKPzOY.s:402    .text.main:00000000 main
                            .group:00000000 wm4.Usic.h.90.22743468abc46f16747d12430b219aaf
                            .group:00000000 wm4.UART001_Conf.h.53.c5c972f6f634bc5116c171852aaab668
                            .group:00000000 wm4.UART001.h.109.3e835815a7a59791d8bd39655f4d4cc9
+                           .group:00000000 wm4.NVIC002_Conf.h.63.45e3c2b9806aa66850587e587798873e
                            .group:00000000 wm4.httpd.h.46.38e2ea2940809751797b9d85d2a393d8
 
 UNDEFINED SYMBOLS
+strcmp
+IO004_Handle0
 http_set_cgi_handlers
 __aeabi_i2d
 __aeabi_dmul
@@ -704,7 +1008,10 @@ __aeabi_d2uiz
 ADCCH001_Handle0
 ADCCH001_GetResult
 http_set_ssi_handler
+UART001_Handle0
+UART001_ReadDataMultiple
 DAVE_Init
 ADC002_Handle0
 ADC002_InitializeQueue
 lwIPStack_init
+UART001_WriteDataBytes

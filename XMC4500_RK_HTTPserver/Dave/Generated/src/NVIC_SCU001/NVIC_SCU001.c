@@ -162,9 +162,9 @@ NVIC_SCU001_HandleType NVIC_SCU001_Handle0;
 void NVIC_SCU001_Init()
 {
  DBG002_FUNCTION_ENTRY(APP_GID,NVIC_SCU001_FUNC_ENTRY);
-  NVIC_SetPriority((IRQn_Type)90, NVIC_EncodePriority(NVIC_GetPriorityGrouping(),63,0));
+  NVIC_SetPriority((IRQn_Type)64, NVIC_EncodePriority(NVIC_GetPriorityGrouping(),63,0));
   /* Enable Interrupt */
-  NVIC_EnableIRQ((IRQn_Type)90); 
+  NVIC_EnableIRQ((IRQn_Type)64); 
  
   DBG002_FUNCTION_EXIT(APP_GID,NVIC_SCU001_FUNC_EXIT);
 }

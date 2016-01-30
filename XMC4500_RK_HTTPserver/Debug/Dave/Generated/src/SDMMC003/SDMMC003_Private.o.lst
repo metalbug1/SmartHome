@@ -179,7 +179,7 @@
  183              		.thumb
  184              		.thumb_func
  186              	SDMMC003_lReset:
- 187              	.LFB112:
+ 187              	.LFB117:
  188              		.file 1 "../Dave/Generated/src/SDMMC003/SDMMC003_Private.c"
    1:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** /*******************************************************************************
    2:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** **  DAVE App Name : SDMMC003       App Version: 1.0.14               
@@ -498,14 +498,14 @@
  266 0086 BD46     		mov	sp, r7
  267 0088 80BD     		pop	{r7, pc}
  268              		.cfi_endproc
- 269              	.LFE112:
+ 269              	.LFE117:
  271 008a 00BF     		.section	.text.SDMMC003_lCardCleanUp,"ax",%progbits
  272              		.align	2
  273              		.global	SDMMC003_lCardCleanUp
  274              		.thumb
  275              		.thumb_func
  277              	SDMMC003_lCardCleanUp:
- 278              	.LFB113:
+ 278              	.LFB118:
  238:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** /* <<<DD_SDMMC_nonAPI_2>>> */
  239:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** /*
  240:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c ****  * This function clears the card related structures and stops the SD clock.
@@ -591,14 +591,14 @@
  342              		.loc 1 256 0
  343 0096 80BD     		pop	{r7, pc}
  344              		.cfi_endproc
- 345              	.LFE113:
+ 345              	.LFE118:
  347              		.section	.text.SDMMC003_lCheckDatCmdline,"ax",%progbits
  348              		.align	2
  349              		.global	SDMMC003_lCheckDatCmdline
  350              		.thumb
  351              		.thumb_func
  353              	SDMMC003_lCheckDatCmdline:
- 354              	.LFB114:
+ 354              	.LFB119:
  257:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** 
  258:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** /* <<<DD_SDMMC_nonAPI_3>>> */
  259:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** /*
@@ -776,14 +776,14 @@
  468 00ca 80BC     		pop	{r7}
  469 00cc 7047     		bx	lr
  470              		.cfi_endproc
- 471              	.LFE114:
+ 471              	.LFE119:
  473 00ce 00BF     		.section	.text.SDMMC003_lCheckArgumentError,"ax",%progbits
  474              		.align	2
  475              		.global	SDMMC003_lCheckArgumentError
  476              		.thumb
  477              		.thumb_func
  479              	SDMMC003_lCheckArgumentError:
- 480              	.LFB115:
+ 480              	.LFB120:
  315:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** 
  316:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** /* <<<DD_SDMMC_nonAPI_4>>> */
  317:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** /*
@@ -898,14 +898,14 @@
  544 005c 80BC     		pop	{r7}
  545 005e 7047     		bx	lr
  546              		.cfi_endproc
- 547              	.LFE115:
+ 547              	.LFE120:
  549              		.section	.text.SDMMC003_lCheckEraseError,"ax",%progbits
  550              		.align	2
  551              		.global	SDMMC003_lCheckEraseError
  552              		.thumb
  553              		.thumb_func
  555              	SDMMC003_lCheckEraseError:
- 556              	.LFB116:
+ 556              	.LFB121:
  363:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** 
  364:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** /* <<<DD_SDMMC_nonAPI_5>>> */
  365:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** /*
@@ -999,14 +999,14 @@
  610 004c 80BC     		pop	{r7}
  611 004e 7047     		bx	lr
  612              		.cfi_endproc
- 613              	.LFE116:
+ 613              	.LFE121:
  615              		.section	.text.SDMMC003_lCheckCardError,"ax",%progbits
  616              		.align	2
  617              		.global	SDMMC003_lCheckCardError
  618              		.thumb
  619              		.thumb_func
  621              	SDMMC003_lCheckCardError:
- 622              	.LFB117:
+ 622              	.LFB122:
  400:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** 
  401:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** /* <<<DD_SDMMC_nonAPI_6>>> */
  402:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** /*
@@ -1099,14 +1099,14 @@
  676 004c 80BC     		pop	{r7}
  677 004e 7047     		bx	lr
  678              		.cfi_endproc
- 679              	.LFE117:
+ 679              	.LFE122:
  681              		.section	.text.SDMMC003_lCheckErrorInResponse,"ax",%progbits
  682              		.align	2
  683              		.global	SDMMC003_lCheckErrorInResponse
  684              		.thumb
  685              		.thumb_func
  687              	SDMMC003_lCheckErrorInResponse:
- 688              	.LFB118:
+ 688              	.LFB123:
  436:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** 
  437:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** /*<<<DD_SDMMC_nonAPI_7>>> */
  438:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** /*
@@ -1244,14 +1244,14 @@
  769 0082 BD46     		mov	sp, r7
  770 0084 80BD     		pop	{r7, pc}
  771              		.cfi_endproc
- 772              	.LFE118:
+ 772              	.LFE123:
  774 0086 00BF     		.section	.text.SDMMC003_lGetCardLockState,"ax",%progbits
  775              		.align	2
  776              		.global	SDMMC003_lGetCardLockState
  777              		.thumb
  778              		.thumb_func
  780              	SDMMC003_lGetCardLockState:
- 781              	.LFB119:
+ 781              	.LFB124:
  490:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** 
  491:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** /*
  492:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c ****  * This function checks for lock status of SDMMC card.
@@ -1324,14 +1324,14 @@
  835 005c 80BC     		pop	{r7}
  836 005e 7047     		bx	lr
  837              		.cfi_endproc
- 838              	.LFE119:
+ 838              	.LFE124:
  840              		.section	.text.SDMMC003_lTransferDelay,"ax",%progbits
  841              		.align	2
  842              		.global	SDMMC003_lTransferDelay
  843              		.thumb
  844              		.thumb_func
  846              	SDMMC003_lTransferDelay:
- 847              	.LFB120:
+ 847              	.LFB125:
  506:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** 
  507:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** /*
  508:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c ****  * This function provide the delay in transfer.
@@ -1460,14 +1460,14 @@
  938 0098 BD46     		mov	sp, r7
  939 009a 80BD     		pop	{r7, pc}
  940              		.cfi_endproc
- 941              	.LFE120:
+ 941              	.LFE125:
  943              		.section	.text.SDMMC003_lReadResponse,"ax",%progbits
  944              		.align	2
  945              		.global	SDMMC003_lReadResponse
  946              		.thumb
  947              		.thumb_func
  949              	SDMMC003_lReadResponse:
- 950              	.LFB121:
+ 950              	.LFB126:
  541:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** 
  542:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** /*<<<DD_SDMMC_nonAPI_8>>> */
  543:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** /*
@@ -1806,14 +1806,14 @@
  1153 0160 BD46     		mov	sp, r7
  1154 0162 80BD     		pop	{r7, pc}
  1155              		.cfi_endproc
- 1156              	.LFE121:
+ 1156              	.LFE126:
  1158              		.section	.text.SDMMC003_lSendCommand,"ax",%progbits
  1159              		.align	2
  1160              		.global	SDMMC003_lSendCommand
  1161              		.thumb
  1162              		.thumb_func
  1164              	SDMMC003_lSendCommand:
- 1165              	.LFB122:
+ 1165              	.LFB127:
  672:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** 
  673:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** /*<<<DD_SDMMC_nonAPI_9>>> */
  674:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** /*
@@ -2186,14 +2186,14 @@
  1339 014a BD46     		mov	sp, r7
  1340 014c 80BD     		pop	{r7, pc}
  1341              		.cfi_endproc
- 1342              	.LFE122:
+ 1342              	.LFE127:
  1344 014e 00BF     		.section	.text.SDMMC003_lSetVoltageWindow,"ax",%progbits
  1345              		.align	2
  1346              		.global	SDMMC003_lSetVoltageWindow
  1347              		.thumb
  1348              		.thumb_func
  1350              	SDMMC003_lSetVoltageWindow:
- 1351              	.LFB123:
+ 1351              	.LFB128:
  866:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** 
  867:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** /*<<<DD_SDMMC_nonAPI_10>>> */
  868:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** /*
@@ -2386,14 +2386,14 @@
  1480 00f2 BD46     		mov	sp, r7
  1481 00f4 80BD     		pop	{r7, pc}
  1482              		.cfi_endproc
- 1483              	.LFE123:
+ 1483              	.LFE128:
  1485 00f6 00BF     		.section	.text.SDMMC003_lQueryOperatingCond,"ax",%progbits
  1486              		.align	2
  1487              		.global	SDMMC003_lQueryOperatingCond
  1488              		.thumb
  1489              		.thumb_func
  1491              	SDMMC003_lQueryOperatingCond:
- 1492              	.LFB124:
+ 1492              	.LFB129:
  923:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** 
  924:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** /*<<<DD_SDMMC_nonAPI_11>>> */
  925:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** /*
@@ -2554,14 +2554,14 @@
  1587 00a4 BD46     		mov	sp, r7
  1588 00a6 80BD     		pop	{r7, pc}
  1589              		.cfi_endproc
- 1590              	.LFE124:
+ 1590              	.LFE129:
  1592              		.section	.text.SDMMC003_lQueryVoltage,"ax",%progbits
  1593              		.align	2
  1594              		.global	SDMMC003_lQueryVoltage
  1595              		.thumb
  1596              		.thumb_func
  1598              	SDMMC003_lQueryVoltage:
- 1599              	.LFB125:
+ 1599              	.LFB130:
  984:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** 
  985:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** /*<<<DD_SDMMC_nonAPI_12>>> */
  986:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** /*
@@ -2731,14 +2731,14 @@
  1700 00b2 BD46     		mov	sp, r7
  1701 00b4 80BD     		pop	{r7, pc}
  1702              		.cfi_endproc
- 1703              	.LFE125:
+ 1703              	.LFE130:
  1705 00b6 00BF     		.section	.text.SDMMC003_lAfterCardInitialize,"ax",%progbits
  1706              		.align	2
  1707              		.global	SDMMC003_lAfterCardInitialize
  1708              		.thumb
  1709              		.thumb_func
  1711              	SDMMC003_lAfterCardInitialize:
- 1712              	.LFB126:
+ 1712              	.LFB131:
 1046:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** 
 1047:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** /*<<<DD_SDMMC_nonAPI_13>>> */
 1048:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** /*
@@ -2858,14 +2858,14 @@
  1787 0082 BD46     		mov	sp, r7
  1788 0084 80BD     		pop	{r7, pc}
  1789              		.cfi_endproc
- 1790              	.LFE126:
+ 1790              	.LFE131:
  1792 0086 00BF     		.section	.text.SDMMC003_lInitializeCard,"ax",%progbits
  1793              		.align	2
  1794              		.global	SDMMC003_lInitializeCard
  1795              		.thumb
  1796              		.thumb_func
  1798              	SDMMC003_lInitializeCard:
- 1799              	.LFB127:
+ 1799              	.LFB132:
 1087:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** 
 1088:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** /* <<<DD_SDMMC_nonAPI_14>>> */
 1089:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** /*
@@ -3136,14 +3136,14 @@
  1980              	.L121:
  1981 0148 04000000 		.word	SDMMC003_CardInfo+4
  1982              		.cfi_endproc
- 1983              	.LFE127:
+ 1983              	.LFE132:
  1985              		.section	.text.SDMMC003_lWriteCardType,"ax",%progbits
  1986              		.align	2
  1987              		.global	SDMMC003_lWriteCardType
  1988              		.thumb
  1989              		.thumb_func
  1991              	SDMMC003_lWriteCardType:
- 1992              	.LFB128:
+ 1992              	.LFB133:
 1168:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** 
 1169:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** /* <<<DD_SDMMC_nonAPI_15>>> */
 1170:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** /*
@@ -3244,14 +3244,14 @@
  2056 0080 80BC     		pop	{r7}
  2057 0082 7047     		bx	lr
  2058              		.cfi_endproc
- 2059              	.LFE128:
+ 2059              	.LFE133:
  2061              		.section	.text.SDMMC003_lSetWriteProtect,"ax",%progbits
  2062              		.align	2
  2063              		.global	SDMMC003_lSetWriteProtect
  2064              		.thumb
  2065              		.thumb_func
  2067              	SDMMC003_lSetWriteProtect:
- 2068              	.LFB129:
+ 2068              	.LFB134:
 1202:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** 
 1203:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** /* <<<DD_SDMMC_nonAPI_16>>> */
 1204:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** /*
@@ -3379,14 +3379,14 @@
  2141 007c BD46     		mov	sp, r7
  2142 007e 80BD     		pop	{r7, pc}
  2143              		.cfi_endproc
- 2144              	.LFE129:
+ 2144              	.LFE134:
  2146              		.section	.text.SDMMC003_lReadRca,"ax",%progbits
  2147              		.align	2
  2148              		.global	SDMMC003_lReadRca
  2149              		.thumb
  2150              		.thumb_func
  2152              	SDMMC003_lReadRca:
- 2153              	.LFB130:
+ 2153              	.LFB135:
 1252:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** 
 1253:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** /* <<<DD_SDMMC_nonAPI_17>>> */
 1254:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** /*
@@ -3463,14 +3463,14 @@
  2192              	.L134:
  2193 003c 2C000000 		.word	SDMMC003_CardInfo+44
  2194              		.cfi_endproc
- 2195              	.LFE130:
+ 2195              	.LFE135:
  2197              		.section	.text.SDMMC003_lReadCardRegisters,"ax",%progbits
  2198              		.align	2
  2199              		.global	SDMMC003_lReadCardRegisters
  2200              		.thumb
  2201              		.thumb_func
  2203              	SDMMC003_lReadCardRegisters:
- 2204              	.LFB131:
+ 2204              	.LFB136:
 1287:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** 
 1288:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** /* <<<DD_SDMMC_nonAPI_18>>> */
 1289:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** /*
@@ -3766,14 +3766,14 @@
  2375              	.L147:
  2376 015c 14000000 		.word	SDMMC003_CardInfo+20
  2377              		.cfi_endproc
- 2378              	.LFE131:
+ 2378              	.LFE136:
  2380              		.section	.text.SDMMC003_lConfigureForSingleTransfer,"ax",%progbits
  2381              		.align	2
  2382              		.global	SDMMC003_lConfigureForSingleTransfer
  2383              		.thumb
  2384              		.thumb_func
  2386              	SDMMC003_lConfigureForSingleTransfer:
- 2387              	.LFB132:
+ 2387              	.LFB137:
 1403:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** 
 1404:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** /* <<<DD_SDMMC_nonAPI_20>>> */
 1405:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** /*
@@ -3945,14 +3945,14 @@
  2476 00bc BD46     		mov	sp, r7
  2477 00be 80BD     		pop	{r7, pc}
  2478              		.cfi_endproc
- 2479              	.LFE132:
+ 2479              	.LFE137:
  2481              		.section	.text.SDMMC003_lConfigureRegForMultiTransfer,"ax",%progbits
  2482              		.align	2
  2483              		.global	SDMMC003_lConfigureRegForMultiTransfer
  2484              		.thumb
  2485              		.thumb_func
  2487              	SDMMC003_lConfigureRegForMultiTransfer:
- 2488              	.LFB133:
+ 2488              	.LFB138:
 1482:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** 
 1483:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** /* <<<DD_SDMMC_nonAPI_21>>> */
 1484:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** /*
@@ -4176,14 +4176,14 @@
  2616 011e BD46     		mov	sp, r7
  2617 0120 80BD     		pop	{r7, pc}
  2618              		.cfi_endproc
- 2619              	.LFE133:
+ 2619              	.LFE138:
  2621 0122 00BF     		.section	.text.SDMMC003_lMultiBlockTransfer,"ax",%progbits
  2622              		.align	2
  2623              		.global	SDMMC003_lMultiBlockTransfer
  2624              		.thumb
  2625              		.thumb_func
  2627              	SDMMC003_lMultiBlockTransfer:
- 2628              	.LFB134:
+ 2628              	.LFB139:
 1574:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** 
 1575:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** /* <<<DD_SDMMC_nonAPI_22>>> */
 1576:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** /*
@@ -4361,14 +4361,14 @@
  2728 0098 BD46     		mov	sp, r7
  2729 009a 80BD     		pop	{r7, pc}
  2730              		.cfi_endproc
- 2731              	.LFE134:
+ 2731              	.LFE139:
  2733              		.section	.text.SDMMC003_lSingleBlockTransfer,"ax",%progbits
  2734              		.align	2
  2735              		.global	SDMMC003_lSingleBlockTransfer
  2736              		.thumb
  2737              		.thumb_func
  2739              	SDMMC003_lSingleBlockTransfer:
- 2740              	.LFB135:
+ 2740              	.LFB140:
 1646:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** 
 1647:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** /* <<<DD_SDMMC_nonAPI_23>>> */
 1648:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** /*
@@ -4586,14 +4586,14 @@
  2876 00ee BD46     		mov	sp, r7
  2877 00f0 80BD     		pop	{r7, pc}
  2878              		.cfi_endproc
- 2879              	.LFE135:
+ 2879              	.LFE140:
  2881 00f2 00BF     		.section	.text.SDMMC003_lCheckLockStatus,"ax",%progbits
  2882              		.align	2
  2883              		.global	SDMMC003_lCheckLockStatus
  2884              		.thumb
  2885              		.thumb_func
  2887              	SDMMC003_lCheckLockStatus:
- 2888              	.LFB136:
+ 2888              	.LFB141:
 1723:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** 
 1724:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** /* <<<DD_SDMMC_nonAPI_24>>> */
 1725:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** /*
@@ -4697,14 +4697,14 @@
  2953 0058 BD46     		mov	sp, r7
  2954 005a 80BD     		pop	{r7, pc}
  2955              		.cfi_endproc
- 2956              	.LFE136:
+ 2956              	.LFE141:
  2958              		.section	.text.SDMMC003_lSwitchBusWidth,"ax",%progbits
  2959              		.align	2
  2960              		.global	SDMMC003_lSwitchBusWidth
  2961              		.thumb
  2962              		.thumb_func
  2964              	SDMMC003_lSwitchBusWidth:
- 2965              	.LFB137:
+ 2965              	.LFB142:
 1759:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** 
 1760:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** /* <<<DD_SDMMC_nonAPI_25>>> */
 1761:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** /*
@@ -4922,14 +4922,14 @@
  3100 010c BD46     		mov	sp, r7
  3101 010e 80BD     		pop	{r7, pc}
  3102              		.cfi_endproc
- 3103              	.LFE137:
+ 3103              	.LFE142:
  3105              		.section	.text.SDMMC003_lSwitchSpeed,"ax",%progbits
  3106              		.align	2
  3107              		.global	SDMMC003_lSwitchSpeed
  3108              		.thumb
  3109              		.thumb_func
  3111              	SDMMC003_lSwitchSpeed:
- 3112              	.LFB138:
+ 3112              	.LFB143:
 1833:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** 
 1834:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** /* <<<DD_SDMMC_nonAPI_26>>> */
 1835:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** /*
@@ -5118,14 +5118,14 @@
  3218 00c4 BD46     		mov	sp, r7
  3219 00c6 80BD     		pop	{r7, pc}
  3220              		.cfi_endproc
- 3221              	.LFE138:
+ 3221              	.LFE143:
  3223              		.section	.text.SDMMC003_lCommandDelay,"ax",%progbits
  3224              		.align	2
  3225              		.global	SDMMC003_lCommandDelay
  3226              		.thumb
  3227              		.thumb_func
  3229              	SDMMC003_lCommandDelay:
- 3230              	.LFB139:
+ 3230              	.LFB144:
 1909:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** 
 1910:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** /*
 1911:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c ****  * This function provides delay in command execution.
@@ -5270,14 +5270,14 @@
  3333 00b0 BD46     		mov	sp, r7
  3334 00b2 80BD     		pop	{r7, pc}
  3335              		.cfi_endproc
- 3336              	.LFE139:
+ 3336              	.LFE144:
  3338              		.section	.text.SDMMC003_lErrorInterruptRecovery,"ax",%progbits
  3339              		.align	2
  3340              		.global	SDMMC003_lErrorInterruptRecovery
  3341              		.thumb
  3342              		.thumb_func
  3344              	SDMMC003_lErrorInterruptRecovery:
- 3345              	.LFB140:
+ 3345              	.LFB145:
 1946:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** 
 1947:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** 
 1948:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** /* <<<DD_SDMMC_nonAPI_27>>> */
@@ -5537,14 +5537,14 @@
  3518 0166 BD46     		mov	sp, r7
  3519 0168 80BD     		pop	{r7, pc}
  3520              		.cfi_endproc
- 3521              	.LFE140:
+ 3521              	.LFE145:
  3523 016a 00BF     		.section	.text.SDMMC003_lNormalInterruptHandler,"ax",%progbits
  3524              		.align	2
  3525              		.global	SDMMC003_lNormalInterruptHandler
  3526              		.thumb
  3527              		.thumb_func
  3529              	SDMMC003_lNormalInterruptHandler:
- 3530              	.LFB141:
+ 3530              	.LFB146:
 2027:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** 
 2028:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** /* <<<DD_SDMMC_nonAPI_28>>> */
 2029:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** /*
@@ -5786,14 +5786,14 @@
  3661 0122 80BC     		pop	{r7}
  3662 0124 7047     		bx	lr
  3663              		.cfi_endproc
- 3664              	.LFE141:
+ 3664              	.LFE146:
  3666 0126 00BF     		.section	.text.SDMMC003_lErrorInterruptHandler,"ax",%progbits
  3667              		.align	2
  3668              		.global	SDMMC003_lErrorInterruptHandler
  3669              		.thumb
  3670              		.thumb_func
  3672              	SDMMC003_lErrorInterruptHandler:
- 3673              	.LFB142:
+ 3673              	.LFB147:
 2135:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** /* <<<DD_SDMMC_nonAPI_29>>> */
 2136:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** /*
 2137:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c ****  * This function handles the Interrupt in Error Interrupt Status Register.
@@ -6251,14 +6251,14 @@
  3963 02c2 80BC     		pop	{r7}
  3964 02c4 7047     		bx	lr
  3965              		.cfi_endproc
- 3966              	.LFE142:
+ 3966              	.LFE147:
  3968 02c6 00BF     		.section	.text.SDMMC003_lSwitchToTransferState,"ax",%progbits
  3969              		.align	2
  3970              		.global	SDMMC003_lSwitchToTransferState
  3971              		.thumb
  3972              		.thumb_func
  3974              	SDMMC003_lSwitchToTransferState:
- 3975              	.LFB143:
+ 3975              	.LFB148:
 2300:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** 
 2301:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** /* <<<DD_SDMMC_nonAPI_30>>> */
 2302:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** /*
@@ -6407,14 +6407,14 @@
  4067 00a8 BD46     		mov	sp, r7
  4068 00aa 80BD     		pop	{r7, pc}
  4069              		.cfi_endproc
- 4070              	.LFE143:
+ 4070              	.LFE148:
  4072              		.section	.text.SDMMC003_lDataTransfer,"ax",%progbits
  4073              		.align	2
  4074              		.global	SDMMC003_lDataTransfer
  4075              		.thumb
  4076              		.thumb_func
  4078              	SDMMC003_lDataTransfer:
- 4079              	.LFB144:
+ 4079              	.LFB149:
 2351:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** 
 2352:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** /* <<<DD_SDMMC_nonAPI_31>>> */
 2353:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** /*
@@ -6635,14 +6635,14 @@
  4225 0106 BD46     		mov	sp, r7
  4226 0108 80BD     		pop	{r7, pc}
  4227              		.cfi_endproc
- 4228              	.LFE144:
+ 4228              	.LFE149:
  4230 010a 00BF     		.section	.text.SDMMC003_CheckPCMDFlag,"ax",%progbits
  4231              		.align	2
  4232              		.global	SDMMC003_CheckPCMDFlag
  4233              		.thumb
  4234              		.thumb_func
  4236              	SDMMC003_CheckPCMDFlag:
- 4237              	.LFB145:
+ 4237              	.LFB150:
 2421:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** 
 2422:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** /*
 2423:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c ****  * This function checks the PCMD flag.
@@ -6686,14 +6686,14 @@
  4262 001c 80BC     		pop	{r7}
  4263 001e 7047     		bx	lr
  4264              		.cfi_endproc
- 4265              	.LFE145:
+ 4265              	.LFE150:
  4267              		.section	.text.SDMMC003_lAcmdErrorRecovery,"ax",%progbits
  4268              		.align	2
  4269              		.global	SDMMC003_lAcmdErrorRecovery
  4270              		.thumb
  4271              		.thumb_func
  4273              	SDMMC003_lAcmdErrorRecovery:
- 4274              	.LFB146:
+ 4274              	.LFB151:
 2437:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** 
 2438:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** /* <<<DD_SDMMC_nonAPI_32>>> */
 2439:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** /*
@@ -6936,14 +6936,14 @@
  4417 00fe BD46     		mov	sp, r7
  4418 0100 80BD     		pop	{r7, pc}
  4419              		.cfi_endproc
- 4420              	.LFE146:
+ 4420              	.LFE151:
  4422 0102 00BF     		.section	.text.Timer_CallBack,"ax",%progbits
  4423              		.align	2
  4424              		.global	Timer_CallBack
  4425              		.thumb
  4426              		.thumb_func
  4428              	Timer_CallBack:
- 4429              	.LFB147:
+ 4429              	.LFB152:
 2527:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** 
 2528:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** void Timer_CallBack(void* Temp)
 2529:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** {
@@ -6990,14 +6990,14 @@
  4464 002e 80BC     		pop	{r7}
  4465 0030 7047     		bx	lr
  4466              		.cfi_endproc
- 4467              	.LFE147:
+ 4467              	.LFE152:
  4469 0032 00BF     		.section	.text.SDMMC003_lDelay,"ax",%progbits
  4470              		.align	2
  4471              		.global	SDMMC003_lDelay
  4472              		.thumb
  4473              		.thumb_func
  4475              	SDMMC003_lDelay:
- 4476              	.LFB148:
+ 4476              	.LFB153:
 2536:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** 
 2537:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** 
 2538:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** /* <<< DD_SDMMC_nonAPI_33 >>> */
@@ -7102,14 +7102,14 @@
  4546 0078 BD46     		mov	sp, r7
  4547 007a 80BD     		pop	{r7, pc}
  4548              		.cfi_endproc
- 4549              	.LFE148:
+ 4549              	.LFE153:
  4551              		.section	.text.SDMMC0_0_IRQHandler,"ax",%progbits
  4552              		.align	2
  4553              		.global	SDMMC0_0_IRQHandler
  4554              		.thumb
  4555              		.thumb_func
  4557              	SDMMC0_0_IRQHandler:
- 4558              	.LFB149:
+ 4558              	.LFB154:
 2568:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** 
 2569:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** /* <<< DD_SDMMC_nonAPI_34 >>>
 2570:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c ****  *  SDMMC Interrupt Handler */
@@ -7209,14 +7209,14 @@
  4628 008a BD46     		mov	sp, r7
  4629 008c 80BD     		pop	{r7, pc}
  4630              		.cfi_endproc
- 4631              	.LFE149:
+ 4631              	.LFE154:
  4633 008e 00BF     		.section	.text.SDMMC003_lCardIdentificationProcess,"ax",%progbits
  4634              		.align	2
  4635              		.global	SDMMC003_lCardIdentificationProcess
  4636              		.thumb
  4637              		.thumb_func
  4639              	SDMMC003_lCardIdentificationProcess:
- 4640              	.LFB150:
+ 4640              	.LFB155:
 2595:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** 
 2596:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** 
 2597:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** /* <<< DD_SDMMC_nonAPI_36 >>> */
@@ -7403,14 +7403,14 @@
  4761 00d4 BD46     		mov	sp, r7
  4762 00d6 80BD     		pop	{r7, pc}
  4763              		.cfi_endproc
- 4764              	.LFE150:
+ 4764              	.LFE155:
  4766              		.section	.text.SDMMC003_lStartTimer,"ax",%progbits
  4767              		.align	2
  4768              		.global	SDMMC003_lStartTimer
  4769              		.thumb
  4770              		.thumb_func
  4772              	SDMMC003_lStartTimer:
- 4773              	.LFB151:
+ 4773              	.LFB156:
 2656:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** 
 2657:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** /* <<< DD_SDMMC_nonAPI_37 >>> */
 2658:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** /**
@@ -7497,14 +7497,14 @@
  4831 0062 BD46     		mov	sp, r7
  4832 0064 80BD     		pop	{r7, pc}
  4833              		.cfi_endproc
- 4834              	.LFE151:
+ 4834              	.LFE156:
  4836 0066 00BF     		.section	.text.SDMMC003_lStopTimer,"ax",%progbits
  4837              		.align	2
  4838              		.global	SDMMC003_lStopTimer
  4839              		.thumb
  4840              		.thumb_func
  4842              	SDMMC003_lStopTimer:
- 4843              	.LFB152:
+ 4843              	.LFB157:
 2682:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** 
 2683:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** /* <<< DD_SDMMC_nonAPI_38 >>> */
 2684:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** /**
@@ -7559,14 +7559,14 @@
  4878 002c BD46     		mov	sp, r7
  4879 002e 80BD     		pop	{r7, pc}
  4880              		.cfi_endproc
- 4881              	.LFE152:
+ 4881              	.LFE157:
  4883              		.section	.text.SDMMC003_lCheckSectorBound,"ax",%progbits
  4884              		.align	2
  4885              		.global	SDMMC003_lCheckSectorBound
  4886              		.thumb
  4887              		.thumb_func
  4889              	SDMMC003_lCheckSectorBound:
- 4890              	.LFB153:
+ 4890              	.LFB158:
 2699:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** 
 2700:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** 
 2701:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** /* <<< DD_SDMMC_nonAPI_39 >>> */
@@ -7650,14 +7650,14 @@
  4941 0040 BD46     		mov	sp, r7
  4942 0042 80BD     		pop	{r7, pc}
  4943              		.cfi_endproc
- 4944              	.LFE153:
+ 4944              	.LFE158:
  4946              		.section	.text.SDMMC003_lLocalErase,"ax",%progbits
  4947              		.align	2
  4948              		.global	SDMMC003_lLocalErase
  4949              		.thumb
  4950              		.thumb_func
  4952              	SDMMC003_lLocalErase:
- 4953              	.LFB154:
+ 4953              	.LFB159:
 2728:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** 
 2729:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c **** /*
 2730:../Dave/Generated/src/SDMMC003/SDMMC003_Private.c ****  * The function performs the actual erase operation.
@@ -7930,7 +7930,7 @@
  5082 00f8 BD46     		mov	sp, r7
  5083 00fa 80BD     		pop	{r7, pc}
  5084              		.cfi_endproc
- 5085              	.LFE154:
+ 5085              	.LFE159:
  5087              		.text
  5088              	.Letext0:
  5089              		.file 2 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
@@ -7949,100 +7949,100 @@ DEFINED SYMBOLS
                             *COM*:00000004 SDMMC003_ReturnStatus
                             *COM*:00000002 NormalIntStatus
                             *COM*:00000002 ErrorIntStatus
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:29     .rodata:00000000 SDMMC003_Command
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:26     .rodata:00000000 $d
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:114    .rodata:00000050 SDMMC003_SDHashTable
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:181    .text.SDMMC003_lReset:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:186    .text.SDMMC003_lReset:00000000 SDMMC003_lReset
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:4772   .text.SDMMC003_lStartTimer:00000000 SDMMC003_lStartTimer
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:4842   .text.SDMMC003_lStopTimer:00000000 SDMMC003_lStopTimer
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:272    .text.SDMMC003_lCardCleanUp:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:277    .text.SDMMC003_lCardCleanUp:00000000 SDMMC003_lCardCleanUp
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:348    .text.SDMMC003_lCheckDatCmdline:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:353    .text.SDMMC003_lCheckDatCmdline:00000000 SDMMC003_lCheckDatCmdline
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:474    .text.SDMMC003_lCheckArgumentError:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:479    .text.SDMMC003_lCheckArgumentError:00000000 SDMMC003_lCheckArgumentError
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:550    .text.SDMMC003_lCheckEraseError:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:555    .text.SDMMC003_lCheckEraseError:00000000 SDMMC003_lCheckEraseError
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:616    .text.SDMMC003_lCheckCardError:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:621    .text.SDMMC003_lCheckCardError:00000000 SDMMC003_lCheckCardError
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:682    .text.SDMMC003_lCheckErrorInResponse:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:687    .text.SDMMC003_lCheckErrorInResponse:00000000 SDMMC003_lCheckErrorInResponse
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:775    .text.SDMMC003_lGetCardLockState:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:780    .text.SDMMC003_lGetCardLockState:00000000 SDMMC003_lGetCardLockState
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:841    .text.SDMMC003_lTransferDelay:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:846    .text.SDMMC003_lTransferDelay:00000000 SDMMC003_lTransferDelay
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:944    .text.SDMMC003_lReadResponse:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:949    .text.SDMMC003_lReadResponse:00000000 SDMMC003_lReadResponse
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:1025   .text.SDMMC003_lReadResponse:00000074 $d
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:1034   .text.SDMMC003_lReadResponse:00000090 $t
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:1159   .text.SDMMC003_lSendCommand:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:1164   .text.SDMMC003_lSendCommand:00000000 SDMMC003_lSendCommand
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:3344   .text.SDMMC003_lErrorInterruptRecovery:00000000 SDMMC003_lErrorInterruptRecovery
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:1345   .text.SDMMC003_lSetVoltageWindow:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:1350   .text.SDMMC003_lSetVoltageWindow:00000000 SDMMC003_lSetVoltageWindow
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:4475   .text.SDMMC003_lDelay:00000000 SDMMC003_lDelay
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:1486   .text.SDMMC003_lQueryOperatingCond:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:1491   .text.SDMMC003_lQueryOperatingCond:00000000 SDMMC003_lQueryOperatingCond
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:1593   .text.SDMMC003_lQueryVoltage:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:1598   .text.SDMMC003_lQueryVoltage:00000000 SDMMC003_lQueryVoltage
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:1991   .text.SDMMC003_lWriteCardType:00000000 SDMMC003_lWriteCardType
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:1706   .text.SDMMC003_lAfterCardInitialize:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:1711   .text.SDMMC003_lAfterCardInitialize:00000000 SDMMC003_lAfterCardInitialize
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:2203   .text.SDMMC003_lReadCardRegisters:00000000 SDMMC003_lReadCardRegisters
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:2964   .text.SDMMC003_lSwitchBusWidth:00000000 SDMMC003_lSwitchBusWidth
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:3111   .text.SDMMC003_lSwitchSpeed:00000000 SDMMC003_lSwitchSpeed
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:1793   .text.SDMMC003_lInitializeCard:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:1798   .text.SDMMC003_lInitializeCard:00000000 SDMMC003_lInitializeCard
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:2152   .text.SDMMC003_lReadRca:00000000 SDMMC003_lReadRca
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:1981   .text.SDMMC003_lInitializeCard:00000148 $d
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:1986   .text.SDMMC003_lWriteCardType:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:2062   .text.SDMMC003_lSetWriteProtect:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:2067   .text.SDMMC003_lSetWriteProtect:00000000 SDMMC003_lSetWriteProtect
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:2147   .text.SDMMC003_lReadRca:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:2193   .text.SDMMC003_lReadRca:0000003c $d
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:2198   .text.SDMMC003_lReadCardRegisters:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:3974   .text.SDMMC003_lSwitchToTransferState:00000000 SDMMC003_lSwitchToTransferState
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:2739   .text.SDMMC003_lSingleBlockTransfer:00000000 SDMMC003_lSingleBlockTransfer
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:2376   .text.SDMMC003_lReadCardRegisters:0000015c $d
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:2381   .text.SDMMC003_lConfigureForSingleTransfer:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:2386   .text.SDMMC003_lConfigureForSingleTransfer:00000000 SDMMC003_lConfigureForSingleTransfer
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:2482   .text.SDMMC003_lConfigureRegForMultiTransfer:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:2487   .text.SDMMC003_lConfigureRegForMultiTransfer:00000000 SDMMC003_lConfigureRegForMultiTransfer
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:2622   .text.SDMMC003_lMultiBlockTransfer:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:2627   .text.SDMMC003_lMultiBlockTransfer:00000000 SDMMC003_lMultiBlockTransfer
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:4078   .text.SDMMC003_lDataTransfer:00000000 SDMMC003_lDataTransfer
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:4273   .text.SDMMC003_lAcmdErrorRecovery:00000000 SDMMC003_lAcmdErrorRecovery
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:2734   .text.SDMMC003_lSingleBlockTransfer:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:2882   .text.SDMMC003_lCheckLockStatus:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:2887   .text.SDMMC003_lCheckLockStatus:00000000 SDMMC003_lCheckLockStatus
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:2959   .text.SDMMC003_lSwitchBusWidth:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:3106   .text.SDMMC003_lSwitchSpeed:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:3224   .text.SDMMC003_lCommandDelay:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:3229   .text.SDMMC003_lCommandDelay:00000000 SDMMC003_lCommandDelay
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:3339   .text.SDMMC003_lErrorInterruptRecovery:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:3524   .text.SDMMC003_lNormalInterruptHandler:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:3529   .text.SDMMC003_lNormalInterruptHandler:00000000 SDMMC003_lNormalInterruptHandler
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:3667   .text.SDMMC003_lErrorInterruptHandler:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:3672   .text.SDMMC003_lErrorInterruptHandler:00000000 SDMMC003_lErrorInterruptHandler
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:3969   .text.SDMMC003_lSwitchToTransferState:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:4073   .text.SDMMC003_lDataTransfer:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:4231   .text.SDMMC003_CheckPCMDFlag:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:4236   .text.SDMMC003_CheckPCMDFlag:00000000 SDMMC003_CheckPCMDFlag
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:4268   .text.SDMMC003_lAcmdErrorRecovery:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:4423   .text.Timer_CallBack:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:4428   .text.Timer_CallBack:00000000 Timer_CallBack
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:4470   .text.SDMMC003_lDelay:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:4552   .text.SDMMC0_0_IRQHandler:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:4557   .text.SDMMC0_0_IRQHandler:00000000 SDMMC0_0_IRQHandler
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:4634   .text.SDMMC003_lCardIdentificationProcess:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:4639   .text.SDMMC003_lCardIdentificationProcess:00000000 SDMMC003_lCardIdentificationProcess
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:4767   .text.SDMMC003_lStartTimer:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:4837   .text.SDMMC003_lStopTimer:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:4884   .text.SDMMC003_lCheckSectorBound:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:4889   .text.SDMMC003_lCheckSectorBound:00000000 SDMMC003_lCheckSectorBound
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:4947   .text.SDMMC003_lLocalErase:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:4952   .text.SDMMC003_lLocalErase:00000000 SDMMC003_lLocalErase
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:29     .rodata:00000000 SDMMC003_Command
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:26     .rodata:00000000 $d
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:114    .rodata:00000050 SDMMC003_SDHashTable
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:181    .text.SDMMC003_lReset:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:186    .text.SDMMC003_lReset:00000000 SDMMC003_lReset
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:4772   .text.SDMMC003_lStartTimer:00000000 SDMMC003_lStartTimer
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:4842   .text.SDMMC003_lStopTimer:00000000 SDMMC003_lStopTimer
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:272    .text.SDMMC003_lCardCleanUp:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:277    .text.SDMMC003_lCardCleanUp:00000000 SDMMC003_lCardCleanUp
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:348    .text.SDMMC003_lCheckDatCmdline:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:353    .text.SDMMC003_lCheckDatCmdline:00000000 SDMMC003_lCheckDatCmdline
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:474    .text.SDMMC003_lCheckArgumentError:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:479    .text.SDMMC003_lCheckArgumentError:00000000 SDMMC003_lCheckArgumentError
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:550    .text.SDMMC003_lCheckEraseError:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:555    .text.SDMMC003_lCheckEraseError:00000000 SDMMC003_lCheckEraseError
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:616    .text.SDMMC003_lCheckCardError:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:621    .text.SDMMC003_lCheckCardError:00000000 SDMMC003_lCheckCardError
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:682    .text.SDMMC003_lCheckErrorInResponse:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:687    .text.SDMMC003_lCheckErrorInResponse:00000000 SDMMC003_lCheckErrorInResponse
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:775    .text.SDMMC003_lGetCardLockState:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:780    .text.SDMMC003_lGetCardLockState:00000000 SDMMC003_lGetCardLockState
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:841    .text.SDMMC003_lTransferDelay:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:846    .text.SDMMC003_lTransferDelay:00000000 SDMMC003_lTransferDelay
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:944    .text.SDMMC003_lReadResponse:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:949    .text.SDMMC003_lReadResponse:00000000 SDMMC003_lReadResponse
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:1025   .text.SDMMC003_lReadResponse:00000074 $d
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:1034   .text.SDMMC003_lReadResponse:00000090 $t
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:1159   .text.SDMMC003_lSendCommand:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:1164   .text.SDMMC003_lSendCommand:00000000 SDMMC003_lSendCommand
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:3344   .text.SDMMC003_lErrorInterruptRecovery:00000000 SDMMC003_lErrorInterruptRecovery
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:1345   .text.SDMMC003_lSetVoltageWindow:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:1350   .text.SDMMC003_lSetVoltageWindow:00000000 SDMMC003_lSetVoltageWindow
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:4475   .text.SDMMC003_lDelay:00000000 SDMMC003_lDelay
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:1486   .text.SDMMC003_lQueryOperatingCond:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:1491   .text.SDMMC003_lQueryOperatingCond:00000000 SDMMC003_lQueryOperatingCond
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:1593   .text.SDMMC003_lQueryVoltage:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:1598   .text.SDMMC003_lQueryVoltage:00000000 SDMMC003_lQueryVoltage
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:1991   .text.SDMMC003_lWriteCardType:00000000 SDMMC003_lWriteCardType
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:1706   .text.SDMMC003_lAfterCardInitialize:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:1711   .text.SDMMC003_lAfterCardInitialize:00000000 SDMMC003_lAfterCardInitialize
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:2203   .text.SDMMC003_lReadCardRegisters:00000000 SDMMC003_lReadCardRegisters
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:2964   .text.SDMMC003_lSwitchBusWidth:00000000 SDMMC003_lSwitchBusWidth
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:3111   .text.SDMMC003_lSwitchSpeed:00000000 SDMMC003_lSwitchSpeed
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:1793   .text.SDMMC003_lInitializeCard:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:1798   .text.SDMMC003_lInitializeCard:00000000 SDMMC003_lInitializeCard
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:2152   .text.SDMMC003_lReadRca:00000000 SDMMC003_lReadRca
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:1981   .text.SDMMC003_lInitializeCard:00000148 $d
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:1986   .text.SDMMC003_lWriteCardType:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:2062   .text.SDMMC003_lSetWriteProtect:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:2067   .text.SDMMC003_lSetWriteProtect:00000000 SDMMC003_lSetWriteProtect
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:2147   .text.SDMMC003_lReadRca:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:2193   .text.SDMMC003_lReadRca:0000003c $d
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:2198   .text.SDMMC003_lReadCardRegisters:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:3974   .text.SDMMC003_lSwitchToTransferState:00000000 SDMMC003_lSwitchToTransferState
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:2739   .text.SDMMC003_lSingleBlockTransfer:00000000 SDMMC003_lSingleBlockTransfer
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:2376   .text.SDMMC003_lReadCardRegisters:0000015c $d
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:2381   .text.SDMMC003_lConfigureForSingleTransfer:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:2386   .text.SDMMC003_lConfigureForSingleTransfer:00000000 SDMMC003_lConfigureForSingleTransfer
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:2482   .text.SDMMC003_lConfigureRegForMultiTransfer:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:2487   .text.SDMMC003_lConfigureRegForMultiTransfer:00000000 SDMMC003_lConfigureRegForMultiTransfer
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:2622   .text.SDMMC003_lMultiBlockTransfer:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:2627   .text.SDMMC003_lMultiBlockTransfer:00000000 SDMMC003_lMultiBlockTransfer
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:4078   .text.SDMMC003_lDataTransfer:00000000 SDMMC003_lDataTransfer
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:4273   .text.SDMMC003_lAcmdErrorRecovery:00000000 SDMMC003_lAcmdErrorRecovery
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:2734   .text.SDMMC003_lSingleBlockTransfer:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:2882   .text.SDMMC003_lCheckLockStatus:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:2887   .text.SDMMC003_lCheckLockStatus:00000000 SDMMC003_lCheckLockStatus
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:2959   .text.SDMMC003_lSwitchBusWidth:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:3106   .text.SDMMC003_lSwitchSpeed:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:3224   .text.SDMMC003_lCommandDelay:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:3229   .text.SDMMC003_lCommandDelay:00000000 SDMMC003_lCommandDelay
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:3339   .text.SDMMC003_lErrorInterruptRecovery:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:3524   .text.SDMMC003_lNormalInterruptHandler:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:3529   .text.SDMMC003_lNormalInterruptHandler:00000000 SDMMC003_lNormalInterruptHandler
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:3667   .text.SDMMC003_lErrorInterruptHandler:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:3672   .text.SDMMC003_lErrorInterruptHandler:00000000 SDMMC003_lErrorInterruptHandler
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:3969   .text.SDMMC003_lSwitchToTransferState:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:4073   .text.SDMMC003_lDataTransfer:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:4231   .text.SDMMC003_CheckPCMDFlag:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:4236   .text.SDMMC003_CheckPCMDFlag:00000000 SDMMC003_CheckPCMDFlag
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:4268   .text.SDMMC003_lAcmdErrorRecovery:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:4423   .text.Timer_CallBack:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:4428   .text.Timer_CallBack:00000000 Timer_CallBack
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:4470   .text.SDMMC003_lDelay:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:4552   .text.SDMMC0_0_IRQHandler:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:4557   .text.SDMMC0_0_IRQHandler:00000000 SDMMC0_0_IRQHandler
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:4634   .text.SDMMC003_lCardIdentificationProcess:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:4639   .text.SDMMC003_lCardIdentificationProcess:00000000 SDMMC003_lCardIdentificationProcess
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:4767   .text.SDMMC003_lStartTimer:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:4837   .text.SDMMC003_lStopTimer:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:4884   .text.SDMMC003_lCheckSectorBound:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:4889   .text.SDMMC003_lCheckSectorBound:00000000 SDMMC003_lCheckSectorBound
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:4947   .text.SDMMC003_lLocalErase:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc33KUVR.s:4952   .text.SDMMC003_lLocalErase:00000000 SDMMC003_lLocalErase
                      .debug_frame:00000010 $d
                            .group:00000000 wm4.1.1791a5ae2e936ca1033c1c44be394cc7
                            .group:00000000 wm4.SDMMC003_Conf.h.50.e707c07613fb4e6f2eaec982a892429d
@@ -8133,6 +8133,7 @@ C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:4952   .text.SDMMC003_lLocalErase:0
                            .group:00000000 wm4.fcntl.h.9.9336f33d7f5028f694c75e6e224e0cf7
                            .group:00000000 wm4.SLTHA001.h.97.d7e87c19a31e3244bdd5839e7cc42a61
                            .group:00000000 wm4.WEBSERVER001_Conf.h.54.cd6d29aaa96a848cbc5321bab5d6cd90
+                           .group:00000000 wm4.IO004.h.51.dbf9dd216c57d6a7f14a22b2cb7e5626
                            .group:00000000 wm4.ADCGROUP001.h.48.081c7f952eb4b6ea2df7d05180ee1663
                            .group:00000000 wm4.IO001.h.49.1da965fb490206cf7cde64a90f6912e1
                            .group:00000000 wm4.MOTORLIBS.h.59.b2e97de0df555dedfa51e24447b57ab8
@@ -8140,6 +8141,7 @@ C:\Users\Mihai\AppData\Local\Temp\cc9S5iQj.s:4952   .text.SDMMC003_lLocalErase:0
                            .group:00000000 wm4.Usic.h.90.22743468abc46f16747d12430b219aaf
                            .group:00000000 wm4.UART001_Conf.h.53.c5c972f6f634bc5116c171852aaab668
                            .group:00000000 wm4.UART001.h.109.3e835815a7a59791d8bd39655f4d4cc9
+                           .group:00000000 wm4.NVIC002_Conf.h.63.45e3c2b9806aa66850587e587798873e
                            .group:00000000 wm4.SDMMC003_Private.h.51.65f011a4ed3b9c916aeb9b57038ffa07
 
 UNDEFINED SYMBOLS

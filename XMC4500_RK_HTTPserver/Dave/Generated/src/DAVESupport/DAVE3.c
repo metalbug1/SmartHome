@@ -113,6 +113,9 @@ void DAVE_Init(void)
 	//  Initialization of app 'SLTHA001'		     
 	SLTHA001_Init();
  
+	//  Initialization of app 'IO004'		     
+	IO004_Init();
+ 
 	//  Initialization of app 'ADCGLOB001'		     
 	ADCGLOB001_Init();
  
@@ -130,6 +133,9 @@ void DAVE_Init(void)
  
 	//  Initialization of app 'UART001'		     
 	UART001_Init();
+ 
+	//  Initialization of app 'NVIC002'		     
+	NVIC002_Init();
       
 	//  MUX configurations
 	DAVE_MUX_Init();	
