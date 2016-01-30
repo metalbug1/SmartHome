@@ -4,12 +4,15 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
+../DataQueue.c \
 ../SmartHome.c 
 
 OBJS += \
+./DataQueue.o \
 ./SmartHome.o 
 
 C_DEPS += \
+./DataQueue.d \
 ./SmartHome.d 
 
 

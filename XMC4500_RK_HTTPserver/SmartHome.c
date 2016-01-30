@@ -17,6 +17,7 @@
 #include "./Dave/Generated/src/WEBSERVER001/HTTPServer/httpd.h"
 
 #include "SmartHome_Types.h"
+#include "DataQueue.h"
 
 /* Initialisation of functions to be used with CGi*/
 //  CGI handler to switch LED status
@@ -151,38 +152,35 @@ DataQueueType receivedData;
 void UART_ReceiveInterrupt(void)
 {
 	uint16_t au16tempBuffer[256];
-	uint16_t u16rnumberOfReceivedBytes;
+	uint16_t u16numberOfReceivedBytes;
 	uint16_t u16tempIndex;
 
-	u16rnumberOfReceivedBytes = UART001_ReadDataMultiple(&UART001_Handle0, au16tempBuffer, 256);
-	if (0 != u16rnumberOfReceivedBytes)
-	{
-		for (u16tempIndex=0; u16tempIndex < u16rnumberOfReceivedBytes; u16tempIndex++)
-		{
-			receivedData.au8dataBuffer[u16tempIndex + receivedData.u8rxIndex] = (char)au16tempBuffer[u16tempIndex];
-			receivedData.u8rxIndex++;
-		}
-	}
+	u16numberOfReceivedBytes = UART001_ReadDataMultiple(&UART001_Handle0, au16tempBuffer, QUEUE_MAX_SIZE);
+
+	Queue_PutBuffer(&receivedData, au16tempBuffer, u16numberOfReceivedBytes);
 }
 
 RoomInformationType roomInformation[NUMBER_OF_ROOMS];
+
 
 int main(void)
 {
 	char Data[] = {'a','b','c'};
 	uint8_t k = 0;
-//	status_t status;		// Declaration of return variable for DAVE3 APIs (toggle comment if required)
-	DAVE_Init();			// Initialization of DAVE Apps
+ 	DAVE_Init();			// Initialization of DAVE Apps
 
 	ADC002_InitializeQueue((ADC002_HandleType*)&ADC002_Handle0);
     lwIPStack_init();
     http_CGI_init();
     http_SSI_init();
-    // ... infinite loop ...
+
+    Queue_Init(&receivedData);
+
 	while(1)
 	{
-		if ((receivedData.u8rxIndex > 6) && (k == 0))
+		if ((receivedData.u8usedSpace > 3))
 		{
+			Queue_GetBuffer(&receivedData, Data, 3);
 			UART001_WriteDataBytes(&UART001_Handle0, Data, 3);
 			k = 1;
 		}

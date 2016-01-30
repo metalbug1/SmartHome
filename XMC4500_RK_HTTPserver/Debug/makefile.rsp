@@ -1,5 +1,6 @@
 Startup/startup_XMC4500.o
 Startup/system_XMC4500.o
+DataQueue.o
 SmartHome.o
 Lib/System_LibcStubs.o
 Dave/Generated/src/WEBSERVER001/HTTPServer/fs.o

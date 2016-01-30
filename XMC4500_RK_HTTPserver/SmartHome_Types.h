@@ -14,6 +14,12 @@
 #define ROOM_INDEX(room)    (((room) >> 0x4) - 0xA)
 #define SENSOR_TYPE_MASK	(0xF)
 
+typedef enum
+{
+	OK = 0,
+	NOT_OK = 1
+}StdReturnType;
+
 /* This will be the most significant 4 bits of the address byte */
 typedef enum
 {
@@ -39,13 +45,5 @@ typedef struct
 	uint8_t u8Light;
 	uint8_t u8Presence;
 }RoomInformationType;
-
-typedef struct
-{
-	uint8_t au8dataBuffer[256];
-	uint8_t u8rxIndex;
-	uint8_t u8currentIndex;
-}DataQueueType;
-
 
 #endif
