@@ -1,7 +1,9 @@
-Startup/startup_XMC4500.o
-Startup/system_XMC4500.o
+DataProcessing.o
 DataQueue.o
 SmartHome.o
+WebServerFunctions.o
+Startup/startup_XMC4500.o
+Startup/system_XMC4500.o
 Lib/System_LibcStubs.o
 Dave/Generated/src/WEBSERVER001/HTTPServer/fs.o
 Dave/Generated/src/WEBSERVER001/HTTPServer/fsdata.o

@@ -16,8 +16,8 @@ SECONDARY_LIST :=
 
 # Every subdirectory with source files must be described here
 SUBDIRS := \
-Startup \
 . \
+Startup \
 Lib \
 Dave/Generated/src/WEBSERVER001/HTTPServer \
 Dave/Generated/src/UART001 \

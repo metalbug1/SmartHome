@@ -4,16 +4,22 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
+../DataProcessing.c \
 ../DataQueue.c \
-../SmartHome.c 
+../SmartHome.c \
+../WebServerFunctions.c 
 
 OBJS += \
+./DataProcessing.o \
 ./DataQueue.o \
-./SmartHome.o 
+./SmartHome.o \
+./WebServerFunctions.o 
 
 C_DEPS += \
+./DataProcessing.d \
 ./DataQueue.d \
-./SmartHome.d 
+./SmartHome.d \
+./WebServerFunctions.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
