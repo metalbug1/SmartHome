@@ -1,9 +1,10 @@
-/*
- * Main.c
- *
- *  Created on: Mar 18, 2013
- *      Author: toochang
- */
+/*********************************************************************/
+/* Author         Date            Description						 */
+/*-------------------------------------------------------------------*/
+/* Alina&Mihai    30/01/2016    Initial version						 */
+/*-------------------------------------------------------------------*/
+/* Alina&Mihai    31/01/2016    Added processingData functions		 */
+/*********************************************************************/
 
 
 /** Inclusion of header file */
@@ -18,6 +19,54 @@
 
 #include "SmartHome_Types.h"
 #include "DataQueue.h"
+
+
+RoomInformationType roomInformation[NUMBER_OF_ROOMS];
+
+RoomType currentRoom 		= BEDROOM;
+SensorType currentSensor 	= TEMPERATURE;
+uint8_t currentData 		= 0x0;
+uint8_t currentDataIndex 	= 0x0;
+
+uint8_t convertToCharArray(uint8_t *sensorInformation, uint8_t size, char *characters)
+{
+	uint8_t numberOfCharacters = 0;
+	uint8_t tempIndex;
+	uint8_t tempData;
+	bool foundFirstDigit = FALSE;
+
+	while (tempIndex < size)
+	{
+		foundFirstDigit = FALSE;
+		tempData = sensorInformation[tempIndex];
+
+		if ((tempData / 100) != 0)
+		{
+			characters[numberOfCharacters] = (char)((tempData / 100) + 0x30);
+			numberOfCharacters++;
+			tempData = tempData - (100 * (characters[numberOfCharacters - 1] - 0x30));
+			foundFirstDigit = TRUE;
+		}
+
+		if ((TRUE == foundFirstDigit) || ((tempData / 10) != 0))
+		{
+			characters[numberOfCharacters] = (char)((tempData / 10) + 0x30);
+			numberOfCharacters++;
+			tempData = tempData - (10 * (characters[numberOfCharacters - 1] - 0x30));
+		}
+		characters[numberOfCharacters] = (char)((tempData) + 0x30);
+		numberOfCharacters++;
+
+		tempIndex++;
+		if (tempIndex < size)
+		{
+			characters[numberOfCharacters] = ',';
+			numberOfCharacters++;
+		}
+	}
+
+	return numberOfCharacters;
+}
 
 /* Initialisation of functions to be used with CGi*/
 //  CGI handler to switch LED status
@@ -75,57 +124,39 @@ void http_CGI_init( void)
 	http_set_cgi_handlers(&CGI_TAB[0], 1);
 }
 
-u16_t SSI_ADC_Handler (int iIndex, char *pcInsert, int iInsertLen)
+u16_t SSI_Handler (int iIndex, char *pcInsert, int iInsertLen)
 {
-
-    char Digit1=0, Digit2=0, Digit3=0, Digit4=0; 
-    uint16_t ADCVal = 0;        
-	status_t status;
-
-	/* We have only one SSI handler iIndex = 0 */
+	uint16_t numberOfChars;
+	uint8_t tempIndex;
+	char tempChars[6];
 
 	if (iIndex ==0)
-	{  
-
-
-	/* get ADC conversion value */
-
-	status = ADCCH001_GetResult(&ADCCH001_Handle0, &ADCVal);
-		//ADCVal = AD_result;//ADC_GetConversionValue(ADC3);
-		
-		/* convert to Voltage,	step = 0.8 mV */
-		ADCVal = (uint16_t)(ADCVal * 0.8);	
-		
-		/* get digits to display */
-		
-		Digit1= ADCVal/1000;
-		Digit2= (ADCVal-(Digit1*1000))/100 ;
-		Digit3= (ADCVal-((Digit1*1000)+(Digit2*100)))/10;
-		Digit4= ADCVal -((Digit1*1000)+(Digit2*100)+ (Digit3*10));
-		   
+	{
+		numberOfChars = convertToCharArray(roomInformation[ROOM_INDEX(BEDROOM)].u8Temperature, TEMP_MAX_BYTES, tempChars);
 		/* prepare data to be inserted in html */
-		*pcInsert		= (char)(Digit1+0x30);
-		*(pcInsert + 1) = (char)(Digit2+0x30);
-		*(pcInsert + 2) = (char)(Digit3+0x30);
-		*(pcInsert + 3) = (char)(Digit4+0x30);
+		for (tempIndex = 0; tempIndex < numberOfChars; tempIndex++)
+		{
+			*(pcInsert + tempIndex)		= tempChars[tempIndex];
+		}
 	   
-	   /* 4 characters need to be inserted in html*/
-	   return 4;
+	   return numberOfChars;
 
 	}
 
 	if (iIndex == 1)
 	{
-		*pcInsert		= (char)'c';
-		*(pcInsert + 1) = (char)'a';
-		*(pcInsert + 2) = (char)'l';
-		*(pcInsert + 3) = (char)'d';
+		numberOfChars = convertToCharArray(roomInformation[ROOM_INDEX(BEDROOM)].u8Humidity, HUMID_MAX_BYTES, tempChars);
+		/* prepare data to be inserted in html */
+		for (tempIndex = 0; tempIndex < numberOfChars; tempIndex++)
+		{
+			*(pcInsert + tempIndex)		= tempChars[tempIndex];
+		}
 
 	   /* 4 characters need to be inserted in html*/
-	   return 4;
+	   return numberOfChars;
 	}
 
-		return 0;
+	return 0;
 }
 
 
@@ -143,7 +174,7 @@ void http_SSI_init (void)
 	have the following format: <!--#tag-->
 	For the ADC conversion page, the following tag "t" is used inside the HTML code: <!--#t-->
 	*/
-	http_set_ssi_handler(SSI_ADC_Handler, (char const **)TAGS, 2);
+	http_set_ssi_handler(SSI_Handler, (char const **)TAGS, 2);
 }
 
 
@@ -153,20 +184,89 @@ void UART_ReceiveInterrupt(void)
 {
 	uint16_t au16tempBuffer[256];
 	uint16_t u16numberOfReceivedBytes;
-	uint16_t u16tempIndex;
 
 	u16numberOfReceivedBytes = UART001_ReadDataMultiple(&UART001_Handle0, au16tempBuffer, QUEUE_MAX_SIZE);
 
-	Queue_PutBuffer(&receivedData, au16tempBuffer, u16numberOfReceivedBytes);
+	Queue_PutBuffer(&receivedData, (uint8_t*)au16tempBuffer, u16numberOfReceivedBytes);
 }
 
-RoomInformationType roomInformation[NUMBER_OF_ROOMS];
+bool IsAddress(uint8_t byte)
+{
+	bool ret = FALSE;
 
+	if (((byte & SENSOR_TYPE_MASK) <= NUMBER_OF_SENSORS) && (ROOM_INDEX(byte) < NUMBER_OF_ROOMS) && (byte >= BEDROOM))
+	{
+		ret = TRUE;
+	}
+
+	return ret;
+}
+
+void ProcessReceivedData()
+{
+	uint8_t tempData[QUEUE_MAX_SIZE];
+	uint8_t tempIndex = 0;
+	uint8_t tempLength = 0;
+
+	if (FALSE == Queue_IsEmpty(receivedData))
+	{
+		tempLength = receivedData.u8usedSpace;
+		Queue_GetBuffer(&receivedData, tempData, tempLength);
+
+		for (tempIndex = 0; tempIndex < tempLength; tempIndex++)
+		{
+			if (IsAddress(tempData[tempIndex]))
+			{
+				currentRoom = tempData[tempIndex] & ROOM_TYPE_MASK;
+				currentSensor = tempData[tempIndex] & SENSOR_TYPE_MASK;
+				currentDataIndex = 0;
+			}
+			else
+			{
+				switch (currentSensor)
+				{
+					case TEMPERATURE:
+						if (currentDataIndex < TEMP_MAX_BYTES)
+						{
+							roomInformation[ROOM_INDEX(currentRoom)].u8Temperature[currentDataIndex] = tempData[tempIndex];
+							currentDataIndex++;
+						}
+						break;
+					case HUMIDITY:
+						if (currentDataIndex < HUMID_MAX_BYTES)
+						{
+							roomInformation[ROOM_INDEX(currentRoom)].u8Humidity[currentDataIndex] = tempData[tempIndex];
+							currentDataIndex++;
+						}
+						break;
+					case LIGHT:
+						if (currentDataIndex < LIGHT_MAX_BYTES)
+						{
+							roomInformation[ROOM_INDEX(currentRoom)].u8Light[currentDataIndex] = tempData[tempIndex];
+							currentDataIndex++;
+						}
+						break;
+					case PRESENCE:
+						if (currentDataIndex < PIR_MAX_BYTES)
+						{
+							roomInformation[ROOM_INDEX(currentRoom)].u8Presence[currentDataIndex] = tempData[tempIndex];
+							currentDataIndex++;
+						}
+						break;
+					default:
+						break;
+
+				}
+			}
+		}
+	}
+}
 
 int main(void)
 {
-	char Data[] = {'a','b','c'};
 	uint8_t k = 0;
+	char buff[3];
+
  	DAVE_Init();			// Initialization of DAVE Apps
 
 	ADC002_InitializeQueue((ADC002_HandleType*)&ADC002_Handle0);
@@ -178,12 +278,16 @@ int main(void)
 
 	while(1)
 	{
-		if ((receivedData.u8usedSpace > 3))
+		ProcessReceivedData();
+	/*	if ((k == 0) && roomInformation[ROOM_INDEX(BEDROOM)].u8Humidity[1] != 0)
 		{
-			Queue_GetBuffer(&receivedData, Data, 3);
-			UART001_WriteDataBytes(&UART001_Handle0, Data, 3);
+			UART001_WriteDataBytes(&UART001_Handle0, roomInformation[ROOM_INDEX(BEDROOM)].u8Temperature, 2);
+			UART001_WriteDataBytes(&UART001_Handle0, roomInformation[ROOM_INDEX(BEDROOM)].u8Light, 2);
+
+
+			convertToCharArray(roomInformation[ROOM_INDEX(BEDROOM)].u8Humidity, 2, buff);
 			k = 1;
-		}
+		}*/
 
 	}
 	return 0;

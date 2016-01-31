@@ -2,6 +2,9 @@
 /* Author         Date            Description						 */
 /*-------------------------------------------------------------------*/
 /* Alina&Mihai    30/01/2016    Initial version						 */
+/*-------------------------------------------------------------------*/
+/* Alina&Mihai    31/01/2016    Change data type for sensor info
+ * 							    to uint8[] and added max sizes		 */
 /*********************************************************************/
 
 
@@ -11,8 +14,14 @@
 #define NUMBER_OF_ROOMS 	(5)
 #define NUMBER_OF_SENSORS	(4)
 
+#define TEMP_MAX_BYTES 		(2)
+#define HUMID_MAX_BYTES 	(2)
+#define LIGHT_MAX_BYTES 	(2)
+#define PIR_MAX_BYTES		(1)
+
 #define ROOM_INDEX(room)    (((room) >> 0x4) - 0xA)
-#define SENSOR_TYPE_MASK	(0xF)
+#define SENSOR_TYPE_MASK	(0x0F)
+#define ROOM_TYPE_MASK		(0xF0)
 
 typedef enum
 {
@@ -40,10 +49,11 @@ typedef enum
 
 typedef struct
 {
-	uint8_t u8Temperature;
-	uint8_t u8Humidity;
-	uint8_t u8Light;
-	uint8_t u8Presence;
+	uint8_t u8Temperature[TEMP_MAX_BYTES];
+	uint8_t u8Humidity[HUMID_MAX_BYTES];
+	uint8_t u8Light[LIGHT_MAX_BYTES];
+	uint8_t u8Presence[PIR_MAX_BYTES];
 }RoomInformationType;
+
 
 #endif
