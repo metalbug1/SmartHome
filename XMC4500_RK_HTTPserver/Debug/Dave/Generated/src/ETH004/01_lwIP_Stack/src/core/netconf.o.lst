@@ -1024,28 +1024,28 @@ DEFINED SYMBOLS
                             *COM*:00000004 Eth_TimerHandle
                             *COM*:00000034 netif
                             *COM*:00000004 lwip250mStimer
-C:\Users\Mihai\AppData\Local\Temp\cchaNyov.s:26     .data:00000000 EthernetTimer
-C:\Users\Mihai\AppData\Local\Temp\cchaNyov.s:33     .bss:00000000 LinkCallback
-C:\Users\Mihai\AppData\Local\Temp\cchaNyov.s:30     .bss:00000000 $d
-C:\Users\Mihai\AppData\Local\Temp\cchaNyov.s:39     .bss:00000004 StatusCallback
-C:\Users\Mihai\AppData\Local\Temp\cchaNyov.s:45     .bss:00000008 TCPTimer
-C:\Users\Mihai\AppData\Local\Temp\cchaNyov.s:51     .bss:0000000c ARPTimer
-C:\Users\Mihai\AppData\Local\Temp\cchaNyov.s:54     .text.Periodic_Timer_CallBack:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cchaNyov.s:59     .text.Periodic_Timer_CallBack:00000000 Periodic_Timer_CallBack
-C:\Users\Mihai\AppData\Local\Temp\cchaNyov.s:443    .text.LwIP_Periodic_Timer_CallBack:00000000 LwIP_Periodic_Timer_CallBack
-C:\Users\Mihai\AppData\Local\Temp\cchaNyov.s:83     .text.Ethernetwait_Timer_CallBack:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cchaNyov.s:88     .text.Ethernetwait_Timer_CallBack:00000000 Ethernetwait_Timer_CallBack
-C:\Users\Mihai\AppData\Local\Temp\cchaNyov.s:120    .text.OneShotTimerCallback:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cchaNyov.s:125    .text.OneShotTimerCallback:00000000 OneShotTimerCallback
-C:\Users\Mihai\AppData\Local\Temp\cchaNyov.s:197    .text.PeriodicTimerCallback:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cchaNyov.s:202    .text.PeriodicTimerCallback:00000000 PeriodicTimerCallback
-C:\Users\Mihai\AppData\Local\Temp\cchaNyov.s:232    .text.DeletePeriodicTimer:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cchaNyov.s:237    .text.DeletePeriodicTimer:00000000 DeletePeriodicTimer
-C:\Users\Mihai\AppData\Local\Temp\cchaNyov.s:263    .text.lwIPStack_init:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cchaNyov.s:268    .text.lwIPStack_init:00000000 lwIPStack_init
-C:\Users\Mihai\AppData\Local\Temp\cchaNyov.s:438    .text.LwIP_Periodic_Timer_CallBack:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cchaNyov.s:557    .text.lwIPStack_UnInit:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cchaNyov.s:562    .text.lwIPStack_UnInit:00000000 lwIPStack_UnInit
+C:\Users\Mihai\AppData\Local\Temp\ccm6Id3Q.s:26     .data:00000000 EthernetTimer
+C:\Users\Mihai\AppData\Local\Temp\ccm6Id3Q.s:33     .bss:00000000 LinkCallback
+C:\Users\Mihai\AppData\Local\Temp\ccm6Id3Q.s:30     .bss:00000000 $d
+C:\Users\Mihai\AppData\Local\Temp\ccm6Id3Q.s:39     .bss:00000004 StatusCallback
+C:\Users\Mihai\AppData\Local\Temp\ccm6Id3Q.s:45     .bss:00000008 TCPTimer
+C:\Users\Mihai\AppData\Local\Temp\ccm6Id3Q.s:51     .bss:0000000c ARPTimer
+C:\Users\Mihai\AppData\Local\Temp\ccm6Id3Q.s:54     .text.Periodic_Timer_CallBack:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccm6Id3Q.s:59     .text.Periodic_Timer_CallBack:00000000 Periodic_Timer_CallBack
+C:\Users\Mihai\AppData\Local\Temp\ccm6Id3Q.s:443    .text.LwIP_Periodic_Timer_CallBack:00000000 LwIP_Periodic_Timer_CallBack
+C:\Users\Mihai\AppData\Local\Temp\ccm6Id3Q.s:83     .text.Ethernetwait_Timer_CallBack:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccm6Id3Q.s:88     .text.Ethernetwait_Timer_CallBack:00000000 Ethernetwait_Timer_CallBack
+C:\Users\Mihai\AppData\Local\Temp\ccm6Id3Q.s:120    .text.OneShotTimerCallback:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccm6Id3Q.s:125    .text.OneShotTimerCallback:00000000 OneShotTimerCallback
+C:\Users\Mihai\AppData\Local\Temp\ccm6Id3Q.s:197    .text.PeriodicTimerCallback:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccm6Id3Q.s:202    .text.PeriodicTimerCallback:00000000 PeriodicTimerCallback
+C:\Users\Mihai\AppData\Local\Temp\ccm6Id3Q.s:232    .text.DeletePeriodicTimer:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccm6Id3Q.s:237    .text.DeletePeriodicTimer:00000000 DeletePeriodicTimer
+C:\Users\Mihai\AppData\Local\Temp\ccm6Id3Q.s:263    .text.lwIPStack_init:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccm6Id3Q.s:268    .text.lwIPStack_init:00000000 lwIPStack_init
+C:\Users\Mihai\AppData\Local\Temp\ccm6Id3Q.s:438    .text.LwIP_Periodic_Timer_CallBack:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccm6Id3Q.s:557    .text.lwIPStack_UnInit:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccm6Id3Q.s:562    .text.lwIPStack_UnInit:00000000 lwIPStack_UnInit
                      .debug_frame:00000010 $d
                            .group:00000000 wm4.1.1791a5ae2e936ca1033c1c44be394cc7
                            .group:00000000 wm4.ETH004_Conf.h.56.564c3f309c32b3c742fc91049cf66940
@@ -1144,14 +1144,12 @@ C:\Users\Mihai\AppData\Local\Temp\cchaNyov.s:562    .text.lwIPStack_UnInit:00000
                            .group:00000000 wm4.SLTHA001.h.97.d7e87c19a31e3244bdd5839e7cc42a61
                            .group:00000000 wm4.WEBSERVER001_Conf.h.54.cd6d29aaa96a848cbc5321bab5d6cd90
                            .group:00000000 wm4.IO004.h.51.dbf9dd216c57d6a7f14a22b2cb7e5626
-                           .group:00000000 wm4.ADCGROUP001.h.48.081c7f952eb4b6ea2df7d05180ee1663
-                           .group:00000000 wm4.IO001.h.49.1da965fb490206cf7cde64a90f6912e1
                            .group:00000000 wm4.MOTORLIBS.h.59.b2e97de0df555dedfa51e24447b57ab8
                            .group:00000000 wm4.uc_id.h.35.a6c4837fad81477ba31967683332b8cc
                            .group:00000000 wm4.Usic.h.90.22743468abc46f16747d12430b219aaf
                            .group:00000000 wm4.UART001_Conf.h.53.c5c972f6f634bc5116c171852aaab668
                            .group:00000000 wm4.UART001.h.109.3e835815a7a59791d8bd39655f4d4cc9
-                           .group:00000000 wm4.NVIC002_Conf.h.63.45e3c2b9806aa66850587e587798873e
+                           .group:00000000 wm4.NVIC002_Conf.h.63.91a0613dae6f500837ac7c56dab852ab
 
 UNDEFINED SYMBOLS
 SYSTM001_CreateTimer

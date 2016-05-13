@@ -35,12 +35,12 @@
   39 000f 00       		.byte	0
   40 0010 00       		.byte	0
   41 0011 00       		.byte	0
-  42 0012 00       		.byte	0
-  43 0013 00       		.byte	0
-  44 0014 00       		.byte	0
-  45 0015 00       		.byte	0
+  42 0012 02       		.byte	2
+  43 0013 01       		.byte	1
+  44 0014 02       		.byte	2
+  45 0015 01       		.byte	1
   46 0016 01       		.byte	1
-  47 0017 00       		.byte	0
+  47 0017 00       		.space	1
   48              		.text
   49              	.Letext0:
   50              		.file 1 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
@@ -52,10 +52,10 @@
   56              		.file 7 "../Dave/Generated/src/ADCGLOB001/ADCGlob001_Conf.c"
 DEFINED SYMBOLS
                             *ABS*:00000000 ADCGlob001_Conf.c
-C:\Users\Mihai\AppData\Local\Temp\cc1ETCqL.s:24     .bss:00000000 ADCGLOB001_DynamicData0
-C:\Users\Mihai\AppData\Local\Temp\cc1ETCqL.s:21     .bss:00000000 $d
-C:\Users\Mihai\AppData\Local\Temp\cc1ETCqL.s:31     .rodata:00000000 ADCGLOB001_Handle0
-C:\Users\Mihai\AppData\Local\Temp\cc1ETCqL.s:28     .rodata:00000000 $d
+C:\Users\Mihai\AppData\Local\Temp\ccKZup56.s:24     .bss:00000000 ADCGLOB001_DynamicData0
+C:\Users\Mihai\AppData\Local\Temp\ccKZup56.s:21     .bss:00000000 $d
+C:\Users\Mihai\AppData\Local\Temp\ccKZup56.s:31     .rodata:00000000 ADCGLOB001_Handle0
+C:\Users\Mihai\AppData\Local\Temp\ccKZup56.s:28     .rodata:00000000 $d
                            .group:00000000 wm4.1.1791a5ae2e936ca1033c1c44be394cc7
                            .group:00000000 wm4.XMC4500.h.45.215f4b8c79f46c7645c15373868d08c0
                            .group:00000000 wm4.core_cm4.h.47.41af406cb4cda82c972f112a9cd0a024
@@ -146,13 +146,14 @@ C:\Users\Mihai\AppData\Local\Temp\cc1ETCqL.s:28     .rodata:00000000 $d
                            .group:00000000 wm4.SLTHA001.h.97.d7e87c19a31e3244bdd5839e7cc42a61
                            .group:00000000 wm4.WEBSERVER001_Conf.h.54.cd6d29aaa96a848cbc5321bab5d6cd90
                            .group:00000000 wm4.IO004.h.51.dbf9dd216c57d6a7f14a22b2cb7e5626
-                           .group:00000000 wm4.ADCGROUP001.h.48.081c7f952eb4b6ea2df7d05180ee1663
-                           .group:00000000 wm4.IO001.h.49.1da965fb490206cf7cde64a90f6912e1
                            .group:00000000 wm4.MOTORLIBS.h.59.b2e97de0df555dedfa51e24447b57ab8
                            .group:00000000 wm4.uc_id.h.35.a6c4837fad81477ba31967683332b8cc
                            .group:00000000 wm4.Usic.h.90.22743468abc46f16747d12430b219aaf
                            .group:00000000 wm4.UART001_Conf.h.53.c5c972f6f634bc5116c171852aaab668
                            .group:00000000 wm4.UART001.h.109.3e835815a7a59791d8bd39655f4d4cc9
-                           .group:00000000 wm4.NVIC002_Conf.h.63.45e3c2b9806aa66850587e587798873e
+                           .group:00000000 wm4.NVIC002_Conf.h.63.4809ded45954a78aa476d1e9f44d110e
+                           .group:00000000 wm4.ADCGROUP001.h.66.3ee81aba16709c201614af7d67499bdb
+                           .group:00000000 wm4.IO001.h.49.4efcabb368feaef60c65bd7504b48505
+                           .group:00000000 wm4.ADC001.h.72.a0f6b9479a18584b91fa95e6f862978d
 
 NO UNDEFINED SYMBOLS

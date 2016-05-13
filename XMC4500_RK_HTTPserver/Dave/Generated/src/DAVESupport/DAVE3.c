@@ -116,21 +116,6 @@ void DAVE_Init(void)
 	//  Initialization of app 'IO004'		     
 	IO004_Init();
  
-	//  Initialization of app 'ADCGLOB001'		     
-	ADCGLOB001_Init();
- 
-	//  Initialization of app 'ADCGROUP001'		     
-	ADCGROUP001_Init();
- 
-	//  Initialization of app 'IO001'		     
-	IO001_Init();
- 
-	//  Initialization of app 'ADCCH001'		     
-	ADCCH001_Init();
- 
-	//  Initialization of app 'ADC002'		     
-	ADC002_Init();
- 
 	//  Initialization of app 'UART001'		     
 	UART001_Init();
  

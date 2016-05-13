@@ -2257,35 +2257,35 @@
  1533              		.file 10 "F:\\WORK\\SmartHome_checkout1\\XMC4500_RK_HTTPserver\\Dave\\Generated\\inc\\DAVESupport/
 DEFINED SYMBOLS
                             *ABS*:00000000 RTC001.c
-C:\Users\Mihai\AppData\Local\Temp\cc49QEbk.s:24     .rodata:00000000 RTC001_DAYS_IN_MONTH
-C:\Users\Mihai\AppData\Local\Temp\cc49QEbk.s:21     .rodata:00000000 $d
-C:\Users\Mihai\AppData\Local\Temp\cc49QEbk.s:39     .text.RTC001_lInit:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc49QEbk.s:43     .text.RTC001_lInit:00000000 RTC001_lInit
-C:\Users\Mihai\AppData\Local\Temp\cc49QEbk.s:304    .text.RTC001_Disable:00000000 RTC001_Disable
-C:\Users\Mihai\AppData\Local\Temp\cc49QEbk.s:799    .text.RTC001_Clock_SetTime:00000000 RTC001_Clock_SetTime
-C:\Users\Mihai\AppData\Local\Temp\cc49QEbk.s:172    .text.RTC001_Init:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc49QEbk.s:177    .text.RTC001_Init:00000000 RTC001_Init
-C:\Users\Mihai\AppData\Local\Temp\cc49QEbk.s:201    .text.RTC001_DeInit:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc49QEbk.s:206    .text.RTC001_DeInit:00000000 RTC001_DeInit
-C:\Users\Mihai\AppData\Local\Temp\cc49QEbk.s:228    .text.RTC001_Enable:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc49QEbk.s:233    .text.RTC001_Enable:00000000 RTC001_Enable
-C:\Users\Mihai\AppData\Local\Temp\cc49QEbk.s:299    .text.RTC001_Disable:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc49QEbk.s:430    .text.RTC001_GetFlagStatus:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc49QEbk.s:435    .text.RTC001_GetFlagStatus:00000000 RTC001_GetFlagStatus
-C:\Users\Mihai\AppData\Local\Temp\cc49QEbk.s:487    .text.RTC001_ClearFlagStatus:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc49QEbk.s:492    .text.RTC001_ClearFlagStatus:00000000 RTC001_ClearFlagStatus
-C:\Users\Mihai\AppData\Local\Temp\cc49QEbk.s:529    .text.RTC001_ConfigAlarm:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc49QEbk.s:534    .text.RTC001_ConfigAlarm:00000000 RTC001_ConfigAlarm
-C:\Users\Mihai\AppData\Local\Temp\cc49QEbk.s:1261   .text.RTC001_ldatevalid:00000000 RTC001_ldatevalid
-C:\Users\Mihai\AppData\Local\Temp\cc49QEbk.s:689    .text.RTC001_Clock_GetTime:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc49QEbk.s:694    .text.RTC001_Clock_GetTime:00000000 RTC001_Clock_GetTime
-C:\Users\Mihai\AppData\Local\Temp\cc49QEbk.s:794    .text.RTC001_Clock_SetTime:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc49QEbk.s:1394   .text.RTC001_lweekday:00000000 RTC001_lweekday
-C:\Users\Mihai\AppData\Local\Temp\cc49QEbk.s:980    .text.RTC001_Time:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc49QEbk.s:985    .text.RTC001_Time:00000000 RTC001_Time
-C:\Users\Mihai\AppData\Local\Temp\cc49QEbk.s:1257   .text.RTC001_ldatevalid:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc49QEbk.s:1375   .rodata:00000034 .LC0
-C:\Users\Mihai\AppData\Local\Temp\cc49QEbk.s:1390   .text.RTC001_lweekday:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccF9G6BT.s:24     .rodata:00000000 RTC001_DAYS_IN_MONTH
+C:\Users\Mihai\AppData\Local\Temp\ccF9G6BT.s:21     .rodata:00000000 $d
+C:\Users\Mihai\AppData\Local\Temp\ccF9G6BT.s:39     .text.RTC001_lInit:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccF9G6BT.s:43     .text.RTC001_lInit:00000000 RTC001_lInit
+C:\Users\Mihai\AppData\Local\Temp\ccF9G6BT.s:304    .text.RTC001_Disable:00000000 RTC001_Disable
+C:\Users\Mihai\AppData\Local\Temp\ccF9G6BT.s:799    .text.RTC001_Clock_SetTime:00000000 RTC001_Clock_SetTime
+C:\Users\Mihai\AppData\Local\Temp\ccF9G6BT.s:172    .text.RTC001_Init:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccF9G6BT.s:177    .text.RTC001_Init:00000000 RTC001_Init
+C:\Users\Mihai\AppData\Local\Temp\ccF9G6BT.s:201    .text.RTC001_DeInit:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccF9G6BT.s:206    .text.RTC001_DeInit:00000000 RTC001_DeInit
+C:\Users\Mihai\AppData\Local\Temp\ccF9G6BT.s:228    .text.RTC001_Enable:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccF9G6BT.s:233    .text.RTC001_Enable:00000000 RTC001_Enable
+C:\Users\Mihai\AppData\Local\Temp\ccF9G6BT.s:299    .text.RTC001_Disable:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccF9G6BT.s:430    .text.RTC001_GetFlagStatus:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccF9G6BT.s:435    .text.RTC001_GetFlagStatus:00000000 RTC001_GetFlagStatus
+C:\Users\Mihai\AppData\Local\Temp\ccF9G6BT.s:487    .text.RTC001_ClearFlagStatus:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccF9G6BT.s:492    .text.RTC001_ClearFlagStatus:00000000 RTC001_ClearFlagStatus
+C:\Users\Mihai\AppData\Local\Temp\ccF9G6BT.s:529    .text.RTC001_ConfigAlarm:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccF9G6BT.s:534    .text.RTC001_ConfigAlarm:00000000 RTC001_ConfigAlarm
+C:\Users\Mihai\AppData\Local\Temp\ccF9G6BT.s:1261   .text.RTC001_ldatevalid:00000000 RTC001_ldatevalid
+C:\Users\Mihai\AppData\Local\Temp\ccF9G6BT.s:689    .text.RTC001_Clock_GetTime:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccF9G6BT.s:694    .text.RTC001_Clock_GetTime:00000000 RTC001_Clock_GetTime
+C:\Users\Mihai\AppData\Local\Temp\ccF9G6BT.s:794    .text.RTC001_Clock_SetTime:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccF9G6BT.s:1394   .text.RTC001_lweekday:00000000 RTC001_lweekday
+C:\Users\Mihai\AppData\Local\Temp\ccF9G6BT.s:980    .text.RTC001_Time:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccF9G6BT.s:985    .text.RTC001_Time:00000000 RTC001_Time
+C:\Users\Mihai\AppData\Local\Temp\ccF9G6BT.s:1257   .text.RTC001_ldatevalid:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccF9G6BT.s:1375   .rodata:00000034 .LC0
+C:\Users\Mihai\AppData\Local\Temp\ccF9G6BT.s:1390   .text.RTC001_lweekday:00000000 $t
                      .debug_frame:00000010 $d
                            .group:00000000 wm4.1.1791a5ae2e936ca1033c1c44be394cc7
                            .group:00000000 wm4.XMC4500.h.45.215f4b8c79f46c7645c15373868d08c0
@@ -2377,14 +2377,12 @@ C:\Users\Mihai\AppData\Local\Temp\cc49QEbk.s:1390   .text.RTC001_lweekday:000000
                            .group:00000000 wm4.SLTHA001.h.97.d7e87c19a31e3244bdd5839e7cc42a61
                            .group:00000000 wm4.WEBSERVER001_Conf.h.54.cd6d29aaa96a848cbc5321bab5d6cd90
                            .group:00000000 wm4.IO004.h.51.dbf9dd216c57d6a7f14a22b2cb7e5626
-                           .group:00000000 wm4.ADCGROUP001.h.48.081c7f952eb4b6ea2df7d05180ee1663
-                           .group:00000000 wm4.IO001.h.49.1da965fb490206cf7cde64a90f6912e1
                            .group:00000000 wm4.MOTORLIBS.h.59.b2e97de0df555dedfa51e24447b57ab8
                            .group:00000000 wm4.uc_id.h.35.a6c4837fad81477ba31967683332b8cc
                            .group:00000000 wm4.Usic.h.90.22743468abc46f16747d12430b219aaf
                            .group:00000000 wm4.UART001_Conf.h.53.c5c972f6f634bc5116c171852aaab668
                            .group:00000000 wm4.UART001.h.109.3e835815a7a59791d8bd39655f4d4cc9
-                           .group:00000000 wm4.NVIC002_Conf.h.63.45e3c2b9806aa66850587e587798873e
+                           .group:00000000 wm4.NVIC002_Conf.h.63.91a0613dae6f500837ac7c56dab852ab
 
 UNDEFINED SYMBOLS
 timeptr1

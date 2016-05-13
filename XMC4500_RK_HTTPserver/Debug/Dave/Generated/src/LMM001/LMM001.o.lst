@@ -2693,22 +2693,22 @@
  1199              		.file 5 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Include/core_cm4.h"
 DEFINED SYMBOLS
                             *ABS*:00000000 LMM001.c
-C:\Users\Mihai\AppData\Local\Temp\cc3yPgqB.s:20     .text.LMM001_lblocks:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc3yPgqB.s:24     .text.LMM001_lblocks:00000000 LMM001_lblocks
-C:\Users\Mihai\AppData\Local\Temp\cc3yPgqB.s:72     .text.LMM001_lmake_new_block:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc3yPgqB.s:76     .text.LMM001_lmake_new_block:00000000 LMM001_lmake_new_block
-C:\Users\Mihai\AppData\Local\Temp\cc3yPgqB.s:170    .text.LMM001_ldisconnect_from_free_list:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc3yPgqB.s:174    .text.LMM001_ldisconnect_from_free_list:00000000 LMM001_ldisconnect_from_free_list
-C:\Users\Mihai\AppData\Local\Temp\cc3yPgqB.s:260    .text.LMM001_l_assimilate_up:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc3yPgqB.s:264    .text.LMM001_l_assimilate_up:00000000 LMM001_l_assimilate_up
-C:\Users\Mihai\AppData\Local\Temp\cc3yPgqB.s:367    .text.LMM001_l_assimilate_down:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc3yPgqB.s:371    .text.LMM001_l_assimilate_down:00000000 LMM001_l_assimilate_down
-C:\Users\Mihai\AppData\Local\Temp\cc3yPgqB.s:454    .text.LMM001_free:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc3yPgqB.s:459    .text.LMM001_free:00000000 LMM001_free
-C:\Users\Mihai\AppData\Local\Temp\cc3yPgqB.s:610    .text.LMM001_malloc:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc3yPgqB.s:615    .text.LMM001_malloc:00000000 LMM001_malloc
-C:\Users\Mihai\AppData\Local\Temp\cc3yPgqB.s:921    .text.LMM001_realloc:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc3yPgqB.s:926    .text.LMM001_realloc:00000000 LMM001_realloc
+C:\Users\Mihai\AppData\Local\Temp\cc2r1ogP.s:20     .text.LMM001_lblocks:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc2r1ogP.s:24     .text.LMM001_lblocks:00000000 LMM001_lblocks
+C:\Users\Mihai\AppData\Local\Temp\cc2r1ogP.s:72     .text.LMM001_lmake_new_block:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc2r1ogP.s:76     .text.LMM001_lmake_new_block:00000000 LMM001_lmake_new_block
+C:\Users\Mihai\AppData\Local\Temp\cc2r1ogP.s:170    .text.LMM001_ldisconnect_from_free_list:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc2r1ogP.s:174    .text.LMM001_ldisconnect_from_free_list:00000000 LMM001_ldisconnect_from_free_list
+C:\Users\Mihai\AppData\Local\Temp\cc2r1ogP.s:260    .text.LMM001_l_assimilate_up:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc2r1ogP.s:264    .text.LMM001_l_assimilate_up:00000000 LMM001_l_assimilate_up
+C:\Users\Mihai\AppData\Local\Temp\cc2r1ogP.s:367    .text.LMM001_l_assimilate_down:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc2r1ogP.s:371    .text.LMM001_l_assimilate_down:00000000 LMM001_l_assimilate_down
+C:\Users\Mihai\AppData\Local\Temp\cc2r1ogP.s:454    .text.LMM001_free:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc2r1ogP.s:459    .text.LMM001_free:00000000 LMM001_free
+C:\Users\Mihai\AppData\Local\Temp\cc2r1ogP.s:610    .text.LMM001_malloc:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc2r1ogP.s:615    .text.LMM001_malloc:00000000 LMM001_malloc
+C:\Users\Mihai\AppData\Local\Temp\cc2r1ogP.s:921    .text.LMM001_realloc:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc2r1ogP.s:926    .text.LMM001_realloc:00000000 LMM001_realloc
                      .debug_frame:00000010 $d
                            .group:00000000 wm4.1.1791a5ae2e936ca1033c1c44be394cc7
                            .group:00000000 wm4.XMC4500.h.45.215f4b8c79f46c7645c15373868d08c0
@@ -2800,14 +2800,12 @@ C:\Users\Mihai\AppData\Local\Temp\cc3yPgqB.s:926    .text.LMM001_realloc:0000000
                            .group:00000000 wm4.SLTHA001.h.97.d7e87c19a31e3244bdd5839e7cc42a61
                            .group:00000000 wm4.WEBSERVER001_Conf.h.54.cd6d29aaa96a848cbc5321bab5d6cd90
                            .group:00000000 wm4.IO004.h.51.dbf9dd216c57d6a7f14a22b2cb7e5626
-                           .group:00000000 wm4.ADCGROUP001.h.48.081c7f952eb4b6ea2df7d05180ee1663
-                           .group:00000000 wm4.IO001.h.49.1da965fb490206cf7cde64a90f6912e1
                            .group:00000000 wm4.MOTORLIBS.h.59.b2e97de0df555dedfa51e24447b57ab8
                            .group:00000000 wm4.uc_id.h.35.a6c4837fad81477ba31967683332b8cc
                            .group:00000000 wm4.Usic.h.90.22743468abc46f16747d12430b219aaf
                            .group:00000000 wm4.UART001_Conf.h.53.c5c972f6f634bc5116c171852aaab668
                            .group:00000000 wm4.UART001.h.109.3e835815a7a59791d8bd39655f4d4cc9
-                           .group:00000000 wm4.NVIC002_Conf.h.63.45e3c2b9806aa66850587e587798873e
+                           .group:00000000 wm4.NVIC002_Conf.h.63.91a0613dae6f500837ac7c56dab852ab
 
 UNDEFINED SYMBOLS
 memcpy

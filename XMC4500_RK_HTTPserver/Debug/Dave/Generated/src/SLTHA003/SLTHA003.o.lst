@@ -564,18 +564,18 @@
  319              		.file 13 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Include/core_cm4.h"
 DEFINED SYMBOLS
                             *ABS*:00000000 SLTHA003.c
-C:\Users\Mihai\AppData\Local\Temp\cc38Tt7f.s:20     .text._malloc_r:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc38Tt7f.s:25     .text._malloc_r:00000000 _malloc_r
-C:\Users\Mihai\AppData\Local\Temp\cc38Tt7f.s:58     .text._calloc_r:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc38Tt7f.s:63     .text._calloc_r:00000000 _calloc_r
-C:\Users\Mihai\AppData\Local\Temp\cc38Tt7f.s:112    .text._free_r:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc38Tt7f.s:117    .text._free_r:00000000 _free_r
-C:\Users\Mihai\AppData\Local\Temp\cc38Tt7f.s:147    .text._realloc_r:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc38Tt7f.s:152    .text._realloc_r:00000000 _realloc_r
-C:\Users\Mihai\AppData\Local\Temp\cc38Tt7f.s:186    .text._gettimeofday_r:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc38Tt7f.s:191    .text._gettimeofday_r:00000000 _gettimeofday_r
-C:\Users\Mihai\AppData\Local\Temp\cc38Tt7f.s:255    .text._times_r:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc38Tt7f.s:260    .text._times_r:00000000 _times_r
+C:\Users\Mihai\AppData\Local\Temp\ccBsRMcR.s:20     .text._malloc_r:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccBsRMcR.s:25     .text._malloc_r:00000000 _malloc_r
+C:\Users\Mihai\AppData\Local\Temp\ccBsRMcR.s:58     .text._calloc_r:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccBsRMcR.s:63     .text._calloc_r:00000000 _calloc_r
+C:\Users\Mihai\AppData\Local\Temp\ccBsRMcR.s:112    .text._free_r:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccBsRMcR.s:117    .text._free_r:00000000 _free_r
+C:\Users\Mihai\AppData\Local\Temp\ccBsRMcR.s:147    .text._realloc_r:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccBsRMcR.s:152    .text._realloc_r:00000000 _realloc_r
+C:\Users\Mihai\AppData\Local\Temp\ccBsRMcR.s:186    .text._gettimeofday_r:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccBsRMcR.s:191    .text._gettimeofday_r:00000000 _gettimeofday_r
+C:\Users\Mihai\AppData\Local\Temp\ccBsRMcR.s:255    .text._times_r:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccBsRMcR.s:260    .text._times_r:00000000 _times_r
                      .debug_frame:00000010 $d
                            .group:00000000 wm4.1.1791a5ae2e936ca1033c1c44be394cc7
                            .group:00000000 wm4.XMC4500.h.45.215f4b8c79f46c7645c15373868d08c0
@@ -667,14 +667,12 @@ C:\Users\Mihai\AppData\Local\Temp\cc38Tt7f.s:260    .text._times_r:00000000 _tim
                            .group:00000000 wm4.SLTHA001.h.97.d7e87c19a31e3244bdd5839e7cc42a61
                            .group:00000000 wm4.WEBSERVER001_Conf.h.54.cd6d29aaa96a848cbc5321bab5d6cd90
                            .group:00000000 wm4.IO004.h.51.dbf9dd216c57d6a7f14a22b2cb7e5626
-                           .group:00000000 wm4.ADCGROUP001.h.48.081c7f952eb4b6ea2df7d05180ee1663
-                           .group:00000000 wm4.IO001.h.49.1da965fb490206cf7cde64a90f6912e1
                            .group:00000000 wm4.MOTORLIBS.h.59.b2e97de0df555dedfa51e24447b57ab8
                            .group:00000000 wm4.uc_id.h.35.a6c4837fad81477ba31967683332b8cc
                            .group:00000000 wm4.Usic.h.90.22743468abc46f16747d12430b219aaf
                            .group:00000000 wm4.UART001_Conf.h.53.c5c972f6f634bc5116c171852aaab668
                            .group:00000000 wm4.UART001.h.109.3e835815a7a59791d8bd39655f4d4cc9
-                           .group:00000000 wm4.NVIC002_Conf.h.63.45e3c2b9806aa66850587e587798873e
+                           .group:00000000 wm4.NVIC002_Conf.h.63.91a0613dae6f500837ac7c56dab852ab
 
 UNDEFINED SYMBOLS
 GMM001_malloc

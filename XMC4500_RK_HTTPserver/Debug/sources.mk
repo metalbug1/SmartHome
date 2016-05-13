@@ -34,7 +34,6 @@ Dave/Generated/src/MOTORLIBS \
 Dave/Generated/src/LMM001 \
 Dave/Generated/src/LIBS \
 Dave/Generated/src/IO004 \
-Dave/Generated/src/IO001 \
 Dave/Generated/src/GMM001 \
 Dave/Generated/src/FATFS004 \
 Dave/Generated/src/FATFS002 \
@@ -49,8 +48,4 @@ Dave/Generated/src/ETH002 \
 Dave/Generated/src/ETH001 \
 Dave/Generated/src/DAVESupport \
 Dave/Generated/src/CLK001 \
-Dave/Generated/src/ADCGROUP001 \
-Dave/Generated/src/ADCGLOB001 \
-Dave/Generated/src/ADCCH001 \
-Dave/Generated/src/ADC002 \
 

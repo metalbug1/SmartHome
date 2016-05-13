@@ -3934,30 +3934,30 @@
  3736              		.file 16 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Include/core_cm4.h"
 DEFINED SYMBOLS
                             *ABS*:00000000 fs.c
-C:\Users\Mihai\AppData\Local\Temp\cckNA2Hh.s:20     .rodata:00000000 $d
-C:\Users\Mihai\AppData\Local\Temp\cckNA2Hh.s:23     .rodata:00000000 dummy_align__img_sics_gif
-C:\Users\Mihai\AppData\Local\Temp\cckNA2Hh.s:28     .rodata:00000004 data__img_sics_gif
-C:\Users\Mihai\AppData\Local\Temp\cckNA2Hh.s:879    .rodata:00000354 dummy_align__404_html
-C:\Users\Mihai\AppData\Local\Temp\cckNA2Hh.s:884    .rodata:00000358 data__404_html
-C:\Users\Mihai\AppData\Local\Temp\cckNA2Hh.s:1584   .rodata:00000610 dummy_align__index_html
-C:\Users\Mihai\AppData\Local\Temp\cckNA2Hh.s:1589   .rodata:00000614 data__index_html
-C:\Users\Mihai\AppData\Local\Temp\cckNA2Hh.s:3296   .rodata:00000cbc file__img_sics_gif
-C:\Users\Mihai\AppData\Local\Temp\cckNA2Hh.s:3307   .rodata:00000cd0 file__404_html
-C:\Users\Mihai\AppData\Local\Temp\cckNA2Hh.s:3318   .rodata:00000ce4 file__index_html
+C:\Users\Mihai\AppData\Local\Temp\ccXNSASD.s:20     .rodata:00000000 $d
+C:\Users\Mihai\AppData\Local\Temp\ccXNSASD.s:23     .rodata:00000000 dummy_align__img_sics_gif
+C:\Users\Mihai\AppData\Local\Temp\ccXNSASD.s:28     .rodata:00000004 data__img_sics_gif
+C:\Users\Mihai\AppData\Local\Temp\ccXNSASD.s:879    .rodata:00000354 dummy_align__404_html
+C:\Users\Mihai\AppData\Local\Temp\ccXNSASD.s:884    .rodata:00000358 data__404_html
+C:\Users\Mihai\AppData\Local\Temp\ccXNSASD.s:1584   .rodata:00000610 dummy_align__index_html
+C:\Users\Mihai\AppData\Local\Temp\ccXNSASD.s:1589   .rodata:00000614 data__index_html
+C:\Users\Mihai\AppData\Local\Temp\ccXNSASD.s:3296   .rodata:00000cbc file__img_sics_gif
+C:\Users\Mihai\AppData\Local\Temp\ccXNSASD.s:3307   .rodata:00000cd0 file__404_html
+C:\Users\Mihai\AppData\Local\Temp\ccXNSASD.s:3318   .rodata:00000ce4 file__index_html
                             *COM*:00000118 fs_memory
-C:\Users\Mihai\AppData\Local\Temp\cckNA2Hh.s:3327   .text.fs_malloc:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cckNA2Hh.s:3331   .text.fs_malloc:00000000 fs_malloc
-C:\Users\Mihai\AppData\Local\Temp\cckNA2Hh.s:3412   .text.fs_free:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cckNA2Hh.s:3416   .text.fs_free:00000000 fs_free
-C:\Users\Mihai\AppData\Local\Temp\cckNA2Hh.s:3492   .rodata:00000cf8 .LC0
-C:\Users\Mihai\AppData\Local\Temp\cckNA2Hh.s:3495   .text.fs_open:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cckNA2Hh.s:3500   .text.fs_open:00000000 fs_open
-C:\Users\Mihai\AppData\Local\Temp\cckNA2Hh.s:3582   .text.fs_close:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cckNA2Hh.s:3587   .text.fs_close:00000000 fs_close
-C:\Users\Mihai\AppData\Local\Temp\cckNA2Hh.s:3621   .text.fs_read:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cckNA2Hh.s:3626   .text.fs_read:00000000 fs_read
-C:\Users\Mihai\AppData\Local\Temp\cckNA2Hh.s:3682   .text.fs_bytes_left:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cckNA2Hh.s:3687   .text.fs_bytes_left:00000000 fs_bytes_left
+C:\Users\Mihai\AppData\Local\Temp\ccXNSASD.s:3327   .text.fs_malloc:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccXNSASD.s:3331   .text.fs_malloc:00000000 fs_malloc
+C:\Users\Mihai\AppData\Local\Temp\ccXNSASD.s:3412   .text.fs_free:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccXNSASD.s:3416   .text.fs_free:00000000 fs_free
+C:\Users\Mihai\AppData\Local\Temp\ccXNSASD.s:3492   .rodata:00000cf8 .LC0
+C:\Users\Mihai\AppData\Local\Temp\ccXNSASD.s:3495   .text.fs_open:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccXNSASD.s:3500   .text.fs_open:00000000 fs_open
+C:\Users\Mihai\AppData\Local\Temp\ccXNSASD.s:3582   .text.fs_close:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccXNSASD.s:3587   .text.fs_close:00000000 fs_close
+C:\Users\Mihai\AppData\Local\Temp\ccXNSASD.s:3621   .text.fs_read:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccXNSASD.s:3626   .text.fs_read:00000000 fs_read
+C:\Users\Mihai\AppData\Local\Temp\ccXNSASD.s:3682   .text.fs_bytes_left:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccXNSASD.s:3687   .text.fs_bytes_left:00000000 fs_bytes_left
                      .debug_frame:00000010 $d
                            .group:00000000 wm4.1.1791a5ae2e936ca1033c1c44be394cc7
                            .group:00000000 wm4.ETH004_Conf.h.56.564c3f309c32b3c742fc91049cf66940
@@ -4049,14 +4049,12 @@ C:\Users\Mihai\AppData\Local\Temp\cckNA2Hh.s:3687   .text.fs_bytes_left:00000000
                            .group:00000000 wm4.SLTHA001.h.97.d7e87c19a31e3244bdd5839e7cc42a61
                            .group:00000000 wm4.WEBSERVER001_Conf.h.54.cd6d29aaa96a848cbc5321bab5d6cd90
                            .group:00000000 wm4.IO004.h.51.dbf9dd216c57d6a7f14a22b2cb7e5626
-                           .group:00000000 wm4.ADCGROUP001.h.48.081c7f952eb4b6ea2df7d05180ee1663
-                           .group:00000000 wm4.IO001.h.49.1da965fb490206cf7cde64a90f6912e1
                            .group:00000000 wm4.MOTORLIBS.h.59.b2e97de0df555dedfa51e24447b57ab8
                            .group:00000000 wm4.uc_id.h.35.a6c4837fad81477ba31967683332b8cc
                            .group:00000000 wm4.Usic.h.90.22743468abc46f16747d12430b219aaf
                            .group:00000000 wm4.UART001_Conf.h.53.c5c972f6f634bc5116c171852aaab668
                            .group:00000000 wm4.UART001.h.109.3e835815a7a59791d8bd39655f4d4cc9
-                           .group:00000000 wm4.NVIC002_Conf.h.63.45e3c2b9806aa66850587e587798873e
+                           .group:00000000 wm4.NVIC002_Conf.h.63.91a0613dae6f500837ac7c56dab852ab
                            .group:00000000 wm4.fs.h.47.a3710c8cba84bb2c95ff7a1ff61bdc0a
                            .group:00000000 wm4.fsdata.c.7.7f58e175d385fccca4d3d3a1366fa9e3
 

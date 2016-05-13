@@ -74,12 +74,15 @@ extern "C" {
 /* User defined function mapped to IRQ_Hdlr_90 */
 #define UART_ReceiveInterrupt    IRQ_Hdlr_90 
 
+/* User defined function mapped to IRQ_Hdlr_64 */
+#define ADC_ConversionComplete    IRQ_Hdlr_64 
+
 
 /**
  * @ingroup NVIC002_constants
  * @{
  */
-#define NVIC002_NUM_INSTANCES 1U
+#define NVIC002_NUM_INSTANCES 2U
 /**
   * @}
   */

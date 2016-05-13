@@ -45,10 +45,10 @@
   49              		.file 7 "../Dave/Generated/src/RTC001/RTC001_Conf.c"
 DEFINED SYMBOLS
                             *ABS*:00000000 RTC001_Conf.c
-C:\Users\Mihai\AppData\Local\Temp\ccgjph5j.s:24     .rodata:00000000 RTC001_Handle
-C:\Users\Mihai\AppData\Local\Temp\ccgjph5j.s:21     .rodata:00000000 $d
-C:\Users\Mihai\AppData\Local\Temp\ccgjph5j.s:33     .data:00000000 timeptr1
-C:\Users\Mihai\AppData\Local\Temp\ccgjph5j.s:30     .data:00000000 $d
+C:\Users\Mihai\AppData\Local\Temp\ccsJlhL7.s:24     .rodata:00000000 RTC001_Handle
+C:\Users\Mihai\AppData\Local\Temp\ccsJlhL7.s:21     .rodata:00000000 $d
+C:\Users\Mihai\AppData\Local\Temp\ccsJlhL7.s:33     .data:00000000 timeptr1
+C:\Users\Mihai\AppData\Local\Temp\ccsJlhL7.s:30     .data:00000000 $d
                            .group:00000000 wm4.1.1791a5ae2e936ca1033c1c44be394cc7
                            .group:00000000 wm4.XMC4500.h.45.215f4b8c79f46c7645c15373868d08c0
                            .group:00000000 wm4.core_cm4.h.47.41af406cb4cda82c972f112a9cd0a024
@@ -139,13 +139,11 @@ C:\Users\Mihai\AppData\Local\Temp\ccgjph5j.s:30     .data:00000000 $d
                            .group:00000000 wm4.SLTHA001.h.97.d7e87c19a31e3244bdd5839e7cc42a61
                            .group:00000000 wm4.WEBSERVER001_Conf.h.54.cd6d29aaa96a848cbc5321bab5d6cd90
                            .group:00000000 wm4.IO004.h.51.dbf9dd216c57d6a7f14a22b2cb7e5626
-                           .group:00000000 wm4.ADCGROUP001.h.48.081c7f952eb4b6ea2df7d05180ee1663
-                           .group:00000000 wm4.IO001.h.49.1da965fb490206cf7cde64a90f6912e1
                            .group:00000000 wm4.MOTORLIBS.h.59.b2e97de0df555dedfa51e24447b57ab8
                            .group:00000000 wm4.uc_id.h.35.a6c4837fad81477ba31967683332b8cc
                            .group:00000000 wm4.Usic.h.90.22743468abc46f16747d12430b219aaf
                            .group:00000000 wm4.UART001_Conf.h.53.c5c972f6f634bc5116c171852aaab668
                            .group:00000000 wm4.UART001.h.109.3e835815a7a59791d8bd39655f4d4cc9
-                           .group:00000000 wm4.NVIC002_Conf.h.63.45e3c2b9806aa66850587e587798873e
+                           .group:00000000 wm4.NVIC002_Conf.h.63.91a0613dae6f500837ac7c56dab852ab
 
 NO UNDEFINED SYMBOLS

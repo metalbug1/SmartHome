@@ -68,15 +68,16 @@ extern "C" {
 /******************************************************************************
  @Defines
 ******************************************************************************/
-	
+		
 
 /**
  * @ingroup NVIC002_datastructures
  * @{
  */
 extern const NVIC002_HandleType NVIC002_Handle0;
+extern const NVIC002_HandleType NVIC002_Handle1;
 
-extern const NVIC002_HandleType * NVIC002_HandleArray[1];
+extern const NVIC002_HandleType * NVIC002_HandleArray[2];
 
 /**
   * @}

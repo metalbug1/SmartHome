@@ -5149,67 +5149,67 @@
  2505              		.file 10 "../Dave/Generated/src/SDMMC003/../../inc/SDMMC003/SDMMC003_Private.h"
 DEFINED SYMBOLS
                             *ABS*:00000000 SDMMC003.c
-C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:20     .text.NVIC_GetPriorityGrouping:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:24     .text.NVIC_GetPriorityGrouping:00000000 NVIC_GetPriorityGrouping
-C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:54     .text.NVIC_EnableIRQ:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:58     .text.NVIC_EnableIRQ:00000000 NVIC_EnableIRQ
-C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:96     .text.NVIC_ClearPendingIRQ:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:100    .text.NVIC_ClearPendingIRQ:00000000 NVIC_ClearPendingIRQ
-C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:139    .text.NVIC_SetPriority:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:143    .text.NVIC_SetPriority:00000000 NVIC_SetPriority
-C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:201    .text.NVIC_EncodePriority:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:205    .text.NVIC_EncodePriority:00000000 NVIC_EncodePriority
-C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:285    .bss:00000000 SDMMC003_Handle
-C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:282    .bss:00000000 $d
-C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:288    .text.SDMMC003_HostControllerInit:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:293    .text.SDMMC003_HostControllerInit:00000000 SDMMC003_HostControllerInit
-C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:414    .text.SDMMC003_HostControllerDeInit:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:419    .text.SDMMC003_HostControllerDeInit:00000000 SDMMC003_HostControllerDeInit
-C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:482    .text.SDMMC003_CardReadMultipleBlocks:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:487    .text.SDMMC003_CardReadMultipleBlocks:00000000 SDMMC003_CardReadMultipleBlocks
-C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:593    .text.SDMMC003_CardReadSingleBlock:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:598    .text.SDMMC003_CardReadSingleBlock:00000000 SDMMC003_CardReadSingleBlock
-C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:701    .text.SDMMC003_CardWriteMultipleBlocks:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:706    .text.SDMMC003_CardWriteMultipleBlocks:00000000 SDMMC003_CardWriteMultipleBlocks
-C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:812    .text.SDMMC003_CardWriteSingleBlock:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:817    .text.SDMMC003_CardWriteSingleBlock:00000000 SDMMC003_CardWriteSingleBlock
-C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:920    .rodata:00000000 $d
-C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:921    .rodata:00000000 .LC0
-C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:933    .text.SDMMC003_EraseBlock:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:938    .text.SDMMC003_EraseBlock:00000000 SDMMC003_EraseBlock
-C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:2156   .text.SDMMC003_GetSdStatus:00000000 SDMMC003_GetSdStatus
-C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:1176   .text.SDMMC003_LockUnlockCard:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:1181   .text.SDMMC003_LockUnlockCard:00000000 SDMMC003_LockUnlockCard
-C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:1263   .text.SDMMC003_GetLockStatus:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:1268   .text.SDMMC003_GetLockStatus:00000000 SDMMC003_GetLockStatus
-C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:1355   .text.SDMMC003_GetCurrentState:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:1360   .text.SDMMC003_GetCurrentState:00000000 SDMMC003_GetCurrentState
-C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:1448   .text.SDMMC003_GetCardType:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:1453   .text.SDMMC003_GetCardType:00000000 SDMMC003_GetCardType
-C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:1507   .text.SDMMC003_GetCid:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:1512   .text.SDMMC003_GetCid:00000000 SDMMC003_GetCid
-C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:1655   .text.SDMMC003_GetOcr:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:1660   .text.SDMMC003_GetOcr:00000000 SDMMC003_GetOcr
-C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:1712   .text.SDMMC003_GetCsd:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:1717   .text.SDMMC003_GetCsd:00000000 SDMMC003_GetCsd
-C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:1768   .text.SDMMC003_GetCsd:00000044 $d
-C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:1773   .text.SDMMC003_GetSectorCount:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:1778   .text.SDMMC003_GetSectorCount:00000000 SDMMC003_GetSectorCount
-C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:1930   .text.SDMMC003_GetSectorSize:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:1935   .text.SDMMC003_GetSectorSize:00000000 SDMMC003_GetSectorSize
-C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:1985   .text.SDMMC003_GetBlockSize:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:1990   .text.SDMMC003_GetBlockSize:00000000 SDMMC003_GetBlockSize
-C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:2103   .text.SDMMC003_FlushDiskWriteCache:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:2108   .text.SDMMC003_FlushDiskWriteCache:00000000 SDMMC003_FlushDiskWriteCache
-C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:2151   .text.SDMMC003_GetSdStatus:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:2266   .text.SDMMC003_EjectCard:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:2271   .text.SDMMC003_EjectCard:00000000 SDMMC003_EjectCard
-C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:2357   .text.SDMMC003_Init:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:2362   .text.SDMMC003_Init:00000000 SDMMC003_Init
-C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:2386   .text.SDMMC003_Start:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:2391   .text.SDMMC003_Start:00000000 SDMMC003_Start
-C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:2451   .text.SDMMC003_CardDetectionSupport:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:2456   .text.SDMMC003_CardDetectionSupport:00000000 SDMMC003_CardDetectionSupport
+C:\Users\Mihai\AppData\Local\Temp\ccqIiUT1.s:20     .text.NVIC_GetPriorityGrouping:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccqIiUT1.s:24     .text.NVIC_GetPriorityGrouping:00000000 NVIC_GetPriorityGrouping
+C:\Users\Mihai\AppData\Local\Temp\ccqIiUT1.s:54     .text.NVIC_EnableIRQ:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccqIiUT1.s:58     .text.NVIC_EnableIRQ:00000000 NVIC_EnableIRQ
+C:\Users\Mihai\AppData\Local\Temp\ccqIiUT1.s:96     .text.NVIC_ClearPendingIRQ:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccqIiUT1.s:100    .text.NVIC_ClearPendingIRQ:00000000 NVIC_ClearPendingIRQ
+C:\Users\Mihai\AppData\Local\Temp\ccqIiUT1.s:139    .text.NVIC_SetPriority:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccqIiUT1.s:143    .text.NVIC_SetPriority:00000000 NVIC_SetPriority
+C:\Users\Mihai\AppData\Local\Temp\ccqIiUT1.s:201    .text.NVIC_EncodePriority:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccqIiUT1.s:205    .text.NVIC_EncodePriority:00000000 NVIC_EncodePriority
+C:\Users\Mihai\AppData\Local\Temp\ccqIiUT1.s:285    .bss:00000000 SDMMC003_Handle
+C:\Users\Mihai\AppData\Local\Temp\ccqIiUT1.s:282    .bss:00000000 $d
+C:\Users\Mihai\AppData\Local\Temp\ccqIiUT1.s:288    .text.SDMMC003_HostControllerInit:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccqIiUT1.s:293    .text.SDMMC003_HostControllerInit:00000000 SDMMC003_HostControllerInit
+C:\Users\Mihai\AppData\Local\Temp\ccqIiUT1.s:414    .text.SDMMC003_HostControllerDeInit:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccqIiUT1.s:419    .text.SDMMC003_HostControllerDeInit:00000000 SDMMC003_HostControllerDeInit
+C:\Users\Mihai\AppData\Local\Temp\ccqIiUT1.s:482    .text.SDMMC003_CardReadMultipleBlocks:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccqIiUT1.s:487    .text.SDMMC003_CardReadMultipleBlocks:00000000 SDMMC003_CardReadMultipleBlocks
+C:\Users\Mihai\AppData\Local\Temp\ccqIiUT1.s:593    .text.SDMMC003_CardReadSingleBlock:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccqIiUT1.s:598    .text.SDMMC003_CardReadSingleBlock:00000000 SDMMC003_CardReadSingleBlock
+C:\Users\Mihai\AppData\Local\Temp\ccqIiUT1.s:701    .text.SDMMC003_CardWriteMultipleBlocks:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccqIiUT1.s:706    .text.SDMMC003_CardWriteMultipleBlocks:00000000 SDMMC003_CardWriteMultipleBlocks
+C:\Users\Mihai\AppData\Local\Temp\ccqIiUT1.s:812    .text.SDMMC003_CardWriteSingleBlock:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccqIiUT1.s:817    .text.SDMMC003_CardWriteSingleBlock:00000000 SDMMC003_CardWriteSingleBlock
+C:\Users\Mihai\AppData\Local\Temp\ccqIiUT1.s:920    .rodata:00000000 $d
+C:\Users\Mihai\AppData\Local\Temp\ccqIiUT1.s:921    .rodata:00000000 .LC0
+C:\Users\Mihai\AppData\Local\Temp\ccqIiUT1.s:933    .text.SDMMC003_EraseBlock:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccqIiUT1.s:938    .text.SDMMC003_EraseBlock:00000000 SDMMC003_EraseBlock
+C:\Users\Mihai\AppData\Local\Temp\ccqIiUT1.s:2156   .text.SDMMC003_GetSdStatus:00000000 SDMMC003_GetSdStatus
+C:\Users\Mihai\AppData\Local\Temp\ccqIiUT1.s:1176   .text.SDMMC003_LockUnlockCard:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccqIiUT1.s:1181   .text.SDMMC003_LockUnlockCard:00000000 SDMMC003_LockUnlockCard
+C:\Users\Mihai\AppData\Local\Temp\ccqIiUT1.s:1263   .text.SDMMC003_GetLockStatus:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccqIiUT1.s:1268   .text.SDMMC003_GetLockStatus:00000000 SDMMC003_GetLockStatus
+C:\Users\Mihai\AppData\Local\Temp\ccqIiUT1.s:1355   .text.SDMMC003_GetCurrentState:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccqIiUT1.s:1360   .text.SDMMC003_GetCurrentState:00000000 SDMMC003_GetCurrentState
+C:\Users\Mihai\AppData\Local\Temp\ccqIiUT1.s:1448   .text.SDMMC003_GetCardType:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccqIiUT1.s:1453   .text.SDMMC003_GetCardType:00000000 SDMMC003_GetCardType
+C:\Users\Mihai\AppData\Local\Temp\ccqIiUT1.s:1507   .text.SDMMC003_GetCid:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccqIiUT1.s:1512   .text.SDMMC003_GetCid:00000000 SDMMC003_GetCid
+C:\Users\Mihai\AppData\Local\Temp\ccqIiUT1.s:1655   .text.SDMMC003_GetOcr:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccqIiUT1.s:1660   .text.SDMMC003_GetOcr:00000000 SDMMC003_GetOcr
+C:\Users\Mihai\AppData\Local\Temp\ccqIiUT1.s:1712   .text.SDMMC003_GetCsd:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccqIiUT1.s:1717   .text.SDMMC003_GetCsd:00000000 SDMMC003_GetCsd
+C:\Users\Mihai\AppData\Local\Temp\ccqIiUT1.s:1768   .text.SDMMC003_GetCsd:00000044 $d
+C:\Users\Mihai\AppData\Local\Temp\ccqIiUT1.s:1773   .text.SDMMC003_GetSectorCount:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccqIiUT1.s:1778   .text.SDMMC003_GetSectorCount:00000000 SDMMC003_GetSectorCount
+C:\Users\Mihai\AppData\Local\Temp\ccqIiUT1.s:1930   .text.SDMMC003_GetSectorSize:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccqIiUT1.s:1935   .text.SDMMC003_GetSectorSize:00000000 SDMMC003_GetSectorSize
+C:\Users\Mihai\AppData\Local\Temp\ccqIiUT1.s:1985   .text.SDMMC003_GetBlockSize:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccqIiUT1.s:1990   .text.SDMMC003_GetBlockSize:00000000 SDMMC003_GetBlockSize
+C:\Users\Mihai\AppData\Local\Temp\ccqIiUT1.s:2103   .text.SDMMC003_FlushDiskWriteCache:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccqIiUT1.s:2108   .text.SDMMC003_FlushDiskWriteCache:00000000 SDMMC003_FlushDiskWriteCache
+C:\Users\Mihai\AppData\Local\Temp\ccqIiUT1.s:2151   .text.SDMMC003_GetSdStatus:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccqIiUT1.s:2266   .text.SDMMC003_EjectCard:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccqIiUT1.s:2271   .text.SDMMC003_EjectCard:00000000 SDMMC003_EjectCard
+C:\Users\Mihai\AppData\Local\Temp\ccqIiUT1.s:2357   .text.SDMMC003_Init:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccqIiUT1.s:2362   .text.SDMMC003_Init:00000000 SDMMC003_Init
+C:\Users\Mihai\AppData\Local\Temp\ccqIiUT1.s:2386   .text.SDMMC003_Start:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccqIiUT1.s:2391   .text.SDMMC003_Start:00000000 SDMMC003_Start
+C:\Users\Mihai\AppData\Local\Temp\ccqIiUT1.s:2451   .text.SDMMC003_CardDetectionSupport:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccqIiUT1.s:2456   .text.SDMMC003_CardDetectionSupport:00000000 SDMMC003_CardDetectionSupport
                      .debug_frame:00000010 $d
                            .group:00000000 wm4.1.1791a5ae2e936ca1033c1c44be394cc7
                            .group:00000000 wm4.SDMMC003_Conf.h.50.e707c07613fb4e6f2eaec982a892429d
@@ -5301,14 +5301,12 @@ C:\Users\Mihai\AppData\Local\Temp\ccX7vJ2y.s:2456   .text.SDMMC003_CardDetection
                            .group:00000000 wm4.SLTHA001.h.97.d7e87c19a31e3244bdd5839e7cc42a61
                            .group:00000000 wm4.WEBSERVER001_Conf.h.54.cd6d29aaa96a848cbc5321bab5d6cd90
                            .group:00000000 wm4.IO004.h.51.dbf9dd216c57d6a7f14a22b2cb7e5626
-                           .group:00000000 wm4.ADCGROUP001.h.48.081c7f952eb4b6ea2df7d05180ee1663
-                           .group:00000000 wm4.IO001.h.49.1da965fb490206cf7cde64a90f6912e1
                            .group:00000000 wm4.MOTORLIBS.h.59.b2e97de0df555dedfa51e24447b57ab8
                            .group:00000000 wm4.uc_id.h.35.a6c4837fad81477ba31967683332b8cc
                            .group:00000000 wm4.Usic.h.90.22743468abc46f16747d12430b219aaf
                            .group:00000000 wm4.UART001_Conf.h.53.c5c972f6f634bc5116c171852aaab668
                            .group:00000000 wm4.UART001.h.109.3e835815a7a59791d8bd39655f4d4cc9
-                           .group:00000000 wm4.NVIC002_Conf.h.63.45e3c2b9806aa66850587e587798873e
+                           .group:00000000 wm4.NVIC002_Conf.h.63.91a0613dae6f500837ac7c56dab852ab
                            .group:00000000 wm4.SDMMC003_Private.h.51.65f011a4ed3b9c916aeb9b57038ffa07
 
 UNDEFINED SYMBOLS

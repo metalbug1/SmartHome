@@ -5657,81 +5657,81 @@
  3382              		.file 21 "F:\\WORK\\SmartHome_checkout1\\XMC4500_RK_HTTPserver\\Dave\\Generated\\src\\ETH004\\01_l
 DEFINED SYMBOLS
                             *ABS*:00000000 httpd.c
-C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:39     .rodata:00000040 g_psDefaultFilenames
-C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:21     .rodata:00000000 $d
+C:\Users\Mihai\AppData\Local\Temp\ccCN3522.s:39     .rodata:00000040 g_psDefaultFilenames
+C:\Users\Mihai\AppData\Local\Temp\ccCN3522.s:21     .rodata:00000000 $d
                             *COM*:00000234 myfsObject
-C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:57     .bss:00000000 $d
-C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:58     .bss:00000000 httpd_req_buf
-C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:78     .data:00000000 g_pcSSIExtensions
-C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:75     .data:00000000 $d
-C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:88     .bss:00000400 g_pfnSSIHandler
-C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:94     .bss:00000404 g_iNumTags
-C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:100    .bss:00000408 g_ppcTags
-C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:110    .rodata:00000090 g_pcTagLeadIn
-C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:119    .rodata:00000098 g_pcTagLeadOut
-C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:126    .bss:0000040c g_pCGIs
-C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:132    .bss:00000410 g_iNumCGIs
-C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:135    .text.strnstr:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:139    .text.strnstr:00000000 strnstr
-C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:230    .text.http_state_alloc:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:234    .text.http_state_alloc:00000000 http_state_alloc
-C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:276    .text.http_state_free:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:280    .text.http_state_free:00000000 http_state_free
-C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:344    .text.http_write:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:348    .text.http_write:00000000 http_write
-C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:426    .text.http_close_conn:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:430    .text.http_close_conn:00000000 http_close_conn
-C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:2872   .text.http_poll:00000000 http_poll
-C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:506    .text.extract_uri_parameters:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:510    .text.extract_uri_parameters:00000000 extract_uri_parameters
-C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:659    .rodata:0000009c .LC11
-C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:662    .rodata:000000b0 .LC12
-C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:665    .text.get_tag_insert:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:669    .text.get_tag_insert:00000000 get_tag_insert
-C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:832    .text.http_send_data:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:836    .text.http_send_data:00000000 http_send_data
-C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:1186   .text.http_send_data:00000254 $d
-C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:1193   .text.http_send_data:00000268 $t
-C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:1933   .rodata:000000b8 .LC13
-C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:1936   .rodata:000000c4 .LC14
-C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:1939   .rodata:000000d0 .LC15
-C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:1942   .rodata:000000dc .LC16
-C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:1945   .rodata:000000e8 .LC17
-C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:1948   .rodata:000000f4 .LC18
-C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:1951   .text.http_find_error_file:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:1955   .text.http_find_error_file:00000000 http_find_error_file
-C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:2675   .text.http_init_file:00000000 http_init_file
-C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:2054   .rodata:00000100 .LC19
-C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:2057   .rodata:0000010c .LC20
-C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:2060   .rodata:00000114 .LC21
-C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:2063   .rodata:00000120 .LC22
-C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:2066   .text.http_get_404_file:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:2070   .text.http_get_404_file:00000000 http_get_404_file
-C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:2149   .rodata:0000012c .LC23
-C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:2152   .rodata:00000130 .LC24
-C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:2155   .rodata:00000138 .LC25
-C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:2158   .text.http_parse_request:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:2162   .text.http_parse_request:00000000 http_parse_request
-C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:2407   .text.http_find_file:00000000 http_find_file
-C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:2403   .text.http_find_file:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:2671   .text.http_init_file:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:2768   .text.http_err:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:2772   .text.http_err:00000000 http_err
-C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:2811   .text.http_sent:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:2815   .text.http_sent:00000000 http_sent
-C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:2868   .text.http_poll:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:2963   .text.http_recv:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:2967   .text.http_recv:00000000 http_recv
-C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:3100   .text.http_accept:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:3104   .text.http_accept:00000000 http_accept
-C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:3178   .text.httpd_init_addr:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:3182   .text.httpd_init_addr:00000000 httpd_init_addr
-C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:3236   .text.httpd_init:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:3241   .text.httpd_init:00000000 httpd_init
-C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:3270   .text.http_set_ssi_handler:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:3275   .text.http_set_ssi_handler:00000000 http_set_ssi_handler
-C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:3319   .text.http_set_cgi_handlers:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:3324   .text.http_set_cgi_handlers:00000000 http_set_cgi_handlers
+C:\Users\Mihai\AppData\Local\Temp\ccCN3522.s:57     .bss:00000000 $d
+C:\Users\Mihai\AppData\Local\Temp\ccCN3522.s:58     .bss:00000000 httpd_req_buf
+C:\Users\Mihai\AppData\Local\Temp\ccCN3522.s:78     .data:00000000 g_pcSSIExtensions
+C:\Users\Mihai\AppData\Local\Temp\ccCN3522.s:75     .data:00000000 $d
+C:\Users\Mihai\AppData\Local\Temp\ccCN3522.s:88     .bss:00000400 g_pfnSSIHandler
+C:\Users\Mihai\AppData\Local\Temp\ccCN3522.s:94     .bss:00000404 g_iNumTags
+C:\Users\Mihai\AppData\Local\Temp\ccCN3522.s:100    .bss:00000408 g_ppcTags
+C:\Users\Mihai\AppData\Local\Temp\ccCN3522.s:110    .rodata:00000090 g_pcTagLeadIn
+C:\Users\Mihai\AppData\Local\Temp\ccCN3522.s:119    .rodata:00000098 g_pcTagLeadOut
+C:\Users\Mihai\AppData\Local\Temp\ccCN3522.s:126    .bss:0000040c g_pCGIs
+C:\Users\Mihai\AppData\Local\Temp\ccCN3522.s:132    .bss:00000410 g_iNumCGIs
+C:\Users\Mihai\AppData\Local\Temp\ccCN3522.s:135    .text.strnstr:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccCN3522.s:139    .text.strnstr:00000000 strnstr
+C:\Users\Mihai\AppData\Local\Temp\ccCN3522.s:230    .text.http_state_alloc:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccCN3522.s:234    .text.http_state_alloc:00000000 http_state_alloc
+C:\Users\Mihai\AppData\Local\Temp\ccCN3522.s:276    .text.http_state_free:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccCN3522.s:280    .text.http_state_free:00000000 http_state_free
+C:\Users\Mihai\AppData\Local\Temp\ccCN3522.s:344    .text.http_write:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccCN3522.s:348    .text.http_write:00000000 http_write
+C:\Users\Mihai\AppData\Local\Temp\ccCN3522.s:426    .text.http_close_conn:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccCN3522.s:430    .text.http_close_conn:00000000 http_close_conn
+C:\Users\Mihai\AppData\Local\Temp\ccCN3522.s:2872   .text.http_poll:00000000 http_poll
+C:\Users\Mihai\AppData\Local\Temp\ccCN3522.s:506    .text.extract_uri_parameters:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccCN3522.s:510    .text.extract_uri_parameters:00000000 extract_uri_parameters
+C:\Users\Mihai\AppData\Local\Temp\ccCN3522.s:659    .rodata:0000009c .LC11
+C:\Users\Mihai\AppData\Local\Temp\ccCN3522.s:662    .rodata:000000b0 .LC12
+C:\Users\Mihai\AppData\Local\Temp\ccCN3522.s:665    .text.get_tag_insert:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccCN3522.s:669    .text.get_tag_insert:00000000 get_tag_insert
+C:\Users\Mihai\AppData\Local\Temp\ccCN3522.s:832    .text.http_send_data:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccCN3522.s:836    .text.http_send_data:00000000 http_send_data
+C:\Users\Mihai\AppData\Local\Temp\ccCN3522.s:1186   .text.http_send_data:00000254 $d
+C:\Users\Mihai\AppData\Local\Temp\ccCN3522.s:1193   .text.http_send_data:00000268 $t
+C:\Users\Mihai\AppData\Local\Temp\ccCN3522.s:1933   .rodata:000000b8 .LC13
+C:\Users\Mihai\AppData\Local\Temp\ccCN3522.s:1936   .rodata:000000c4 .LC14
+C:\Users\Mihai\AppData\Local\Temp\ccCN3522.s:1939   .rodata:000000d0 .LC15
+C:\Users\Mihai\AppData\Local\Temp\ccCN3522.s:1942   .rodata:000000dc .LC16
+C:\Users\Mihai\AppData\Local\Temp\ccCN3522.s:1945   .rodata:000000e8 .LC17
+C:\Users\Mihai\AppData\Local\Temp\ccCN3522.s:1948   .rodata:000000f4 .LC18
+C:\Users\Mihai\AppData\Local\Temp\ccCN3522.s:1951   .text.http_find_error_file:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccCN3522.s:1955   .text.http_find_error_file:00000000 http_find_error_file
+C:\Users\Mihai\AppData\Local\Temp\ccCN3522.s:2675   .text.http_init_file:00000000 http_init_file
+C:\Users\Mihai\AppData\Local\Temp\ccCN3522.s:2054   .rodata:00000100 .LC19
+C:\Users\Mihai\AppData\Local\Temp\ccCN3522.s:2057   .rodata:0000010c .LC20
+C:\Users\Mihai\AppData\Local\Temp\ccCN3522.s:2060   .rodata:00000114 .LC21
+C:\Users\Mihai\AppData\Local\Temp\ccCN3522.s:2063   .rodata:00000120 .LC22
+C:\Users\Mihai\AppData\Local\Temp\ccCN3522.s:2066   .text.http_get_404_file:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccCN3522.s:2070   .text.http_get_404_file:00000000 http_get_404_file
+C:\Users\Mihai\AppData\Local\Temp\ccCN3522.s:2149   .rodata:0000012c .LC23
+C:\Users\Mihai\AppData\Local\Temp\ccCN3522.s:2152   .rodata:00000130 .LC24
+C:\Users\Mihai\AppData\Local\Temp\ccCN3522.s:2155   .rodata:00000138 .LC25
+C:\Users\Mihai\AppData\Local\Temp\ccCN3522.s:2158   .text.http_parse_request:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccCN3522.s:2162   .text.http_parse_request:00000000 http_parse_request
+C:\Users\Mihai\AppData\Local\Temp\ccCN3522.s:2407   .text.http_find_file:00000000 http_find_file
+C:\Users\Mihai\AppData\Local\Temp\ccCN3522.s:2403   .text.http_find_file:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccCN3522.s:2671   .text.http_init_file:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccCN3522.s:2768   .text.http_err:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccCN3522.s:2772   .text.http_err:00000000 http_err
+C:\Users\Mihai\AppData\Local\Temp\ccCN3522.s:2811   .text.http_sent:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccCN3522.s:2815   .text.http_sent:00000000 http_sent
+C:\Users\Mihai\AppData\Local\Temp\ccCN3522.s:2868   .text.http_poll:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccCN3522.s:2963   .text.http_recv:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccCN3522.s:2967   .text.http_recv:00000000 http_recv
+C:\Users\Mihai\AppData\Local\Temp\ccCN3522.s:3100   .text.http_accept:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccCN3522.s:3104   .text.http_accept:00000000 http_accept
+C:\Users\Mihai\AppData\Local\Temp\ccCN3522.s:3178   .text.httpd_init_addr:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccCN3522.s:3182   .text.httpd_init_addr:00000000 httpd_init_addr
+C:\Users\Mihai\AppData\Local\Temp\ccCN3522.s:3236   .text.httpd_init:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccCN3522.s:3241   .text.httpd_init:00000000 httpd_init
+C:\Users\Mihai\AppData\Local\Temp\ccCN3522.s:3270   .text.http_set_ssi_handler:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccCN3522.s:3275   .text.http_set_ssi_handler:00000000 http_set_ssi_handler
+C:\Users\Mihai\AppData\Local\Temp\ccCN3522.s:3319   .text.http_set_cgi_handlers:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccCN3522.s:3324   .text.http_set_cgi_handlers:00000000 http_set_cgi_handlers
                      .debug_frame:00000010 $d
                            .group:00000000 wm4.1.1791a5ae2e936ca1033c1c44be394cc7
                            .group:00000000 wm4.arch.h.33.6fa4aa86d33d1490ae882caef7316405
@@ -5828,14 +5828,12 @@ C:\Users\Mihai\AppData\Local\Temp\cc7MCUCk.s:3324   .text.http_set_cgi_handlers:
                            .group:00000000 wm4.SLTHA001.h.97.d7e87c19a31e3244bdd5839e7cc42a61
                            .group:00000000 wm4.WEBSERVER001_Conf.h.54.cd6d29aaa96a848cbc5321bab5d6cd90
                            .group:00000000 wm4.IO004.h.51.dbf9dd216c57d6a7f14a22b2cb7e5626
-                           .group:00000000 wm4.ADCGROUP001.h.48.081c7f952eb4b6ea2df7d05180ee1663
-                           .group:00000000 wm4.IO001.h.49.1da965fb490206cf7cde64a90f6912e1
                            .group:00000000 wm4.MOTORLIBS.h.59.b2e97de0df555dedfa51e24447b57ab8
                            .group:00000000 wm4.uc_id.h.35.a6c4837fad81477ba31967683332b8cc
                            .group:00000000 wm4.Usic.h.90.22743468abc46f16747d12430b219aaf
                            .group:00000000 wm4.UART001_Conf.h.53.c5c972f6f634bc5116c171852aaab668
                            .group:00000000 wm4.UART001.h.109.3e835815a7a59791d8bd39655f4d4cc9
-                           .group:00000000 wm4.NVIC002_Conf.h.63.45e3c2b9806aa66850587e587798873e
+                           .group:00000000 wm4.NVIC002_Conf.h.63.91a0613dae6f500837ac7c56dab852ab
                            .group:00000000 wm4.fs.h.47.a3710c8cba84bb2c95ff7a1ff61bdc0a
 
 UNDEFINED SYMBOLS

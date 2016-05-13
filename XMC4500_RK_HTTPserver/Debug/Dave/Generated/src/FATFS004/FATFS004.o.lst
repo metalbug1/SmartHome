@@ -839,22 +839,22 @@
  525              		.file 10 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Include/core_cm4.h"
 DEFINED SYMBOLS
                             *ABS*:00000000 FATFS004.c
-C:\Users\Mihai\AppData\Local\Temp\ccg7SWDc.s:24     .data:00000000 FATFS004_ErrorCodes
-C:\Users\Mihai\AppData\Local\Temp\ccg7SWDc.s:21     .data:00000000 $d
-C:\Users\Mihai\AppData\Local\Temp\ccg7SWDc.s:34     .data:00000008 FATFS004_StatusCodes
+C:\Users\Mihai\AppData\Local\Temp\ccOFc4wc.s:24     .data:00000000 FATFS004_ErrorCodes
+C:\Users\Mihai\AppData\Local\Temp\ccOFc4wc.s:21     .data:00000000 $d
+C:\Users\Mihai\AppData\Local\Temp\ccOFc4wc.s:34     .data:00000008 FATFS004_StatusCodes
                             *COM*:00000004 FATFS004_UnusedStatus
-C:\Users\Mihai\AppData\Local\Temp\ccg7SWDc.s:42     .text.disk_initialize:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccg7SWDc.s:47     .text.disk_initialize:00000000 disk_initialize
-C:\Users\Mihai\AppData\Local\Temp\ccg7SWDc.s:111    .text.disk_status:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccg7SWDc.s:116    .text.disk_status:00000000 disk_status
-C:\Users\Mihai\AppData\Local\Temp\ccg7SWDc.s:177    .text.disk_read:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccg7SWDc.s:182    .text.disk_read:00000000 disk_read
-C:\Users\Mihai\AppData\Local\Temp\ccg7SWDc.s:270    .text.disk_write:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccg7SWDc.s:275    .text.disk_write:00000000 disk_write
-C:\Users\Mihai\AppData\Local\Temp\ccg7SWDc.s:363    .text.disk_ioctl:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccg7SWDc.s:368    .text.disk_ioctl:00000000 disk_ioctl
-C:\Users\Mihai\AppData\Local\Temp\ccg7SWDc.s:446    .text.get_fattime:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccg7SWDc.s:451    .text.get_fattime:00000000 get_fattime
+C:\Users\Mihai\AppData\Local\Temp\ccOFc4wc.s:42     .text.disk_initialize:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccOFc4wc.s:47     .text.disk_initialize:00000000 disk_initialize
+C:\Users\Mihai\AppData\Local\Temp\ccOFc4wc.s:111    .text.disk_status:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccOFc4wc.s:116    .text.disk_status:00000000 disk_status
+C:\Users\Mihai\AppData\Local\Temp\ccOFc4wc.s:177    .text.disk_read:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccOFc4wc.s:182    .text.disk_read:00000000 disk_read
+C:\Users\Mihai\AppData\Local\Temp\ccOFc4wc.s:270    .text.disk_write:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccOFc4wc.s:275    .text.disk_write:00000000 disk_write
+C:\Users\Mihai\AppData\Local\Temp\ccOFc4wc.s:363    .text.disk_ioctl:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccOFc4wc.s:368    .text.disk_ioctl:00000000 disk_ioctl
+C:\Users\Mihai\AppData\Local\Temp\ccOFc4wc.s:446    .text.get_fattime:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccOFc4wc.s:451    .text.get_fattime:00000000 get_fattime
                      .debug_frame:00000010 $d
                            .group:00000000 wm4.1.1791a5ae2e936ca1033c1c44be394cc7
                            .group:00000000 wm4.XMC4500.h.45.215f4b8c79f46c7645c15373868d08c0
@@ -946,14 +946,12 @@ C:\Users\Mihai\AppData\Local\Temp\ccg7SWDc.s:451    .text.get_fattime:00000000 g
                            .group:00000000 wm4.SLTHA001.h.97.d7e87c19a31e3244bdd5839e7cc42a61
                            .group:00000000 wm4.WEBSERVER001_Conf.h.54.cd6d29aaa96a848cbc5321bab5d6cd90
                            .group:00000000 wm4.IO004.h.51.dbf9dd216c57d6a7f14a22b2cb7e5626
-                           .group:00000000 wm4.ADCGROUP001.h.48.081c7f952eb4b6ea2df7d05180ee1663
-                           .group:00000000 wm4.IO001.h.49.1da965fb490206cf7cde64a90f6912e1
                            .group:00000000 wm4.MOTORLIBS.h.59.b2e97de0df555dedfa51e24447b57ab8
                            .group:00000000 wm4.uc_id.h.35.a6c4837fad81477ba31967683332b8cc
                            .group:00000000 wm4.Usic.h.90.22743468abc46f16747d12430b219aaf
                            .group:00000000 wm4.UART001_Conf.h.53.c5c972f6f634bc5116c171852aaab668
                            .group:00000000 wm4.UART001.h.109.3e835815a7a59791d8bd39655f4d4cc9
-                           .group:00000000 wm4.NVIC002_Conf.h.63.45e3c2b9806aa66850587e587798873e
+                           .group:00000000 wm4.NVIC002_Conf.h.63.91a0613dae6f500837ac7c56dab852ab
 
 UNDEFINED SYMBOLS
 FATFS004_DeviceFunc

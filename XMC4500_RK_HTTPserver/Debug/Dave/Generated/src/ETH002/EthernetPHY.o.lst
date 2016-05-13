@@ -1451,22 +1451,22 @@
 DEFINED SYMBOLS
                             *ABS*:00000000 EthernetPHY.c
                             *COM*:00000004 PHYtimerCallback
-C:\Users\Mihai\AppData\Local\Temp\ccbsZhpQ.s:21     .text.PHY_InitializeDevice:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccbsZhpQ.s:26     .text.PHY_InitializeDevice:00000000 PHY_InitializeDevice
-C:\Users\Mihai\AppData\Local\Temp\ccbsZhpQ.s:410    .text.PHY_lResetPHY:00000000 PHY_lResetPHY
-C:\Users\Mihai\AppData\Local\Temp\ccbsZhpQ.s:503    .text.PHY_lPerformLinkNegotiation:00000000 PHY_lPerformLinkNegotiation
-C:\Users\Mihai\AppData\Local\Temp\ccbsZhpQ.s:101    .text.PHY_IsLinkUP:00000000 PHY_IsLinkUP
-C:\Users\Mihai\AppData\Local\Temp\ccbsZhpQ.s:96     .text.PHY_IsLinkUP:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccbsZhpQ.s:176    .text.PHY_lReadReg:00000000 PHY_lReadReg
-C:\Users\Mihai\AppData\Local\Temp\ccbsZhpQ.s:172    .text.PHY_lReadReg:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccbsZhpQ.s:289    .text.PHY_lWriteReg:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccbsZhpQ.s:293    .text.PHY_lWriteReg:00000000 PHY_lWriteReg
-C:\Users\Mihai\AppData\Local\Temp\ccbsZhpQ.s:406    .text.PHY_lResetPHY:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccbsZhpQ.s:499    .text.PHY_lPerformLinkNegotiation:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccbsZhpQ.s:636    .text.PHY_lIsAutoNegoComplete:00000000 PHY_lIsAutoNegoComplete
-C:\Users\Mihai\AppData\Local\Temp\ccbsZhpQ.s:632    .text.PHY_lIsAutoNegoComplete:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccbsZhpQ.s:723    .text.PHY_RegisterTimerCallback:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccbsZhpQ.s:728    .text.PHY_RegisterTimerCallback:00000000 PHY_RegisterTimerCallback
+C:\Users\Mihai\AppData\Local\Temp\ccL9N7Xe.s:21     .text.PHY_InitializeDevice:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccL9N7Xe.s:26     .text.PHY_InitializeDevice:00000000 PHY_InitializeDevice
+C:\Users\Mihai\AppData\Local\Temp\ccL9N7Xe.s:410    .text.PHY_lResetPHY:00000000 PHY_lResetPHY
+C:\Users\Mihai\AppData\Local\Temp\ccL9N7Xe.s:503    .text.PHY_lPerformLinkNegotiation:00000000 PHY_lPerformLinkNegotiation
+C:\Users\Mihai\AppData\Local\Temp\ccL9N7Xe.s:101    .text.PHY_IsLinkUP:00000000 PHY_IsLinkUP
+C:\Users\Mihai\AppData\Local\Temp\ccL9N7Xe.s:96     .text.PHY_IsLinkUP:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccL9N7Xe.s:176    .text.PHY_lReadReg:00000000 PHY_lReadReg
+C:\Users\Mihai\AppData\Local\Temp\ccL9N7Xe.s:172    .text.PHY_lReadReg:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccL9N7Xe.s:289    .text.PHY_lWriteReg:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccL9N7Xe.s:293    .text.PHY_lWriteReg:00000000 PHY_lWriteReg
+C:\Users\Mihai\AppData\Local\Temp\ccL9N7Xe.s:406    .text.PHY_lResetPHY:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccL9N7Xe.s:499    .text.PHY_lPerformLinkNegotiation:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccL9N7Xe.s:636    .text.PHY_lIsAutoNegoComplete:00000000 PHY_lIsAutoNegoComplete
+C:\Users\Mihai\AppData\Local\Temp\ccL9N7Xe.s:632    .text.PHY_lIsAutoNegoComplete:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccL9N7Xe.s:723    .text.PHY_RegisterTimerCallback:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccL9N7Xe.s:728    .text.PHY_RegisterTimerCallback:00000000 PHY_RegisterTimerCallback
                      .debug_frame:00000010 $d
                            .group:00000000 wm4.1.1791a5ae2e936ca1033c1c44be394cc7
                            .group:00000000 wm4.XMC4500.h.45.215f4b8c79f46c7645c15373868d08c0
@@ -1558,13 +1558,11 @@ C:\Users\Mihai\AppData\Local\Temp\ccbsZhpQ.s:728    .text.PHY_RegisterTimerCallb
                            .group:00000000 wm4.SLTHA001.h.97.d7e87c19a31e3244bdd5839e7cc42a61
                            .group:00000000 wm4.WEBSERVER001_Conf.h.54.cd6d29aaa96a848cbc5321bab5d6cd90
                            .group:00000000 wm4.IO004.h.51.dbf9dd216c57d6a7f14a22b2cb7e5626
-                           .group:00000000 wm4.ADCGROUP001.h.48.081c7f952eb4b6ea2df7d05180ee1663
-                           .group:00000000 wm4.IO001.h.49.1da965fb490206cf7cde64a90f6912e1
                            .group:00000000 wm4.MOTORLIBS.h.59.b2e97de0df555dedfa51e24447b57ab8
                            .group:00000000 wm4.uc_id.h.35.a6c4837fad81477ba31967683332b8cc
                            .group:00000000 wm4.Usic.h.90.22743468abc46f16747d12430b219aaf
                            .group:00000000 wm4.UART001_Conf.h.53.c5c972f6f634bc5116c171852aaab668
                            .group:00000000 wm4.UART001.h.109.3e835815a7a59791d8bd39655f4d4cc9
-                           .group:00000000 wm4.NVIC002_Conf.h.63.45e3c2b9806aa66850587e587798873e
+                           .group:00000000 wm4.NVIC002_Conf.h.63.91a0613dae6f500837ac7c56dab852ab
 
 NO UNDEFINED SYMBOLS
