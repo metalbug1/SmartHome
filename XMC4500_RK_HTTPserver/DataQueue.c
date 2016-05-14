@@ -6,7 +6,7 @@
 
 #include "DataQueue.h"
 
-
+/* Resets queue specific members */
 void Queue_Init(DataQueueType *dq)
 {
 	dq->u8processingIndex = 0;
@@ -14,11 +14,19 @@ void Queue_Init(DataQueueType *dq)
 	dq->u8usedSpace = 0;
 }
 
+/* The function checks the used space of the queue and returns
+ * false - if the queue is not empty
+ * true - if the queue is empty
+ */
 bool Queue_IsEmpty(DataQueueType dq)
 {
 	return (0 == dq.u8usedSpace);
 }
 
+/* The function checks the used space of the queue and returns
+ * false - if the queue is not full
+ * true - if the queue is full
+ */
 bool Queue_IsFull(DataQueueType dq)
 {
 	return (QUEUE_MAX_SIZE == dq.u8usedSpace);

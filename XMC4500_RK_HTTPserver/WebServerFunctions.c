@@ -30,7 +30,7 @@ const tCGI LED_CGI={"/leds.cgi", CGI_led_handler};
 /* Cgi call table, only one CGI used */
 tCGI CGI_TAB[1];
 
-/* Initialisation of functions to be used with CGi*/
+/* Initialization of functions to be used with CGi*/
 //  CGI handler to switch LED status
 const char *CGI_led_handler(int iIndex, int iNumParams, char *pcParam[], char *pcValue[])
 {
@@ -65,7 +65,7 @@ const char *CGI_led_handler(int iIndex, int iNumParams, char *pcParam[], char *p
 
 }
 
-//Initialise cgi environment
+//Initialize cgi environment
 void http_CGI_init( void)
 {
 	//Initialised CGI structure for LED

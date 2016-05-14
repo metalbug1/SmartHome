@@ -12,10 +12,16 @@
 #include "SmartHome_Types.h"
 #include "DataQueue.h"
 
-#define ADC_VCC_VOLTAGE_MILIVOLTS (3300)
-#define ADC_MAX_VALUE 		 	  (4096)
+/* The VCC value that is used for the temperature sensor circuit */
+#define TEMPSENSOR_ADC_VCC_VOLTAGE_MILIVOLTS 			(3300)
+/* The maximum value of the ADC based on the resolution used
+ * For 12 bits resolution the maximum value is 4096
+ */
+#define TEMPSENSOR_ADC_MAX_VALUE 		 	  			(4096)
+/* The resistor used for the resistor divisor of the temperature sensor */
+#define TEMPSENSOR_RESISTOR_VALUE_OHM  					(1000)
 
-
+/* To be called in the initialization sequence */
 void TemperatureSensorInit();
 
 #endif
