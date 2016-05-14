@@ -1,7 +1,7 @@
 DataProcessing.o
 DataQueue.o
+Sensors.o
 SmartHome.o
-TemperatureSensor.o
 WebServerFunctions.o
 Startup/startup_XMC4500.o
 Startup/system_XMC4500.o

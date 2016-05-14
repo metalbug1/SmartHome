@@ -4,17 +4,10 @@
 /* Alina&Mihai    31/01/2016    Initial version						 */
 /*********************************************************************/
 
-#include "TemperatureSensor.h"
+#include "Sensors.h"
 
 
 ADC001_ResultHandleType AdcConversionResult;
-
-/* Call this function once in the initialization sequence */
-void TemperatureSensorInit()
-{
-	/* This function generates a load event for the background scan sequence. */
-    ADC001_GenerateLoadEvent(&ADC001_Handle0);
-}
 
 /* Uses the data received in the ADC Conversion Complete interrupt to get a temperature
  * value in Celsius degrees. The function will round the temperature to a uint16 value.

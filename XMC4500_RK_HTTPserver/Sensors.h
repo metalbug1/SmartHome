@@ -5,8 +5,8 @@
 /*********************************************************************/
 
 
-#ifndef _TEMPERATURESENSOR_H
-#define _TEMPERATURESENSOR_H
+#ifndef _SENSORS_H
+#define _SENSORS_H
 
 #include <DAVE3.h>
 #include "SmartHome_Types.h"
@@ -21,7 +21,6 @@
 /* The resistor used for the resistor divisor of the temperature sensor */
 #define TEMPSENSOR_RESISTOR_VALUE_OHM  					(1000)
 
-/* To be called in the initialization sequence */
-void TemperatureSensorInit();
+uint16_t GetTemperature();
 
 #endif

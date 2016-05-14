@@ -21,7 +21,7 @@
 #include "DataQueue.h"
 #include "DataProcessing.h"
 #include "WebServerFunctions.h"
-#include "TemperatureSensor.h"
+#include "Sensors.h"
 
 
 
@@ -39,7 +39,7 @@ int main(void)
     http_SSI_init();
 
     Queue_Init(&receivedDataQueue);
-    TemperatureSensorInit();
+    ADC001_GenerateLoadEvent(&ADC001_Handle0);
 
     while(1)
 	{
