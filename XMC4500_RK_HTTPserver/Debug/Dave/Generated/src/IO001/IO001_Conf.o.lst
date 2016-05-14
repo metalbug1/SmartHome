@@ -24,18 +24,26 @@
   26 0001 01       		.byte	1
   27 0002 0000     		.space	2
   28 0004 008E0248 		.word	1208126976
-  29              		.text
-  30              	.Letext0:
-  31              		.file 1 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
-  32              		.file 2 "F:\\WORK\\SmartHome_checkout1\\XMC4500_RK_HTTPserver\\Dave\\Generated\\inc\\DAVESupport/.
-  33              		.file 3 "F:\\WORK\\SmartHome_checkout1\\XMC4500_RK_HTTPserver\\Dave\\Generated\\inc\\DAVESupport/.
-  34              		.file 4 "F:\\WORK\\SmartHome_checkout1\\XMC4500_RK_HTTPserver\\Dave\\Generated\\inc\\DAVESupport/.
-  35              		.file 5 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Include/core_cm4.h"
-  36              		.file 6 "../Dave/Generated/src/IO001/IO001_Conf.c"
+  29              		.global	IO001_Handle1
+  30              		.align	2
+  33              	IO001_Handle1:
+  34 0008 0E       		.byte	14
+  35 0009 02       		.byte	2
+  36 000a 0000     		.space	2
+  37 000c 008E0248 		.word	1208126976
+  38              		.text
+  39              	.Letext0:
+  40              		.file 1 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
+  41              		.file 2 "F:\\WORK\\SmartHome_checkout1\\XMC4500_RK_HTTPserver\\Dave\\Generated\\inc\\DAVESupport/.
+  42              		.file 3 "F:\\WORK\\SmartHome_checkout1\\XMC4500_RK_HTTPserver\\Dave\\Generated\\inc\\DAVESupport/.
+  43              		.file 4 "F:\\WORK\\SmartHome_checkout1\\XMC4500_RK_HTTPserver\\Dave\\Generated\\inc\\DAVESupport/.
+  44              		.file 5 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Include/core_cm4.h"
+  45              		.file 6 "../Dave/Generated/src/IO001/IO001_Conf.c"
 DEFINED SYMBOLS
                             *ABS*:00000000 IO001_Conf.c
-C:\Users\Mihai\AppData\Local\Temp\ccqLpFOY.s:24     .rodata:00000000 IO001_Handle0
-C:\Users\Mihai\AppData\Local\Temp\ccqLpFOY.s:21     .rodata:00000000 $d
+C:\Users\Mihai\AppData\Local\Temp\ccxcjNyl.s:24     .rodata:00000000 IO001_Handle0
+C:\Users\Mihai\AppData\Local\Temp\ccxcjNyl.s:21     .rodata:00000000 $d
+C:\Users\Mihai\AppData\Local\Temp\ccxcjNyl.s:33     .rodata:00000008 IO001_Handle1
                            .group:00000000 wm4.1.1791a5ae2e936ca1033c1c44be394cc7
                            .group:00000000 wm4.XMC4500.h.45.215f4b8c79f46c7645c15373868d08c0
                            .group:00000000 wm4.core_cm4.h.47.41af406cb4cda82c972f112a9cd0a024

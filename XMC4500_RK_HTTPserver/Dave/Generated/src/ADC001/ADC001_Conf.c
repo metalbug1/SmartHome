@@ -104,30 +104,36 @@ const ADC001_ChannelHandleType ADC001_ChannelAAHandle = {
   .kEnable = (uint8_t)1
 };
 
+const ADC001_ChannelHandleType ADC001_ChannelABHandle = {
+  .kGroupNo = (uint8_t)0,
+  .kChannelNo = (uint8_t)2,
+  .kEnable = (uint8_t)1
+};
 
 
 
-const ADC001_ChannelHandleType* ADC001_ChannelHandlePtr[1] = {
+const ADC001_ChannelHandleType* ADC001_ChannelHandlePtr[2] = {
   &ADC001_ChannelAAHandle,
+  &ADC001_ChannelABHandle,
 
 };
 
 
 const ADC001_HandleType ADC001_Handle0 =
 {
-  .kChannels = (uint8_t)1,
-  .kGroup0ChSelect = (uint8_t)2, 
+  .kChannels = (uint8_t)2,
+  .kGroup0ChSelect = (uint8_t)6, 
   .kGroup1ChSelect = (uint8_t)0,  
   .kGroup2ChSelect = (uint8_t)0,
   .kGroup3ChSelect = (uint8_t)0,
-  .kGrpAChannels = (uint8_t)1,
+  .kGrpAChannels = (uint8_t)2,
   .kGrpBChannels = (uint8_t)0,
   .kGrpCChannels = (uint8_t)0,
   .kGrpDChannels = (uint8_t)0,
   
   .kActiveGroups = {(uint8_t)1, (uint8_t)0 , (uint8_t)0, (uint8_t)0 }, 
   
-  .kActiveChannels = {{(uint8_t)0, (uint8_t)1, (uint8_t)0, (uint8_t)0, (uint8_t)0, (uint8_t)0, (uint8_t)0, (uint8_t)0 },
+  .kActiveChannels = {{(uint8_t)0, (uint8_t)1, (uint8_t)1, (uint8_t)0, (uint8_t)0, (uint8_t)0, (uint8_t)0, (uint8_t)0 },
                       {(uint8_t)0, (uint8_t)0, (uint8_t)0, (uint8_t)0, (uint8_t)0, (uint8_t)0, (uint8_t)0, (uint8_t)0 } ,
                       {(uint8_t)0, (uint8_t)0, (uint8_t)0, (uint8_t)0, (uint8_t)0, (uint8_t)0, (uint8_t)0, (uint8_t)0 },
                       {(uint8_t)0, (uint8_t)0, (uint8_t)0, (uint8_t)0, (uint8_t)0, (uint8_t)0, (uint8_t)0, (uint8_t)0 }
@@ -140,7 +146,7 @@ const ADC001_HandleType ADC001_Handle0 =
   .kTriggerMode = (uint8_t)ADC001_NOTRIGGER,
   .kGatingMode = (uint8_t)ADC001_GATING_ENABLED_ALWAYS,
   .kTriggerEn = (uint8_t)0,
-  .kAutoScan =   (uint8_t)ADC001_AUTOSCAN_ENABLE,
+  .kAutoScan =   (uint8_t)ADC001_AUTOSCAN_DISABLE,
   .kResultControl = (uint8_t)ADC001_LEFT_ALIGN,
   .kResultEvtEnable= (uint8_t)1,
   .kResourceEvtEnable= (uint8_t)0U,

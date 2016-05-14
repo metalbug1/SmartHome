@@ -2,6 +2,8 @@
 <ResourceModel:Peripheral xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ResourceModel="http://www.infineon.com/Davex/Resource.ecore" name="VADC" description="VADC Device Description" URI="http://www.infineon.com/0.1.37/peripheral/vadc/0">
   <provided xsi:type="ResourceModel:ResourceGroup" name="1" URI="http://www.infineon.com/0.1.37/peripheral/vadc/0/group/0/ch/1">
     <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../ADC001/1.0.22/adc001_0.app#//@consumed.48"/>
+    <localValue xsi:type="ResourceModel:StringValue" value="DependentApp"/>
+    <globalValue xsi:type="ResourceModel:StringValue" value="DependentApp"/>
     <resourcesList name="gchass_assch" requiredResourceUri="http://www.infineon.com/0.1.37/peripheral/vadc/0/g0chass/assch1" isResolved="true"/>
     <resourcesList name="gchctr" requiredResourceUri="http://www.infineon.com/0.1.37/peripheral/vadc/0/g0chctr1" isResolved="true"/>
     <resourcesList name="gcefclr_cev" requiredResourceUri="http://www.infineon.com/0.1.37/peripheral/vadc/0/g0cefclr/cev1" isResolved="true"/>
@@ -817,8 +819,8 @@
     <bitFields name="SCAN" URI="http://www.infineon.com/0.1.37/peripheral/vadc/0/backgnd/brsmr/scan" maxValue="1" minValue="0" startPos="4" stopPos="4" accessPermission="rw">
       <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
       <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../ADC001/1.0.22/adc001_0.app#//@consumed.129"/>
-      <localValue xsi:type="ResourceModel:IntegerValue" value="1"/>
-      <globalValue xsi:type="ResourceModel:IntegerValue" value="1"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
       <toolTipHelpDescription>Autoscan Enable</toolTipHelpDescription>
       <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="No autoscan"/>
       <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Autoscan functionality enabled: a request source event automatically generates a load event"/>
@@ -922,6 +924,47 @@
   </provided>
   <provided xsi:type="ResourceModel:SignalDeclaration" name="gr_rev0" description="Global Signal rev0 from Global Result Resource Group " URI="http://www.infineon.com/0.1.37/peripheral/vadc/0/global_result/rev0" signalType="SINGAL" direction="OUT" isVisible="true">
     <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../ADC001/1.0.22/adc001_0.app#//@consumed.119"/>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="2" URI="http://www.infineon.com/0.1.37/peripheral/vadc/0/group/0/ch/2">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../ADC001/1.0.22/adc001_0.app#//@consumed.49"/>
+    <resourcesList name="gchass_assch" requiredResourceUri="http://www.infineon.com/0.1.37/peripheral/vadc/0/g0chass/assch2" isResolved="true"/>
+    <resourcesList name="gchctr" requiredResourceUri="http://www.infineon.com/0.1.37/peripheral/vadc/0/g0chctr2" isResolved="true"/>
+    <resourcesList name="gcefclr_cev" requiredResourceUri="http://www.infineon.com/0.1.37/peripheral/vadc/0/g0cefclr/cev2" isResolved="true"/>
+    <resourcesList name="gceflag_cev" requiredResourceUri="http://www.infineon.com/0.1.37/peripheral/vadc/0/g0ceflag/cev2" isResolved="true"/>
+    <resourcesList name="gcevnp0_cevnp" requiredResourceUri="http://www.infineon.com/0.1.37/peripheral/vadc/0/g0cevnp0/cev2np" isResolved="true"/>
+    <resourcesList name="gchctr_resreg" requiredResourceUri="http://www.infineon.com/0.1.37/peripheral/vadc/0/g0chctr2/resreg" isResolved="true"/>
+    <resourcesList name="gch" requiredResourceUri="http://www.infineon.com/0.1.37/peripheral/vadc/0/g0ch2" isResolved="true"/>
+    <resourcesList name="select" requiredResourceUri="http://www.infineon.com/0.1.37/peripheral/vadc/0/g0ch2select" isResolved="true"/>
+    <resourcesList name="cev" requiredResourceUri="http://www.infineon.com/0.1.37/peripheral/vadc/0/g0cev2" isResolved="true"/>
+    <resourcesList name="res_sel" requiredResourceUri="http://www.infineon.com/0.1.37/peripheral/vadc/0/g0ch2ressel" isResolved="true"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="g0ch2" description="Group 0 channel 2 signal " URI="http://www.infineon.com/0.1.37/peripheral/vadc/0/group/0/ch/2/gch" signalType="SINGAL" direction="IN" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../ADC001/1.0.22/adc001_0.app#//@consumed.182"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="g0cev2" description="Group 0 channel event signal 2 " URI="http://www.infineon.com/0.1.37/peripheral/vadc/0/group/0/ch/2/cev" signalType="SINGAL" direction="OUT" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../ADC001/1.0.22/adc001_0.app#//@consumed.192"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="g0ch2select" description="Group 0 channel 2 select signal " URI="http://www.infineon.com/0.1.37/peripheral/vadc/0/group/0/ch/2/select" signalType="SINGAL" direction="IN" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../ADC001/1.0.22/adc001_0.app#//@consumed.220"/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="RESREG" URI="http://www.infineon.com/0.1.37/peripheral/vadc/0/group/0/ch/2/gchctr_resreg" maxValue="15" minValue="0" startPos="16" stopPos="19" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Result Register</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0000" description="Store result in group result register GxRES0"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1111" description="Store result in group result register GxRES15"/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="CEV2NP" URI="http://www.infineon.com/0.1.37/peripheral/vadc/0/group/0/ch/2/gcevnp0_cevnp" maxValue="15" minValue="0" startPos="8" stopPos="11" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Service Request Node Pointer Channel Event i</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0000" description="Select service request line 0 of group x"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0011" description="Select service request line 3 of group x"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0100" description="Select shared service request line 0"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0111" description="Select shared service request line 3"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1xxx" description="Reserved"/>
   </provided>
   <categoryDescription description="Versatile Analog-to-Digital Converter Device Description" name="VADC"/>
 </ResourceModel:Peripheral>

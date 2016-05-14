@@ -9,6 +9,9 @@
 
 ADC001_ResultHandleType AdcConversionResult;
 
+uint16_t TemperatureAdcConversion;
+uint16_t LightAdcConversion;
+
 /* Uses the data received in the ADC Conversion Complete interrupt to get a temperature
  * value in Celsius degrees. The function will round the temperature to a uint16 value.
  */
@@ -17,11 +20,7 @@ uint16_t GetTemperature()
 	float fVoltage = 0;
 	float fTempSensorResistance = 0;
 	float fPreciseTemperature = 0;
-	uint16_t u16AdcResult;
 	uint16_t u16Temperature;
-
-	/* Gets the conversion result value from the structure that is filled by the ADC ISR */
-	u16AdcResult = AdcConversionResult.Result;
 
 	/* The input voltage will result in a maximum value for the ADC channel, so:
 	 * TEMPSENSOR_ADC_VCC_VOLTAGE_MILIVOLTS ......... TEMPSENSOR_ADC_MAX_VALUE
@@ -30,7 +29,7 @@ uint16_t GetTemperature()
 	 * fVoltage = (u16AdcResult * TEMPSENSOR_ADC_VCC_VOLTAGE_MILIVOLTS) / TEMPSENSOR_ADC_MAX_VALUE
 	 * In our case: fVoltage = (u16AdcResult * 3300 mV) / 4096
 	 */
-	fVoltage = (u16AdcResult * TEMPSENSOR_ADC_VCC_VOLTAGE_MILIVOLTS) / TEMPSENSOR_ADC_MAX_VALUE;
+	fVoltage = (TemperatureAdcConversion * TEMPSENSOR_ADC_VCC_VOLTAGE_MILIVOLTS) / TEMPSENSOR_ADC_MAX_VALUE;
 
 	/* Knowing the resistance divisor formula and members we can calculate the temperature sensor
 	 * resistance:
@@ -58,9 +57,26 @@ uint16_t GetTemperature()
 	return u16Temperature;
 }
 
+uint16_t GetLight()
+{
+	return (LightAdcConversion/21);
+}
+
+
+
+
 /* ISR for the ADC Conversion Complete */
 void ADC_ConversionComplete()
 {
 	/* The result will be saved in the AdcConversionResult structure */
 	ADC001_GetResult(&ADC001_Handle0, &AdcConversionResult);
+
+	if (AdcConversionResult.ChannelNo == ADC_TEMPSENSOR_CHANNEL)
+	{
+		TemperatureAdcConversion = AdcConversionResult.Result;
+	}
+	if (AdcConversionResult.ChannelNo == ADC_LIGHTSENSOR_CHANNEL)
+	{
+		LightAdcConversion = AdcConversionResult.Result;
+	}
 }

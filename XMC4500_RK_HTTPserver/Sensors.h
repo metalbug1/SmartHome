@@ -21,6 +21,10 @@
 /* The resistor used for the resistor divisor of the temperature sensor */
 #define TEMPSENSOR_RESISTOR_VALUE_OHM  					(1000)
 
+#define ADC_TEMPSENSOR_CHANNEL							(1)
+#define ADC_LIGHTSENSOR_CHANNEL							(2)
+
 uint16_t GetTemperature();
+uint16_t GetLight();
 
 #endif

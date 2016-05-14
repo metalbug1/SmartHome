@@ -71,6 +71,13 @@ const IO001_HandleType IO001_Handle0 = {
   1U,   /* Mapped Pin */
    (IO001_PORTS_TypeDef*)PORT14_BASE /* Port Base Address*/			
 };
+   
+
+const IO001_HandleType IO001_Handle1 = {
+   14U , /* Mapped Port */
+  2U,   /* Mapped Pin */
+   (IO001_PORTS_TypeDef*)PORT14_BASE /* Port Base Address*/			
+};
 
 /*CODE_BLOCK_END*/
 

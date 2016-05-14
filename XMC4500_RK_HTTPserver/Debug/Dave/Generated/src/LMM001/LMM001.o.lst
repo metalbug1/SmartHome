@@ -2693,22 +2693,22 @@
  1199              		.file 5 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Include/core_cm4.h"
 DEFINED SYMBOLS
                             *ABS*:00000000 LMM001.c
-C:\Users\Mihai\AppData\Local\Temp\ccOosPx4.s:20     .text.LMM001_lblocks:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccOosPx4.s:24     .text.LMM001_lblocks:00000000 LMM001_lblocks
-C:\Users\Mihai\AppData\Local\Temp\ccOosPx4.s:72     .text.LMM001_lmake_new_block:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccOosPx4.s:76     .text.LMM001_lmake_new_block:00000000 LMM001_lmake_new_block
-C:\Users\Mihai\AppData\Local\Temp\ccOosPx4.s:170    .text.LMM001_ldisconnect_from_free_list:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccOosPx4.s:174    .text.LMM001_ldisconnect_from_free_list:00000000 LMM001_ldisconnect_from_free_list
-C:\Users\Mihai\AppData\Local\Temp\ccOosPx4.s:260    .text.LMM001_l_assimilate_up:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccOosPx4.s:264    .text.LMM001_l_assimilate_up:00000000 LMM001_l_assimilate_up
-C:\Users\Mihai\AppData\Local\Temp\ccOosPx4.s:367    .text.LMM001_l_assimilate_down:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccOosPx4.s:371    .text.LMM001_l_assimilate_down:00000000 LMM001_l_assimilate_down
-C:\Users\Mihai\AppData\Local\Temp\ccOosPx4.s:454    .text.LMM001_free:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccOosPx4.s:459    .text.LMM001_free:00000000 LMM001_free
-C:\Users\Mihai\AppData\Local\Temp\ccOosPx4.s:610    .text.LMM001_malloc:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccOosPx4.s:615    .text.LMM001_malloc:00000000 LMM001_malloc
-C:\Users\Mihai\AppData\Local\Temp\ccOosPx4.s:921    .text.LMM001_realloc:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccOosPx4.s:926    .text.LMM001_realloc:00000000 LMM001_realloc
+C:\Users\Mihai\AppData\Local\Temp\cc9u7OeI.s:20     .text.LMM001_lblocks:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc9u7OeI.s:24     .text.LMM001_lblocks:00000000 LMM001_lblocks
+C:\Users\Mihai\AppData\Local\Temp\cc9u7OeI.s:72     .text.LMM001_lmake_new_block:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc9u7OeI.s:76     .text.LMM001_lmake_new_block:00000000 LMM001_lmake_new_block
+C:\Users\Mihai\AppData\Local\Temp\cc9u7OeI.s:170    .text.LMM001_ldisconnect_from_free_list:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc9u7OeI.s:174    .text.LMM001_ldisconnect_from_free_list:00000000 LMM001_ldisconnect_from_free_list
+C:\Users\Mihai\AppData\Local\Temp\cc9u7OeI.s:260    .text.LMM001_l_assimilate_up:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc9u7OeI.s:264    .text.LMM001_l_assimilate_up:00000000 LMM001_l_assimilate_up
+C:\Users\Mihai\AppData\Local\Temp\cc9u7OeI.s:367    .text.LMM001_l_assimilate_down:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc9u7OeI.s:371    .text.LMM001_l_assimilate_down:00000000 LMM001_l_assimilate_down
+C:\Users\Mihai\AppData\Local\Temp\cc9u7OeI.s:454    .text.LMM001_free:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc9u7OeI.s:459    .text.LMM001_free:00000000 LMM001_free
+C:\Users\Mihai\AppData\Local\Temp\cc9u7OeI.s:610    .text.LMM001_malloc:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc9u7OeI.s:615    .text.LMM001_malloc:00000000 LMM001_malloc
+C:\Users\Mihai\AppData\Local\Temp\cc9u7OeI.s:921    .text.LMM001_realloc:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc9u7OeI.s:926    .text.LMM001_realloc:00000000 LMM001_realloc
                      .debug_frame:00000010 $d
                            .group:00000000 wm4.1.1791a5ae2e936ca1033c1c44be394cc7
                            .group:00000000 wm4.XMC4500.h.45.215f4b8c79f46c7645c15373868d08c0

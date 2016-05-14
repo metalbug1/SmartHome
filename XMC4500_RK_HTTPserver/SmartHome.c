@@ -30,6 +30,7 @@ int main(void)
 	struct tcp_pcb *mypcb;
 	uint8_t data[] = {1,2,3};
 	uint16_t LivingRoomTemperature;
+	uint16_t LivingRoomLight;
 
 
 	DAVE_Init();			// Initialization of DAVE Apps
@@ -44,6 +45,8 @@ int main(void)
     while(1)
 	{
     	LivingRoomTemperature = GetTemperature();
+    	LivingRoomLight = GetLight();
+        ADC001_GenerateLoadEvent(&ADC001_Handle0);
 		ProcessReceivedData();
 	   /* mypcb = tcp_new();
 	    tcp_bind(mypcb, IP_ADDR_ANY, 80);

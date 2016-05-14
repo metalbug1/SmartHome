@@ -83,6 +83,7 @@ extern const ADC001_HandleType ADC001_Handle0;
 extern const ADC001_ChannelHandleType* ADC001_ChannelHandlePtr[];
 
 extern const ADC001_ChannelHandleType ADC001_ChannelAAHandle;
+extern const ADC001_ChannelHandleType ADC001_ChannelABHandle;
 
 #ifdef __cplusplus
 }

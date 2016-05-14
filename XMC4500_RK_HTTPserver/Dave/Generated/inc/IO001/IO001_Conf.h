@@ -59,6 +59,8 @@ extern "C" {
 
 extern const IO001_HandleType IO001_Handle0;
 
+extern const IO001_HandleType IO001_Handle1;
+
 
 #ifdef __cplusplus
 }
