@@ -1551,23 +1551,23 @@
  974              		.file 8 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Include/core_cm4.h"
 DEFINED SYMBOLS
                             *ABS*:00000000 SDMMC001.c
-C:\Users\Mihai\AppData\Local\Temp\cc3itZfb.s:20     .bss:00000000 SDMMC001_InitializeFlag
-C:\Users\Mihai\AppData\Local\Temp\cc3itZfb.s:21     .bss:00000000 $d
-C:\Users\Mihai\AppData\Local\Temp\cc3itZfb.s:22     .bss:00000001 SDMMC001_LockFlag
-C:\Users\Mihai\AppData\Local\Temp\cc3itZfb.s:25     .text.SDMMC001_lFindDiskStatus:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc3itZfb.s:30     .text.SDMMC001_lFindDiskStatus:00000000 SDMMC001_lFindDiskStatus
-C:\Users\Mihai\AppData\Local\Temp\cc3itZfb.s:115    .text.SDMMC001_Initialize:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc3itZfb.s:120    .text.SDMMC001_Initialize:00000000 SDMMC001_Initialize
-C:\Users\Mihai\AppData\Local\Temp\cc3itZfb.s:203    .text.SDMMC001_GetStatus:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc3itZfb.s:208    .text.SDMMC001_GetStatus:00000000 SDMMC001_GetStatus
-C:\Users\Mihai\AppData\Local\Temp\cc3itZfb.s:240    .text.SDMMC001_ReadBlock:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc3itZfb.s:245    .text.SDMMC001_ReadBlock:00000000 SDMMC001_ReadBlock
-C:\Users\Mihai\AppData\Local\Temp\cc3itZfb.s:323    .text.SDMMC001_WriteBlock:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc3itZfb.s:328    .text.SDMMC001_WriteBlock:00000000 SDMMC001_WriteBlock
-C:\Users\Mihai\AppData\Local\Temp\cc3itZfb.s:418    .text.SDMMC001_Ioctl:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc3itZfb.s:423    .text.SDMMC001_Ioctl:00000000 SDMMC001_Ioctl
-C:\Users\Mihai\AppData\Local\Temp\cc3itZfb.s:527    .text.SDMMC001_Ioctl:000000c4 $d
-C:\Users\Mihai\AppData\Local\Temp\cc3itZfb.s:567    .text.SDMMC001_Ioctl:0000015c $t
+C:\Users\Mihai\AppData\Local\Temp\ccbgLqmM.s:20     .bss:00000000 SDMMC001_InitializeFlag
+C:\Users\Mihai\AppData\Local\Temp\ccbgLqmM.s:21     .bss:00000000 $d
+C:\Users\Mihai\AppData\Local\Temp\ccbgLqmM.s:22     .bss:00000001 SDMMC001_LockFlag
+C:\Users\Mihai\AppData\Local\Temp\ccbgLqmM.s:25     .text.SDMMC001_lFindDiskStatus:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccbgLqmM.s:30     .text.SDMMC001_lFindDiskStatus:00000000 SDMMC001_lFindDiskStatus
+C:\Users\Mihai\AppData\Local\Temp\ccbgLqmM.s:115    .text.SDMMC001_Initialize:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccbgLqmM.s:120    .text.SDMMC001_Initialize:00000000 SDMMC001_Initialize
+C:\Users\Mihai\AppData\Local\Temp\ccbgLqmM.s:203    .text.SDMMC001_GetStatus:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccbgLqmM.s:208    .text.SDMMC001_GetStatus:00000000 SDMMC001_GetStatus
+C:\Users\Mihai\AppData\Local\Temp\ccbgLqmM.s:240    .text.SDMMC001_ReadBlock:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccbgLqmM.s:245    .text.SDMMC001_ReadBlock:00000000 SDMMC001_ReadBlock
+C:\Users\Mihai\AppData\Local\Temp\ccbgLqmM.s:323    .text.SDMMC001_WriteBlock:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccbgLqmM.s:328    .text.SDMMC001_WriteBlock:00000000 SDMMC001_WriteBlock
+C:\Users\Mihai\AppData\Local\Temp\ccbgLqmM.s:418    .text.SDMMC001_Ioctl:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccbgLqmM.s:423    .text.SDMMC001_Ioctl:00000000 SDMMC001_Ioctl
+C:\Users\Mihai\AppData\Local\Temp\ccbgLqmM.s:527    .text.SDMMC001_Ioctl:000000c4 $d
+C:\Users\Mihai\AppData\Local\Temp\ccbgLqmM.s:567    .text.SDMMC001_Ioctl:0000015c $t
                      .debug_frame:00000010 $d
                            .group:00000000 wm4.1.1791a5ae2e936ca1033c1c44be394cc7
                            .group:00000000 wm4.XMC4500.h.45.215f4b8c79f46c7645c15373868d08c0
@@ -1664,7 +1664,10 @@ C:\Users\Mihai\AppData\Local\Temp\cc3itZfb.s:567    .text.SDMMC001_Ioctl:0000015
                            .group:00000000 wm4.Usic.h.90.22743468abc46f16747d12430b219aaf
                            .group:00000000 wm4.UART001_Conf.h.53.c5c972f6f634bc5116c171852aaab668
                            .group:00000000 wm4.UART001.h.109.3e835815a7a59791d8bd39655f4d4cc9
-                           .group:00000000 wm4.NVIC002_Conf.h.63.91a0613dae6f500837ac7c56dab852ab
+                           .group:00000000 wm4.NVIC002_Conf.h.63.4809ded45954a78aa476d1e9f44d110e
+                           .group:00000000 wm4.ADCGROUP001.h.66.3ee81aba16709c201614af7d67499bdb
+                           .group:00000000 wm4.IO001.h.49.4efcabb368feaef60c65bd7504b48505
+                           .group:00000000 wm4.ADC001.h.72.a0f6b9479a18584b91fa95e6f862978d
 
 UNDEFINED SYMBOLS
 SDMMC003_GetCurrentState

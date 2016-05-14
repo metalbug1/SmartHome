@@ -1,6 +1,7 @@
 DataProcessing.o
 DataQueue.o
 SmartHome.o
+TemperatureSensor.o
 WebServerFunctions.o
 Startup/startup_XMC4500.o
 Startup/system_XMC4500.o
@@ -32,6 +33,8 @@ Dave/Generated/src/LMM001/LMM001_Conf.o
 Dave/Generated/src/LIBS/CCU8PWMLIB.o
 Dave/Generated/src/IO004/IO004.o
 Dave/Generated/src/IO004/IO004_Conf.o
+Dave/Generated/src/IO001/IO001.o
+Dave/Generated/src/IO001/IO001_Conf.o
 Dave/Generated/src/GMM001/GMM001.o
 Dave/Generated/src/GMM001/GMM001_Conf.o
 Dave/Generated/src/FATFS004/FATFS004.o
@@ -85,3 +88,9 @@ Dave/Generated/src/ETH001/synopGMAC_stack_interface.o
 Dave/Generated/src/DAVESupport/DAVE3.o
 Dave/Generated/src/DAVESupport/MULTIPLEXER.o
 Dave/Generated/src/CLK001/CLK001.o
+Dave/Generated/src/ADCGROUP001/ADCGroup001.o
+Dave/Generated/src/ADCGROUP001/ADCGroup001_Conf.o
+Dave/Generated/src/ADCGLOB001/ADCGlob001.o
+Dave/Generated/src/ADCGLOB001/ADCGlob001_Conf.o
+Dave/Generated/src/ADC001/ADC001.o
+Dave/Generated/src/ADC001/ADC001_Conf.o

@@ -45,10 +45,10 @@
   49              		.file 7 "../Dave/Generated/src/RTC001/RTC001_Conf.c"
 DEFINED SYMBOLS
                             *ABS*:00000000 RTC001_Conf.c
-C:\Users\Mihai\AppData\Local\Temp\ccsJlhL7.s:24     .rodata:00000000 RTC001_Handle
-C:\Users\Mihai\AppData\Local\Temp\ccsJlhL7.s:21     .rodata:00000000 $d
-C:\Users\Mihai\AppData\Local\Temp\ccsJlhL7.s:33     .data:00000000 timeptr1
-C:\Users\Mihai\AppData\Local\Temp\ccsJlhL7.s:30     .data:00000000 $d
+C:\Users\Mihai\AppData\Local\Temp\ccD683AO.s:24     .rodata:00000000 RTC001_Handle
+C:\Users\Mihai\AppData\Local\Temp\ccD683AO.s:21     .rodata:00000000 $d
+C:\Users\Mihai\AppData\Local\Temp\ccD683AO.s:33     .data:00000000 timeptr1
+C:\Users\Mihai\AppData\Local\Temp\ccD683AO.s:30     .data:00000000 $d
                            .group:00000000 wm4.1.1791a5ae2e936ca1033c1c44be394cc7
                            .group:00000000 wm4.XMC4500.h.45.215f4b8c79f46c7645c15373868d08c0
                            .group:00000000 wm4.core_cm4.h.47.41af406cb4cda82c972f112a9cd0a024
@@ -144,6 +144,9 @@ C:\Users\Mihai\AppData\Local\Temp\ccsJlhL7.s:30     .data:00000000 $d
                            .group:00000000 wm4.Usic.h.90.22743468abc46f16747d12430b219aaf
                            .group:00000000 wm4.UART001_Conf.h.53.c5c972f6f634bc5116c171852aaab668
                            .group:00000000 wm4.UART001.h.109.3e835815a7a59791d8bd39655f4d4cc9
-                           .group:00000000 wm4.NVIC002_Conf.h.63.91a0613dae6f500837ac7c56dab852ab
+                           .group:00000000 wm4.NVIC002_Conf.h.63.4809ded45954a78aa476d1e9f44d110e
+                           .group:00000000 wm4.ADCGROUP001.h.66.3ee81aba16709c201614af7d67499bdb
+                           .group:00000000 wm4.IO001.h.49.4efcabb368feaef60c65bd7504b48505
+                           .group:00000000 wm4.ADC001.h.72.a0f6b9479a18584b91fa95e6f862978d
 
 NO UNDEFINED SYMBOLS

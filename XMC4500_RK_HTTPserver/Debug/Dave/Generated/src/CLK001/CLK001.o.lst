@@ -2097,24 +2097,24 @@
  958              		.file 5 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Include/core_cm4.h"
 DEFINED SYMBOLS
                             *ABS*:00000000 CLK001.c
-C:\Users\Mihai\AppData\Local\Temp\ccNazHgx.s:20     .text.Delay:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccNazHgx.s:24     .text.Delay:00000000 Delay
-C:\Users\Mihai\AppData\Local\Temp\ccNazHgx.s:104    .text.System_Clock_valid:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccNazHgx.s:108    .text.System_Clock_valid:00000000 System_Clock_valid
-C:\Users\Mihai\AppData\Local\Temp\ccNazHgx.s:153    .text.System_Clock_init:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccNazHgx.s:157    .text.System_Clock_init:00000000 System_Clock_init
-C:\Users\Mihai\AppData\Local\Temp\ccNazHgx.s:508    .text.USB_Clock_valid:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccNazHgx.s:512    .text.USB_Clock_valid:00000000 USB_Clock_valid
-C:\Users\Mihai\AppData\Local\Temp\ccNazHgx.s:557    .text.USB_Clock_init:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccNazHgx.s:561    .text.USB_Clock_init:00000000 USB_Clock_init
-C:\Users\Mihai\AppData\Local\Temp\ccNazHgx.s:754    .text.MMC_Clock_init:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccNazHgx.s:758    .text.MMC_Clock_init:00000000 MMC_Clock_init
-C:\Users\Mihai\AppData\Local\Temp\ccNazHgx.s:788    .text.RTC_Clock_init:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccNazHgx.s:792    .text.RTC_Clock_init:00000000 RTC_Clock_init
-C:\Users\Mihai\AppData\Local\Temp\ccNazHgx.s:878    .text.CLK001_Init:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccNazHgx.s:883    .text.CLK001_Init:00000000 CLK001_Init
-C:\Users\Mihai\AppData\Local\Temp\ccNazHgx.s:925    .text.AllowPLLInitByStartup:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccNazHgx.s:930    .text.AllowPLLInitByStartup:00000000 AllowPLLInitByStartup
+C:\Users\Mihai\AppData\Local\Temp\ccVvL1ra.s:20     .text.Delay:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccVvL1ra.s:24     .text.Delay:00000000 Delay
+C:\Users\Mihai\AppData\Local\Temp\ccVvL1ra.s:104    .text.System_Clock_valid:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccVvL1ra.s:108    .text.System_Clock_valid:00000000 System_Clock_valid
+C:\Users\Mihai\AppData\Local\Temp\ccVvL1ra.s:153    .text.System_Clock_init:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccVvL1ra.s:157    .text.System_Clock_init:00000000 System_Clock_init
+C:\Users\Mihai\AppData\Local\Temp\ccVvL1ra.s:508    .text.USB_Clock_valid:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccVvL1ra.s:512    .text.USB_Clock_valid:00000000 USB_Clock_valid
+C:\Users\Mihai\AppData\Local\Temp\ccVvL1ra.s:557    .text.USB_Clock_init:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccVvL1ra.s:561    .text.USB_Clock_init:00000000 USB_Clock_init
+C:\Users\Mihai\AppData\Local\Temp\ccVvL1ra.s:754    .text.MMC_Clock_init:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccVvL1ra.s:758    .text.MMC_Clock_init:00000000 MMC_Clock_init
+C:\Users\Mihai\AppData\Local\Temp\ccVvL1ra.s:788    .text.RTC_Clock_init:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccVvL1ra.s:792    .text.RTC_Clock_init:00000000 RTC_Clock_init
+C:\Users\Mihai\AppData\Local\Temp\ccVvL1ra.s:878    .text.CLK001_Init:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccVvL1ra.s:883    .text.CLK001_Init:00000000 CLK001_Init
+C:\Users\Mihai\AppData\Local\Temp\ccVvL1ra.s:925    .text.AllowPLLInitByStartup:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccVvL1ra.s:930    .text.AllowPLLInitByStartup:00000000 AllowPLLInitByStartup
                      .debug_frame:00000010 $d
                            .group:00000000 wm4.1.1791a5ae2e936ca1033c1c44be394cc7
                            .group:00000000 wm4.XMC4500.h.45.215f4b8c79f46c7645c15373868d08c0
@@ -2211,7 +2211,10 @@ C:\Users\Mihai\AppData\Local\Temp\ccNazHgx.s:930    .text.AllowPLLInitByStartup:
                            .group:00000000 wm4.Usic.h.90.22743468abc46f16747d12430b219aaf
                            .group:00000000 wm4.UART001_Conf.h.53.c5c972f6f634bc5116c171852aaab668
                            .group:00000000 wm4.UART001.h.109.3e835815a7a59791d8bd39655f4d4cc9
-                           .group:00000000 wm4.NVIC002_Conf.h.63.91a0613dae6f500837ac7c56dab852ab
+                           .group:00000000 wm4.NVIC002_Conf.h.63.4809ded45954a78aa476d1e9f44d110e
+                           .group:00000000 wm4.ADCGROUP001.h.66.3ee81aba16709c201614af7d67499bdb
+                           .group:00000000 wm4.IO001.h.49.4efcabb368feaef60c65bd7504b48505
+                           .group:00000000 wm4.ADC001.h.72.a0f6b9479a18584b91fa95e6f862978d
 
 UNDEFINED SYMBOLS
 SystemCoreClockUpdate

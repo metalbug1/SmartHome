@@ -7,18 +7,21 @@ C_SRCS += \
 ../DataProcessing.c \
 ../DataQueue.c \
 ../SmartHome.c \
+../TemperatureSensor.c \
 ../WebServerFunctions.c 
 
 OBJS += \
 ./DataProcessing.o \
 ./DataQueue.o \
 ./SmartHome.o \
+./TemperatureSensor.o \
 ./WebServerFunctions.o 
 
 C_DEPS += \
 ./DataProcessing.d \
 ./DataQueue.d \
 ./SmartHome.d \
+./TemperatureSensor.d \
 ./WebServerFunctions.d 
 
 

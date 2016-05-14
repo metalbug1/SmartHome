@@ -74,8 +74,8 @@ extern "C" {
 /* User defined function mapped to IRQ_Hdlr_90 */
 #define UART_ReceiveInterrupt    IRQ_Hdlr_90 
 
-/* User defined function mapped to IRQ_Hdlr_64 */
-#define ADC_ConversionComplete    IRQ_Hdlr_64 
+/* User defined function mapped to IRQ_Hdlr_16 */
+#define ADC_ConversionComplete    IRQ_Hdlr_16 
 
 
 /**

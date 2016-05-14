@@ -2017,7 +2017,7 @@
  257              	.LCFI12:
  258              		.cfi_def_cfa_register 7
  164:../Dave/Generated/src/NVIC_SCU001/NVIC_SCU001.c ****  DBG002_FUNCTION_ENTRY(APP_GID,NVIC_SCU001_FUNC_ENTRY);
- 165:../Dave/Generated/src/NVIC_SCU001/NVIC_SCU001.c ****   NVIC_SetPriority((IRQn_Type)3, NVIC_EncodePriority(NVIC_GetPriorityGrouping(),63,0));
+ 165:../Dave/Generated/src/NVIC_SCU001/NVIC_SCU001.c ****   NVIC_SetPriority((IRQn_Type)64, NVIC_EncodePriority(NVIC_GetPriorityGrouping(),63,0));
  259              		.loc 2 165 0
  260 0004 FFF7FEFF 		bl	NVIC_GetPriorityGrouping
  261 0008 0346     		mov	r3, r0
@@ -2026,13 +2026,13 @@
  264 0010 4FF00002 		mov	r2, #0
  265 0014 FFF7FEFF 		bl	NVIC_EncodePriority
  266 0018 0346     		mov	r3, r0
- 267 001a 4FF00300 		mov	r0, #3
+ 267 001a 4FF04000 		mov	r0, #64
  268 001e 1946     		mov	r1, r3
  269 0020 FFF7FEFF 		bl	NVIC_SetPriority
  166:../Dave/Generated/src/NVIC_SCU001/NVIC_SCU001.c ****   /* Enable Interrupt */
- 167:../Dave/Generated/src/NVIC_SCU001/NVIC_SCU001.c ****   NVIC_EnableIRQ((IRQn_Type)3); 
+ 167:../Dave/Generated/src/NVIC_SCU001/NVIC_SCU001.c ****   NVIC_EnableIRQ((IRQn_Type)64); 
  270              		.loc 2 167 0
- 271 0024 4FF00300 		mov	r0, #3
+ 271 0024 4FF04000 		mov	r0, #64
  272 0028 FFF7FEFF 		bl	NVIC_EnableIRQ
  168:../Dave/Generated/src/NVIC_SCU001/NVIC_SCU001.c ****  
  169:../Dave/Generated/src/NVIC_SCU001/NVIC_SCU001.c ****   DBG002_FUNCTION_EXIT(APP_GID,NVIC_SCU001_FUNC_EXIT);
@@ -2993,21 +2993,21 @@
  955              		.file 6 "F:\\WORK\\SmartHome_checkout1\\XMC4500_RK_HTTPserver\\Dave\\Generated\\inc\\DAVESupport/.
 DEFINED SYMBOLS
                             *ABS*:00000000 NVIC_SCU001.c
-C:\Users\Mihai\AppData\Local\Temp\cc2CsEMa.s:20     .text.NVIC_GetPriorityGrouping:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc2CsEMa.s:24     .text.NVIC_GetPriorityGrouping:00000000 NVIC_GetPriorityGrouping
-C:\Users\Mihai\AppData\Local\Temp\cc2CsEMa.s:54     .text.NVIC_EnableIRQ:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc2CsEMa.s:58     .text.NVIC_EnableIRQ:00000000 NVIC_EnableIRQ
-C:\Users\Mihai\AppData\Local\Temp\cc2CsEMa.s:96     .text.NVIC_SetPriority:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc2CsEMa.s:100    .text.NVIC_SetPriority:00000000 NVIC_SetPriority
-C:\Users\Mihai\AppData\Local\Temp\cc2CsEMa.s:158    .text.NVIC_EncodePriority:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc2CsEMa.s:162    .text.NVIC_EncodePriority:00000000 NVIC_EncodePriority
+C:\Users\Mihai\AppData\Local\Temp\ccjK8dMI.s:20     .text.NVIC_GetPriorityGrouping:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccjK8dMI.s:24     .text.NVIC_GetPriorityGrouping:00000000 NVIC_GetPriorityGrouping
+C:\Users\Mihai\AppData\Local\Temp\ccjK8dMI.s:54     .text.NVIC_EnableIRQ:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccjK8dMI.s:58     .text.NVIC_EnableIRQ:00000000 NVIC_EnableIRQ
+C:\Users\Mihai\AppData\Local\Temp\ccjK8dMI.s:96     .text.NVIC_SetPriority:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccjK8dMI.s:100    .text.NVIC_SetPriority:00000000 NVIC_SetPriority
+C:\Users\Mihai\AppData\Local\Temp\ccjK8dMI.s:158    .text.NVIC_EncodePriority:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccjK8dMI.s:162    .text.NVIC_EncodePriority:00000000 NVIC_EncodePriority
                             *COM*:00000088 NVIC_SCU001_Handle0
-C:\Users\Mihai\AppData\Local\Temp\cc2CsEMa.s:239    .text.NVIC_SCU001_Init:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc2CsEMa.s:244    .text.NVIC_SCU001_Init:00000000 NVIC_SCU001_Init
-C:\Users\Mihai\AppData\Local\Temp\cc2CsEMa.s:279    .text.NVIC_SCU001_RegisterCallback:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc2CsEMa.s:284    .text.NVIC_SCU001_RegisterCallback:00000000 NVIC_SCU001_RegisterCallback
-C:\Users\Mihai\AppData\Local\Temp\cc2CsEMa.s:330    .text.SCU_0_IRQHandler:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc2CsEMa.s:335    .text.SCU_0_IRQHandler:00000000 SCU_0_IRQHandler
+C:\Users\Mihai\AppData\Local\Temp\ccjK8dMI.s:239    .text.NVIC_SCU001_Init:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccjK8dMI.s:244    .text.NVIC_SCU001_Init:00000000 NVIC_SCU001_Init
+C:\Users\Mihai\AppData\Local\Temp\ccjK8dMI.s:279    .text.NVIC_SCU001_RegisterCallback:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccjK8dMI.s:284    .text.NVIC_SCU001_RegisterCallback:00000000 NVIC_SCU001_RegisterCallback
+C:\Users\Mihai\AppData\Local\Temp\ccjK8dMI.s:330    .text.SCU_0_IRQHandler:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccjK8dMI.s:335    .text.SCU_0_IRQHandler:00000000 SCU_0_IRQHandler
                      .debug_frame:00000010 $d
                            .group:00000000 wm4.1.1791a5ae2e936ca1033c1c44be394cc7
                            .group:00000000 wm4.XMC4500.h.45.215f4b8c79f46c7645c15373868d08c0
@@ -3104,6 +3104,9 @@ C:\Users\Mihai\AppData\Local\Temp\cc2CsEMa.s:335    .text.SCU_0_IRQHandler:00000
                            .group:00000000 wm4.Usic.h.90.22743468abc46f16747d12430b219aaf
                            .group:00000000 wm4.UART001_Conf.h.53.c5c972f6f634bc5116c171852aaab668
                            .group:00000000 wm4.UART001.h.109.3e835815a7a59791d8bd39655f4d4cc9
-                           .group:00000000 wm4.NVIC002_Conf.h.63.91a0613dae6f500837ac7c56dab852ab
+                           .group:00000000 wm4.NVIC002_Conf.h.63.4809ded45954a78aa476d1e9f44d110e
+                           .group:00000000 wm4.ADCGROUP001.h.66.3ee81aba16709c201614af7d67499bdb
+                           .group:00000000 wm4.IO001.h.49.4efcabb368feaef60c65bd7504b48505
+                           .group:00000000 wm4.ADC001.h.72.a0f6b9479a18584b91fa95e6f862978d
 
 NO UNDEFINED SYMBOLS
