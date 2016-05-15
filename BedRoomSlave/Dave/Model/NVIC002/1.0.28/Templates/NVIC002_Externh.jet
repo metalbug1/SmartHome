@@ -1,4 +1,4 @@
-<%@ jet package="CodeGenerator" class="nvic002_extern_template"
+<%@ jet package="CodeGenerator" class="nvic002_externh_template"
 imports="java.util.* java.text.* com.ifx.davex.appjetinteract.App2JetInterface" %>
 <% App2JetInterface app = (App2JetInterface) argument; %>
 

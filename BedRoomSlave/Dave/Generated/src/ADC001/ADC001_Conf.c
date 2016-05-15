@@ -100,7 +100,7 @@ ADC001_DynamicDataType ADC001_DynamicHandle =
 
 const ADC001_ChannelHandleType ADC001_ChannelAAHandle = {
   .kGroupNo = (uint8_t)0,
-  .kChannelNo = (uint8_t)0,
+  .kChannelNo = (uint8_t)1,
   .kEnable = (uint8_t)1
 };
 
@@ -128,7 +128,7 @@ const ADC001_ChannelHandleType* ADC001_ChannelHandlePtr[3] = {
 const ADC001_HandleType ADC001_Handle0 =
 {
   .kChannels = (uint8_t)3,
-  .kGroup0ChSelect = (uint8_t)13, 
+  .kGroup0ChSelect = (uint8_t)14, 
   .kGroup1ChSelect = (uint8_t)0,  
   .kGroup2ChSelect = (uint8_t)0,
   .kGroup3ChSelect = (uint8_t)0,
@@ -139,7 +139,7 @@ const ADC001_HandleType ADC001_Handle0 =
   
   .kActiveGroups = {(uint8_t)1, (uint8_t)0 , (uint8_t)0, (uint8_t)0 }, 
   
-  .kActiveChannels = {{(uint8_t)1, (uint8_t)0, (uint8_t)1, (uint8_t)1, (uint8_t)0, (uint8_t)0, (uint8_t)0, (uint8_t)0 },
+  .kActiveChannels = {{(uint8_t)0, (uint8_t)1, (uint8_t)1, (uint8_t)1, (uint8_t)0, (uint8_t)0, (uint8_t)0, (uint8_t)0 },
                       {(uint8_t)0, (uint8_t)0, (uint8_t)0, (uint8_t)0, (uint8_t)0, (uint8_t)0, (uint8_t)0, (uint8_t)0 } ,
                       {(uint8_t)0, (uint8_t)0, (uint8_t)0, (uint8_t)0, (uint8_t)0, (uint8_t)0, (uint8_t)0, (uint8_t)0 },
                       {(uint8_t)0, (uint8_t)0, (uint8_t)0, (uint8_t)0, (uint8_t)0, (uint8_t)0, (uint8_t)0, (uint8_t)0 }

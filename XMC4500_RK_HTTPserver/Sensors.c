@@ -15,7 +15,7 @@ uint16_t LightAdcConversion;
 /* Uses the data received in the ADC Conversion Complete interrupt to get a temperature
  * value in Celsius degrees. The function will round the temperature to a uint16 value.
  */
-uint16_t GetTemperature()
+void GetTemperature(uint8_t au8Temperature[])
 {
 	float fVoltage = 0;
 	float fTempSensorResistance = 0;
@@ -44,6 +44,7 @@ uint16_t GetTemperature()
 	 */
 	fPreciseTemperature = (uint8_t)((0.1272 * fTempSensorResistance - 103.1) * 10);
 
+
 	/* Round the temperature value to the closest integer */
 	if (((uint16_t)fPreciseTemperature % 10) < 5)
 	{
@@ -53,13 +54,15 @@ uint16_t GetTemperature()
 	{
 		u16Temperature = (uint16_t)(fPreciseTemperature/10) + 1;
 	}
-
-	return u16Temperature;
+	au8Temperature[0] = (uint8_t)u16Temperature;
+	au8Temperature[1] = (uint8_t)((uint16_t)fPreciseTemperature % 10);
 }
 
-uint16_t GetLight()
+void GetLight(uint8_t au8Light[])
 {
-	return (LightAdcConversion/21);
+	au8Light[0] = LightAdcConversion/21;
+	au8Light[1] = 0;
+
 }
 
 

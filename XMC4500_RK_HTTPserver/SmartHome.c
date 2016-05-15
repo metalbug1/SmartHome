@@ -44,8 +44,8 @@ int main(void)
 
     while(1)
 	{
-    	LivingRoomTemperature = GetTemperature();
-    	LivingRoomLight = GetLight();
+    	GetTemperature(roomInformation[ROOM_INDEX(BEDROOM)].u8Temperature);
+    	GetLight(roomInformation[ROOM_INDEX(BEDROOM)].u8Humidity);
         ADC001_GenerateLoadEvent(&ADC001_Handle0);
 		ProcessReceivedData();
 	   /* mypcb = tcp_new();

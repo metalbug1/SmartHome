@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<Project MotherSystem_Version="" Name="BedRoomSlave" Path="F:\WORK\BedRoomSlave">
+<Project MotherSystem_Version="" Name="BedRoomSlave" Path="F:\WORK\SmartHome_checkout1\BedRoomSlave">
     <COMPILER>
         <Name>ARM-GCC</Name>
         <Version/>
@@ -74,6 +74,16 @@
             <Source_File>
                 <File_Name>MOTORLIB.c</File_Name>
                 <Path>\Dave\Generated\src\LIBS\MOTORLIB.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>NVIC002.c</File_Name>
+                <Path>\Dave\Generated\src\NVIC002\NVIC002.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>NVIC002_Conf.c</File_Name>
+                <Path>\Dave\Generated\src\NVIC002\NVIC002_Conf.c</Path>
                 <Type>C File</Type>
             </Source_File>
             <Source_File>
@@ -186,6 +196,21 @@
             <Header_File>
                 <File_Name>MOTORLIBS.h</File_Name>
                 <Path>\Dave\Generated\inc\MOTORLIBS\MOTORLIBS.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>NVIC002.h</File_Name>
+                <Path>\Dave\Generated\inc\NVIC002\NVIC002.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>NVIC002_Conf.h</File_Name>
+                <Path>\Dave\Generated\inc\NVIC002\NVIC002_Conf.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>NVIC002_Extern.h</File_Name>
+                <Path>\Dave\Generated\inc\NVIC002\NVIC002_Extern.h</Path>
                 <Type>H File</Type>
             </Header_File>
             <Header_File>

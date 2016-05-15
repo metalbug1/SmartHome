@@ -994,24 +994,24 @@
  655              		.file 9 "F:\\WORK\\SmartHome_checkout1\\XMC4500_RK_HTTPserver\\Dave\\Generated\\src\\ETH004\\01_lw
 DEFINED SYMBOLS
                             *ABS*:00000000 raw.c
-C:\Users\Mihai\AppData\Local\Temp\cc7w8qh5.s:20     .bss:00000000 $d
-C:\Users\Mihai\AppData\Local\Temp\cc7w8qh5.s:21     .bss:00000000 raw_pcbs
-C:\Users\Mihai\AppData\Local\Temp\cc7w8qh5.s:24     .text.raw_input:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc7w8qh5.s:29     .text.raw_input:00000000 raw_input
-C:\Users\Mihai\AppData\Local\Temp\cc7w8qh5.s:159    .text.raw_bind:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc7w8qh5.s:164    .text.raw_bind:00000000 raw_bind
-C:\Users\Mihai\AppData\Local\Temp\cc7w8qh5.s:211    .text.raw_connect:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc7w8qh5.s:216    .text.raw_connect:00000000 raw_connect
-C:\Users\Mihai\AppData\Local\Temp\cc7w8qh5.s:263    .text.raw_recv:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc7w8qh5.s:268    .text.raw_recv:00000000 raw_recv
-C:\Users\Mihai\AppData\Local\Temp\cc7w8qh5.s:305    .text.raw_sendto:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc7w8qh5.s:310    .text.raw_sendto:00000000 raw_sendto
-C:\Users\Mihai\AppData\Local\Temp\cc7w8qh5.s:450    .text.raw_send:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc7w8qh5.s:455    .text.raw_send:00000000 raw_send
-C:\Users\Mihai\AppData\Local\Temp\cc7w8qh5.s:491    .text.raw_remove:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc7w8qh5.s:496    .text.raw_remove:00000000 raw_remove
-C:\Users\Mihai\AppData\Local\Temp\cc7w8qh5.s:576    .text.raw_new:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\cc7w8qh5.s:581    .text.raw_new:00000000 raw_new
+C:\Users\Mihai\AppData\Local\Temp\ccWWAWSc.s:20     .bss:00000000 $d
+C:\Users\Mihai\AppData\Local\Temp\ccWWAWSc.s:21     .bss:00000000 raw_pcbs
+C:\Users\Mihai\AppData\Local\Temp\ccWWAWSc.s:24     .text.raw_input:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccWWAWSc.s:29     .text.raw_input:00000000 raw_input
+C:\Users\Mihai\AppData\Local\Temp\ccWWAWSc.s:159    .text.raw_bind:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccWWAWSc.s:164    .text.raw_bind:00000000 raw_bind
+C:\Users\Mihai\AppData\Local\Temp\ccWWAWSc.s:211    .text.raw_connect:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccWWAWSc.s:216    .text.raw_connect:00000000 raw_connect
+C:\Users\Mihai\AppData\Local\Temp\ccWWAWSc.s:263    .text.raw_recv:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccWWAWSc.s:268    .text.raw_recv:00000000 raw_recv
+C:\Users\Mihai\AppData\Local\Temp\ccWWAWSc.s:305    .text.raw_sendto:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccWWAWSc.s:310    .text.raw_sendto:00000000 raw_sendto
+C:\Users\Mihai\AppData\Local\Temp\ccWWAWSc.s:450    .text.raw_send:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccWWAWSc.s:455    .text.raw_send:00000000 raw_send
+C:\Users\Mihai\AppData\Local\Temp\ccWWAWSc.s:491    .text.raw_remove:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccWWAWSc.s:496    .text.raw_remove:00000000 raw_remove
+C:\Users\Mihai\AppData\Local\Temp\ccWWAWSc.s:576    .text.raw_new:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccWWAWSc.s:581    .text.raw_new:00000000 raw_new
                      .debug_frame:00000010 $d
                            .group:00000000 wm4.1.1791a5ae2e936ca1033c1c44be394cc7
                            .group:00000000 wm4.ETH004_Conf.h.56.564c3f309c32b3c742fc91049cf66940

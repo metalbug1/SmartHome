@@ -24,7 +24,7 @@
 #define ADC_TEMPSENSOR_CHANNEL							(1)
 #define ADC_LIGHTSENSOR_CHANNEL							(2)
 
-uint16_t GetTemperature();
-uint16_t GetLight();
+void GetTemperature(uint8_t au8Temperature[]);
+void GetLight(uint8_t au8Light[]);
 
 #endif

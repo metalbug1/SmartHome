@@ -18,6 +18,7 @@
             <BindMap MUri="peripheral/scu/0/rstctrl/0/ccu4reset/3" Proxy="app/reset001/0/ccu4reset3"/>
             <BindMap MUri="port/p/0/pad/0" Proxy="app/uart001/0/uart_rxpin"/>
             <BindMap MUri="peripheral/scu/0/rstctrl/0/rcurst" Proxy="app/reset001/0/rcurst"/>
+            <BindMap MUri="peripheral/cpu/0/nvic/interrupt/16" Proxy="app/nvic002/0/nvicnode"/>
             <BindMap MUri="peripheral/scu/0/rstctrl/0/ebureset" Proxy="app/reset001/0/ebureset"/>
             <BindMap MUri="peripheral/scu/0/rstctrl/0/wdtreset" Proxy="app/reset001/0/wdtreset"/>
             <BindMap MUri="peripheral/vadc/0/group/0/ch/1" Proxy="app/adc001/0/channel_aa"/>

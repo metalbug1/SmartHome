@@ -133,6 +133,9 @@ void DAVE_MUX_Init(void)
                                               
    	 
             	         
+                                              
+   	 
+            	         
                                           
 
 /*        PORT Macro definitions for IOCR_OE, IOCR_PCR & HWSEL_HW     */                                      
@@ -141,9 +144,7 @@ void DAVE_MUX_Init(void)
    	 
             	         
                                   
-                  /*VADC GROUP0 Mux Related SFR/Bitfields Configurations*/  						                                                   						         						                         						                          						         						                                   						          						          						          						                                    						         
-  WR_REG(VADC_G0->ALIAS, VADC_G_ALIAS_ALIAS0_Msk, VADC_G_ALIAS_ALIAS0_Pos,1); 
-   						          
+                  /*VADC GROUP0 Mux Related SFR/Bitfields Configurations*/  						                                                   						         						                         						                          						         						                                   						          						          						          						                                    						         						          
 
 					 						          						          						          						          						          						          						          						                
                                                                                                                 						                            						                          						                            						                             						                          						                             						                           						                          						                            						                    						                         						                         						                       						                       						                          						                          						                                         						                             						                        						                            						                     						                         						                       						                               
@@ -159,7 +160,9 @@ void DAVE_MUX_Init(void)
 
 					 						          						          						          						          						          						          						          						                
                                                                                                                 						                            						                          						                            						                             						                          						                             						                           						                          						                            						                    						                         						                         						                       						                       						                          						                          						                                         						                             						                        						                            						                     						                         						                       						                                 
-               /*VADC GLOBAL RESULT Mux Related SFR/Bitfields Configurations*/  						                       						                     						                                 
+               /*VADC GLOBAL RESULT Mux Related SFR/Bitfields Configurations*/  						          
+  WR_REG(VADC->GLOBEVNP, VADC_GLOBEVNP_REV0NP_Msk, VADC_GLOBEVNP_REV0NP_Pos,2); 
+                 						                     						                                 
                /*VADC BACKGROUND Source Mux Related SFR/Bitfields Configurations*/  						                  						                						                                                                          
 }
 
@@ -180,7 +183,7 @@ void DAVE_MUX_Init(void)
 *******************************************************************************/
  
 void DAVE_MUX_PreInit(void)
-{        
+{            
 
 /*        PORT Macro definitions for IOCR_OE, IOCR_PCR & HWSEL_HW     */                       
 }

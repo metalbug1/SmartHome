@@ -22,6 +22,7 @@ int main(void)
 	uint16_t BedroomHumidity;
 	DAVE_Init();			// Initialization of DAVE Apps
 
+    ADC001_GenerateLoadEvent(&ADC001_Handle0);
 
 	while(1)
 	{
