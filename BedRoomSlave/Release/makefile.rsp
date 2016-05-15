@@ -6,8 +6,6 @@ Lib/System_LibcStubs.o
 Dave/Generated/src/UART001/UART001.o
 Dave/Generated/src/UART001/UART001_Conf.o
 Dave/Generated/src/RESET001/RESET001.o
-Dave/Generated/src/NVIC002/NVIC002.o
-Dave/Generated/src/NVIC002/NVIC002_Conf.o
 Dave/Generated/src/LIBS/CCU8PWMLIB.o
 Dave/Generated/src/LIBS/MOTORLIB.o
 Dave/Generated/src/IO001/IO001.o

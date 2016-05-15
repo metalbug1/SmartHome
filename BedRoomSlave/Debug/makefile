@@ -12,6 +12,7 @@ RM := rm -rf
 -include Lib/subdir.mk
 -include Dave/Generated/src/UART001/subdir.mk
 -include Dave/Generated/src/RESET001/subdir.mk
+-include Dave/Generated/src/NVIC002/subdir.mk
 -include Dave/Generated/src/LIBS/subdir.mk
 -include Dave/Generated/src/IO001/subdir.mk
 -include Dave/Generated/src/DAVESupport/subdir.mk
