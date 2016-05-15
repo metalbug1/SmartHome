@@ -316,8 +316,8 @@
   78 000a B3F1FF3F 		cmp	r3, #-1
   79 000e 07D0     		beq	.L2
   80              		.loc 1 239 0 is_stmt 0 discriminator 1
-  81 0010 40F20003 		movw	r3, #:lower16:LastAllocFileHandle.12342
-  82 0014 C0F20003 		movt	r3, #:upper16:LastAllocFileHandle.12342
+  81 0010 40F20003 		movw	r3, #:lower16:LastAllocFileHandle.12344
+  82 0014 C0F20003 		movt	r3, #:upper16:LastAllocFileHandle.12344
   83 0018 1B68     		ldr	r3, [r3, #0]
   84 001a 7A68     		ldr	r2, [r7, #4]
   85 001c 9A42     		cmp	r2, r3
@@ -330,8 +330,8 @@
  244:../Dave/Generated/src/SLTHA001/SLTHA001.c ****     /* Check the FileHandle array to find the match for the File Handle*/
  245:../Dave/Generated/src/SLTHA001/SLTHA001.c ****     for (Slot=0; Slot< MAX_OPEN_FILES; Slot++)
   88              		.loc 1 245 0 is_stmt 1
-  89 0020 40F20003 		movw	r3, #:lower16:Slot.12341
-  90 0024 C0F20003 		movt	r3, #:upper16:Slot.12341
+  89 0020 40F20003 		movw	r3, #:lower16:Slot.12343
+  90 0024 C0F20003 		movt	r3, #:upper16:Slot.12343
   91 0028 4FF00002 		mov	r2, #0
   92 002c 1A60     		str	r2, [r3, #0]
   93 002e 1FE0     		b	.L4
@@ -339,8 +339,8 @@
  246:../Dave/Generated/src/SLTHA001/SLTHA001.c ****     {
  247:../Dave/Generated/src/SLTHA001/SLTHA001.c ****       if(FileHandle[Slot].Fd == FileDesc)
   95              		.loc 1 247 0
-  96 0030 40F20003 		movw	r3, #:lower16:Slot.12341
-  97 0034 C0F20003 		movt	r3, #:upper16:Slot.12341
+  96 0030 40F20003 		movw	r3, #:lower16:Slot.12343
+  97 0034 C0F20003 		movt	r3, #:upper16:Slot.12343
   98 0038 1968     		ldr	r1, [r3, #0]
   99 003a 40F20002 		movw	r2, #:lower16:FileHandle
  100 003e C0F20002 		movt	r2, #:upper16:FileHandle
@@ -356,18 +356,18 @@
  110              	.L5:
  245:../Dave/Generated/src/SLTHA001/SLTHA001.c ****     for (Slot=0; Slot< MAX_OPEN_FILES; Slot++)
  111              		.loc 1 245 0
- 112 0058 40F20003 		movw	r3, #:lower16:Slot.12341
- 113 005c C0F20003 		movt	r3, #:upper16:Slot.12341
+ 112 0058 40F20003 		movw	r3, #:lower16:Slot.12343
+ 113 005c C0F20003 		movt	r3, #:upper16:Slot.12343
  114 0060 1B68     		ldr	r3, [r3, #0]
  115 0062 03F10102 		add	r2, r3, #1
- 116 0066 40F20003 		movw	r3, #:lower16:Slot.12341
- 117 006a C0F20003 		movt	r3, #:upper16:Slot.12341
+ 116 0066 40F20003 		movw	r3, #:lower16:Slot.12343
+ 117 006a C0F20003 		movt	r3, #:upper16:Slot.12343
  118 006e 1A60     		str	r2, [r3, #0]
  119              	.L4:
  245:../Dave/Generated/src/SLTHA001/SLTHA001.c ****     for (Slot=0; Slot< MAX_OPEN_FILES; Slot++)
  120              		.loc 1 245 0 is_stmt 0 discriminator 1
- 121 0070 40F20003 		movw	r3, #:lower16:Slot.12341
- 122 0074 C0F20003 		movt	r3, #:upper16:Slot.12341
+ 121 0070 40F20003 		movw	r3, #:lower16:Slot.12343
+ 122 0074 C0F20003 		movt	r3, #:upper16:Slot.12343
  123 0078 1B68     		ldr	r3, [r3, #0]
  124 007a 132B     		cmp	r3, #19
  125 007c D8DD     		ble	.L7
@@ -381,8 +381,8 @@
  250:../Dave/Generated/src/SLTHA001/SLTHA001.c ****     /* Save the last Allocated File Handle.*/
  251:../Dave/Generated/src/SLTHA001/SLTHA001.c ****     LastAllocFileHandle = FileDesc;
  131              		.loc 1 251 0
- 132 0082 40F20003 		movw	r3, #:lower16:LastAllocFileHandle.12342
- 133 0086 C0F20003 		movt	r3, #:upper16:LastAllocFileHandle.12342
+ 132 0082 40F20003 		movw	r3, #:lower16:LastAllocFileHandle.12344
+ 133 0086 C0F20003 		movt	r3, #:upper16:LastAllocFileHandle.12344
  134 008a 7A68     		ldr	r2, [r7, #4]
  135 008c 1A60     		str	r2, [r3, #0]
  136 008e 00E0     		b	.L3
@@ -394,8 +394,8 @@
  252:../Dave/Generated/src/SLTHA001/SLTHA001.c ****   } while(0);
  253:../Dave/Generated/src/SLTHA001/SLTHA001.c ****   return Slot;
  141              		.loc 1 253 0
- 142 0092 40F20003 		movw	r3, #:lower16:Slot.12341
- 143 0096 C0F20003 		movt	r3, #:upper16:Slot.12341
+ 142 0092 40F20003 		movw	r3, #:lower16:Slot.12343
+ 143 0096 C0F20003 		movt	r3, #:upper16:Slot.12343
  144 009a 1B68     		ldr	r3, [r3, #0]
  254:../Dave/Generated/src/SLTHA001/SLTHA001.c **** }
  145              		.loc 1 254 0
@@ -3875,11 +3875,11 @@
  2560              	.LFE139:
  2562 0022 00BF     		.data
  2563              		.align	2
- 2566              	LastAllocFileHandle.12342:
+ 2566              	LastAllocFileHandle.12344:
  2567 004c FFFFFFFF 		.word	-1
  2568              		.bss
  2569              		.align	2
- 2570              	Slot.12341:
+ 2570              	Slot.12343:
  2571 0190 00000000 		.space	4
  2572              		.text
  2573              	.Letext0:
@@ -3902,58 +3902,58 @@
  2590              		.file 18 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Include/core_cm4.h"
 DEFINED SYMBOLS
                             *ABS*:00000000 SLTHA001.c
-C:\Users\Mihai\AppData\Local\Temp\ccsC8KGD.s:24     .data:00000000 ErrorCodes
-C:\Users\Mihai\AppData\Local\Temp\ccsC8KGD.s:21     .data:00000000 $d
-C:\Users\Mihai\AppData\Local\Temp\ccsC8KGD.s:49     .bss:00000000 FileHandle
-C:\Users\Mihai\AppData\Local\Temp\ccsC8KGD.s:46     .bss:00000000 $d
-C:\Users\Mihai\AppData\Local\Temp\ccsC8KGD.s:52     .text.SLTHA001_lFindAvailableSlot:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccsC8KGD.s:57     .text.SLTHA001_lFindAvailableSlot:00000000 SLTHA001_lFindAvailableSlot
-C:\Users\Mihai\AppData\Local\Temp\ccsC8KGD.s:2566   .data:0000004c LastAllocFileHandle.12342
-C:\Users\Mihai\AppData\Local\Temp\ccsC8KGD.s:2570   .bss:00000190 Slot.12341
-C:\Users\Mihai\AppData\Local\Temp\ccsC8KGD.s:155    .text.SLTHA001_lLocalInitialize:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccsC8KGD.s:160    .text.SLTHA001_lLocalInitialize:00000000 SLTHA001_lLocalInitialize
-C:\Users\Mihai\AppData\Local\Temp\ccsC8KGD.s:226    .text.SLTHA001_lTimeFormat:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccsC8KGD.s:230    .text.SLTHA001_lTimeFormat:00000000 SLTHA001_lTimeFormat
-C:\Users\Mihai\AppData\Local\Temp\ccsC8KGD.s:302    .text.SLTHA001_lFatInfoToStatus:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccsC8KGD.s:306    .text.SLTHA001_lFatInfoToStatus:00000000 SLTHA001_lFatInfoToStatus
-C:\Users\Mihai\AppData\Local\Temp\ccsC8KGD.s:402    .text.SLTHA001_lSetFlagsAccessModes:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccsC8KGD.s:406    .text.SLTHA001_lSetFlagsAccessModes:00000000 SLTHA001_lSetFlagsAccessModes
-C:\Users\Mihai\AppData\Local\Temp\ccsC8KGD.s:581    .text._open:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccsC8KGD.s:586    .text._open:00000000 _open
-C:\Users\Mihai\AppData\Local\Temp\ccsC8KGD.s:997    .text._close:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccsC8KGD.s:1002   .text._close:00000000 _close
-C:\Users\Mihai\AppData\Local\Temp\ccsC8KGD.s:1147   .text._read_r:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccsC8KGD.s:1152   .text._read_r:00000000 _read_r
-C:\Users\Mihai\AppData\Local\Temp\ccsC8KGD.s:1346   .text._write_r:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccsC8KGD.s:1351   .text._write_r:00000000 _write_r
-C:\Users\Mihai\AppData\Local\Temp\ccsC8KGD.s:1528   .text._lseek:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccsC8KGD.s:1533   .text._lseek:00000000 _lseek
-C:\Users\Mihai\AppData\Local\Temp\ccsC8KGD.s:1748   .text._unlink:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccsC8KGD.s:1753   .text._unlink:00000000 _unlink
-C:\Users\Mihai\AppData\Local\Temp\ccsC8KGD.s:1809   .text._fstat:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccsC8KGD.s:1814   .text._fstat:00000000 _fstat
-C:\Users\Mihai\AppData\Local\Temp\ccsC8KGD.s:1930   .text._stat:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccsC8KGD.s:1935   .text._stat:00000000 _stat
-C:\Users\Mihai\AppData\Local\Temp\ccsC8KGD.s:2019   .text.rename:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccsC8KGD.s:2024   .text.rename:00000000 rename
-C:\Users\Mihai\AppData\Local\Temp\ccsC8KGD.s:2082   .text._chmod:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccsC8KGD.s:2087   .text._chmod:00000000 _chmod
-C:\Users\Mihai\AppData\Local\Temp\ccsC8KGD.s:2148   .text._mkdir:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccsC8KGD.s:2153   .text._mkdir:00000000 _mkdir
-C:\Users\Mihai\AppData\Local\Temp\ccsC8KGD.s:2210   .text._sync:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccsC8KGD.s:2215   .text._sync:00000000 _sync
-C:\Users\Mihai\AppData\Local\Temp\ccsC8KGD.s:2281   .text.mkfs:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccsC8KGD.s:2286   .text.mkfs:00000000 mkfs
-C:\Users\Mihai\AppData\Local\Temp\ccsC8KGD.s:2350   .text.mount:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccsC8KGD.s:2355   .text.mount:00000000 mount
-C:\Users\Mihai\AppData\Local\Temp\ccsC8KGD.s:2415   .text._isatty:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccsC8KGD.s:2420   .text._isatty:00000000 _isatty
-C:\Users\Mihai\AppData\Local\Temp\ccsC8KGD.s:2455   .text.SLTHA001_Init:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccsC8KGD.s:2460   .text.SLTHA001_Init:00000000 SLTHA001_Init
-C:\Users\Mihai\AppData\Local\Temp\ccsC8KGD.s:2482   .text._link:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccsC8KGD.s:2487   .text._link:00000000 _link
-C:\Users\Mihai\AppData\Local\Temp\ccsC8KGD.s:2522   .text.fdisk:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccsC8KGD.s:2527   .text.fdisk:00000000 fdisk
+C:\Users\Mihai\AppData\Local\Temp\ccLeYxEf.s:24     .data:00000000 ErrorCodes
+C:\Users\Mihai\AppData\Local\Temp\ccLeYxEf.s:21     .data:00000000 $d
+C:\Users\Mihai\AppData\Local\Temp\ccLeYxEf.s:49     .bss:00000000 FileHandle
+C:\Users\Mihai\AppData\Local\Temp\ccLeYxEf.s:46     .bss:00000000 $d
+C:\Users\Mihai\AppData\Local\Temp\ccLeYxEf.s:52     .text.SLTHA001_lFindAvailableSlot:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccLeYxEf.s:57     .text.SLTHA001_lFindAvailableSlot:00000000 SLTHA001_lFindAvailableSlot
+C:\Users\Mihai\AppData\Local\Temp\ccLeYxEf.s:2566   .data:0000004c LastAllocFileHandle.12344
+C:\Users\Mihai\AppData\Local\Temp\ccLeYxEf.s:2570   .bss:00000190 Slot.12343
+C:\Users\Mihai\AppData\Local\Temp\ccLeYxEf.s:155    .text.SLTHA001_lLocalInitialize:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccLeYxEf.s:160    .text.SLTHA001_lLocalInitialize:00000000 SLTHA001_lLocalInitialize
+C:\Users\Mihai\AppData\Local\Temp\ccLeYxEf.s:226    .text.SLTHA001_lTimeFormat:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccLeYxEf.s:230    .text.SLTHA001_lTimeFormat:00000000 SLTHA001_lTimeFormat
+C:\Users\Mihai\AppData\Local\Temp\ccLeYxEf.s:302    .text.SLTHA001_lFatInfoToStatus:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccLeYxEf.s:306    .text.SLTHA001_lFatInfoToStatus:00000000 SLTHA001_lFatInfoToStatus
+C:\Users\Mihai\AppData\Local\Temp\ccLeYxEf.s:402    .text.SLTHA001_lSetFlagsAccessModes:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccLeYxEf.s:406    .text.SLTHA001_lSetFlagsAccessModes:00000000 SLTHA001_lSetFlagsAccessModes
+C:\Users\Mihai\AppData\Local\Temp\ccLeYxEf.s:581    .text._open:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccLeYxEf.s:586    .text._open:00000000 _open
+C:\Users\Mihai\AppData\Local\Temp\ccLeYxEf.s:997    .text._close:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccLeYxEf.s:1002   .text._close:00000000 _close
+C:\Users\Mihai\AppData\Local\Temp\ccLeYxEf.s:1147   .text._read_r:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccLeYxEf.s:1152   .text._read_r:00000000 _read_r
+C:\Users\Mihai\AppData\Local\Temp\ccLeYxEf.s:1346   .text._write_r:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccLeYxEf.s:1351   .text._write_r:00000000 _write_r
+C:\Users\Mihai\AppData\Local\Temp\ccLeYxEf.s:1528   .text._lseek:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccLeYxEf.s:1533   .text._lseek:00000000 _lseek
+C:\Users\Mihai\AppData\Local\Temp\ccLeYxEf.s:1748   .text._unlink:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccLeYxEf.s:1753   .text._unlink:00000000 _unlink
+C:\Users\Mihai\AppData\Local\Temp\ccLeYxEf.s:1809   .text._fstat:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccLeYxEf.s:1814   .text._fstat:00000000 _fstat
+C:\Users\Mihai\AppData\Local\Temp\ccLeYxEf.s:1930   .text._stat:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccLeYxEf.s:1935   .text._stat:00000000 _stat
+C:\Users\Mihai\AppData\Local\Temp\ccLeYxEf.s:2019   .text.rename:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccLeYxEf.s:2024   .text.rename:00000000 rename
+C:\Users\Mihai\AppData\Local\Temp\ccLeYxEf.s:2082   .text._chmod:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccLeYxEf.s:2087   .text._chmod:00000000 _chmod
+C:\Users\Mihai\AppData\Local\Temp\ccLeYxEf.s:2148   .text._mkdir:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccLeYxEf.s:2153   .text._mkdir:00000000 _mkdir
+C:\Users\Mihai\AppData\Local\Temp\ccLeYxEf.s:2210   .text._sync:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccLeYxEf.s:2215   .text._sync:00000000 _sync
+C:\Users\Mihai\AppData\Local\Temp\ccLeYxEf.s:2281   .text.mkfs:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccLeYxEf.s:2286   .text.mkfs:00000000 mkfs
+C:\Users\Mihai\AppData\Local\Temp\ccLeYxEf.s:2350   .text.mount:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccLeYxEf.s:2355   .text.mount:00000000 mount
+C:\Users\Mihai\AppData\Local\Temp\ccLeYxEf.s:2415   .text._isatty:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccLeYxEf.s:2420   .text._isatty:00000000 _isatty
+C:\Users\Mihai\AppData\Local\Temp\ccLeYxEf.s:2455   .text.SLTHA001_Init:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccLeYxEf.s:2460   .text.SLTHA001_Init:00000000 SLTHA001_Init
+C:\Users\Mihai\AppData\Local\Temp\ccLeYxEf.s:2482   .text._link:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccLeYxEf.s:2487   .text._link:00000000 _link
+C:\Users\Mihai\AppData\Local\Temp\ccLeYxEf.s:2522   .text.fdisk:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccLeYxEf.s:2527   .text.fdisk:00000000 fdisk
                      .debug_frame:00000010 $d
                            .group:00000000 wm4.1.1791a5ae2e936ca1033c1c44be394cc7
                            .group:00000000 wm4.XMC4500.h.45.215f4b8c79f46c7645c15373868d08c0

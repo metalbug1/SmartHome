@@ -132,6 +132,9 @@
   <nodes xsi:type="DaveExpert:AppNode">
     <resource xsi:type="ResourceModel:App" href="IO001/1.0.16/io001_1.app#/"/>
   </nodes>
+  <nodes xsi:type="DaveExpert:AppNode">
+    <resource xsi:type="ResourceModel:App" href="IO001/1.0.16/io001_2.app#/"/>
+  </nodes>
   <connections xsi:type="DaveExpert:NodeConnection" source="//@nodes.3" target="//@nodes.4"/>
   <connections xsi:type="DaveExpert:NodeConnection" source="//@nodes.3" target="//@nodes.5"/>
   <connections xsi:type="DaveExpert:NodeConnection" source="//@nodes.4" target="//@nodes.6"/>
@@ -189,4 +192,6 @@
   <connections xsi:type="DaveExpert:NodeConnection" source="//@nodes.6" target="//@nodes.42"/>
   <connections xsi:type="DaveExpert:NodeConnection" source="//@nodes.36" target="//@nodes.43"/>
   <connections xsi:type="DaveExpert:NodeConnection" source="//@nodes.43" target="//@nodes.40"/>
+  <connections xsi:type="DaveExpert:NodeConnection" source="//@nodes.36" target="//@nodes.44"/>
+  <connections xsi:type="DaveExpert:NodeConnection" source="//@nodes.44" target="//@nodes.40"/>
 </DaveExpert:ApplicationModelData>

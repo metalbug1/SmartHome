@@ -126,6 +126,9 @@ void IO001_Init(void)
   /* Configuration of Port 14 Pin 2 based on User configuration */
   /*Disable Digital Pad Input*/
   IO001_Handle1.PortRegs->PDISC  |= (0x1U << 2);
+  /* Configuration of Port 14 Pin 3 based on User configuration */
+  /*Disable Digital Pad Input*/
+  IO001_Handle2.PortRegs->PDISC  |= (0x1U << 3);
 }
 
 void IO001_EnableDigitalInput(const IO001_HandleType* Handle,IO001_InputModeType Mode)

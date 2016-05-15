@@ -927,6 +927,8 @@
   </provided>
   <provided xsi:type="ResourceModel:ResourceGroup" name="2" URI="http://www.infineon.com/0.1.37/peripheral/vadc/0/group/0/ch/2">
     <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../ADC001/1.0.22/adc001_0.app#//@consumed.49"/>
+    <localValue xsi:type="ResourceModel:StringValue" value="DependentApp"/>
+    <globalValue xsi:type="ResourceModel:StringValue" value="DependentApp"/>
     <resourcesList name="gchass_assch" requiredResourceUri="http://www.infineon.com/0.1.37/peripheral/vadc/0/g0chass/assch2" isResolved="true"/>
     <resourcesList name="gchctr" requiredResourceUri="http://www.infineon.com/0.1.37/peripheral/vadc/0/g0chctr2" isResolved="true"/>
     <resourcesList name="gcefclr_cev" requiredResourceUri="http://www.infineon.com/0.1.37/peripheral/vadc/0/g0cefclr/cev2" isResolved="true"/>
@@ -956,6 +958,47 @@
     <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1111" description="Store result in group result register GxRES15"/>
   </provided>
   <provided xsi:type="ResourceModel:BitField" name="CEV2NP" URI="http://www.infineon.com/0.1.37/peripheral/vadc/0/group/0/ch/2/gcevnp0_cevnp" maxValue="15" minValue="0" startPos="8" stopPos="11" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Service Request Node Pointer Channel Event i</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0000" description="Select service request line 0 of group x"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0011" description="Select service request line 3 of group x"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0100" description="Select shared service request line 0"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0111" description="Select shared service request line 3"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1xxx" description="Reserved"/>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="3" URI="http://www.infineon.com/0.1.37/peripheral/vadc/0/group/0/ch/3">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../ADC001/1.0.22/adc001_0.app#//@consumed.50"/>
+    <resourcesList name="gchass_assch" requiredResourceUri="http://www.infineon.com/0.1.37/peripheral/vadc/0/g0chass/assch3" isResolved="true"/>
+    <resourcesList name="gchctr" requiredResourceUri="http://www.infineon.com/0.1.37/peripheral/vadc/0/g0chctr3" isResolved="true"/>
+    <resourcesList name="gcefclr_cev" requiredResourceUri="http://www.infineon.com/0.1.37/peripheral/vadc/0/g0cefclr/cev3" isResolved="true"/>
+    <resourcesList name="gceflag_cev" requiredResourceUri="http://www.infineon.com/0.1.37/peripheral/vadc/0/g0ceflag/cev3" isResolved="true"/>
+    <resourcesList name="gcevnp0_cevnp" requiredResourceUri="http://www.infineon.com/0.1.37/peripheral/vadc/0/g0cevnp0/cev3np" isResolved="true"/>
+    <resourcesList name="gchctr_resreg" requiredResourceUri="http://www.infineon.com/0.1.37/peripheral/vadc/0/g0chctr3/resreg" isResolved="true"/>
+    <resourcesList name="gch" requiredResourceUri="http://www.infineon.com/0.1.37/peripheral/vadc/0/g0ch3" isResolved="true"/>
+    <resourcesList name="select" requiredResourceUri="http://www.infineon.com/0.1.37/peripheral/vadc/0/g0ch3select" isResolved="true"/>
+    <resourcesList name="cev" requiredResourceUri="http://www.infineon.com/0.1.37/peripheral/vadc/0/g0cev3" isResolved="true"/>
+    <resourcesList name="res_sel" requiredResourceUri="http://www.infineon.com/0.1.37/peripheral/vadc/0/g0ch3ressel" isResolved="true"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="g0ch3" description="Group 0 channel 3 signal " URI="http://www.infineon.com/0.1.37/peripheral/vadc/0/group/0/ch/3/gch" signalType="SINGAL" direction="IN" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../ADC001/1.0.22/adc001_0.app#//@consumed.138"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="g0ch3select" description="Group 0 channel 3 select signal " URI="http://www.infineon.com/0.1.37/peripheral/vadc/0/group/0/ch/3/select" signalType="SINGAL" direction="IN" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../ADC001/1.0.22/adc001_0.app#//@consumed.196"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="g0cev3" description="Group 0 channel event signal 3 " URI="http://www.infineon.com/0.1.37/peripheral/vadc/0/group/0/ch/3/cev" signalType="SINGAL" direction="OUT" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../ADC001/1.0.22/adc001_0.app#//@consumed.199"/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="RESREG" URI="http://www.infineon.com/0.1.37/peripheral/vadc/0/group/0/ch/3/gchctr_resreg" maxValue="15" minValue="0" startPos="16" stopPos="19" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Result Register</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0000" description="Store result in group result register GxRES0"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1111" description="Store result in group result register GxRES15"/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="CEV3NP" URI="http://www.infineon.com/0.1.37/peripheral/vadc/0/group/0/ch/3/gcevnp0_cevnp" maxValue="15" minValue="0" startPos="12" stopPos="15" accessPermission="rw">
     <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
     <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
     <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>

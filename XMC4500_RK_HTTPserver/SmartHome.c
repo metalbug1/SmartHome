@@ -45,13 +45,10 @@ int main(void)
     while(1)
 	{
     	GetTemperature(roomInformation[ROOM_INDEX(BEDROOM)].u8Temperature);
-    	GetLight(roomInformation[ROOM_INDEX(BEDROOM)].u8Humidity);
+    	GetLight(roomInformation[ROOM_INDEX(BEDROOM)].u8Light);
+    	GetHumidity(roomInformation[ROOM_INDEX(BEDROOM)].u8Humidity);
         ADC001_GenerateLoadEvent(&ADC001_Handle0);
 		ProcessReceivedData();
-	   /* mypcb = tcp_new();
-	    tcp_bind(mypcb, IP_ADDR_ANY, 80);
-		tcp_write(mypcb, data, 3, TCP_WRITE_FLAG_COPY);*/
-
 	}
 	return 0;
 }

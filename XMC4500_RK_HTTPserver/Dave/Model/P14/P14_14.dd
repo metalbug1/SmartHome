@@ -80,5 +80,45 @@
     <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
     <toolTipHelpDescription>Port Control for Port n Pin 0 to 3</toolTipHelpDescription>
   </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="P14.3 / #28" URI="http://www.infineon.com/0.1.39/port/p/14/pad/3">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../IO001/1.0.16/io001_2.app#//@consumed.0"/>
+    <resourcesList name="out_p" requiredResourceUri="http://www.infineon.com/0.1.39/port/p/14/out/p3" isResolved="true"/>
+    <resourcesList name="omr_ps" requiredResourceUri="http://www.infineon.com/0.1.39/port/p/14/omr/ps3" isResolved="true"/>
+    <resourcesList name="omr_pr" requiredResourceUri="http://www.infineon.com/0.1.39/port/p/14/omr/pr3" isResolved="true"/>
+    <resourcesList name="in_p" requiredResourceUri="http://www.infineon.com/0.1.39/port/p/14/in/p3" isResolved="true"/>
+    <resourcesList name="pps_pps" requiredResourceUri="http://www.infineon.com/0.1.39/port/p/14/pps/pps3" isResolved="true"/>
+    <resourcesList name="pdisc_pdis" requiredResourceUri="http://www.infineon.com/0.1.39/port/p/14/pdisc/pdis3" isResolved="true"/>
+    <resourcesList name="iocr_oe" requiredResourceUri="http://www.infineon.com/0.1.39/port/p/14/iocr0/pc3_4" isResolved="true"/>
+    <resourcesList name="iocr_pcr" requiredResourceUri="http://www.infineon.com/0.1.39/port/p/14/iocr0/pc3_2_0" isResolved="true"/>
+    <resourcesList name="analogout" requiredResourceUri="http://www.infineon.com/0.1.39/port/p/14/pad_3/analogout" isResolved="true"/>
+    <resourcesList name="analogin" requiredResourceUri="http://www.infineon.com/0.1.39/port/p/14/pad_3/analogin" isResolved="true"/>
+    <resourcesList name="altin" requiredResourceUri="http://www.infineon.com/0.1.39/port/p/14/pad_3/altin" isResolved="true"/>
+    <resourcesList name="pad" requiredResourceUri="http://www.infineon.com/0.1.39/port/p/14/pad_3/pad" isResolved="true"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="PAD" URI="http://www.infineon.com/0.1.39/port/p/14/pad/3/pad" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../IO001/1.0.16/io001_2.app#//@consumed.3"/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="PDIS3" URI="http://www.infineon.com/0.1.39/port/p/14/pad/3/pdisc_pdis" maxValue="1" minValue="0" startPos="3" stopPos="3" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="1"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../IO001/1.0.16/io001_2.app#//@consumed.4"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="1"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="1"/>
+    <toolTipHelpDescription>Pad Disable for Port 14 Pin 3</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Pad is enabled, digital input selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Pad is disabled, ADC 0 and ADC 1 analog input 3 selected."/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="PC3_2_0" URI="http://www.infineon.com/0.1.39/port/p/14/pad/3/iocr_pcr" maxValue="7" minValue="0" startPos="27" stopPos="29" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../IO001/1.0.16/io001_2.app#//@consumed.5"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Port Control for Port n Pin 0 to 3</toolTipHelpDescription>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="PC3_4" URI="http://www.infineon.com/0.1.39/port/p/14/pad/3/iocr_oe" maxValue="1" minValue="0" startPos="31" stopPos="31" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Port Control for Port n Pin 0 to 3</toolTipHelpDescription>
+  </provided>
   <categoryDescription description="Port 14 is a 14-bit analog/digital input port." name="Port 14"/>
 </ResourceModel:Peripheral>

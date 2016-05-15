@@ -1551,23 +1551,23 @@
  974              		.file 8 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Include/core_cm4.h"
 DEFINED SYMBOLS
                             *ABS*:00000000 SDMMC001.c
-C:\Users\Mihai\AppData\Local\Temp\ccPod7ke.s:20     .bss:00000000 SDMMC001_InitializeFlag
-C:\Users\Mihai\AppData\Local\Temp\ccPod7ke.s:21     .bss:00000000 $d
-C:\Users\Mihai\AppData\Local\Temp\ccPod7ke.s:22     .bss:00000001 SDMMC001_LockFlag
-C:\Users\Mihai\AppData\Local\Temp\ccPod7ke.s:25     .text.SDMMC001_lFindDiskStatus:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccPod7ke.s:30     .text.SDMMC001_lFindDiskStatus:00000000 SDMMC001_lFindDiskStatus
-C:\Users\Mihai\AppData\Local\Temp\ccPod7ke.s:115    .text.SDMMC001_Initialize:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccPod7ke.s:120    .text.SDMMC001_Initialize:00000000 SDMMC001_Initialize
-C:\Users\Mihai\AppData\Local\Temp\ccPod7ke.s:203    .text.SDMMC001_GetStatus:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccPod7ke.s:208    .text.SDMMC001_GetStatus:00000000 SDMMC001_GetStatus
-C:\Users\Mihai\AppData\Local\Temp\ccPod7ke.s:240    .text.SDMMC001_ReadBlock:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccPod7ke.s:245    .text.SDMMC001_ReadBlock:00000000 SDMMC001_ReadBlock
-C:\Users\Mihai\AppData\Local\Temp\ccPod7ke.s:323    .text.SDMMC001_WriteBlock:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccPod7ke.s:328    .text.SDMMC001_WriteBlock:00000000 SDMMC001_WriteBlock
-C:\Users\Mihai\AppData\Local\Temp\ccPod7ke.s:418    .text.SDMMC001_Ioctl:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccPod7ke.s:423    .text.SDMMC001_Ioctl:00000000 SDMMC001_Ioctl
-C:\Users\Mihai\AppData\Local\Temp\ccPod7ke.s:527    .text.SDMMC001_Ioctl:000000c4 $d
-C:\Users\Mihai\AppData\Local\Temp\ccPod7ke.s:567    .text.SDMMC001_Ioctl:0000015c $t
+C:\Users\Mihai\AppData\Local\Temp\cce4X29M.s:20     .bss:00000000 SDMMC001_InitializeFlag
+C:\Users\Mihai\AppData\Local\Temp\cce4X29M.s:21     .bss:00000000 $d
+C:\Users\Mihai\AppData\Local\Temp\cce4X29M.s:22     .bss:00000001 SDMMC001_LockFlag
+C:\Users\Mihai\AppData\Local\Temp\cce4X29M.s:25     .text.SDMMC001_lFindDiskStatus:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cce4X29M.s:30     .text.SDMMC001_lFindDiskStatus:00000000 SDMMC001_lFindDiskStatus
+C:\Users\Mihai\AppData\Local\Temp\cce4X29M.s:115    .text.SDMMC001_Initialize:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cce4X29M.s:120    .text.SDMMC001_Initialize:00000000 SDMMC001_Initialize
+C:\Users\Mihai\AppData\Local\Temp\cce4X29M.s:203    .text.SDMMC001_GetStatus:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cce4X29M.s:208    .text.SDMMC001_GetStatus:00000000 SDMMC001_GetStatus
+C:\Users\Mihai\AppData\Local\Temp\cce4X29M.s:240    .text.SDMMC001_ReadBlock:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cce4X29M.s:245    .text.SDMMC001_ReadBlock:00000000 SDMMC001_ReadBlock
+C:\Users\Mihai\AppData\Local\Temp\cce4X29M.s:323    .text.SDMMC001_WriteBlock:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cce4X29M.s:328    .text.SDMMC001_WriteBlock:00000000 SDMMC001_WriteBlock
+C:\Users\Mihai\AppData\Local\Temp\cce4X29M.s:418    .text.SDMMC001_Ioctl:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cce4X29M.s:423    .text.SDMMC001_Ioctl:00000000 SDMMC001_Ioctl
+C:\Users\Mihai\AppData\Local\Temp\cce4X29M.s:527    .text.SDMMC001_Ioctl:000000c4 $d
+C:\Users\Mihai\AppData\Local\Temp\cce4X29M.s:567    .text.SDMMC001_Ioctl:0000015c $t
                      .debug_frame:00000010 $d
                            .group:00000000 wm4.1.1791a5ae2e936ca1033c1c44be394cc7
                            .group:00000000 wm4.XMC4500.h.45.215f4b8c79f46c7645c15373868d08c0

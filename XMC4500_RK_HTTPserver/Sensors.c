@@ -11,6 +11,7 @@ ADC001_ResultHandleType AdcConversionResult;
 
 uint16_t TemperatureAdcConversion;
 uint16_t LightAdcConversion;
+uint16_t HumidityAdcConversion;
 
 /* Uses the data received in the ADC Conversion Complete interrupt to get a temperature
  * value in Celsius degrees. The function will round the temperature to a uint16 value.
@@ -60,12 +61,17 @@ void GetTemperature(uint8_t au8Temperature[])
 
 void GetLight(uint8_t au8Light[])
 {
-	au8Light[0] = LightAdcConversion/21;
-	au8Light[1] = 0;
+	au8Light[0] = (uint8_t)(LightAdcConversion/21);
+	au8Light[1] = (uint8_t)((LightAdcConversion/21) % 10);
 
 }
 
+void GetHumidity(uint8_t au8Humidity[])
+{
+	au8Humidity[0] = HumidityAdcConversion/21;
+	au8Humidity[1] = 0;
 
+}
 
 
 /* ISR for the ADC Conversion Complete */
@@ -77,6 +83,10 @@ void ADC_ConversionComplete()
 	if (AdcConversionResult.ChannelNo == ADC_TEMPSENSOR_CHANNEL)
 	{
 		TemperatureAdcConversion = AdcConversionResult.Result;
+	}
+	if (AdcConversionResult.ChannelNo == ADC_HUMIDSENSOR_CHANNEL)
+	{
+		HumidityAdcConversion = AdcConversionResult.Result;
 	}
 	if (AdcConversionResult.ChannelNo == ADC_LIGHTSENSOR_CHANNEL)
 	{

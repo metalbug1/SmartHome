@@ -22,9 +22,11 @@
 #define TEMPSENSOR_RESISTOR_VALUE_OHM  					(1000)
 
 #define ADC_TEMPSENSOR_CHANNEL							(1)
-#define ADC_LIGHTSENSOR_CHANNEL							(2)
+#define ADC_HUMIDSENSOR_CHANNEL							(2)
+#define ADC_LIGHTSENSOR_CHANNEL							(3)
 
 void GetTemperature(uint8_t au8Temperature[]);
 void GetLight(uint8_t au8Light[]);
+void GetHumidity(uint8_t au8Humidity[]);
 
 #endif
