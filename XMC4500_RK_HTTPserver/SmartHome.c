@@ -44,9 +44,17 @@ int main(void)
 
     while(1)
 	{
-    	GetTemperature(roomInformation[ROOM_INDEX(BEDROOM)].u8Temperature);
-    	GetLight(roomInformation[ROOM_INDEX(BEDROOM)].u8Light);
-    	GetHumidity(roomInformation[ROOM_INDEX(BEDROOM)].u8Humidity);
+    	UpdateSensorInformation();
+
+    	roomInformation[ROOM_INDEX(BEDROOM)].u8Temperature[0] = roomInformation[ROOM_INDEX(LIVING)].u8Temperature[0];
+    	roomInformation[ROOM_INDEX(BEDROOM)].u8Temperature[1] = roomInformation[ROOM_INDEX(LIVING)].u8Temperature[1];
+
+    	roomInformation[ROOM_INDEX(BEDROOM)].u8Light[0] = roomInformation[ROOM_INDEX(LIVING)].u8Light[0];
+    	roomInformation[ROOM_INDEX(BEDROOM)].u8Light[1] = roomInformation[ROOM_INDEX(LIVING)].u8Light[1];
+
+    	roomInformation[ROOM_INDEX(BEDROOM)].u8Humidity[0] = roomInformation[ROOM_INDEX(LIVING)].u8Humidity[0];
+    	roomInformation[ROOM_INDEX(BEDROOM)].u8Humidity[1] = roomInformation[ROOM_INDEX(LIVING)].u8Humidity[1];
+
         ADC001_GenerateLoadEvent(&ADC001_Handle0);
 		ProcessReceivedData();
 	}
