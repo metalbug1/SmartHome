@@ -6,8 +6,6 @@
 
 #include "Sensors.h"
 
-ADC001_ResultHandleType AdcConversionResult;
-
 uint16_t TemperatureAdcConversion;
 uint16_t LightAdcConversion;
 uint16_t HumidityAdcConversion;
@@ -18,18 +16,10 @@ float afHumidityResistance20DegreesTable[] = {8200, 2800, 689, 263.5, 67.25, 28,
 float afHumidityResistance25DegreesTable[] = {7430, 1645, 450, 100, 50, 16.5, 7.2, 4.27, 2.8};
 float afHumidityResistance30DegreesTable[] = {6400, 967, 460, 85.25, 39.45, 9.65, 6.2, 3.45, 2};
 
-void UpdateSensorInformation()
-{
-	GetTemperature();
-	GetLight();
-	GetHumidity();
-}
-
-
 /* Uses the data received in the ADC Conversion Complete interrupt to get a temperature
  * value in Celsius degrees. The function will round the temperature to a uint16 value.
  */
-void GetTemperature()
+void GetTemperature(uint8_t au8Temperature[])
 {
 	float fVoltage = 0;
 	float fTempSensorResistance = 0;
@@ -68,17 +58,17 @@ void GetTemperature()
 	{
 		u16Temperature = (uint16_t)(fPreciseTemperature/10) + 1;
 	}
-	roomInformation[ROOM_INDEX(LIVING)].u8Temperature[0] = (uint8_t)u16Temperature;
-	roomInformation[ROOM_INDEX(LIVING)].u8Temperature[1] = (uint8_t)((uint16_t)fPreciseTemperature % 10);
+	au8Temperature[0] = (uint8_t)u16Temperature;
+	au8Temperature[1] = (uint8_t)((uint16_t)fPreciseTemperature % 10);
 }
 
-void GetLight()
+void GetLight(uint8_t au8Light[])
 {
-	roomInformation[ROOM_INDEX(LIVING)].u8Light[0] = (uint8_t)(LightAdcConversion/21);
-	roomInformation[ROOM_INDEX(LIVING)].u8Light[1] = (uint8_t)((LightAdcConversion/21) % 10);
+	au8Light[0] = (uint8_t)(LightAdcConversion/21);
+	au8Light[1] = (uint8_t)((LightAdcConversion/21) % 10);
 }
 
-void GetHumidity()
+void GetHumidity(uint8_t au8Humidity[])
 {
 	float fVoltage = 0;
 	float fPreciseHumidity = 0;
@@ -101,27 +91,8 @@ void GetHumidity()
 	 */
 	fHumiditySensorResistance = fVoltage * HUMIDITY_RESISTOR_VALUE_OHM/(HUMIDITY_ADC_VCC_VOLTAGE_MILIVOLTS - fVoltage);
 
-	roomInformation[ROOM_INDEX(LIVING)].u8Humidity[0] = HumidityAdcConversion/21;
-	roomInformation[ROOM_INDEX(LIVING)].u8Humidity[1] = 0;
+	au8Humidity[0] = HumidityAdcConversion/21;
+	au8Humidity[1] = 0;
 }
 
 
-/* ISR for the ADC Conversion Complete */
-void ADC_ConversionComplete()
-{
-	/* The result will be saved in the AdcConversionResult structure */
-	ADC001_GetResult(&ADC001_Handle0, &AdcConversionResult);
-
-	if (AdcConversionResult.ChannelNo == ADC_TEMPSENSOR_CHANNEL)
-	{
-		TemperatureAdcConversion = AdcConversionResult.Result;
-	}
-	if (AdcConversionResult.ChannelNo == ADC_HUMIDSENSOR_CHANNEL)
-	{
-		HumidityAdcConversion = AdcConversionResult.Result;
-	}
-	if (AdcConversionResult.ChannelNo == ADC_LIGHTSENSOR_CHANNEL)
-	{
-		LightAdcConversion = AdcConversionResult.Result;
-	}
-}

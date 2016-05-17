@@ -839,22 +839,22 @@
  525              		.file 10 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Include/core_cm4.h"
 DEFINED SYMBOLS
                             *ABS*:00000000 FATFS004.c
-C:\Users\Mihai\AppData\Local\Temp\ccciR8gd.s:24     .data:00000000 FATFS004_ErrorCodes
-C:\Users\Mihai\AppData\Local\Temp\ccciR8gd.s:21     .data:00000000 $d
-C:\Users\Mihai\AppData\Local\Temp\ccciR8gd.s:34     .data:00000008 FATFS004_StatusCodes
+C:\Users\Mihai\AppData\Local\Temp\ccv9rH2n.s:24     .data:00000000 FATFS004_ErrorCodes
+C:\Users\Mihai\AppData\Local\Temp\ccv9rH2n.s:21     .data:00000000 $d
+C:\Users\Mihai\AppData\Local\Temp\ccv9rH2n.s:34     .data:00000008 FATFS004_StatusCodes
                             *COM*:00000004 FATFS004_UnusedStatus
-C:\Users\Mihai\AppData\Local\Temp\ccciR8gd.s:42     .text.disk_initialize:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccciR8gd.s:47     .text.disk_initialize:00000000 disk_initialize
-C:\Users\Mihai\AppData\Local\Temp\ccciR8gd.s:111    .text.disk_status:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccciR8gd.s:116    .text.disk_status:00000000 disk_status
-C:\Users\Mihai\AppData\Local\Temp\ccciR8gd.s:177    .text.disk_read:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccciR8gd.s:182    .text.disk_read:00000000 disk_read
-C:\Users\Mihai\AppData\Local\Temp\ccciR8gd.s:270    .text.disk_write:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccciR8gd.s:275    .text.disk_write:00000000 disk_write
-C:\Users\Mihai\AppData\Local\Temp\ccciR8gd.s:363    .text.disk_ioctl:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccciR8gd.s:368    .text.disk_ioctl:00000000 disk_ioctl
-C:\Users\Mihai\AppData\Local\Temp\ccciR8gd.s:446    .text.get_fattime:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccciR8gd.s:451    .text.get_fattime:00000000 get_fattime
+C:\Users\Mihai\AppData\Local\Temp\ccv9rH2n.s:42     .text.disk_initialize:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccv9rH2n.s:47     .text.disk_initialize:00000000 disk_initialize
+C:\Users\Mihai\AppData\Local\Temp\ccv9rH2n.s:111    .text.disk_status:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccv9rH2n.s:116    .text.disk_status:00000000 disk_status
+C:\Users\Mihai\AppData\Local\Temp\ccv9rH2n.s:177    .text.disk_read:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccv9rH2n.s:182    .text.disk_read:00000000 disk_read
+C:\Users\Mihai\AppData\Local\Temp\ccv9rH2n.s:270    .text.disk_write:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccv9rH2n.s:275    .text.disk_write:00000000 disk_write
+C:\Users\Mihai\AppData\Local\Temp\ccv9rH2n.s:363    .text.disk_ioctl:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccv9rH2n.s:368    .text.disk_ioctl:00000000 disk_ioctl
+C:\Users\Mihai\AppData\Local\Temp\ccv9rH2n.s:446    .text.get_fattime:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccv9rH2n.s:451    .text.get_fattime:00000000 get_fattime
                      .debug_frame:00000010 $d
                            .group:00000000 wm4.1.1791a5ae2e936ca1033c1c44be394cc7
                            .group:00000000 wm4.XMC4500.h.45.215f4b8c79f46c7645c15373868d08c0

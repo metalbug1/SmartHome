@@ -432,14 +432,14 @@
  276              		.file 6 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Include/core_cm4.h"
 DEFINED SYMBOLS
                             *ABS*:00000000 RESET001.c
-C:\Users\Mihai\AppData\Local\Temp\ccwHHk6q.s:20     .text.RESET001_AssertReset:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccwHHk6q.s:25     .text.RESET001_AssertReset:00000000 RESET001_AssertReset
-C:\Users\Mihai\AppData\Local\Temp\ccwHHk6q.s:83     .text.RESET001_DeassertReset:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccwHHk6q.s:88     .text.RESET001_DeassertReset:00000000 RESET001_DeassertReset
-C:\Users\Mihai\AppData\Local\Temp\ccwHHk6q.s:145    .text.RESET001_GetResetInfo:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccwHHk6q.s:150    .text.RESET001_GetResetInfo:00000000 RESET001_GetResetInfo
-C:\Users\Mihai\AppData\Local\Temp\ccwHHk6q.s:185    .text.RESET001_GetStatus:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccwHHk6q.s:190    .text.RESET001_GetStatus:00000000 RESET001_GetStatus
+C:\Users\Mihai\AppData\Local\Temp\cccrVqx8.s:20     .text.RESET001_AssertReset:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cccrVqx8.s:25     .text.RESET001_AssertReset:00000000 RESET001_AssertReset
+C:\Users\Mihai\AppData\Local\Temp\cccrVqx8.s:83     .text.RESET001_DeassertReset:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cccrVqx8.s:88     .text.RESET001_DeassertReset:00000000 RESET001_DeassertReset
+C:\Users\Mihai\AppData\Local\Temp\cccrVqx8.s:145    .text.RESET001_GetResetInfo:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cccrVqx8.s:150    .text.RESET001_GetResetInfo:00000000 RESET001_GetResetInfo
+C:\Users\Mihai\AppData\Local\Temp\cccrVqx8.s:185    .text.RESET001_GetStatus:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cccrVqx8.s:190    .text.RESET001_GetStatus:00000000 RESET001_GetStatus
                      .debug_frame:00000010 $d
                            .group:00000000 wm4.1.1791a5ae2e936ca1033c1c44be394cc7
                            .group:00000000 wm4.XMC4500.h.45.215f4b8c79f46c7645c15373868d08c0

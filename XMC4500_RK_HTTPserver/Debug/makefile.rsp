@@ -1,3 +1,4 @@
+AdcRelaxKit.o
 DataProcessing.o
 DataQueue.o
 Sensors.o

@@ -4,15 +4,18 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
-../BedRoomSlave.c \
+../AdcRelaxKit.c \
+../Room.c \
 ../Sensors.c 
 
 OBJS += \
-./BedRoomSlave.o \
+./AdcRelaxKit.o \
+./Room.o \
 ./Sensors.o 
 
 C_DEPS += \
-./BedRoomSlave.d \
+./AdcRelaxKit.d \
+./Room.d \
 ./Sensors.d 
 
 

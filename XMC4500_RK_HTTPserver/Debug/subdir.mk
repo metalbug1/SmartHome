@@ -4,6 +4,7 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
+../AdcRelaxKit.c \
 ../DataProcessing.c \
 ../DataQueue.c \
 ../Sensors.c \
@@ -11,6 +12,7 @@ C_SRCS += \
 ../WebServerFunctions.c 
 
 OBJS += \
+./AdcRelaxKit.o \
 ./DataProcessing.o \
 ./DataQueue.o \
 ./Sensors.o \
@@ -18,6 +20,7 @@ OBJS += \
 ./WebServerFunctions.o 
 
 C_DEPS += \
+./AdcRelaxKit.d \
 ./DataProcessing.d \
 ./DataQueue.d \
 ./Sensors.d \

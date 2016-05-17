@@ -1,6 +1,7 @@
 Startup/startup_XMC4500.o
 Startup/system_XMC4500.o
-BedRoomSlave.o
+AdcRelaxKit.o
+Room.o
 Sensors.o
 Lib/System_LibcStubs.o
 Dave/Generated/src/UART001/UART001.o

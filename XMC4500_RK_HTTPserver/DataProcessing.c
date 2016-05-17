@@ -5,7 +5,8 @@
 /*********************************************************************/
 
 #include "DataProcessing.h"
-
+#include "Sensors.h"
+#include "Room.h"
 
 DataQueueType receivedDataQueue;
 RoomInformationType roomInformation[NUMBER_OF_ROOMS];
@@ -22,6 +23,14 @@ void UART_ReceiveInterrupt(void)
 
 	Queue_PutBuffer(&receivedDataQueue, (uint8_t*)au16tempBuffer, u16numberOfReceivedBytes);
 }
+
+void UpdateSensorInformation()
+{
+	GetTemperature(roomInformation[ROOM_INDEX(CURRENT_ROOM)].u8Temperature);
+	GetLight(roomInformation[ROOM_INDEX(CURRENT_ROOM)].u8Light);
+	GetHumidity(roomInformation[ROOM_INDEX(CURRENT_ROOM)].u8Humidity);
+}
+
 uint8_t convertToCharArray(uint8_t *sensorInformation, uint8_t size, char *characters)
 {
 	uint8_t numberOfCharacters = 0;

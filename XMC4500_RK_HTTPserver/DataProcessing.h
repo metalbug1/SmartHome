@@ -18,5 +18,6 @@ extern DataQueueType receivedDataQueue;
 uint8_t convertToCharArray(uint8_t *sensorInformation, uint8_t size, char *characters);
 
 void ProcessReceivedData();
+void UpdateSensorInformation();
 
 #endif
