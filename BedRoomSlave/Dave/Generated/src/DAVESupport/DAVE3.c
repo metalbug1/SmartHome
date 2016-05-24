@@ -110,6 +110,9 @@ void DAVE_Init(void)
 	 
 	//  Initialization of app 'NVIC002'		     
 	NVIC002_Init();
+	 
+	//  Initialization of app 'SYSTM001'		     
+	SYSTM001_Init();
 	
       
 	//  MUX configurations

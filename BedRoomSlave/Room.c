@@ -15,6 +15,8 @@
 uint8_t au8RoomSensorData[ROOM_SENSOR_DATA_MAX_SIZE];
 uint8_t u8RoomSensorDataSize = 0;
 
+uint8_t u8NumberOfTimerPeriods = 0;
+
 void PackData()
 {
 	uint8_t u8RoomSensorDataIndex = 0;
@@ -60,24 +62,29 @@ void PackData()
 	u8RoomSensorDataSize = u8RoomSensorDataIndex;
 }
 
+void TimerHandlerReadSensors()
+{
+    ADC001_GenerateLoadEvent(&ADC001_Handle0);
+	PackData();
+	u8NumberOfTimerPeriods++;
+}
+
 int main(void)
 {
-	uint16_t i = 0;
+	handle_t TimerId;
 
 	DAVE_Init();			// Initialization of DAVE Apps
 
     ADC001_GenerateLoadEvent(&ADC001_Handle0);
-
+    TimerId = SYSTM001_CreateTimer(100,SYSTM001_PERIODIC,TimerHandlerReadSensors,NULL);
+    SYSTM001_StartTimer(TimerId);
 	while(1)
 	{
-    	PackData();
-
-        ADC001_GenerateLoadEvent(&ADC001_Handle0);
-
-		UART001_WriteDataBytes(&UART001_Handle0, au8RoomSensorData, u8RoomSensorDataSize);
-
-		for (i = 0; i<0xFFFF; i++);
-
+		if (u8NumberOfTimerPeriods >= 100)
+		{
+			u8NumberOfTimerPeriods = 0;
+			UART001_WriteDataBytes(&UART001_Handle0, au8RoomSensorData, u8RoomSensorDataSize);
+		}
 	}
 	return 0;
 }

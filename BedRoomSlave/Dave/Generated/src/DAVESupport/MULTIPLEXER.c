@@ -114,12 +114,12 @@ void DAVE_MUX_Init(void)
    /*USIC 1 Channel 1 Mux Related SFR/Bitfields Configurations*/ 						         
  WR_REG(USIC1_CH1->DX0CR, USIC_CH_DX0CR_DSEL_Msk, USIC_CH_DX0CR_DSEL_Pos,3); 
   			  					 				 				 		       				              				  					    					 					   				  					 				 				       				  										 									 					 					  									      					              					  						    					      
-                 
+          
    // Data Pointer & Buffer Size for Transmitter Buffer Control  
- WR_REG(USIC1_CH1->TBCTR, USIC_CH_TBCTR_DPTRSIZE_Msk, USIC_CH_TBCTR_DPTRSIZE_Pos,0x01000002);		/*    DPTR = 2,  SIZE = 1 */ 
-         
+ WR_REG(USIC1_CH1->TBCTR, USIC_CH_TBCTR_DPTRSIZE_Msk, USIC_CH_TBCTR_DPTRSIZE_Pos,0x05000000);		/*    DPTR = 0,  SIZE = 5 */ 
+           
   // Data Pointer & Buffer Size for Receiver Buffer Control  
- WR_REG(USIC1_CH1->RBCTR, USIC_CH_RBCTR_DPTRSIZE_Msk, USIC_CH_RBCTR_DPTRSIZE_Pos,0x01000000);		/*    DPTR = 0,  SIZE = 1 */ 
+ WR_REG(USIC1_CH1->RBCTR, USIC_CH_RBCTR_DPTRSIZE_Msk, USIC_CH_RBCTR_DPTRSIZE_Pos,0x01000020);		/*    DPTR = 32,  SIZE = 1 */ 
    						
    /*USIC 2 Channel 0 Mux Related SFR/Bitfields Configurations*/ 									  					 				 				 		       				              				  					    					 					   				  					 				 				       				  										 									 					 					  									      					              					  						    					      
        						

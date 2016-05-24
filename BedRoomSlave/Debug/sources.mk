@@ -20,6 +20,7 @@ Startup \
 . \
 Lib \
 Dave/Generated/src/UART001 \
+Dave/Generated/src/SYSTM001 \
 Dave/Generated/src/RESET001 \
 Dave/Generated/src/NVIC002 \
 Dave/Generated/src/LIBS \
