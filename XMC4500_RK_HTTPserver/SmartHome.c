@@ -24,9 +24,18 @@
 #include "Sensors.h"
 
 
+uint8_t u8NumberOfTimerPeriods = 0;
+
+void TimerHandlerReadSensors()
+{
+    ADC001_GenerateLoadEvent(&ADC001_Handle0);
+	UpdateSensorInformation();
+	u8NumberOfTimerPeriods++;
+}
 
 int main(void)
 {
+	handle_t TimerId;
 	DAVE_Init();			// Initialization of DAVE Apps
 
     lwIPStack_init();
@@ -34,23 +43,27 @@ int main(void)
     http_SSI_init();
 
     Queue_Init(&receivedDataQueue);
-    ADC001_GenerateLoadEvent(&ADC001_Handle0);
+
+    TimerId = SYSTM001_CreateTimer(100,SYSTM001_PERIODIC,TimerHandlerReadSensors,NULL);
+    SYSTM001_StartTimer(TimerId);
 
     while(1)
 	{
-    	UpdateSensorInformation();
 
-    	roomInformation[ROOM_INDEX(BEDROOM)].u8Temperature[0] = roomInformation[ROOM_INDEX(LIVING)].u8Temperature[0];
-    	roomInformation[ROOM_INDEX(BEDROOM)].u8Temperature[1] = roomInformation[ROOM_INDEX(LIVING)].u8Temperature[1];
+		if (u8NumberOfTimerPeriods >= 100)
+		{
+			u8NumberOfTimerPeriods = 0;
+	    	roomInformation[ROOM_INDEX(BEDROOM)].u8Temperature[0] = roomInformation[ROOM_INDEX(LIVING)].u8Temperature[0];
+	    	roomInformation[ROOM_INDEX(BEDROOM)].u8Temperature[1] = roomInformation[ROOM_INDEX(LIVING)].u8Temperature[1];
 
-    	roomInformation[ROOM_INDEX(BEDROOM)].u8Light[0] = roomInformation[ROOM_INDEX(LIVING)].u8Light[0];
-    	roomInformation[ROOM_INDEX(BEDROOM)].u8Light[1] = roomInformation[ROOM_INDEX(LIVING)].u8Light[1];
+	    	roomInformation[ROOM_INDEX(BEDROOM)].u8Light[0] = roomInformation[ROOM_INDEX(LIVING)].u8Light[0];
+	    	roomInformation[ROOM_INDEX(BEDROOM)].u8Light[1] = roomInformation[ROOM_INDEX(LIVING)].u8Light[1];
 
-    	roomInformation[ROOM_INDEX(BEDROOM)].u8Humidity[0] = roomInformation[ROOM_INDEX(LIVING)].u8Humidity[0];
-    	roomInformation[ROOM_INDEX(BEDROOM)].u8Humidity[1] = roomInformation[ROOM_INDEX(LIVING)].u8Humidity[1];
+	    	roomInformation[ROOM_INDEX(BEDROOM)].u8Humidity[0] = roomInformation[ROOM_INDEX(LIVING)].u8Humidity[0];
+	    	roomInformation[ROOM_INDEX(BEDROOM)].u8Humidity[1] = roomInformation[ROOM_INDEX(LIVING)].u8Humidity[1];
 
-        ADC001_GenerateLoadEvent(&ADC001_Handle0);
-		ProcessReceivedData();
+			ProcessReceivedData();
+		}
 	}
 	return 0;
 }
