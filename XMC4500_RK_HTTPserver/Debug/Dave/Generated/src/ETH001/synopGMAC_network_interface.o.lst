@@ -3004,28 +3004,28 @@
  1228              		.file 6 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Include/core_cm4.h"
 DEFINED SYMBOLS
                             *ABS*:00000000 synopGMAC_network_interface.c
-C:\Users\Mihai\AppData\Local\Temp\ccdfQh6i.s:20     .text.synopGMAC_IsEtherAddrsValid:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccdfQh6i.s:25     .text.synopGMAC_IsEtherAddrsValid:00000000 synopGMAC_IsEtherAddrsValid
-C:\Users\Mihai\AppData\Local\Temp\ccdfQh6i.s:1038   .text.is_valid_ether_addr:00000000 is_valid_ether_addr
-C:\Users\Mihai\AppData\Local\Temp\ccdfQh6i.s:68     .text.synopGMAC_powerup_mac:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccdfQh6i.s:73     .text.synopGMAC_powerup_mac:00000000 synopGMAC_powerup_mac
-C:\Users\Mihai\AppData\Local\Temp\ccdfQh6i.s:127    .text.synopGMAC_cable_unplug_function:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccdfQh6i.s:132    .text.synopGMAC_cable_unplug_function:00000000 synopGMAC_cable_unplug_function
-C:\Users\Mihai\AppData\Local\Temp\ccdfQh6i.s:202    .text.synopGMAC_setup_rx_desc_queue:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccdfQh6i.s:207    .text.synopGMAC_setup_rx_desc_queue:00000000 synopGMAC_setup_rx_desc_queue
-C:\Users\Mihai\AppData\Local\Temp\ccdfQh6i.s:418    .text.synopGMAC_giveup_rx_desc_queue:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccdfQh6i.s:423    .text.synopGMAC_giveup_rx_desc_queue:00000000 synopGMAC_giveup_rx_desc_queue
-C:\Users\Mihai\AppData\Local\Temp\ccdfQh6i.s:553    .text.synopGMAC_setup_tx_desc_queue:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccdfQh6i.s:558    .text.synopGMAC_setup_tx_desc_queue:00000000 synopGMAC_setup_tx_desc_queue
-C:\Users\Mihai\AppData\Local\Temp\ccdfQh6i.s:769    .text.synopGMAC_giveup_tx_desc_queue:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccdfQh6i.s:774    .text.synopGMAC_giveup_tx_desc_queue:00000000 synopGMAC_giveup_tx_desc_queue
-C:\Users\Mihai\AppData\Local\Temp\ccdfQh6i.s:904    .text.synop_handle_transmit_over:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccdfQh6i.s:909    .text.synop_handle_transmit_over:00000000 synop_handle_transmit_over
-C:\Users\Mihai\AppData\Local\Temp\ccdfQh6i.s:1034   .text.is_valid_ether_addr:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccdfQh6i.s:1119   .text.synopGMAC_set_mac_address:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccdfQh6i.s:1124   .text.synopGMAC_set_mac_address:00000000 synopGMAC_set_mac_address
-C:\Users\Mihai\AppData\Local\Temp\ccdfQh6i.s:1187   .text.synopGMAC_change_mtu:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccdfQh6i.s:1192   .text.synopGMAC_change_mtu:00000000 synopGMAC_change_mtu
+C:\Users\Mihai\AppData\Local\Temp\cc509yWF.s:20     .text.synopGMAC_IsEtherAddrsValid:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc509yWF.s:25     .text.synopGMAC_IsEtherAddrsValid:00000000 synopGMAC_IsEtherAddrsValid
+C:\Users\Mihai\AppData\Local\Temp\cc509yWF.s:1038   .text.is_valid_ether_addr:00000000 is_valid_ether_addr
+C:\Users\Mihai\AppData\Local\Temp\cc509yWF.s:68     .text.synopGMAC_powerup_mac:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc509yWF.s:73     .text.synopGMAC_powerup_mac:00000000 synopGMAC_powerup_mac
+C:\Users\Mihai\AppData\Local\Temp\cc509yWF.s:127    .text.synopGMAC_cable_unplug_function:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc509yWF.s:132    .text.synopGMAC_cable_unplug_function:00000000 synopGMAC_cable_unplug_function
+C:\Users\Mihai\AppData\Local\Temp\cc509yWF.s:202    .text.synopGMAC_setup_rx_desc_queue:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc509yWF.s:207    .text.synopGMAC_setup_rx_desc_queue:00000000 synopGMAC_setup_rx_desc_queue
+C:\Users\Mihai\AppData\Local\Temp\cc509yWF.s:418    .text.synopGMAC_giveup_rx_desc_queue:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc509yWF.s:423    .text.synopGMAC_giveup_rx_desc_queue:00000000 synopGMAC_giveup_rx_desc_queue
+C:\Users\Mihai\AppData\Local\Temp\cc509yWF.s:553    .text.synopGMAC_setup_tx_desc_queue:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc509yWF.s:558    .text.synopGMAC_setup_tx_desc_queue:00000000 synopGMAC_setup_tx_desc_queue
+C:\Users\Mihai\AppData\Local\Temp\cc509yWF.s:769    .text.synopGMAC_giveup_tx_desc_queue:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc509yWF.s:774    .text.synopGMAC_giveup_tx_desc_queue:00000000 synopGMAC_giveup_tx_desc_queue
+C:\Users\Mihai\AppData\Local\Temp\cc509yWF.s:904    .text.synop_handle_transmit_over:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc509yWF.s:909    .text.synop_handle_transmit_over:00000000 synop_handle_transmit_over
+C:\Users\Mihai\AppData\Local\Temp\cc509yWF.s:1034   .text.is_valid_ether_addr:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc509yWF.s:1119   .text.synopGMAC_set_mac_address:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc509yWF.s:1124   .text.synopGMAC_set_mac_address:00000000 synopGMAC_set_mac_address
+C:\Users\Mihai\AppData\Local\Temp\cc509yWF.s:1187   .text.synopGMAC_change_mtu:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cc509yWF.s:1192   .text.synopGMAC_change_mtu:00000000 synopGMAC_change_mtu
                      .debug_frame:00000010 $d
                            .group:00000000 wm4.1.1791a5ae2e936ca1033c1c44be394cc7
                            .group:00000000 wm4.XMC4500.h.45.215f4b8c79f46c7645c15373868d08c0

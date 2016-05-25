@@ -63,7 +63,7 @@ uint8_t convertToCharArray(uint8_t *sensorInformation, uint8_t size, char *chara
 		tempIndex++;
 		if (tempIndex < size)
 		{
-			characters[numberOfCharacters] = ',';
+			characters[numberOfCharacters] = '.';
 			numberOfCharacters++;
 		}
 	}
