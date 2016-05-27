@@ -47,6 +47,7 @@ int main(void)
     TimerId = SYSTM001_CreateTimer(100,SYSTM001_PERIODIC,TimerHandlerReadSensors,NULL);
     SYSTM001_StartTimer(TimerId);
 
+    ADC001_GenerateLoadEvent(&ADC001_Handle0);
     while(1)
 	{
 
