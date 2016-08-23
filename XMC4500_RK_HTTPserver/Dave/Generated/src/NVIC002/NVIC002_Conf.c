@@ -89,7 +89,7 @@ const NVIC002_HandleType NVIC002_Handle0 = {
    /* Mapped NVIC Node */
   .NodeID      = 90 , 
   /* Node Interrupt Priority */
-  .Priority    = 63,  
+  .Priority    = 50,  
   /* Node Interrupt SubPriority */
   .SubPriority = 0,
   /* Interrupt enable for Node90 */
@@ -100,7 +100,7 @@ const NVIC002_HandleType NVIC002_Handle1 = {
    /* Mapped NVIC Node */
   .NodeID      = 16 , 
   /* Node Interrupt Priority */
-  .Priority    = 63,  
+  .Priority    = 60,  
   /* Node Interrupt SubPriority */
   .SubPriority = 0,
   /* Interrupt enable for Node16 */

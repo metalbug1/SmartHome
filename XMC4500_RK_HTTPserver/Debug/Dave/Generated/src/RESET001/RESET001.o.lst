@@ -432,14 +432,14 @@
  276              		.file 6 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Include/core_cm4.h"
 DEFINED SYMBOLS
                             *ABS*:00000000 RESET001.c
-C:\Users\Mihai\AppData\Local\Temp\ccNGIK8k.s:20     .text.RESET001_AssertReset:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccNGIK8k.s:25     .text.RESET001_AssertReset:00000000 RESET001_AssertReset
-C:\Users\Mihai\AppData\Local\Temp\ccNGIK8k.s:83     .text.RESET001_DeassertReset:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccNGIK8k.s:88     .text.RESET001_DeassertReset:00000000 RESET001_DeassertReset
-C:\Users\Mihai\AppData\Local\Temp\ccNGIK8k.s:145    .text.RESET001_GetResetInfo:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccNGIK8k.s:150    .text.RESET001_GetResetInfo:00000000 RESET001_GetResetInfo
-C:\Users\Mihai\AppData\Local\Temp\ccNGIK8k.s:185    .text.RESET001_GetStatus:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccNGIK8k.s:190    .text.RESET001_GetStatus:00000000 RESET001_GetStatus
+C:\Users\Mihai\AppData\Local\Temp\ccH803l9.s:20     .text.RESET001_AssertReset:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccH803l9.s:25     .text.RESET001_AssertReset:00000000 RESET001_AssertReset
+C:\Users\Mihai\AppData\Local\Temp\ccH803l9.s:83     .text.RESET001_DeassertReset:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccH803l9.s:88     .text.RESET001_DeassertReset:00000000 RESET001_DeassertReset
+C:\Users\Mihai\AppData\Local\Temp\ccH803l9.s:145    .text.RESET001_GetResetInfo:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccH803l9.s:150    .text.RESET001_GetResetInfo:00000000 RESET001_GetResetInfo
+C:\Users\Mihai\AppData\Local\Temp\ccH803l9.s:185    .text.RESET001_GetStatus:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccH803l9.s:190    .text.RESET001_GetStatus:00000000 RESET001_GetStatus
                      .debug_frame:00000010 $d
                            .group:00000000 wm4.1.1791a5ae2e936ca1033c1c44be394cc7
                            .group:00000000 wm4.XMC4500.h.45.215f4b8c79f46c7645c15373868d08c0
@@ -477,7 +477,7 @@ C:\Users\Mihai\AppData\Local\Temp\ccNGIK8k.s:190    .text.RESET001_GetStatus:000
                            .group:00000000 wm4.stdlib.h.53.c69c7609933ff56d59c757cec2d13230
                            .group:00000000 wm4.string.h.8.ef946ad0bc9ad5c970c365dcd1fc4b0a
                            .group:00000000 wm4.string.h.86.d5c872ff52e2712c985b588a0ef39f3c
-                           .group:00000000 wm4.ETH004_Conf.h.56.564c3f309c32b3c742fc91049cf66940
+                           .group:00000000 wm4.ETH004_Conf.h.56.59591edbd6ce1f089c3d2789404b9485
                            .group:00000000 wm4.lwipopts.h.73.a7a63bda1e8216abd1d90275eaaa0027
                            .group:00000000 wm4.arch.h.33.6fa4aa86d33d1490ae882caef7316405
                            .group:00000000 wm4.cpu.h.33.b213c7fd77614ebc3691cef18ad2ff22

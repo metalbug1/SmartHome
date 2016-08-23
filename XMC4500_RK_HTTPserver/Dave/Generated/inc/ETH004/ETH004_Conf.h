@@ -63,7 +63,7 @@
  #define LWIP_DHCP                      0
  #endif
  #ifndef MEM_SIZE
- #define MEM_SIZE                       16384
+ #define MEM_SIZE                       20480
  #endif
 
  #ifndef IP_DEFAULT_TTL
@@ -103,7 +103,7 @@
  #endif
 
  #ifndef DNS_SERVER_ADDRESS             
- #define DNS_SERVER_ADDRESS             inet_addr("192.168.1.1") 
+ #define DNS_SERVER_ADDRESS             inet_addr("192.168.0.1") 
  #endif 
 
  #ifndef LWIP_NETIF_HOSTNAME

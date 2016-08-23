@@ -19,23 +19,23 @@
   19              		.bss
   20              		.align	2
   21              	ram_heap:
-  22 0000 00000000 		.space	16404
+  22 0000 00000000 		.space	20500
   22      00000000 
   22      00000000 
   22      00000000 
   22      00000000 
   23              		.align	2
   24              	ram:
-  25 4014 00000000 		.space	4
+  25 5014 00000000 		.space	4
   26              		.align	2
   27              	ram_end:
-  28 4018 00000000 		.space	4
+  28 5018 00000000 		.space	4
   29              		.align	2
   30              	lfree:
-  31 401c 00000000 		.space	4
+  31 501c 00000000 		.space	4
   32              	mem_sem:
-  33 4020 00       		.space	1
-  34 4021 000000   		.section	.text.plug_holes,"ax",%progbits
+  33 5020 00       		.space	1
+  34 5021 000000   		.section	.text.plug_holes,"ax",%progbits
   35              		.align	2
   36              		.thumb
   37              		.thumb_func
@@ -484,7 +484,7 @@
  273:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/mem.c ****   mem->next = MEM_SIZE_ALIGNED;
  211              		.loc 1 273 0
  212 002e 7B68     		ldr	r3, [r7, #4]
- 213 0030 4FF48042 		mov	r2, #16384
+ 213 0030 4FF4A042 		mov	r2, #20480
  214 0034 1A80     		strh	r2, [r3, #0]	@ movhi
  274:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/mem.c ****   mem->prev = 0;
  215              		.loc 1 274 0
@@ -502,7 +502,7 @@
  224 0046 40F20003 		movw	r3, #:lower16:ram
  225 004a C0F20003 		movt	r3, #:upper16:ram
  226 004e 1B68     		ldr	r3, [r3, #0]
- 227 0050 03F58042 		add	r2, r3, #16384
+ 227 0050 03F5A042 		add	r2, r3, #20480
  228 0054 40F20003 		movw	r3, #:lower16:ram_end
  229 0058 C0F20003 		movt	r3, #:upper16:ram_end
  230 005c 1A60     		str	r2, [r3, #0]
@@ -518,14 +518,14 @@
  238 006e 40F20003 		movw	r3, #:lower16:ram_end
  239 0072 C0F20003 		movt	r3, #:upper16:ram_end
  240 0076 1B68     		ldr	r3, [r3, #0]
- 241 0078 4FF48042 		mov	r2, #16384
+ 241 0078 4FF4A042 		mov	r2, #20480
  242 007c 1A80     		strh	r2, [r3, #0]	@ movhi
  280:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/mem.c ****   ram_end->prev = MEM_SIZE_ALIGNED;
  243              		.loc 1 280 0
  244 007e 40F20003 		movw	r3, #:lower16:ram_end
  245 0082 C0F20003 		movt	r3, #:upper16:ram_end
  246 0086 1B68     		ldr	r3, [r3, #0]
- 247 0088 4FF48042 		mov	r2, #16384
+ 247 0088 4FF4A042 		mov	r2, #20480
  248 008c 5A80     		strh	r2, [r3, #2]	@ movhi
  281:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/mem.c **** 
  282:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/mem.c ****   mem_sem = sys_sem_new(1);
@@ -771,7 +771,7 @@
  374:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/mem.c ****   if (newsize > MEM_SIZE_ALIGNED) {
  399              		.loc 1 374 0
  400 0026 7B88     		ldrh	r3, [r7, #2]
- 401 0028 B3F5804F 		cmp	r3, #16384
+ 401 0028 B3F5A04F 		cmp	r3, #20480
  402 002c 02D9     		bls	.L18
  375:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/mem.c ****     return NULL;
  403              		.loc 1 375 0
@@ -966,7 +966,7 @@
  534              		.loc 1 433 0
  535 0128 FB68     		ldr	r3, [r7, #12]
  536 012a 1B88     		ldrh	r3, [r3, #0]
- 537 012c B3F5804F 		cmp	r3, #16384
+ 537 012c B3F5A04F 		cmp	r3, #20480
  538 0130 4AD0     		beq	.L27
  434:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/mem.c ****       ((struct mem *)&ram[mem2->next])->prev = ptr2;
  539              		.loc 1 434 0
@@ -1054,7 +1054,7 @@
  601              		.loc 1 454 0
  602 01aa FB68     		ldr	r3, [r7, #12]
  603 01ac 1B88     		ldrh	r3, [r3, #0]
- 604 01ae B3F5804F 		cmp	r3, #16384
+ 604 01ae B3F5A04F 		cmp	r3, #20480
  605 01b2 09D0     		beq	.L27
  455:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/mem.c ****       ((struct mem *)&ram[mem2->next])->prev = ptr2;
  606              		.loc 1 455 0
@@ -1175,7 +1175,7 @@
  504:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/mem.c ****   if (size > MEM_SIZE_ALIGNED) {
  675              		.loc 1 504 0
  676 0030 FB88     		ldrh	r3, [r7, #6]
- 677 0032 B3F5804F 		cmp	r3, #16384
+ 677 0032 B3F5A04F 		cmp	r3, #20480
  678 0036 02D9     		bls	.L33
  505:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/mem.c ****     return NULL;
  679              		.loc 1 505 0
@@ -1322,7 +1322,7 @@
  764              		.loc 1 560 0
  765 00e2 BB68     		ldr	r3, [r7, #8]
  766 00e4 1B88     		ldrh	r3, [r3, #0]
- 767 00e6 B3F5804F 		cmp	r3, #16384
+ 767 00e6 B3F5A04F 		cmp	r3, #20480
  768 00ea 0ED0     		beq	.L37
  561:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/mem.c ****             ((struct mem *)&ram[mem2->next])->prev = ptr2;
  769              		.loc 1 561 0
@@ -1445,7 +1445,7 @@
  848              		.loc 1 520 0 discriminator 1
  849 0196 FA8A     		ldrh	r2, [r7, #22]
  850 0198 FB88     		ldrh	r3, [r7, #6]
- 851 019a C3F58043 		rsb	r3, r3, #16384
+ 851 019a C3F5A043 		rsb	r3, r3, #20480
  852 019e 9A42     		cmp	r2, r3
  853 01a0 FFF65BAF 		blt	.L42
  596:../Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/mem.c ****       }
@@ -1559,27 +1559,27 @@
  929              		.file 5 "F:\\WORK\\SmartHome_checkout1\\XMC4500_RK_HTTPserver\\Dave\\Generated\\src\\ETH004\\01_lw
 DEFINED SYMBOLS
                             *ABS*:00000000 mem.c
-C:\Users\Mihai\AppData\Local\Temp\ccjFPJeq.s:20     .bss:00000000 $d
-C:\Users\Mihai\AppData\Local\Temp\ccjFPJeq.s:21     .bss:00000000 ram_heap
-C:\Users\Mihai\AppData\Local\Temp\ccjFPJeq.s:24     .bss:00004014 ram
-C:\Users\Mihai\AppData\Local\Temp\ccjFPJeq.s:27     .bss:00004018 ram_end
-C:\Users\Mihai\AppData\Local\Temp\ccjFPJeq.s:30     .bss:0000401c lfree
-C:\Users\Mihai\AppData\Local\Temp\ccjFPJeq.s:32     .bss:00004020 mem_sem
-C:\Users\Mihai\AppData\Local\Temp\ccjFPJeq.s:35     .text.plug_holes:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccjFPJeq.s:39     .text.plug_holes:00000000 plug_holes
-C:\Users\Mihai\AppData\Local\Temp\ccjFPJeq.s:175    .text.mem_init:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccjFPJeq.s:180    .text.mem_init:00000000 mem_init
-C:\Users\Mihai\AppData\Local\Temp\ccjFPJeq.s:270    .text.mem_free:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccjFPJeq.s:275    .text.mem_free:00000000 mem_free
-C:\Users\Mihai\AppData\Local\Temp\ccjFPJeq.s:360    .text.mem_realloc:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccjFPJeq.s:365    .text.mem_realloc:00000000 mem_realloc
-C:\Users\Mihai\AppData\Local\Temp\ccjFPJeq.s:629    .text.mem_malloc:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccjFPJeq.s:634    .text.mem_malloc:00000000 mem_malloc
-C:\Users\Mihai\AppData\Local\Temp\ccjFPJeq.s:867    .text.mem_calloc:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccjFPJeq.s:872    .text.mem_calloc:00000000 mem_calloc
+C:\Users\Mihai\AppData\Local\Temp\ccQys7Bl.s:20     .bss:00000000 $d
+C:\Users\Mihai\AppData\Local\Temp\ccQys7Bl.s:21     .bss:00000000 ram_heap
+C:\Users\Mihai\AppData\Local\Temp\ccQys7Bl.s:24     .bss:00005014 ram
+C:\Users\Mihai\AppData\Local\Temp\ccQys7Bl.s:27     .bss:00005018 ram_end
+C:\Users\Mihai\AppData\Local\Temp\ccQys7Bl.s:30     .bss:0000501c lfree
+C:\Users\Mihai\AppData\Local\Temp\ccQys7Bl.s:32     .bss:00005020 mem_sem
+C:\Users\Mihai\AppData\Local\Temp\ccQys7Bl.s:35     .text.plug_holes:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQys7Bl.s:39     .text.plug_holes:00000000 plug_holes
+C:\Users\Mihai\AppData\Local\Temp\ccQys7Bl.s:175    .text.mem_init:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQys7Bl.s:180    .text.mem_init:00000000 mem_init
+C:\Users\Mihai\AppData\Local\Temp\ccQys7Bl.s:270    .text.mem_free:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQys7Bl.s:275    .text.mem_free:00000000 mem_free
+C:\Users\Mihai\AppData\Local\Temp\ccQys7Bl.s:360    .text.mem_realloc:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQys7Bl.s:365    .text.mem_realloc:00000000 mem_realloc
+C:\Users\Mihai\AppData\Local\Temp\ccQys7Bl.s:629    .text.mem_malloc:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQys7Bl.s:634    .text.mem_malloc:00000000 mem_malloc
+C:\Users\Mihai\AppData\Local\Temp\ccQys7Bl.s:867    .text.mem_calloc:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\ccQys7Bl.s:872    .text.mem_calloc:00000000 mem_calloc
                      .debug_frame:00000010 $d
                            .group:00000000 wm4.1.1791a5ae2e936ca1033c1c44be394cc7
-                           .group:00000000 wm4.ETH004_Conf.h.56.564c3f309c32b3c742fc91049cf66940
+                           .group:00000000 wm4.ETH004_Conf.h.56.59591edbd6ce1f089c3d2789404b9485
                            .group:00000000 wm4.lwipopts.h.73.a7a63bda1e8216abd1d90275eaaa0027
                            .group:00000000 wm4.arch.h.33.6fa4aa86d33d1490ae882caef7316405
                            .group:00000000 wm4.cpu.h.33.b213c7fd77614ebc3691cef18ad2ff22

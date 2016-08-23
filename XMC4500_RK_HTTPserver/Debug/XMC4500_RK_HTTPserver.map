@@ -14918,7 +14918,7 @@ Communication_Buffers
 
 USB_RAM
 
-.bss            0x20000800     0x5e6c
+.bss            0x20000800     0x6e70
                 0x20000800                __Xmc4500_sBSS = .
  *(.bss)
  .bss           0x20000800        0x0 AdcRelaxKit.o
@@ -14980,384 +14980,383 @@ USB_RAM
  .bss           0x20000dd2        0x0 Dave/Generated/src/FATFS002/syscall.o
  *fill*         0x20000dd2        0x2 00
  .bss           0x20000dd4        0xc Dave/Generated/src/FATFS002/Src/ff.o
- .bss           0x20000de0        0x2 Dave/Generated/src/ETH004/ETH004_Conf.o
-                0x20000de0                Netpos4
- *fill*         0x20000de2        0x2 00
- .bss           0x20000de4       0xcc Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/etharp.o
- .bss           0x20000eb0        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.o
- .bss           0x20000eb0        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/loopif.o
- .bss           0x20000eb0        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/slipif.o
- .bss           0x20000eb0        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dhcp.o
- .bss           0x20000eb0      0x670 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.o
- .bss           0x20001520        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.o
- .bss           0x20001520     0x4024 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/mem.o
- .bss           0x20005544        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/memp.o
- .bss           0x20005544       0x10 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.o
-                0x20005544                LinkCallback
-                0x20005548                StatusCallback
-                0x2000554c                TCPTimer
-                0x20005550                ARPTimer
- .bss           0x20005554        0x1 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netif.o
- .bss           0x20005555        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.o
- *fill*         0x20005555        0x3 00
- .bss           0x20005558        0x4 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.o
- .bss           0x2000555c        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/stats.o
- .bss           0x2000555c        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/sys.o
- .bss           0x2000555c        0x1 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/tcp.o
- *fill*         0x2000555d        0x3 00
- .bss           0x20005560       0x30 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/tcp_in.o
- .bss           0x20005590        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/tcp_out.o
- .bss           0x20005590        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.o
- .bss           0x20005590        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/autoip.o
- .bss           0x20005590        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.o
- .bss           0x20005590        0xc Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/igmp.o
- .bss           0x2000559c       0x10 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/inet.o
- .bss           0x200055ac        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/inet_chksum.o
- .bss           0x200055ac        0x2 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.o
- .bss           0x200055ae        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip_addr.o
- *fill*         0x200055ae        0x2 00
- .bss           0x200055b0      0x5e8 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip_frag.o
- .bss           0x20005b98        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/api/api_lib.o
- .bss           0x20005b98        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/api/api_msg.o
- .bss           0x20005b98        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/api/err.o
- .bss           0x20005b98        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/api/netbuf.o
- .bss           0x20005b98        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/api/netdb.o
- .bss           0x20005b98        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/api/netifapi.o
- .bss           0x20005b98        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/api/sockets.o
- .bss           0x20005b98        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/api/tcpip.o
- .bss           0x20005b98        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/port/arch/sys/sys_arch.o
- .bss           0x20005b98        0x0 Dave/Generated/src/ETH002/EthernetPHY.o
- .bss           0x20005b98        0x0 Dave/Generated/src/ETH001/DMA_Descriptors.o
- .bss           0x20005b98        0x4 Dave/Generated/src/ETH001/synopGMAC_Dev.o
- .bss           0x20005b9c        0x0 Dave/Generated/src/ETH001/synopGMAC_network_interface.o
- .bss           0x20005b9c        0x0 Dave/Generated/src/ETH001/synopGMAC_plat.o
- .bss           0x20005b9c        0x8 Dave/Generated/src/ETH001/synopGMAC_stack_interface.o
- .bss           0x20005ba4        0x0 Dave/Generated/src/DAVESupport/DAVE3.o
- .bss           0x20005ba4        0x0 Dave/Generated/src/DAVESupport/MULTIPLEXER.o
- .bss           0x20005ba4        0x0 Dave/Generated/src/CLK001/CLK001.o
- .bss           0x20005ba4        0x0 Dave/Generated/src/ADCGROUP001/ADCGroup001.o
- .bss           0x20005ba4        0x4 Dave/Generated/src/ADCGROUP001/ADCGroup001_Conf.o
-                0x20005ba4                ADCGROUP001_DynamicHandle0
- .bss           0x20005ba8        0x0 Dave/Generated/src/ADCGLOB001/ADCGlob001.o
- .bss           0x20005ba8        0x4 Dave/Generated/src/ADCGLOB001/ADCGlob001_Conf.o
-                0x20005ba8                ADCGLOB001_DynamicData0
- .bss           0x20005bac        0x0 Dave/Generated/src/ADC001/ADC001.o
- .bss           0x20005bac        0x8 Dave/Generated/src/ADC001/ADC001_Conf.o
-                0x20005bac                ADC001_DynamicHandle
- .bss           0x20005bb4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv7e-m\libgcc.a(_arm_addsubdf3.o)
- .bss           0x20005bb4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv7e-m\libgcc.a(_arm_muldivdf3.o)
- .bss           0x20005bb4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv7e-m\libgcc.a(_arm_fixunsdfsi.o)
- .bss           0x20005bb4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-calloc.o)
- .bss           0x20005bb4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-errno.o)
- .bss           0x20005bb4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-fclose.o)
- .bss           0x20005bb4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-fflush.o)
- .bss           0x20005bb4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-findfp.o)
- .bss           0x20005bb4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-fopen.o)
- .bss           0x20005bb4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-fread.o)
- .bss           0x20005bb4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-fseek.o)
- .bss           0x20005bb4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-fstatr.o)
- .bss           0x20005bb4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-fwalk.o)
- .bss           0x20005bb4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-impure.o)
- .bss           0x20005bb4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-init.o)
- .bss           0x20005bb4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-makebuf.o)
- .bss           0x20005bb4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-malloc.o)
- .bss           0x20005bb4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-memcpy.o)
- .bss           0x20005bb4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-memmove.o)
- .bss           0x20005bb4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-memset.o)
- .bss           0x20005bb4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-mktime.o)
- .bss           0x20005bb4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-mktm_r.o)
- .bss           0x20005bb4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-openr.o)
- .bss           0x20005bb4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-reent.o)
- .bss           0x20005bb4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-refill.o)
- .bss           0x20005bb4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-stdio.o)
- .bss           0x20005bb4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-strchr.o)
- .bss           0x20005bb4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-strcmp.o)
- .bss           0x20005bb4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-strcpy.o)
- .bss           0x20005bb4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-strlen.o)
- .bss           0x20005bb4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-strncmp.o)
- .bss           0x20005bb4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-strstr.o)
- .bss           0x20005bb4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-sysstat.o)
- .bss           0x20005bb4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-tzlock.o)
- .bss           0x20005bb4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-tzvars.o)
- .bss           0x20005bb4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-closer.o)
- .bss           0x20005bb4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-div.o)
- .bss           0x20005bb4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-flags.o)
- .bss           0x20005bb4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-gettzinfo.o)
- .bss           0x20005bb4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-isattyr.o)
- .bss           0x20005bb4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-lseekr.o)
- .bss           0x20005bb4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-memchr.o)
- .bss           0x20005bb4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-memcmp.o)
- .bss           0x20005bb4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-statr.o)
+ .bss           0x20000de0        0x6 Dave/Generated/src/ETH004/ETH004_Conf.o
+                0x20000de0                IPpos3
+                0x20000de2                Netpos4
+                0x20000de4                GWpos3
+ *fill*         0x20000de6        0x2 00
+ .bss           0x20000de8       0xcc Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/etharp.o
+ .bss           0x20000eb4        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.o
+ .bss           0x20000eb4        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/loopif.o
+ .bss           0x20000eb4        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/slipif.o
+ .bss           0x20000eb4        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dhcp.o
+ .bss           0x20000eb4      0x670 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.o
+ .bss           0x20001524        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.o
+ .bss           0x20001524     0x5024 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/mem.o
+ .bss           0x20006548        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/memp.o
+ .bss           0x20006548       0x10 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.o
+                0x20006548                LinkCallback
+                0x2000654c                StatusCallback
+                0x20006550                TCPTimer
+                0x20006554                ARPTimer
+ .bss           0x20006558        0x1 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netif.o
+ .bss           0x20006559        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.o
+ *fill*         0x20006559        0x3 00
+ .bss           0x2000655c        0x4 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.o
+ .bss           0x20006560        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/stats.o
+ .bss           0x20006560        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/sys.o
+ .bss           0x20006560        0x1 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/tcp.o
+ *fill*         0x20006561        0x3 00
+ .bss           0x20006564       0x30 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/tcp_in.o
+ .bss           0x20006594        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/tcp_out.o
+ .bss           0x20006594        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.o
+ .bss           0x20006594        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/autoip.o
+ .bss           0x20006594        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.o
+ .bss           0x20006594        0xc Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/igmp.o
+ .bss           0x200065a0       0x10 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/inet.o
+ .bss           0x200065b0        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/inet_chksum.o
+ .bss           0x200065b0        0x2 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.o
+ .bss           0x200065b2        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip_addr.o
+ *fill*         0x200065b2        0x2 00
+ .bss           0x200065b4      0x5e8 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip_frag.o
+ .bss           0x20006b9c        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/api/api_lib.o
+ .bss           0x20006b9c        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/api/api_msg.o
+ .bss           0x20006b9c        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/api/err.o
+ .bss           0x20006b9c        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/api/netbuf.o
+ .bss           0x20006b9c        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/api/netdb.o
+ .bss           0x20006b9c        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/api/netifapi.o
+ .bss           0x20006b9c        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/api/sockets.o
+ .bss           0x20006b9c        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/api/tcpip.o
+ .bss           0x20006b9c        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/port/arch/sys/sys_arch.o
+ .bss           0x20006b9c        0x0 Dave/Generated/src/ETH002/EthernetPHY.o
+ .bss           0x20006b9c        0x0 Dave/Generated/src/ETH001/DMA_Descriptors.o
+ .bss           0x20006b9c        0x4 Dave/Generated/src/ETH001/synopGMAC_Dev.o
+ .bss           0x20006ba0        0x0 Dave/Generated/src/ETH001/synopGMAC_network_interface.o
+ .bss           0x20006ba0        0x0 Dave/Generated/src/ETH001/synopGMAC_plat.o
+ .bss           0x20006ba0        0x8 Dave/Generated/src/ETH001/synopGMAC_stack_interface.o
+ .bss           0x20006ba8        0x0 Dave/Generated/src/DAVESupport/DAVE3.o
+ .bss           0x20006ba8        0x0 Dave/Generated/src/DAVESupport/MULTIPLEXER.o
+ .bss           0x20006ba8        0x0 Dave/Generated/src/CLK001/CLK001.o
+ .bss           0x20006ba8        0x0 Dave/Generated/src/ADCGROUP001/ADCGroup001.o
+ .bss           0x20006ba8        0x4 Dave/Generated/src/ADCGROUP001/ADCGroup001_Conf.o
+                0x20006ba8                ADCGROUP001_DynamicHandle0
+ .bss           0x20006bac        0x0 Dave/Generated/src/ADCGLOB001/ADCGlob001.o
+ .bss           0x20006bac        0x4 Dave/Generated/src/ADCGLOB001/ADCGlob001_Conf.o
+                0x20006bac                ADCGLOB001_DynamicData0
+ .bss           0x20006bb0        0x0 Dave/Generated/src/ADC001/ADC001.o
+ .bss           0x20006bb0        0x8 Dave/Generated/src/ADC001/ADC001_Conf.o
+                0x20006bb0                ADC001_DynamicHandle
+ .bss           0x20006bb8        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv7e-m\libgcc.a(_arm_addsubdf3.o)
+ .bss           0x20006bb8        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv7e-m\libgcc.a(_arm_muldivdf3.o)
+ .bss           0x20006bb8        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv7e-m\libgcc.a(_arm_fixunsdfsi.o)
+ .bss           0x20006bb8        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-calloc.o)
+ .bss           0x20006bb8        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-errno.o)
+ .bss           0x20006bb8        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-fclose.o)
+ .bss           0x20006bb8        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-fflush.o)
+ .bss           0x20006bb8        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-findfp.o)
+ .bss           0x20006bb8        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-fopen.o)
+ .bss           0x20006bb8        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-fread.o)
+ .bss           0x20006bb8        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-fseek.o)
+ .bss           0x20006bb8        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-fstatr.o)
+ .bss           0x20006bb8        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-fwalk.o)
+ .bss           0x20006bb8        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-impure.o)
+ .bss           0x20006bb8        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-init.o)
+ .bss           0x20006bb8        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-makebuf.o)
+ .bss           0x20006bb8        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-malloc.o)
+ .bss           0x20006bb8        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-memcpy.o)
+ .bss           0x20006bb8        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-memmove.o)
+ .bss           0x20006bb8        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-memset.o)
+ .bss           0x20006bb8        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-mktime.o)
+ .bss           0x20006bb8        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-mktm_r.o)
+ .bss           0x20006bb8        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-openr.o)
+ .bss           0x20006bb8        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-reent.o)
+ .bss           0x20006bb8        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-refill.o)
+ .bss           0x20006bb8        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-stdio.o)
+ .bss           0x20006bb8        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-strchr.o)
+ .bss           0x20006bb8        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-strcmp.o)
+ .bss           0x20006bb8        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-strcpy.o)
+ .bss           0x20006bb8        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-strlen.o)
+ .bss           0x20006bb8        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-strncmp.o)
+ .bss           0x20006bb8        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-strstr.o)
+ .bss           0x20006bb8        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-sysstat.o)
+ .bss           0x20006bb8        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-tzlock.o)
+ .bss           0x20006bb8        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-tzvars.o)
+ .bss           0x20006bb8        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-closer.o)
+ .bss           0x20006bb8        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-div.o)
+ .bss           0x20006bb8        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-flags.o)
+ .bss           0x20006bb8        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-gettzinfo.o)
+ .bss           0x20006bb8        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-isattyr.o)
+ .bss           0x20006bb8        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-lseekr.o)
+ .bss           0x20006bb8        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-memchr.o)
+ .bss           0x20006bb8        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-memcmp.o)
+ .bss           0x20006bb8        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-statr.o)
  *(.bss*)
  .bss._daylight
-                0x20005bb4        0x4 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-tzvars.o)
-                0x20005bb4                _daylight
+                0x20006bb8        0x4 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-tzvars.o)
+                0x20006bb8                _daylight
  .bss._timezone
-                0x20005bb8        0x4 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-tzvars.o)
-                0x20005bb8                _timezone
+                0x20006bbc        0x4 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-tzvars.o)
+                0x20006bbc                _timezone
  *(EXCLUDE_FILE(*DMA_Descriptors.o) COMMON)
- COMMON         0x20005bbc      0x127 DataProcessing.o
-                0x20005bbc                receivedDataQueue
-                0x20005cc0                roomInformation
- *fill*         0x20005ce3        0x1 00
- COMMON         0x20005ce4        0x6 Sensors.o
-                0x20005ce4                LightAdcConversion
-                0x20005ce6                TemperatureAdcConversion
-                0x20005ce8                HumidityAdcConversion
- *fill*         0x20005cea        0x2 00
- COMMON         0x20005cec        0x8 WebServerFunctions.o
-                0x20005cec                CGI_TAB
- COMMON         0x20005cf4      0x118 Dave/Generated/src/WEBSERVER001/HTTPServer/fs.o
-                0x20005cf4                fs_memory
- COMMON         0x20005e0c      0x234 Dave/Generated/src/WEBSERVER001/HTTPServer/httpd.o
-                0x20005e0c                myfsObject
- COMMON         0x20006040      0x400 Dave/Generated/src/SYSTM001/SYSTM001.o
-                0x20006040                TimerTbl
- COMMON         0x20006440       0x40 Dave/Generated/src/SDMMC003/SDMMC003_Private.o
-                0x20006440                NormalIntStatus
-                0x20006444                SDMMC003_ReturnStatus
-                0x20006448                SDMMC003_ISRContext
-                0x2000644e                ErrorIntStatus
-                0x20006450                SDMMC003_CardInfo
- COMMON         0x20006480       0x88 Dave/Generated/src/NVIC_SCU001/NVIC_SCU001.o
-                0x20006480                NVIC_SCU001_Handle0
- COMMON         0x20006508       0x16 Dave/Generated/src/GMM001/GMM001.o
-                0x20006508                GMM001_handle1
-                0x20006510                GMM001_handle2
-                0x20006518                GMM001_handle0
- *fill*         0x2000651e        0x2 00
- COMMON         0x20006520        0x4 Dave/Generated/src/FATFS004/FATFS004.o
-                0x20006520                FATFS004_UnusedStatus
- COMMON         0x20006524        0x6 Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.o
-                0x20006524                MACaddr
- *fill*         0x2000652a        0x2 00
- COMMON         0x2000652c       0x3c Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.o
-                0x2000652c                netif
-                0x20006560                lwip250mStimer
-                0x20006564                Eth_TimerHandle
- COMMON         0x20006568        0x8 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netif.o
-                0x20006568                netif_list
-                0x2000656c                netif_default
- COMMON         0x20006570       0x18 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/tcp.o
-                0x20006570                tcp_active_pcbs
-                0x20006574                tcp_ticks
-                0x20006578                tcp_listen_pcbs
-                0x2000657c                tcp_tmp_pcb
-                0x20006580                tcp_bound_pcbs
-                0x20006584                tcp_tw_pcbs
- COMMON         0x20006588        0x4 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/tcp_in.o
-                0x20006588                tcp_input_pcb
- COMMON         0x2000658c        0x4 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.o
-                0x2000658c                udp_pcbs
- COMMON         0x20006590        0x8 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.o
-                0x20006590                current_netif
-                0x20006594                current_header
- COMMON         0x20006598        0x4 Dave/Generated/src/ETH002/EthernetPHY.o
-                0x20006598                PHYtimerCallback
- COMMON         0x2000659c       0xcc Dave/Generated/src/ETH001/synopGMAC_stack_interface.o
-                0x2000659c                GMACdevice
-                0x20006660                GMAC_Power_down
-                0x20006664                synopGMACdev
- COMMON         0x20006668        0x4 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-reent.o)
-                0x20006668                errno
+ COMMON         0x20006bc0      0x127 DataProcessing.o
+                0x20006bc0                receivedDataQueue
+                0x20006cc4                roomInformation
+ *fill*         0x20006ce7        0x1 00
+ COMMON         0x20006ce8        0x6 Sensors.o
+                0x20006ce8                LightAdcConversion
+                0x20006cea                TemperatureAdcConversion
+                0x20006cec                HumidityAdcConversion
+ *fill*         0x20006cee        0x2 00
+ COMMON         0x20006cf0        0x8 WebServerFunctions.o
+                0x20006cf0                CGI_TAB
+ COMMON         0x20006cf8      0x118 Dave/Generated/src/WEBSERVER001/HTTPServer/fs.o
+                0x20006cf8                fs_memory
+ COMMON         0x20006e10      0x234 Dave/Generated/src/WEBSERVER001/HTTPServer/httpd.o
+                0x20006e10                myfsObject
+ COMMON         0x20007044      0x400 Dave/Generated/src/SYSTM001/SYSTM001.o
+                0x20007044                TimerTbl
+ COMMON         0x20007444       0x40 Dave/Generated/src/SDMMC003/SDMMC003_Private.o
+                0x20007444                NormalIntStatus
+                0x20007448                SDMMC003_ReturnStatus
+                0x2000744c                SDMMC003_ISRContext
+                0x20007452                ErrorIntStatus
+                0x20007454                SDMMC003_CardInfo
+ COMMON         0x20007484       0x88 Dave/Generated/src/NVIC_SCU001/NVIC_SCU001.o
+                0x20007484                NVIC_SCU001_Handle0
+ COMMON         0x2000750c       0x16 Dave/Generated/src/GMM001/GMM001.o
+                0x2000750c                GMM001_handle1
+                0x20007514                GMM001_handle2
+                0x2000751c                GMM001_handle0
+ *fill*         0x20007522        0x2 00
+ COMMON         0x20007524        0x4 Dave/Generated/src/FATFS004/FATFS004.o
+                0x20007524                FATFS004_UnusedStatus
+ COMMON         0x20007528        0x6 Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.o
+                0x20007528                MACaddr
+ *fill*         0x2000752e        0x2 00
+ COMMON         0x20007530       0x3c Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.o
+                0x20007530                netif
+                0x20007564                lwip250mStimer
+                0x20007568                Eth_TimerHandle
+ COMMON         0x2000756c        0x8 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netif.o
+                0x2000756c                netif_list
+                0x20007570                netif_default
+ COMMON         0x20007574       0x18 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/tcp.o
+                0x20007574                tcp_active_pcbs
+                0x20007578                tcp_ticks
+                0x2000757c                tcp_listen_pcbs
+                0x20007580                tcp_tmp_pcb
+                0x20007584                tcp_bound_pcbs
+                0x20007588                tcp_tw_pcbs
+ COMMON         0x2000758c        0x4 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/tcp_in.o
+                0x2000758c                tcp_input_pcb
+ COMMON         0x20007590        0x4 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.o
+                0x20007590                udp_pcbs
+ COMMON         0x20007594        0x8 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.o
+                0x20007594                current_netif
+                0x20007598                current_header
+ COMMON         0x2000759c        0x4 Dave/Generated/src/ETH002/EthernetPHY.o
+                0x2000759c                PHYtimerCallback
+ COMMON         0x200075a0       0xcc Dave/Generated/src/ETH001/synopGMAC_stack_interface.o
+                0x200075a0                GMACdevice
+                0x20007664                GMAC_Power_down
+                0x20007668                synopGMACdev
+ COMMON         0x2000766c        0x4 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-reent.o)
+                0x2000766c                errno
  *(.gnu.linkonce.b*)
-                0x2000666c                __Xmc4500_eBSS = ALIGN (0x4)
-                0x00005e6c                __Xmc4500_BSS_Size = (__Xmc4500_eBSS - __Xmc4500_sBSS)
+                0x20007670                __Xmc4500_eBSS = ALIGN (0x4)
+                0x00006e70                __Xmc4500_BSS_Size = (__Xmc4500_eBSS - __Xmc4500_sBSS)
 
-.data           0x20006670      0x5dc load address 0x0c026c40
-                0x20006670                __Xmc4500_sData = .
+.data           0x20007670      0x5d4 load address 0x0c026c40
+                0x20007670                __Xmc4500_sData = .
  *(.data)
- .data          0x20006670        0x0 AdcRelaxKit.o
- .data          0x20006670        0x2 DataProcessing.o
- .data          0x20006672        0x0 DataQueue.o
- *fill*         0x20006672        0x2 00
- .data          0x20006674       0x78 Sensors.o
-                0x20006674                au8HumidityTable
-                0x20006680                afHumidityResistance20DegreesTable
-                0x200066a4                afHumidityResistance25DegreesTable
-                0x200066c8                afHumidityResistance30DegreesTable
- .data          0x200066ec        0x0 SmartHome.o
- .data          0x200066ec        0x8 WebServerFunctions.o
-                0x200066ec                TAGS
- .data          0x200066f4        0x0 Startup/startup_XMC4500.o
- .data          0x200066f4        0x4 Startup/system_XMC4500.o
-                0x200066f4                SystemCoreClock
- .data          0x200066f8        0x0 Lib/System_LibcStubs.o
- .data          0x200066f8        0x0 Dave/Generated/src/WEBSERVER001/HTTPServer/fs.o
- .data          0x200066f8        0x0 Dave/Generated/src/WEBSERVER001/HTTPServer/fsdata.o
- .data          0x200066f8       0x10 Dave/Generated/src/WEBSERVER001/HTTPServer/httpd.o
-                0x200066f8                g_pcSSIExtensions
- .data          0x20006708        0x0 Dave/Generated/src/UART001/UART001.o
- .data          0x20006708        0x4 Dave/Generated/src/UART001/UART001_Conf.o
-                0x20006708                UART001_HandleArray
- .data          0x2000670c        0x0 Dave/Generated/src/SYSTM001/SYSTM001.o
- .data          0x2000670c        0x0 Dave/Generated/src/SLTHA003/SLTHA003.o
- .data          0x2000670c        0x0 Dave/Generated/src/SLTHA003/SLTHA003_Conf.o
- .data          0x2000670c       0x50 Dave/Generated/src/SLTHA001/SLTHA001.o
-                0x2000670c                ErrorCodes
- .data          0x2000675c        0x0 Dave/Generated/src/SLTHA001/SLTHA001_Conf.o
- .data          0x2000675c        0x0 Dave/Generated/src/SDMMC003/SDMMC003.o
- .data          0x2000675c        0x0 Dave/Generated/src/SDMMC003/SDMMC003_Conf.o
- .data          0x2000675c        0x0 Dave/Generated/src/SDMMC003/SDMMC003_Private.o
- .data          0x2000675c        0x0 Dave/Generated/src/SDMMC001/SDMMC001.o
- .data          0x2000675c        0x0 Dave/Generated/src/SDMMC001/SDMMC001_Conf.o
- .data          0x2000675c        0x0 Dave/Generated/src/RTC001/RTC001.o
- .data          0x2000675c        0x8 Dave/Generated/src/RTC001/RTC001_Conf.o
-                0x2000675c                timeptr1
- .data          0x20006764        0x0 Dave/Generated/src/RESET001/RESET001.o
- .data          0x20006764        0x0 Dave/Generated/src/NVIC_SCU001/NVIC_SCU001.o
- .data          0x20006764        0x0 Dave/Generated/src/NVIC002/NVIC002.o
- .data          0x20006764        0x8 Dave/Generated/src/NVIC002/NVIC002_Conf.o
-                0x20006764                NVIC002_HandleArray
- .data          0x2000676c        0x0 Dave/Generated/src/MOTORLIBS/MOTORLIBS.o
- .data          0x2000676c        0x0 Dave/Generated/src/LMM001/LMM001.o
- .data          0x2000676c        0x0 Dave/Generated/src/LMM001/LMM001_Conf.o
- .data          0x2000676c        0x0 Dave/Generated/src/LIBS/CCU8PWMLIB.o
- .data          0x2000676c        0x0 Dave/Generated/src/IO004/IO004.o
- .data          0x2000676c        0x0 Dave/Generated/src/IO004/IO004_Conf.o
- .data          0x2000676c        0x0 Dave/Generated/src/IO001/IO001.o
- .data          0x2000676c        0x0 Dave/Generated/src/IO001/IO001_Conf.o
- .data          0x2000676c        0x0 Dave/Generated/src/GMM001/GMM001.o
- .data          0x2000676c        0x0 Dave/Generated/src/GMM001/GMM001_Conf.o
- .data          0x2000676c       0x10 Dave/Generated/src/FATFS004/FATFS004.o
-                0x2000676c                FATFS004_ErrorCodes
-                0x20006774                FATFS004_StatusCodes
- .data          0x2000677c        0x0 Dave/Generated/src/FATFS004/FATFS004_Conf.o
- .data          0x2000677c        0x0 Dave/Generated/src/FATFS002/FATFS002_Conf.o
- .data          0x2000677c        0x0 Dave/Generated/src/FATFS002/syscall.o
- .data          0x2000677c        0x0 Dave/Generated/src/FATFS002/Src/ff.o
- .data          0x2000677c       0x16 Dave/Generated/src/ETH004/ETH004_Conf.o
-                0x2000677c                IPpos1
-                0x2000677e                IPpos2
-                0x20006780                IPpos3
-                0x20006782                IPpos4
-                0x20006784                Netpos1
-                0x20006786                Netpos2
-                0x20006788                Netpos3
-                0x2000678a                GWpos1
-                0x2000678c                GWpos2
-                0x2000678e                GWpos3
-                0x20006790                GWpos4
- .data          0x20006792        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/etharp.o
- .data          0x20006792        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.o
- .data          0x20006792        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/loopif.o
- .data          0x20006792        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/slipif.o
- .data          0x20006792        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dhcp.o
- .data          0x20006792        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.o
- .data          0x20006792        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.o
- .data          0x20006792        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/mem.o
- .data          0x20006792        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/memp.o
- .data          0x20006792        0x1 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.o
-                0x20006792                EthernetTimer
- .data          0x20006793        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netif.o
- .data          0x20006793        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.o
- .data          0x20006793        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.o
- .data          0x20006793        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/stats.o
- .data          0x20006793        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/sys.o
- *fill*         0x20006793        0x1 00
- .data          0x20006794       0x34 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/tcp.o
-                0x20006794                tcp_state_str
- .data          0x200067c8        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/tcp_in.o
- .data          0x200067c8        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/tcp_out.o
- .data          0x200067c8        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.o
- .data          0x200067c8        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/autoip.o
- .data          0x200067c8        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.o
- .data          0x200067c8        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/igmp.o
- .data          0x200067c8        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/inet.o
- .data          0x200067c8        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/inet_chksum.o
- .data          0x200067c8        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.o
- .data          0x200067c8        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip_addr.o
- .data          0x200067c8        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip_frag.o
- .data          0x200067c8        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/api/api_lib.o
- .data          0x200067c8        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/api/api_msg.o
- .data          0x200067c8        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/api/err.o
- .data          0x200067c8        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/api/netbuf.o
- .data          0x200067c8        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/api/netdb.o
- .data          0x200067c8        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/api/netifapi.o
- .data          0x200067c8        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/api/sockets.o
- .data          0x200067c8        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/api/tcpip.o
- .data          0x200067c8        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/port/arch/sys/sys_arch.o
- .data          0x200067c8        0x0 Dave/Generated/src/ETH002/EthernetPHY.o
- .data          0x200067c8        0x0 Dave/Generated/src/ETH001/DMA_Descriptors.o
- .data          0x200067c8        0x0 Dave/Generated/src/ETH001/synopGMAC_Dev.o
- .data          0x200067c8        0x0 Dave/Generated/src/ETH001/synopGMAC_network_interface.o
- .data          0x200067c8        0x0 Dave/Generated/src/ETH001/synopGMAC_plat.o
- .data          0x200067c8        0x0 Dave/Generated/src/ETH001/synopGMAC_stack_interface.o
- .data          0x200067c8        0x0 Dave/Generated/src/DAVESupport/DAVE3.o
- .data          0x200067c8        0x0 Dave/Generated/src/DAVESupport/MULTIPLEXER.o
- .data          0x200067c8        0x0 Dave/Generated/src/CLK001/CLK001.o
- .data          0x200067c8        0x0 Dave/Generated/src/ADCGROUP001/ADCGroup001.o
- .data          0x200067c8        0x0 Dave/Generated/src/ADCGROUP001/ADCGroup001_Conf.o
- .data          0x200067c8        0x0 Dave/Generated/src/ADCGLOB001/ADCGlob001.o
- .data          0x200067c8        0x0 Dave/Generated/src/ADCGLOB001/ADCGlob001_Conf.o
- .data          0x200067c8        0x0 Dave/Generated/src/ADC001/ADC001.o
- .data          0x200067c8        0xc Dave/Generated/src/ADC001/ADC001_Conf.o
-                0x200067c8                ADC001_ChannelHandlePtr
- .data          0x200067d4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv7e-m\libgcc.a(_arm_addsubdf3.o)
- .data          0x200067d4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv7e-m\libgcc.a(_arm_muldivdf3.o)
- .data          0x200067d4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv7e-m\libgcc.a(_arm_fixunsdfsi.o)
- .data          0x200067d4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-calloc.o)
- .data          0x200067d4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-errno.o)
- .data          0x200067d4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-fclose.o)
- .data          0x200067d4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-fflush.o)
- .data          0x200067d4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-findfp.o)
- .data          0x200067d4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-fopen.o)
- .data          0x200067d4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-fread.o)
- .data          0x200067d4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-fseek.o)
- .data          0x200067d4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-fstatr.o)
- .data          0x200067d4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-fwalk.o)
- .data          0x200067d4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-impure.o)
- .data          0x200067d4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-init.o)
- .data          0x200067d4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-makebuf.o)
- .data          0x200067d4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-malloc.o)
- .data          0x200067d4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-memcpy.o)
- .data          0x200067d4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-memmove.o)
- .data          0x200067d4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-memset.o)
- .data          0x200067d4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-mktime.o)
- .data          0x200067d4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-mktm_r.o)
- .data          0x200067d4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-openr.o)
- .data          0x200067d4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-reent.o)
- .data          0x200067d4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-refill.o)
- .data          0x200067d4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-stdio.o)
- .data          0x200067d4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-strchr.o)
- .data          0x200067d4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-strcmp.o)
- .data          0x200067d4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-strcpy.o)
- .data          0x200067d4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-strlen.o)
- .data          0x200067d4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-strncmp.o)
- .data          0x200067d4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-strstr.o)
- .data          0x200067d4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-sysstat.o)
- .data          0x200067d4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-tzlock.o)
- .data          0x200067d4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-tzvars.o)
- .data          0x200067d4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-closer.o)
- .data          0x200067d4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-div.o)
- .data          0x200067d4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-flags.o)
- .data          0x200067d4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-gettzinfo.o)
- .data          0x200067d4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-isattyr.o)
- .data          0x200067d4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-lseekr.o)
- .data          0x200067d4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-memchr.o)
- .data          0x200067d4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-memcmp.o)
- .data          0x200067d4        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-statr.o)
+ .data          0x20007670        0x0 AdcRelaxKit.o
+ .data          0x20007670        0x2 DataProcessing.o
+ .data          0x20007672        0x0 DataQueue.o
+ *fill*         0x20007672        0x2 00
+ .data          0x20007674       0x78 Sensors.o
+                0x20007674                au8HumidityTable
+                0x20007680                afHumidityResistance20DegreesTable
+                0x200076a4                afHumidityResistance25DegreesTable
+                0x200076c8                afHumidityResistance30DegreesTable
+ .data          0x200076ec        0x0 SmartHome.o
+ .data          0x200076ec        0x8 WebServerFunctions.o
+                0x200076ec                TAGS
+ .data          0x200076f4        0x0 Startup/startup_XMC4500.o
+ .data          0x200076f4        0x4 Startup/system_XMC4500.o
+                0x200076f4                SystemCoreClock
+ .data          0x200076f8        0x0 Lib/System_LibcStubs.o
+ .data          0x200076f8        0x0 Dave/Generated/src/WEBSERVER001/HTTPServer/fs.o
+ .data          0x200076f8        0x0 Dave/Generated/src/WEBSERVER001/HTTPServer/fsdata.o
+ .data          0x200076f8       0x10 Dave/Generated/src/WEBSERVER001/HTTPServer/httpd.o
+                0x200076f8                g_pcSSIExtensions
+ .data          0x20007708        0x0 Dave/Generated/src/UART001/UART001.o
+ .data          0x20007708        0x4 Dave/Generated/src/UART001/UART001_Conf.o
+                0x20007708                UART001_HandleArray
+ .data          0x2000770c        0x0 Dave/Generated/src/SYSTM001/SYSTM001.o
+ .data          0x2000770c        0x0 Dave/Generated/src/SLTHA003/SLTHA003.o
+ .data          0x2000770c        0x0 Dave/Generated/src/SLTHA003/SLTHA003_Conf.o
+ .data          0x2000770c       0x50 Dave/Generated/src/SLTHA001/SLTHA001.o
+                0x2000770c                ErrorCodes
+ .data          0x2000775c        0x0 Dave/Generated/src/SLTHA001/SLTHA001_Conf.o
+ .data          0x2000775c        0x0 Dave/Generated/src/SDMMC003/SDMMC003.o
+ .data          0x2000775c        0x0 Dave/Generated/src/SDMMC003/SDMMC003_Conf.o
+ .data          0x2000775c        0x0 Dave/Generated/src/SDMMC003/SDMMC003_Private.o
+ .data          0x2000775c        0x0 Dave/Generated/src/SDMMC001/SDMMC001.o
+ .data          0x2000775c        0x0 Dave/Generated/src/SDMMC001/SDMMC001_Conf.o
+ .data          0x2000775c        0x0 Dave/Generated/src/RTC001/RTC001.o
+ .data          0x2000775c        0x8 Dave/Generated/src/RTC001/RTC001_Conf.o
+                0x2000775c                timeptr1
+ .data          0x20007764        0x0 Dave/Generated/src/RESET001/RESET001.o
+ .data          0x20007764        0x0 Dave/Generated/src/NVIC_SCU001/NVIC_SCU001.o
+ .data          0x20007764        0x0 Dave/Generated/src/NVIC002/NVIC002.o
+ .data          0x20007764        0x8 Dave/Generated/src/NVIC002/NVIC002_Conf.o
+                0x20007764                NVIC002_HandleArray
+ .data          0x2000776c        0x0 Dave/Generated/src/MOTORLIBS/MOTORLIBS.o
+ .data          0x2000776c        0x0 Dave/Generated/src/LMM001/LMM001.o
+ .data          0x2000776c        0x0 Dave/Generated/src/LMM001/LMM001_Conf.o
+ .data          0x2000776c        0x0 Dave/Generated/src/LIBS/CCU8PWMLIB.o
+ .data          0x2000776c        0x0 Dave/Generated/src/IO004/IO004.o
+ .data          0x2000776c        0x0 Dave/Generated/src/IO004/IO004_Conf.o
+ .data          0x2000776c        0x0 Dave/Generated/src/IO001/IO001.o
+ .data          0x2000776c        0x0 Dave/Generated/src/IO001/IO001_Conf.o
+ .data          0x2000776c        0x0 Dave/Generated/src/GMM001/GMM001.o
+ .data          0x2000776c        0x0 Dave/Generated/src/GMM001/GMM001_Conf.o
+ .data          0x2000776c       0x10 Dave/Generated/src/FATFS004/FATFS004.o
+                0x2000776c                FATFS004_ErrorCodes
+                0x20007774                FATFS004_StatusCodes
+ .data          0x2000777c        0x0 Dave/Generated/src/FATFS004/FATFS004_Conf.o
+ .data          0x2000777c        0x0 Dave/Generated/src/FATFS002/FATFS002_Conf.o
+ .data          0x2000777c        0x0 Dave/Generated/src/FATFS002/syscall.o
+ .data          0x2000777c        0x0 Dave/Generated/src/FATFS002/Src/ff.o
+ .data          0x2000777c       0x12 Dave/Generated/src/ETH004/ETH004_Conf.o
+                0x2000777c                IPpos1
+                0x2000777e                IPpos2
+                0x20007780                IPpos4
+                0x20007782                Netpos1
+                0x20007784                Netpos2
+                0x20007786                Netpos3
+                0x20007788                GWpos1
+                0x2000778a                GWpos2
+                0x2000778c                GWpos4
+ .data          0x2000778e        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/etharp.o
+ .data          0x2000778e        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/ethernetif.o
+ .data          0x2000778e        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/loopif.o
+ .data          0x2000778e        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/netif/slipif.o
+ .data          0x2000778e        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dhcp.o
+ .data          0x2000778e        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/dns.o
+ .data          0x2000778e        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/init.o
+ .data          0x2000778e        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/mem.o
+ .data          0x2000778e        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/memp.o
+ .data          0x2000778e        0x1 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netconf.o
+                0x2000778e                EthernetTimer
+ .data          0x2000778f        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/netif.o
+ .data          0x2000778f        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/pbuf.o
+ .data          0x2000778f        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/raw.o
+ .data          0x2000778f        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/stats.o
+ .data          0x2000778f        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/sys.o
+ *fill*         0x2000778f        0x1 00
+ .data          0x20007790       0x34 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/tcp.o
+                0x20007790                tcp_state_str
+ .data          0x200077c4        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/tcp_in.o
+ .data          0x200077c4        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/tcp_out.o
+ .data          0x200077c4        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/udp.o
+ .data          0x200077c4        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/autoip.o
+ .data          0x200077c4        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/icmp.o
+ .data          0x200077c4        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/igmp.o
+ .data          0x200077c4        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/inet.o
+ .data          0x200077c4        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/inet_chksum.o
+ .data          0x200077c4        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip.o
+ .data          0x200077c4        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip_addr.o
+ .data          0x200077c4        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/core/ipv4/ip_frag.o
+ .data          0x200077c4        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/api/api_lib.o
+ .data          0x200077c4        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/api/api_msg.o
+ .data          0x200077c4        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/api/err.o
+ .data          0x200077c4        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/api/netbuf.o
+ .data          0x200077c4        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/api/netdb.o
+ .data          0x200077c4        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/api/netifapi.o
+ .data          0x200077c4        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/api/sockets.o
+ .data          0x200077c4        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/src/api/tcpip.o
+ .data          0x200077c4        0x0 Dave/Generated/src/ETH004/01_lwIP_Stack/port/arch/sys/sys_arch.o
+ .data          0x200077c4        0x0 Dave/Generated/src/ETH002/EthernetPHY.o
+ .data          0x200077c4        0x0 Dave/Generated/src/ETH001/DMA_Descriptors.o
+ .data          0x200077c4        0x0 Dave/Generated/src/ETH001/synopGMAC_Dev.o
+ .data          0x200077c4        0x0 Dave/Generated/src/ETH001/synopGMAC_network_interface.o
+ .data          0x200077c4        0x0 Dave/Generated/src/ETH001/synopGMAC_plat.o
+ .data          0x200077c4        0x0 Dave/Generated/src/ETH001/synopGMAC_stack_interface.o
+ .data          0x200077c4        0x0 Dave/Generated/src/DAVESupport/DAVE3.o
+ .data          0x200077c4        0x0 Dave/Generated/src/DAVESupport/MULTIPLEXER.o
+ .data          0x200077c4        0x0 Dave/Generated/src/CLK001/CLK001.o
+ .data          0x200077c4        0x0 Dave/Generated/src/ADCGROUP001/ADCGroup001.o
+ .data          0x200077c4        0x0 Dave/Generated/src/ADCGROUP001/ADCGroup001_Conf.o
+ .data          0x200077c4        0x0 Dave/Generated/src/ADCGLOB001/ADCGlob001.o
+ .data          0x200077c4        0x0 Dave/Generated/src/ADCGLOB001/ADCGlob001_Conf.o
+ .data          0x200077c4        0x0 Dave/Generated/src/ADC001/ADC001.o
+ .data          0x200077c4        0xc Dave/Generated/src/ADC001/ADC001_Conf.o
+                0x200077c4                ADC001_ChannelHandlePtr
+ .data          0x200077d0        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv7e-m\libgcc.a(_arm_addsubdf3.o)
+ .data          0x200077d0        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv7e-m\libgcc.a(_arm_muldivdf3.o)
+ .data          0x200077d0        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv7e-m\libgcc.a(_arm_fixunsdfsi.o)
+ .data          0x200077d0        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-calloc.o)
+ .data          0x200077d0        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-errno.o)
+ .data          0x200077d0        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-fclose.o)
+ .data          0x200077d0        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-fflush.o)
+ .data          0x200077d0        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-findfp.o)
+ .data          0x200077d0        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-fopen.o)
+ .data          0x200077d0        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-fread.o)
+ .data          0x200077d0        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-fseek.o)
+ .data          0x200077d0        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-fstatr.o)
+ .data          0x200077d0        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-fwalk.o)
+ .data          0x200077d0        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-impure.o)
+ .data          0x200077d0        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-init.o)
+ .data          0x200077d0        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-makebuf.o)
+ .data          0x200077d0        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-malloc.o)
+ .data          0x200077d0        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-memcpy.o)
+ .data          0x200077d0        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-memmove.o)
+ .data          0x200077d0        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-memset.o)
+ .data          0x200077d0        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-mktime.o)
+ .data          0x200077d0        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-mktm_r.o)
+ .data          0x200077d0        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-openr.o)
+ .data          0x200077d0        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-reent.o)
+ .data          0x200077d0        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-refill.o)
+ .data          0x200077d0        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-stdio.o)
+ .data          0x200077d0        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-strchr.o)
+ .data          0x200077d0        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-strcmp.o)
+ .data          0x200077d0        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-strcpy.o)
+ .data          0x200077d0        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-strlen.o)
+ .data          0x200077d0        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-strncmp.o)
+ .data          0x200077d0        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-strstr.o)
+ .data          0x200077d0        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-sysstat.o)
+ .data          0x200077d0        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-tzlock.o)
+ .data          0x200077d0        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-tzvars.o)
+ .data          0x200077d0        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-closer.o)
+ .data          0x200077d0        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-div.o)
+ .data          0x200077d0        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-flags.o)
+ .data          0x200077d0        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-gettzinfo.o)
+ .data          0x200077d0        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-isattyr.o)
+ .data          0x200077d0        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-lseekr.o)
+ .data          0x200077d0        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-memchr.o)
+ .data          0x200077d0        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-memcmp.o)
+ .data          0x200077d0        0x0 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-statr.o)
  *(.data*)
- *fill*         0x200067d4        0x4 00
  .data.impure_data
-                0x200067d8      0x428 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-impure.o)
+                0x200077d0      0x428 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-impure.o)
  .data._impure_ptr
-                0x20006c00        0x4 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-impure.o)
-                0x20006c00                _impure_ptr
- .data._tzname  0x20006c04        0x8 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-tzvars.o)
-                0x20006c04                _tzname
- .data.tzinfo   0x20006c0c       0x40 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-gettzinfo.o)
+                0x20007bf8        0x4 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-impure.o)
+                0x20007bf8                _impure_ptr
+ .data._tzname  0x20007bfc        0x8 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-tzvars.o)
+                0x20007bfc                _tzname
+ .data.tzinfo   0x20007c04       0x40 c:/dave-3.1.10/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-gettzinfo.o)
  *(*.data)
  *(.gnu.linkonce.d*)
-                0x20006c4c                __Xmc4500_eData = ALIGN (0x4)
-                0x000005dc                __Xmc4500_Data_Size = (__Xmc4500_eData - __Xmc4500_sData)
-                0x20006c50                __Xmc4500_heap_start = ALIGN (0x8)
+                0x20007c44                __Xmc4500_eData = ALIGN (0x4)
+                0x000005d4                __Xmc4500_Data_Size = (__Xmc4500_eData - __Xmc4500_sData)
+                0x20007c48                __Xmc4500_heap_start = ALIGN (0x8)
                 0x20010000                __Xmc4500_heap_end = (ORIGIN (DSRAM_1_system) + 0x10000)
-                0x20006c50                Heap_Bank1_Start = __Xmc4500_heap_start
-                0x000093b0                Heap_Bank1_Size = (__Xmc4500_heap_end - __Xmc4500_heap_start)
+                0x20007c48                Heap_Bank1_Start = __Xmc4500_heap_start
+                0x000083b8                Heap_Bank1_Size = (__Xmc4500_heap_end - __Xmc4500_heap_start)
                 0x20010000                Heap_Bank1_End = ABSOLUTE (__Xmc4500_heap_end)
 
-.igot.plt       0x20006c4c        0x0 load address 0x0c02721c
+.igot.plt       0x20007c44        0x0 load address 0x0c027214
  .igot.plt      0x00000000        0x0 AdcRelaxKit.o
 
 DSRAM2_Heap     0x30004920        0x0

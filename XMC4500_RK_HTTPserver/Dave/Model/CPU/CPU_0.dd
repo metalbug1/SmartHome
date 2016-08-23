@@ -36,8 +36,8 @@
   <provided xsi:type="ResourceModel:BitField" name="pri_90" URI="http://www.infineon.com/0.1.29/peripheral/cpu/0/nvic/interrupt/90/ipr_pri" maxValue="255" minValue="0" startPos="16" stopPos="23" accessPermission="rw">
     <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
     <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../NVIC002/1.0.28/nvic002_0.app#//@consumed.2"/>
-    <localValue xsi:type="ResourceModel:IntegerValue" value="fc"/>
-    <globalValue xsi:type="ResourceModel:IntegerValue" value="fc"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="c8"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="c8"/>
     <toolTipHelpDescription>Priority of interrupt 90</toolTipHelpDescription>
   </provided>
   <provided xsi:type="ResourceModel:ResourceGroup" name="VADC0_C0_2_IRQHandler" URI="http://www.infineon.com/0.1.29/peripheral/cpu/0/nvic/interrupt/16">
@@ -56,8 +56,8 @@
   <provided xsi:type="ResourceModel:BitField" name="pri_16" URI="http://www.infineon.com/0.1.29/peripheral/cpu/0/nvic/interrupt/16/ipr_pri" maxValue="255" minValue="0" startPos="0" stopPos="7" accessPermission="rw">
     <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
     <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../NVIC002/1.0.28/nvic002_1.app#//@consumed.2"/>
-    <localValue xsi:type="ResourceModel:IntegerValue" value="fc"/>
-    <globalValue xsi:type="ResourceModel:IntegerValue" value="fc"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="f0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="f0"/>
     <toolTipHelpDescription>Priority of interrupt 16</toolTipHelpDescription>
   </provided>
   <provided xsi:type="ResourceModel:ResourceGroup" name="CCU81_0_IRQHandler" URI="http://www.infineon.com/0.1.29/peripheral/cpu/0/nvic/interrupt/64">

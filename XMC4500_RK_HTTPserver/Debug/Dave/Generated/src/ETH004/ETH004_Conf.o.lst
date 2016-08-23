@@ -26,70 +26,74 @@
   30              	IPpos2:
   31 0002 A800     		.short	168
   32              		.global	IPpos3
-  33              		.align	1
-  36              	IPpos3:
-  37 0004 0100     		.short	1
-  38              		.global	IPpos4
-  39              		.align	1
-  42              	IPpos4:
-  43 0006 6700     		.short	103
-  44              		.global	Netpos1
-  45              		.align	1
-  48              	Netpos1:
-  49 0008 FF00     		.short	255
-  50              		.global	Netpos2
-  51              		.align	1
-  54              	Netpos2:
-  55 000a FF00     		.short	255
-  56              		.global	Netpos3
-  57              		.align	1
-  60              	Netpos3:
-  61 000c FF00     		.short	255
-  62              		.global	Netpos4
-  63              		.bss
-  64              		.align	1
-  67              	Netpos4:
-  68 0000 0000     		.space	2
-  69              		.global	GWpos1
-  70              		.data
-  71              		.align	1
-  74              	GWpos1:
-  75 000e C000     		.short	192
-  76              		.global	GWpos2
-  77              		.align	1
-  80              	GWpos2:
-  81 0010 A800     		.short	168
-  82              		.global	GWpos3
-  83              		.align	1
-  86              	GWpos3:
-  87 0012 0100     		.short	1
-  88              		.global	GWpos4
-  89              		.align	1
-  92              	GWpos4:
-  93 0014 0100     		.short	1
-  94              		.text
-  95              	.Letext0:
-  96              		.file 1 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
-  97              		.file 2 "F:\\WORK\\SmartHome_checkout1\\XMC4500_RK_HTTPserver\\Dave\\Generated\\inc\\DAVESupport/.
-  98              		.file 3 "F:\\WORK\\SmartHome_checkout1\\XMC4500_RK_HTTPserver\\Dave\\Generated\\inc\\DAVESupport/.
-  99              		.file 4 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Include/core_cm4.h"
- 100              		.file 5 "../Dave/Generated/src/ETH004/ETH004_Conf.c"
+  33              		.bss
+  34              		.align	1
+  37              	IPpos3:
+  38 0000 0000     		.space	2
+  39              		.global	IPpos4
+  40              		.data
+  41              		.align	1
+  44              	IPpos4:
+  45 0004 6700     		.short	103
+  46              		.global	Netpos1
+  47              		.align	1
+  50              	Netpos1:
+  51 0006 FF00     		.short	255
+  52              		.global	Netpos2
+  53              		.align	1
+  56              	Netpos2:
+  57 0008 FF00     		.short	255
+  58              		.global	Netpos3
+  59              		.align	1
+  62              	Netpos3:
+  63 000a FF00     		.short	255
+  64              		.global	Netpos4
+  65              		.bss
+  66              		.align	1
+  69              	Netpos4:
+  70 0002 0000     		.space	2
+  71              		.global	GWpos1
+  72              		.data
+  73              		.align	1
+  76              	GWpos1:
+  77 000c C000     		.short	192
+  78              		.global	GWpos2
+  79              		.align	1
+  82              	GWpos2:
+  83 000e A800     		.short	168
+  84              		.global	GWpos3
+  85              		.bss
+  86              		.align	1
+  89              	GWpos3:
+  90 0004 0000     		.space	2
+  91              		.global	GWpos4
+  92              		.data
+  93              		.align	1
+  96              	GWpos4:
+  97 0010 0100     		.short	1
+  98              		.text
+  99              	.Letext0:
+ 100              		.file 1 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
+ 101              		.file 2 "F:\\WORK\\SmartHome_checkout1\\XMC4500_RK_HTTPserver\\Dave\\Generated\\inc\\DAVESupport/.
+ 102              		.file 3 "F:\\WORK\\SmartHome_checkout1\\XMC4500_RK_HTTPserver\\Dave\\Generated\\inc\\DAVESupport/.
+ 103              		.file 4 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Include/core_cm4.h"
+ 104              		.file 5 "../Dave/Generated/src/ETH004/ETH004_Conf.c"
 DEFINED SYMBOLS
                             *ABS*:00000000 ETH004_Conf.c
-C:\Users\Mihai\AppData\Local\Temp\ccKuEB1Z.s:24     .data:00000000 IPpos1
-C:\Users\Mihai\AppData\Local\Temp\ccKuEB1Z.s:21     .data:00000000 $d
-C:\Users\Mihai\AppData\Local\Temp\ccKuEB1Z.s:30     .data:00000002 IPpos2
-C:\Users\Mihai\AppData\Local\Temp\ccKuEB1Z.s:36     .data:00000004 IPpos3
-C:\Users\Mihai\AppData\Local\Temp\ccKuEB1Z.s:42     .data:00000006 IPpos4
-C:\Users\Mihai\AppData\Local\Temp\ccKuEB1Z.s:48     .data:00000008 Netpos1
-C:\Users\Mihai\AppData\Local\Temp\ccKuEB1Z.s:54     .data:0000000a Netpos2
-C:\Users\Mihai\AppData\Local\Temp\ccKuEB1Z.s:60     .data:0000000c Netpos3
-C:\Users\Mihai\AppData\Local\Temp\ccKuEB1Z.s:67     .bss:00000000 Netpos4
-C:\Users\Mihai\AppData\Local\Temp\ccKuEB1Z.s:64     .bss:00000000 $d
-C:\Users\Mihai\AppData\Local\Temp\ccKuEB1Z.s:74     .data:0000000e GWpos1
-C:\Users\Mihai\AppData\Local\Temp\ccKuEB1Z.s:80     .data:00000010 GWpos2
-C:\Users\Mihai\AppData\Local\Temp\ccKuEB1Z.s:86     .data:00000012 GWpos3
-C:\Users\Mihai\AppData\Local\Temp\ccKuEB1Z.s:92     .data:00000014 GWpos4
+C:\Users\Mihai\AppData\Local\Temp\ccF2rZAr.s:24     .data:00000000 IPpos1
+C:\Users\Mihai\AppData\Local\Temp\ccF2rZAr.s:21     .data:00000000 $d
+C:\Users\Mihai\AppData\Local\Temp\ccF2rZAr.s:30     .data:00000002 IPpos2
+C:\Users\Mihai\AppData\Local\Temp\ccF2rZAr.s:37     .bss:00000000 IPpos3
+C:\Users\Mihai\AppData\Local\Temp\ccF2rZAr.s:34     .bss:00000000 $d
+C:\Users\Mihai\AppData\Local\Temp\ccF2rZAr.s:44     .data:00000004 IPpos4
+C:\Users\Mihai\AppData\Local\Temp\ccF2rZAr.s:50     .data:00000006 Netpos1
+C:\Users\Mihai\AppData\Local\Temp\ccF2rZAr.s:56     .data:00000008 Netpos2
+C:\Users\Mihai\AppData\Local\Temp\ccF2rZAr.s:62     .data:0000000a Netpos3
+C:\Users\Mihai\AppData\Local\Temp\ccF2rZAr.s:69     .bss:00000002 Netpos4
+C:\Users\Mihai\AppData\Local\Temp\ccF2rZAr.s:76     .data:0000000c GWpos1
+C:\Users\Mihai\AppData\Local\Temp\ccF2rZAr.s:82     .data:0000000e GWpos2
+C:\Users\Mihai\AppData\Local\Temp\ccF2rZAr.s:89     .bss:00000004 GWpos3
+C:\Users\Mihai\AppData\Local\Temp\ccF2rZAr.s:96     .data:00000010 GWpos4
                            .group:00000000 wm4.1.1791a5ae2e936ca1033c1c44be394cc7
                            .group:00000000 wm4.XMC4500.h.45.215f4b8c79f46c7645c15373868d08c0
                            .group:00000000 wm4.core_cm4.h.47.41af406cb4cda82c972f112a9cd0a024
@@ -126,7 +130,7 @@ C:\Users\Mihai\AppData\Local\Temp\ccKuEB1Z.s:92     .data:00000014 GWpos4
                            .group:00000000 wm4.stdlib.h.53.c69c7609933ff56d59c757cec2d13230
                            .group:00000000 wm4.string.h.8.ef946ad0bc9ad5c970c365dcd1fc4b0a
                            .group:00000000 wm4.string.h.86.d5c872ff52e2712c985b588a0ef39f3c
-                           .group:00000000 wm4.ETH004_Conf.h.56.564c3f309c32b3c742fc91049cf66940
+                           .group:00000000 wm4.ETH004_Conf.h.56.59591edbd6ce1f089c3d2789404b9485
                            .group:00000000 wm4.lwipopts.h.73.a7a63bda1e8216abd1d90275eaaa0027
                            .group:00000000 wm4.arch.h.33.6fa4aa86d33d1490ae882caef7316405
                            .group:00000000 wm4.cpu.h.33.b213c7fd77614ebc3691cef18ad2ff22
