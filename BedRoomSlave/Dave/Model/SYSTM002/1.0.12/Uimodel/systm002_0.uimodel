@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com.ifx.davex.uimodel:UIDataModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:com.ifx.davex.uimodel="com.ifx.davex.uimodel">
+  <controls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="DefaultPage" displayName="DefaultPage" className="IfxGroupBox" controlId="1376626672291">
+    <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+    <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group35" displayName="SysTick" className="IfxGroupBox" controlId="1376627055057">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/systm002/0/systm002_systickinterval" displayName="SysTick Interval " className="IntegerType" paramName="app/systm002/0/systm002_systickinterval:SysTick Interval in microsec" controlId="1376627515176" defaultType="usec" customControl="true">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData" horizontalAlignment="LEFT"/>
+        <conversionType>usec</conversionType>
+      </subControls>
+      <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+    </subControls>
+    <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group31" displayName="SWTimers" className="IfxGroupBox" controlId="1376627068538">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/systm002/0/systm002_swtimers" displayName="Number of Software timers" className="IntegerType" paramName="app/systm002/0/systm002_swtimers:Number of Software timers" controlId="1376627094286">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData" horizontalAlignment="RIGHT"/>
+        <conversionType>dec</conversionType>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/systm002/0/systm001_swtimers" displayName="Number of Software timers" className="IntegerType" paramName="app/systm002/0/systm001_swtimers:Number of Software timers" controlId="1384779912290">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        <conversionType>dec</conversionType>
+      </subControls>
+      <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+    </subControls>
+    <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group70" displayName="Interrupt configuration for SysTick Exception" className="IfxGroupBox" controlId="1376627132545">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/systm002/0/systm002_irwInterruptPriority" displayName="Preemption Priority" className="IntegerType" constraint="if(CM.getSoftwareId().substring(0,1).compareTo(&quot;4&quot;) == 0)&#xD;&#xA;{&#xD;&#xA;  CM.setVisible(true);&#xD;&#xA;  CM.setEnable(true);&#xD;&#xA;}&#xD;&#xA;else&#xD;&#xA;{&#xD;&#xA;  CM.setVisible(false);&#xD;&#xA;  CM.setEnable(false);&#xD;&#xA;} " paramName="app/systm002/0/systm002_irwInterruptPriority:Preemption Priority" controlId="1376627157276">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        <conversionType>dec</conversionType>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/systm002/0/systm002_irwInterruptPrio_timm" displayName="Preemption Priority" className="IntegerType" constraint="if(CM.getSoftwareId().substring(0,1).compareTo(&quot;1&quot;) == 0)&#xD;&#xA;{&#xD;&#xA;  CM.setVisible(true);&#xD;&#xA;  CM.setEnable(true);&#xD;&#xA;}&#xD;&#xA;else&#xD;&#xA;{&#xD;&#xA;  CM.setVisible(false);&#xD;&#xA;  CM.setEnable(false);&#xD;&#xA;} " paramName="app/systm002/0/systm002_irwInterruptPrio_timm:Preemption Priority for Timm" controlId="1376894009474">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        <conversionType>dec</conversionType>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/systm002/0/systm002_irwInterruptSubPriority" displayName="Sub Priority" className="IntegerType" constraint="if(CM.getSoftwareId().substring(0,1).compareTo(&quot;1&quot;) == 0)&#xD;&#xA;{&#xD;&#xA;  CM.setVisible(false);&#xD;&#xA;  CM.setEnable(false);&#xD;&#xA;}&#xD;&#xA;else&#xD;&#xA;{&#xD;&#xA;  CM.setVisible(true);&#xD;&#xA;  CM.setEnable(true);&#xD;&#xA;} " paramName="app/systm002/0/systm002_irwInterruptSubPriority:Sub Priority" controlId="1376894035207">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData" horizontalAlignment="CENTER"/>
+        <conversionType>dec</conversionType>
+      </subControls>
+      <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+    </subControls>
+    <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+  </controls>
+</com.ifx.davex.uimodel:UIDataModel>

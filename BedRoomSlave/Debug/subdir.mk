@@ -6,17 +6,20 @@
 C_SRCS += \
 ../AdcRelaxKit.c \
 ../Room.c \
-../Sensors.c 
+../Sensors.c \
+../dht.c 
 
 OBJS += \
 ./AdcRelaxKit.o \
 ./Room.o \
-./Sensors.o 
+./Sensors.o \
+./dht.o 
 
 C_DEPS += \
 ./AdcRelaxKit.d \
 ./Room.d \
-./Sensors.d 
+./Sensors.d \
+./dht.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes

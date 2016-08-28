@@ -9,6 +9,7 @@
 #include "Sensors.h"
 #include "Room.h"
 #include "SmartHome_Types.h"
+#include "dht.h"
 
 #define ROOM_SENSOR_DATA_MAX_SIZE  (20)
 
@@ -62,22 +63,17 @@ void PackData()
 	u8RoomSensorDataSize = u8RoomSensorDataIndex;
 }
 
-void TimerHandlerReadSensors()
-{
-    ADC001_GenerateLoadEvent(&ADC001_Handle0);
-	PackData();
-	u8NumberOfTimerPeriods++;
-}
 
 int main(void)
 {
-	handle_t TimerId;
 
 	DAVE_Init();			// Initialization of DAVE Apps
 
     ADC001_GenerateLoadEvent(&ADC001_Handle0);
-    TimerId = SYSTM001_CreateTimer(100,SYSTM001_PERIODIC,TimerHandlerReadSensors,NULL);
-    SYSTM001_StartTimer(TimerId);
+
+    DHT_Init();
+    DHT_Read();
+
 	while(1)
 	{
 		if (u8NumberOfTimerPeriods >= 100)

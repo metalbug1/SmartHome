@@ -1,0 +1,185 @@
+<%@ jet package="CodeGenerator" class="systm002_confh_template"
+imports="java.util.* java.text.* com.ifx.davex.appjetinteract.App2JetInterface" %>
+<% App2JetInterface app = (App2JetInterface) argument; %>
+<% String AppBaseuri = "app/systm002/0";%>
+
+/*******************************************************************************
+**                                                                            **
+** Copyright (C) 2014 Infineon Technologies AG. All rights reserved.          **
+**                                                                            **
+** Infineon Technologies AG (Infineon) is supplying this software for use     **
+** with Infineon's microcontrollers.                                          **
+** This file can be freely distributed within development tools that are      **
+** supporting such microcontrollers.                                          **
+**                                                                            **
+** THIS SOFTWARE IS PROVIDED "AS IS".  NO WARRANTIES, WHETHER EXPRESS,        **
+** IMPLIED OR STATUTORY, INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES    **
+** OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE APPLY TO THIS      **
+** SOFTWARE. INFINEON SHALL NOT, IN ANY CIRCUMSTANCES, BE LIABLE FOR SPECIAL, **
+** INCIDENTAL, OR CONSEQUENTIAL DAMAGES, FOR ANY REASON WHATSOEVER.           **
+**                                                                            **
+********************************************************************************
+**                                                                            **
+** PLATFORM : Infineon XMC1000/XMC4000 Series                                 **
+**                                                                            **
+** COMPILER : Compiler Independent                                            **
+**                                                                            **
+** AUTHOR   : App Developer                                                   **
+**                                                                            **
+** NOTE     : Any Changes made to this file will be overwritten during Code   **
+**            Generation                                                      **
+**                                                                            **
+********************************************************************************
+** VERSION HISTORY:
+********************************************************************************
+** v1.0.0, 25 Sep 2013,  SSS: Initial version for XMC1000/XMC4000 series.
+** v1.0.2  10 Oct 2013,  SSS: 1.C++ codebase support is added.
+**                            2.macros are renamed 
+**                               a. PRIORITY to SYSTM002_PRIORITY
+**                               b. SUBPRIORITY to SYSTM002_SUBPRIORITY
+**                            3.Variable systick is renamed as SYSTM002_Systick
+**
+** v1.0.6  29 Jan 2014,  SSM: 1. DBG002 App changes are taken care.
+**                             
+** V1.0.8  06 Feb 2014,     : 1. XMC1000 VQFN package support added;   
+**                         XMC4000 Device support extended for XMC4500 AC step,
+**                                XMC4400 AB Step and XMC4200 AB Step. 
+**
+** V1.0.10 25 Feb 2014,  SSM: 1. Floating point multiplication and Division     
+**                                  inside API are removed. 
+**                            2. SYSTM002_GetSysTickCount(uint32_t Period)API 
+**                                removed and it is replaced with the macro
+**                                 SYSTM002_SysTickMicroSec(microsec)
+**
+** V1.0.12 23 Apr 2014,  SSM: 1. Fixes Floating operation issue 
+**                                in XMC4x series.
+**
+*******************************************************************************/
+
+/**
+ * @file SYSTM002_Conf.h
+ *
+ * @brief This file contains extern declarations and global macro definitions 
+ * of SYSTM002.
+ *
+ */
+
+#ifndef SYSTM002_CONF_H_
+#define SYSTM002_CONF_H_
+
+/* Support for C++ codebase */
+#ifdef __cplusplus
+extern "C" {
+#endif
+/*******************************************************************************
+** INCLUDE FILES:
+*******************************************************************************/
+<% String TempApps = null;
+   String MyAppName = null;
+   ArrayList<String> apps;
+   String TempLowerApps = null; 
+   boolean DBGApp = false;   
+   apps=(ArrayList<String>)(app.getApps());
+        for (int k = 0; k < apps.size(); k++) {
+              TempApps = apps.get(k);
+              MyAppName = TempApps.substring(TempApps.indexOf("/app/") + 5, TempApps.lastIndexOf("/"));
+              TempLowerApps = MyAppName.toLowerCase();
+              if (TempLowerApps.equalsIgnoreCase("dbg002")) {DBGApp = true;}   
+  } %>
+<% if(DBGApp) { %>
+#include "../../inc/DBG002/DBG002.h"
+<% } %>
+
+
+/*******************************************************************************
+** GLOBAL MACRO DEFINITIONS:                   
+*******************************************************************************/
+/**
+ * @ingroup SYSTM002_constants
+ * @{
+ */
+<%int XMC1xxx=-1;%>
+<% double temp1 = 0.0; %>
+<%XMC1xxx=app.getSoftwareId().substring(0,1).compareTo("1");%>
+/* Priority group */
+<%if(XMC1xxx!=0)%>
+<%{%>
+#define SYSTM002_PRIORITY     <%= app.getIntegerValue(AppBaseuri + "/systm002_irwInterruptPriority") %>U
+#define SYSTM002_SUBPRIORITY  <%= app.getIntegerValue(AppBaseuri + "/systm002_irwInterruptSubPriority") %>U
+<%}%>
+<%else {%>
+#define SYSTM002_PRIORITY <%= app.getIntegerValue(AppBaseuri + "/systm002_irwInterruptPrio_timm") %>U
+<%}%>
+
+/* System Core clock frequency in Hz multiplied by 1000000
+*  changes has done to avoid Float operation
+*/
+<%if(XMC1xxx!=0)%>
+<%{%>
+#define SYSTM002_SYS_CORE_CLOCK  <%= app.getIntegerValue (AppBaseuri + "/clkapp/clk001_iroActualFreqSystem" ) *  1000000 %>U
+<%}%>
+<%else {%>
+<% temp1 = (app.getDoubleValue (AppBaseuri + "/clockapp/clk002_irMCLK" ) * 1000000); %>
+#define SYSTM002_SYS_CORE_CLOCK  <%= Math.round(temp1) %>U
+<%}%>
+
+/* Time between two systick interrupt in usec */
+<%int SYSTM002_Systick = app.getIntegerValue (AppBaseuri + "/systm002_systickinterval" );
+if(SYSTM002_Systick > 0) {%>
+#define SYSTM002_SYSTICK_INTERVAL <%=SYSTM002_Systick%>U
+<%}else {%>
+#define SYSTM002_SYSTICK_INTERVAL 10U
+<%}%>
+/* Maximum Number of timer */
+#define SYSTM002_CFG_MAX_TMR  <%= app.getIntegerValue (AppBaseuri + "/systm002_swtimers" )%>U 
+
+/**
+ * @}
+ */
+
+
+/*******************************************************************************
+** GLOBAL TYPE DEFINITIONS:                     
+*******************************************************************************/
+
+/*******************************************************************************
+** GLOBAL VARIABLE DEFINITIONS: 
+*******************************************************************************/
+
+/*******************************************************************************
+** FUNCTION PROTOTYPES:
+*******************************************************************************/
+/**
+ * @ingroup SYSTM002_apidoc
+ * @{
+ */
+
+/**
+ * @}
+ */
+
+/*******************************************************************************
+** ENUMERATIONS:
+*******************************************************************************/
+/**
+  * @ingroup SYSTM002_publicparam
+  * @{
+  */
+
+/**
+ * @}
+ */
+
+/*******************************************************************************
+** STRUCTURES:
+*******************************************************************************/
+
+/* Support for C++ codebase */
+#ifdef __cplusplus
+}
+#endif   
+
+#endif /* SYSTM002_CONF_H_ */
+
+/*CODE_BLOCK_END*/
+

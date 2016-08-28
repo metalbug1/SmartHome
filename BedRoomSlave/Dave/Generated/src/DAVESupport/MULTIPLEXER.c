@@ -140,6 +140,8 @@ void DAVE_MUX_Init(void)
 
 /*        PORT Macro definitions for IOCR_OE, IOCR_PCR & HWSEL_HW     */                                      
   WR_REG(PORT0->IOCR0, 0xb800U, PORT_IOCR_PC1_PCR_Pos, 0x12U);                /*P0.1 : PORT0_IOCR0_PC1_PCR and PORT0_IOCR0_PC1_OE */					   
+					                         
+  WR_REG(PORT0->IOCR4, PORT_IOCR_PC0_OE_Msk, PORT_IOCR_PC0_OE_Pos, PORT_IOCR_OE1);                /*    P0.4 : PORT0_IOCR4_PC4_OE */					   
 					      
    	 
             	         

@@ -1,0 +1,19 @@
+#ifndef _DHT_H
+#define _DHT_H
+
+typedef enum
+{
+	DHT_IDLE = 0,
+	DHT_HOST_PULL_DOWN,
+	DHT_HOST_PULL_UP,
+	DHT_SENSOR_PULL_DOWN,
+	DHT_SENSOR_PULL_UP,
+	DHT_SENSOR_PREPARE_SENDING,
+	DHT_SENSOR_READ_BIT,
+	DHT_FINISHED
+} DHT_State;
+
+void DHT_Init();
+void DHT_Read();
+
+#endif //_DHT_H
