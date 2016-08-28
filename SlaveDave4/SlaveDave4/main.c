@@ -33,7 +33,6 @@ uint8_t HumSiTemp[100];
 void RtcHandler(void)
 {
 	UART_Transmit(&UART_0, mesajRTC, sizeof(mesajRTC)/sizeof(uint8_t));
-	while(UART_IsTxBusy(&UART_0));
 }
 
 /**
@@ -91,6 +90,7 @@ int main(void)
 		  UART_Transmit(&UART_0, mesajSleep, sizeof(mesajSleep)/sizeof(uint8_t));
 		  while(UART_IsTxBusy(&UART_0));
 
+		  RTC_Start();
 		/*  XMC_SCU_HIB_EnableEvent(XMC_SCU_HIB_EVENT_WAKEUP_ON_RTC);
 		  XMC_SCU_HIB_EnterHibernateState();*/
 

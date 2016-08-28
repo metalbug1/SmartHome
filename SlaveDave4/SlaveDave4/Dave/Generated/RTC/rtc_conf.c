@@ -62,13 +62,13 @@ const RTC_CONFIG_t RTC_0_config  =
 {
 
   /* RTC start at Initialization */
-  .start = RTC_START_ENABLE,
+  .start = RTC_START_DISABLE,
 
-  /* Timer Periodic seconds interrupt enabled */
-  .periodic_sec_intr = RTC_INT_PERIODIC_SEC_ENABLE,
+  /* Timer Periodic seconds interrupt disabled */
+  .periodic_sec_intr = RTC_INT_PERIODIC_SEC_DISABLE,
 
-  /* Timer Periodic minutes interrupt disabled */
-  .periodic_min_intr = RTC_INT_PERIODIC_MIN_DISABLE,
+  /* Timer Periodic minutes interrupt enabled */
+  .periodic_min_intr = RTC_INT_PERIODIC_MIN_ENABLE,
 
   /* Timer Periodic hours interrupt disabled */
   .periodic_hour_intr = RTC_INT_PERIODIC_HOUR_DISABLE,
