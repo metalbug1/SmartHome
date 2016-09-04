@@ -1,4 +1,4 @@
-/* crypto/aes/aes.h -*- mode:C; c-file-style: "eay" -*- */
+/* crypto/aes/aes_ecb.c -*- mode:C; c-file-style: "eay" -*- */
 /* ====================================================================
  * Copyright (c) 1998-2002 The OpenSSL Project.  All rights reserved.
  *
@@ -46,10 +46,11 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  * ====================================================================
+ *
  */
 
 /**
- * @file aes_locl.h
+ * @file aes_ecb.c
  * @date 2015-10-09
  *
  * NOTE:
@@ -87,52 +88,30 @@
  ***********************************************************************************************************************
  */
 
-#ifndef HEADER_AES_LOCL_H
-#define HEADER_AES_LOCL_H
+#include "crypto_aes.h"
 
-#ifdef __cplusplus
-extern "C" {
+#ifdef CRYPTO_AES_BUILD_MODE_ECB
+
+#ifndef AES_DEBUG
+# ifndef NDEBUG
+#  define NDEBUG
+# endif
 #endif
+#include <assert.h>
 
-//changed by Wipro IFX
-//#include <openssl/e_os2.h>
+#include "aes.h"
+#include "aes_locl.h"
 
-#ifdef OPENSSL_NO_AES
-#error AES is disabled.
-#endif
+void AES_ecb_encrypt(const unsigned char *in, unsigned char *out,
+		     const AES_KEY *key, const int enc) {
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+        assert(in && out && key);
+	assert((AES_ENCRYPT == enc)||(AES_DECRYPT == enc));
 
-
-#if defined(_MSC_VER) && (defined(_M_IX86) || defined(_M_AMD64) || defined(_M_X64))
-# define SWAP(x) (_lrotl(x, 8) & 0x00ff00ff | _lrotr(x, 8) & 0xff00ff00)
-# define GETU32(p) SWAP(*((u32 *)(p)))
-# define PUTU32(ct, st) { *((u32 *)(ct)) = SWAP((st)); }
-#else
-# define GETU32(pt) (((u32_aes)(pt)[0] << 24) ^ ((u32_aes)(pt)[1] << 16) ^ ((u32_aes)(pt)[2] <<  8) ^ ((u32_aes)(pt)[3]))
-# define PUTU32(ct, st) { (ct)[0] = (u8)((st) >> 24); (ct)[1] = (u8)((st) >> 16); (ct)[2] = (u8)((st) >>  8); (ct)[3] = (u8)(st); }
-#endif
-
-#ifdef AES_LONG
-typedef unsigned long u32;
-#else
-typedef unsigned int u32_aes;
-#endif
-typedef unsigned short u16;
-typedef unsigned char u8;
-
-#define MAXKC   (256/32)
-#define MAXKB   (256/8)
-#define MAXNR   14
-
-/* This controls loop-unrolling in aes_core.c */
-#undef FULL_UNROLL
-
-#ifdef __cplusplus
+	if (AES_ENCRYPT == enc)
+		AES_encrypt(in, out, key);
+	else
+		AES_decrypt(in, out, key);
 }
-#endif
 
-#endif /* !HEADER_AES_LOCL_H */
-
+#endif /* #ifdef CRYPTO_AES_BUILD_MODE_ECB */

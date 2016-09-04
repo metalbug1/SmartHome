@@ -51,7 +51,15 @@
 #include "dht.h"
 #include "TSL2561.h"
 #include "SmartHome_Types.h"
-char OutData[9];
+
+#ifdef USE_ENCRYPTION
+#include "CRYPTO_AES/crypto_aes.h"
+
+const uint8_t key[] = "disertatieReteaS";
+uint8_t encryptedData[16]; // Holds the decryption output
+#endif
+
+char OutData[16];
 extern uint16_t u16Humidity;
 extern uint16_t u16Temperature;
 extern float fLightIntensity;
@@ -91,7 +99,16 @@ int main(void)
   OutData[7] = (uint8_t)((uint16_t)fLightIntensity >> 8U);
   OutData[8] = (uint8_t)((uint16_t)fLightIntensity & 0xFF);
   
-  AS1_SendBlock(MySerialPtr, OutData, sizeof(OutData)); 
+#ifdef USE_ENCRYPTION
+	CRYPTO_AES_Init(&CRYPTO_AES_0);
+	
+	CRYPTO_AES_Reset(&CRYPTO_AES_0);
+	CRYPTO_AES_SetKey(&CRYPTO_AES_0, key, AES_ENCRYPT);
+	CRYPTO_AES_Encrypt(&CRYPTO_AES_0, &encryptedData, OutData, 16);
+	AS1_SendBlock(MySerialPtr, encryptedData, 16); 
+#else
+  AS1_SendBlock(MySerialPtr, OutData, 9); 
+#endif
   /*Cpu_SetOperationMode(DOM_STOP, NULL, NULL);*/
   while (1)
   {

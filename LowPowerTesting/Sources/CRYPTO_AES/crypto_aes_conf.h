@@ -42,7 +42,7 @@
  *     - Initial version <br>
  *
  * 2015-04-21:
- *     - Name changes: crypto_aes_init_vector, crypto_aes_encryption_key <br>
+ *     - Name changes: Automatically generate APP version <br>
  *
  * 2015-06-20:
  *     - Update license/version information <br>
@@ -50,22 +50,42 @@
  * @endcond
  */
 
+#ifndef CRYPTO_AES_CONF_H
+#define CRYPTO_AES_CONF_H
+
+/* Support for C++ */
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /***********************************************************************************************************************
  * HEADER FILES
  **********************************************************************************************************************/
 
-#include "crypto_aes.h"
-
-const uint8_t crypto_aes_init_vector[] = ""; /* Initialization vector */
-const uint8_t crypto_aes_encryption_key[] = "disertatieReteaSdisertatieReteaS"; /* AES encryption key */
-
-/***********************************************************************************************************************
- * DATA STRUCTURES
+/**********************************************************************************************************************
+ * MACROS
  **********************************************************************************************************************/
 
-CRYPTO_AES_t CRYPTO_AES_0 = {
-  .encryption_operation = TRUE, /* Is the user encrypting or decrypting? */
-  .mode = CRYPTO_AES_MODE_ECB, /* AES encryption mode */
-  .key_size = CRYPTO_AES_KEY_SIZE_256, /* AES encryption key size */
-};
+/* CRYPTO_AES APP version */
+#define CRYPTO_AES_MAJOR_VERSION (4U) /**< Major version */
+#define CRYPTO_AES_MINOR_VERSION (0U) /**< Minor version */
+#define CRYPTO_AES_PATCH_VERSION (8U) /**< Patch version */
+
+/*
+ * Supported encryption modes
+ */
+#define CRYPTO_AES_BUILD_MODE_ECB /* Include ECB mode */
+#define CRYPTO_AES_BUILD_MODE_CFB /* Include CFB mode */
+#define CRYPTO_AES_BUILD_MODE_CTR /* Include CTR mode */
+#define CRYPTO_AES_BUILD_MODE_CBC /* Include CBC mode */
+#define CRYPTO_AES_BUILD_MODE_OFB /* Include OFB mode */
+
+/* Support for C++ */
+#ifdef __cplusplus
+}
+#endif
+
+#endif  /* CRYPTO_AES_CONF_H */
+
+/* CODE_BLOCK_END */
 

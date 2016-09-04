@@ -7,6 +7,9 @@
 #include "DataProcessing.h"
 #include "Sensors.h"
 #include "Room.h"
+#ifdef USE_ENCRYPTION
+#include "CRYPTO_AES/crypto_aes.h"
+#endif
 
 DataQueueType receivedDataQueue;
 RoomInformationType roomInformation[NUMBER_OF_ROOMS];
@@ -89,12 +92,19 @@ void ProcessReceivedData()
 	uint8_t tempData[QUEUE_MAX_SIZE];
 	uint8_t tempIndex = 0;
 	uint8_t tempLength = 0;
+#ifdef USE_ENCRYPTION
+	uint8_t encryptedData[QUEUE_MAX_SIZE];
+#endif
 
 	if (FALSE == Queue_IsEmpty(receivedDataQueue))
 	{
 		tempLength = receivedDataQueue.u8usedSpace;
+#ifdef USE_ENCRYPTION
+		Queue_GetBuffer(&receivedDataQueue, encryptedData, tempLength);
+		CRYPTO_AES_Decrypt(&CRYPTO_AES_0, tempData, encryptedData, tempLength);
+#else
 		Queue_GetBuffer(&receivedDataQueue, tempData, tempLength);
-
+#endif
 		for (tempIndex = 0; tempIndex < tempLength; tempIndex++)
 		{
 			if (IsAddress(tempData[tempIndex]))

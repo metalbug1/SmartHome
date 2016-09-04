@@ -95,3 +95,11 @@ Dave/Generated/src/ADCGLOB001/ADCGlob001.o
 Dave/Generated/src/ADCGLOB001/ADCGlob001_Conf.o
 Dave/Generated/src/ADC001/ADC001.o
 Dave/Generated/src/ADC001/ADC001_Conf.o
+CRYPTO_AES/aes_cbc.o
+CRYPTO_AES/aes_cfb.o
+CRYPTO_AES/aes_core.o
+CRYPTO_AES/aes_ctr.o
+CRYPTO_AES/aes_ecb.o
+CRYPTO_AES/aes_ofb.o
+CRYPTO_AES/crypto_aes.o
+CRYPTO_AES/crypto_aes_conf.o

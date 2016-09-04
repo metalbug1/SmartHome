@@ -52,4 +52,5 @@ Dave/Generated/src/CLK001 \
 Dave/Generated/src/ADCGROUP001 \
 Dave/Generated/src/ADCGLOB001 \
 Dave/Generated/src/ADC001 \
+CRYPTO_AES \
 

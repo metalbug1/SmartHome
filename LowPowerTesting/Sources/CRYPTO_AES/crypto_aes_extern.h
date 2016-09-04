@@ -42,7 +42,7 @@
  *     - Initial version <br>
  *
  * 2015-04-21:
- *     - Name changes: crypto_aes_init_vector, crypto_aes_encryption_key <br>
+ *     - Name changes: Name changes: crypto_aes_init_vector, crypto_aes_encryption_key <br>
  *
  * 2015-06-20:
  *     - Update license/version information <br>
@@ -50,22 +50,39 @@
  * @endcond
  */
 
+#ifndef CRYPTO_AES_EXTERN_H
+#define CRYPTO_AES_EXTERN_H
+
+/* Support for C++ interwork */
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /***********************************************************************************************************************
  * HEADER FILES
  **********************************************************************************************************************/
-
-#include "crypto_aes.h"
-
-const uint8_t crypto_aes_init_vector[] = ""; /* Initialization vector */
-const uint8_t crypto_aes_encryption_key[] = "disertatieReteaSdisertatieReteaS"; /* AES encryption key */
-
-/***********************************************************************************************************************
- * DATA STRUCTURES
+ 
+/**********************************************************************************************************************
+ * MACROS
  **********************************************************************************************************************/
 
-CRYPTO_AES_t CRYPTO_AES_0 = {
-  .encryption_operation = TRUE, /* Is the user encrypting or decrypting? */
-  .mode = CRYPTO_AES_MODE_ECB, /* AES encryption mode */
-  .key_size = CRYPTO_AES_KEY_SIZE_256, /* AES encryption key size */
-};
+/*
+ * A reference to the init. vector
+ * specified in the CRYPTO_AES GUI
+ */
+extern const uint8_t crypto_aes_init_vector[];
+extern const uint8_t crypto_aes_encryption_key[];
+
+/***********************************************************************************************************************
+ * EXTERN DECLARATIONS
+ ***********************************************************************************************************************/
+
+extern CRYPTO_AES_t CRYPTO_AES_0;
+ 
+/* Support for C++ interwork */
+#ifdef __cplusplus
+}
+#endif 
+
+#endif /* CRYPTO_AES_EXTERN_H */
 

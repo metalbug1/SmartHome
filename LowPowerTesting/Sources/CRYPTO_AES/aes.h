@@ -49,7 +49,7 @@
  */
 
 /**
- * @file aes_locl.h
+ * @file aes.h
  * @date 2015-10-09
  *
  * NOTE:
@@ -87,52 +87,91 @@
  ***********************************************************************************************************************
  */
 
-#ifndef HEADER_AES_LOCL_H
-#define HEADER_AES_LOCL_H
+#ifndef HEADER_AES_H
+#define HEADER_AES_H
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-//changed by Wipro IFX
-//#include <openssl/e_os2.h>
-
 #ifdef OPENSSL_NO_AES
 #error AES is disabled.
 #endif
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#define AES_ENCRYPT	1
+#define AES_DECRYPT	0
 
+/* Because array size can't be a const in C, the following two are macros.
+   Both sizes are in bytes. */
+#define AES_MAXNR 14
+#define AES_BLOCK_SIZE 16
 
-#if defined(_MSC_VER) && (defined(_M_IX86) || defined(_M_AMD64) || defined(_M_X64))
-# define SWAP(x) (_lrotl(x, 8) & 0x00ff00ff | _lrotr(x, 8) & 0xff00ff00)
-# define GETU32(p) SWAP(*((u32 *)(p)))
-# define PUTU32(ct, st) { *((u32 *)(ct)) = SWAP((st)); }
-#else
-# define GETU32(pt) (((u32_aes)(pt)[0] << 24) ^ ((u32_aes)(pt)[1] << 16) ^ ((u32_aes)(pt)[2] <<  8) ^ ((u32_aes)(pt)[3]))
-# define PUTU32(ct, st) { (ct)[0] = (u8)((st) >> 24); (ct)[1] = (u8)((st) >> 16); (ct)[2] = (u8)((st) >>  8); (ct)[3] = (u8)(st); }
+#ifdef OPENSSL_FIPS
+#define FIPS_AES_SIZE_T	int
 #endif
 
+#ifdef  __cplusplus
+extern "C" {
+#endif
+
+/* This should be a hidden type, but EVP requires that the size be known */
+struct aes_key_st {
 #ifdef AES_LONG
-typedef unsigned long u32;
+    unsigned long rd_key[4 *(AES_MAXNR + 1)];
 #else
-typedef unsigned int u32_aes;
+    unsigned int rd_key[4 *(AES_MAXNR + 1)];
 #endif
-typedef unsigned short u16;
-typedef unsigned char u8;
+    int rounds;
+};
+typedef struct aes_key_st AES_KEY;
 
-#define MAXKC   (256/32)
-#define MAXKB   (256/8)
-#define MAXNR   14
+//changed by Wipro IFX
+//const char *AES_options(void);
 
-/* This controls loop-unrolling in aes_core.c */
-#undef FULL_UNROLL
+int AES_set_encrypt_key(const unsigned char *userKey, const int bits,
+	AES_KEY *key);
+int AES_set_decrypt_key(const unsigned char *userKey, const int bits,
+	AES_KEY *key);
+
+void AES_encrypt(const unsigned char *in, unsigned char *out,
+	const AES_KEY *key);
+void AES_decrypt(const unsigned char *in, unsigned char *out,
+	const AES_KEY *key);
+
+void AES_ecb_encrypt(const unsigned char *in, unsigned char *out,
+	const AES_KEY *key, const int enc);
+void AES_cbc_encrypt(const unsigned char *in, unsigned char *out,
+	const unsigned long length, const AES_KEY *key,
+	unsigned char *ivec, const int enc);
+void AES_cfb128_encrypt(const unsigned char *in, unsigned char *out,
+	const unsigned long length, const AES_KEY *key,
+	unsigned char *ivec, int *num, const int enc);
+void AES_cfb1_encrypt(const unsigned char *in, unsigned char *out,
+	const unsigned long length, const AES_KEY *key,
+	unsigned char *ivec, int *num, const int enc);
+void AES_cfb8_encrypt(const unsigned char *in, unsigned char *out,
+	const unsigned long length, const AES_KEY *key,
+	unsigned char *ivec, int *num, const int enc);
+void AES_cfbr_encrypt_block(const unsigned char *in,unsigned char *out,
+			    const int nbits,const AES_KEY *key,
+			    unsigned char *ivec,const int enc);
+void AES_ofb128_encrypt(const unsigned char *in, unsigned char *out,
+	const unsigned long length, const AES_KEY *key,
+	unsigned char *ivec, int *num);
+void AES_ctr128_encrypt(const unsigned char *in, unsigned char *out,
+	const unsigned long length, const AES_KEY *key,
+	unsigned char ivec[AES_BLOCK_SIZE],
+	unsigned char ecount_buf[AES_BLOCK_SIZE],
+	unsigned int *num);
+
+
+#ifdef  __cplusplus
+}
+#endif
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* !HEADER_AES_LOCL_H */
+#endif /* !HEADER_AES_H */
 

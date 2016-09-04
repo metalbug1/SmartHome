@@ -22,6 +22,9 @@
 #include "DataProcessing.h"
 #include "WebServerFunctions.h"
 #include "Sensors.h"
+#ifdef USE_ENCRYPTION
+#include "CRYPTO_AES/crypto_aes.h"
+#endif
 
 
 uint8_t u8NumberOfTimerPeriods = 0;
@@ -33,10 +36,25 @@ void TimerHandlerReadSensors()
 	u8NumberOfTimerPeriods++;
 }
 
+uint8_t cipher_text[16] = {0};
+uint8_t initial_text[] = "Hello world !!!!";
+uint8_t output[16]; // Holds the decryption output
+
+ uint8_t dec[] = {'%', 4, '/', 138, 176, 'K', '!', '6', '?', '^', 207, 'V', '~', 189, '?', 134};
+  const uint8_t key[] = "disertatieReteaS";
+
+
 int main(void)
 {
 	handle_t TimerId;
 	DAVE_Init();			// Initialization of DAVE Apps
+#ifdef USE_ENCRYPTION
+	CRYPTO_AES_Init(&CRYPTO_AES_0);
+	CRYPTO_AES_Reset(&CRYPTO_AES_0);
+	CRYPTO_AES_SetKey(&CRYPTO_AES_0, key, AES_DECRYPT);
+//CRYPTO_AES_SetKey(&CRYPTO_AES_0, key, AES_ENCRYPT);
+//CRYPTO_AES_Encrypt(&CRYPTO_AES_0, dec, initial_text, 16);
+#endif
 
     lwIPStack_init();
     http_CGI_init();
