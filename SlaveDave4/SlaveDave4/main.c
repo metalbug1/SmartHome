@@ -90,10 +90,32 @@ int main(void)
 		  UART_Transmit(&UART_0, mesajSleep, sizeof(mesajSleep)/sizeof(uint8_t));
 		  while(UART_IsTxBusy(&UART_0));
 
-		  RTC_Start();
-		/*  XMC_SCU_HIB_EnableEvent(XMC_SCU_HIB_EVENT_WAKEUP_ON_RTC);
-		  XMC_SCU_HIB_EnterHibernateState();*/
+		  XMC_SCU_HIB_EnableHibernateDomain();
 
+		  //Enable RTC external clock oscillator
+		  SCU_HIBERNATE->OSCULCTRL &= ~ SCU_HIBERNATE_OSCULCTRL_MODE_Msk;
+
+		  /*Select external crystal oscillator as RTC clock source
+		  wait until HDCR register ready for a write*/
+		  while ( SCU_GENERAL->MIRRSTS & SCU_GENERAL_MIRRSTS_HDCR_Msk);
+
+		  //write 1 to SCU_HDCR.RCS
+		  SCU_HIBERNATE->HDCR &= (~SCU_HIBERNATE_HDCR_RCS_Msk) | (0x1 << SCU_HIBERNATE_HDCR_RCS_Pos);
+
+		  for (int i=0; i<100; i++)
+		  {
+			  __NOP();
+		  }
+
+
+		  RTC_Start();
+
+		  SCU_HIBERNATE->HDCR &= (~SCU_HIBERNATE_HDCR_RTCE_Msk) | (0x1 << SCU_HIBERNATE_HDCR_RTCE_Pos);
+		  while ( SCU_GENERAL->MIRRSTS & SCU_GENERAL_MIRRSTS_HDCR_Msk);
+
+
+		//  XMC_SCU_HIB_EnableEvent(XMC_SCU_HIB_EVENT_WAKEUP_ON_RTC);
+		  /*XMC_SCU_HIB_EnterHibernateState();*/
 
 	  }
 
