@@ -28,8 +28,8 @@ uint8_t u8NumberOfTimerPeriods = 0;
 
 void TimerHandlerReadSensors()
 {
-    ADC001_GenerateLoadEvent(&ADC001_Handle0);
-	UpdateSensorInformation();
+    //ADC001_GenerateLoadEvent(&ADC001_Handle0);
+	//UpdateSensorInformation();
 	u8NumberOfTimerPeriods++;
 }
 
@@ -47,21 +47,21 @@ int main(void)
     TimerId = SYSTM001_CreateTimer(100,SYSTM001_PERIODIC,TimerHandlerReadSensors,NULL);
     SYSTM001_StartTimer(TimerId);
 
-    ADC001_GenerateLoadEvent(&ADC001_Handle0);
+   // ADC001_GenerateLoadEvent(&ADC001_Handle0);
     while(1)
 	{
 
 		if (u8NumberOfTimerPeriods >= 100)
 		{
 			u8NumberOfTimerPeriods = 0;
-	    	roomInformation[ROOM_INDEX(BEDROOM)].u8Temperature[0] = roomInformation[ROOM_INDEX(LIVING)].u8Temperature[0];
-	    	roomInformation[ROOM_INDEX(BEDROOM)].u8Temperature[1] = roomInformation[ROOM_INDEX(LIVING)].u8Temperature[1];
-
-	    	roomInformation[ROOM_INDEX(BEDROOM)].u8Light[0] = roomInformation[ROOM_INDEX(LIVING)].u8Light[0];
-	    	roomInformation[ROOM_INDEX(BEDROOM)].u8Light[1] = roomInformation[ROOM_INDEX(LIVING)].u8Light[1];
-
-	    	roomInformation[ROOM_INDEX(BEDROOM)].u8Humidity[0] = roomInformation[ROOM_INDEX(LIVING)].u8Humidity[0];
-	    	roomInformation[ROOM_INDEX(BEDROOM)].u8Humidity[1] = roomInformation[ROOM_INDEX(LIVING)].u8Humidity[1];
+//	    	roomInformation[ROOM_INDEX(BEDROOM)].u8Temperature[0] = roomInformation[ROOM_INDEX(LIVING)].u8Temperature[0];
+//	    	roomInformation[ROOM_INDEX(BEDROOM)].u8Temperature[1] = roomInformation[ROOM_INDEX(LIVING)].u8Temperature[1];
+//
+//	    	roomInformation[ROOM_INDEX(BEDROOM)].u8Light[0] = roomInformation[ROOM_INDEX(LIVING)].u8Light[0];
+//	    	roomInformation[ROOM_INDEX(BEDROOM)].u8Light[1] = roomInformation[ROOM_INDEX(LIVING)].u8Light[1];
+//
+//	    	roomInformation[ROOM_INDEX(BEDROOM)].u8Humidity[0] = roomInformation[ROOM_INDEX(LIVING)].u8Humidity[0];
+//	    	roomInformation[ROOM_INDEX(BEDROOM)].u8Humidity[1] = roomInformation[ROOM_INDEX(LIVING)].u8Humidity[1];
 
 			ProcessReceivedData();
 		}

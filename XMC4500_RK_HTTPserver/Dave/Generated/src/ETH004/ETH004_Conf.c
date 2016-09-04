@@ -75,7 +75,7 @@
   uint16_t IPpos1 = 192;
   uint16_t IPpos2 = 168;
   uint16_t IPpos3 = 0;
-  uint16_t IPpos4 = 103;
+  uint16_t IPpos4 = 105;
     
   uint16_t Netpos1 = 255;
   uint16_t Netpos2 = 255;

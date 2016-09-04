@@ -17,14 +17,14 @@
   17              		.section	.rodata
   18              		.align	2
   21              	IO004_Handle0:
-  22 0000 03       		.byte	3
-  23 0001 09       		.byte	9
+  22 0000 01       		.byte	1
+  23 0001 00       		.byte	0
   24 0002 0000     		.space	2
-  25 0004 00830248 		.word	1208124160
+  25 0004 00810248 		.word	1208123648
   26              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
 DEFINED SYMBOLS
                             *ABS*:00000000 IO004_Conf.c
-C:\Users\Mihai\AppData\Local\Temp\ccGMogu1.s:21     .rodata:00000000 IO004_Handle0
-C:\Users\Mihai\AppData\Local\Temp\ccGMogu1.s:18     .rodata:00000000 $d
+C:\Users\Mihai\AppData\Local\Temp\cc0ZJT2x.s:21     .rodata:00000000 IO004_Handle0
+C:\Users\Mihai\AppData\Local\Temp\cc0ZJT2x.s:18     .rodata:00000000 $d
 
 NO UNDEFINED SYMBOLS

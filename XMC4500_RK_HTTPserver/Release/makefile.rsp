@@ -1,6 +1,11 @@
+AdcRelaxKit.o
+DataProcessing.o
+DataQueue.o
+Sensors.o
+SmartHome.o
+WebServerFunctions.o
 Startup/startup_XMC4500.o
 Startup/system_XMC4500.o
-Main.o
 Lib/System_LibcStubs.o
 Dave/Generated/src/WEBSERVER001/HTTPServer/fs.o
 Dave/Generated/src/WEBSERVER001/HTTPServer/fsdata.o
@@ -88,7 +93,5 @@ Dave/Generated/src/ADCGROUP001/ADCGroup001.o
 Dave/Generated/src/ADCGROUP001/ADCGroup001_Conf.o
 Dave/Generated/src/ADCGLOB001/ADCGlob001.o
 Dave/Generated/src/ADCGLOB001/ADCGlob001_Conf.o
-Dave/Generated/src/ADCCH001/ADCCH001.o
-Dave/Generated/src/ADCCH001/ADCCH001_Conf.o
-Dave/Generated/src/ADC002/ADC002.o
-Dave/Generated/src/ADC002/ADC002_Conf.o
+Dave/Generated/src/ADC001/ADC001.o
+Dave/Generated/src/ADC001/ADC001_Conf.o
