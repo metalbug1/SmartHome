@@ -6,6 +6,7 @@
 #include "I2C_PDD.h"
 #include "i2c.h"
 
+TSL_StateType TslSensorState = TSL_IDLE;
 float fLightIntensity;
 
 LDD_TDeviceData *TSL2561I2CHandler = NULL;
@@ -53,6 +54,7 @@ void TSL2561Timer_500msEvent()
 		TSL_Disable();
 		TSL2561Timer_DisableEvent();
 		TSL2561Timer_Disable();
+		TslSensorState = TSL_FINISHED;
 	}
 }
 

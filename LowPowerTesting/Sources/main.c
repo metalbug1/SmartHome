@@ -44,10 +44,18 @@
 #include "PE_Error.h"
 #include "PE_Const.h"
 #include "IO_Map.h"
+#include <stdio.h>
 
 /* User includes (#include below this line is not maintained by Processor Expert) */
 #include "dht.h"
-char OutData[] = "Hello world";
+#include "TSL2561.h"
+#include "SmartHome_Types.h"
+char OutData[9];
+extern uint16_t u16Humidity;
+extern uint16_t u16Temperature;
+extern float fLightIntensity;
+extern TSL_StateType TslSensorState;
+extern DHT_State eDhtState;
 
 /*lint -save  -e970 Disable MISRA rule (6.3) checking. */
 int main(void)
@@ -69,6 +77,19 @@ int main(void)
   MySerialPtr = AS1_Init(NULL);
   DHT_Read();
   TSL_Start();
+  
+  while ((TslSensorState != TSL_FINISHED) || (eDhtState != DHT_FINISHED));
+ 
+  OutData[0] = (BEDROOM | TEMPERATURE);
+  OutData[1] = (u16Temperature / 10);
+  OutData[2] = (u16Temperature % 10);
+  OutData[3] = (BEDROOM | HUMIDITY);
+  OutData[4] = (u16Humidity / 10);
+  OutData[5] = (u16Humidity % 10);
+  OutData[6] = (BEDROOM | LIGHT);
+  OutData[7] = (uint8_t)((uint16_t)fLightIntensity >> 8U);
+  OutData[8] = (uint8_t)((uint16_t)fLightIntensity & 0xFF);
+  
   AS1_SendBlock(MySerialPtr, OutData, sizeof(OutData)); 
   /*Cpu_SetOperationMode(DOM_STOP, NULL, NULL);*/
   while (1)

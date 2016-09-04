@@ -13,6 +13,12 @@
 
 typedef enum
 {
+	TSL_IDLE 		= 0x0U,
+	TSL_FINISHED 	= 0x1U
+} TSL_StateType;
+
+typedef enum
+{
 	TSL_CONTROL 		= 0x0U,
 	TSL_TIMING 			= 0x1U,
 	TSL_THRESHLOWLOW 	= 0x2U,
