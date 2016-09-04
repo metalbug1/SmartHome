@@ -2,7 +2,7 @@
 # Automatically-generated file. Do not edit!
 ################################################################################
 
-#Progress monitor hint: 19
+#Progress monitor hint: 20
 first : all
 -include ../makefile.init
 
@@ -56,7 +56,7 @@ all: warning-messages explicit-dependencies LowPowerTesting.elf secondary-output
 # Tool invocations
 LowPowerTesting.elf: $(OBJS) $(USER_OBJS) ../Project_Settings/Linker_Files/ProcessorExpert.ld
 	@echo 'Building target: $@'
-	@echo 'Executing target #20 $@'
+	@echo 'Executing target #21 $@'
 	@echo 'Invoking: ARM Ltd Windows GCC C Linker'
 	"$(ARMSourceryDirEnv)/arm-none-eabi-gcc"  $(USER_OBJS_QUOTED) $(LIBS_QUOTED) @"LowPowerTesting.args" -o"LowPowerTesting.elf"
 	@echo 'Finished building target: $@'

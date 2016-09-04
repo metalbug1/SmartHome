@@ -47,6 +47,7 @@
 
 /* User includes (#include below this line is not maintained by Processor Expert) */
 #include "dht.h"
+char OutData[] = "Hello world";
 
 /*lint -save  -e970 Disable MISRA rule (6.3) checking. */
 int main(void)
@@ -54,6 +55,7 @@ int main(void)
 {
   /* Write your local variable definition here */
 	LDD_TDeviceData *bit1Ptr;
+	LDD_TDeviceData *MySerialPtr;
 	
 	volatile int i =0;
 
@@ -64,9 +66,10 @@ int main(void)
   /* Write your code here */
   /* For example: for(;;) { } */
   bit1Ptr = Bit1_Init((LDD_TUserData *)NULL);
-
+  MySerialPtr = AS1_Init(NULL);
   DHT_Read();
   TSL_Start();
+  AS1_SendBlock(MySerialPtr, OutData, sizeof(OutData)); 
   /*Cpu_SetOperationMode(DOM_STOP, NULL, NULL);*/
   while (1)
   {

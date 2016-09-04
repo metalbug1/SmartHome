@@ -7,7 +7,7 @@
 **     Version     : Component 01.025, Driver 01.04, CPU db: 3.00.000
 **     Datasheet   : KL25P80M48SF0RM, Rev.3, Sep 2012
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2016-09-04, 10:56, # CodeGen: 32
+**     Date/Time   : 2016-09-04, 11:50, # CodeGen: 33
 **     Abstract    :
 **
 **     Settings    :
@@ -69,6 +69,7 @@
 #include "TSL2561Timer.h"
 #include "TimerIntLdd2.h"
 #include "TU2.h"
+#include "AS1.h"
 #include "PE_Types.h"
 #include "PE_Error.h"
 #include "PE_Const.h"

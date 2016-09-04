@@ -4,14 +4,14 @@
 -g3
 -gdwarf-2
 -gstrict-dwarf
--I"C:/Users/Mihai/workspace/LowPowerTesting/Project_Headers"
--I"C:/Users/Mihai/workspace/LowPowerTesting/Project_Settings/Startup_Code"
+-I"F:/WORK/SmartHome_checkout1/LowPowerTesting/Project_Headers"
+-I"F:/WORK/SmartHome_checkout1/LowPowerTesting/Project_Settings/Startup_Code"
 -I"C:/Freescale/CW MCU v10.6/MCU/ARM_GCC_Support/ewl/EWL_C/include"
 -I"C:/Freescale/CW MCU v10.6/MCU/ARM_GCC_Support/ewl/EWL_Runtime/include"
--I"C:/Users/Mihai/workspace/LowPowerTesting/Generated_Code"
--I"C:/Users/Mihai/workspace/LowPowerTesting/Sources"
--I"C:/Users/Mihai/workspace/LowPowerTesting/Static_Code/PDD"
--I"C:/Users/Mihai/workspace/LowPowerTesting/Static_Code/IO_Map"
+-I"F:/WORK/SmartHome_checkout1/LowPowerTesting/Generated_Code"
+-I"F:/WORK/SmartHome_checkout1/LowPowerTesting/Sources"
+-I"F:/WORK/SmartHome_checkout1/LowPowerTesting/Static_Code/PDD"
+-I"F:/WORK/SmartHome_checkout1/LowPowerTesting/Static_Code/IO_Map"
 -O0
 -ffunction-sections
 -fdata-sections

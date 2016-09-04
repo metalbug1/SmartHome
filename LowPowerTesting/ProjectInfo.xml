@@ -35,85 +35,87 @@
     <FLASHsize>128k</FLASHsize>
   </PROCESSOR>
   <PATHS>
-    <LinkerCommandFile>C:\Users\Mihai\workspace\LowPowerTesting\Project_Settings\Linker_Files\ProcessorExpert.ld</LinkerCommandFile>
+    <LinkerCommandFile>F:\WORK\SmartHome_checkout1\LowPowerTesting\Project_Settings\Linker_Files\ProcessorExpert.ld</LinkerCommandFile>
     <IncludePaths>
-      <Path>C:\Users\Mihai\workspace\LowPowerTesting\Static_Code\PDD\</Path>
-      <Path>C:\Users\Mihai\workspace\LowPowerTesting\Static_Code\IO_Map\</Path>
-      <Path>C:\Users\Mihai\workspace\LowPowerTesting\Sources\</Path>
-      <Path>C:\Users\Mihai\workspace\LowPowerTesting\Generated_Code\</Path>
+      <Path>F:\WORK\SmartHome_checkout1\LowPowerTesting\Static_Code\PDD\</Path>
+      <Path>F:\WORK\SmartHome_checkout1\LowPowerTesting\Static_Code\IO_Map\</Path>
+      <Path>F:\WORK\SmartHome_checkout1\LowPowerTesting\Sources\</Path>
+      <Path>F:\WORK\SmartHome_checkout1\LowPowerTesting\Generated_Code\</Path>
     </IncludePaths>
     <SourceCodePaths>
-      <Path>C:\Users\Mihai\workspace\LowPowerTesting\Generated_Code\</Path>
-      <Path>C:\Users\Mihai\workspace\LowPowerTesting\Project_Settings\Startup_Code\</Path>
-      <Path>C:\Users\Mihai\workspace\LowPowerTesting\Sources\</Path>
+      <Path>F:\WORK\SmartHome_checkout1\LowPowerTesting\Generated_Code\</Path>
+      <Path>F:\WORK\SmartHome_checkout1\LowPowerTesting\Project_Settings\Startup_Code\</Path>
+      <Path>F:\WORK\SmartHome_checkout1\LowPowerTesting\Sources\</Path>
     </SourceCodePaths>
   </PATHS>
   <FILES>
     <GeneratedCs>
-      <PathName>C:\Users\Mihai\workspace\LowPowerTesting\Generated_Code\Bit1.c</PathName>
-      <PathName>C:\Users\Mihai\workspace\LowPowerTesting\Generated_Code\Cpu.c</PathName>
-      <PathName>C:\Users\Mihai\workspace\LowPowerTesting\Generated_Code\DHT22Pin.c</PathName>
-      <PathName>C:\Users\Mihai\workspace\LowPowerTesting\Generated_Code\DHT22Timer.c</PathName>
-      <PathName>C:\Users\Mihai\workspace\LowPowerTesting\Generated_Code\PE_LDD.c</PathName>
-      <PathName>C:\Users\Mihai\workspace\LowPowerTesting\Generated_Code\TSL2561Timer.c</PathName>
-      <PathName>C:\Users\Mihai\workspace\LowPowerTesting\Generated_Code\TU1.c</PathName>
-      <PathName>C:\Users\Mihai\workspace\LowPowerTesting\Generated_Code\TU2.c</PathName>
-      <PathName>C:\Users\Mihai\workspace\LowPowerTesting\Generated_Code\TimerIntLdd1.c</PathName>
-      <PathName>C:\Users\Mihai\workspace\LowPowerTesting\Generated_Code\TimerIntLdd2.c</PathName>
-      <PathName>C:\Users\Mihai\workspace\LowPowerTesting\Generated_Code\Vectors.c</PathName>
-      <PathName>C:\Users\Mihai\workspace\LowPowerTesting\Project_Settings\Startup_Code\__arm_end.c</PathName>
-      <PathName>C:\Users\Mihai\workspace\LowPowerTesting\Project_Settings\Startup_Code\__arm_start.c</PathName>
-      <PathName>C:\Users\Mihai\workspace\LowPowerTesting\Sources\Events.c</PathName>
-      <PathName>C:\Users\Mihai\workspace\LowPowerTesting\Sources\TSL2561.c</PathName>
-      <PathName>C:\Users\Mihai\workspace\LowPowerTesting\Sources\dht.c</PathName>
-      <PathName>C:\Users\Mihai\workspace\LowPowerTesting\Sources\i2c.c</PathName>
-      <PathName>C:\Users\Mihai\workspace\LowPowerTesting\Sources\main.c</PathName>
-      <PathName>C:\Users\Mihai\workspace\LowPowerTesting\Sources\sa_mtb.c</PathName>
+      <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Generated_Code\AS1.c</PathName>
+      <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Generated_Code\Bit1.c</PathName>
+      <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Generated_Code\Cpu.c</PathName>
+      <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Generated_Code\DHT22Pin.c</PathName>
+      <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Generated_Code\DHT22Timer.c</PathName>
+      <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Generated_Code\PE_LDD.c</PathName>
+      <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Generated_Code\TSL2561Timer.c</PathName>
+      <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Generated_Code\TU1.c</PathName>
+      <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Generated_Code\TU2.c</PathName>
+      <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Generated_Code\TimerIntLdd1.c</PathName>
+      <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Generated_Code\TimerIntLdd2.c</PathName>
+      <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Generated_Code\Vectors.c</PathName>
+      <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Project_Settings\Startup_Code\__arm_end.c</PathName>
+      <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Project_Settings\Startup_Code\__arm_start.c</PathName>
+      <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Sources\Events.c</PathName>
+      <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Sources\TSL2561.c</PathName>
+      <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Sources\dht.c</PathName>
+      <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Sources\i2c.c</PathName>
+      <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Sources\main.c</PathName>
+      <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Sources\sa_mtb.c</PathName>
     </GeneratedCs>
     <GeneratedHs>
-      <PathName>C:\Users\Mihai\workspace\LowPowerTesting\Generated_Code\Bit1.h</PathName>
-      <PathName>C:\Users\Mihai\workspace\LowPowerTesting\Generated_Code\Cpu.h</PathName>
-      <PathName>C:\Users\Mihai\workspace\LowPowerTesting\Generated_Code\DHT22Pin.h</PathName>
-      <PathName>C:\Users\Mihai\workspace\LowPowerTesting\Generated_Code\DHT22Timer.h</PathName>
-      <PathName>C:\Users\Mihai\workspace\LowPowerTesting\Generated_Code\IO_Map.h</PathName>
-      <PathName>C:\Users\Mihai\workspace\LowPowerTesting\Generated_Code\PE_Const.h</PathName>
-      <PathName>C:\Users\Mihai\workspace\LowPowerTesting\Generated_Code\PE_Error.h</PathName>
-      <PathName>C:\Users\Mihai\workspace\LowPowerTesting\Generated_Code\PE_LDD.h</PathName>
-      <PathName>C:\Users\Mihai\workspace\LowPowerTesting\Generated_Code\PE_Types.h</PathName>
-      <PathName>C:\Users\Mihai\workspace\LowPowerTesting\Generated_Code\TSL2561Timer.h</PathName>
-      <PathName>C:\Users\Mihai\workspace\LowPowerTesting\Generated_Code\TU1.h</PathName>
-      <PathName>C:\Users\Mihai\workspace\LowPowerTesting\Generated_Code\TU2.h</PathName>
-      <PathName>C:\Users\Mihai\workspace\LowPowerTesting\Generated_Code\TimerIntLdd1.h</PathName>
-      <PathName>C:\Users\Mihai\workspace\LowPowerTesting\Generated_Code\TimerIntLdd2.h</PathName>
-      <PathName>C:\Users\Mihai\workspace\LowPowerTesting\Project_Headers\bme.h</PathName>
-      <PathName>C:\Users\Mihai\workspace\LowPowerTesting\Project_Settings\Startup_Code\runtime_configuration.h</PathName>
-      <PathName>C:\Users\Mihai\workspace\LowPowerTesting\Sources\Events.h</PathName>
-      <PathName>C:\Users\Mihai\workspace\LowPowerTesting\Sources\TSL2561.h</PathName>
-      <PathName>C:\Users\Mihai\workspace\LowPowerTesting\Sources\dht.h</PathName>
-      <PathName>C:\Users\Mihai\workspace\LowPowerTesting\Sources\i2c.h</PathName>
-      <PathName>C:\Users\Mihai\workspace\LowPowerTesting\Static_Code\IO_Map\MKL25Z4.h</PathName>
-      <PathName>C:\Users\Mihai\workspace\LowPowerTesting\Static_Code\PDD\ADC_PDD.h</PathName>
-      <PathName>C:\Users\Mihai\workspace\LowPowerTesting\Static_Code\PDD\CMP_PDD.h</PathName>
-      <PathName>C:\Users\Mihai\workspace\LowPowerTesting\Static_Code\PDD\COP_PDD.h</PathName>
-      <PathName>C:\Users\Mihai\workspace\LowPowerTesting\Static_Code\PDD\DAC_PDD.h</PathName>
-      <PathName>C:\Users\Mihai\workspace\LowPowerTesting\Static_Code\PDD\DMAMUX_PDD.h</PathName>
-      <PathName>C:\Users\Mihai\workspace\LowPowerTesting\Static_Code\PDD\DMA_PDD.h</PathName>
-      <PathName>C:\Users\Mihai\workspace\LowPowerTesting\Static_Code\PDD\FTFA_PDD.h</PathName>
-      <PathName>C:\Users\Mihai\workspace\LowPowerTesting\Static_Code\PDD\GPIO_PDD.h</PathName>
-      <PathName>C:\Users\Mihai\workspace\LowPowerTesting\Static_Code\PDD\I2C_PDD.h</PathName>
-      <PathName>C:\Users\Mihai\workspace\LowPowerTesting\Static_Code\PDD\LPTMR_PDD.h</PathName>
-      <PathName>C:\Users\Mihai\workspace\LowPowerTesting\Static_Code\PDD\MCM_PDD.h</PathName>
-      <PathName>C:\Users\Mihai\workspace\LowPowerTesting\Static_Code\PDD\PDD_Types.h</PathName>
-      <PathName>C:\Users\Mihai\workspace\LowPowerTesting\Static_Code\PDD\PIT_PDD.h</PathName>
-      <PathName>C:\Users\Mihai\workspace\LowPowerTesting\Static_Code\PDD\PORT_PDD.h</PathName>
-      <PathName>C:\Users\Mihai\workspace\LowPowerTesting\Static_Code\PDD\RTC_PDD.h</PathName>
-      <PathName>C:\Users\Mihai\workspace\LowPowerTesting\Static_Code\PDD\SIM_PDD.h</PathName>
-      <PathName>C:\Users\Mihai\workspace\LowPowerTesting\Static_Code\PDD\SPI_PDD.h</PathName>
-      <PathName>C:\Users\Mihai\workspace\LowPowerTesting\Static_Code\PDD\SysTick_PDD.h</PathName>
-      <PathName>C:\Users\Mihai\workspace\LowPowerTesting\Static_Code\PDD\TPM_PDD.h</PathName>
-      <PathName>C:\Users\Mihai\workspace\LowPowerTesting\Static_Code\PDD\UART0_PDD.h</PathName>
-      <PathName>C:\Users\Mihai\workspace\LowPowerTesting\Static_Code\PDD\UART_PDD.h</PathName>
-      <PathName>C:\Users\Mihai\workspace\LowPowerTesting\Static_Code\PDD\USB_PDD.h</PathName>
+      <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Generated_Code\AS1.h</PathName>
+      <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Generated_Code\Bit1.h</PathName>
+      <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Generated_Code\Cpu.h</PathName>
+      <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Generated_Code\DHT22Pin.h</PathName>
+      <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Generated_Code\DHT22Timer.h</PathName>
+      <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Generated_Code\IO_Map.h</PathName>
+      <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Generated_Code\PE_Const.h</PathName>
+      <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Generated_Code\PE_Error.h</PathName>
+      <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Generated_Code\PE_LDD.h</PathName>
+      <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Generated_Code\PE_Types.h</PathName>
+      <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Generated_Code\TSL2561Timer.h</PathName>
+      <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Generated_Code\TU1.h</PathName>
+      <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Generated_Code\TU2.h</PathName>
+      <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Generated_Code\TimerIntLdd1.h</PathName>
+      <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Generated_Code\TimerIntLdd2.h</PathName>
+      <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Project_Headers\bme.h</PathName>
+      <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Project_Settings\Startup_Code\runtime_configuration.h</PathName>
+      <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Sources\Events.h</PathName>
+      <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Sources\TSL2561.h</PathName>
+      <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Sources\dht.h</PathName>
+      <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Sources\i2c.h</PathName>
+      <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Static_Code\IO_Map\MKL25Z4.h</PathName>
+      <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Static_Code\PDD\ADC_PDD.h</PathName>
+      <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Static_Code\PDD\CMP_PDD.h</PathName>
+      <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Static_Code\PDD\COP_PDD.h</PathName>
+      <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Static_Code\PDD\DAC_PDD.h</PathName>
+      <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Static_Code\PDD\DMAMUX_PDD.h</PathName>
+      <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Static_Code\PDD\DMA_PDD.h</PathName>
+      <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Static_Code\PDD\FTFA_PDD.h</PathName>
+      <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Static_Code\PDD\GPIO_PDD.h</PathName>
+      <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Static_Code\PDD\I2C_PDD.h</PathName>
+      <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Static_Code\PDD\LPTMR_PDD.h</PathName>
+      <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Static_Code\PDD\MCM_PDD.h</PathName>
+      <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Static_Code\PDD\PDD_Types.h</PathName>
+      <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Static_Code\PDD\PIT_PDD.h</PathName>
+      <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Static_Code\PDD\PORT_PDD.h</PathName>
+      <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Static_Code\PDD\RTC_PDD.h</PathName>
+      <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Static_Code\PDD\SIM_PDD.h</PathName>
+      <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Static_Code\PDD\SPI_PDD.h</PathName>
+      <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Static_Code\PDD\SysTick_PDD.h</PathName>
+      <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Static_Code\PDD\TPM_PDD.h</PathName>
+      <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Static_Code\PDD\UART0_PDD.h</PathName>
+      <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Static_Code\PDD\UART_PDD.h</PathName>
+      <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Static_Code\PDD\USB_PDD.h</PathName>
     </GeneratedHs>
   </FILES>
   <OPTIONS>
