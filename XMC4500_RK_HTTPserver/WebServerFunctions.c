@@ -21,7 +21,8 @@ u16_t SSI_Handler (int iIndex, char *pcInsert, int iInsertLen);
 
 char const TAGCHAR[1] 	="t";
 char const TAGCHAR2[1] 	="u";
-char const* TAGS[2] 	= {TAGCHAR, TAGCHAR2};
+char const TAGCHAR3[1] 	="l";
+char const* TAGS[3] 	= {TAGCHAR, TAGCHAR2, TAGCHAR3};
 
 /* Htm request for "/leds.cgi" will start led_handler */
 /*<form method="get" action="/leds.cgi">*/
@@ -106,6 +107,32 @@ u16_t SSI_Handler (int iIndex, char *pcInsert, int iInsertLen)
 	   return numberOfChars;
 	}
 
+	if (iIndex == 2)
+	{
+		uint16_t light = ( roomInformation[ROOM_INDEX(BEDROOM)].u8Light[0] << 8 ) + roomInformation[ROOM_INDEX(BEDROOM)].u8Light[1];
+		sprintf (tempChars, "%d", light);
+		if (light == 0)
+		{
+			numberOfChars = 1;
+		}
+		else
+		{
+			numberOfChars = 0;
+			while (light !=0)
+			{
+				light /= 10;
+				numberOfChars++;
+			}
+		}
+		/* prepare data to be inserted in html */
+		for (tempIndex = 0; tempIndex < numberOfChars; tempIndex++)
+		{
+			*(pcInsert + tempIndex)		= tempChars[tempIndex];
+		}
+
+	   return numberOfChars;
+	}
+
 	return 0;
 }
 
@@ -118,5 +145,5 @@ void http_SSI_init (void)
 	have the following format: <!--#tag-->
 	For the ADC conversion page, the following tag "t" is used inside the HTML code: <!--#t-->
 	*/
-	http_set_ssi_handler(SSI_Handler, (char const **)TAGS, 2);
+	http_set_ssi_handler(SSI_Handler, (char const **)TAGS, 3);
 }

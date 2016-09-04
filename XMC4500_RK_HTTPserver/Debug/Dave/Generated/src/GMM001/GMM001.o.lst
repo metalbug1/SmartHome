@@ -631,21 +631,21 @@
  431              		.file 6 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Include/core_cm4.h"
 DEFINED SYMBOLS
                             *ABS*:00000000 GMM001.c
-C:\Users\Mihai\AppData\Local\Temp\ccIOOmNH.s:24     .rodata:00000000 LENGTH1
-C:\Users\Mihai\AppData\Local\Temp\ccIOOmNH.s:21     .rodata:00000000 $d
-C:\Users\Mihai\AppData\Local\Temp\ccIOOmNH.s:30     .rodata:00000004 LENGTH2
-C:\Users\Mihai\AppData\Local\Temp\ccIOOmNH.s:36     .rodata:00000008 LENGTH3
+C:\Users\Mihai\AppData\Local\Temp\cccvM0X9.s:24     .rodata:00000000 LENGTH1
+C:\Users\Mihai\AppData\Local\Temp\cccvM0X9.s:21     .rodata:00000000 $d
+C:\Users\Mihai\AppData\Local\Temp\cccvM0X9.s:30     .rodata:00000004 LENGTH2
+C:\Users\Mihai\AppData\Local\Temp\cccvM0X9.s:36     .rodata:00000008 LENGTH3
                             *COM*:00000006 GMM001_handle0
                             *COM*:00000006 GMM001_handle1
                             *COM*:00000006 GMM001_handle2
-C:\Users\Mihai\AppData\Local\Temp\ccIOOmNH.s:42     .text.GMM001_Init:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccIOOmNH.s:47     .text.GMM001_Init:00000000 GMM001_Init
-C:\Users\Mihai\AppData\Local\Temp\ccIOOmNH.s:140    .text.GMM001_malloc:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccIOOmNH.s:145    .text.GMM001_malloc:00000000 GMM001_malloc
-C:\Users\Mihai\AppData\Local\Temp\ccIOOmNH.s:204    .text.GMM001_realloc:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccIOOmNH.s:209    .text.GMM001_realloc:00000000 GMM001_realloc
-C:\Users\Mihai\AppData\Local\Temp\ccIOOmNH.s:327    .text.GMM001_free:00000000 $t
-C:\Users\Mihai\AppData\Local\Temp\ccIOOmNH.s:332    .text.GMM001_free:00000000 GMM001_free
+C:\Users\Mihai\AppData\Local\Temp\cccvM0X9.s:42     .text.GMM001_Init:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cccvM0X9.s:47     .text.GMM001_Init:00000000 GMM001_Init
+C:\Users\Mihai\AppData\Local\Temp\cccvM0X9.s:140    .text.GMM001_malloc:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cccvM0X9.s:145    .text.GMM001_malloc:00000000 GMM001_malloc
+C:\Users\Mihai\AppData\Local\Temp\cccvM0X9.s:204    .text.GMM001_realloc:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cccvM0X9.s:209    .text.GMM001_realloc:00000000 GMM001_realloc
+C:\Users\Mihai\AppData\Local\Temp\cccvM0X9.s:327    .text.GMM001_free:00000000 $t
+C:\Users\Mihai\AppData\Local\Temp\cccvM0X9.s:332    .text.GMM001_free:00000000 GMM001_free
                      .debug_frame:00000010 $d
                            .group:00000000 wm4.1.1791a5ae2e936ca1033c1c44be394cc7
                            .group:00000000 wm4.XMC4500.h.45.215f4b8c79f46c7645c15373868d08c0
