@@ -18,7 +18,7 @@
         <Line>PE_Const</Line>
         <Line>IO_Map</Line>
       </GenSharedModules>
-      <ShrdHeaderAge0>1227120209</ShrdHeaderAge0>
+      <ShrdHeaderAge0>1227203762</ShrdHeaderAge0>
       <ShrdCodeAge0>-1</ShrdCodeAge0>
       <ShrdAsemblAge0>-1</ShrdAsemblAge0>
       <ShrdHeaderAge1>1227120209</ShrdHeaderAge1>
@@ -49,9 +49,9 @@
         <Line>Generated_Code\Vectors.c</Line>
       </GenExtraFiles>
       <GenExtraFileSrcDir10>lib\doxygen\</GenExtraFileSrcDir10>
-      <XtraAge12>1227120209</XtraAge12>
-      <XtraAge13>1227120209</XtraAge13>
-      <XtraAge15>1227120209</XtraAge15>
+      <XtraAge12>1227203762</XtraAge12>
+      <XtraAge13>1227203762</XtraAge13>
+      <XtraAge15>1227203762</XtraAge15>
       <GenExtraFileType15>4</GenExtraFileType15>
       <GenExtraFileType14>4</GenExtraFileType14>
       <GenExtraFileType13>4</GenExtraFileType13>
@@ -318,7 +318,7 @@
     </GenFiles>
     <SignalListFile>Documentation\LowPowerTesting_SIGNALS.txt</SignalListFile>
     <DestinationCompiler>GNUC</DestinationCompiler>
-    <ProjectModificationStamp>37</ProjectModificationStamp>
+    <ProjectModificationStamp>57</ProjectModificationStamp>
   </Options>
   <CpuID_2>
     <Generated>true</Generated>
@@ -327,7 +327,7 @@
     <GenDriverVersion>01.04</GenDriverVersion>
     <GenEventModule>Events</GenEventModule>
     <HeaderAge>1227120209</HeaderAge>
-    <CodeAge>1227120209</CodeAge>
+    <CodeAge>1227203762</CodeAge>
     <AsemblAge>-1</AsemblAge>
     <GenNumMethods>11</GenNumMethods>
     <SetClockConfiguration>false</SetClockConfiguration>

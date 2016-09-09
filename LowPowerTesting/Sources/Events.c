@@ -36,7 +36,8 @@ extern "C" {
 
 
 /* User includes (#include below this line is not maintained by Processor Expert) */
-
+#include "Bit1.h"
+extern LDD_TDeviceData *bit1Ptr;
 extern void DHT22Timer_10usEvent();
 extern void TSL2561Timer_500msEvent();
 extern void TSL2561I2C_DataReceived();
@@ -184,6 +185,44 @@ void AS1_OnBlockReceived(LDD_TUserData *UserDataPtr)
 void AS1_OnBlockSent(LDD_TUserData *UserDataPtr)
 {
   /* Write your code here ... */
+}
+
+/*
+** ===================================================================
+**     Event       :  LowPowerTimer_OnInterrupt (module Events)
+**
+**     Component   :  LowPowerTimer [TimerInt]
+**     Description :
+**         When a timer interrupt occurs this event is called (only
+**         when the component is enabled - <Enable> and the events are
+**         enabled - <EnableEvent>). This event is enabled only if a
+**         <interrupt service/event> is enabled.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+void LowPowerTimer_OnInterrupt(void)
+{
+	Bit1_NegVal(&bit1Ptr);
+}
+
+/*
+** ===================================================================
+**     Event       :  TI1_OnInterrupt (module Events)
+**
+**     Component   :  TI1 [TimerInt]
+**     Description :
+**         When a timer interrupt occurs this event is called (only
+**         when the component is enabled - <Enable> and the events are
+**         enabled - <EnableEvent>). This event is enabled only if a
+**         <interrupt service/event> is enabled.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+void TI1_OnInterrupt(void)
+{
+	Bit1_NegVal(&bit1Ptr);
 }
 
 /* END Events */

@@ -99,10 +99,13 @@ void ProcessReceivedData()
 	if (FALSE == Queue_IsEmpty(receivedDataQueue))
 	{
 		tempLength = receivedDataQueue.u8usedSpace;
+
 #ifdef USE_ENCRYPTION
+
 		Queue_GetBuffer(&receivedDataQueue, encryptedData, tempLength);
 		CRYPTO_AES_Decrypt(&CRYPTO_AES_0, tempData, encryptedData, tempLength);
 #else
+
 		Queue_GetBuffer(&receivedDataQueue, tempData, tempLength);
 #endif
 		for (tempIndex = 0; tempIndex < tempLength; tempIndex++)

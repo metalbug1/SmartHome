@@ -45,6 +45,7 @@
     <SourceCodePaths>
       <Path>F:\WORK\SmartHome_checkout1\LowPowerTesting\Generated_Code\</Path>
       <Path>F:\WORK\SmartHome_checkout1\LowPowerTesting\Project_Settings\Startup_Code\</Path>
+      <Path>F:\WORK\SmartHome_checkout1\LowPowerTesting\Sources\CRYPTO_AES\</Path>
       <Path>F:\WORK\SmartHome_checkout1\LowPowerTesting\Sources\</Path>
     </SourceCodePaths>
   </PATHS>
@@ -64,6 +65,14 @@
       <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Generated_Code\Vectors.c</PathName>
       <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Project_Settings\Startup_Code\__arm_end.c</PathName>
       <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Project_Settings\Startup_Code\__arm_start.c</PathName>
+      <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Sources\CRYPTO_AES\aes_cbc.c</PathName>
+      <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Sources\CRYPTO_AES\aes_cfb.c</PathName>
+      <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Sources\CRYPTO_AES\aes_core.c</PathName>
+      <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Sources\CRYPTO_AES\aes_ctr.c</PathName>
+      <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Sources\CRYPTO_AES\aes_ecb.c</PathName>
+      <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Sources\CRYPTO_AES\aes_ofb.c</PathName>
+      <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Sources\CRYPTO_AES\crypto_aes.c</PathName>
+      <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Sources\CRYPTO_AES\crypto_aes_conf.c</PathName>
       <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Sources\Events.c</PathName>
       <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Sources\TSL2561.c</PathName>
       <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Sources\dht.c</PathName>
@@ -89,6 +98,11 @@
       <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Generated_Code\TimerIntLdd2.h</PathName>
       <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Project_Headers\bme.h</PathName>
       <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Project_Settings\Startup_Code\runtime_configuration.h</PathName>
+      <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Sources\CRYPTO_AES\aes.h</PathName>
+      <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Sources\CRYPTO_AES\aes_locl.h</PathName>
+      <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Sources\CRYPTO_AES\crypto_aes.h</PathName>
+      <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Sources\CRYPTO_AES\crypto_aes_conf.h</PathName>
+      <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Sources\CRYPTO_AES\crypto_aes_extern.h</PathName>
       <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Sources\Events.h</PathName>
       <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Sources\SmartHome_Types.h</PathName>
       <PathName>F:\WORK\SmartHome_checkout1\LowPowerTesting\Sources\TSL2561.h</PathName>

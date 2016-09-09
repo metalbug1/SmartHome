@@ -7,7 +7,7 @@
 **     Version     : Component 01.025, Driver 01.04, CPU db: 3.00.000
 **     Datasheet   : KL25P80M48SF0RM, Rev.3, Sep 2012
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2016-09-04, 11:50, # CodeGen: 33
+**     Date/Time   : 2016-09-05, 20:37, # CodeGen: 52
 **     Abstract    :
 **
 **     Settings    :
@@ -425,14 +425,15 @@ void PE_low_level_init(void)
                LLWU_PE4_WUPE15(0x03) |
                LLWU_PE4_WUPE14(0x03)
               );
-  /* LLWU_ME: WUME7=0,WUME5=0,WUME4=0,WUME1=0,WUME0=0 */
-  LLWU_ME &= (uint8_t)~(uint8_t)(
-              LLWU_ME_WUME7_MASK |
-              LLWU_ME_WUME5_MASK |
-              LLWU_ME_WUME4_MASK |
-              LLWU_ME_WUME1_MASK |
-              LLWU_ME_WUME0_MASK
-             );
+  /* LLWU_ME: WUME7=0,WUME5=0,WUME4=0,WUME1=0,WUME0=1 */
+  LLWU_ME = (uint8_t)((LLWU_ME & (uint8_t)~(uint8_t)(
+             LLWU_ME_WUME7_MASK |
+             LLWU_ME_WUME5_MASK |
+             LLWU_ME_WUME4_MASK |
+             LLWU_ME_WUME1_MASK
+            )) | (uint8_t)(
+             LLWU_ME_WUME0_MASK
+            ));
   /* LLWU_FILT1: FILTF=1,FILTE=0,??=0,FILTSEL=0 */
   LLWU_FILT1 = LLWU_FILT1_FILTF_MASK |
                LLWU_FILT1_FILTE(0x00) |

@@ -1,31 +1,30 @@
 /* ###################################################################
-**     Filename    : main.c
-**     Project     : LowPowerTesting
-**     Processor   : MKL25Z128VLK4
-**     Version     : Driver 01.01
-**     Compiler    : GNU C Compiler
-**     Date/Time   : 2016-09-03, 11:48, # CodeGen: 0
-**     Abstract    :
-**         Main module.
-**         This module contains user's application code.
-**     Settings    :
-**     Contents    :
-**         No public methods
-**
-** ###################################################################*/
+ **     Filename    : main.c
+ **     Project     : LowPowerTesting
+ **     Processor   : MKL25Z128VLK4
+ **     Version     : Driver 01.01
+ **     Compiler    : GNU C Compiler
+ **     Date/Time   : 2016-09-03, 11:48, # CodeGen: 0
+ **     Abstract    :
+ **         Main module.
+ **         This module contains user's application code.
+ **     Settings    :
+ **     Contents    :
+ **         No public methods
+ **
+ ** ###################################################################*/
 /*!
-** @file main.c
-** @version 01.01
-** @brief
-**         Main module.
-**         This module contains user's application code.
-*/         
+ ** @file main.c
+ ** @version 01.01
+ ** @brief
+ **         Main module.
+ **         This module contains user's application code.
+ */
 /*!
-**  @addtogroup main_module main module documentation
-**  @{
-*/         
+ **  @addtogroup main_module main module documentation
+ **  @{
+ */
 /* MODULE main */
-
 
 /* Including needed modules to compile this module/procedure */
 #include "Cpu.h"
@@ -59,6 +58,7 @@ const uint8_t key[] = "disertatieReteaS";
 uint8_t encryptedData[16]; // Holds the decryption output
 #endif
 
+LDD_TDeviceData *bit1Ptr;
 char OutData[16];
 extern uint16_t u16Humidity;
 extern uint16_t u16Temperature;
@@ -70,54 +70,55 @@ extern DHT_State eDhtState;
 int main(void)
 /*lint -restore Enable MISRA rule (6.3) checking. */
 {
-  /* Write your local variable definition here */
-	LDD_TDeviceData *bit1Ptr;
+	/* Write your local variable definition here */
+
 	LDD_TDeviceData *MySerialPtr;
-	
-	volatile int i =0;
 
-  /*** Processor Expert internal initialization. DON'T REMOVE THIS CODE!!! ***/
-  PE_low_level_init();
-  /*** End of Processor Expert internal initialization.                    ***/
+	volatile int i = 0;
 
-  /* Write your code here */
-  /* For example: for(;;) { } */
-  bit1Ptr = Bit1_Init((LDD_TUserData *)NULL);
-  MySerialPtr = AS1_Init(NULL);
-  DHT_Read();
-  TSL_Start();
-  
-  while ((TslSensorState != TSL_FINISHED) || (eDhtState != DHT_FINISHED));
- 
-  OutData[0] = (BEDROOM | TEMPERATURE);
-  OutData[1] = (u16Temperature / 10);
-  OutData[2] = (u16Temperature % 10);
-  OutData[3] = (BEDROOM | HUMIDITY);
-  OutData[4] = (u16Humidity / 10);
-  OutData[5] = (u16Humidity % 10);
-  OutData[6] = (BEDROOM | LIGHT);
-  OutData[7] = (uint8_t)((uint16_t)fLightIntensity >> 8U);
-  OutData[8] = (uint8_t)((uint16_t)fLightIntensity & 0xFF);
-  
+	/*** Processor Expert internal initialization. DON'T REMOVE THIS CODE!!! ***/
+	PE_low_level_init();
+	/*** End of Processor Expert internal initialization.                    ***/
+
+	/* Write your code here */
+	/* For example: for(;;) { } */
+	bit1Ptr = Bit1_Init((LDD_TUserData *) NULL);
+	MySerialPtr = AS1_Init(NULL);
+	DHT_Read();
+	TSL_Start();
+
+	while ((TslSensorState != TSL_FINISHED) || (eDhtState != DHT_FINISHED))
+		;
+
+	OutData[0] = (BEDROOM | TEMPERATURE);
+	OutData[1] = (u16Temperature / 10);
+	OutData[2] = (u16Temperature % 10);
+	OutData[3] = (BEDROOM | HUMIDITY);
+	OutData[4] = (u16Humidity / 10);
+	OutData[5] = (u16Humidity % 10);
+	OutData[6] = (BEDROOM | LIGHT);
+	OutData[7] = (uint8_t) ((uint16_t) fLightIntensity >> 8U);
+	OutData[8] = (uint8_t) ((uint16_t) fLightIntensity & 0xFF);
+
 #ifdef USE_ENCRYPTION
 	CRYPTO_AES_Init(&CRYPTO_AES_0);
-	
+
 	CRYPTO_AES_Reset(&CRYPTO_AES_0);
 	CRYPTO_AES_SetKey(&CRYPTO_AES_0, key, AES_ENCRYPT);
 	CRYPTO_AES_Encrypt(&CRYPTO_AES_0, &encryptedData, OutData, 16);
-	AS1_SendBlock(MySerialPtr, encryptedData, 16); 
+	//AS1_SendBlock(MySerialPtr, encryptedData, 16);
 #else
-  AS1_SendBlock(MySerialPtr, OutData, 9); 
+	AS1_SendBlock(MySerialPtr, OutData, 9);
 #endif
-  /*Cpu_SetOperationMode(DOM_STOP, NULL, NULL);*/
-  while (1)
-  {
-	  Bit1_SetVal(&bit1Ptr);
-	  for (i = 0; i < 0xFFFFF; i++);
-	  Bit1_ClrVal(&bit1Ptr);
-	  for (i = 0; i < 0xFFFFF; i++);
-  }
-  /*** Don't write any code pass this line, or it will be deleted during code generation. ***/
+	/*Cpu_SetOperationMode(DOM_STOP, NULL, NULL);*/
+	//LowPowerTimer_Enable();
+	while (1) {
+//	  Bit1_SetVal(&bit1Ptr);
+//	  for (i = 0; i < 0xFFFFF; i++);
+//	  Bit1_ClrVal(&bit1Ptr);
+//	  for (i = 0; i < 0xFFFFF; i++);
+	}
+	/*** Don't write any code pass this line, or it will be deleted during code generation. ***/
   /*** RTOS startup code. Macro PEX_RTOS_START is defined by the RTOS component. DON'T MODIFY THIS CODE!!! ***/
   #ifdef PEX_RTOS_START
     PEX_RTOS_START();                  /* Startup of the selected RTOS. Macro is defined by the RTOS component. */
@@ -130,13 +131,13 @@ int main(void)
 
 /* END main */
 /*!
-** @}
-*/
+ ** @}
+ */
 /*
-** ###################################################################
-**
-**     This file was created by Processor Expert 10.3 [05.09]
-**     for the Freescale Kinetis series of microcontrollers.
-**
-** ###################################################################
-*/
+ ** ###################################################################
+ **
+ **     This file was created by Processor Expert 10.3 [05.09]
+ **     for the Freescale Kinetis series of microcontrollers.
+ **
+ ** ###################################################################
+ */

@@ -1,0 +1,21 @@
+-mcpu=cortex-m0
+-mthumb
+-mfloat-abi=soft
+-g3
+-gdwarf-2
+-gstrict-dwarf
+-I"F:/WORK/SmartHome_checkout1/LowPowerTesting/Project_Headers"
+-I"F:/WORK/SmartHome_checkout1/LowPowerTesting/Project_Settings/Startup_Code"
+-I"C:/Freescale/CW MCU v10.6/MCU/ARM_GCC_Support/ewl/EWL_C/include"
+-I"C:/Freescale/CW MCU v10.6/MCU/ARM_GCC_Support/ewl/EWL_Runtime/include"
+-I"F:/WORK/SmartHome_checkout1/LowPowerTesting/Generated_Code"
+-I"F:/WORK/SmartHome_checkout1/LowPowerTesting/Sources"
+-I"F:/WORK/SmartHome_checkout1/LowPowerTesting/Static_Code/PDD"
+-I"F:/WORK/SmartHome_checkout1/LowPowerTesting/Static_Code/IO_Map"
+-O0
+-ffunction-sections
+-fdata-sections
+-Wall
+-c
+-fmessage-length=0
+-specs=ewl_c.specs

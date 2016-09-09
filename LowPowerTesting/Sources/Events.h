@@ -172,6 +172,38 @@ void AS1_OnBlockReceived(LDD_TUserData *UserDataPtr);
 /* ===================================================================*/
 void AS1_OnBlockSent(LDD_TUserData *UserDataPtr);
 
+/*
+** ===================================================================
+**     Event       :  LowPowerTimer_OnInterrupt (module Events)
+**
+**     Component   :  LowPowerTimer [TimerInt]
+**     Description :
+**         When a timer interrupt occurs this event is called (only
+**         when the component is enabled - <Enable> and the events are
+**         enabled - <EnableEvent>). This event is enabled only if a
+**         <interrupt service/event> is enabled.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+void LowPowerTimer_OnInterrupt(void);
+
+/*
+** ===================================================================
+**     Event       :  TI1_OnInterrupt (module Events)
+**
+**     Component   :  TI1 [TimerInt]
+**     Description :
+**         When a timer interrupt occurs this event is called (only
+**         when the component is enabled - <Enable> and the events are
+**         enabled - <EnableEvent>). This event is enabled only if a
+**         <interrupt service/event> is enabled.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+void TI1_OnInterrupt(void);
+
 /* END Events */
 
 #ifdef __cplusplus

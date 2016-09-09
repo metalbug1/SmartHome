@@ -239,7 +239,7 @@
               <enumgroup name="External pin 15 (ADC0_SE7b/PTD6/LLWU_P15/SPI1_MOSI/UART0_RX/SPI1_MISO)" v="Disabled">
                 <EmptySection_DummyValue />
               </enumgroup>
-              <Internal_module_0__LPTMR0_ v="Disabled" />
+              <Internal_module_0__LPTMR0_ v="Enabled" />
               <Internal_module_1__CMP0_ v="Disabled" />
               <Internal_module_4__TSI0_ v="Disabled" />
               <Internal_module_5__RTC_ v="Disabled" />
