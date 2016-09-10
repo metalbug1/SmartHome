@@ -5,7 +5,7 @@
 **     Processor   : MKL25Z128VLK4
 **     Version     : Component 01.025, Driver 01.04, CPU db: 3.00.000
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2016-09-06, 00:30, # CodeGen: 20
+**     Date/Time   : 2016-09-09, 17:51, # CodeGen: 30
 **     Abstract    :
 **
 **     Settings    :
@@ -73,6 +73,7 @@
 #include "TU3.h"
 #include "DHT22Pin.h"
 #include "HmTrpUart.h"
+#include "MeasurePin.h"
 
 
 /*

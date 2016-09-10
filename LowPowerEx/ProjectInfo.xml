@@ -56,6 +56,7 @@
       <PathName>C:\Users\Mihai\workspace\LowPowerEx\Generated_Code\DHT22Pin.c</PathName>
       <PathName>C:\Users\Mihai\workspace\LowPowerEx\Generated_Code\DHT22Timer.c</PathName>
       <PathName>C:\Users\Mihai\workspace\LowPowerEx\Generated_Code\HmTrpUart.c</PathName>
+      <PathName>C:\Users\Mihai\workspace\LowPowerEx\Generated_Code\MeasurePin.c</PathName>
       <PathName>C:\Users\Mihai\workspace\LowPowerEx\Generated_Code\PE_LDD.c</PathName>
       <PathName>C:\Users\Mihai\workspace\LowPowerEx\Generated_Code\RedLed.c</PathName>
       <PathName>C:\Users\Mihai\workspace\LowPowerEx\Generated_Code\TSL2561Timer.c</PathName>
@@ -92,6 +93,7 @@
       <PathName>C:\Users\Mihai\workspace\LowPowerEx\Generated_Code\DHT22Timer.h</PathName>
       <PathName>C:\Users\Mihai\workspace\LowPowerEx\Generated_Code\HmTrpUart.h</PathName>
       <PathName>C:\Users\Mihai\workspace\LowPowerEx\Generated_Code\IO_Map.h</PathName>
+      <PathName>C:\Users\Mihai\workspace\LowPowerEx\Generated_Code\MeasurePin.h</PathName>
       <PathName>C:\Users\Mihai\workspace\LowPowerEx\Generated_Code\PE_Const.h</PathName>
       <PathName>C:\Users\Mihai\workspace\LowPowerEx\Generated_Code\PE_Error.h</PathName>
       <PathName>C:\Users\Mihai\workspace\LowPowerEx\Generated_Code\PE_LDD.h</PathName>

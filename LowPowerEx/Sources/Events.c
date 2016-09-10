@@ -176,7 +176,8 @@ void HmTrpUart_OnBlockReceived(LDD_TUserData *UserDataPtr)
 /* ===================================================================*/
 void HmTrpUart_OnBlockSent(LDD_TUserData *UserDataPtr)
 {
-  /* Write your code here ... */
+  extern int UartTxFinished;
+  UartTxFinished = 1;
 }
 
 /* END Events */

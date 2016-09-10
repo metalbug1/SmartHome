@@ -55,6 +55,6 @@ typedef struct
 	uint8_t u8Presence[PIR_MAX_BYTES];
 }RoomInformationType;
 
-#define USE_ENCRYPTION
+//#define USE_ENCRYPTION
 
 #endif

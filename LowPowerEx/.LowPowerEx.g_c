@@ -18,7 +18,7 @@
         <Line>PE_Const</Line>
         <Line>IO_Map</Line>
       </GenSharedModules>
-      <ShrdHeaderAge0>1227228105</ShrdHeaderAge0>
+      <ShrdHeaderAge0>1227460213</ShrdHeaderAge0>
       <ShrdCodeAge0>-1</ShrdCodeAge0>
       <ShrdAsemblAge0>-1</ShrdAsemblAge0>
       <ShrdHeaderAge1>1227052685</ShrdHeaderAge1>
@@ -30,7 +30,7 @@
       <ShrdHeaderAge3>1227052685</ShrdHeaderAge3>
       <ShrdCodeAge3>-1</ShrdCodeAge3>
       <ShrdAsemblAge3>-1</ShrdAsemblAge3>
-      <GenExtraFiles lines_count="19">
+      <GenExtraFiles lines_count="20">
         <Line>Documentation\doxygen\BlueLed.txt</Line>
         <Line>Documentation\doxygen\TU1.txt</Line>
         <Line>Documentation\doxygen\TimerIntLdd1.txt</Line>
@@ -41,6 +41,7 @@
         <Line>Documentation\doxygen\TimerIntLdd3.txt</Line>
         <Line>Documentation\doxygen\DHT22Pin.txt</Line>
         <Line>Documentation\doxygen\HmTrpUart.txt</Line>
+        <Line>Documentation\doxygen\MeasurePin.txt</Line>
         <Line>Documentation\doxygen\LowPowerEx.txt</Line>
         <Line>Documentation\doxygen\RoutingReport.txt</Line>
         <Line>Documentation\doxygen\pex.doxyfile</Line>
@@ -51,16 +52,17 @@
         <Line>Project_Settings\Linker_Files\ProcessorExpert.ld</Line>
         <Line>Generated_Code\Vectors.c</Line>
       </GenExtraFiles>
-      <GenExtraFileSrcDir13>lib\doxygen\</GenExtraFileSrcDir13>
-      <XtraAge15>1227229262</XtraAge15>
-      <XtraAge16>1227228105</XtraAge16>
-      <XtraAge18>1227229262</XtraAge18>
+      <GenExtraFileSrcDir14>lib\doxygen\</GenExtraFileSrcDir14>
+      <XtraAge16>1227460088</XtraAge16>
+      <XtraAge17>1227460213</XtraAge17>
+      <XtraAge19>1227460213</XtraAge19>
+      <GenExtraFileType19>4</GenExtraFileType19>
       <GenExtraFileType18>4</GenExtraFileType18>
       <GenExtraFileType17>4</GenExtraFileType17>
       <GenExtraFileType16>4</GenExtraFileType16>
       <GenExtraFileType15>4</GenExtraFileType15>
-      <GenExtraFileType14>4</GenExtraFileType14>
-      <GenExtraFileType13>5</GenExtraFileType13>
+      <GenExtraFileType14>5</GenExtraFileType14>
+      <GenExtraFileType13>4</GenExtraFileType13>
       <GenExtraFileType12>4</GenExtraFileType12>
       <GenExtraFileType11>4</GenExtraFileType11>
       <GenExtraFileType10>4</GenExtraFileType10>
@@ -111,7 +113,7 @@
         <Line>Cpu_OnNMIINT</Line>
         <Line>Cpu_OnLLSWakeUpINT</Line>
       </GenMethodsInEvents>
-      <GenAllModules lines_count="19">
+      <GenAllModules lines_count="20">
         <Line>BlueLed</Line>
         <Line>Cpu</Line>
         <Line>DHT22Pin</Line>
@@ -119,6 +121,7 @@
         <Line>Events</Line>
         <Line>HmTrpUart</Line>
         <Line>IO_Map</Line>
+        <Line>MeasurePin</Line>
         <Line>PE_Const</Line>
         <Line>PE_Error</Line>
         <Line>PE_Types</Line>
@@ -133,7 +136,7 @@
         <Line>WakeUpTimer</Line>
       </GenAllModules>
       <GenExternModules lines_count="0" />
-      <GenBeanModules lines_count="13">
+      <GenBeanModules lines_count="14">
         <Line>BlueLed</Line>
         <Line>WakeUpTimer</Line>
         <Line>TimerIntLdd1</Line>
@@ -147,11 +150,12 @@
         <Line>TU3</Line>
         <Line>DHT22Pin</Line>
         <Line>HmTrpUart</Line>
+        <Line>MeasurePin</Line>
       </GenBeanModules>
     </GenFiles>
     <SignalListFile>Documentation\LowPowerEx_SIGNALS.txt</SignalListFile>
     <DestinationCompiler>GNUC</DestinationCompiler>
-    <ProjectModificationStamp>30</ProjectModificationStamp>
+    <ProjectModificationStamp>35</ProjectModificationStamp>
   </Options>
   <CpuID_2>
     <Generated>true</Generated>
@@ -159,8 +163,8 @@
     <GenComponentVersion>01.025</GenComponentVersion>
     <GenDriverVersion>01.04</GenDriverVersion>
     <GenEventModule>Events</GenEventModule>
-    <HeaderAge>1227229262</HeaderAge>
-    <CodeAge>1227267431</CodeAge>
+    <HeaderAge>1227466493</HeaderAge>
+    <CodeAge>1227466493</CodeAge>
     <AsemblAge>-1</AsemblAge>
     <GenNumMethods>11</GenNumMethods>
     <SetClockConfiguration>false</SetClockConfiguration>
@@ -871,8 +875,8 @@
     <GenComponentVersion>01.164</GenComponentVersion>
     <GenDriverVersion>01.11</GenDriverVersion>
     <GenEventModule>Events</GenEventModule>
-    <HeaderAge>1227229262</HeaderAge>
-    <CodeAge>1227229262</CodeAge>
+    <HeaderAge>1227466492</HeaderAge>
+    <CodeAge>1227466493</CodeAge>
     <AsemblAge>-1</AsemblAge>
     <GenNumMethods>22</GenNumMethods>
     <Init>true</Init>
@@ -1212,8 +1216,8 @@
     <GenComponentVersion>01.164</GenComponentVersion>
     <GenDriverVersion>01.11</GenDriverVersion>
     <GenEventModule>Events</GenEventModule>
-    <HeaderAge>1227229262</HeaderAge>
-    <CodeAge>1227229262</CodeAge>
+    <HeaderAge>1227466493</HeaderAge>
+    <CodeAge>1227466493</CodeAge>
     <AsemblAge>-1</AsemblAge>
     <GenNumMethods>22</GenNumMethods>
     <Init>true</Init>
@@ -1493,7 +1497,7 @@
     <GenDriverVersion>01.12</GenDriverVersion>
     <GenEventModule>Events</GenEventModule>
     <HeaderAge>1227267431</HeaderAge>
-    <CodeAge>1227267431</CodeAge>
+    <CodeAge>1227466493</CodeAge>
     <AsemblAge>-1</AsemblAge>
     <GenNumMethods>36</GenNumMethods>
     <Init>true</Init>
@@ -1625,6 +1629,149 @@
     <GenExtraFilesCount>1</GenExtraFilesCount>
     <ExtraFile0>Documentation\doxygen\HmTrpUart.txt</ExtraFile0>
   </ComponentID_28>
+  <ComponentID_35>
+    <Generated>true</Generated>
+    <GenCompName>MeasurePin</GenCompName>
+    <GenComponentVersion>01.033</GenComponentVersion>
+    <GenDriverVersion>01.03</GenDriverVersion>
+    <GenEventModule />
+    <HeaderAge>1227460213</HeaderAge>
+    <CodeAge>1227460213</CodeAge>
+    <AsemblAge>-1</AsemblAge>
+    <GenNumMethods>13</GenNumMethods>
+    <Init>true</Init>
+    <Deinit>false</Deinit>
+    <GetDir>false</GetDir>
+    <SetDir>true</SetDir>
+    <SetInput>true</SetInput>
+    <SetOutput>false</SetOutput>
+    <GetVal>true</GetVal>
+    <PutVal>true</PutVal>
+    <ClrVal>true</ClrVal>
+    <SetVal>true</SetVal>
+    <NegVal>true</NegVal>
+    <ConnectPin>false</ConnectPin>
+    <GetRawVal>false</GetRawVal>
+    <GenNumEvents>0</GenNumEvents>
+    <GenSmartUserChangesDetected_Header>false</GenSmartUserChangesDetected_Header>
+    <GenSmartUserChangesDetected_Code>false</GenSmartUserChangesDetected_Code>
+    <GenSmartUserChangesDetected_Asembl>false</GenSmartUserChangesDetected_Asembl>
+    <GenMethodPos>16</GenMethodPos>
+    <MethodPos>
+      <MethodPos0>Init</MethodPos0>
+      <MethodType>method</MethodType>
+      <ModuleType>Header</ModuleType>
+      <LineBeg>125</LineBeg>
+      <LineEnd>148</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos1>SetDir</MethodPos1>
+      <MethodType>method</MethodType>
+      <ModuleType>Header</ModuleType>
+      <LineBeg>149</LineBeg>
+      <LineEnd>167</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos2>SetInput</MethodPos2>
+      <MethodType>method</MethodType>
+      <ModuleType>Header</ModuleType>
+      <LineBeg>168</LineBeg>
+      <LineEnd>182</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos3>GetVal</MethodPos3>
+      <MethodType>method</MethodType>
+      <ModuleType>Header</ModuleType>
+      <LineBeg>183</LineBeg>
+      <LineEnd>204</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos4>PutVal</MethodPos4>
+      <MethodType>method</MethodType>
+      <ModuleType>Header</ModuleType>
+      <LineBeg>205</LineBeg>
+      <LineEnd>230</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos5>ClrVal</MethodPos5>
+      <MethodType>method</MethodType>
+      <ModuleType>Header</ModuleType>
+      <LineBeg>231</LineBeg>
+      <LineEnd>246</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos6>SetVal</MethodPos6>
+      <MethodType>method</MethodType>
+      <ModuleType>Header</ModuleType>
+      <LineBeg>247</LineBeg>
+      <LineEnd>262</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos7>NegVal</MethodPos7>
+      <MethodType>method</MethodType>
+      <ModuleType>Header</ModuleType>
+      <LineBeg>263</LineBeg>
+      <LineEnd>278</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos8>Init</MethodPos8>
+      <MethodType>method</MethodType>
+      <ModuleType>Code</ModuleType>
+      <LineBeg>98</LineBeg>
+      <LineEnd>147</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos9>SetDir</MethodPos9>
+      <MethodType>method</MethodType>
+      <ModuleType>Code</ModuleType>
+      <LineBeg>148</LineBeg>
+      <LineEnd>176</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos10>SetInput</MethodPos10>
+      <MethodType>method</MethodType>
+      <ModuleType>Code</ModuleType>
+      <LineBeg>177</LineBeg>
+      <LineEnd>195</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos11>GetVal</MethodPos11>
+      <MethodType>method</MethodType>
+      <ModuleType>Code</ModuleType>
+      <LineBeg>196</LineBeg>
+      <LineEnd>230</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos12>PutVal</MethodPos12>
+      <MethodType>method</MethodType>
+      <ModuleType>Code</ModuleType>
+      <LineBeg>231</LineBeg>
+      <LineEnd>264</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos13>ClrVal</MethodPos13>
+      <MethodType>method</MethodType>
+      <ModuleType>Code</ModuleType>
+      <LineBeg>265</LineBeg>
+      <LineEnd>284</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos14>SetVal</MethodPos14>
+      <MethodType>method</MethodType>
+      <ModuleType>Code</ModuleType>
+      <LineBeg>285</LineBeg>
+      <LineEnd>304</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos15>NegVal</MethodPos15>
+      <MethodType>method</MethodType>
+      <ModuleType>Code</ModuleType>
+      <LineBeg>305</LineBeg>
+      <LineEnd>324</LineEnd>
+    </MethodPos>
+    <GenExtraFilesCount>1</GenExtraFilesCount>
+    <ExtraFile0>Documentation\doxygen\MeasurePin.txt</ExtraFile0>
+  </ComponentID_35>
   <UsedSrcFiles>
     <SrcFile0>Drivers\Common\CheckRegBits8_Rst.prg=1116866294</SrcFile0>
     <SrcFile1>Drivers\Kinetis\Init_FTFL_FlashConfig_KINETIS.prg=1146382935</SrcFile1>

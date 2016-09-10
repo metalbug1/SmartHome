@@ -9,6 +9,7 @@
 "./Generated_Code/TSL2561Timer.o"
 "./Generated_Code/RedLed.o"
 "./Generated_Code/PE_LDD.o"
+"./Generated_Code/MeasurePin.o"
 "./Generated_Code/HmTrpUart.o"
 "./Generated_Code/DHT22Timer.o"
 "./Generated_Code/DHT22Pin.o"

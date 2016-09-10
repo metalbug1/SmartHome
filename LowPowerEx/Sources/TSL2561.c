@@ -51,7 +51,7 @@ void TSL2561Timer_500msEvent()
 	{
 		sensorRead = 1;
 		fLightIntensity = TSL_ReadLightIntensity();
-		TSL_Disable();
+		//TSL_Disable();
 		TSL2561Timer_DisableEvent();
 		TSL2561Timer_Disable();
 		TslSensorState = TSL_FINISHED;

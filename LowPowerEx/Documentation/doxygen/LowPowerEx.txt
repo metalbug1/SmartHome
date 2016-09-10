@@ -38,6 +38,7 @@
 - \subpage TimerIntLdd3
 - \subpage DHT22Pin
 - \subpage HmTrpUart
+- \subpage MeasurePin
 
 
 */

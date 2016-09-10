@@ -7,7 +7,7 @@
 **     Version     : Component 01.025, Driver 01.04, CPU db: 3.00.000
 **     Datasheet   : KL25P80M48SF0RM, Rev.3, Sep 2012
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2016-09-06, 19:43, # CodeGen: 24
+**     Date/Time   : 2016-09-09, 20:55, # CodeGen: 32
 **     Abstract    :
 **
 **     Settings    :
@@ -74,6 +74,7 @@
 #include "TU3.h"
 #include "DHT22Pin.h"
 #include "HmTrpUart.h"
+#include "MeasurePin.h"
 #include "PE_Types.h"
 #include "PE_Error.h"
 #include "PE_Const.h"

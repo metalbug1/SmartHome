@@ -36,7 +36,7 @@ void TimerHandlerReadSensors()
 	u8NumberOfTimerPeriods++;
 }
 
-const uint8_t key[] = "foobarfoobarbaz1";
+const uint8_t key[] = "disertatieReteaS";
 const uint8_t input[]  = "helloworldhello1";
 
 uint8_t decryptedData[16] = {0};
@@ -51,11 +51,12 @@ int main(void)
 	CRYPTO_AES_Init(&CRYPTO_AES_0);
 	CRYPTO_AES_Reset(&CRYPTO_AES_0);
 
-	CRYPTO_AES_SetKey(&CRYPTO_AES_0, key, AES_ENCRYPT);
-	CRYPTO_AES_Encrypt(&CRYPTO_AES_0, encryptedData, input, 16);
+	//CRYPTO_AES_SetKey(&CRYPTO_AES_0, key, AES_ENCRYPT);
+
+	//CRYPTO_AES_Encrypt(&CRYPTO_AES_0, encryptedData, input, 16);
 
 	CRYPTO_AES_SetKey(&CRYPTO_AES_0, key, AES_DECRYPT);
-	CRYPTO_AES_Decrypt(&CRYPTO_AES_0, decryptedData, encryptedData, 16);
+	//CRYPTO_AES_Decrypt(&CRYPTO_AES_0, decryptedData, encryptedData, 16);
 #endif
 
     lwIPStack_init();

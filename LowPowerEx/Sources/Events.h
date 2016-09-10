@@ -47,6 +47,7 @@
 #include "TU3.h"
 #include "DHT22Pin.h"
 #include "HmTrpUart.h"
+#include "MeasurePin.h"
 
 #ifdef __cplusplus
 extern "C" {

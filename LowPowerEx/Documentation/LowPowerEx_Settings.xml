@@ -287,9 +287,9 @@
             <MCGFFCLK__kHz_ v="32.768" />
           </enumgroup>
           <group name="System clocks">
-            <Core_clock_prescaler v="Auto select" />
+            <Core_clock_prescaler v="1" />
             <Core_clock v="20.971520000000" />
-            <Bus_clock_prescaler v="Auto select" />
+            <Bus_clock_prescaler v="1" />
             <Bus_clock v="20.971520000000" />
             <enumgroup name="PLL/FLL clock selection" v="Auto select">
               <Clock_frequency__MHz_ v="20.971520000000" />
@@ -1224,6 +1224,38 @@ PE_DEBUGHALT();
       <event name="OnBreak" v="don&amp;apos;t generate code" />
       <event name="OnError" v="don&amp;apos;t generate code" />
       <event name="OnTxComplete" v="don&amp;apos;t generate code" />
+    </Events>
+  </Bean>
+  <Bean name="MeasurePin" type="BitIO_LDD">
+    <Enabled v="Y" />
+    <Properties>
+      <Component_name v="MeasurePin" />
+      <Pin_for_I_O v="TSI0_CH2/PTA1/UART0_RX/TPM2_CH0" />
+      <Direction v="Input/Output" />
+      <group name="Initialization">
+        <Init__direction v="Output" />
+        <Init__value v="0" />
+        <Auto_initialization v="no" />
+      </group>
+      <Safe_mode v="no" />
+    </Properties>
+    <Methods>
+      <Init v="generate code" />
+      <Deinit v="don&amp;apos;t generate code" />
+      <GetDir v="don&amp;apos;t generate code" />
+      <SetDir v="generate code" />
+      <SetInput v="generate code" />
+      <SetOutput v="don&amp;apos;t generate code" />
+      <GetVal v="generate code" />
+      <PutVal v="generate code" />
+      <ClrVal v="generate code" />
+      <SetVal v="generate code" />
+      <NegVal v="generate code" />
+      <ConnectPin v="don&amp;apos;t generate code" />
+      <GetRawVal v="don&amp;apos;t generate code" />
+    </Methods>
+    <Events>
+      <EmptySection_DummyValue />
     </Events>
   </Bean>
 </PE_PROJECT_SETTINGS_DOCUMENTATION>
